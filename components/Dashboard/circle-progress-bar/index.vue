@@ -1,5 +1,4 @@
 <template>
-  <div class="flex-wrapper">
   <div class="single-chart">
     <svg viewBox="0 0 36 36" class="circular-chart orange">
         <defs>
@@ -25,7 +24,6 @@
     </svg>
   </div>
   
-</div>
 </template>
 
 <script>
@@ -40,22 +38,14 @@
 </script>
 
 <style lang="stylus" scoped>
-.flex-wrapper {
-  display: flex;
-  width 100%
-  justify-content: center;
-  align-items: center;
-}
-
 .single-chart {
-  width: 50%;
-  justify-content: space-around ;
+  width: 100%;
 }
 
 .circular-chart {
   display: block;
   margin: 10px auto;
-  max-width: 80%;
+  max-width:100%;
   max-height: 250px;
 }
 

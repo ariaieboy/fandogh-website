@@ -1,52 +1,48 @@
 <template>
-   <div class="services">
-    <div class="active-plan-header">
-  <h2>جزئیات حساب شما</h2>
-  </div>
-
-      <div class="service-container">
-  <service :plan="activePlan.plan" :configs="activePlan.configs" :progressBar="60"/>
-  </div>
-  <div class="active-plan-header">
-  <h2>انتخاب پلن</h2>
-  </div>
-  <div class="all-plans">
-    <service v-for="service in services" :plan="service.plan" :configs="service.configs" :key="service.plan.title" />
-
+  <div class="service-plan">
+    <nuxt-child/>  
+    <div class="row">
+    <h1 class="service-plan-heading">جز‌ئیات حساب شما</h1>
     </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-12 col-xs-12">
+    <active-plan-box>
+    <ActivePlan :plan="activePlan.plan" :configs="activePlan.configs" />
+    </active-plan-box>
+      </div>
+    </div>
+    <div class="row">
+    <h1 class="service-plan-heading">انتخاب پلن</h1>
+    </div>
+    <panel-box>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12" v-for="service,index in services">
+          <Panel :plan="service.plan" :configs="service.configs" :index="index"  />
+      </div>
+      </div>
+    </panel-box>
   </div>
 </template>
 
 <script>
-    import FTable from '~/components/Dashboard/table'
-    import FButton from '~/components/elements/button'
-    import FDate from '~/utils/date'
-    import Alert from '~/components/Dashboard/alert'
-    import service from "~/components/Dashboard/service";
+import PanelBox from "~/components/Dashboard/plans/panel-box";
+import Panel from "~/components/Dashboard/plans/panel-box/panel";
+import ActivePlan from "~/components/Dashboard/plans/active-plan/panel";
+import ActivePlanBox from "~/components/Dashboard/plans/active-plan";
 
-    export default {
-      layout: 'dashboard',
-      name : 'plans',
-      async asyncData({store, route, redirect}){
-        try {
-        //  await store.dispatch('getImages')
-        } catch (e) {
-          if(e.status === 401){
-            redirect('/user/login')
-          }
-        }
-      },
-      data(){
+export default {
+  layout: "dashboard",
+  name: "plans",
+  data() {
     return {
+      isShow:-1,
       activePlan: {
         plan: {
-          icon: "bicycle.png",
-          title: "مفتی",
-          price: "رایگان",
-          iconFirst: true,
-          hasInfo: false,
+          icon: "blimp.png",
+          title: "پلن فعلی",
+          price: "پلن 2 ",
         },
-        configs: [{ title: "RAM", value: "400MB", icon: "ram.png" }]
+        configs: [{ title: "RAM", value: "2GB", icon: "ram.png" }]
       },
       services: [
         {
@@ -104,65 +100,29 @@
         }
       ]
     };
-      },
-      components:{
-        FTable,
-        FButton,
-        service
-      },
-      computed:{
-
-      },
-      methods:{
-
-      }
-    }
+  },
+  components: {
+    PanelBox,
+    Panel,
+    ActivePlan,
+    ActivePlanBox
+  }
+};
 </script>
 
 
 <style lang="stylus" scoped>
-.services {
-  display: inline-block;
-  width: 100%;
-  background-color: #f0f4f8;
-}
-
-.active-plan-header 
-  padding: 45px 110px;
-  @media screen and (max-width:1150px)
-    padding: 45px 38px
-
-
-.all-plans 
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  align-items: center;
-  margin: 0 101px;
-  margin-bottom: 50px;
-  border-radius: 10px;
-  border: solid 1px #e7e8ea;
-  background-color: #fff;
-  @media screen and (max-width:1150px)
-    margin: 0 38px;
-    margin-bottom: 10px;
-  @media screen and (max-width:768px)
-    margin: 0 38px;
-    margin-bottom: 10px;
-
-
-.service-container 
-  width 624px
-  border-radius: 10px;
-  border: solid 1px #e7e8ea;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap  wrap
-  margin: 0 101px;
-  @media screen and (max-width:1150px)
-    width 550px
-    margin: 0 38px;
-
+.service-plan-heading
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  padding 45px 31px
+@font-face
+  font-family roboto-bold
+  font-style normal
+  src url('~/assets/fonts/Roboto-Bold.ttf')
+@font-face
+  font-family roboto
+  font-style normal
+  src url('~/assets/fonts/Roboto-Regular.ttf')
 </style>

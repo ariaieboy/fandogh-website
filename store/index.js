@@ -23,6 +23,7 @@ const createStore = () => {
       versions: null,
       builds: null,
       domains: null,
+      plan: null,
       manifest: {}
     },
     actions: actions,

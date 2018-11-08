@@ -201,3 +201,13 @@ export const manifestGenerator = ({commit, state}, {value, path}) => {
   commit('SET_JSON_MANIFEST', json)
   return json
 }
+
+export const setPlan = async ({commit, state}, {plan,configs}) => {
+  try {
+    const planData = {plan,configs}
+    commit('SET_PLAN', planData)
+    return true 
+  } catch (e) {
+    return Promise.reject(e)
+  }
+}
