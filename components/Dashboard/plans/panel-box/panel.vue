@@ -1,50 +1,50 @@
 <template>
-        <div class="service" @click="redirectToPlan(plan,configs)" >
-        <box :hasShadow="plan.isActive ? false : true ">
-        <div class="service---box">
-            <div class="service----item">
-                <div class="service-----image">
-                    <img :src="'/icons/plans/services-icon/'+plan.icon">
-                </div>
-                <div class="service-----text">
-                    <span class="service------title">
-                        {{plan.title}}
-                        <img src="~/static/icons/plans/info-button.png" @click.stop="toggleTooltip(index)">
-                    </span>
-                    <div class="tooltip-container" v-show="tooltip === -1">
-                        <div class="tooltip-box">
-                            <h3 class="tooltip-heading">ویژگی‌ها :</h3>
-                            <div class="tooltip-features" v-for="feature in description.features">
-                                <p>امکان اجرای دو سرویس همزمان</p>
-                            </div>
-                            <h3 class="tooltip-heading">توضیحات :</h3>
-                            <p class="tooltip-details-text">{{description.text}}</p>
-                        </div>
+    <div class="service" @click.stop="redirectToPlan(plan,configs)">
+        <box :hasShadow="!plan.isActive">
+            <div class="service---box">
+                <div class="service----item">
+                    <div class="service-----image">
+                        <img :src="'/icons/plans/services-icon/'+plan.icon">
                     </div>
-                    <span class="service------price">
-                        {{plan.price}}
-                    </span>
+                    <div class="service-----text">
+                        <span class="service------title">
+                            {{plan.title}}
+                            <img src="~/static/icons/plans/info-button.png" @click.stop.prevent="toggleTooltip">
+                        </span>
+                        <div class="tooltip-container" v-if="tooltipShow">
+                            <div class="tooltip-box">
+                                <h3 class="tooltip-heading">ویژگی‌ها :</h3>
+                                <div class="tooltip-features" v-for="feature in description.features">
+                                    <p>امکان اجرای دو سرویس همزمان</p>
+                                </div>
+                                <h3 class="tooltip-heading">توضیحات :</h3>
+                                <p class="tooltip-details-text">{{description.text}}</p>
+                            </div>
+                        </div>
+                        <span class="service------price">
+                            {{plan.price}}
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="service----line"></div>
-            <div class="service----item service----item-second">
-                <div class="service-----information" v-for="config in configs">
-                    <span class="service------image">
-                        <img :src="'/icons/plans/'+config.icon" alt="">
-                    </span>
-                    <span class="service------name">
-                        {{config.title}}
-                    </span>
-                    <span class="service------info">
-                        {{config.value}}
-                    </span>
+                <div class="service----line"></div>
+                <div class="service----item service----item-second">
+                    <div class="service-----information" v-for="config in configs">
+                        <span class="service------image">
+                            <img :src="'/icons/plans/'+config.icon" alt="">
+                        </span>
+                        <span class="service------name">
+                            {{config.title}}
+                        </span>
+                        <span class="service------info">
+                            {{config.value}}
+                        </span>
+                    </div>
                 </div>
-            </div>
 
-        </div>
+            </div>
         </box>
         <div class="service-description">
-            <div class="service-description-content" v-show="isShow === index">
+            <div class="service-description-content" v-show="isShow">
                 <h3 class="service-description-heading">ویژگی‌ها :</h3>
                 <div class="bullet-list" v-for="feature in description.features">
                     <span class="bullet"></span>
@@ -53,7 +53,7 @@
                 <h3 class="service-description-heading">توضیحات :</h3>
                 <p class="service-description-text">{{description.text}}</p>
             </div>
-            <div class="plan-description-toggle" v-on:click.stop="toggle(index)">
+            <div class="plan-description-toggle" v-on:click.stop="toggle">
                 <p>توضیحات</p>
 
             </div>
@@ -69,16 +69,14 @@ export default {
   components: {
     Box
   },
-  data() {
-    return {
-      isShow: -1,
-      tooltip: -1
-    };
-  },
   props: {
-    index: {
-      type: Number,
-      default: 1
+    tooltipShow: {
+      type: Boolean,
+      default: false
+    },
+    isShow: {
+      type: Boolean,
+      default: false
     },
     description: {
       type: Object,
@@ -125,19 +123,15 @@ export default {
         });
     },
     toggle(index) {
+      this.$emit("toggle");
       if (index === this.isShow) {
         this.isShow = -1;
         return;
       }
       this.isShow = index;
     },
-    toggleTooltip(index) {
-      alert("a");
-      if (index === this.tooltip) {
-        this.tooltip = -1;
-        return;
-      }
-      this.tooltip = index;
+    toggleTooltip() {
+      this.$emit("clickInfo");
     }
   }
 };
@@ -186,6 +180,9 @@ export default {
         @media (max-width: 566px)
             font-size 12px
         img
+            // &:hover
+            // .tooltip-container
+            // display block !important
             @media (max-width: 992px)
                 display none
             @media (max-width: 566px)
@@ -274,6 +271,7 @@ export default {
     border-left 10px solid transparent
     content ''
 .tooltip-container
+    // display none
     width 100%
 .tooltip-box
     position absolute
@@ -285,15 +283,15 @@ export default {
     border-radius 9px
     background-color #3a3c40
     font-size 14px
-    @media(max-width 400px)
+    @media (max-width: 400px)
         visibility hidden
 .tooltip-heading
     max-height 0
     color #ffffff
     font-size 16px
 .tooltip-features
+    margin-right 20px
     max-height 30px
-    margin-right: 20px;
 .tooltip-features p
     color #ffffff
     font-size 14px

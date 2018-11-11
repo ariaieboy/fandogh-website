@@ -1,24 +1,24 @@
 <template>
   <div class="service-plan">
-    <nuxt-child/>  
+    <nuxt-child />
     <div class="row">
-    <h1 class="service-plan-heading">جز‌ئیات حساب شما</h1>
+      <h1 class="service-plan-heading">جز‌ئیات حساب شما</h1>
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-12 col-xs-12">
-    <active-plan-box>
-    <ActivePlan :plan="activePlan.plan" :configs="activePlan.configs" />
-    </active-plan-box>
+        <active-plan-box>
+          <ActivePlan :plan="activePlan.plan" :configs="activePlan.configs" />
+        </active-plan-box>
       </div>
     </div>
     <div class="row">
-    <h1 class="service-plan-heading">انتخاب پلن</h1>
+      <h1 class="service-plan-heading">انتخاب پلن</h1>
     </div>
     <panel-box>
       <div class="row">
         <div class="col-md-6 col-sm-12 col-xs-12" v-for="service,index in services">
-          <Panel :plan="service.plan" :configs="service.configs" :index="index"  />
-      </div>
+          <Panel :plan="service.plan" :configs="service.configs" :isShow="index === isShow" @toggle="toggle(index)" :tooltipShow="index === tooltipShow" @clickInfo="clickInfo(index)" />
+        </div>
       </div>
     </panel-box>
   </div>
@@ -35,12 +35,13 @@ export default {
   name: "plans",
   data() {
     return {
-      isShow:-1,
+      tooltipShow: -1,
+      isShow: -1,
       activePlan: {
         plan: {
           icon: "blimp.png",
           title: "پلن فعلی",
-          price: "پلن 2 ",
+          price: "پلن 2 "
         },
         configs: [{ title: "RAM", value: "2GB", icon: "ram.png" }]
       },
@@ -106,6 +107,22 @@ export default {
     Panel,
     ActivePlan,
     ActivePlanBox
+  },
+  methods: {
+    clickInfo(index) {
+      if (index === this.tooltipShow) {
+        this.tooltipShow = -1;
+        return;
+      }
+      this.tooltipShow = index;
+    },
+    toggle(index) {
+      if (index === this.isShow) {
+        this.isShow = -1;
+        return;
+      }
+      this.isShow = index;
+    }
   }
 };
 </script>
@@ -113,16 +130,16 @@ export default {
 
 <style lang="stylus" scoped>
 .service-plan-heading
-  font-size: 18px;
-  font-weight: bold;
-  color: #000000;
   padding 45px 31px
+  color #000000
+  font-weight bold
+  font-size 18px
 @font-face
-  font-family roboto-bold
   font-style normal
+  font-family roboto-bold
   src url('~/assets/fonts/Roboto-Bold.ttf')
 @font-face
-  font-family roboto
   font-style normal
+  font-family roboto
   src url('~/assets/fonts/Roboto-Regular.ttf')
 </style>
