@@ -42,7 +42,7 @@
                     </div>
 
                     <div  class="fandogh-form-group">
-                        <f-input v-model="image_pull_policy"  styles="input-white input-block input-dashboard"  placeholder="Image Pull Policy"> </f-input>
+                        <f-select v-model="image_pull_policy"  styles="input-white input-block input-dashboard" :options="[{title: 'Always'}, {title: 'IfNotPresent'}]"  placeholder="Image Pull Policy"> </f-select>
                     </div>
 
                     <div  class="fandogh-form-group">
