@@ -2,6 +2,7 @@
     <div :class="{'show-sidebar': sidebar}" class="admin-sidebar">
         <profile />
         <namespace />
+        <my-plan />
         <sidebar-menu />
     </div>
 </template>
@@ -10,11 +11,13 @@
     import Profile from './profile'
     import Namespace from './namespace'
     import SidebarMenu from './menu'
+    import MyPlan from './myPlan'
     export default {
       components:{
         Profile,
         Namespace,
-        SidebarMenu
+        SidebarMenu,
+        MyPlan
       },
       computed:{
       	sidebar(){
