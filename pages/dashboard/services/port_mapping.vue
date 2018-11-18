@@ -73,7 +73,7 @@
     },
     methods:{
       deleteItem(name){
-        this.volume_mounts = this.port_mapping.filter(item => item.mount_path !== name)
+        this.port_mapping = this.port_mapping.filter(item => item.mount_path !== name)
       },
       addPath(){
         this.port_mapping.push(
