@@ -3,7 +3,7 @@
     <div class="box middle-xs ">
 
       <div>
-        <div class="wrap" >
+        <div class="wrap">
           <img :alt="title" :src="image" />
         </div>
         <div class="text-container">
@@ -17,74 +17,64 @@
 </template>
 
 <script>
-import img from '~/assets/svg/ic-auto-scale.svg'
+import img from "~/assets/svg/ic-auto-scale.svg";
 export default {
-  props:['icon','title', 'local_title'],
-  data(){
+  props: ["icon", "title", "local_title"],
+  data() {
     return {
-      'auto-scale': require('~/assets/svg/ic-auto-scale.svg'),
-      'cost-effective': require('~/assets/svg/ic-cost-effective.svg'),
-      'docker': require('~/assets/svg/ic-docker.svg'),
-      'database': require('~/assets/svg/ic-managed-d-bs.svg'),
-      'ready': require('~/assets/svg/ic-ready-tg.svg'),
-      'highly': require('~/assets/svg/ic-highly-av.svg')
-    }
+      "auto-scale": require("~/assets/svg/ic-auto-scale.svg"),
+      "cost-effective": require("~/assets/svg/ic-cost-effective.svg"),
+      docker: require("~/assets/svg/ic-docker.svg"),
+      database: require("~/assets/svg/ic-managed-d-bs.svg"),
+      ready: require("~/assets/svg/ic-ready-tg.svg"),
+      highly: require("~/assets/svg/ic-highly-av.svg")
+    };
   },
-  computed:{
-    image(){
-      return this.$data[this.icon]
+  computed: {
+    image() {
+      return this.$data[this.icon];
     }
   }
-}
+};
 </script>
 
-<style lang="stylus" >
-
-  .box
-    border-radius: 10px
-    background-color: rgba(0, 0, 0, 0.1)
+<style lang="stylus" scoped>
+.box
+  display flex
+  margin 1rem 0
+  min-height 270px
+  border-radius 10px
+  background-color rgba(0, 0, 0, 0.1)
+  text-align center
+.box
+  .wrap
+    display inline-block
+    padding 5px
+    width 100px
+    height 100px
+    vertical-align top
+    img
+      position relative
+      top 50%
+      margin-right auto
+      margin-left auto
+      width 100px
+      transform translateY(-50%)
+  div.text-container
+    width auto
+.title
+  font-weight bold
+.box
+  margin-left 0
+  div
+    top 0
+    display block
+    width 100%
     text-align center
-    margin 1rem 0
-    min-height 270px
-    display flex
-
-  .box
-    .wrap
-      display inline-block
-      vertical-align top
-      height 100px
-      width: 100px
-      padding 5px
-      img
-        width 100px
-        margin-left: auto
-        margin-right: auto
-        position: relative
-        top: 50%
-        transform: translateY(-50%)
-    div.text-container
-      width: auto
-  .title
-    font-weight bold
-
-  .box
-    margin-left 0
-    div
-      display: block
-      text-align center
-      width 100%
-      top: 0
-      transform none
-
-
- // @media only screen and (max-width: 1200px)
-
-/*@media only screen and (max-width: 991px)*/
-  /**/
-    /**/
-   /**/
-
-
-
+    transform none
+/* @media only screen and (max-width: 991px) */
+/*  */
+/*  */
+/*  */
 </style>
 
