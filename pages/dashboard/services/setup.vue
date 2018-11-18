@@ -27,7 +27,7 @@
                        </div>
                     </div>
 
-                    <div v-if="kind === 'External'" class="margin-top-50">
+                    <div v-if="kind === 'ExternalService'" class="margin-top-50">
                         <h2>
                             External Option
                         </h2>
@@ -74,10 +74,10 @@
         service: "",
         service_types: [
           {
-            title: 'External'
+            title: 'ExternalService'
           },
           {
-            title: 'Internal'
+            title: 'InternalService'
           }
         ],
         data: [
