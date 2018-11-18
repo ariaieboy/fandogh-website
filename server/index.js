@@ -1,5 +1,5 @@
 import express from 'express'
-import { Nuxt, Builder } from 'nuxt-edge'
+import { Nuxt, Builder } from 'nuxt'
 var cookieParser = require('cookie-parser')
 const app = express()
 app.use(cookieParser())
