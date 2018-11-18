@@ -106,7 +106,7 @@
       },
       memory(value, oldValue) {
         let memory = value.toLowerCase().includes('mi') ? value : value+'Mi';
-        this.$store.dispatch("manifestGenerator", { value: memory, path: "resources.memory"});
+        this.$store.dispatch("manifestGenerator", { value: memory, path: "spec.resources.memory"});
       }
     },
     mounted(){
