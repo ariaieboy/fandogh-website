@@ -5,12 +5,12 @@
 @font-face
   font-family yekan
   font-style normal
-  src url('~/assets/fonts/yekan-regular.ttf')
+  src url('/fonts/yekan-regular.ttf')
 
 @font-face
   font-family yekan-light
   font-style normal
-  src url('~/assets/fonts/iranyekanweblight.ttf')
+  src url('/fonts/iranyekanweblight.ttf')
 
   
 body.noscroll
@@ -33,7 +33,7 @@ p, h1, h2, h3, h6, button, span, a, li, label
   font-family yekan, sans-serif
   color white
 .dash-container
-  p, h1, h2, h3, h6, span, a, li, label
+  a, p, h1, h2, h3, h6, span, li, label
     color #000
   h2
     line-height 1.8
@@ -112,6 +112,10 @@ p.description
 .flex
   display flex
   align-items center
+.flex-space
+  display flex
+  justify-content space-between
+  align-items center
 .centered-page
   min-height 86vh
   justify-content center
@@ -148,11 +152,17 @@ p.description
   margin 20px
 .margin-40
   margin 40px 0
-
+.margin-top-50
+  margin-top 50px
 .margin-top-100
   margin-top 100px
 .80
   width 80%
+
+.custom-row
+  display flex
+  align-items center
+  justify-content space-between
 
 .bounce-enter-active {
   animation: bounce-in .3s;
@@ -171,4 +181,6 @@ p.description
     transform: scale(1);
   }
 }
-
+.btn-nuxt
+  display: inline-block
+  text-align: center

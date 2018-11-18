@@ -1,7 +1,7 @@
 <template>
   <div class="images" >
     <div class="row-block">
-      <f-button styles="red" @onClick="$router.push('/dashboard/services/create')" > اجرای سرویس جدید </f-button>
+      <f-button styles="red" path="/dashboard/services/setup" > اجرای سرویس جدید </f-button>
     </div>
     <f-table :header="header" title="سرویس‌ های شما" :data="_services" :actions="[{title:`<img src='/icons/ic-delete.svg' /><span> حذف </span>`, action:'delete'}, {title:`<img src='/icons/ic-logs.svg' /> <span>مشاهده جزییات</span> `, action:'logs'}]"></f-table>
   </div>

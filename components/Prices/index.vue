@@ -38,14 +38,13 @@
 </template>
 
 <script>
+import PriceOption from "./option";
 
-import PriceOption from './option'
-
-export default{ 
-  components:{
+export default {
+  components: {
     PriceOption
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>

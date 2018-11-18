@@ -15,9 +15,13 @@
                         </th>
                     </tr>
                     <tr v-for="(dataRow, index) in data" :key="index">
-                        <td v-for="(value, jendex) in dataRow.rows" :key="jendex" :class="[index%2 !== 0 && jendex%2 === 0 ? 'white' : index%2 === 0 && jendex%2 !== 0 ? 'gray-2': 'gray-1']" v-html="value">  </td>
+                        <td v-for="(value, jendex) in dataRow.rows" :key="jendex"
+                            :class="[index%2 !== 0 && jendex%2 === 0 ? 'white' : index%2 === 0 && jendex%2 !== 0 ?
+                            'gray-2': 'gray-1']" v-html="value">  </td>
                         <td v-if="actions && actions.length" :class="[index%2 !== 0 && dataRow.rows.length%2 === 0 ? 'white' : index%2 === 0 && dataRow.rows.length%2 !== 0 ? 'gray-2': 'gray-1']"  >
-                            <component :class="actions.length >= 3 ? 'action-button-s' : 'action-button-m'" v-for="(action, index) in actions" :key="index" is="action-button"  @onClick="$parent[action.action](dataRow.meta.id)" v-html="action.title" > </component>
+                            <component :class="actions.length >= 3 ? 'action-button-s' : 'action-button-m'"
+                                       v-for="(action, index) in actions" :key="index" is="action-button"
+                                       @onClick="actionHandler(action, dataRow)" v-html="action.title" > </component>
                         </td>
                     </tr>
                 </tbody>
@@ -32,6 +36,14 @@
       props:['header', 'data', 'actions', 'title', 'small'],
       components:{
         ActionButton
+      },
+      methods:{
+        actionHandler(action, dataRow){
+          if(this.$parent[action.action]) {
+            this.$parent[action.action](dataRow.meta.id)
+          }
+          this.$emit(action.action, dataRow.meta.id)
+        }
       },
       mounted(){
         if(this.small){
@@ -51,9 +63,11 @@
     }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus" >
     @import url('http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900')
     .table
+        img
+          width 24px
         width 100%
         margin 0 auto
         font-family 'Roboto', yekan, sans-serif

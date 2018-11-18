@@ -40,7 +40,7 @@
         <div v-show="show" class="dropdown-selector">
             <ul>
                 <li v-for="option in options">
-                    <a @click="selectOption(option)" href="#">{{option.title}}</a>
+                    <a @click.prevent="selectOption(option)" href="#">{{option.title}}</a>
                 </li>
             </ul>
         </div>
@@ -50,6 +50,9 @@
 <script>
   export default {
     props:{
+      value:{
+        default: ''
+      },
       options:{
         default: []
       },
@@ -66,14 +69,19 @@
         show: false
       }
     },
+    watch:{
+      value(value){
+        this.selectOption({title: value, value}, true)
+      }
+    },
     methods:{
       toggle(){
         this.show = !this.show
       },
-      selectOption(option){
-        this.toggle()
+      selectOption(option, noToggle){
+        if(!noToggle) this.toggle()
         this.selected = option.title
-        this.$emit('input', option.value)
+        this.$emit('input', option.value || option.title)
       }
     }
   }
@@ -82,6 +90,7 @@
 <style scoped lang="stylus">
 
     .dropdown
+        overflow hidden
         ul, li
             padding 0
             margin 0

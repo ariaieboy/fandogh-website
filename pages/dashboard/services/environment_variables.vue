@@ -3,28 +3,28 @@
         <h2>مرحله سوم </h2>
         <div class="row">
             <div class="col-md-6 col-xs-12" >
+                <wizard btn_title="مرحله بعد">
 
-                <div class="flex margin-40">
-                    <f-checkbox v-model="hidden" id="checkbox3"  styles="input-light" title="متغییر مخفی"  /> <span class="field-description"> </span>
-                </div>
-                <div class="row flex">
-                    <div class="col-md-4">
+                    <div class="fandogh-form-group">
                         <f-input v-model="name"  styles="input-white input-block input-dashboard" placeholder="نام متغیر"> </f-input>
                     </div>
-                    <div class="col-md-4">
+                    <div class="fandogh-form-group">
                         <f-input v-model="value"  styles="input-white input-block input-dashboard" placeholder="مقدار متغییر"> </f-input>
                     </div>
+                    <div class="flex-space">
+                        <div class="flex margin-40">
+                            <f-checkbox v-model="hidden" id="checkbox3"  styles="input-light" title="متغییر مخفی"  /> <span class="field-description"> </span>
+                        </div>
 
-                    <div class="col-md-4">
-                        <f-button @onClick="addEnv" styles="blue block" > افزودن به جدول</f-button>
+                        <div class="fandogh-form-group">
+                            <f-button @onClick="addEnv" styles="transparent black border" > افزودن به جدول</f-button>
+                        </div>
                     </div>
-                </div>
-                <div class="fandogh-form-group margin-top-100">
-                    <f-button styles="red block" @onClick="nextStep"  > مرحله بعد </f-button>
-                </div>
-            </div>
-            <div class="col-md-6 col-xs-12" >
-                <f-table :small="true" :header="header" :data="envsData"  title="env" :actions="[{title:`<img src='/icons/ic-delete.svg' /> `, action:'delete'}]" />
+                    <div class="fandogh-form-group margin-top-100">
+                        <f-table :small="true" :header="header" :data="envsData"
+                                @delete="deleteRow" title="env" :actions="[{title:`<img src='/icons/ic-delete.svg' /> `, action:'delete'}]" />
+                    </div>
+                </wizard>
             </div>
         </div>
     </div>
@@ -36,6 +36,7 @@
   import FTable from '~/components/Dashboard/table'
   import FCheckbox from '~/components/elements/checkbox'
   import MultiSelect from '~/components/Dashboard/multiselect'
+  import Wizard from '~/components/Dashboard/wizard'
   export default {
     layout: 'dashboard',
     data(){
@@ -45,7 +46,7 @@
         name: '',
         value: '',
         hidden: false,
-        envs: [
+        env: [
         ]
       }
     },
@@ -54,23 +55,24 @@
       FButton,
       FCheckbox,
       FTable,
-      MultiSelect
+      MultiSelect,
+      Wizard
     },
     computed:{
       envsData(){
-        return this.$dataTable({rows: this.envs, length: 3, props: ['name', 'value','hidden' ], id: 'name'})
+        return this.$dataTable({rows: this.env, length: 3, props: ['name', 'value','hidden' ], id: 'name'})
       }
     },
     methods:{
-      delete(name){
-        this.envs = this.envs.filter(item => item.name !== name)
+      deleteRow(name){
+        this.env = this.env.filter(item => item.name !== name)
       },
       addEnv(){
         let name = this.name
         let value = this.value
-        let hidden = this.hidden
-        this.envs.push(
-            {name, value, hidden}
+        let hidden = this.hidden ? `<img src="/icons/success.svg" />` : `<img src="/icons/fail.svg" />`
+        this.env.push(
+          {name, value, hidden}
         )
       },
       nextStep(){
@@ -78,7 +80,7 @@
       }
     },
     watch:{
-      envs(value, oldValue){
+      env(value, oldValue){
         this.$store.dispatch('manifestGenerator', {value, path: 'spec.env'})
       },
     }
