@@ -6,7 +6,6 @@
                 <wizard btn_title="مرحله بعد">
                     <div class="fandogh-form-group">
                         <f-radio v-model="image_type" :options="image_types" title="نوع ایمیج" />
-
                     </div>
                     <a v-if="!images.length" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">
                         <f-label value="شما هیچ تصویری پابلیش نکرده اید٬ برای آپلود کردن تصویر می توانید از این لینک  استفاده کنید.
@@ -118,7 +117,7 @@
       },
       imageVersion(){
         if((!this.image.length || !this.version.length) && (!this.image_external.length || !this.version_external.length) ) return
-        return (this.image+':'+this.version) || (this.image_external+':'+this.version_external)
+        return this.internal ? this.image+':'+this.version : this.image_external+':'+this.version_external
       },
     },
     layout: 'dashboard',
