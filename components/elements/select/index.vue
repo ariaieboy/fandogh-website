@@ -1,28 +1,8 @@
-<!--<template>-->
-    <!--<select @change="e => $emit('input', e.target.value)">-->
-        <!--<option v-for="option in options"  :value="option.value"> {{option.title}} </option>-->
-    <!--</select>-->
-<!--</template>-->
-
-<!--<script>-->
-    <!--export default {-->
-      <!--props:{-->
-        <!--options:{-->
-          <!--default: []-->
-        <!--}-->
-      <!--},-->
-    <!--}-->
-<!--</script>-->
-
-<!--<style lang="stylus" scoped>-->
-
-<!--</style>-->
-
 <template>
     <div class="dropdown">
 
-        <div  class="dropdown-container">
-            <div @click="toggle" class="dropdown--arrow">
+        <div @click="toggle"  class="dropdown-container">
+            <div  class="dropdown--arrow">
                 <img v-if="!show" src="./images/arrow-d.svg" />
                 <img v-if="show" src="./images/arrow-u.svg" />
             </div>
@@ -100,6 +80,7 @@
             border solid 1px #e7e8ea
             width 100%
         .dropdown-container
+            cursor pointer
             min-height 46px
             margin-bottom 8px
             position relative
