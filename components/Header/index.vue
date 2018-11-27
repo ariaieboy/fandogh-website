@@ -21,13 +21,13 @@
                 </div>
             </div>
             <div class="user" v-if="!loggedIn">
-                <f-button style="width: 100px" path="/user/login"  styles="transparent" > ورود </f-button>
-                <f-button path="/user/register" styles="transparent border" > ثبت نام </f-button>
+                <f-button  path="/user/login"  styles="transparent" > ورود </f-button>
+                <f-button path="/user/register" styles="transparent border margin-10" > ثبت نام </f-button>
             </div>
             <div class="user" v-else>
-                <f-button style="width: 100px" @onClick="logout"  styles="transparent" > خروج </f-button>
-                <!--<f-button style="width: 100px" @onClick="$router.push('/dashboard/images')"  styles="transparent border" > داشبورد </f-button>-->
-                <f-button style="width: 100px" path="/dashboard/images"  styles="transparent border" > داشبورد </f-button>
+                <f-button  @onClick="logout"  styles="transparent md" > خروج </f-button>
+                <!--<f-button  @onClick="$router.push('/dashboard/images')"  styles="transparent border" > داشبورد </f-button>-->
+                <f-button  path="/dashboard/images"  styles="transparent border md margin-10" > داشبورد </f-button>
             </div>
 
             <div v-if="loggedIn" class="profile">
@@ -115,7 +115,7 @@ export default {
 
 <style lang="stylus">
     .header-container
-        padding 30px 90px
+        padding 13.5px 30px
         position fixed
         box-sizing border-box
         z-index 1000
