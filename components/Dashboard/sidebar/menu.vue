@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     setHeight() {
-      this.height = window.innerHeight - 490;
+      this.height = window.innerHeight - 490 + 42;
     },
     closeMenu(path) {
       this.$store.dispatch("toggleSidebar", 0);

@@ -77,14 +77,14 @@
             border solid 1px #e7e8ea
             border-radius 0 0 15px 10px
         td, th
-            min-width 220px
-            max-width 220px
+            // min-width 220px
+            // max-width 220px
             text-overflow ellipsis
             overflow hidden
             white-space nowrap
-            padding 10px
+            padding 10px 10px
             box-sizing border-box
-            height 90px
+            height 65px
             color #75879c
             font-size 18px
             text-align center
@@ -95,11 +95,12 @@
             font-size 16px
             font-weight bold
             color #000
+            padding 10px 50px
         .table-header
             background-color: #291996;
             display block
             box-sizing border-box
-            padding 10px
+            padding 9px
             text-align center
             border-radius 10px 10px 0 0
             width 100%
