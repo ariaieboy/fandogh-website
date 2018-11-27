@@ -18,7 +18,7 @@
     },
     data(){
       return {
-        header: ['تاریخ ساخت سرویس', 'ورژن ایمیج', 'ایمیج سرویس', 'نام سرویس'],
+        header: ['نام سرویس' , 'ورژن ایمیج', 'ایمیج سرویس', 'تاریخ ساخت سرویس',] ,
       }
     },
     computed:{
@@ -68,7 +68,7 @@
           }
         })
       },
-      logs(){
+      logs(value){
         this.$router.push(`/dashboard/services/${value}/logs`)
       }
     }

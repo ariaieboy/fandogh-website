@@ -34,7 +34,7 @@
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%)
   border-radius: 10px;
-  z-index 11
+  z-index 99999
   overflow hidden
 }
 
@@ -70,7 +70,7 @@ body{
   left: 0;
   width: 100%;
   height: 120vh;
-  z-index: 10;
+  z-index: 9999;
   background-color: rgba(0,0,0,0.8); /*dim the background*/
 }
 
