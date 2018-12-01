@@ -3,7 +3,6 @@
     <h2>جزییات سرویس </h2>
     <div class="row">
       <div class="col-md-6 col-xs-12" >
-
         <div class="fandogh-form-group">
           <f-input v-model="service"  styles="input-white input-block input-dashboard input-disable" > </f-input>
         </div>
@@ -29,6 +28,10 @@
       <div class="col-md-6 col-xs-12" >
         <f-table :small="true" :header="header" :data="data"  title="env" />
       </div>
+    </div>
+    <h3>رپلیکاها :</h3>
+    <div class="row">
+      
     </div>
   </div>
 </template>

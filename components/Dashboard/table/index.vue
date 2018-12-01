@@ -82,7 +82,7 @@
             text-overflow ellipsis
             overflow hidden
             white-space nowrap
-            padding 10px 10px
+            padding 0 10px
             box-sizing border-box
             height 65px
             color #75879c

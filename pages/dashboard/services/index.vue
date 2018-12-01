@@ -69,7 +69,8 @@
         })
       },
       logs(value){
-        this.$router.push(`/dashboard/services/${value}/logs`)
+        console.log(value)
+        // this.$router.push(`/dashboard/services/${value}/logs`)
       }
     }
   }
