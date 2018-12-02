@@ -7,6 +7,10 @@
       :aria-expanded="active ? 'true' : 'false'"
       @click.prevent="toggle"
     >
+    <span class="collapse-icon">
+      <icon-plus :open="active"/>
+    </span>
+
       <slot name="collapse-header"></slot>
     </div>
     <transition name="fade">
@@ -20,8 +24,12 @@
 </template>
 
 <script>
+import iconPlus from './icons/plus'
 export default {
   name: "Collapse",
+  components:{
+    iconPlus
+  },
   data() {
     return {
       active: false
@@ -30,7 +38,7 @@ export default {
   props: {
     selected: {
       type: Boolean,
-      required: true,
+      required: false,
       default: false
     }
   },
@@ -54,14 +62,20 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-
+$borderColor = #b5b5b5;
+$borderWidth = 0.6px
+$round = 10px
 .collapse
   margin-bottom 2px
 .collapse .collapse-header
   position relative
-  padding 20px 20px 20px 40px
+  padding 15px 20px 15px 40px
+  border $borderWidth solid $borderColor
   border-radius 3px
-  background #f7f7f7
+  background #fff
+  border-top-right-radius $round
+  border-top-left-radius $round
+  cursor pointer
 .collapse .collapse-header > div
   display flex
   justify-content space-between
@@ -69,35 +83,25 @@ export default {
 .collapse .collapse-header h3
   font-weight bold
   font-size 0.938em
-.collapse .collapse-header::before
+.collapse .collapse-icon
   position absolute
-  top calc(50% - 0.4em)
+  // top calc(50% - 0.4em)
   left 20px
-  color #c5c9d0
-  content url('./icons/arrow-down.svg')
-  font-size 0.4em
-  transition all 0.2s
-  transform rotate(-90deg)
-  -moz-transition all 0.2s
-  -o-transition all 0.2s
-  -webkit-transition all 0.2s
-  -moz-transform rotate(-90deg)
-  -o-transform rotate(-90deg)
-  -ms-transform rotate(-90deg)
-  -webkit-transform rotate(-90deg)
+
 .collapse.is-active .collapse-header::before
   transform rotate(0deg)
-  -moz-transform rotate(0deg)
-  -o-transform rotate(0deg)
-  -ms-transform rotate(0deg)
+  -moz-transform rotate(0$borderColor = #75879cdeg);
+  -o-transform rotate(0deg$borderColor = #75879c);
+  -ms-transform rotate(0$borderColor = #75879cdeg);
   -webkit-transform rotate(0deg)
 .collapse .collapse-content-box
-  padding 30px 40px
-  border-right 2px solid #f7f7f7
-  border-bottom 2px solid #f7f7f7
-  border-left 2px solid #f7f7f7
-  border-bottom-right-radius 3px
-  border-bottom-left-radius 3px
+  padding 15px 0
+  background-color #fff
+  border-right $borderWidth solid $borderColor
+  border-bottom $borderWidth solid $borderColor
+  border-left $borderWidth solid $borderColor
+  border-bottom-right-radius $round
+  border-bottom-left-radius $round
   transition all 0.2s
   -moz-transition all 0.2s
   -o-transition all 0.2s
