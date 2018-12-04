@@ -17,10 +17,11 @@
                     <tr v-for="(dataRow, index) in data" :key="index">
                         <td v-for="(value, jendex) in dataRow.rows" :key="jendex"
                             :class="[index%2 !== 0 && jendex%2 === 0 ? 'white' : index%2 === 0 && jendex%2 !== 0 ?
-                            'gray-2': 'gray-1']" v-html="value">  </td>
+                            'gray-2': 'gray-1']" v-html="value">  
+                        </td>
                         <td v-if="actions && actions.length" :class="[index%2 !== 0 && dataRow.rows.length%2 === 0 ? 'white' : index%2 === 0 && dataRow.rows.length%2 !== 0 ? 'gray-2': 'gray-1']"  >
-                            <component :class="actions.length >= 3 ? 'action-button-s' : 'action-button-m'"
-                                       v-for="(action, index) in actions" :key="index" is="action-button"
+                            <component :class="[actions.length >= 3 ? 'action-button-s' : 'action-button-m']"
+                                       v-for="(action, jindex) in actions" :key="jindex" :is="'action-button'"
                                        @onClick="actionHandler(action, dataRow)" v-html="action.title" > </component>
                         </td>
                     </tr>
@@ -82,7 +83,7 @@
             text-overflow ellipsis
             overflow hidden
             white-space nowrap
-            padding 10px 10px
+            padding 0 10px
             box-sizing border-box
             height 65px
             color #75879c

@@ -10,7 +10,8 @@
   font-family yekan-light
   font-style normal
   src url('/fonts/iranyekanweblight.ttf')
-  
+.font-roboto 
+   font-family: Roboto !important
 body.noscroll
   overflow: hidden
 
@@ -27,23 +28,24 @@ body.noscroll
 
 li              
   list-style: none
-p, h1, h2, h3, h6, button, span, a, li, label
+p, h1, h2, h3 , h6, button, span, a, li, label
   font-family yekan, sans-serif
   color white
 .dash-container
-  a, p, h1, h2, h3, h6, span, li, label
+  a, p, h1, h2,h4, h3, h6, span, li, label
     color #000
   h2
     line-height 1.8
     padding-bottom 20px
     font-size 18px
+
   .error-text
-    color #ff2d55
-    text-decoration underline
+    color #ff2d55 !important
+    // text-decoration underline
   .pending-text
-    color #296bdd
+    color #296bdd !important
   .success-text
-    color #2cac46
+    color #2cac46 !important
 
 p, h6, button
   font-size font-small
@@ -136,6 +138,7 @@ p.description
 .fandogh-form-group
   margin 15px 0
   display block
+  position: relative
   &:first-of-type
     margin-top 0
 
@@ -154,6 +157,8 @@ p.description
   margin-top 50px
 .margin-top-100
   margin-top 100px
+.mb-45
+  margin-bottom: 45px
 .80
   width 80%
 
