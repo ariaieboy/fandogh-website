@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="user" v-if="!loggedIn">
-                <f-button  path="/user/login"  styles="transparent" > ورود </f-button>
-                <f-button path="/user/register" styles="transparent border margin-10" > ثبت نام </f-button>
+                <f-button  path="/user/login"  styles="transparent md" > ورود </f-button>
+                <f-button path="/user/register" styles="transparent border margin-10 md" > ثبت نام </f-button>
             </div>
             <div class="user" v-else>
                 <f-button  @onClick="logout"  styles="transparent md" > خروج </f-button>

@@ -4,11 +4,22 @@
       <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </div>
     <!-- <f-table title="ایمیج های شما" :header="header" :data="_domains" :actions="[ {title:`<img src='/icons/ic-tick.svg' /> <span>تایید</span> `, action:'verify'}, {title:`<img src='/icons/ic-delete.svg' /> <span>حذف</span> `, action:'delete'}]"></f-table> -->
-    <vue-good-table :columns="header" :rows="domains" :rtl="true">
+    <div class="table-title">دامنه های شما</div>
+    <vue-good-table :columns="header" :rows="domains" :rtl="true"   styleClass="vgt-table">
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
-            <action-button :title="`<img src='/icons/ic-tick.svg' /> <span>تایید</span>`"></action-button>
-          <!-- <span style="font-weight: bold; color: blue;">{{props.row.age}}</span>  -->
+            <action-button class="action-button-m" v-if="!props.row.verified" @onClick="verify(props.row)">
+              <img src='/icons/ic-tick.svg' /> 
+              <span>تایید</span>
+            </action-button>
+            <action-button class="action-button-m disabled" v-if="props.row.verified">
+              <img src='/icons/ic_tConfirm.svg' /> 
+              <span>تایید</span>
+            </action-button>
+            <action-button class="action-button-m" @onClick="remove(props.row)" >
+              <img src='/icons/ic-delete.svg' /> 
+              <span>حذف</span>
+            </action-button>
         </span>
         <span v-else>{{props.formattedRow[props.column.field]}}</span>
       </template>
@@ -36,11 +47,18 @@ export default {
   },
   data() {
     return {
-      // 'نام دامنه','متصل به سرویس', 'تاریخ افزودن دامنه', 'وضعیت'
       header: [
         {
           label: "نام دامنه",
           field: "name"
+        },
+        {
+          label: "متصل به سرویس",
+          field: "service"
+        },
+        {
+          label: "گواهینامه ssl",
+          field: "ssl"
         },
         {
           label: "وضعیت",
@@ -49,12 +67,11 @@ export default {
           html: true
         },
         {
-          label: "تغییرات",
+          label: "مدیریت",
           field: "action",
           html: true
         }
       ],
-      data: []
     };
   },
   components: {
@@ -64,28 +81,8 @@ export default {
   },
   computed: {
     domains() {
-      let domains = this.$store.state.domains;
-      if (domains) {
-        return domains.map(({ name, verified }) => {
-          return {
-            name,
-            service: "",
-            created_at: "",
-            verified
-          };
-        });
-      }
+      return this.$store.state.domains;
     },
-    _domains() {
-      if (this.domains) {
-        return this.$dataTable({
-          rows: this.domains,
-          length: 4,
-          props: ["name", "service", "created_at", "_verified"],
-          id: "name"
-        });
-      }
-    }
   },
   methods: {
     getDomainStatus({ verified }) {
@@ -94,14 +91,30 @@ export default {
     getClass({ verified }) {
       return verified ? "success-text" : "error-text";
     },
-    // getAction(){
-    //     return `<button @click=verify>عملیات</button>`
-    // },
-    verify(id) {
-      console.log(id);
+    verify({name}) {
+      this.$router.push(`/dashboard/domains/verification/${name}`)
     },
-    verify(id) {},
-    delete(id) {}
+    remove({name}) {
+      this.$alertify({
+          title: `دامنه ${name} حذف شود؟`,
+          description: ' آیا از حذف شدن دامنه خود مطمئن هستید؟'
+        }, (status) =>{
+          if(status){
+            this.$store.dispatch('removeDomain', name).then(res =>{
+              this.$store.dispatch('getDomains')
+              this.$notify({
+                title: res.message,
+                type: 'success'
+              })
+            }).catch(e => {
+              this.$notify({
+                title: e.message,
+                type: 'error'
+              })
+            })
+          }
+        })
+    }
   }
 };
 </script>
