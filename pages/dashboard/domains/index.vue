@@ -3,15 +3,26 @@
     <div class="row-block">
       <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </div>
-    <f-table
-      title="ایمیج های شما"
-      :header="header"
-      :data="_domains"
-      :actions="[ 
-       {title:`<img src='/icons/ic-tick.svg' /> <span>تایید</span> `, action:'verify'},
-       {title:`<img src='/icons/ic-delete.svg' /> <span>حذف</span> `, action:'delete'}
-       ]"
-    ></f-table>
+    <div class="table-title">دامنه های شما</div>
+    <vue-good-table :columns="header" :rows="domains" :rtl="true"   styleClass="vgt-table">
+      <template slot="table-row" slot-scope="props">
+        <span v-if="props.column.field == 'action'">
+            <action-button class="action-button-m" v-if="!props.row.verified" @onClick="verify(props.row)">
+              <img src='/icons/ic-tick.svg' /> 
+              <span>تایید</span>
+            </action-button>
+            <action-button class="action-button-m disabled" v-if="props.row.verified">
+              <img src='/icons/ic_tConfirm.svg' /> 
+              <span>تایید</span>
+            </action-button>
+            <action-button class="action-button-m" @onClick="remove(props.row)" >
+              <img src='/icons/ic-delete.svg' /> 
+              <span>حذف</span>
+            </action-button>
+        </span>
+        <span v-else>{{props.formattedRow[props.column.field]}}</span>
+      </template>
+    </vue-good-table>
   </div>
 </template>
 
@@ -20,6 +31,8 @@ import FTable from "~/components/Dashboard/table";
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
+import ActionButton from '~/components/Dashboard/table/action-button'
+
 export default {
   layout: "dashboard",
   async asyncData({ store, route, redirect }) {
@@ -33,49 +46,79 @@ export default {
   },
   data() {
     return {
-      header: ["نام دامنه", "متصل به سرویس", "تاریخ افزودن دامنه", "وضعیت"],
-      data: []
+      header: [
+        {
+          sortable: false,
+          label: "نام دامنه",
+          field: "name"
+        },
+        {
+          sortable: false,
+          label: "متصل به سرویس",
+          field: "service"
+        },
+        {
+          sortable: false,
+          label: "گواهینامه ssl",
+          field: "ssl"
+        },
+        {
+          label: "وضعیت",
+          sortable: false,
+          field: this.getDomainStatus,
+          tdClass: this.getClass,
+          html: true
+        },
+        {
+          label: "مدیریت",
+          sortable: false,
+          field: "action",
+          html: true
+        }
+      ],
     };
   },
   components: {
     FTable,
-    FButton
+    FButton,
+    ActionButton
   },
   computed: {
     domains() {
-      let domains = this.$store.state.domains;
-      if (domains) {
-        return domains.map(({ name, verified }) => {
-          return {
-            name,
-            service: "",
-            created_at: "",
-            _verified: this.getDomainStatus(verified, name),
-          };
-        });
-      }
+      return this.$store.state.domains;
     },
-    _domains() {
-      if (this.domains) {
-        return this.$dataTable({
-          rows: this.domains,
-          length: 4,
-          props: ["name", "service", "created_at", "_verified"],
-          id: "name"
-        });
-      }
-    }
   },
   methods: {
-    getDomainStatus(status, name) {
-      return status
-        ? `<span class="success-text">در حال استفاده </span>`
-        : `<span class="error-text">تایید نشده</span>`;
+    getDomainStatus({ verified }) {
+      return verified ? "در حال استفاده" : "تایید نشده";
     },
-    verify(id) {
-      this.$router.push(`/dashboard/domains/verification/${id}`);
+    getClass({ verified }) {
+      return verified ? "success-text" : "error-text";
     },
-    delete(id) {}
+    verify({name}) {
+      this.$router.push(`/dashboard/domains/verification/${name}`)
+    },
+    remove({name}) {
+      this.$alertify({
+          title: `دامنه ${name} حذف شود؟`,
+          description: ' آیا از حذف شدن دامنه خود مطمئن هستید؟'
+        }, (status) =>{
+          if(status){
+            this.$store.dispatch('removeDomain', name).then(res =>{
+              this.$store.dispatch('getDomains')
+              this.$notify({
+                title: res.message,
+                type: 'success'
+              })
+            }).catch(e => {
+              this.$notify({
+                title: e.message,
+                type: 'error'
+              })
+            })
+          }
+        })
+    }
   }
 };
 </script>

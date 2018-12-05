@@ -14,9 +14,13 @@
         color #4f4f4f
         font-size 12px
         margin 15px
-        margin-right 8px
+        margin-right 8px    
+        &.disabled
+            pointer-events none
+            span 
+               color: rgb(212, 212, 212);
         span
-            width  0
+            width  100px
             overflow hidden
             display inline-block
             transition all ease .5s
@@ -34,8 +38,8 @@
             span
                 width 100px
 
-   @media (min-width: 1920px)
-       .action-button         
-           span
-               width 100px
+//    @media (min-width: 1920px)
+//        .action-button         
+//            span
+//                width 100px
 </style>

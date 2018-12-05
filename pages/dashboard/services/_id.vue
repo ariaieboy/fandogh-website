@@ -29,7 +29,8 @@
         </div>-->
       </div>
       <div class="col-md-6 col-xs-12">
-        <f-table :small="true" :header="header" :data="data" title="env"/>
+        <div class="table-title font-roboto">ENV</div>
+        <vue-good-table :columns="header" :rows="data" :rtl="true"   styleClass="vgt-table" />
       </div>
     </div>
     <h3>رپلیکاها :</h3>
@@ -84,11 +85,20 @@ export default {
       version: "داخلی",
       date: "512MB",
       image: this.$route.params.image,
-      header: ["نام متغییر", "مقدار متغیر"],
-      data: [
+      header: [
         {
-          rows: ["NODE_ENV", "Production"]
-        }
+          sortable: false,
+          label: "نام متغییر",
+          field: "name"
+        },
+        {
+          sortable: false,
+          label: "مقدار",
+          field: "value"
+        },
+      ],
+      data: [
+        {name:'NODE_ENV',value:'Production'}
       ]
     };
   }

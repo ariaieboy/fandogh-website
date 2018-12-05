@@ -189,8 +189,14 @@ export const createDomain = async ({commit, state}, form) => {
 }
 export const verificationDomain = async ({commit, state}, {name}) => {
   try {
-    return  await Request().post(`/api/domains/${name}/verifications`
-  )
+    return  await Request().post(`/api/domains/${name}/verifications`)
+  } catch (e) {
+    return Promise.reject(e)
+  }
+}
+export const removeDomain = async ({commit, state},name) => {
+  try {
+    return  await Request().delete(`/api/domains/${name}`)
   } catch (e) {
     return Promise.reject(e)
   }
