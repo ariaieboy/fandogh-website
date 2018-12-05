@@ -8,7 +8,8 @@
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
           <action-button class="action-button-s" @onClick="logs(props.row)">
-            <img src='/icons/ic-logs.svg' /> <span>مشاهده جزییات</span> 
+            <img src="/icons/ic-logs.svg">
+            <span>مشاهده جزییات</span>
           </action-button>
           <action-button class="action-button-s" @onClick="remove(props.row)">
             <img src="/icons/ic-delete.svg">
@@ -37,22 +38,27 @@ export default {
       header: [
         {
           label: "نام سرویس",
+          sortable: false,
           field: "name"
         },
         {
           label: "نوع سرویس",
+          sortable: false,
           field: "service_type"
         },
         {
           label: "حافظه",
+          sortable: false,
           field: "memory"
         },
         {
           label: "تاریخ ساخت سرویس",
+          sortable: false,
           field: "start_date"
         },
         {
           label: "مدیریت",
+          sortable: false,
           field: "action",
           html: true
         }
@@ -63,15 +69,17 @@ export default {
     services() {
       let services = this.$store.state.services;
       if (services) {
-        return services.map(({ memory ,start_date, name, service_type, state }) => {
-          return {
-            name,
-            //version: last_version.version,
-            service_type: service_type,
-            memory: `Mi ${memory}`,
-            start_date: FDate({ date: start_date })
-          };
-        });
+        return services.map(
+          ({ memory, start_date, name, service_type, state }) => {
+            return {
+              name,
+              //version: last_version.version,
+              service_type: service_type,
+              memory: `Mi ${memory}`,
+              start_date: FDate({ date: start_date })
+            };
+          }
+        );
       }
     }
   },
@@ -108,7 +116,7 @@ export default {
         }
       );
     },
-    logs({name}) {
+    logs({ name }) {
       this.$router.push(`/dashboard/services/${name}`);
     }
   }

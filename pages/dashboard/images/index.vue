@@ -8,10 +8,12 @@
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
           <action-button class="action-button-s" @onClick="versions(props.row)">
-           <img src='/icons/ic-time.svg'/><span> ورژن ها </span>
+            <img src="/icons/ic-time.svg">
+            <span>ورژن ها</span>
           </action-button>
           <action-button class="action-button-s" @onClick="createVersion(props.row)">
-            <img src='/icons/ic-upload.svg' /> <span>آپلود</span>
+            <img src="/icons/ic-upload.svg">
+            <span>آپلود</span>
           </action-button>
           <action-button class="action-button-s" @onClick="remove(props.row)">
             <img src="/icons/ic-delete.svg">
@@ -47,22 +49,27 @@ export default {
       header: [
         {
           label: "نام دامنه",
+          sortable: false,
           field: "name"
         },
         {
           label: "تاریخ ساخت ایمیج",
+          sortable: false,
           field: "created_at"
         },
         {
           label: "آخرین ورژن",
+          sortable: false,
           field: "version"
         },
         {
           label: "آخرین به روز‌رسانی",
+          sortable: false,
           field: "date"
         },
         {
           label: "مدیریت",
+          sortable: false,
           field: "action",
           html: true
         }
@@ -94,16 +101,16 @@ export default {
           }
         });
       }
-    },
+    }
   },
   methods: {
-    versions({name}) {
+    versions({ name }) {
       this.$router.push(`/dashboard/images/${name}/versions`);
     },
-    createVersion({name}) {
+    createVersion({ name }) {
       this.$router.push(`/dashboard/images/${name}/versions/create`);
     },
-    remove({name}) {
+    remove({ name }) {
       this.$alertify(
         {
           title: "ایمیج حذف شود؟",
