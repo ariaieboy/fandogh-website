@@ -63,6 +63,7 @@
   import FLabel from '~/components/Dashboard/label'
   import Wizard from '~/components/Dashboard/wizard'
   import FRadio from '~/components/elements/radio'
+  import {getValue} from "~/utils/cookie";
 
   // yaml generator
   import jsyaml from 'js-yaml'
@@ -84,7 +85,7 @@
         image_external: '',
         version_external: 'latest',
         version_loaded: false,
-        version: false,
+        version:'',
         image_type: '',
         image_pull_policy:'',
         image_pull_secret: '',
@@ -94,7 +95,14 @@
         ]
       }
     },
+    
     computed:{
+      nameImage(){
+        return getValue('name')
+      },
+      versionsImage(){
+        return getValue('versions')
+      },
       internal(){
         return this.image_types[0] === this.image_type
       },
@@ -167,6 +175,10 @@
       FLabel,
       Wizard,
       FRadio
+    },
+    mounted(){
+       this.image = this.nameImage
+       this.version= this.versionsImage
     }
   }
 </script>

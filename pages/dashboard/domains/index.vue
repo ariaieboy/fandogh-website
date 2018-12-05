@@ -3,7 +3,6 @@
     <div class="row-block">
       <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </div>
-    <!-- <f-table title="ایمیج های شما" :header="header" :data="_domains" :actions="[ {title:`<img src='/icons/ic-tick.svg' /> <span>تایید</span> `, action:'verify'}, {title:`<img src='/icons/ic-delete.svg' /> <span>حذف</span> `, action:'delete'}]"></f-table> -->
     <div class="table-title">دامنه های شما</div>
     <vue-good-table :columns="header" :rows="domains" :rtl="true"   styleClass="vgt-table">
       <template slot="table-row" slot-scope="props">

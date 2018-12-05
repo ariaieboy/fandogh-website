@@ -6,7 +6,7 @@
         <div class="wrapper-col" :class="{'col-lg-2':!showHalf , 'col-lg-0':showHalf}">
           <admin-sidebar />
         </div>
-        <div class="wrapper-col" :class="{'col-xs-12 col-lg-10 pr-120':!showHalf,'col-xs-12':showHalf}">
+        <div class="wrapper-col" :class="{'col-xs-12 col-lg-10 pr-120 pl-100':!showHalf,'col-xs-12':showHalf}">
           <div class="dash-container">
             <nuxt />
           </div>
