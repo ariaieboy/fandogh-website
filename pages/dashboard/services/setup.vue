@@ -5,9 +5,11 @@
             <div class="col-md-6 col-xs-12" >
                 <wizard :prevent="prevent" btn_title="مرحله بعد">
                     <div class="fandogh-form-group">
+                        <label>نام سرویس</label>
                         <f-input v-required v-model="name"  styles="input-white input-block input-dashboard" placeholder="نام سرویس را در این قسمت بنویسید"> </f-input>
                     </div>
                     <div  class="fandogh-form-group">
+                        <label>نوع سرویس</label>
                         <f-select v-required  v-model="kind" :options="service_types" title="انتخاب نوع سرویس"  />
                     </div>
 
@@ -35,10 +37,12 @@
                             <f-checkbox title="HTTP" id="http" styles="light" v-model="allow_http" />
                         </div>
                         <div class="fandogh-form-group">
+                            <label class="font-roboto">Path</label>
                             <f-input v-model="path"  styles="input-white input-block input-dashboard" placeholder="Path"> </f-input>
                         </div>
                         <div class="fandogh-form-group">
-                            <f-input v-model="domains"  styles="input-white input-block input-dashboard" placeholder="دامنه خود را وارد نمایید  "> </f-input>
+                            <label>دامنه</label>
+                            <f-input v-model="domains"  styles="input-white input-block input-dashboard" placeholder="دامنه خود را وارد نمایید"> </f-input>
                         </div>
                     </div>
 

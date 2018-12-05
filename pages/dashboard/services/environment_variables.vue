@@ -6,9 +6,11 @@
                 <wizard btn_title="مرحله بعد">
 
                     <div class="fandogh-form-group">
+                        <label>نام متغیر </label>
                         <f-input v-model="name"  styles="input-white input-block input-dashboard" placeholder="نام متغیر"> </f-input>
                     </div>
                     <div class="fandogh-form-group">
+                        <label>مقدار متغیر</label>
                         <f-input v-model="value"  styles="input-white input-block input-dashboard" placeholder="مقدار متغییر"> </f-input>
                     </div>
                     <div class="flex-space">

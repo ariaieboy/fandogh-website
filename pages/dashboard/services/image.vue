@@ -8,17 +8,18 @@
                         <f-radio v-model="image_type" :options="image_types" title="نوع ایمیج" />
                     </div>
                     <a v-if="!images.length" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">
-                        <f-label value="شما هیچ تصویری پابلیش نکرده اید٬ برای آپلود کردن تصویر می توانید از این لینک  استفاده کنید.
-"   />
+                        <f-label value="شما هیچ تصویری پابلیش نکرده اید٬ برای آپلود کردن تصویر می توانید از این لینک  استفاده کنید."   />
                     </a>
                     <div v-if="internal" class="row">
                         <div class="col-sm-8">
                             <div  class="fandogh-form-group">
+                                <label>نام ایمیج</label>
                                 <f-select v-model="image" title="نام ایمیج را انتخاب کنید" :options="images"  styles="input-white input-block input-dashboard" placeholder="نام ایمیج را انتخاب کنید"> </f-select>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="fandogh-form-group"  >
+                                 <label>ورژن ایمیج</label>
                                 <f-select v-model="version" title="ورژن " :options="versions"  styles="input-white input-block input-dashboard" placeholder="ورژن ایمیج را انتخاب کنید"> </f-select>
                             </div>
                         </div>
@@ -27,25 +28,30 @@
                     <div v-else class="row">
                         <div class="col-sm-8">
                             <div  class="fandogh-form-group">
+                                <label>نام ایمیج</label>
                                 <f-input v-model="image_external"  styles="input-white input-block input-dashboard"  placeholder="نام ایمیج خارجی بنویسید"> </f-input>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div  class="fandogh-form-group">
+                                 <label>ورژن ایمیج</label>
                                 <f-input v-model="version_external"  styles="input-white input-block input-dashboard"   placeholder="آخرین ورژن"> </f-input>
                             </div>
                         </div>
                     </div>
 
                     <div class="fandogh-form-group">
+                        <label>Replicas</label>
                         <f-input v-model="replicas"  styles="input-white input-block input-dashboard" type="number" placeholder="تعداد رپلیکاها را در این قسمت بنویسید"> </f-input>
                     </div>
 
                     <div  class="fandogh-form-group">
+                        <label>Image Pull Policy</label>
                         <f-select v-model="image_pull_policy"  styles="input-white input-block input-dashboard" :options="[{title: 'Always'}, {title: 'IfNotPresent'}]"  placeholder="Image Pull Policy"> </f-select>
                     </div>
 
                     <div  class="fandogh-form-group">
+                        <label>Image Pull Secret</label>
                         <f-input v-model="image_pull_secret"  styles="input-white input-block input-dashboard"  placeholder="Image Pull Secret"> </f-input>
                     </div>
                 </wizard>

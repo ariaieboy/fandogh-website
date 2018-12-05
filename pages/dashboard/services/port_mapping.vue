@@ -5,12 +5,15 @@
             <div class="col-md-6 col-xs-12" >
                 <wizard btn_title="مرحله بعد">
                     <div class="fandogh-form-group">
+                      <label>Inside Port</label>
                         <f-input v-model="port"  styles="input-white input-block input-dashboard" placeholder="Inside Port"> </f-input>
                     </div>
                     <div class="fandogh-form-group">
+                        <label>Outside Port</label>
                         <f-input v-model="target_port"  styles="input-white input-block input-dashboard" placeholder="Outside Port"> </f-input>
                     </div>
                     <div class="fandogh-form-group">
+                        <label>Protocol</label>
                         <f-select v-model="protocol" :options="protocols"  placeholder="Protocol"> </f-select>
                     </div>
 

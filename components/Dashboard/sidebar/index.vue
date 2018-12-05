@@ -51,13 +51,10 @@ export default {
     width 300px
   &.show-half
     right -350px
+    
 @media only screen and (max-width: 1230px)
   .admin-sidebar
-    position fixed
     top 60px
-    right initial
-    left 0
-    transform translate(-100%)
-  &.show-sidebar
-    transform translate(0)
+    &.show-half
+      right -300px
 </style>
