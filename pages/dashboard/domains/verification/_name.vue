@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>ایجاد سرویس </h2>
+    <h2>ایجاد دامنه </h2>
     <div class="row">
       <div class="col-md-6 col-xs-12" >
 

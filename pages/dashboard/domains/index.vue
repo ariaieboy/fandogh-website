@@ -114,6 +114,17 @@ export default {
           }
         })
     }
+  },
+  methods: {
+    getDomainStatus(status, name) {
+      return status
+        ? `<span class="success-text">در حال استفاده </span>`
+        : `<span class="error-text">تایید نشده</span>`;
+    },
+    verify(id) {
+      this.$router.push(`/dashboard/domains/verification/${id}`);
+    },
+    delete(id) {}
   }
 };
 </script>
