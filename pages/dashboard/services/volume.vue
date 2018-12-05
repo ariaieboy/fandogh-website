@@ -5,9 +5,11 @@
             <div class="col-md-6 col-xs-12" >
                <wizard btn_title="مرحله بعد">
                    <div class="fandogh-form-group">
+                      <label>Volume path</label>
                        <f-input v-model="mount_path"  styles="input-white input-block input-dashboard" placeholder="Mount Path"> </f-input>
                    </div>
                    <div class="fandogh-form-group">
+                      <label>Storage sub path</label>
                        <f-input v-model="sub_path"  styles="input-white input-block input-dashboard" placeholder="Sub Path"> </f-input>
                    </div>
 

@@ -3,10 +3,11 @@
     class="close-half"
     @click="toggleMenu(3)"
   >
-    <img
+    <img 
       src="./icons/ic_arrowRight.svg"
       alt="arrow-right"
       class="close-half-icon"
+      :class="{'revers-icon':showHalf}"
     >
   </div>
 </template>
@@ -14,6 +15,11 @@
 <script>
 export default {
   name: "close-half",
+  computed:{
+    showHalf() {
+      return this.$store.state.sidebar === 3;
+    }
+  },
   methods: {
     toggleMenu(type) {
       this.$store.dispatch("toggleSidebar", type);
@@ -37,4 +43,9 @@ export default {
   &-icon
     align-self center
     width 8px
+    transition all 0.3s ease-in
+  .revers-icon 
+     transform scale(-1,1)
+     transition all 0.3s ease-out
+
 </style>

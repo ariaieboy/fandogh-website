@@ -3,9 +3,11 @@
     <div class="col-md-6 col-xs-12" >
       <h2>ساخت ایمیج</h2>
       <div class="fandogh-form-group">
+        <label>نام ایمیج</label>
         <f-input name="name" v-model="name" styles="input-white input-block input-dashboard" placeholder="نام ایمیج را در این قسمت بنویسید"> </f-input>
       </div>
       <div class="fandogh-form-group">
+        <label>ورژن ایمیج</label>
         <f-input name="version" v-model="version" class="version" styles="input-white input-block input-dashboard" placeholder="ورژن ایمیج را در این قسمت بنویسید"> </f-input>
       </div>
       <div class="fandogh-form-group margin-40">

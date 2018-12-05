@@ -3,6 +3,7 @@
     <div class="col-md-6 col-xs-12" >
       <h2>افزودن دامنه</h2>
       <div class="fandogh-form-group">
+        <label>نام دامنه</label>
         <f-input v-model="name"  styles="input-white input-block input-dashboard" placeholder="نام دامنه را در این قسمت بنویسید"> </f-input>
       </div>
       <div class="fandogh-form-group margin-top-100">
