@@ -25,7 +25,8 @@ const createStore = () => {
         builds: null,
         domains: null,
         manifest: {},
-        plan: null
+        plan: null,
+        activePlan:null,
       }
     },
     actions: actions,
