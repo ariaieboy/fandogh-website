@@ -8,6 +8,9 @@
     </div>
     <div class="table-title">ورژن های شما</div>
     <vue-good-table :columns="header" :rows="versions" :rtl="true" styleClass="vgt-table">
+      <div slot="emptystate">
+        <p class="empty-table center">دیتایی وجود ندارد</p>
+      </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
           <action-button class="action-button-s" @onClick="craeteVersions(props.row)">

@@ -4,21 +4,28 @@
       <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </div>
     <div class="table-title">دامنه های شما</div>
-    <vue-good-table :columns="header" :rows="domains" :rtl="true"   styleClass="vgt-table">
+    <vue-good-table :columns="header" :rows="domains" :rtl="true" styleClass="vgt-table">
+      <div slot="emptystate">
+        <p class="empty-table center">دیتایی وجود ندارد</p>
+      </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
-            <action-button class="action-button-m" v-if="!props.row.verified" @onClick="verify(props.row)">
-              <img src='/icons/ic-tick.svg' /> 
-              <span>تایید</span>
-            </action-button>
-            <action-button class="action-button-m disabled" v-if="props.row.verified">
-              <img src='/icons/ic_tConfirm.svg' /> 
-              <span>تایید</span>
-            </action-button>
-            <action-button class="action-button-m" @onClick="remove(props.row)" >
-              <img src='/icons/ic-delete.svg' /> 
-              <span>حذف</span>
-            </action-button>
+          <action-button
+            class="action-button-m"
+            v-if="!props.row.verified"
+            @onClick="verify(props.row)"
+          >
+            <img src="/icons/ic-tick.svg">
+            <span>تایید</span>
+          </action-button>
+          <action-button class="action-button-m disabled" v-if="props.row.verified">
+            <img src="/icons/ic_tConfirm.svg">
+            <span>تایید</span>
+          </action-button>
+          <action-button class="action-button-m" @onClick="remove(props.row)">
+            <img src="/icons/ic-delete.svg">
+            <span>حذف</span>
+          </action-button>
         </span>
         <span v-else>{{props.formattedRow[props.column.field]}}</span>
       </template>
@@ -31,7 +38,7 @@ import FTable from "~/components/Dashboard/table";
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
-import ActionButton from '~/components/Dashboard/table/action-button'
+import ActionButton from "~/components/Dashboard/table/action-button";
 
 export default {
   layout: "dashboard",
@@ -75,7 +82,7 @@ export default {
           field: "action",
           html: true
         }
-      ],
+      ]
     };
   },
   components: {
@@ -86,7 +93,7 @@ export default {
   computed: {
     domains() {
       return this.$store.state.domains;
-    },
+    }
   },
   methods: {
     getDomainStatus({ verified }) {
@@ -95,29 +102,35 @@ export default {
     getClass({ verified }) {
       return verified ? "success-text" : "error-text";
     },
-    verify({name}) {
-      this.$router.push(`/dashboard/domains/verification/${name}`)
+    verify({ name }) {
+      this.$router.push(`/dashboard/domains/verification/${name}`);
     },
-    remove({name}) {
-      this.$alertify({
+    remove({ name }) {
+      this.$alertify(
+        {
           title: `دامنه ${name} حذف شود؟`,
-          description: ' آیا از حذف شدن دامنه خود مطمئن هستید؟'
-        }, (status) =>{
-          if(status){
-            this.$store.dispatch('removeDomain', name).then(res =>{
-              this.$store.dispatch('getDomains')
-              this.$notify({
-                title: res.message,
-                type: 'success'
+          description: " آیا از حذف شدن دامنه خود مطمئن هستید؟"
+        },
+        status => {
+          if (status) {
+            this.$store
+              .dispatch("removeDomain", name)
+              .then(res => {
+                this.$store.dispatch("getDomains");
+                this.$notify({
+                  title: res.message,
+                  type: "success"
+                });
               })
-            }).catch(e => {
-              this.$notify({
-                title: e.message,
-                type: 'error'
-              })
-            })
+              .catch(e => {
+                this.$notify({
+                  title: e.message,
+                  type: "error"
+                });
+              });
           }
-        })
+        }
+      );
     }
   }
 };

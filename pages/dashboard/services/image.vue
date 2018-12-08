@@ -183,8 +183,11 @@
       FRadio
     },
     mounted(){
+      if(this.nameImage){
        this.image = this.nameImage
        this.version= this.versionsImage
+      }
+
     }
   }
 </script>
