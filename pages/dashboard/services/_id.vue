@@ -30,7 +30,11 @@
       </div>
       <div class="col-md-6 col-xs-12">
         <div class="table-title font-roboto">ENV</div>
-        <vue-good-table :columns="header" :rows="data" :rtl="true"   styleClass="vgt-table" />
+        <vue-good-table :columns="header" :rows="data" :rtl="true" styleClass="vgt-table">
+          <div slot="emptystate">
+            <p class="empty-table center">دیتایی وجود ندارد</p>
+          </div>
+        </vue-good-table>
       </div>
     </div>
     <h3>رپلیکاها :</h3>
@@ -95,11 +99,9 @@ export default {
           sortable: false,
           label: "مقدار",
           field: "value"
-        },
+        }
       ],
-      data: [
-        {name:'NODE_ENV',value:'Production'}
-      ]
+      data: [{ name: "NODE_ENV", value: "Production" }]
     };
   }
 };

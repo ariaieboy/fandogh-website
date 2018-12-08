@@ -5,6 +5,9 @@
     </div>
     <div class="table-title">سرویس‌ های شما</div>
     <vue-good-table :columns="header" :rows="services" :rtl="true" styleClass="vgt-table">
+      <div slot="emptystate">
+        <p class="empty-table center">دیتایی وجود ندارد</p>
+      </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
           <action-button class="action-button-s" @onClick="logs(props.row)">

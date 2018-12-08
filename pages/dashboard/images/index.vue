@@ -5,6 +5,9 @@
     </div>
     <div class="table-title">ایمیج های شما</div>
     <vue-good-table :columns="header" :rows="images" :rtl="true" styleClass="vgt-table">
+      <div slot="emptystate">
+        <p class="empty-table center">دیتایی وجود ندارد</p>
+      </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
           <action-button class="action-button-s" @onClick="versions(props.row)">
