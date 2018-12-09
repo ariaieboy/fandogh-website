@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as mutations from './mutations'
 import wizard from './wizard'
+import plan from './plan'
 const createStore = () => {
   return new Vuex.Store({
     state: () => {
@@ -25,14 +26,14 @@ const createStore = () => {
         builds: null,
         domains: null,
         manifest: {},
-        plan: null,
-        activePlan:null,
+        
       }
     },
     actions: actions,
     mutations: mutations,
     modules:{
-      wizard
+      wizard,
+      plan
     }
   })
 }

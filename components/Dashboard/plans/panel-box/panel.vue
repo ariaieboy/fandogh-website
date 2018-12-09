@@ -1,5 +1,5 @@
 <template>
-  <div class="service" @click.stop="redirectToPlan(plan,configs)">
+  <div class="service" @click.stop="$emit('onClick')">
     <box :hasShadow="!isActive">
       <div class="service---box">
         <div class="service----item">
@@ -11,19 +11,11 @@
               {{title}}
               <img
                 src="~/static/icons/plans/info-button.png"
-                @click.stop.prevent="toggleTooltip"
+                @click.stop.prevent="$emit('clickInfo')"
               >
+              <!-- tooltipShow -->
             </span>
-            <div class="tooltip-container" v-if="tooltipShow">
-              <div class="tooltip-box">
-                <h3 class="tooltip-heading">ویژگی‌ها :</h3>
-                <div class="tooltip-features">
-                  <p>امکان اجرای دو سرویس همزمان</p>
-                </div>
-                <h3 class="tooltip-heading">توضیحات :</h3>
-                <p class="tooltip-details-text">{{text}}</p>
-              </div>
-            </div>
+            <tooltip v-if="tooltipShow" :list="list" :description="description"/>
             <span class="service------price">{{price}}</span>
           </div>
         </div>
@@ -56,14 +48,14 @@
     <div class="service-description">
       <div class="service-description-content" v-show="isShow">
         <h3 class="service-description-heading">ویژگی‌ها :</h3>
-        <div class="bullet-list">
+        <div class="bullet-list" v-for="item in list">
           <span class="bullet"></span>
-          <p>امکان اجرای دو سرویس همزمان</p>
+          <p>{{item}}</p>
         </div>
         <h3 class="service-description-heading">توضیحات :</h3>
-        <p class="service-description-text">{{text}}</p>
+        <p class="service-description-text">{{description}}</p>
       </div>
-      <div class="plan-description-toggle" v-on:click.stop="toggle">
+      <div class="plan-description-toggle" v-on:click.stop="$emit('toggle')">
         <p>توضیحات</p>
       </div>
     </div>
@@ -72,37 +64,30 @@
 
 <script>
 import Box from "~/components/Dashboard/plans/panel-box/box.vue";
+import tooltip from "./tooltip";
 
 export default {
   name: "panel",
   components: {
-    Box
+    Box,
+    tooltip
   },
-  props: ['tooltipShow','isShow','isActive','features','text','icon','title','price','space','ram','cpu'],
+  props: [
+    "tooltipShow",
+    "isShow",
+    "isActive",
+    "features",
+    "text",
+    "icon",
+    "title",
+    "price",
+    "space",
+    "ram",
+    "cpu",
+    "description",
+    "list"
+  ],
 
-  methods: {
-    redirectToPlan(plan, configs) {
-      this.$store
-        .dispatch("setPlan", { plan, configs })
-        .then(res => {
-          this.$router.push("/dashboard/plans/1");
-        })
-        .catch(e => {
-          console.log(e, "eee");
-        });
-    },
-    toggle(index) {
-      this.$emit("toggle");
-      if (index === this.isShow) {
-        this.isShow = -1;
-        return;
-      }
-      this.isShow = index;
-    },
-    toggleTooltip() {
-      this.$emit("clickInfo");
-    }
-  }
 };
 </script>
 
@@ -189,7 +174,6 @@ export default {
   flex-direction column
   margin 0 15px
   margin-bottom 20px
-  text-align center
   @media (min-width: 992px)
     display none
   .service-description-content
@@ -199,6 +183,7 @@ export default {
     border solid 1px #e7e8ea
     background-color #ffffff
     line-height 1.75
+    padding 5px 10px
 .plan-description-toggle
   z-index 1
   display inline-block
@@ -211,6 +196,7 @@ export default {
   border-bottom-left-radius 10px
   background-color #e7e8ea
   box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.16)
+  text-align center
   p
     color #fff
     font-weight bold
@@ -218,7 +204,9 @@ export default {
 .bullet-list
   display flex
   align-items baseline
-  padding 0 11px 0 5px
+  p 
+   margin 0
+   line-height 1.75
 .bullet
   margin-left 10px
   width 8px
@@ -226,48 +214,11 @@ export default {
   border-radius 50%
   background-color #ff859e
 .service-description-heading
-  margin-right 10px
+  color #000
+  font-size 14px
 .service-description-text
-  margin 5px
-.tooltip-box:before
-  position absolute
-  top -10px
-  right 11%
-  z-index 99
-  z-index 99
-  border-right 10px solid transparent
-  border-bottom 10px solid #3a3c40
-  border-left 10px solid transparent
-  content ''
-.tooltip-container
-  // display none
-  width 100%
-.tooltip-box
-  position absolute
-  z-index 100
-  display flex
-  flex-direction column
-  padding 10px
-  max-height 300px
-  border-radius 9px
-  background-color #3a3c40
-  font-size 14px
-  @media (max-width: 400px)
-    visibility hidden
-.tooltip-heading
-  max-height 0
-  color #ffffff
-  font-size 16px
-.tooltip-features
-  margin-right 20px
-  max-height 30px
-.tooltip-features p
-  color #ffffff
-  font-size 14px
-  line-height 1.79
-.tooltip-details-text
-  color #ffffff
-  font-size 14px
-  line-height 1.79
-  // max-height 30px
+  margin 0
+  color: rgb(79, 79, 79);
+  font-size 12px
+  text-align justify
 </style>

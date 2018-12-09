@@ -21,13 +21,7 @@
       <h1 class="service-plan-heading">انتخاب پلن</h1>
     </div>
     <panel-box>
-      <!-- :plan="service.plan"
-      :configs="service.configs"-->
-      <!-- :isShow="index === isShow"
-            @toggle="toggle(index)"
-            :tooltipShow="index === tooltipShow"
-      @clickInfo="clickInfo(index)"-->
-      <f-panels :items="services"/>
+      <f-panels :items="allPlan"/>
     </panel-box>
   </div>
 </template>
@@ -48,28 +42,15 @@ export default {
     FActivePlan,
     FActivePlanBox
   },
-  data() {
-    return {
-      tooltipShow: -1,
-      isShow: -1,
-      services: [
-        {
-          icon: "bicycle.png",  // to see  more icons open dir : ROOT/static/icons/plans/services-icon
-          title: "مفتی",
-          price: "رایگان",
-          cpu: "Unknown",
-          ram: "400MB",
-          space: "2GB"
-        }
-      ]
-    };
-  },
   computed: {
     namespace() {
       return getValue("namespace");
     },
+    allPlan() {
+      return this.$store.state.plan.plans;
+    },
     activePlan() {
-      return this.$store.state.activePlan;
+      return this.$store.state.plan.activePlan;
     },
     percent() {
       let percent = Math.round(
@@ -80,25 +61,8 @@ export default {
       return percent.toString();
     }
   },
-
-  methods: {
-    clickInfo(index) {
-      if (index === this.tooltipShow) {
-        this.tooltipShow = -1;
-        return;
-      }
-      this.tooltipShow = index;
-    },
-    toggle(index) {
-      if (index === this.isShow) {
-        this.isShow = -1;
-        return;
-      }
-      this.isShow = index;
-    }
-  },
   mounted() {
-    this.$store.dispatch("getNameSpace", this.namespace);
+    this.$store.dispatch("plan/getNameSpace", this.namespace);
   }
 };
 </script>
