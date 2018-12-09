@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar" :class="{'show-sidebar': sidebar}">
+    <div class="sidebar" :class="{'show-sidebar-navbar': sidebar}">
         <div class="row sidebar-heading no-margin">
             <div class="col-xs-6">
                 <a href="#" @click.prevent="toggleMenu" class="close">
@@ -65,7 +65,7 @@
       },
       methods:{
         toggleMenu(){
-          this.$store.dispatch('toggleSidebar', 1)
+          this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
         },
         showModal(modal){
           this.toggleMenu()
@@ -83,7 +83,7 @@
       },
       computed:{
         sidebar(){
-          return this.$store.state.sidebar === 1
+          return this.$store.state.sidebar === 'navbar'
         },
         loggedIn(){
           return this.$store.state.user.token
@@ -105,7 +105,7 @@
         right 0
         z-index 9999
         transition all .5s ease
-    .show-sidebar
+    .show-sidebar-navbar
         transform: translate3d(0, 0, 0);
         opacity  1
     .sidebar-heading

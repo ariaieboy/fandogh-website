@@ -1,6 +1,5 @@
 <template>
-  <div
-    :class="{'show-sidebar': sidebar,'show-half':showHalf}"
+  <div :class="{'show-half':showHalf}"
     class="admin-sidebar"
   >
     <closeHalf />
@@ -27,10 +26,10 @@ export default {
   },
   computed: {
     sidebar() {
-      return this.$store.state.sidebar === 2;
+      return this.$store.state.sidebar === 'navbar';
     },
     showHalf() {
-      return this.$store.state.sidebar === 3;
+      return this.$store.state.sidebar === 'halfSidebar';
     }
   }
 };

@@ -38,7 +38,7 @@ export default {
       return this.$store.state.message;
     },
     showHalf() {
-      return this.$store.state.sidebar === 3;
+      return this.$store.state.sidebar === 'halfSidebar';
     }
   },
   watch: {

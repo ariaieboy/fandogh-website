@@ -39,6 +39,7 @@
   color: #909399;
 }
 
+
 .vgt-wrap {
   position: relative;
 }
@@ -63,6 +64,14 @@ table.vgt-table td {
   height: 40px;
   vertical-align: middle;
   padding: 0px 5px !important;
+}
+table.vgt-table td.ellipsis span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: inline-block;
+  white-space: nowrap;
+  width: 200px;
+  text-align: center;
 }
 table.vgt-table tr:nth-child(odd) {background: rgb(248, 249, 252);}
 table.vgt-table tr:nth-child(even) {background: #FFF}

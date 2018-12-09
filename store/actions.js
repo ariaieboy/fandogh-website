@@ -35,9 +35,6 @@ export const register = async ({ commit, state }, data) => {
 export const showModal = ({ commit, state }, modal) => {
   commit("SET_MODAL", modal);
 };
-export const toggleSidebar = ({ commit, state }, number) => {
-  commit("SET_NUMBER_SIDEBAR", number);
-};
 
 export const setMessage = ({ commit, state }, message) => {
   commit("SET_MESSAGE", message);
@@ -244,4 +241,8 @@ export const getNameSpace = async ({ commit, state }, namespace) => {
   } catch (e) {
     return Promise.reject(e);
   }
+};
+
+export const TOGGLE_NAV = ({ commit, state }, {data}) => {
+  commit("SET_DATA", { data: data, id: "sidebar" });
 };

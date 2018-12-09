@@ -1,9 +1,6 @@
 <template>
-  <div
-    class="close-half"
-    @click="toggleMenu(3)"
-  >
-    <img 
+  <div class="close-half" @click="toggleMenu('halfSidebar')">
+    <img
       src="./icons/ic_arrowRight.svg"
       alt="arrow-right"
       class="close-half-icon"
@@ -15,14 +12,18 @@
 <script>
 export default {
   name: "close-half",
-  computed:{
+  computed: {
     showHalf() {
-      return this.$store.state.sidebar === 3;
+      return this.$store.state.sidebar === "halfSidebar";
     }
   },
   methods: {
     toggleMenu(type) {
-      this.$store.dispatch("toggleSidebar", type);
+      if (this.showHalf) {
+        this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
+      } else {
+        this.$store.dispatch("TOGGLE_NAV", { data: type, id: "sidebar" });
+      }
     }
   }
 };
@@ -44,8 +45,7 @@ export default {
     align-self center
     width 8px
     transition all 0.3s ease-in
-  .revers-icon 
-     transform scale(-1,1)
-     transition all 0.3s ease-out
-
+  .revers-icon
+    transition all 0.3s ease-out
+    transform scale(-1, 1)
 </style>

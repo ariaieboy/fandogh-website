@@ -3,7 +3,7 @@
     <nav class="header-container" :class="{'no-fixed': noFixed, 'header-dashboard': dashboard}">
       <div class="right-menu">
         <div class="menu">
-          <a href="#" @click.prevent="toggleMenu(1)">
+          <a href="#" @click.prevent="toggleMenu('navbar')">
             <img alt="hamburger button" :src="require('../../assets/svg/ic_hamburger.svg')">
           </a>
         </div>
@@ -53,7 +53,7 @@
       </div>
 
       <div v-if="loggedIn" class="profile">
-        <a href="#" @click.prevent="toggleMenu(2)">
+        <a href="#" @click.prevent="toggleMenu(null)">
           <img :src="avatar" alt="profile">
         </a>
       </div>
@@ -115,12 +115,8 @@ export default {
     }
   },
   methods: {
-    toggleMenu(number) {
-      if (this.$route.fullPath.includes("dashboard") || number === 1) {
-        this.$store.dispatch("toggleSidebar", number);
-      } else {
-        this.$router.push("/dashboard/images");
-      }
+    toggleMenu(type) {
+        this.$store.dispatch("TOGGLE_NAV", { data: type, id: "sidebar" });
     },
     showModal(modal) {
       this.$store.dispatch("showModal", modal);

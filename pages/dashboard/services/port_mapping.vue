@@ -37,10 +37,12 @@
               </div>
               <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'action'">
-                  <action-button class="action-button-s" @onClick="remove(props.row)">
-                    <img src="/icons/ic-delete.svg">
-                    <span>حذف</span>
-                  </action-button>
+                  <action-button
+                    class="action-button-s"
+                    @onClick="remove(props.row)"
+                    icon="ic-delete.svg"
+                    label="حذف"
+                  />
                 </span>
                 <span v-else>{{props.formattedRow[props.column.field]}}</span>
               </template>
@@ -61,7 +63,6 @@ import FSelect from "~/components/elements/select";
 import ErrorReporter from "~/utils/ErrorReporter";
 import Wizard from "~/components/Dashboard/wizard";
 import ActionButton from "~/components/Dashboard/table/action-button";
-
 
 export default {
   layout: "dashboard",
@@ -116,17 +117,17 @@ export default {
   },
   computed: {
     envsData() {
-    return this.port_mapping
+      return this.port_mapping;
     }
   },
   methods: {
     async deleteItem(port) {
-       return this.port_mapping = await this.port_mapping.filter(
+      return (this.port_mapping = await this.port_mapping.filter(
         item => item.port !== port
-      );
+      ));
     },
-    remove({port}){
-       this.$alertify(
+    remove({ port }) {
+      this.$alertify(
         {
           title: `پورت ${port} حذف شود؟`,
           description: " آیا از حذف شدن پورت خود مطمئن هستید؟"

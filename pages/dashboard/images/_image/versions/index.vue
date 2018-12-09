@@ -13,15 +13,21 @@
       </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
-          <action-button class="action-button-s" @onClick="craeteVersions(props.row)">
-            <img src="/icons/ic-add.svg">
-            <span>ایجاد سرویس</span>
-          </action-button>
-          <action-button class="action-button-s" @onClick="logs(props.row)">
-            <img src="/icons/ic-logs.svg">
-            <span>مشاهده لاگ</span>
-          </action-button>
+          <action-button
+            class="action-button-s"
+            @onClick="craeteVersions(props.row)"
+            icon="ic-add.svg"
+            label="ایجاد سرویس"
+          />
+          <action-button
+            class="action-button-s"
+            @onClick="logs(props.row)"
+            icon="ic-add.svg"
+            label="مشاهده لاگ"
+          />
         </span>
+        <!-- <span v-else-if="props.column.field == 'action'">
+        </span> -->
         <span v-else>{{props.formattedRow[props.column.field]}}</span>
       </template>
     </vue-good-table>
@@ -51,7 +57,7 @@ export default {
         {
           label: "ورژن",
           sortable: false,
-          field: "version"
+          field: "version",
         },
         {
           label: "تاریخ",
