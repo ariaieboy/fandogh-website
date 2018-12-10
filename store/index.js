@@ -2,11 +2,14 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as mutations from './mutations'
 import wizard from './wizard'
+import plan from './plan'
 const createStore = () => {
   return new Vuex.Store({
     state: () => {
       return {
-        sidebar: 0,
+        windowHeight:null,
+        windowWidth:null,
+        sidebar: 'halfSidebar',
         modals: {
           login: false,
           register: false,
@@ -25,13 +28,14 @@ const createStore = () => {
         builds: null,
         domains: null,
         manifest: {},
-        plan: null
+        
       }
     },
     actions: actions,
     mutations: mutations,
     modules:{
-      wizard
+      wizard,
+      plan
     }
   })
 }

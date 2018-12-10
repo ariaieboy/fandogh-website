@@ -10,18 +10,24 @@
       </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
-          <action-button class="action-button-s" @onClick="versions(props.row)">
-            <img src="/icons/ic-time.svg">
-            <span>ورژن ها</span>
-          </action-button>
-          <action-button class="action-button-s" @onClick="createVersion(props.row)">
-            <img src="/icons/ic-upload.svg">
-            <span>آپلود</span>
-          </action-button>
-          <action-button class="action-button-s" @onClick="remove(props.row)">
-            <img src="/icons/ic-delete.svg">
-            <span>حذف</span>
-          </action-button>
+          <action-button
+            class="action-button-s"
+            @onClick="versions(props.row)"
+            icon="ic-time.svg"
+            label="ورژن ها"
+          />
+          <action-button
+            class="action-button-s"
+            @onClick="createVersion(props.row)"
+            icon="ic-upload.svg"
+            label="آپلود"
+          />
+          <action-button
+            class="action-button-s"
+            @onClick="remove(props.row)"
+            icon="ic-delete.svg"
+            label="حذف"
+          />
         </span>
         <span v-else>{{props.formattedRow[props.column.field]}}</span>
       </template>
@@ -53,7 +59,8 @@ export default {
         {
           label: "نام دامنه",
           sortable: false,
-          field: "name"
+          field: "name",
+          tdClass: 'ellipsis',
         },
         {
           label: "تاریخ ساخت ایمیج",
@@ -63,7 +70,8 @@ export default {
         {
           label: "آخرین ورژن",
           sortable: false,
-          field: "version"
+          field: "version",
+          tdClass: 'ellipsis',
         },
         {
           label: "آخرین به روز‌رسانی",
@@ -73,7 +81,7 @@ export default {
         {
           label: "مدیریت",
           sortable: false,
-          field: "action",
+          field: "action", 
           html: true
         }
       ]

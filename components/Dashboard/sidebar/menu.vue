@@ -15,9 +15,9 @@
           :to="{path:'/dashboard/services'}"
         ><img src="./icons/services.svg" /> سرویس ها </router-link>
       </li>
-      <li>
+      <!-- <li>
         <a href="#"><img src="./icons/managed_services.svg" /> سرویس های مدیریت شده </a>
-      </li>
+      </li> -->
       <li>
         <router-link
           event="disabled"
@@ -62,7 +62,7 @@ export default {
       this.height = window.innerHeight - 490 + 42;
     },
     closeMenu(path) {
-      this.$store.dispatch("toggleSidebar", 0);
+      // this.$store.dispatch("TOGGLE_NAV", {data:null,id:'sidebar'});
       this.$router.push(path);
     },
     logout(){

@@ -1,13 +1,10 @@
 <template>
-  <div
-    :class="{'show-sidebar': sidebar,'show-half':showHalf}"
-    class="admin-sidebar"
-  >
-    <closeHalf />
-    <profile />
-    <namespace />
-    <my-plan />
-    <sidebar-menu />
+  <div :class="{'show-half':!showHalf}" class="admin-sidebar">
+    <closeHalf/>
+    <profile/>
+    <namespace/>
+    <my-plan/>
+    <sidebar-menu/>
   </div>
 </template>
 
@@ -27,10 +24,46 @@ export default {
   },
   computed: {
     sidebar() {
-      return this.$store.state.sidebar === 2;
+      return this.$store.state.sidebar === "navbar";
     },
     showHalf() {
-      return this.$store.state.sidebar === 3;
+      return this.$store.state.sidebar === "halfSidebar";
+    },
+    isMobile() {
+      return this.$store.state.windowWidth <= 992;
+    }
+  },
+  watch: {
+    isMobile(val) {
+      if (val) {
+        this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
+      }
+    }
+  },
+  mounted() {
+    var vm = this;
+    window.addEventListener("resize", function(e) {
+      vm.setSize(e);
+    });
+    if (process.browser) {
+      this.setDefaultSize();
+    }
+  },
+  methods: {
+    setSize(e) {
+      this.$store.dispatch("SET_SIZE", {
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    },
+    setDefaultSize(e) {
+      this.$store.dispatch("SET_SIZE", {
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      if (this.isMobile) {
+        this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
+      }
     }
   }
 };
@@ -51,7 +84,6 @@ export default {
     width 300px
   &.show-half
     right -350px
-    
 @media only screen and (max-width: 1230px)
   .admin-sidebar
     top 60px

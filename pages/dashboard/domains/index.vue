@@ -11,21 +11,25 @@
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
           <action-button
-            class="action-button-m"
             v-if="!props.row.verified"
+            class="action-button-m"
             @onClick="verify(props.row)"
-          >
-            <img src="/icons/ic-tick.svg">
-            <span>تایید</span>
-          </action-button>
-          <action-button class="action-button-m disabled" v-if="props.row.verified">
-            <img src="/icons/ic_tConfirm.svg">
-            <span>تایید</span>
-          </action-button>
-          <action-button class="action-button-m" @onClick="remove(props.row)">
-            <img src="/icons/ic-delete.svg">
-            <span>حذف</span>
-          </action-button>
+            icon="ic-tick.svg"
+            label="تایید"
+          />
+          <action-button
+            v-if="props.row.verified"
+            class="action-button-m disabled"
+            @onClick="verify(props.row)"
+            icon="ic_tConfirm.svg"
+            label="تایید"
+          />
+          <action-button
+            class="action-button-m"
+            @onClick="remove(props.row)"
+            icon="ic-delete.svg"
+            label="حذف"
+          />
         </span>
         <span v-else>{{props.formattedRow[props.column.field]}}</span>
       </template>
@@ -57,7 +61,8 @@ export default {
         {
           sortable: false,
           label: "نام دامنه",
-          field: "name"
+          field: "name",
+          tdClass: "ellipsis",
         },
         {
           sortable: false,
@@ -93,7 +98,7 @@ export default {
   computed: {
     domains() {
       return this.$store.state.domains;
-    }
+    },
   },
   methods: {
     getDomainStatus({ verified }) {
@@ -113,6 +118,7 @@ export default {
         },
         status => {
           if (status) {
+            console.log(status)
             this.$store
               .dispatch("removeDomain", name)
               .then(res => {
@@ -128,6 +134,8 @@ export default {
                   type: "error"
                 });
               });
+          }else{
+            console.log('hello')
           }
         }
       );

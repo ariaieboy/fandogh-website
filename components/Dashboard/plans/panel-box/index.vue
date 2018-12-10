@@ -1,26 +1,62 @@
 <template>
-    <div class="panel-box">
-        <slot></slot>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12" v-for="(item,index) in items" :key="index">
+      <f-panel
+        :icon="item.icon"
+        :title="item.title"
+        :price="item.price"
+        :space="item.space"
+        :ram="item.ram"
+        :cpu="item.cpu"
+        :isShow="index === isShow"
+        @toggle="toggle(index)"
+        :tooltipShow="index === tooltipShow"
+        @clickInfo="clickInfo(index)"
+        :list="item.list"
+        :description="item.description"
+        @onClick="pushUrl(index)"
+      />
     </div>
+  </div>
 </template>
 
 <script>
+import FPanel from "./panel";
 export default {
-  name: "box"
+  name: "panel-list",
+  components: {
+    FPanel
+  },
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  },
+  data() {
+    return {
+      tooltipShow: -1,
+      isShow: -1
+    };
+  },
+  methods: {
+    clickInfo(index) {
+      if (index === this.tooltipShow) {
+        this.tooltipShow = -1;
+        return;
+      }
+      this.tooltipShow = index;
+    },
+    toggle(index) {
+      if (index === this.isShow) {
+        this.isShow = -1;
+        return;
+      }
+      this.isShow = index;
+    },
+    pushUrl(index){
+      this.$router.push(`/dashboard/plans/${index + 1}`);
+    }
+  }
 };
 </script>
-
-<style lang="stylus" scoped>
-.panel-box
-    margin-bottom 20px
-    padding 45px 60px
-    min-height 100px
-    border solid 1px #e7e8ea
-    border-radius 10px
-    background-color #ffffff
-    @media (max-width: 1500px) and (min-width:992px)
-        padding 45px 15px
-    @media (max-width: 566px)
-        padding 45px 20px
-    
-</style>

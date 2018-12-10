@@ -67,3 +67,7 @@ export const SET_JSON_MANIFEST = (state, json) => {
 export const SET_PLAN = (state, plan) => {
   state.plan = plan
 }
+
+export const SET_DATA = (state, {id, data}) => {
+  state[id] = data
+}

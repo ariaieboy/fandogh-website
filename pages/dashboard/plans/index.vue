@@ -1,128 +1,68 @@
 <template>
   <div class="service-plan">
-    <nuxt-child />
+    <nuxt-child/>
     <div class="row">
       <h1 class="service-plan-heading">جز‌ئیات حساب شما</h1>
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-12 col-xs-12">
-        <active-plan-box>
-          <ActivePlan :plan="activePlan.plan" :configs="activePlan.configs" />
-        </active-plan-box>
+        <f-active-plan-box v-if="activePlan">
+          <f-active-plan
+            :type="'نوع پلن'"
+            :isActive="'activePlan.isActive'"
+            :percent="percent"
+            :title="'activePlan.title'"
+            :memory_limit="activePlan.quota.memory_limit"
+          />
+        </f-active-plan-box>
       </div>
     </div>
     <div class="row">
       <h1 class="service-plan-heading">انتخاب پلن</h1>
     </div>
     <panel-box>
-      <div class="row">
-        <div class="col-md-6 col-sm-12 col-xs-12" v-for="service,index in services">
-          <Panel :plan="service.plan" :configs="service.configs" :isShow="index === isShow" @toggle="toggle(index)" :tooltipShow="index === tooltipShow" @clickInfo="clickInfo(index)" />
-        </div>
-      </div>
+      <f-panels :items="allPlan"/>
     </panel-box>
   </div>
 </template>
 
 <script>
-import PanelBox from "~/components/Dashboard/plans/panel-box";
-import Panel from "~/components/Dashboard/plans/panel-box/panel";
-import ActivePlan from "~/components/Dashboard/plans/active-plan/panel";
-import ActivePlanBox from "~/components/Dashboard/plans/active-plan";
+import PanelBox from "~/components/Dashboard/plans/panel-box/section-box.vue";
+import FPanels from "~/components/Dashboard/plans/panel-box";
+import FActivePlan from "~/components/Dashboard/plans/active-plan/panel";
+import FActivePlanBox from "~/components/Dashboard/plans/active-plan";
+import { getValue } from "~/utils/cookie";
 
 export default {
   layout: "dashboard",
   name: "plans",
-  data() {
-    return {
-      tooltipShow: -1,
-      isShow: -1,
-      activePlan: {
-        plan: {
-          icon: "blimp.png",
-          title: "پلن فعلی",
-          price: "پلن 2 "
-        },
-        configs: [{ title: "RAM", value: "2GB", icon: "ram.png" }]
-      },
-      services: [
-        {
-          plan: { icon: "bicycle.png", title: "مفتی", price: "رایگان" },
-          configs: [
-            { title: "CPU", value: "Unknown", icon: "cpu.png" },
-            { title: "RAM", value: "400MB", icon: "ram.png" },
-            { title: "STORAGE", value: "2GB", icon: "storage.png" }
-          ]
-        },
-        {
-          plan: { icon: "sail-boat.png", title: "پلن 1", price: "99,000" },
-          configs: [
-            { title: "CPU", value: "0.5Core", icon: "cpu.png" },
-            { title: "RAM", value: "1GB", icon: "ram.png" },
-            { title: "STORAGE", value: "5GB", icon: "storage.png" }
-          ]
-        },
-        {
-          plan: {
-            icon: "blimp.png",
-            title: "پلن 2",
-            price: "190,000",
-            isActive: true
-          },
-          configs: [
-            { title: "CPU", value: "1Core", icon: "cpu.png" },
-            { title: "RAM", value: "2GB", icon: "ram.png" },
-            { title: "STORAGE", value: "10GB", icon: "storage.png" }
-          ]
-        },
-        {
-          plan: { icon: "helicopter.png", title: "پلن 3", price: "390,000" },
-          configs: [
-            { title: "CPU", value: "2Core", icon: "cpu.png" },
-            { title: "RAM", value: "4GB", icon: "ram.png" },
-            { title: "STORAGE", value: "20GB", icon: "storage.png" }
-          ]
-        },
-        {
-          plan: { icon: "rocket.png", title: "پلن 4", price: "1,500,000" },
-          configs: [
-            { title: "CPU", value: "8Core", icon: "cpu.png" },
-            { title: "RAM", value: "16GB", icon: "ram.png" },
-            { title: "STORAGE", value: "40GB", icon: "storage.png" }
-          ]
-        },
-        {
-          plan: { icon: "truck.png", title: "پلن 5", price: "تماس بگیرید" },
-          configs: [
-            { title: "CPU", value: "-", icon: "cpu.png" },
-            { title: "RAM", value: "-", icon: "ram.png" },
-            { title: "STORAGE", value: "-", icon: "storage.png" }
-          ]
-        }
-      ]
-    };
-  },
   components: {
     PanelBox,
-    Panel,
-    ActivePlan,
-    ActivePlanBox
+    FPanels,
+    FActivePlan,
+    FActivePlanBox
   },
-  methods: {
-    clickInfo(index) {
-      if (index === this.tooltipShow) {
-        this.tooltipShow = -1;
-        return;
-      }
-      this.tooltipShow = index;
+  computed: {
+    namespace() {
+      return getValue("namespace");
     },
-    toggle(index) {
-      if (index === this.isShow) {
-        this.isShow = -1;
-        return;
-      }
-      this.isShow = index;
+    allPlan() {
+      return this.$store.state.plan.plans;
+    },
+    activePlan() {
+      return this.$store.state.plan.activePlan;
+    },
+    percent() {
+      let percent = Math.round(
+        (this.activePlan.current_used_resources.memory_usage /
+          this.activePlan.quota.memory_limit) *
+          100
+      );
+      return percent.toString();
     }
+  },
+  mounted() {
+    this.$store.dispatch("plan/getNameSpace", this.namespace);
   }
 };
 </script>

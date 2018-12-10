@@ -93,12 +93,14 @@ export default {
         {
           sortable: false,
           label: "نام متغییر",
-          field: "name"
+          field: "name",
+          tdClass: 'ellipsis'
         },
         {
           sortable: false,
           label: "مقدار",
-          field: "value"
+          field: "value",
+          tdClass: 'ellipsis'
         }
       ],
       data: [{ name: "NODE_ENV", value: "Production" }]

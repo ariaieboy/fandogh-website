@@ -10,14 +10,18 @@
       </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
-          <action-button class="action-button-s" @onClick="logs(props.row)">
-            <img src="/icons/ic-logs.svg">
-            <span>مشاهده جزییات</span>
-          </action-button>
-          <action-button class="action-button-s" @onClick="remove(props.row)">
-            <img src="/icons/ic-delete.svg">
-            <span>حذف</span>
-          </action-button>
+          <action-button
+            class="action-button-s"
+            @onClick="logs(props.row)"
+            icon="ic-logs.svg"
+            label="مشاهده جزییات"
+          />
+          <action-button
+            class="action-button-s"
+            @onClick="remove(props.row)"
+            icon="ic-delete.svg"
+            label="حذف"
+          />
         </span>
         <span v-else>{{props.formattedRow[props.column.field]}}</span>
       </template>
@@ -42,7 +46,8 @@ export default {
         {
           label: "نام سرویس",
           sortable: false,
-          field: "name"
+          field: "name",
+          tdClass: 'ellipsis'
         },
         {
           label: "نوع سرویس",

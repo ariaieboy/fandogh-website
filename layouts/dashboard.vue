@@ -3,10 +3,10 @@
     <f-header noFixed="true" />
     <div class="container-fluid">
       <div class="row">
-        <div class="wrapper-col" :class="{'col-lg-2':!showHalf , 'col-lg-0':showHalf}">
+        <div class="wrapper-col" :class="{'col-lg-2':showHalf , 'col-lg-0':!showHalf}">
           <admin-sidebar />
         </div>
-        <div class="wrapper-col" :class="{'col-xs-12 col-lg-10 pr-120 pl-100':!showHalf,'col-xs-12':showHalf}">
+        <div class="wrapper-col" :class="{'col-xs-12 col-lg-10 pr-120 pl-100':showHalf,'col-xs-12':!showHalf}">
           <div class="dash-container">
             <nuxt />
           </div>
@@ -38,7 +38,7 @@ export default {
       return this.$store.state.message;
     },
     showHalf() {
-      return this.$store.state.sidebar === 3;
+      return this.$store.state.sidebar === 'halfSidebar';
     }
   },
   watch: {
