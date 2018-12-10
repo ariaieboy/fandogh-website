@@ -1,49 +1,29 @@
 <template>
   <div>
-    <div
-      v-if="display"
-      class="alert"
-    >
+    <div v-if="display" class="alert">
       <div class="close-modal">
-        <a
-          href="#"
-          @click="$emit('onOverlay')"
-          class="close"
-        >
-          <img
-            alt="close icon"
-            :src="require('../../../assets/svg/ic_close.svg')"
-          />
+        <a href="#" @click="$emit('onOverlay')" class="close">
+          <img alt="close icon" :src="require('../../../assets/svg/ic_close.svg')">
         </a>
       </div>
       <!-- Modal content -->
       <div class="modal-content">
         <div class="alert-image">
-          <img src="./images/img_delete.svg" />
+          <img src="./images/img_delete.svg">
           <h2>{{options.title}}</h2>
         </div>
         <div class="alert-content">
           <h6>{{options.description}}</h6>
           <div class="margin-20">
-            <f-button
-              styles="alert"
-              @onClick="onDelete(true)"
-            > حذف شود </f-button>
+            <f-button styles="alert" @onClick="onDelete(true)">حذف شود</f-button>
           </div>
           <div class="margin-20">
-            <f-button
-              styles="light"
-              @onClick="onDelete(false)"
-            > منصرف شدم </f-button>
+            <f-button styles="light" @onClick="onDelete(false)">منصرف شدم</f-button>
           </div>
         </div>
       </div>
     </div>
-    <div
-      @click="toggle"
-      v-if="display"
-      class="overlay"
-    ></div>
+    <div @click="onDelete(false)" v-if="display" class="overlay"></div>
   </div>
 </template>
 

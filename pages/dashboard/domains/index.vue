@@ -62,7 +62,7 @@ export default {
           sortable: false,
           label: "نام دامنه",
           field: "name",
-          tdClass: 'ellipsis'
+          tdClass: "ellipsis",
         },
         {
           sortable: false,
@@ -98,7 +98,7 @@ export default {
   computed: {
     domains() {
       return this.$store.state.domains;
-    }
+    },
   },
   methods: {
     getDomainStatus({ verified }) {
@@ -118,6 +118,7 @@ export default {
         },
         status => {
           if (status) {
+            console.log(status)
             this.$store
               .dispatch("removeDomain", name)
               .then(res => {
@@ -133,6 +134,8 @@ export default {
                   type: "error"
                 });
               });
+          }else{
+            console.log('hello')
           }
         }
       );

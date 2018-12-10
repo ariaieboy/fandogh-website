@@ -246,3 +246,11 @@ export const getNameSpace = async ({ commit, state }, namespace) => {
 export const TOGGLE_NAV = ({ commit, state }, {data}) => {
   commit("SET_DATA", { data: data, id: "sidebar" });
 };
+
+
+export const SET_SIZE = ({ commit, state }, {width,height}) => {
+  commit("SET_DATA", { data: height, id: "windowHeight" });
+  commit("SET_DATA", { data: width, id: "windowWidth" });
+};
+
+

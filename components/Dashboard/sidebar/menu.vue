@@ -62,7 +62,7 @@ export default {
       this.height = window.innerHeight - 490 + 42;
     },
     closeMenu(path) {
-      this.$store.dispatch("TOGGLE_NAV", {data:null,id:'sidebar'});
+      // this.$store.dispatch("TOGGLE_NAV", {data:null,id:'sidebar'});
       this.$router.push(path);
     },
     logout(){

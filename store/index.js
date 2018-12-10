@@ -7,7 +7,9 @@ const createStore = () => {
   return new Vuex.Store({
     state: () => {
       return {
-        sidebar: null,
+        windowHeight:null,
+        windowWidth:null,
+        sidebar: 'halfSidebar',
         modals: {
           login: false,
           register: false,

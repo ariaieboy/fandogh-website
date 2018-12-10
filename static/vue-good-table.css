@@ -32,13 +32,12 @@
   position: relative;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  border :solid 1px #e7e8ea;
+  border: solid 1px #e7e8ea;
 }
 
 .vgt-text-disabled {
   color: #909399;
 }
-
 
 .vgt-wrap {
   position: relative;
@@ -58,7 +57,6 @@ table.vgt-table {
   width: 100%;
   max-width: 100%;
   table-layout: auto;
-  
 }
 table.vgt-table td {
   height: 40px;
@@ -73,15 +71,36 @@ table.vgt-table td.ellipsis span {
   width: 200px;
   text-align: center;
 }
-table.vgt-table tr:nth-child(odd) {background: rgb(248, 249, 252);}
-table.vgt-table tr:nth-child(even) {background: #FFF}
-table.vgt-table tr:nth-child(even) td:nth-child(even) {background: rgba(51, 68, 109, 0.02)}
-table.vgt-table tr:nth-child(odd) td:nth-child(even) {background: rgba(51, 68, 109, 0.02)}
-table.vgt-table tr:nth-child(odd) th:nth-child(even) {background:rgb(251, 251, 252)}
+@media (max-width: 992px) {
+  table.vgt-table th span{
+    font-size: 14px
+  }
+  table.vgt-table td span{
+    font-size: 14px
+  }
+  table.vgt-table td.ellipsis span {
+    width: 100px;
+  }
+}
 
+table.vgt-table tr:nth-child(odd) {
+  background: rgb(248, 249, 252);
+}
+table.vgt-table tr:nth-child(even) {
+  background: #fff;
+}
+table.vgt-table tr:nth-child(even) td:nth-child(even) {
+  background: rgba(51, 68, 109, 0.02);
+}
+table.vgt-table tr:nth-child(odd) td:nth-child(even) {
+  background: rgba(51, 68, 109, 0.02);
+}
+table.vgt-table tr:nth-child(odd) th:nth-child(even) {
+  background: rgb(251, 251, 252);
+}
 
 table.vgt-table td span {
-    color: rgb(117, 135, 156);
+  color: rgb(117, 135, 156);
 }
 table.vgt-table tr.clickable {
   cursor: pointer;
@@ -95,7 +114,7 @@ table.vgt-table tr.clickable:hover {
   vertical-align: middle;
   position: relative;
 }
-.vgt-table th span{ 
+.vgt-table th span {
   color: #000;
 }
 .vgt-table th.sorting {
@@ -700,14 +719,14 @@ table.vgt-table tr.clickable:hover {
   opacity: 0.3;
   /* Firefox */
 }
-.table-title{
-    background-color: #291996;
-    display: block;
-    box-sizing: border-box;
-    padding: 14px 0;
-    text-align: center;
-    border-radius: 10px 10px 0 0;
-    width: 100%;
-    font-family: yekan;
-    color:#fff;
+.table-title {
+  background-color: #291996;
+  display: block;
+  box-sizing: border-box;
+  padding: 14px 0;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  font-family: yekan;
+  color: #fff;
 }

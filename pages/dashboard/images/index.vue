@@ -81,7 +81,7 @@ export default {
         {
           label: "مدیریت",
           sortable: false,
-          field: "action",
+          field: "action", 
           html: true
         }
       ]

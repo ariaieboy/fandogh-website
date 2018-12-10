@@ -4,7 +4,7 @@
       src="./icons/ic_arrowRight.svg"
       alt="arrow-right"
       class="close-half-icon"
-      :class="{'revers-icon':showHalf}"
+      :class="{'revers-icon':!showHalf}"
     >
   </div>
 </template>
