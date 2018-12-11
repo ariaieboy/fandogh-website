@@ -205,7 +205,7 @@ export const createDomain = async ({ commit, state }, form) => {
 };
 export const verificationDomain = async ({ commit, state }, { name }) => {
   try {
-    return await Request().post(`/api/domains/${name}`);
+    return await Request().post(`/api/domains/${name}/verifications`);
   } catch (e) {
     return Promise.reject(e);
   }
