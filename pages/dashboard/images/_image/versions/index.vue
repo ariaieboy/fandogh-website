@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="versions.length" title="هنوز ورژنی اضافه نشده !">
+    <f-empty v-if="!versions.length" title="هنوز ورژنی اضافه نشده !">
        <f-button
           styles="red"
           @onClick="$router.push('/dashboard/images/front/versions/create')"
