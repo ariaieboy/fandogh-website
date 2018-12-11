@@ -44,9 +44,9 @@ export default {
     width 100px
     vertical-align middle
     transition all ease 0.5s
-  &:hover
-    label
-      width 100px
+  // &:hover
+  //   label
+  //     width 100px
   img
     width 16px
     height 16px

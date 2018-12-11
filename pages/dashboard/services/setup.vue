@@ -10,7 +10,7 @@
                     </div>
                     <div  class="fandogh-form-group">
                         <label>نوع سرویس</label>
-                        <f-select v-required  v-model="kind" :options="service_types" title="انتخاب نوع سرویس"  />
+                        <f-select v-required  v-model="kind"  :options="service_types" title="انتخاب نوع سرویس"  />
                     </div>
 
                     <div class="fandogh-form-group">

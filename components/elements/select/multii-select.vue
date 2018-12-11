@@ -10,7 +10,10 @@
       </div>
       <div v-else class="dropdown-options">
         <span class="dropdown--option">
-          <span>{{selected}}</span>
+          <span v-for="item in filterSelected">
+              {{item}}
+                <img  src="./images/close.svg">
+          </span>
         </span>
       </div>
     </div>
@@ -36,9 +39,9 @@ export default {
     title: {
       default: ""
     },
-    multiselect :{
-        default:false,
-        type:Boolean
+    multiselect: {
+      default: false,
+      type: Boolean
     },
     select: {
       default: ""
@@ -46,19 +49,19 @@ export default {
   },
   data() {
     return {
-      selected: this.select,
+      selected: [],
       show: false
     };
   },
-  watch: {
-    value(value) {
-      this.selectOption({ title: value, value }, true);
+  computed:{
+    filterSelected(){
+        return this.selected.filter((obj, pos, arr) => {return arr.map(mapObj => mapObj).indexOf(obj) === pos;});
     }
   },
   mounted() {
-      if(this.value){
-          this.selected = this.value
-      }
+    if (this.value) {
+      this.selected.push(this.value)
+    }
   },
   methods: {
     toggle() {
@@ -66,7 +69,7 @@ export default {
     },
     selectOption(option, noToggle) {
       if (!noToggle) this.toggle();
-      this.selected = option.title;
+      this.selected.push(option.value || option.title);
       this.$emit("input", option.value || option.title);
     }
   }
@@ -80,16 +83,16 @@ export default {
     margin 0
     padding 0
   .dropdown-selector, .dropdown-container
+    z-index 2
     border solid 1px #e7e8ea
     border-radius 10px
     background-color #ffffff
-    z-index 2
   .dropdown-container
     position relative
     display flex
     align-items center
     margin-bottom 8px
-    min-height 46px
+    min-height 48px
     cursor pointer
     .dropdown--placeholder
       padding 16px
@@ -101,7 +104,19 @@ export default {
       .dropdown--option
         display inline-block
         margin-right 16px
-        padding 3px
+        span
+          padding  0 10px
+          height 23px
+          border-radius 5px
+          text-align center
+          line-height 23px
+          color: rgb(0, 0, 0);
+          font-size 12px
+          border 1px solid #e7e8ea
+          display inline-block
+          margin 10px 0 10px 5px;
+          img 
+            margin-right 10px
     .dropdown--arrow
       cursor pointer
       img
@@ -111,16 +126,16 @@ export default {
         width 16px
         height 10px
   .dropdown-selector
-    box-sizing border-box
-    direction ltr
     position absolute
-    z-index: 1;
+    top 43px
     right 10px
     left 10px
-    top: 43px;
+    z-index 1
+    box-sizing border-box
     border-top none
     border-top-left-radius 0
     border-top-right-radius 0
+    direction ltr
     ul
       li
         a
