@@ -1,31 +1,36 @@
 <template>
-  <div class="images">
-    <div class="row-block">
+  <div class="wrapper-image">
+    <f-empty v-if="!services.length" title="هنوز سرویسی اضافه نشده !">
       <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
-    </div>
-    <div class="table-title">سرویس‌ های شما</div>
-    <vue-good-table :columns="header" :rows="services" :rtl="true" styleClass="vgt-table">
-      <div slot="emptystate">
-        <p class="empty-table center">دیتایی وجود ندارد</p>
+    </f-empty>
+    <div class="images" v-else>
+      <div class="row-block">
+        <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
       </div>
-      <template slot="table-row" slot-scope="props">
-        <span v-if="props.column.field == 'action'">
-          <action-button
-            class="action-button-s"
-            @onClick="logs(props.row)"
-            icon="ic-logs.svg"
-            label="مشاهده جزییات"
-          />
-          <action-button
-            class="action-button-s"
-            @onClick="remove(props.row)"
-            icon="ic-delete.svg"
-            label="حذف"
-          />
-        </span>
-        <span v-else>{{props.formattedRow[props.column.field]}}</span>
-      </template>
-    </vue-good-table>
+      <div class="table-title">سرویس‌ های شما</div>
+      <vue-good-table :columns="header" :rows="services" :rtl="true" styleClass="vgt-table">
+        <div slot="emptystate">
+          <p class="empty-table center">دیتایی وجود ندارد</p>
+        </div>
+        <template slot="table-row" slot-scope="props">
+          <span v-if="props.column.field == 'action'">
+            <action-button
+              class="action-button-s"
+              @onClick="logs(props.row)"
+              icon="ic-logs.svg"
+              label="مشاهده جزییات"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="remove(props.row)"
+              icon="ic-delete.svg"
+              label="حذف"
+            />
+          </span>
+          <span v-else>{{props.formattedRow[props.column.field]}}</span>
+        </template>
+      </vue-good-table>
+    </div>
   </div>
 </template>
 
@@ -34,6 +39,7 @@ import FTable from "~/components/Dashboard/table";
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import ActionButton from "~/components/Dashboard/table/action-button";
+import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
@@ -47,7 +53,7 @@ export default {
           label: "نام سرویس",
           sortable: false,
           field: "name",
-          tdClass: 'ellipsis'
+          tdClass: "ellipsis"
         },
         {
           label: "نوع سرویس",
@@ -94,7 +100,8 @@ export default {
   components: {
     FTable,
     FButton,
-    ActionButton
+    ActionButton,
+    FEmpty
   },
   methods: {
     remove({ name }) {
