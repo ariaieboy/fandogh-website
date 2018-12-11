@@ -18,7 +18,7 @@
             <f-button styles="alert" @onClick="onDelete(true)">حذف شود</f-button>
           </div>
           <div class="margin-20">
-            <f-button styles="light" @onClick="onDelete(false)">منصرف شدم</f-button>
+            <f-button styles="blue" @onClick="onDelete(false)">منصرف شدم</f-button>
           </div>
         </div>
       </div>
