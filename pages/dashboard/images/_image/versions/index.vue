@@ -1,36 +1,44 @@
 <template>
-  <div class="images">
-    <div class="row-block">
-      <f-button
-        styles="red"
-        @onClick="$router.push('/dashboard/images/front/versions/create')"
-      >افزودن ورژن</f-button>
-    </div>
-    <div class="table-title">ورژن های شما</div>
-    <vue-good-table :columns="header" :rows="versions" :rtl="true" styleClass="vgt-table">
-      <div slot="emptystate">
-        <p class="empty-table center">دیتایی وجود ندارد</p>
+  <div class="wrapper-image">
+    <f-empty v-if="versions.length" title="هنوز ورژنی اضافه نشده !">
+       <f-button
+          styles="red"
+          @onClick="$router.push('/dashboard/images/front/versions/create')"
+        >افزودن ورژن</f-button>
+    </f-empty>
+    <div class="images" v-else>
+      <div class="row-block">
+        <f-button
+          styles="red"
+          @onClick="$router.push('/dashboard/images/front/versions/create')"
+        >افزودن ورژن</f-button>
       </div>
-      <template slot="table-row" slot-scope="props">
-        <span v-if="props.column.field == 'action'">
-          <action-button
-            class="action-button-s"
-            @onClick="craeteVersions(props.row)"
-            icon="ic-add.svg"
-            label="ایجاد سرویس"
-          />
-          <action-button
-            class="action-button-s"
-            @onClick="logs(props.row)"
-            icon="ic-add.svg"
-            label="مشاهده لاگ"
-          />
-        </span>
-        <!-- <span v-else-if="props.column.field == 'action'">
-        </span> -->
-        <span v-else>{{props.formattedRow[props.column.field]}}</span>
-      </template>
-    </vue-good-table>
+      <div class="table-title">ورژن های شما</div>
+      <vue-good-table :columns="header" :rows="versions" :rtl="true" styleClass="vgt-table">
+        <div slot="emptystate">
+          <p class="empty-table center">دیتایی وجود ندارد</p>
+        </div>
+        <template slot="table-row" slot-scope="props">
+          <span v-if="props.column.field == 'action'">
+            <action-button
+              class="action-button-s"
+              @onClick="craeteVersions(props.row)"
+              icon="ic-add.svg"
+              label="ایجاد سرویس"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="logs(props.row)"
+              icon="ic-add.svg"
+              label="مشاهده لاگ"
+            />
+          </span>
+          <!-- <span v-else-if="props.column.field == 'action'">
+          </span>-->
+          <span v-else>{{props.formattedRow[props.column.field]}}</span>
+        </template>
+      </vue-good-table>
+    </div>
   </div>
 </template>
 
@@ -41,6 +49,7 @@ import Alert from "~/components/Dashboard/alert";
 import FDate from "~/utils/date";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import { setValue } from "~/utils/cookie";
+import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
@@ -57,7 +66,7 @@ export default {
         {
           label: "ورژن",
           sortable: false,
-          field: "version",
+          field: "version"
         },
         {
           label: "تاریخ",
@@ -87,7 +96,8 @@ export default {
     FTable,
     FButton,
     Alert,
-    ActionButton
+    ActionButton,
+    FEmpty
   },
   computed: {
     versions() {

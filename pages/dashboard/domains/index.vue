@@ -1,39 +1,44 @@
 <template>
-  <div class="images">
-    <div class="row-block">
-      <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
-    </div>
-    <div class="table-title">دامنه های شما</div>
-    <vue-good-table :columns="header" :rows="domains" :rtl="true" styleClass="vgt-table">
-      <div slot="emptystate">
-        <p class="empty-table center">دیتایی وجود ندارد</p>
+  <div class="wrapper-image">
+    <f-empty v-if="!domains.length" title="هنوز دامنه‌ای اضافه نشده !">
+        <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
+    </f-empty>
+    <div class="images" v-else>
+      <div class="row-block">
+        <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
       </div>
-      <template slot="table-row" slot-scope="props">
-        <span v-if="props.column.field == 'action'">
-          <action-button
-            v-if="!props.row.verified"
-            class="action-button-m"
-            @onClick="verify(props.row)"
-            icon="ic-tick.svg"
-            label="تایید"
-          />
-          <action-button
-            v-if="props.row.verified"
-            class="action-button-m disabled"
-            @onClick="verify(props.row)"
-            icon="ic_tConfirm.svg"
-            label="تایید"
-          />
-          <action-button
-            class="action-button-m"
-            @onClick="remove(props.row)"
-            icon="ic-delete.svg"
-            label="حذف"
-          />
-        </span>
-        <span v-else>{{props.formattedRow[props.column.field]}}</span>
-      </template>
-    </vue-good-table>
+      <div class="table-title">دامنه های شما</div>
+      <vue-good-table :columns="header" :rows="domains" :rtl="true" styleClass="vgt-table">
+        <div slot="emptystate">
+          <p class="empty-table center">دیتایی وجود ندارد</p>
+        </div>
+        <template slot="table-row" slot-scope="props">
+          <span v-if="props.column.field == 'action'">
+            <action-button
+              v-if="!props.row.verified"
+              class="action-button-m"
+              @onClick="verify(props.row)"
+              icon="ic-tick.svg"
+              label="تایید"
+            />
+            <action-button
+              v-if="props.row.verified"
+              class="action-button-m disabled"
+              @onClick="verify(props.row)"
+              icon="ic_tConfirm.svg"
+              label="تایید"
+            />
+            <action-button
+              class="action-button-m"
+              @onClick="remove(props.row)"
+              icon="ic-delete.svg"
+              label="حذف"
+            />
+          </span>
+          <span v-else>{{props.formattedRow[props.column.field]}}</span>
+        </template>
+      </vue-good-table>
+    </div>
   </div>
 </template>
 
@@ -43,6 +48,7 @@ import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
+import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
@@ -62,7 +68,7 @@ export default {
           sortable: false,
           label: "نام دامنه",
           field: "name",
-          tdClass: "ellipsis",
+          tdClass: "ellipsis"
         },
         {
           sortable: false,
@@ -93,12 +99,13 @@ export default {
   components: {
     FTable,
     FButton,
-    ActionButton
+    ActionButton,
+    FEmpty
   },
   computed: {
     domains() {
       return this.$store.state.domains;
-    },
+    }
   },
   methods: {
     getDomainStatus({ verified }) {
@@ -118,7 +125,7 @@ export default {
         },
         status => {
           if (status) {
-            console.log(status)
+            console.log(status);
             this.$store
               .dispatch("removeDomain", name)
               .then(res => {
@@ -134,8 +141,8 @@ export default {
                   type: "error"
                 });
               });
-          }else{
-            console.log('hello')
+          } else {
+            console.log("hello");
           }
         }
       );

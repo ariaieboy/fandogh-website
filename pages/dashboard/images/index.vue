@@ -1,37 +1,42 @@
 <template>
-  <div class="images">
-    <div class="row-block">
+  <div class="wrapper-image">
+    <f-empty v-if="!images.length" title="هنوز ایمیجی اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
-    </div>
-    <div class="table-title">ایمیج های شما</div>
-    <vue-good-table :columns="header" :rows="images" :rtl="true" styleClass="vgt-table">
-      <div slot="emptystate">
-        <p class="empty-table center">دیتایی وجود ندارد</p>
+    </f-empty>
+    <div class="images" v-else>
+      <div class="row-block">
+        <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
       </div>
-      <template slot="table-row" slot-scope="props">
-        <span v-if="props.column.field == 'action'">
-          <action-button
-            class="action-button-s"
-            @onClick="versions(props.row)"
-            icon="ic-time.svg"
-            label="ورژن ها"
-          />
-          <action-button
-            class="action-button-s"
-            @onClick="createVersion(props.row)"
-            icon="ic-upload.svg"
-            label="آپلود"
-          />
-          <action-button
-            class="action-button-s"
-            @onClick="remove(props.row)"
-            icon="ic-delete.svg"
-            label="حذف"
-          />
-        </span>
-        <span v-else>{{props.formattedRow[props.column.field]}}</span>
-      </template>
-    </vue-good-table>
+      <div class="table-title">ایمیج های شما</div>
+      <vue-good-table :columns="header" :rows="images" :rtl="true" styleClass="vgt-table">
+        <div slot="emptystate">
+          <p class="empty-table center">دیتایی وجود ندارد</p>
+        </div>
+        <template slot="table-row" slot-scope="props">
+          <span v-if="props.column.field == 'action'">
+            <action-button
+              class="action-button-s"
+              @onClick="versions(props.row)"
+              icon="ic-time.svg"
+              label="ورژن ها"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="createVersion(props.row)"
+              icon="ic-upload.svg"
+              label="آپلود"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="remove(props.row)"
+              icon="ic-delete.svg"
+              label="حذف"
+            />
+          </span>
+          <span v-else>{{props.formattedRow[props.column.field]}}</span>
+        </template>
+      </vue-good-table>
+    </div>
   </div>
 </template>
 
@@ -41,7 +46,7 @@ import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
-
+import FEmpty from "~/components/Dashboard/empty";
 export default {
   layout: "dashboard",
   async asyncData({ store, route, redirect }) {
@@ -60,7 +65,7 @@ export default {
           label: "نام دامنه",
           sortable: false,
           field: "name",
-          tdClass: 'ellipsis',
+          tdClass: "ellipsis"
         },
         {
           label: "تاریخ ساخت ایمیج",
@@ -71,7 +76,7 @@ export default {
           label: "آخرین ورژن",
           sortable: false,
           field: "version",
-          tdClass: 'ellipsis',
+          tdClass: "ellipsis"
         },
         {
           label: "آخرین به روز‌رسانی",
@@ -81,13 +86,14 @@ export default {
         {
           label: "مدیریت",
           sortable: false,
-          field: "action", 
+          field: "action",
           html: true
         }
       ]
     };
   },
   components: {
+    FEmpty,
     FTable,
     FButton,
     ActionButton
