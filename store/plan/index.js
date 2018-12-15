@@ -24,7 +24,7 @@ export default {
                 icon: "sail-boat.png", // to see  more icons open dir : ROOT/static/icons/plans/services-icon
                 title: "Plan-1",
                 price: '120,000',
-                cpu: "1 Core",
+                cpu: "Core 1",
                 ram: "1GB",
                 space: "5GB",
                 list: [
@@ -37,7 +37,7 @@ export default {
                 icon: "blimp.png", // to see  more icons open dir : ROOT/static/icons/plans/services-icon
                 title: "Plan-2",
                 price: '240,000',
-                cpu: "1 Core",
+                cpu: "Core 1",
                 ram: "2GB",
                 space: "5GB",
                 list: [
@@ -50,7 +50,7 @@ export default {
                 icon: "truck.png", // to see  more icons open dir : ROOT/static/icons/plans/services-icon
                 title: "Plan-4",
                 price: '480,000',
-                cpu: "2 Core",
+                cpu: "Core 2",
                 ram: "4GB",
                 space: "30GB",
                 list: [
@@ -64,7 +64,7 @@ export default {
                 icon: "helicopter.png", // to see  more icons open dir : ROOT/static/icons/plans/services-icon
                 title: "Plan-8",
                 price: '960,000',
-                cpu: "4 Core",
+                cpu: "Core 4",
                 ram: "8GB",
                 space: "30GB",
                 list: [
@@ -78,7 +78,7 @@ export default {
                 icon: "rocket.png", // to see  more icons open dir : ROOT/static/icons/plans/services-icon
                 title: "Plan-16",
                 price: '1,920,000',
-                cpu: "8 Core",
+                cpu: "Core 8",
                 ram: "16GB",
                 space: "40GB",
                 list: [
