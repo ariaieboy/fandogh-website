@@ -14,6 +14,7 @@ module.exports = {
   },
   css: [
     'flexboxgrid/css/flexboxgrid.css',
+    'balloon-css/balloon.min.css',
     '@/assets/css/main.styl'
   ],
   head: {
@@ -46,5 +47,5 @@ module.exports = {
     extractCSS: true,
     vendor: ['axios']
   },
-  plugins: ['~/plugins/progress-hover', {src: '~/plugins/google-map', ssr: false},'~/plugins/mixins', '~/plugins/validation',{src: '~/plugins/table', ssr: false}]
+  plugins: ['~/plugins/progress-hover', {src: '~/plugins/google-map', ssr: false},'~/plugins/mixins', '~/plugins/validation',{src: '~/plugins/table', ssr: false},    { src: "~/plugins/ga.js", ssr: false }]
 }
