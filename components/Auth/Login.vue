@@ -61,7 +61,10 @@ import ForgotPassword from './ForgotPassword'
         this.$store.dispatch('showModal', modal)
       },
       login(e){
-        console.log(e)
+        this.$ga.event({
+          eventCategory: 'account',
+          eventAction: 'login',
+        })
         if(this.loading) return
         this.loading = true
         this.error = null

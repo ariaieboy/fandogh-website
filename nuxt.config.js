@@ -1,51 +1,65 @@
 module.exports = {
   /*
-  ** Headers of the page
-  */
-  loading:{
-    color: '#ff628f',
-    height: '5px'
+   ** Headers of the page
+   */
+  loading: {
+    color: "#ff628f",
+    height: "5px"
   },
   env: {
-    API: process.env.API || 'https://api.fandogh.cloud/fa'
+    API: process.env.API || "https://api.fandogh.cloud/fa"
   },
   router: {
-    middleware: ['authentication']
+    middleware: ["authentication"]
   },
   css: [
-    'flexboxgrid/css/flexboxgrid.css',
-    'balloon-css/balloon.min.css',
-    '@/assets/css/main.styl'
+    "flexboxgrid/css/flexboxgrid.css",
+    "balloon-css/balloon.min.css",
+    "@/assets/css/main.styl"
   ],
   head: {
-    title: 'سرویس های ابری فندق',
+    title: "سرویس های ابری فندق",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'سرویس های ابری فندق، همه چیز با داکر فایل شروع میشه' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      {
+        hid: "description",
+        name: "description",
+        content: "سرویس های ابری فندق، همه چیز با داکر فایل شروع میشه"
+      }
     ],
-    link: [
-      { rel: 'iScon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: "iScon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
   modules: [
-    '@nuxtjs/pwa'
+    "@nuxtjs/pwa",
+    '@nuxtjs/google-analytics'
   ],
+  'google-analytics': {
+    id: 'UA-120059029-1'
+  },
+  
   manifest: {
-    name: 'فندق',
-    description: 'سرویس های ابری فندق'
+    name: "فندق",
+    description: "سرویس های ابری فندق"
   },
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   //css: ['~/assets/css/main.css'],
   /*
-  ** Add axios globally
-  */
+   ** Add axios globally
+   */
   build: {
     extractCSS: true,
-    vendor: ['axios']
+    vendor: ["axios"]
   },
-  plugins: ['~/plugins/progress-hover', {src: '~/plugins/google-map', ssr: false},'~/plugins/mixins', '~/plugins/validation',{src: '~/plugins/table', ssr: false},    { src: "~/plugins/ga.js", ssr: false }]
-}
+  plugins: [
+    "~/plugins/progress-hover",
+    { src: "~/plugins/google-map", ssr: false },
+    "~/plugins/mixins",
+    "~/plugins/validation",
+    { src: "~/plugins/table", ssr: false },
+    { src: "~/plugins/ga.js", ssr: false }
+  ]
+};
