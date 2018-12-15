@@ -35,6 +35,14 @@
               label="حذف"
             />
           </span>
+          <span v-else-if="props.column.field == 'certificate'">
+            <span v-if="props.row.certificate" :data-balloon="FDate(props.row.certificate.created_at)" data-balloon-pos="up">
+              {{FFromDate(props.row.certificate.created_at)}}
+            </span>
+            <span v-else>
+              ندارد
+            </span>
+          </span>
           <span v-else>{{props.formattedRow[props.column.field]}}</span>
         </template>
       </vue-good-table>
@@ -46,6 +54,7 @@
 import FTable from "~/components/Dashboard/table";
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
+import FFromDate from "~/utils/fromDate";
 import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
@@ -78,7 +87,7 @@ export default {
         {
           sortable: false,
           label: "گواهینامه ssl",
-          field: "ssl"
+          field: 'certificate'
         },
         {
           label: "وضعیت",
@@ -108,6 +117,12 @@ export default {
     }
   },
   methods: {
+    FFromDate(value){
+      return FFromDate(value)
+    },
+    FDate(value){
+      return FDate(value)
+    },
     getDomainStatus({ verified }) {
       return verified ? "در حال استفاده" : "تایید نشده";
     },

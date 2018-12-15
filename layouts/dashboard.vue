@@ -33,6 +33,7 @@ export default {
     Notification,
     Alert
   },
+  middleware: 'authentication',
   computed: {
     message() {
       return this.$store.state.message;
