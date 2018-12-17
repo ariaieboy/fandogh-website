@@ -78,16 +78,7 @@ export default {
   },
   methods: {
     createImage() {
-      if (
-        !FormValidator(this.$data, {
-          name: {
-            required: true,
-            pattern: "^[A-Za-z0-9-_]+$",
-            name: "نام ایمیج"
-          }
-        })
-      )
-        return;
+      if ( !FormValidator(this.$data, {name: {required: true,pattern: "^[A-Za-z0-9-_]+$",name: "نام ایمیج"}})) return;
       this.loading = true;
       this.$store
         .dispatch("createImage", { name: this.name })
@@ -99,6 +90,7 @@ export default {
           });
 
           if (this.version.length && this.source) {
+
             this.loadingProgress = true;
 
             let fd = formData([
@@ -122,6 +114,10 @@ export default {
                 });
                 this.loading = false;
                 this.loadingProgress = false;
+                this.$ga.event({
+                  eventCategory: 'dashboard',
+                  eventAction: 'images create',
+                })
                 this.$router.push(
                   `/dashboard/images/${this.name}/versions/${this.version}/logs`
                 );
@@ -139,6 +135,10 @@ export default {
               });
           } else {
             this.loading = false;
+            this.$ga.event({
+              eventCategory: 'dashboard',
+              eventAction: 'version create',
+            })
             this.$router.push("/dashboard/images");
           }
         })

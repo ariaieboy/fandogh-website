@@ -25,6 +25,15 @@
           :to="{path:'/dashboard/domains'}"
         ><img src="./icons/domain.svg" /> دامنه </router-link>
       </li>
+      
+      <li>
+        <router-link
+          event="disabled"
+          @click.native="closeMenu('/dashboard/secret')"
+          :to="{path:'/dashboard/secret'}"
+        ><img src="./icons/private.svg" /> سکرت‌ها </router-link>
+      </li>
+      
       <li>
         <router-link
           event="disabled"
