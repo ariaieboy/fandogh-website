@@ -10,7 +10,7 @@ module.exports = {
     API: process.env.API || "https://api.fandogh.cloud/fa"
   },
   router: {
-    middleware: ["authentication"]
+    middleware: ["aut"]
   },
   css: [
     "flexboxgrid/css/flexboxgrid.css",
