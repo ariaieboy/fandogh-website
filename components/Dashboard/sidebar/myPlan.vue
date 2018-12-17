@@ -24,6 +24,8 @@ export default {};
   border-radius 5px
   background-image linear-gradient(to top, #00e3dc, #4fa8fd)
   box-shadow 0 3px 6px 0 rgba(1, 225, 220, 0.5)
+  @media only screen and (max-width: 1200px)
+    width 200px
   > *
     margin 10px
 .my-plan-icon
@@ -40,4 +42,8 @@ export default {};
 .my-plan-text
   color #ffffff
   font-size 18px
+  @media only screen and (max-width: 1200px)
+    font-size 12px
+
+
 </style>
