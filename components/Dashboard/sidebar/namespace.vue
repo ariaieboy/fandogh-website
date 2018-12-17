@@ -33,8 +33,6 @@
        align-items center
        box-sizing border-box
        padding 12px
-       @media only screen and (max-width: 1200px)
-          width 200px
        .namespace--icon
            display flex
            justify-content center
@@ -49,13 +47,8 @@
             padding 15px
             span
                 font-size 11px
-                @media only screen and (max-width: 1200px)
-                    font-size 8px
-
             h6
                 margin 5px 0
-                @media only screen and (max-width: 1200px)
-                    font-size 12px
 
 
 
