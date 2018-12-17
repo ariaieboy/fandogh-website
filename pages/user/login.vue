@@ -12,7 +12,6 @@
     },
     mounted(){
       this.$store.dispatch('logout')
-      console.log('hello')
     }
   }
 </script>
