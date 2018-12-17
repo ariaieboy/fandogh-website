@@ -121,6 +121,14 @@ export default {
     }
   },
   methods: {
+    some(){
+        this.$ga.event({
+          eventCategory: 'image',
+          eventAction: 'add image',
+          // eventLabel:'user',
+          // eventValue:'userId'
+        })
+    },
     versions({ name }) {
       this.$router.push(`/dashboard/images/${name}/versions`);
     },
