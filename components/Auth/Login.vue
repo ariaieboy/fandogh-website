@@ -61,10 +61,7 @@ import ForgotPassword from './ForgotPassword'
         this.$store.dispatch('showModal', modal)
       },
       login(e){
-        this.$ga.event({
-          eventCategory: 'account',
-          eventAction: 'login',
-        })
+        
         if(this.loading) return
         this.loading = true
         this.error = null
@@ -72,6 +69,10 @@ import ForgotPassword from './ForgotPassword'
           this.loading = false
           this.$router.push('/dashboard/images')
           this.$store.dispatch('showModal', false)
+          this.$ga.event({
+            eventCategory: 'account',
+            eventAction: 'login',
+          })
         }).catch(e => {
           this.loading = false
           this.error = e
