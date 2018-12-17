@@ -99,6 +99,9 @@ export default {
     FEmpty
   },
   methods: {
+    edit(){
+
+    },
     remove({ name }) {
       this.$alertify(
         {

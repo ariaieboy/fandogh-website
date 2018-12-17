@@ -83,7 +83,6 @@ export default {
     margin 0
     padding 0
   .dropdown-selector, .dropdown-container
-    z-index 2
     border solid 1px #e7e8ea
     border-radius 10px
     background-color #ffffff
@@ -127,7 +126,7 @@ export default {
         height 10px
   .dropdown-selector
     position absolute
-    top 43px
+    top 47px
     right 10px
     left 10px
     z-index 1

@@ -83,7 +83,6 @@ export default {
     border solid 1px #e7e8ea
     border-radius 10px
     background-color #ffffff
-    z-index 2
   .dropdown-container
     position relative
     display flex
@@ -117,7 +116,7 @@ export default {
     z-index: 1;
     right 10px
     left 10px
-    top: 43px;
+    top: 47px;
     border-top none
     border-top-left-radius 0
     border-top-right-radius 0
