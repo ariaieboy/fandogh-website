@@ -120,6 +120,9 @@ export default {
       }
     }
   },
+  destroyed() {
+    this.$store.commit('SET_DATA',{data:null,id:'images'})
+  },
   methods: {
     versions({ name }) {
       this.$router.push(`/dashboard/images/${name}/versions`);
