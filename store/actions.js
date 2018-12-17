@@ -254,3 +254,28 @@ export const SET_SIZE = ({ commit, state }, {width,height}) => {
 };
 
 
+export const createSecret = async ({ commit, state },{name,type,fields}) => {
+  try {
+    let secret = await Request().post(`/api/secrets`,{name,type,fields});
+    return secret;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getSecret = async ({ commit, state }) => {
+  try {
+    let secret = await Request().get(`/api/secrets`);
+    commit("SET_DATA", {id:'secrets',data:secret});
+    return secret;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+export const deleteSecret = async ({ commit, state }, name) => {
+  try {
+    // return await Request().delete(`/api/services/${name}`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
