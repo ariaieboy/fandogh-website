@@ -48,7 +48,6 @@ import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
 export default {
-  middleware: ["authentication"],
   layout: "dashboard",
   async asyncData({ store, route, redirect }) {
     try {
