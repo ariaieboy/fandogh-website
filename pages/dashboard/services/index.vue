@@ -97,6 +97,10 @@ export default {
       }
     }
   },
+  destroyed() {
+    this.$store.commit("SET_DATA", { data: null, id: "services" });
+    
+  },
   components: {
     FTable,
     FButton,
