@@ -61,6 +61,9 @@ export default {
       return percent.toString();
     }
   },
+  destroyed() {
+    this.$store.commit("plan/SET_DATA", { data: null, id: "activePlan" });
+  },
   mounted() {
     this.$store.dispatch("plan/getNameSpace", this.namespace);
   }

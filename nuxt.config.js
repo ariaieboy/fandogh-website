@@ -60,6 +60,6 @@ module.exports = {
     "~/plugins/mixins",
     "~/plugins/validation",
     { src: "~/plugins/table", ssr: false },
-    { src: "~/plugins/ga.js", ssr: false }
+    // { src: "~/plugins/ga.js", ssr: false }
   ]
 };

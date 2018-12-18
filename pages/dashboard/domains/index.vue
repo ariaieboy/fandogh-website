@@ -116,6 +116,9 @@ export default {
       return this.$store.state.domains;
     }
   },
+  destroyed() {
+    this.$store.commit('SET_DATA',{data:null,id:'domains'})
+  },
   methods: {
     FFromDate(value){
       return FFromDate(value)

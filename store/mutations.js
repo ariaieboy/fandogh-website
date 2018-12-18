@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import {setToken, removeToken, setValue} from "../utils/cookie";
+import {setToken, removeToken, setValue , removeValue} from "../utils/cookie";
 
 /**
  *
@@ -28,6 +28,9 @@ export const SET_USER = (state, {token, namespaces, username, email }) => {
 export const LOGOUT = (state) => {
   removeToken()
   state.user.token = null
+  removeValue('username')
+  removeValue('email')
+  removeValue('namespace')
 }
 
 export const SET_MESSAGE = (state, message) => {

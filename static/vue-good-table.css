@@ -71,12 +71,38 @@ table.vgt-table td.ellipsis span {
   width: 200px;
   text-align: center;
 }
-@media (max-width: 992px) {
-  table.vgt-table th span{
-    font-size: 14px
+@media (min-width: 992px) {
+  .is-small table.vgt-table td.ellipsis span {
+    width: 100px;
   }
-  table.vgt-table td span{
-    font-size: 14px
+  .is-small table.vgt-table th span {
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100px;
+  }
+}
+@media (max-width: 768px) {
+  table.vgt-table td.ellipsis span {
+    width: 80px;
+  }
+  table.vgt-table th span {
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    white-space: nowrap;
+    width: 80px;
+  }
+}
+@media (max-width: 992px) {
+  table.vgt-table th span {
+    font-size: 14px;
+  }
+  table.vgt-table td span {
+    font-size: 14px;
   }
   table.vgt-table td.ellipsis span {
     width: 100px;
