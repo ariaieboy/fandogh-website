@@ -1,20 +1,23 @@
 <template>
   <div class="wrapper">
-    <f-header noFixed="true" />
+    <f-header noFixed="true"/>
     <div class="container-fluid">
       <div class="row">
         <div class="wrapper-col" :class="{'col-lg-2':showHalf , 'col-lg-0':!showHalf}">
-          <admin-sidebar />
+          <admin-sidebar/>
         </div>
-        <div class="wrapper-col" :class="{'col-xs-12 col-lg-10 pr-120 pl-100':showHalf,'col-xs-12':!showHalf}">
+        <div
+          class="wrapper-col"
+          :class="{'col-xs-12 col-lg-10 pr-120 pl-100':showHalf,'col-xs-12':!showHalf}"
+        >
           <div class="dash-container">
-            <nuxt />
+            <nuxt/>
           </div>
         </div>
       </div>
     </div>
-    <notification />
-    <alert />
+    <notification/>
+    <alert/>
   </div>
 </template>
 
@@ -25,6 +28,8 @@ import AdminSidebar from "~/components/Dashboard/sidebar";
 import "normalize.css";
 import Notification from "~/components/Dashboard/notification";
 import Alert from "~/components/Dashboard/alert";
+import { readCookieReq, readCookie } from "../utils/cookies.js";
+
 export default {
   components: {
     FHeader,
@@ -33,12 +38,13 @@ export default {
     Notification,
     Alert
   },
+
   computed: {
     message() {
       return this.$store.state.message;
     },
     showHalf() {
-      return this.$store.state.sidebar === 'halfSidebar';
+      return this.$store.state.sidebar === "halfSidebar";
     }
   },
   watch: {
@@ -46,6 +52,17 @@ export default {
       if (this.message) {
         this.$store.dispatch("setMessage", this.message);
         this.$store.dispatch("showModal", "message");
+      }
+    }
+  },
+  mounted() {
+    let token;
+    let valid = false;
+    if (process.browser) {
+      token = readCookie("USER_TOKEN");
+      valid = token ? true : false;
+      if (!valid) {
+        this.$router.push("/user/login");
       }
     }
   }
@@ -57,7 +74,7 @@ export default {
 
 $spaceTop = 45
 // .wrapper-col
-//     transition all 0.5s
+// transition all 0.5s
 .dash-container
   box-sizing border-box
   margin-top $spaceTop + 68px

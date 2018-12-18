@@ -1,6 +1,7 @@
 import './input.styl'
 export default {
   functional: true,
+  
   render(h, {props, ...rest}){
     let classes = ['fandogh-input']
     let styles = props.styles ? props.styles.split(' ') : []
