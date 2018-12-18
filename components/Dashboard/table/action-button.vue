@@ -54,13 +54,8 @@ export default {
     @media (max-width: 1200px)
       width 15px
       height 15px
-@media (max-width: 992px)
-  .action-button-m
-    label
-      width 0
-      position absolute
-@media (max-width: 1200px)
-  .action-button-s
+@media (max-width: 1700px)
+  .action-button-s , .action-button-m
     label
       width 0
       position absolute
