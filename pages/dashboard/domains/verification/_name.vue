@@ -7,11 +7,7 @@
           <f-input v-model="name" styles="input-white input-block input-dashboard input-disable"></f-input>
         </div>
         <div class="fandogh-form-group">
-          <f-textarea
-            :placeholder="description"
-            disable="true"
-            class="textarea-disable"
-          />
+          <f-textarea :placeholder="description" disable="true" class="textarea-disable"/>
         </div>
         <div class="fandogh-form-group">
           <f-lable :value="domain.verification_key" title="کد فعالسازی"></f-lable>
@@ -32,8 +28,14 @@ import FTextarea from "~/components/Dashboard/textarea";
 import FLable from "~/components/Dashboard/label";
 
 export default {
-  async asyncData({ store, dispatch }) {
-    await store.dispatch("getDomains");
+  async asyncData({ store, dispatch, redirect }) {
+    try {
+      await store.dispatch("getDomains");
+    } catch (e) {
+      if (e.status === 401) {
+        redirect("/user/login");
+      }
+    }
   },
   data() {
     return {
@@ -45,7 +47,7 @@ export default {
   },
   computed: {
     domain() {
-      if(!this.name) return null
+      if (!this.name) return null;
       let domain = this.$store.state.domains.find(domain => {
         return domain.name === this.name;
       });
@@ -75,20 +77,20 @@ export default {
               title: "دامنه شما با موفقیت به سرویس متصل شد.",
               type: "success"
             });
-              this.$ga.event({
-                eventCategory: "domain",
-                eventAction: "verified domain",
-                eventLabel: "domain name",
-                eventValue: this.name
-              });
+            this.$ga.event({
+              eventCategory: "domain",
+              eventAction: "verified domain",
+              eventLabel: "domain name",
+              eventValue: this.name
+            });
             this.$router.push("/dashboard/domains");
           } else {
             this.$ga.event({
-                eventCategory: "domain",
-                eventAction: "fail verified domain",
-                eventLabel: "domain name",
-                eventValue: this.name
-              });
+              eventCategory: "domain",
+              eventAction: "fail verified domain",
+              eventLabel: "domain name",
+              eventValue: this.name
+            });
             this.$notify({
               title: "رکورد TXT شما روی دامنه صحیح نیست",
               type: "error"

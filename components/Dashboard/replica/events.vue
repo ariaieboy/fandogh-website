@@ -7,17 +7,17 @@
           <th>Reason</th>
           <th>Message</th>
           <th>Count</th>
-          <th>First Seen</th>
+          <!-- <th>First Seen</th> -->
           <th>Last Seen</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>Scheduled</td>
-          <td>Successfully assigned Behrooz/db-6996b848c-r7bk6 to fandogh-k8s-node6</td>
-          <td>1</td>
-          <td>2018-10-03</td>
-          <td>2018-10-03</td>
+        <tr v-for="item in items">
+          <td>{{item.reason}}</td>
+          <td>{{item.message}}</td>
+          <td>{{item.count}}</td>
+          <!-- <td>2018-10-03</td> -->
+          <td>{{item.last_timestamp}}</td>
         </tr>
       </tbody>
     </table>
@@ -26,7 +26,12 @@
 
 <script>
 export default {
-  name: "replica-events"
+  name: "replica-events",
+  props:{
+    items:{
+      type:Array,
+    }
+  }
 };
 </script>
 <style lang="stylus" scoped>

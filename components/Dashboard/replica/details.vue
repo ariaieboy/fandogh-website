@@ -25,7 +25,7 @@ export default {
   props: {
     name: {
       type: String,
-      default: "db-ijsdjdaijd-2r5242"
+      default: ""
     },
     color: {
       type: String,
@@ -36,12 +36,12 @@ export default {
       default: "در حال انجام"
     },
     count: {
-      type: String,
-      default: "۲۲"
+      type: Number,
+      default: ""
     },
     date: {
       type: String,
-      default: "۲۲ / اردیبهشت / ۱۳۹۷"
+      default: ""
     }
   }
 };

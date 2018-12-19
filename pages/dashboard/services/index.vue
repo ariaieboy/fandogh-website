@@ -43,8 +43,14 @@ import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store, route }) {
-    await store.dispatch("getServices");
+  async asyncData({ store, route, redirect }) {
+    try {
+      await store.dispatch("getServices");
+    } catch (e) {
+      if (e.status === 401) {
+        redirect("/user/login");
+      }
+    }
   },
   data() {
     return {

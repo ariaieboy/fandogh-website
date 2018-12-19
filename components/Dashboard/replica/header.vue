@@ -15,19 +15,19 @@ export default {
   props: {
     name: {
       type: String,
-      default: "Pod 1"
+      default: ""
     },
     color :{
       type: String,
       default: "pending-text"   // error-text , success-text
     },
     state: {
-      type: String,
-      default: "در حال انجام"
+      // type: Number,
+      default: ""
     },
     count: {
-      type: String,
-      default: "2"
+      type: Number,
+      default: ""
     }
   }
 };
