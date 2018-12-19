@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import { getValue } from "~/utils/cookie";
+
 export default {
   data() {
     return {
@@ -75,6 +77,12 @@ export default {
       this.$router.push(path);
     },
     logout(){
+       this.$ga.event({
+            eventCategory: "account",
+            eventAction: "user logout dashboard",
+            eventLabel: "username",
+            eventValue: getValue("username")
+        });
       this.$store.dispatch('logout')
       this.$router.push('/user/login')
     }
