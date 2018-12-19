@@ -52,6 +52,10 @@ export default {
     }
   },
   mounted() {
+    this.$ga.event({
+        eventCategory: 'images-version',
+        eventAction: 'add version image',
+    })
     var vm = this;
     let btnfile = document.querySelector("#source");
     btnfile.addEventListener("change", function(e) {
@@ -89,6 +93,10 @@ export default {
         this.$store
           .dispatch("createImageVersion", { name: this.name, formData: fd })
           .then(res => {
+            this.$ga.event({
+                eventCategory: 'images-version',
+                eventAction: 'create version image',
+            })
             this.$notify({
               title: res.message,
               time: 4000,
@@ -100,6 +108,10 @@ export default {
           })
           .catch(e => {
             this.loading = false;
+            this.$ga.event({
+                eventCategory: 'images-version',
+                eventAction: 'fail create version image',
+            })
             ErrorReporter(e, this.$data, true).forEach(error => {
               this.$notify({
                 title: error,
@@ -109,6 +121,10 @@ export default {
             });
           });
       }else{
+         this.$ga.event({
+              eventCategory: 'images-version',
+              eventAction: 'fail create version image upload file',
+          })
          this.$notify({
               title: 'شما فایلی آپلود نکرده اید',
               time: 4000,

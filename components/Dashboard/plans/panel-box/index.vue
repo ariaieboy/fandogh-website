@@ -41,6 +41,7 @@ export default {
   },
   methods: {
     clickInfo(index) {
+   
       if (index === this.tooltipShow) {
         this.tooltipShow = -1;
         return;
@@ -55,6 +56,12 @@ export default {
       this.isShow = index;
     },
     pushUrl(index){
+      this.$ga.event({
+          eventCategory: "plan",
+          eventAction: "click plan",
+          eventLabel: "plan index",
+          eventValue: index 
+      });
       this.$router.push(`/dashboard/plans/${index + 1}`);
     }
   }

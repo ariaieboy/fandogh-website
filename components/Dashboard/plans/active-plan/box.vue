@@ -21,7 +21,6 @@ export default {
     border-radius 10px
     background-color #ffffff
     position relative
-    cursor pointer
     &:before
         position absolute
         content ''

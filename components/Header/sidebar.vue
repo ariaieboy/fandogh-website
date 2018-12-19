@@ -53,6 +53,8 @@
 <script>
   import logo from './logo'
   import FButton from '~/components/elements/button'
+    import { getValue } from "~/utils/cookie";
+  
     export default {
       data(){
         return {
@@ -72,6 +74,12 @@
           this.$store.dispatch('showModal', modal)
         },
         logout(){
+        this.$ga.event({
+            eventCategory: "account",
+            eventAction: "user logout dashboard",
+            eventLabel: "username",
+            eventValue: getValue("username")
+        });
           this.$store.dispatch('logout')
           this.$router.push('/user/login')
           this.toggleMenu()

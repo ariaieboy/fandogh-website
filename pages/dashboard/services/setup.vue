@@ -114,6 +114,10 @@
       }
     },
     mounted(){
+      this.$ga.event({
+          eventCategory: 'service',
+          eventAction: 'start setup new service',
+      })
       Validation.$on('validation', ({isValid, keys}) => {
         this.prevent = !isValid
       })

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="!services.length" title="هنوز سرویسی اضافه نشده !">
+    <f-empty v-if="!services" title="هنوز سرویسی اضافه نشده !">
       <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
     </f-empty>
     <div class="images" v-else>
@@ -99,7 +99,6 @@ export default {
   },
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "services" });
-    
   },
   components: {
     FTable,
@@ -109,6 +108,12 @@ export default {
   },
   methods: {
     remove({ name }) {
+      this.$ga.event({
+          eventCategory: 'service',
+          eventAction: 'click btn remove service',
+          eventLabel:'service name',
+          eventValue:name
+      })
       this.$alertify(
         {
           title: `سرویس ${name} حذف شود؟`,
@@ -120,12 +125,24 @@ export default {
               .dispatch("deleteService", name)
               .then(res => {
                 this.$store.dispatch("getServices");
+                this.$ga.event({
+                    eventCategory: 'service',
+                    eventAction: 'remove service',
+                    eventLabel:'service name',
+                    eventValue:name
+                })
                 this.$notify({
                   title: res.message,
                   type: "success"
                 });
               })
               .catch(e => {
+                this.$ga.event({
+                    eventCategory: 'service',
+                    eventAction: 'fail remove service',
+                    eventLabel:'service name',
+                    eventValue:name
+                })
                 this.$notify({
                   title: e.message,
                   type: "error"
@@ -136,6 +153,12 @@ export default {
       );
     },
     logs({ name }) {
+      this.$ga.event({
+            eventCategory: 'service',
+            eventAction: 'click btn detail service',
+            eventLabel:'service name',
+            eventValue:name
+      })
       this.$router.push(`/dashboard/services/${name}`);
     }
   }

@@ -28,13 +28,13 @@
             placeholder="رمز عبور"
           />
         </div>
-        <div class="fandogh-form-group margin-20">
+        <!-- <div class="fandogh-form-group margin-20">
           <f-checkbox
             v-model="remind_me"
             :id="noModal ? 'checkbox1' : 'checkbox2'"
             title="مرا بخاطر بسپار"
           />
-        </div>
+        </div> -->
         <div class="fandogh-form-group center margin-20">
           <f-button @onClick="login" styles="red block 80">{{title}}</f-button>
         </div>

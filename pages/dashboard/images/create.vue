@@ -65,6 +65,12 @@ export default {
     ProgressBar
   },
   mounted() {
+    this.$ga.event({
+        eventCategory: 'image',
+        eventAction: 'add image',
+        // eventLabel:'user',
+        // eventValue:'userId'
+      })
     var vm = this;
     let btnfile = document.querySelector("#source");
     btnfile.addEventListener("change", function(e) {
@@ -78,6 +84,12 @@ export default {
   },
   methods: {
     createImage() {
+      this.$ga.event({
+        eventCategory: 'image',
+        eventAction: 'click btn create image',
+        // eventLabel:'user',
+        // eventValue:'userId'
+      })
       if ( !FormValidator(this.$data, {name: {required: true,pattern: "^[A-Za-z0-9-_]+$",name: "نام ایمیج"}})) return;
       this.loading = true;
       this.$store
@@ -115,7 +127,7 @@ export default {
                 this.loading = false;
                 this.loadingProgress = false;
                 this.$ga.event({
-                  eventCategory: 'dashboard',
+                  eventCategory: 'images',
                   eventAction: 'images create',
                 })
                 this.$router.push(
@@ -136,8 +148,8 @@ export default {
           } else {
             this.loading = false;
             this.$ga.event({
-              eventCategory: 'dashboard',
-              eventAction: 'version create',
+              eventCategory: 'images',
+              eventAction: 'images version create',
             })
             this.$router.push("/dashboard/images");
           }

@@ -103,6 +103,12 @@ export default {
 
     },
     remove({ name }) {
+      this.$ga.event({
+          eventCategory: "secret",
+          eventAction: "click btn remove secret",
+          eventLabel: "secret name",
+          eventValue: name
+        });
       this.$alertify(
         {
           title: `سرویس ${name} حذف شود؟`,
@@ -114,12 +120,24 @@ export default {
               .dispatch("deleteSecret", name)
               .then(res => {
                 this.$store.dispatch("getSecrets");
+                  this.$ga.event({
+                      eventCategory: "secret",
+                      eventAction: "remove secret",
+                      eventLabel: "secret name",
+                      eventValue: name
+                    });
                 this.$notify({
                   title: res.message,
                   type: "success"
                 });
               })
               .catch(e => {
+                this.$ga.event({
+                  eventCategory: "secret",
+                  eventAction: "fail remove secret",
+                  eventLabel: "secret name",
+                  eventValue: name
+                });
                 this.$notify({
                   title: e.message,
                   type: "error"

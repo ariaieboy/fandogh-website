@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="!images.length" title="هنوز ایمیجی اضافه نشده !">
+    <f-empty v-if="!images" title="هنوز ایمیجی اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
     </f-empty>
     <div class="images" v-else>
@@ -15,12 +15,14 @@
         <template slot="table-row" slot-scope="props">
           <span v-if="props.column.field == 'action'">
             <action-button
+              v-if="props.row.name !== ''"
               class="action-button-s"
               @onClick="versions(props.row)"
               icon="ic-time.svg"
               label="ورژن ها"
             />
             <action-button
+              v-if="props.row.name !== ''"
               class="action-button-s"
               @onClick="createVersion(props.row)"
               icon="ic-upload.svg"
@@ -124,21 +126,31 @@ export default {
     this.$store.commit('SET_DATA',{data:null,id:'images'})
   },
   methods: {
-    some(){
-        this.$ga.event({
-          eventCategory: 'image',
-          eventAction: 'add image',
-          // eventLabel:'user',
-          // eventValue:'userId'
-        })
-    },
     versions({ name }) {
+      this.$ga.event({
+        eventCategory: 'image',
+        eventAction: 'click btn list version image',
+        // eventLabel:'user',
+        // eventValue:'userId'
+      })
       this.$router.push(`/dashboard/images/${name}/versions`);
     },
     createVersion({ name }) {
+       this.$ga.event({
+          eventCategory: 'image',
+          eventAction: 'click btn upload version image',
+          // eventLabel:'user',
+          // eventValue:'userId'
+        })
       this.$router.push(`/dashboard/images/${name}/versions/create`);
     },
     remove({ name }) {
+       this.$ga.event({
+        eventCategory: 'image',
+        eventAction: 'click btn remove image',
+        // eventLabel:'user',
+        // eventValue:'userId'
+      })
       this.$alertify(
         {
           title: "ایمیج حذف شود؟",
@@ -154,12 +166,24 @@ export default {
                   title: res.message,
                   type: "success"
                 });
+                this.$ga.event({
+                    eventCategory: 'image',
+                    eventAction: 'remove image',
+                    // eventLabel:'user',
+                    // eventValue:'userId'
+                  })
               })
               .catch(e => {
                 this.$notify({
                   title: e.message,
                   type: "error"
                 });
+                this.$ga.event({
+                    eventCategory: 'image',
+                    eventAction: 'canceled remove image',
+                    // eventLabel:'user',
+                    // eventValue:'userId'
+                  })
               });
           }
         }
