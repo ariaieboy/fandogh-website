@@ -43,11 +43,22 @@
         <div class="mb-45" v-for="item in service.pods" v-if="service.pods.length">
           <f-collaps :selected="true">
             <div slot="collapse-header">
-              <f-replica-header :name="item.name" :state="item.phase" :count="item.containers.length" color='success-text'/>
+              <f-replica-header
+                :name="item.name"
+                :state="item.phase"
+                :count="item.containers.length"
+                color="success-text"
+              />
             </div>
             <div slot="collapse-body">
-              <f-replica-details  :date="item.created_at" :name="item.name" :state="item.phase" :count="item.containers.length" color='success-text'/>
-              <f-replica-containers :items="item.containers" />
+              <f-replica-details
+                :date="item.created_at"
+                :name="item.name"
+                :state="item.phase"
+                :count="item.containers.length"
+                color="success-text"
+              />
+              <f-replica-containers :items="item.containers"/>
               <f-replica-events :items="item.events"/>
             </div>
           </f-collaps>
@@ -118,14 +129,87 @@ export default {
   },
   computed: {
     service() {
-      let items = this.$store.state.services;
-      let item = items[0];
-      console.log(item)
-      if (item) {
-        // item.memory = `Mi ${item.memory}`;
-        // item.start_date = FDate({ date: item.start_date });
-        return item;
-      }
+      return {
+        state: "RUNNING",
+        url: "https://front-salameno.fandogh.cloud",
+        urls: ["https://front-salameno.fandogh.cloud"],
+        name: "front",
+        start_date: "2018-11-07T08:45:39Z",
+        last_update: "2018-12-19T12:15:15Z",
+        service_type: "external",
+        pods: [
+          {
+            containers: [
+              {
+                ready: true,
+                waiting: null,
+                name: "front",
+                image: "registry.fandogh.cloud/salameno/front:63"
+              }
+            ],
+            events: [
+              {
+                count: 1,
+                last_timestamp: "2018-12-19T12:15:15Z",
+                reason: "Scheduled",
+                first_timestamp: "2018-12-19T12:15:15Z",
+                kind: null,
+                message:
+                  "Successfully assigned salameno/front-77bcdc8d75-h7n7r to fandogh-k8s-node01"
+              },
+              {
+                count: 1,
+                last_timestamp: "2018-12-19T12:15:16Z",
+                reason: "Pulling",
+                first_timestamp: "2018-12-19T12:15:16Z",
+                kind: null,
+                message:
+                  'pulling image "registry.fandogh.cloud/salameno/front:63"'
+              },
+              {
+                count: 1,
+                last_timestamp: "2018-12-19T12:15:44Z",
+                reason: "Pulled",
+                first_timestamp: "2018-12-19T12:15:44Z",
+                kind: null,
+                message:
+                  'Successfully pulled image "registry.fandogh.cloud/salameno/front:63"'
+              },
+              {
+                count: 1,
+                last_timestamp: "2018-12-19T12:15:44Z",
+                reason: "Created",
+                first_timestamp: "2018-12-19T12:15:44Z",
+                kind: null,
+                message: "Created container"
+              },
+              {
+                count: 1,
+                last_timestamp: "2018-12-19T12:15:44Z",
+                reason: "Started",
+                first_timestamp: "2018-12-19T12:15:44Z",
+                kind: null,
+                message: "Started container"
+              }
+            ],
+            name: "front-77bcdc8d75-h7n7r",
+            created_at: "2018-12-19T12:15:15Z",
+            phase: "Running"
+          }
+        ],
+        env: [],
+        memory: "400",
+        volume_mounts: [],
+        volumes: []
+      };
+      // this.$store.state.services;
+      // let item = items[0];
+      // console.log(item)
+      // if (item) {
+      //   // item.memory = `Mi ${item.memory}`;
+      //   // item.start_date = FDate({ date: item.start_date });
+      //   return item;
+      // }
     }
   }
 };
