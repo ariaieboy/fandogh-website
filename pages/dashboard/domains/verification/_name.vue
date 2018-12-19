@@ -45,6 +45,7 @@ export default {
   },
   computed: {
     domain() {
+      if(!this.name) return null
       let domain = this.$store.state.domains.find(domain => {
         return domain.name === this.name;
       });
@@ -60,6 +61,12 @@ export default {
   },
   methods: {
     verify() {
+      this.$ga.event({
+        eventCategory: "domain",
+        eventAction: "verify domain",
+        eventLabel: "domain name",
+        eventValue: this.name
+      });
       this.$store
         .dispatch("verificationDomain", { name: this.name })
         .then(res => {
@@ -68,8 +75,20 @@ export default {
               title: "دامنه شما با موفقیت به سرویس متصل شد.",
               type: "success"
             });
+              this.$ga.event({
+                eventCategory: "domain",
+                eventAction: "verified domain",
+                eventLabel: "domain name",
+                eventValue: this.name
+              });
             this.$router.push("/dashboard/domains");
           } else {
+            this.$ga.event({
+                eventCategory: "domain",
+                eventAction: "fail verified domain",
+                eventLabel: "domain name",
+                eventValue: this.name
+              });
             this.$notify({
               title: "رکورد TXT شما روی دامنه صحیح نیست",
               type: "error"

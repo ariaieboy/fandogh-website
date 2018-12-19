@@ -55,7 +55,7 @@ export default {
       }
     }
   },
-  mounted() {
+  beforeMount() {
     let token;
     let valid = false;
     if (process.browser) {

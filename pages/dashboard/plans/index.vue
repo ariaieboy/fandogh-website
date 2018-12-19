@@ -53,11 +53,7 @@ export default {
       return this.$store.state.plan.activePlan;
     },
     percent() {
-      let percent = Math.round(
-        (this.activePlan.current_used_resources.memory_usage /
-          this.activePlan.quota.memory_limit) *
-          100
-      );
+      let percent = Math.round((this.activePlan.current_used_resources.memory_usage / this.activePlan.quota.memory_limit) * 100);
       return percent.toString();
     }
   },
@@ -65,6 +61,10 @@ export default {
     this.$store.commit("plan/SET_DATA", { data: null, id: "activePlan" });
   },
   mounted() {
+    this.$ga.event({
+        eventCategory: "plan",
+        eventAction: "see list plan",
+    });
     this.$store.dispatch("plan/getNameSpace", this.namespace);
   }
 };

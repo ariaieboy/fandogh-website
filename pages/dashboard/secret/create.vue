@@ -94,7 +94,13 @@ export default {
     File,
     ProgressBar
   },
-  mounted() {},
+  mounted() {
+        this.$ga.event({
+            eventCategory: "secret",
+            eventAction: "add secret",
+        
+        });
+  },
   methods: {
     createSecret() {
       this.loading = true;
@@ -110,6 +116,10 @@ export default {
           }
         })
         .then(res => {
+          this.$ga.event({
+              eventCategory: "secret",
+              eventAction: "secret create",
+          });
           this.$notify({
             title: res.message,
             time: 3000,
@@ -119,6 +129,10 @@ export default {
         })
         .catch(e => {
           this.loading = false;
+          this.$ga.event({
+              eventCategory: "secret",
+              eventAction: "fail create  secret",
+          });
           ErrorReporter(e, this.$data, true).forEach(error => {
             this.$notify({
               title: error,

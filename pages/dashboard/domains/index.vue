@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="!domains.length" title="هنوز دامنه‌ای اضافه نشده !">
-        <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
+    <f-empty v-if="!domains" title="هنوز دامنه‌ای اضافه نشده !">
+      <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </f-empty>
     <div class="images" v-else>
       <div class="row-block">
@@ -36,12 +36,12 @@
             />
           </span>
           <span v-else-if="props.column.field == 'certificate'">
-            <span v-if="props.row.certificate" :data-balloon="FDate(props.row.certificate.created_at)" data-balloon-pos="up">
-              {{FFromDate(props.row.certificate.created_at)}}
-            </span>
-            <span v-else>
-              ندارد
-            </span>
+            <span
+              v-if="props.row.certificate"
+              :data-balloon="FDate(props.row.certificate.created_at)"
+              data-balloon-pos="up"
+            >{{FFromDate(props.row.certificate.created_at)}}</span>
+            <span v-else>ندارد</span>
           </span>
           <span v-else>{{props.formattedRow[props.column.field]}}</span>
         </template>
@@ -87,7 +87,7 @@ export default {
         {
           sortable: false,
           label: "گواهینامه ssl",
-          field: 'certificate'
+          field: "certificate"
         },
         {
           label: "وضعیت",
@@ -117,14 +117,14 @@ export default {
     }
   },
   destroyed() {
-    this.$store.commit('SET_DATA',{data:null,id:'domains'})
+    this.$store.commit("SET_DATA", { data: null, id: "domains" });
   },
   methods: {
-    FFromDate(value){
-      return FFromDate(value)
+    FFromDate(value) {
+      return FFromDate(value);
     },
-    FDate(value){
-      return FDate(value)
+    FDate(value) {
+      return FDate(value);
     },
     getDomainStatus({ verified }) {
       return verified ? "در حال استفاده" : "تایید نشده";
@@ -133,9 +133,21 @@ export default {
       return verified ? "success-text" : "error-text";
     },
     verify({ name }) {
+      this.$ga.event({
+        eventCategory: "domain",
+        eventAction: "click btn verify domain",
+        eventLabel: "domain name",
+        eventValue: name
+      });
       this.$router.push(`/dashboard/domains/verification/${name}`);
     },
     remove({ name }) {
+      this.$ga.event({
+        eventCategory: "domain",
+        eventAction: "click btn remove domain",
+        eventLabel: "domain name",
+        eventValue: name
+      });
       this.$alertify(
         {
           title: `دامنه ${name} حذف شود؟`,
@@ -143,24 +155,33 @@ export default {
         },
         status => {
           if (status) {
-            console.log(status);
             this.$store
               .dispatch("removeDomain", name)
               .then(res => {
                 this.$store.dispatch("getDomains");
+                this.$ga.event({
+                  eventCategory: "domain",
+                  eventAction: "remove domain",
+                  eventLabel: "domain name",
+                  eventValue: name
+                });
                 this.$notify({
                   title: res.message,
                   type: "success"
                 });
               })
               .catch(e => {
+                this.$ga.event({
+                  eventCategory: "domain",
+                  eventAction: "fail remove domain",
+                  eventLabel: "domain name",
+                  eventValue: name
+                });
                 this.$notify({
                   title: e.message,
                   type: "error"
                 });
               });
-          } else {
-            console.log("hello");
           }
         }
       );

@@ -114,6 +114,7 @@ export default {
       }
     }
   },
+
   methods: {
     craeteVersions({ version }) {
       this.$router.push(`/dashboard/services/setup`);
@@ -128,6 +129,10 @@ export default {
         : "در حال ساخت ...";
     },
     logs({ version }) {
+      this.$ga.event({
+          eventCategory: 'images-version',
+          eventAction: 'click btn logs version image',
+      })
       this.$router.push(
         `/dashboard/images/${this.$route.params.image}/versions/${version}/logs`
       );

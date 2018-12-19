@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import Log from '../../../../../../components/Dashboard/log/‌index'
+  import Log from '~/components/Dashboard/log/‌index'
   import FInput from '~/components/elements/input'
   import FDate from '~/utils/date'
   export default {
