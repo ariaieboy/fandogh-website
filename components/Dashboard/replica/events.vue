@@ -36,6 +36,7 @@ export default {
   },
     methods:{
     FDate(value,format= ' HH:mm:ss'){
+      if(!value) return ''
       return FDate({date:value,format})
     }
   }
