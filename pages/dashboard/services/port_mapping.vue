@@ -122,9 +122,7 @@ export default {
   },
   methods: {
     async deleteItem(port) {
-      return (this.port_mapping = await this.port_mapping.filter(
-        item => item.port !== port
-      ));
+      return (this.port_mapping = await this.port_mapping.filter(item => item.port !== port));
     },
     remove({ port }) {
       this.$alertify(
@@ -145,6 +143,14 @@ export default {
       );
     },
     addPath() {
+      if(this.port_mapping.filter(p=>p.port === this.port).length > 0) {
+        this.$notify({
+            title: 'نباید مقداره یکسان وارد کنید...!!',
+            time: 4000,
+            type: 'error'
+        });
+        return
+      }
       this.port_mapping.push({
         port: this.port,
         target_port: this.target_port,

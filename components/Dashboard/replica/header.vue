@@ -1,7 +1,9 @@
 <template>
   <div class="replica-header">
-    <label class="font-roboto">{{name}}</label> <i>,</i>
-    <label :class="color">{{state}}</label> <i>,</i>
+    <label class="font-roboto">{{name}}</label>
+    <i>,</i>
+    <label :class="stateColor">{{state | state}}</label>
+    <i>,</i>
     <label>
       <span>کانتینر آماده :</span>
       {{count}}
@@ -15,19 +17,38 @@ export default {
   props: {
     name: {
       type: String,
-      default: "Pod 1"
+      default: ""
     },
-    color :{
+    color: {
       type: String,
-      default: "pending-text"   // error-text , success-text
+      default: "pending-text" // error-text , success-text
     },
     state: {
-      type: String,
-      default: "در حال انجام"
+      // type: Number,
+      default: ""
     },
     count: {
-      type: String,
-      default: "2"
+      type: Number,
+      default: ""
+    }
+  },
+  filters: {
+    state(value) {
+      if (!value) return "";
+      return value === "Running"
+        ? "در حال اجرا"
+        : value === "Pendding"
+        ? "درحال ساخت"
+        : "نا مشخص";
+    }
+  },
+  computed: {
+    stateColor() {
+      return this.state === "Running"
+        ? "pending-text"
+        : value === "Pendding"
+        ? "success-text"
+        : "error-text";
     }
   }
 };
@@ -35,11 +56,11 @@ export default {
 <style lang="stylus" scoped>
 .replica-header
   display flex
-  label 
+  label
     margin-left 15px
-    font-size: 14px;
-    text-align: right;
-    color: rgb(79, 79, 79);
-  i 
+    color rgb(79, 79, 79)
+    text-align right
+    font-size 14px
+  i
     margin-left 15px
 </style>

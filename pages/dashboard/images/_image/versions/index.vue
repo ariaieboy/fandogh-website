@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper-image">
     <f-empty v-if="!versions.length" title="هنوز ورژنی اضافه نشده !">
-       <f-button
-          styles="red"
-          @onClick="$router.push('/dashboard/images/front/versions/create')"
-        >افزودن ورژن</f-button>
+      <f-button
+        styles="red"
+        @onClick="$router.push('/dashboard/images/front/versions/create')"
+      >افزودن ورژن</f-button>
     </f-empty>
     <div class="images" v-else>
       <div class="row-block">
@@ -53,11 +53,13 @@ import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store, route }) {
+  async asyncData({ store, route, redirect }) {
     try {
       await store.dispatch("getImageVersions", route.params.image);
     } catch (e) {
-      console.log(e);
+      if (e.status === 401) {
+        redirect("/user/login");
+      }
     }
   },
   data() {
@@ -130,9 +132,9 @@ export default {
     },
     logs({ version }) {
       this.$ga.event({
-          eventCategory: 'images-version',
-          eventAction: 'click btn logs version image',
-      })
+        eventCategory: "images-version",
+        eventAction: "click btn logs version image"
+      });
       this.$router.push(
         `/dashboard/images/${this.$route.params.image}/versions/${version}/logs`
       );
