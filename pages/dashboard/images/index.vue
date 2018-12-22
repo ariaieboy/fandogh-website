@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="!images" title="هنوز ایمیجی اضافه نشده !">
+    <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
     </f-empty>
     <div class="images" v-else>

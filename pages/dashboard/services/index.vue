@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="!services" title="هنوز سرویسی اضافه نشده !">
+    <f-empty v-if="!services || !services.length" title="هنوز سرویسی اضافه نشده !">
       <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
     </f-empty>
     <div class="images" v-else>

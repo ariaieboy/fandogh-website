@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="!domains" title="هنوز دامنه‌ای اضافه نشده !">
+    <f-empty v-if="!domains || !domains.length" title="هنوز دامنه‌ای اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </f-empty>
     <div class="images" v-else>
