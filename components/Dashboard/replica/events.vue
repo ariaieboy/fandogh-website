@@ -17,7 +17,7 @@
           <td>{{item.message}}</td>
           <td>{{item.count}}</td>
           <!-- <td>2018-10-03</td> -->
-          <td>{{item.last_timestamp}}</td>
+          <td>{{FDate(item.last_timestamp)}}</td>
         </tr>
       </tbody>
     </table>
@@ -25,11 +25,18 @@
 </template>
 
 <script>
+import FDate from "~/utils/date";
+
 export default {
   name: "replica-events",
   props:{
     items:{
       type:Array,
+    }
+  },
+    methods:{
+    FDate(value,format= ' HH:mm:ss'){
+      return FDate({date:value,format})
     }
   }
 };

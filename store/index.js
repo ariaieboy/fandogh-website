@@ -20,6 +20,7 @@ const createStore = () => {
         message: '',
         progress: 0,
         services: null,
+        service:null,
         user:{
           token: null
         },

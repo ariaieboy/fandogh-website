@@ -76,12 +76,12 @@ table.vgt-table td.ellipsis span {
     width: 100px;
   }
   .is-small table.vgt-table th span {
-    font-size: 14px;
+    font-size: 12px;
     text-overflow: ellipsis;
     overflow: hidden;
     display: inline-block;
     white-space: nowrap;
-    width: 100px;
+    width: 120px;
   }
 }
 @media (max-width: 768px) {

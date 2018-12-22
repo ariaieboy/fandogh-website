@@ -79,7 +79,6 @@ import FReplicaHeader from "~/components/Dashboard/replica/header";
 import FReplicaDetails from "~/components/Dashboard/replica/details";
 import FReplicaContainers from "~/components/Dashboard/replica/containers";
 import FReplicaEvents from "~/components/Dashboard/replica/events";
-import FDate from "~/utils/date";
 
 export default {
   layout: "dashboard",
@@ -118,98 +117,21 @@ export default {
       data: [{ name: "NODE_ENV", value: "Production" }]
     };
   },
-  async asyncData({ store, route, redirect }) {
+  async asyncData({ store, route, redirect, params }) {
     try {
-      await store.dispatch("getServices");
+      await store.dispatch("getServicesName", { name: params.id });
     } catch (e) {
       if (e.status === 401) {
         redirect("/user/login");
       }
     }
   },
+  destroyed() {
+    this.$store.commit("SET_DATA", { data: null, id: "service" });
+  },
   computed: {
     service() {
-      return {
-        state: "RUNNING",
-        url: "https://front-salameno.fandogh.cloud",
-        urls: ["https://front-salameno.fandogh.cloud"],
-        name: "front",
-        start_date: "2018-11-07T08:45:39Z",
-        last_update: "2018-12-19T12:15:15Z",
-        service_type: "external",
-        pods: [
-          {
-            containers: [
-              {
-                ready: true,
-                waiting: null,
-                name: "front",
-                image: "registry.fandogh.cloud/salameno/front:63"
-              }
-            ],
-            events: [
-              {
-                count: 1,
-                last_timestamp: "2018-12-19T12:15:15Z",
-                reason: "Scheduled",
-                first_timestamp: "2018-12-19T12:15:15Z",
-                kind: null,
-                message:
-                  "Successfully assigned salameno/front-77bcdc8d75-h7n7r to fandogh-k8s-node01"
-              },
-              {
-                count: 1,
-                last_timestamp: "2018-12-19T12:15:16Z",
-                reason: "Pulling",
-                first_timestamp: "2018-12-19T12:15:16Z",
-                kind: null,
-                message:
-                  'pulling image "registry.fandogh.cloud/salameno/front:63"'
-              },
-              {
-                count: 1,
-                last_timestamp: "2018-12-19T12:15:44Z",
-                reason: "Pulled",
-                first_timestamp: "2018-12-19T12:15:44Z",
-                kind: null,
-                message:
-                  'Successfully pulled image "registry.fandogh.cloud/salameno/front:63"'
-              },
-              {
-                count: 1,
-                last_timestamp: "2018-12-19T12:15:44Z",
-                reason: "Created",
-                first_timestamp: "2018-12-19T12:15:44Z",
-                kind: null,
-                message: "Created container"
-              },
-              {
-                count: 1,
-                last_timestamp: "2018-12-19T12:15:44Z",
-                reason: "Started",
-                first_timestamp: "2018-12-19T12:15:44Z",
-                kind: null,
-                message: "Started container"
-              }
-            ],
-            name: "front-77bcdc8d75-h7n7r",
-            created_at: "2018-12-19T12:15:15Z",
-            phase: "Running"
-          }
-        ],
-        env: [],
-        memory: "400",
-        volume_mounts: [],
-        volumes: []
-      };
-      // this.$store.state.services;
-      // let item = items[0];
-      // console.log(item)
-      // if (item) {
-      //   // item.memory = `Mi ${item.memory}`;
-      //   // item.start_date = FDate({ date: item.start_date });
-      //   return item;
-      // }
+      return this.$store.state.service;
     }
   }
 };

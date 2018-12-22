@@ -170,6 +170,15 @@ export const getServices = async ({ commit, state }) => {
     return Promise.reject(e);
   }
 };
+export const getServicesName = async ({ commit, state },{name}) => {
+  try {
+    let services = await Request().get(`/api/services/${name}`);
+    commit("SET_DATA", {id:'service',data:services});
+    return services;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
 export const deleteService = async ({ commit, state }, name) => {
   try {
     return await Request().delete(`/api/services/${name}`);

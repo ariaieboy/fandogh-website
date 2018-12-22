@@ -128,6 +128,14 @@ export default {
       );
     },
     addPath() {
+        if(this.volume_mounts.filter(v => v.mount_path === this.mount_path).length > 0) {
+        this.$notify({
+            title: 'نباید مقداره یکسان وارد کنید...!!',
+            time: 4000,
+            type: 'error'
+        });
+        return
+      }
       this.volume_mounts.push({
         mount_path: this.mount_path,
         sub_path: this.sub_path

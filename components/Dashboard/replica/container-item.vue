@@ -10,7 +10,7 @@
     </div>
     <div class="replica-containers-item">
       <strong>وضعیت :</strong>
-      <span :class="color">{{state}}</span>
+      <span :class="stateColor">{{state | state}}</span>
     </div>
   </div>
 </template>
@@ -35,7 +35,18 @@ export default {
       type: String,
       default: "success-text" // error-text , pending-text
     }
-  }
+  },
+  filters: {
+    state(value) {
+      if (!value) return "";
+      return value  ? "آماده شده" : "آماده نشده";
+    }
+  },
+  computed: {
+    stateColor() {
+      return this.state ? "success-text" : "error-text";
+    },
+  },
 };
 </script>
 

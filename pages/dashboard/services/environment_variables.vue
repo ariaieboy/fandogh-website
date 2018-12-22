@@ -124,7 +124,7 @@ export default {
   },
   methods: {
     async removeRow(name) {
-      return (this.env = await this.env.filter(item => item.name !== name));
+      return this.env = await this.env.filter(item => item.name !== name);
     },
     remove({ name }) {
       this.$alertify(
@@ -145,6 +145,14 @@ export default {
       );
     },
     addEnv() {
+      if(this.env.filter(e=> e.name === this.name).length > 0) {
+        this.$notify({
+            title: 'نباید مقداره یکسان وارد کنید...!!',
+            time: 4000,
+            type: 'error'
+        });
+        return
+      }
       let name = this.name;
       let value = this.value;
       let hidden = this.hidden;
