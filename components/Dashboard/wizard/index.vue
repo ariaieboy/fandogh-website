@@ -34,6 +34,7 @@
 <script>
 import FButton from "~/components/elements/button";
 import ErrorReporter from '~/utils/ErrorReporter'
+import {removeValue} from "~/utils/cookie";
 export default {
   data(){
     return {
@@ -107,6 +108,9 @@ export default {
       this.loading = true
       this.$store.dispatch('createServiceManifest').then(res => {
         this.loading = false
+        this.$store.commit('SET_DATA',{id:'manifest',data:{}})
+        removeValue('name')
+        removeValue('versions')
         this.$router.push('/dashboard/services')
       }).catch(e => {
         this.loading = false

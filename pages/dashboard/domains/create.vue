@@ -40,8 +40,6 @@
     },
     methods:{
       createDomain(){
-        let pattern = '^[a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}$'
-        if( !FormValidator(this.$data, {name: {required: true, pattern, name: 'نام دامنه'}} )) return false
         this.loading = true
         this.$store.dispatch('createDomain', this.$data).then(res => {
           this.$notify({
