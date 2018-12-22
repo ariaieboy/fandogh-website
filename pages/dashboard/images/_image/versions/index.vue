@@ -83,7 +83,8 @@ export default {
         {
           label: "وضعیت",
           sortable: false,
-          field: "state"
+          field: "state",
+          tdClass: this.getClass,
         },
         {
           label: "مدیریت",
@@ -118,6 +119,13 @@ export default {
   },
 
   methods: {
+    getClass({ state }) {
+        return state === "خطا"
+        ? "error-text"
+        : state === "ساخته شده"
+        ? "success-text"
+        : "pending-text";
+    },
     craeteVersions({ version }) {
       this.$router.push(`/dashboard/services/setup`);
       setValue({ key: "versions", value: version });
