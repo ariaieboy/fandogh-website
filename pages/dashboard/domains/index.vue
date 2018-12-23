@@ -178,7 +178,7 @@ export default {
                   eventValue: name
                 });
                 this.$notify({
-                  title: e.message,
+                  title: e.data.message,
                   type: "error"
                 });
               });

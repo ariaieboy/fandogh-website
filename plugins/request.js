@@ -22,6 +22,14 @@ export default function request (params, options) {
         return Promise.reject(e.response.data.message ? e.response.data.message : e.response.data)
       }
     },
+    put: async (url, body, config) => {
+      try {
+        const {data} = await service(params, options).put(url, body, config)
+        return data
+      } catch (e){
+        return Promise.reject(e.response.data.message ? e.response.data.message : e.response.data)
+      }
+    },
     patch: async (url, body) => {
       try {
         const {data} = await service(params, options).patch(url, body)

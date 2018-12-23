@@ -31,7 +31,7 @@
           event="disabled"
           @click.native="closeMenu('/dashboard/secret')"
           :to="{path:'/dashboard/secret'}"
-        ><img src="./icons/private.svg" /> سکرت‌ها </router-link>
+        ><img src="./icons/strongbox.svg" /> سکرت‌ها </router-link>
       </li>
       
       <li>
