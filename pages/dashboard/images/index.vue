@@ -175,7 +175,7 @@ export default {
               })
               .catch(e => {
                 this.$notify({
-                  title: e.message,
+                  title: e.data.message,
                   type: "error"
                 });
                 this.$ga.event({

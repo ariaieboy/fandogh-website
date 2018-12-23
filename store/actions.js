@@ -283,8 +283,15 @@ export const getSecret = async ({ commit, state }) => {
 };
 export const deleteSecret = async ({ commit, state }, name) => {
   try {
-    // return await Request().delete(`/api/services/${name}`);
+    return await Request().delete(`/api/secrets/${name}`);
   } catch (e) {
     return Promise.reject(e);
   }
 };
+export const putSecret = async ({ commit, state }, {name,type,fields}) => {
+  try {
+    return await Request().put(`/api/secrets/${name}`,{name,type,fields});
+  } catch (e) {
+    return Promise.reject(e);
+  }
+}; 

@@ -9,8 +9,12 @@
             </p>
         </div>
         <div class="registration">
-            <f-button path="/user/login" styles="red small login" > ورود </f-button>
-            <f-button path="/user/register" styles="blue small" > ثبت نام </f-button>
+            
+            <f-button v-if="!loggedIn" path="/user/login" styles="red small login" > ورود </f-button>
+            <f-button v-if="!loggedIn" path="/user/register" styles="blue small" > ثبت نام </f-button>
+
+            <f-button v-if="loggedIn" @onClick="logout" styles="red small login">خروج</f-button>
+            <f-button v-if="loggedIn" path="/dashboard/images" styles="blue small">داشبورد</f-button>
         </div>
     
     </section>
@@ -25,7 +29,16 @@ export default{
   methods:{
     showModal(modal){
        this.$store.dispatch('showModal', modal)
+    },
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.push("/user/login");
     }
+  },
+  computed:{
+    loggedIn() {
+      return this.$store.state.user.token;
+    },
   }
 }
 </script>

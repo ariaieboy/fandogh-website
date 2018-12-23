@@ -43,10 +43,10 @@ import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store, route ,redirect }) {
+  async asyncData({ store, route, redirect }) {
     try {
-        await store.dispatch("getSecret");  
-     } catch (e) {
+      await store.dispatch("getSecret");
+    } catch (e) {
       if (e.status === 401) {
         redirect("/user/login");
       }
@@ -71,7 +71,7 @@ export default {
           sortable: false,
           field: "created_at"
         },
-       
+
         {
           label: "مدیریت",
           sortable: false,
@@ -85,16 +85,14 @@ export default {
     secrets() {
       let secrets = this.$store.state.secrets;
       if (secrets) {
-        return secrets.map(
-          ({ memory, created_at, name, type, state }) => {
-            return {
-              name,
-              type: type,
-              memory: `Mi ${memory}`,
-              created_at: FFromDate(created_at)
-            };
-          }
-        );
+        return secrets.map(({ memory, created_at, name, type, state }) => {
+          return {
+            name,
+            type: type,
+            memory: `Mi ${memory}`,
+            created_at: FFromDate(created_at)
+          };
+        });
       }
     }
   },
@@ -105,16 +103,22 @@ export default {
     FEmpty
   },
   methods: {
-    edit(){
-
+    edit({ name }) {
+      this.$ga.event({
+        eventCategory: "secret",
+        eventAction: "click btn edit secret",
+        eventLabel: "secret name",
+        eventValue: name
+      });
+      this.$router.push(`/dashboard/secret/edit/${name}`);
     },
     remove({ name }) {
       this.$ga.event({
-          eventCategory: "secret",
-          eventAction: "click btn remove secret",
-          eventLabel: "secret name",
-          eventValue: name
-        });
+        eventCategory: "secret",
+        eventAction: "click btn remove secret",
+        eventLabel: "secret name",
+        eventValue: name
+      });
       this.$alertify(
         {
           title: `سرویس ${name} حذف شود؟`,
@@ -125,17 +129,18 @@ export default {
             this.$store
               .dispatch("deleteSecret", name)
               .then(res => {
-                this.$store.dispatch("getSecrets");
-                  this.$ga.event({
-                      eventCategory: "secret",
-                      eventAction: "remove secret",
-                      eventLabel: "secret name",
-                      eventValue: name
-                    });
+                this.$store.dispatch("getSecret");
                 this.$notify({
                   title: res.message,
                   type: "success"
                 });
+                this.$ga.event({
+                  eventCategory: "secret",
+                  eventAction: "remove secret",
+                  eventLabel: "secret name",
+                  eventValue: name
+                });
+               
               })
               .catch(e => {
                 this.$ga.event({
@@ -145,14 +150,14 @@ export default {
                   eventValue: name
                 });
                 this.$notify({
-                  title: e.message,
+                  title: e.data.message,
                   type: "error"
                 });
               });
           }
         }
       );
-    },
+    }
   }
 };
 </script>
