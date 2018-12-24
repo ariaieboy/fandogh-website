@@ -170,10 +170,19 @@ export const getServices = async ({ commit, state }) => {
     return Promise.reject(e);
   }
 };
-export const getServicesName = async ({ commit, state },{name}) => {
+export const getServiceLog = async ({ commit, state },{name}) => {
+  try {
+    let logs = await Request().get(`/api/services/${name}/logs`);
+    commit("SET_DATA", {data:logs,id:'serviceLog'});
+    return logs;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+export const getServicesName = async ({ commit, state }, { name }) => {
   try {
     let services = await Request().get(`/api/services/${name}`);
-    commit("SET_DATA", {id:'service',data:services});
+    commit("SET_DATA", { id: "service", data: services });
     return services;
   } catch (e) {
     return Promise.reject(e);
@@ -204,6 +213,15 @@ export const getDomains = async ({ commit, state }) => {
     return Promise.reject(e);
   }
 };
+export const getDomain = async ({ commit, state }, { name }) => {
+  try {
+    let domain = await Request().get(`/api/domains/${name}`);
+    commit("SET_DATA", { data: domain, id: "domain" });
+    return domains;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
 
 export const createDomain = async ({ commit, state }, form) => {
   try {
@@ -215,6 +233,20 @@ export const createDomain = async ({ commit, state }, form) => {
 export const verificationDomain = async ({ commit, state }, { name }) => {
   try {
     return await Request().post(`/api/domains/${name}/verifications`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+export const certificateDomain = async ({ commit, state }, { name }) => {
+  try {
+    return await Request().post(`/api/domains/${name}/certificate`);
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+export const removeCertificateDomain = async ({ commit, state }, { name }) => {
+  try {
+    return await Request().delete(`/api/domains/${name}/certificate`);
   } catch (e) {
     return Promise.reject(e);
   }
@@ -252,20 +284,21 @@ export const getNameSpace = async ({ commit, state }, namespace) => {
   }
 };
 
-export const TOGGLE_NAV = ({ commit, state }, {data}) => {
+export const TOGGLE_NAV = ({ commit, state }, { data }) => {
   commit("SET_DATA", { data: data, id: "sidebar" });
 };
 
-
-export const SET_SIZE = ({ commit, state }, {width,height}) => {
+export const SET_SIZE = ({ commit, state }, { width, height }) => {
   commit("SET_DATA", { data: height, id: "windowHeight" });
   commit("SET_DATA", { data: width, id: "windowWidth" });
 };
 
-
-export const createSecret = async ({ commit, state },{name,type,fields}) => {
+export const createSecret = async (
+  { commit, state },
+  { name, type, fields }
+) => {
   try {
-    let secret = await Request().post(`/api/secrets`,{name,type,fields});
+    let secret = await Request().post(`/api/secrets`, { name, type, fields });
     return secret;
   } catch (e) {
     return Promise.reject(e);
@@ -275,7 +308,7 @@ export const createSecret = async ({ commit, state },{name,type,fields}) => {
 export const getSecret = async ({ commit, state }) => {
   try {
     let secret = await Request().get(`/api/secrets`);
-    commit("SET_DATA", {id:'secrets',data:secret});
+    commit("SET_DATA", { id: "secrets", data: secret });
     return secret;
   } catch (e) {
     return Promise.reject(e);
@@ -288,10 +321,10 @@ export const deleteSecret = async ({ commit, state }, name) => {
     return Promise.reject(e);
   }
 };
-export const putSecret = async ({ commit, state }, {name,type,fields}) => {
+export const putSecret = async ({ commit, state }, { name, type, fields }) => {
   try {
-    return await Request().put(`/api/secrets/${name}`,{name,type,fields});
+    return await Request().put(`/api/secrets/${name}`, { name, type, fields });
   } catch (e) {
     return Promise.reject(e);
   }
-}; 
+};

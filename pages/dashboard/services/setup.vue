@@ -72,7 +72,7 @@
         prevent: true,
         port: "",
         path: "",
-        memory: "",
+        memory: "200",
         allow_http: false,
         domains: "",
         service: "",

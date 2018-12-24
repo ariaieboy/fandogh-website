@@ -94,7 +94,7 @@ export default {
       ],
       port: "",
       target_port: "",
-      protocol: "",
+      protocol: "TCP",
       protocols: [
         {
           title: "TCP"
@@ -145,7 +145,7 @@ export default {
     addPath() {
       if(this.port_mapping.filter(p=>p.port === this.port).length > 0) {
         this.$notify({
-            title: 'نباید مقداره یکسان وارد کنید...!!',
+            title: `شما برای port ${this.port} مقدار تعریف کرده اید.`,
             time: 4000,
             type: 'error'
         });

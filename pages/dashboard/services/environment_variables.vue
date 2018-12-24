@@ -91,7 +91,7 @@ export default {
           tdClass: 'ellipsis'
         },
         {
-          label: "مخفی",
+          label: "عدم نمایش مقدار",
           sortable: false,
           field: "hidden"
         },
@@ -147,7 +147,7 @@ export default {
     addEnv() {
       if(this.env.filter(e=> e.name === this.name).length > 0) {
         this.$notify({
-            title: 'نباید مقداره یکسان وارد کنید...!!',
+            title: `شما برای متغییر ${this.name} مقدار تعریف کرده اید.`,
             time: 4000,
             type: 'error'
         });
@@ -157,6 +157,9 @@ export default {
       let value = this.value;
       let hidden = this.hidden;
       this.env.push({ name, value, hidden });
+       this.name = ''
+       this.value = ''
+       this.hidden = false
     },
     nextStep() {
       this.$router.push("/dashboard/services/create/step4");

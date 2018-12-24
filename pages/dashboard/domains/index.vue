@@ -29,6 +29,20 @@
               label="تایید"
             />
             <action-button
+              v-if="!props.row.certificate"
+              class="action-button-m"
+              @onClick="certificateDomain(props.row)"
+              icon="ic-add.svg"
+              label="درخواست ssl"
+            />
+            <action-button
+              v-if="props.row.certificate"
+              class="action-button-m"
+              @onClick="removeCertificateDomain(props.row)"
+              icon="ic-delete.svg"
+              label="حذف ssl"
+            />
+            <action-button
               class="action-button-m"
               @onClick="remove(props.row)"
               icon="ic-delete.svg"
@@ -43,6 +57,11 @@
             >{{FFromDate(props.row.certificate.created_at)}}</span>
             <span v-else>ندارد</span>
           </span>
+          <span v-else-if="props.column.field == 'service'">
+            <span v-if="props.row.service">{{props.row.service}}</span>
+            <span v-else>ندارد</span>
+          </span>
+          <span v-else-if="props.column.field == 'created_at'">{{FDate(props.row.created_at)}}</span>
           <span v-else>{{props.formattedRow[props.column.field]}}</span>
         </template>
       </vue-good-table>
@@ -58,6 +77,7 @@ import FFromDate from "~/utils/fromDate";
 import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
+import ErrorReporter from "~/utils/ErrorReporter";
 
 export default {
   layout: "dashboard",
@@ -78,6 +98,11 @@ export default {
           label: "نام دامنه",
           field: "name",
           tdClass: "ellipsis"
+        },
+        {
+          sortable: false,
+          label: "تاریخ ساخت",
+          field: "created_at"
         },
         {
           sortable: false,
@@ -140,6 +165,98 @@ export default {
         eventValue: name
       });
       this.$router.push(`/dashboard/domains/verification/${name}`);
+    },
+    certificateDomain({ name }) {
+      this.$ga.event({
+        eventCategory: "domain",
+        eventAction: "click btn certificate domain",
+        eventLabel: "domain name",
+        eventValue: name
+      });
+      this.$store
+        .dispatch("certificateDomain", { name })
+        .then(res => {
+          this.$store.dispatch("getDomains");
+          this.$ga.event({
+            eventCategory: "domain",
+            eventAction: "send certificate domain",
+            eventLabel: "domain name",
+            eventValue: name
+          });
+          this.$notify({
+            title: 'درخواست شما با موفقیت ثبت شد',
+            type: "success"
+          });
+        })
+        .catch(e => {
+          this.$ga.event({
+            eventCategory: "domain",
+            eventAction: "fail certificate domain",
+            eventLabel: "domain name",
+            eventValue: name
+          });
+          
+          // this notify for themploery 
+          if (typeof e === "object") {
+             this.$notify({
+              title: e.domain_name[0],
+              time: 4000,
+              type: "error"
+            });
+          } else {
+             this.$notify({
+              title: ErrorReporter(e, this.$data),
+              time: 4000,
+              type: "error"
+            });
+          
+          }
+        });
+    },
+    removeCertificateDomain({ name }) {
+      this.$ga.event({
+        eventCategory: "domain",
+        eventAction: "click btn remove certificate domain",
+        eventLabel: "domain name",
+        eventValue: name
+      });
+      this.$alertify(
+        {
+          title: `حذف گواهی SLL`,
+          description: `آیا از حذف SSL دامنه ${name} مطمئن هستید؟`
+        },
+        status => {
+          if (status) {
+            this.$store
+              .dispatch("removeCertificateDomain", {name})
+              .then(res => {
+                this.$store.dispatch("getDomains");
+                this.$ga.event({
+                  eventCategory: "domain",
+                  eventAction: "remove ssl domain",
+                  eventLabel: "domain name",
+                  eventValue: name
+                });
+                this.$notify({
+                  title: res.message,
+                  type: "success"
+                });
+              })
+              .catch(e => {
+                this.$ga.event({
+                  eventCategory: "domain",
+                  eventAction: "fail remove ssl domain",
+                  eventLabel: "domain name",
+                  eventValue: name
+                });
+                this.$notify({
+                  title: e.data.message,
+                  type: "error"
+                });
+              });
+          }
+        }
+      );
     },
     remove({ name }) {
       this.$ga.event({

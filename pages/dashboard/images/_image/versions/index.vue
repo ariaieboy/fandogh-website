@@ -29,7 +29,7 @@
             <action-button
               class="action-button-s"
               @onClick="logs(props.row)"
-              icon="ic-add.svg"
+              icon="ic-logs.svg"
               label="مشاهده لاگ"
             />
           </span>
