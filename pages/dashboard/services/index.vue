@@ -16,9 +16,15 @@
           <span v-if="props.column.field == 'action'">
             <action-button
               class="action-button-s"
-              @onClick="logs(props.row)"
+              @onClick="details(props.row)"
               icon="ic-logs.svg"
               label="مشاهده جزییات"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="logs(props.row)"
+              icon="ic-logs.svg"
+              label="مشاهده لاگ"
             />
             <action-button
               class="action-button-s"
@@ -158,14 +164,23 @@ export default {
         }
       );
     },
-    logs({ name }) {
+    details({ name }) {
       this.$ga.event({
             eventCategory: 'service',
-            eventAction: 'click btn detail service',
+            eventAction: 'click btn details service',
             eventLabel:'service name',
             eventValue:name
       })
       this.$router.push(`/dashboard/services/${name}`);
+    },
+    logs({ name }) {
+      this.$ga.event({
+            eventCategory: 'service',
+            eventAction: 'click btn logs service',
+            eventLabel:'service name',
+            eventValue:name
+      })
+      this.$router.push(`/dashboard/services/${name}/logs`);
     }
   }
 };

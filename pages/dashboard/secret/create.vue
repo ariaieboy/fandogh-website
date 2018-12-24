@@ -103,6 +103,8 @@ export default {
   },
   methods: {
     createSecret() {
+      if (!FormValidator(this.$data, { username: { required: true }  ,  password: { required: true } ,  name: { required: true } }))
+        return false;
       this.loading = true;
       this.$store
         .dispatch("createSecret", {

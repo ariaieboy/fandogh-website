@@ -80,6 +80,7 @@ export default {
     flex-flow wrap row
     justify-content center
     align-items center
+    flex-direction column
     margin-top -80px
     width 400px
     height 400px

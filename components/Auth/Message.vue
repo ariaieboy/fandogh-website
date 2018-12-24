@@ -21,6 +21,7 @@
     mounted(){
         this.$refs.modal.$on('onOverlay', function () {
           this.$store.dispatch('showModal', false)
+          this.$store.dispatch('setMessage', null)
         })
     },
     methods:{

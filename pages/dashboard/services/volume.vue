@@ -112,8 +112,8 @@ export default {
     remove({ mount_path }) {
       this.$alertify(
         {
-          title: `متغییر ${mount_path} حذف شود؟`,
-          description: " آیا از حذف شدن valume خود مطمئن هستید؟"
+          title: `حذف ${mount_path}`,
+          description: " آیا از حذف شدن volume خود مطمئن هستید؟"
         },
         status => {
           if (status) {
@@ -130,7 +130,7 @@ export default {
     addPath() {
         if(this.volume_mounts.filter(v => v.mount_path === this.mount_path).length > 0) {
         this.$notify({
-            title: 'نباید مقداره یکسان وارد کنید...!!',
+            title: `شما برای متغییر ${this.mount_path} مقدار تعریف کرده اید.`,
             time: 4000,
             type: 'error'
         });
@@ -140,6 +140,8 @@ export default {
         mount_path: this.mount_path,
         sub_path: this.sub_path
       });
+      this.mount_path = ''
+      this.sub_path = ''
     }
   },
   watch: {

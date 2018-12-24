@@ -28,9 +28,9 @@ import FTextarea from "~/components/Dashboard/textarea";
 import FLable from "~/components/Dashboard/label";
 
 export default {
-  async asyncData({ store, dispatch, redirect }) {
+  async asyncData({ store, dispatch, redirect , params }) {
     try {
-      await store.dispatch("getDomains");
+      await store.dispatch("getDomain",{name:params.name});
     } catch (e) {
       if (e.status === 401) {
         redirect("/user/login");
@@ -47,11 +47,7 @@ export default {
   },
   computed: {
     domain() {
-      if (!this.name) return null;
-      let domain = this.$store.state.domains.find(domain => {
-        return domain.name === this.name;
-      });
-      return domain ? domain : {};
+      return this.$store.state.domain
     }
   },
   layout: "dashboard",
