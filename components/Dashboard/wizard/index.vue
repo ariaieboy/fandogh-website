@@ -3,13 +3,14 @@
       <div class="wizard-progress">
          <div class="wizard-progress-steps">
              <div class="step-container" v-for="(step, index) in _steps" :class="{'current': index === current_state, 'before': index < current_state}">
-                 <div class="step"  >
+                 <div class="step">
                      <router-link  :to="prevent ? $route.fullPath : step.path">
                  <span>
-                     {{index+1}}
+                     {{(index+1).toLocaleString("fa-EG")}}
                  </span>
                      </router-link>
-                     <p v-if="index === current_state">
+                     <!-- current_state -->
+                     <p>
                          {{step.title}}
                      </p>
                  </div>
