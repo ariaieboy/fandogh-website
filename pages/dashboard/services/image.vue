@@ -14,13 +14,13 @@
                         <div class="col-sm-8 col-xs-12">
                             <div  class="fandogh-form-group">
                                 <label>نام ایمیج</label>
-                                <f-select v-model="image" title="نام ایمیج را انتخاب کنید" :options="images"  styles="input-white input-block input-dashboard" placeholder="نام ایمیج را انتخاب کنید"> </f-select>
+                                <f-select tabindex="1" v-model="image" title="نام ایمیج را انتخاب کنید" :options="images"  styles="input-white input-block input-dashboard" placeholder="نام ایمیج را انتخاب کنید"> </f-select>
                             </div>
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <div class="fandogh-form-group"  >
                                  <label>ورژن ایمیج</label>
-                                <f-select v-model="version" title="ورژن " :options="versions"  styles="input-white input-block input-dashboard" placeholder="ورژن ایمیج را انتخاب کنید"> </f-select>
+                                <f-select  tabindex="2" v-model="version" title="ورژن " :options="versions"  styles="input-white input-block input-dashboard" placeholder="ورژن ایمیج را انتخاب کنید"> </f-select>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
 
                     <div  class="fandogh-form-group">
                         <label>Image Pull Policy</label>
-                        <f-select v-model="image_pull_policy"  styles="input-white input-block input-dashboard" :options="[{title: 'Always'}, {title: 'IfNotPresent'}]"  placeholder="Image Pull Policy"> </f-select>
+                        <f-select tabindex="3" v-model="image_pull_policy"  styles="input-white input-block input-dashboard" :options="[{title: 'Always'}, {title: 'IfNotPresent'}]"  placeholder="Image Pull Policy"> </f-select>
                     </div>
 
                     <div  class="fandogh-form-group">

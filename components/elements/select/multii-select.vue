@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown">
-    <div @click="toggle" class="dropdown-container">
+    <div :tabindex="tabindex" @focus="show=true"  @blur="show=false" class="dropdown-container">
       <div class="dropdown--arrow">
         <img v-if="!show" src="./images/arrow-d.svg">
         <img v-if="show" src="./images/arrow-u.svg">
@@ -20,7 +20,7 @@
     <div v-show="show" class="dropdown-selector">
       <ul>
         <li v-for="option in options">
-          <a @click.prevent="selectOption(option)" href="#">{{option.title}}</a>
+          <a @focus="selectOption(option)" href="#">{{option.title}}</a>
         </li>
       </ul>
     </div>
@@ -32,6 +32,9 @@ export default {
   props: {
     value: {
       default: ""
+    },
+    tabindex: {
+      default: "1"
     },
     options: {
       default: []
