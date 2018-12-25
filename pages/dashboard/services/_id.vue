@@ -28,7 +28,7 @@
           </div>
         </div>-->
       </div>
-      <div class="col-md-6 col-xs-12">
+      <div class="col-md-6 col-xs-12" v-if="windowWidth >= 992">
         <div class="table-title font-roboto">ENV</div>
         <vue-good-table :columns="header" :rows="service.env" :rtl="true" styleClass="vgt-table">
           <div slot="emptystate">
@@ -63,6 +63,14 @@
             </div>
           </f-collaps>
         </div>
+      </div>
+        <div class="col-md-6 col-xs-12" v-if="windowWidth <= 992">
+        <div class="table-title font-roboto">ENV</div>
+        <vue-good-table :columns="header" :rows="service.env" :rtl="true" styleClass="vgt-table">
+          <div slot="emptystate">
+            <p class="empty-table center">دیتایی وجود ندارد</p>
+          </div>
+        </vue-good-table>
       </div>
     </div>
   </div>
@@ -130,6 +138,9 @@ export default {
     this.$store.commit("SET_DATA", { data: null, id: "service" });
   },
   computed: {
+    windowWidth(){
+      return this.$store.state.windowWidth
+    },
     service() {
       return this.$store.state.service;
     }
