@@ -122,8 +122,26 @@ export default {
       this.$store.dispatch("showModal", modal);
     },
     logout() {
-      this.$store.dispatch("logout");
-      this.$router.push("/user/login");
+            this.$alertify(
+        {
+          img: "/icons/exit.svg",
+          title: `خروج از داشبورد`,
+          description: "آیا از خروج مطمئن هستید؟",
+          label:'خروج'
+        },
+        status => {
+          if (!status) return
+          this.$ga.event({
+            eventCategory: "account",
+            eventAction: "user logout dashboard",
+            eventLabel: "username",
+            eventValue: getValue("username")
+          });
+          this.$store.dispatch("logout");
+         this.$router.push("/user/login");
+        }
+      );
+
     }
   }
 };
