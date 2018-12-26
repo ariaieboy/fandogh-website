@@ -8,7 +8,7 @@
             <label>نام متغیر</label>
             <f-input
               v-model="name"
-              styles="input-white input-block input-dashboard"
+              styles="input-white input-block input-dashboard focus"
               placeholder="نام متغیر"
             ></f-input>
           </div>
@@ -21,18 +21,21 @@
             ></f-input>
           </div>
           <div class="flex-space">
-            <div class="flex margin-40" data-balloon-length="medium" data-balloon="با فعال سازی این گزینه مقداره وارد شده نمایش داده نمیشود"
-              data-balloon-pos="down">
-              <f-checkbox v-model="hidden" id="checkbox3" styles="input-light" title="متغییر مخفی"/>
+            <div
+              class="flex margin-40"
+              data-balloon-length="medium"
+              data-balloon="با فعال سازی این گزینه مقداره وارد شده نمایش داده نمیشود"
+              data-balloon-pos="down"
+            >
+              <f-checkbox v-model="hidden" id="checkbox3" styles="input-light" title="مقدار محرمانه"/>
               <span class="field-description"></span>
-              
             </div>
 
             <div class="fandogh-form-group">
               <f-button @onClick="addEnv" styles="transparent black border">افزودن به جدول</f-button>
             </div>
           </div>
-          <div class="fandogh-form-group margin-top-100">
+          <div class="fandogh-form-group margin-top-100 td-medium">
             <div class="table-title font-roboto">Environment Variables</div>
             <vue-good-table :columns="header" :rows="envsData" :rtl="true" styleClass="vgt-table">
               <div slot="emptystate">
@@ -45,6 +48,14 @@
                   </div>
                   <div v-else>
                     <img src="/icons/fail.svg">
+                  </div>
+                </span>
+                <span v-else-if="props.column.field == 'value'">
+                  <div v-if="props.row.hidden">
+                    ********
+                  </div>
+                  <div v-else>
+                    {{props.row.value}}
                   </div>
                 </span>
                 <span v-else-if="props.column.field == 'action'">
@@ -84,16 +95,16 @@ export default {
           label: "نام متغییر",
           sortable: false,
           field: "name",
-          tdClass: 'ellipsis'
+          tdClass: "ellipsis"
         },
         {
           label: "مقدار متغیر",
           sortable: false,
           field: "value",
-          tdClass: 'ellipsis'
+          tdClass: "ellipsis"
         },
         {
-          label: "عدم نمایش مقدار",
+          label: "مقدار محرمانه",
           sortable: false,
           field: "hidden"
         },
@@ -125,43 +136,38 @@ export default {
     }
   },
   methods: {
+    focus(){
+      let elm = document.querySelector('.focus')
+      elm.focus()
+    },
     async removeRow(name) {
-      return this.env = await this.env.filter(item => item.name !== name);
+      return (this.env = await this.env.filter(item => item.name !== name));
     },
     remove({ name }) {
-      this.$alertify(
-        {
-          title: `حذف ENV`,
-          description: `آیا از حذف ${name} مطمئن هستید؟`
-        },
-        status => {
-          if (status) {
-            this.removeRow(name).then(res => {
-              this.$notify({
-                title: "با موفقیت حذف شد",
-                type: "success"
-              });
-            });
-          }
-        }
-      );
+      this.removeRow(name).then(res => {
+        this.$notify({
+          title: "با موفقیت حذف شد",
+          type: "success"
+        });
+      });
     },
     addEnv() {
-      if(this.env.filter(e=> e.name === this.name).length > 0) {
+      this.focus()
+      if (this.env.filter(e => e.name === this.name).length > 0) {
         this.$notify({
-            title: `شما برای متغییر ${this.name} مقدار تعریف کرده اید.`,
-            time: 4000,
-            type: 'error'
+          title: `شما برای متغییر ${this.name} مقدار تعریف کرده اید.`,
+          time: 4000,
+          type: "error"
         });
-        return
+        return;
       }
       let name = this.name;
       let value = this.value;
       let hidden = this.hidden;
-      this.env.push({ name, value, hidden });
-       this.name = ''
-       this.value = ''
-       this.hidden = false
+      this.env.unshift({ name, value, hidden });
+      this.name = "";
+      this.value = "";
+      this.hidden = false;
     },
     nextStep() {
       this.$router.push("/dashboard/services/create/step4");

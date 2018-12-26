@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="domain">
     <h2>ایجاد دامنه</h2>
     <div class="row">
       <div class="col-md-6 col-xs-12">

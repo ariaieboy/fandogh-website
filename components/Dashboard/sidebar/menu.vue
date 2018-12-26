@@ -52,9 +52,13 @@
         </router-link>
       </li>
       <li>
-        <a href="#">
+         <router-link
+          event="disabled"
+          @click.native="closeMenu('/dashboard/account')"
+          :to="{path:'/dashboard/account'}"
+        >
           <img src="./icons/settings.svg"> تنظیمات
-        </a>
+        </router-link>
       </li>
       <li @click="logout">
         <a href="#">

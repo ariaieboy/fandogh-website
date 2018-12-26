@@ -9,7 +9,7 @@ export default {
     styles.forEach(element => classes.push('btn-'+element));
     return <div class="upload-btn-wrapper">
       <label> فایل خود را اینجا آپلود کنید</label>
-      <input onChange={e => rename(e.target.files[0].name)} type="file" id={props.id} />
+      <input  accept=".zip"  onChange={e => rename(e.target.files[0].name)} type="file" id={props.id} />
       <FButton  styles={'blue file'}> Browse </FButton>
     </div>
   }

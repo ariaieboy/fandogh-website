@@ -1,6 +1,6 @@
 <template>
-  <div class="dropdown ">
-    <div :tabindex="tabindex" @focus="show=true"  @blur="show=false"  class="dropdown-container">
+  <div class="dropdown">
+    <div :tabindex="tabindex" @focus="show=true" @blur="show=false" class="dropdown-container">
       <div class="dropdown--arrow">
         <img v-if="!show" src="./images/arrow-d.svg">
         <img v-if="show" src="./images/arrow-u.svg">
@@ -17,7 +17,7 @@
     <div v-show="show" class="dropdown-selector">
       <ul>
         <li v-for="option in options">
-          <a @focus="selectOption(option)"  href="#">{{option.title}}</a>
+          <a @focus="selectOption(option)" href="#">{{option.title}}</a>
         </li>
       </ul>
     </div>
@@ -39,9 +39,9 @@ export default {
     tabindex: {
       default: "1"
     },
-    multiselect :{
-        default:false,
-        type:Boolean
+    multiselect: {
+      default: false,
+      type: Boolean
     },
     select: {
       default: ""
@@ -50,8 +50,7 @@ export default {
   data() {
     return {
       selected: this.select,
-      show: false,
-      
+      show: false
     };
   },
   watch: {
@@ -60,13 +59,13 @@ export default {
     }
   },
   mounted() {
-      if(this.value){
-          this.selected = this.value
-      }
+    if (this.value) {
+      this.selected = this.value;
+    }
   },
   methods: {
     toggle() {
-        this.show = !this.show;
+      this.show = !this.show;
     },
     selectOption(option, noToggle) {
       this.selected = option.title;
@@ -104,6 +103,12 @@ export default {
         display inline-block
         margin-right 16px
         padding 3px
+        span
+          display inline-block
+          overflow hidden
+          max-width 131px
+          text-overflow ellipsis
+          white-space nowrap
     .dropdown--arrow
       cursor pointer
       img
@@ -113,20 +118,21 @@ export default {
         width 16px
         height 10px
   .dropdown-selector
-    box-sizing border-box
-    direction ltr
     position absolute
-    z-index: 1;
+    top 47px
     right 10px
     left 10px
-    top: 47px;
+    z-index 1
+    box-sizing border-box
     border-top none
     border-top-left-radius 0
     border-top-right-radius 0
+    direction ltr
     ul
       li
         a
           display block
+          overflow hidden
           padding 5px 15px
           font-size 12px
           font-family Roboto, sans-serif, yekan
