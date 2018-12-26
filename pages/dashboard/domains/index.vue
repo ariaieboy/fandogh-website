@@ -54,7 +54,8 @@
               v-if="props.row.certificate"
               :data-balloon="FDate(props.row.certificate.created_at)"
               data-balloon-pos="up"
-            >{{FFromDate(props.row.certificate.created_at)}}</span>
+            >{{FFromDate(props.row.certificate.created_at)}}
+            </span>
             <span v-else>ندارد</span>
           </span>
           <span v-else-if="props.column.field == 'service'">
@@ -154,7 +155,7 @@ export default {
       return FFromDate(value);
     },
     FDate(value) {
-      return FDate(value);
+      return FDate({date:value});
     },
     getDomainStatus({ verified }) {
       return verified ? "در حال استفاده" : "تایید نشده";
