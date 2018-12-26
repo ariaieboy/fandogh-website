@@ -81,15 +81,7 @@ import ErrorReporter from "~/utils/ErrorReporter";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store, route, redirect }) {
-    try {
-      await store.dispatch("getDomains");
-    } catch (e) {
-      if (e.status === 401) {
-        redirect("/user/login");
-      }
-    }
-  },
+
   data() {
     return {
       header: [
@@ -144,7 +136,20 @@ export default {
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "domains" });
   },
+   created() {
+    this.getData();
+  },
   methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getDomains");
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
+
     FFromDate(value) {
       return FFromDate(value);
     },

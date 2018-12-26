@@ -28,15 +28,6 @@ import FTextarea from "~/components/Dashboard/textarea";
 import FLable from "~/components/Dashboard/label";
 
 export default {
-  async asyncData({ store, dispatch, redirect , params }) {
-    try {
-      await store.dispatch("getDomain",{name:params.name});
-    } catch (e) {
-      if (e.status === 401) {
-        redirect("/user/login");
-      }
-    }
-  },
   data() {
     return {
       name: this.$route.params.name,
@@ -57,7 +48,19 @@ export default {
     FTextarea,
     FLable
   },
+  created() {
+    this.getData();
+  },
   methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getDomain",{name:this.$route.params.name});
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
     verify() {
       this.$ga.event({
         eventCategory: "domain",
