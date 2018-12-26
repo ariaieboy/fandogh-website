@@ -2,6 +2,7 @@ import moment from 'moment-jalaali'
 moment.loadPersian()
 
 export default (date) => {
+    console.log(date)
     let now = moment().unix()
     let time = moment(date).unix()
     let fromNow = now - time
