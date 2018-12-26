@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="service">
     <h2>جزییات سرویس</h2>
     <div class="row">
       <div class="col-md-6 col-xs-12">
@@ -125,14 +125,19 @@ export default {
       data: [{ name: "NODE_ENV", value: "Production" }]
     };
   },
-  async asyncData({ store, route, redirect, params }) {
-    try {
-      await store.dispatch("getServicesName", { name: params.id });
-    } catch (e) {
-      if (e.status === 401) {
-        redirect("/user/login");
+  created() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getServicesName", { name: this.$route.params.id });
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
       }
-    }
+    },
   },
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "service" });

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper-image">
-    <f-empty v-if="!versions.length" title="هنوز ورژنی اضافه نشده !">
+    <f-empty v-if="!versions || !versions.length" title="هنوز ورژنی اضافه نشده !">
       <f-button
         styles="red"
         @onClick="$router.push('/dashboard/images/front/versions/create')"
@@ -53,15 +53,6 @@ import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store, route, redirect }) {
-    try {
-      await store.dispatch("getImageVersions", route.params.image);
-    } catch (e) {
-      if (e.status === 401) {
-        redirect("/user/login");
-      }
-    }
-  },
   data() {
     return {
       header: [
@@ -117,8 +108,19 @@ export default {
       }
     }
   },
-
+  created() {
+    this.getData();
+  },
   methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getImageVersions", this.$route.params.image);
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
     getClass({ state }) {
         return state === "خطا"
         ? "error-text"

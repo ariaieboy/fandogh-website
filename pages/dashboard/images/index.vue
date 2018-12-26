@@ -51,15 +51,6 @@ import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
 export default {
   layout: "dashboard",
-  async asyncData({ store, route, redirect }) {
-    try {
-      await store.dispatch("getImages");
-    } catch (e) {
-      if (e.status === 401) {
-        redirect("/user/login");
-      }
-    }
-  },
   data() {
     return {
       header: [
@@ -67,7 +58,6 @@ export default {
           label: "نام دامنه",
           sortable: false,
           field: "name",
-          tdClass: "ellipsis"
         },
         {
           label: "تاریخ ساخت ایمیج",
@@ -94,6 +84,7 @@ export default {
       ]
     };
   },
+ 
   components: {
     FEmpty,
     FTable,
@@ -123,34 +114,46 @@ export default {
     }
   },
   destroyed() {
-    this.$store.commit('SET_DATA',{data:null,id:'images'})
+    this.$store.commit("SET_DATA", { data: null, id: "images" });
+  },
+  created() {
+    this.getData();
   },
   methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getImages");
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
     versions({ name }) {
       this.$ga.event({
-        eventCategory: 'image',
-        eventAction: 'click btn list version image',
+        eventCategory: "image",
+        eventAction: "click btn list version image"
         // eventLabel:'user',
         // eventValue:'userId'
-      })
+      });
       this.$router.push(`/dashboard/images/${name}/versions`);
     },
     createVersion({ name }) {
-       this.$ga.event({
-          eventCategory: 'image',
-          eventAction: 'click btn upload version image',
-          // eventLabel:'user',
-          // eventValue:'userId'
-        })
+      this.$ga.event({
+        eventCategory: "image",
+        eventAction: "click btn upload version image"
+        // eventLabel:'user',
+        // eventValue:'userId'
+      });
       this.$router.push(`/dashboard/images/${name}/versions/create`);
     },
     remove({ name }) {
-       this.$ga.event({
-        eventCategory: 'image',
-        eventAction: 'click btn remove image',
+      this.$ga.event({
+        eventCategory: "image",
+        eventAction: "click btn remove image"
         // eventLabel:'user',
         // eventValue:'userId'
-      })
+      });
       this.$alertify(
         {
           title: "حذف ایمیج",
@@ -161,17 +164,17 @@ export default {
             this.$store
               .dispatch("deleteImage", name)
               .then(res => {
-                this.$store.dispatch("getImages");
+                this.getData();
                 this.$notify({
                   title: res.message,
                   type: "success"
                 });
                 this.$ga.event({
-                    eventCategory: 'image',
-                    eventAction: 'remove image',
-                    // eventLabel:'user',
-                    // eventValue:'userId'
-                  })
+                  eventCategory: "image",
+                  eventAction: "remove image"
+                  // eventLabel:'user',
+                  // eventValue:'userId'
+                });
               })
               .catch(e => {
                 this.$notify({
@@ -179,11 +182,11 @@ export default {
                   type: "error"
                 });
                 this.$ga.event({
-                    eventCategory: 'image',
-                    eventAction: 'canceled remove image',
-                    // eventLabel:'user',
-                    // eventValue:'userId'
-                  })
+                  eventCategory: "image",
+                  eventAction: "canceled remove image"
+                  // eventLabel:'user',
+                  // eventValue:'userId'
+                });
               });
           }
         }

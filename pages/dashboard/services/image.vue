@@ -75,15 +75,6 @@
   import jsyaml from 'js-yaml'
 
   export default {
-    async asyncData({store, route, redirect}){
-      try {
-        await store.dispatch('getImages')
-      } catch (e) {
-        if(e.status === 401){
-          redirect('/user/login')
-        }
-      }
-    },
     data(){
       return {
         replicas: '',
@@ -167,7 +158,20 @@
       },
 
     },
-    methods:{
+
+  created() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getImages");
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
       nextStep(){
         this.$router.push('/dashboard/services/create/step3')
       }

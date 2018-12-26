@@ -13,9 +13,9 @@
       </thead>
       <tbody>
         <tr v-for="item in 3" >
-          <td>{{'item.reason'}}</td>
-          <td>{{'item.message'}}</td>
-          <td>{{'item.count'}}</td>
+          <td>{{item.reason}}</td>
+          <td>{{item.message}}</td>
+          <td>{{item.count}}</td>
           <!-- <td>2018-10-03</td> -->
           <td>{{FDate(item.last_timestamp)}}</td>
         </tr>
@@ -25,7 +25,7 @@
       <tbody v-for="item in 4">
         <tr>
           <td> 
-             {{'item.reason'}}
+             {{item.reason}}
           </td>
           <th>
             Reason
@@ -33,7 +33,7 @@
         </tr>
         <tr>
             <td> 
-                {{'item.message'}}
+                {{item.message}}
             </td>
             <th>
                 Message
@@ -41,7 +41,7 @@
           </tr>
           <tr>
               <td> 
-                {{'item.count'}}
+                {{item.count}}
               </td>
               <th>
                Count

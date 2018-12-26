@@ -26,27 +26,33 @@ import {removeValue} from "~/utils/cookie";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store,params, route, redirect }) {
-    try {
-      await store.dispatch("getServiceLog", {
-        name: params.name,
-      });
-    } catch (e) {
-      redirect("/");
-    }
-  },
   data() {
     return {
       image: "نام سرویس: " + this.$route.params.name,
-      date: "",
       logInterval: null
     };
+  },
+  created() {
+    this.getData();
+  },
+  methods:{
+     getData() {
+      try {
+        this.$store.dispatch("getServiceLog" , {
+          name: this.$route.params.name,
+        });
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    }
   },
   mounted() {
     this.$store.commit('SET_DATA',{id:'manifest',data:{}})
     removeValue('name')
     removeValue('versions')
-    this.date = "تاریخ ساخت: " + FDate({ date: this.builds.last_logged_time });
+    // this.date = "تاریخ ساخت: " + FDate({ date: this.builds.last_logged_time });
     // let state = this.builds.state.toLowerCase();
     // if (state === "building") {
     //   this.logInterval = setInterval(() => {
@@ -67,6 +73,11 @@ export default {
       if (this.builds) {
         if(!this.builds.logs) return
         return this.builds.logs.split("\n");
+      }
+    },
+    date(){
+      if (this.builds) {
+      return "تاریخ ساخت: " + FDate({ date: this.builds.last_logged_time });
       }
     }
   },
