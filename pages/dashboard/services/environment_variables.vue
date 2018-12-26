@@ -131,8 +131,8 @@ export default {
     remove({ name }) {
       this.$alertify(
         {
-          title: `متغییر ${name} حذف شود؟`,
-          description: " آیا از حذف شدن متغییر خود مطمئن هستید؟"
+          title: `حذف ENV`,
+          description: `آیا از حذف ${name} مطمئن هستید؟`
         },
         status => {
           if (status) {

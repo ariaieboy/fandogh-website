@@ -153,8 +153,8 @@ export default {
       })
       this.$alertify(
         {
-          title: "ایمیج حذف شود؟",
-          description: " آیا از حذف شدن ایمیج خود مطمئن هستید؟"
+          title: "حذف ایمیج",
+          description: `آیا از حذف ${name} مطمئن هستید؟`
         },
         status => {
           if (status) {

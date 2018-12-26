@@ -128,8 +128,8 @@ export default {
       })
       this.$alertify(
         {
-          title: `سرویس ${name} حذف شود؟`,
-          description: " آیا از حذف شدن سرویس خود مطمئن هستید؟"
+          title: `حذف سرویس`,
+          description: `آیا از حذف ${name}  مطمئن هستید؟`
         },
         status => {
           if (status) {

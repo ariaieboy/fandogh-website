@@ -127,8 +127,8 @@ export default {
     remove({ port }) {
       this.$alertify(
         {
-          title: `پورت ${port} حذف شود؟`,
-          description: " آیا از حذف شدن پورت خود مطمئن هستید؟"
+          title: `حذف پورت`,
+          description: `آیا از حذف ${port} مطمئن هستید؟`
         },
         status => {
           if (status) {

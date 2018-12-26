@@ -112,8 +112,8 @@ export default {
     remove({ mount_path }) {
       this.$alertify(
         {
-          title: `حذف ${mount_path}`,
-          description: " آیا از حذف شدن volume خود مطمئن هستید؟"
+          title: `حذف Volume Configurations`,
+          description: `آیا از حذف ${mount_path} مطمئن هستید؟`
         },
         status => {
           if (status) {
