@@ -71,9 +71,10 @@ table.vgt-table td.ellipsis span {
   width: 200px;
   text-align: center;
 }
+
 @media (min-width: 992px) {
   .is-small table.vgt-table td.ellipsis span {
-    width: 100px;
+    width: 200px;
   }
   .is-small table.vgt-table th span {
     font-size: 12px;
@@ -82,6 +83,9 @@ table.vgt-table td.ellipsis span {
     display: inline-block;
     white-space: nowrap;
     width: 120px;
+  }
+  .td-medium table.vgt-table td.ellipsis span {
+    width: 100px;
   }
 }
 @media (max-width: 768px) {

@@ -10,6 +10,7 @@
               v-model="mount_path"
               styles="input-white input-block input-dashboard"
               placeholder="Mount Path"
+              name="نام Volume"
             ></f-input>
           </div>
           <div class="fandogh-form-group">
@@ -59,6 +60,7 @@ import MultiSelect from "~/components/Dashboard/multiselect";
 import ErrorReporter from "~/utils/ErrorReporter";
 import Wizard from "~/components/Dashboard/wizard";
 import ActionButton from "~/components/Dashboard/table/action-button";
+import FormValidator from "~/utils/formValidator";
 
 export default {
   layout: "dashboard",
@@ -128,6 +130,7 @@ export default {
       );
     },
     addPath() {
+       if (!FormValidator(this.$data, {mount_path: {required: true,pattern:"^/.*$",msg:'مقدار Volume path را باید به صورت absolute وارد کنید'}})) return;
         if(this.volume_mounts.filter(v => v.mount_path === this.mount_path).length > 0) {
         this.$notify({
             title: `شما برای متغییر ${this.mount_path} مقدار تعریف کرده اید.`,

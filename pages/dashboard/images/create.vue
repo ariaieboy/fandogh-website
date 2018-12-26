@@ -25,7 +25,7 @@
         <file class="file" id="source"/>
       </div>
       <div class="fandogh-form-group margin-top-100">
-        <f-button v-if="!loading" @onClick="createImage" styles="red block">اتمام ساخت</f-button>
+        <f-button v-if="!loading" @onClick="createImage" styles="red block">ایجاد ورژن جدید</f-button>
         <f-button v-if="loading && !loadingProgress" styles="red block">در حال ساخت</f-button>
         <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar>
       </div>
@@ -90,7 +90,7 @@ export default {
         // eventLabel:'user',
         // eventValue:'userId'
       })
-      if ( !FormValidator(this.$data, {name: {required: true,pattern: "^[A-Za-z0-9-_]+$",name: "نام ایمیج"}})) return;
+      if (!FormValidator(this.$data, {name: {required: true,pattern: "^[A-Za-z0-9-_]+$",msg: "لطفا از کاراکتر های مجاز استفاده کنید  : A-Za-z0-9-_"}})) return;
       this.loading = true;
       this.$store
         .dispatch("createImage", { name: this.name })

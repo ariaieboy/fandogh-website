@@ -58,6 +58,7 @@ export default {
           label: "نام دامنه",
           sortable: false,
           field: "name",
+          tdClass: "ellipsis"
         },
         {
           label: "تاریخ ساخت ایمیج",
