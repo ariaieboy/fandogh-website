@@ -1,7 +1,7 @@
 <template>
   <div class="replica-events">
     <h4>رخداد‌ها</h4>
-    <table class="font-roboto">
+    <table class="font-roboto" v-if="windowWidth >= 992">
       <thead>
         <tr>
           <th>Reason</th>
@@ -12,13 +12,48 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items">
-          <td>{{item.reason}}</td>
-          <td>{{item.message}}</td>
-          <td>{{item.count}}</td>
+        <tr v-for="item in 3" >
+          <td>{{'item.reason'}}</td>
+          <td>{{'item.message'}}</td>
+          <td>{{'item.count'}}</td>
           <!-- <td>2018-10-03</td> -->
           <td>{{FDate(item.last_timestamp)}}</td>
         </tr>
+      </tbody>
+    </table>
+    <table class="font-roboto mobile-table" v-else>
+      <tbody v-for="item in 4">
+        <tr>
+          <td> 
+             {{'item.reason'}}
+          </td>
+          <th>
+            Reason
+          </th>
+        </tr>
+        <tr>
+            <td> 
+                {{'item.message'}}
+            </td>
+            <th>
+                Message
+            </th>
+          </tr>
+          <tr>
+              <td> 
+                {{'item.count'}}
+              </td>
+              <th>
+               Count
+             </th>
+          </tr>
+          <!-- <td>2018-10-03</td> -->
+          <tr>
+            <td class="border"> 
+              {{FDate(item.last_timestamp)}}
+            </td>
+            <th class="border">Last Seen</th>
+          </tr>
       </tbody>
     </table>
   </div>
@@ -39,6 +74,11 @@ export default {
       if(!value) return ''
       return FDate({date:value,format})
     }
+  },
+  computed:{
+    windowWidth(){
+      return this.$store.state.windowWidth
+    },
   }
 };
 </script>
@@ -60,4 +100,16 @@ export default {
       color #4f4f4f
       font-size 12px
       padding 5px 0
+  .mobile-table
+    text-align left
+    .border
+      border-bottom:1pt solid black;
+    th
+      width 150px
+      border none
+    tbody:last-child
+      .border 
+        border-bottom none
+
+    
 </style>

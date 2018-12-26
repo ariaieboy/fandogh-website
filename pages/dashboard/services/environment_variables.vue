@@ -21,9 +21,11 @@
             ></f-input>
           </div>
           <div class="flex-space">
-            <div class="flex margin-40">
+            <div class="flex margin-40" data-balloon-length="medium" data-balloon="با فعال سازی این گزینه مقداره وارد شده نمایش داده نمیشود"
+              data-balloon-pos="down">
               <f-checkbox v-model="hidden" id="checkbox3" styles="input-light" title="متغییر مخفی"/>
               <span class="field-description"></span>
+              
             </div>
 
             <div class="fandogh-form-group">
@@ -129,8 +131,8 @@ export default {
     remove({ name }) {
       this.$alertify(
         {
-          title: `متغییر ${name} حذف شود؟`,
-          description: " آیا از حذف شدن متغییر خود مطمئن هستید؟"
+          title: `حذف ENV`,
+          description: `آیا از حذف ${name} مطمئن هستید؟`
         },
         status => {
           if (status) {

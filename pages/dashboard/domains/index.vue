@@ -267,8 +267,8 @@ export default {
       });
       this.$alertify(
         {
-          title: `دامنه ${name} حذف شود؟`,
-          description: " آیا از حذف شدن دامنه خود مطمئن هستید؟"
+          title: `حذف دامنه`,
+          description: ` آیا از حذف دامنه ${name} مطمئن هستید؟`
         },
         status => {
           if (status) {

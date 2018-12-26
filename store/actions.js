@@ -44,8 +44,9 @@ export const checkAuthentication = ({ commit, state }, token) => {
   commit("SET_USER", { token: token });
 };
 
-export const logout = async ({ commit, state }) => {
+export const logout = async ({app , commit, state }) => {
   try {
+    
     commit("LOGOUT");
   } catch (e) {
     return Promise.reject(e);

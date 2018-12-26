@@ -2,20 +2,20 @@
   <div>
     <div v-if="display" class="alert">
       <div class="close-modal">
-        <a href="#" @click="$emit('onOverlay')" class="close">
+        <a href="#" @click="onDelete(false)" class="close">
           <img alt="close icon" :src="require('../../../assets/svg/ic_close.svg')">
         </a>
       </div>
       <!-- Modal content -->
       <div class="modal-content">
         <div class="alert-image">
-          <img src="./images/img_delete.svg">
+          <img :src="image">
           <h2>{{options.title}}</h2>
         </div>
         <div class="alert-content">
           <h6>{{options.description}}</h6>
           <div class="margin-20">
-            <f-button styles="alert" @onClick="onDelete(true)">حذف شود</f-button>
+            <f-button styles="alert" @onClick="onDelete(true)">{{label}}</f-button>
           </div>
           <div class="margin-20">
             <f-button styles="blue" @onClick="onDelete(false)">منصرف شدم</f-button>
@@ -32,11 +32,29 @@ import FButton from "~/components/elements/button";
 import Vue from "vue";
 export default {
   props: ["message", "disableOverlay", "noModal"],
+  // 
+  props:{
+    message:{
+      type:String,
+      default:''
+    },
+    disableOverlay:'',
+    noModal:''
+  },
   data() {
     return {
       display: false,
-      options: null
+      options: null,
+      
     };
+  },
+  computed:{
+    image(){
+      return  this.options.img ? this.options.img   : require('./images/img_delete.svg')
+    },
+    label(){
+      return this.options.label || 'حذف شود'
+    }
   },
   created() {
     Vue.prototype.$alertify = this.alert;
@@ -86,8 +104,7 @@ export default {
     height 400px
     border-radius 200px
     background-color rgba(224, 224, 224, 0.2)
-    img
-      width 300px
+   
   .alert-content
     text-align center
     h6
@@ -140,14 +157,13 @@ body
 @media only screen and (max-width: 576px)
   .alert
     margin-top 0
+    .close-modal
+      top 40px
     .modal-content
       margin 5% auto
     .alert-image
       margin -60px auto
-      width 300px
-      height 300px
+      background-color #fff;
       border-radius 150px
-      img
-        width 200px
 </style>
 
