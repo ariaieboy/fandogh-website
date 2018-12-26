@@ -49,15 +49,6 @@ import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store, route, redirect }) {
-    try {
-      await store.dispatch("getServices");
-    } catch (e) {
-      if (e.status === 401) {
-        redirect("/user/login");
-      }
-    }
-  },
   data() {
     return {
       header: [
@@ -118,7 +109,19 @@ export default {
     ActionButton,
     FEmpty
   },
+    created() {
+    this.getData();
+  },
   methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getServices");
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
     remove({ name }) {
       this.$ga.event({
           eventCategory: 'service',
@@ -136,7 +139,7 @@ export default {
             this.$store
               .dispatch("deleteService", name)
               .then(res => {
-                this.$store.dispatch("getServices");
+                this.getData()
                 this.$ga.event({
                     eventCategory: 'service',
                     eventAction: 'remove service',

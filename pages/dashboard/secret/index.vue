@@ -43,15 +43,7 @@ import FEmpty from "~/components/Dashboard/empty";
 
 export default {
   layout: "dashboard",
-  async asyncData({ store, route, redirect }) {
-    try {
-      await store.dispatch("getSecret");
-    } catch (e) {
-      if (e.status === 401) {
-        redirect("/user/login");
-      }
-    }
-  },
+
   data() {
     return {
       header: [
@@ -102,7 +94,19 @@ export default {
     ActionButton,
     FEmpty
   },
+  created() {
+    this.getData();
+  },
   methods: {
+    getData() {
+      try {
+        this.$store.dispatch("getSecret");
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
     edit({ name }) {
       this.$ga.event({
         eventCategory: "secret",
@@ -129,7 +133,7 @@ export default {
             this.$store
               .dispatch("deleteSecret", name)
               .then(res => {
-                this.$store.dispatch("getSecret");
+                this.getData()
                 this.$notify({
                   title: res.message,
                   type: "success"
