@@ -1,23 +1,25 @@
 <template>
   <div class="wrapper">
-    <f-header noFixed="true"/>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="wrapper-col" :class="{'col-lg-2':showHalf , 'col-lg-0':!showHalf}">
-          <admin-sidebar/>
-        </div>
-        <div
-          class="wrapper-col"
-          :class="{'col-xs-12 col-lg-10 pr-120 pl-100 is-small':showHalf,'col-xs-12':!showHalf}"
-        >
-          <div class="dash-container">
-            <nuxt/>
+    <no-ssr>
+      <f-header noFixed="true"/>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="wrapper-col" :class="{'col-lg-2':showHalf , 'col-lg-0':!showHalf}">
+            <admin-sidebar/>
+          </div>
+          <div
+            class="wrapper-col"
+            :class="{'col-xs-12 col-lg-10 pr-120 pl-100 is-small':showHalf,'col-xs-12':!showHalf}"
+          >
+            <div class="dash-container">
+              <nuxt/>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <notification/>
-    <alert/>
+      <notification/>
+      <alert/>
+    </no-ssr>
   </div>
 </template>
 
