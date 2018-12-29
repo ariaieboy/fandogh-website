@@ -10,9 +10,14 @@
                  </span>
                      </router-link>
                      <!-- current_state -->
-                     <p>
+                     <p v-if="windowWidth >= 1200">
                          {{step.title}}
                      </p>
+                     
+                     <p v-else-if="index === current_state">
+                         {{step.title}}
+                     </p>
+
                  </div>
                  <div v-if="index+1 < _steps.length" class="line"></div>
              </div>
@@ -64,6 +69,9 @@ export default {
     this.persistData(manifest)
   },
   computed: {
+     windowWidth(){
+      return this.$store.state.windowWidth
+    },
     wizard(){
       return this.$store.state.wizard
     },

@@ -63,6 +63,9 @@ table.vgt-table td {
   vertical-align: middle;
   padding: 0px 5px !important;
 }
+table.vgt-table td.ltr{
+  direction: ltr;
+}
 table.vgt-table td.ellipsis span {
   text-overflow: ellipsis;
   overflow: hidden;

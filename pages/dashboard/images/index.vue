@@ -58,7 +58,7 @@ export default {
           label: "نام دامنه",
           sortable: false,
           field: "name",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           label: "تاریخ ساخت ایمیج",
@@ -69,7 +69,7 @@ export default {
           label: "آخرین ورژن",
           sortable: false,
           field: "version",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           label: "آخرین به روز‌رسانی",

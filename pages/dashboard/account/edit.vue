@@ -39,18 +39,18 @@
         ></f-input>
       </div>
       <div class="fandogh-form-group right">
-        <div class="row">
-          <div class="col-sm-3">
+          <div class="box-checkbox">
+          <div class="box-checkbox-input">
             <f-checkbox styles="light" v-model="account.news" id="news" title="دریافت خبرنامه"/>
           </div>
-          <div class="col-sm-9">
+          <div class="box-checkbox-info">
             <span class="mute-text">(مایل به دریافت خبرنامه‌های فندق هستم.)</span>
           </div>
         </div>
       </div>
       <div class="fandogh-form-group margin-top-100">
-        <f-button @onClick="accountEdit" styles="blue">ویرایش اطلاعات</f-button>
-        <!-- <f-button v-if="loading && !loadingProgress" styles="red block">در حال ساخت</f-button> -->
+        <f-button v-if="!loadingProgress" @onClick="saveEdit" styles="red block">ویرایش </f-button>
+        <f-button v-if="loadingProgress" styles="red block">در حال  آپدیت ... </f-button>
         <!-- <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar> -->
       </div>
     </div>
@@ -98,15 +98,14 @@ export default {
     FLabelDisable,
     FCheckbox
   },
-  mounted() {
-    this.$ga.event({
-      eventCategory: "secret",
-      eventAction: "add secret"
-    });
-  },
   methods: {
-    accountEdit() {
-      this.$router.push("/dashboard/account/edit");
+    saveEdit() {
+      this.loadingProgress = true
+      this.$ga.event({
+        eventCategory: "account",
+        eventAction: "save update information"
+      });
+      this.loadingProgress = false
     }
   }
 };
