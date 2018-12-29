@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper-image" v-if="!loading">
+    <f-loading :isFull="true" v-if="isLoading"/>
     <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
     </f-empty>
@@ -48,11 +49,14 @@ import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
+import FLoading from "~/components/Loading";
 import FEmpty from "~/components/Dashboard/empty";
+
 export default {
   layout: "dashboard",
   data() {
     return {
+      isLoading: false,
       header: [
         {
           label: "نام دامنه",
@@ -87,6 +91,7 @@ export default {
   },
 
   components: {
+    FLoading,
     FEmpty,
     FTable,
     FButton,
@@ -174,10 +179,12 @@ export default {
         },
         status => {
           if (status) {
+            this.isLoading = true;
             this.$store
               .dispatch("deleteImage", name)
               .then(res => {
                 this.getData();
+                this.isLoading = false;
                 this.$notify({
                   title: res.message,
                   type: "success"
@@ -190,6 +197,7 @@ export default {
                 });
               })
               .catch(e => {
+                this.isLoading = false;
                 this.$notify({
                   title: e.data.message,
                   type: "error"

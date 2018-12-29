@@ -35,6 +35,7 @@ export default {
 .tooltip
   position absolute
   top 0
+  z-index 6
   padding 10px
   min-width 300px
   border-radius 9px
@@ -65,7 +66,7 @@ export default {
   &-description
     p
       color #fff
+      text-align justify
       font-size 14px
       line-height 1.79
-      text-align justify 
 </style>

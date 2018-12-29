@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper-secrets" v-if="!loading">
+    <f-loading :isFull="true" v-if="isLoading"/>
     <f-empty v-if="!secrets" title="هنوز سکرتی اضافه نشده !">
       <f-button styles="red" path="/dashboard/secrets/create">افزودن سکرت</f-button>
     </f-empty>
@@ -40,12 +41,20 @@ import FButton from "~/components/elements/button";
 import FFromDate from "~/utils/fromDate";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
+import FLoading from "~/components/Loading";
 
 export default {
   layout: "dashboard",
-
+  components: {
+    FLoading,
+    FTable,
+    FButton,
+    ActionButton,
+    FEmpty
+  },
   data() {
     return {
+      isLoading: false,
       header: [
         {
           label: "نام سکرت",
@@ -91,12 +100,7 @@ export default {
       }
     }
   },
-  components: {
-    FTable,
-    FButton,
-    ActionButton,
-    FEmpty
-  },
+
   created() {
     this.getData();
   },
@@ -106,6 +110,7 @@ export default {
         await this.$store.dispatch("getSecret");
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
         if (e.status === 401) {
           this.$router.push("/user/login");
         }
@@ -134,10 +139,12 @@ export default {
         },
         status => {
           if (status) {
+            this.isLoading = true;
             this.$store
               .dispatch("deleteSecret", name)
               .then(res => {
                 this.getData();
+                this.isLoading = false;
                 this.$notify({
                   title: res.message,
                   type: "success"
@@ -150,6 +157,7 @@ export default {
                 });
               })
               .catch(e => {
+                this.isLoading = false;
                 this.$ga.event({
                   eventCategory: "secret",
                   eventAction: "fail remove secret",

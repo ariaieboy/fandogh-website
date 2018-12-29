@@ -136,6 +136,7 @@ export default {
         });
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
         if (e.status === 401) {
           this.$router.push("/user/login");
         }

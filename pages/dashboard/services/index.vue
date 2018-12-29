@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper-image" v-if="!loading">
+    <f-loading :isFull="true" v-if="isLoading"/>
     <f-empty v-if="!services || !services.length" title="هنوز سرویسی اضافه نشده !">
       <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
     </f-empty>
@@ -46,11 +47,20 @@ import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
+import FLoading from "~/components/Loading";
 
 export default {
   layout: "dashboard",
+  components: {
+    FLoading,
+    FTable,
+    FButton,
+    ActionButton,
+    FEmpty
+  },
   data() {
     return {
+      isLoading: false,
       header: [
         {
           label: "نام سرویس",
@@ -106,12 +116,7 @@ export default {
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "services" });
   },
-  components: {
-    FTable,
-    FButton,
-    ActionButton,
-    FEmpty
-  },
+
   created() {
     this.getData();
   },
@@ -141,10 +146,12 @@ export default {
         },
         status => {
           if (status) {
+            this.isLoading = true;
             this.$store
               .dispatch("deleteService", name)
               .then(res => {
                 this.getData();
+                this.isLoading = false;
                 this.$ga.event({
                   eventCategory: "service",
                   eventAction: "remove service",
@@ -157,6 +164,7 @@ export default {
                 });
               })
               .catch(e => {
+                this.isLoading = false;
                 this.$ga.event({
                   eventCategory: "service",
                   eventAction: "fail remove service",
