@@ -23,11 +23,11 @@
         <f-label-disable label="کد ملی :" :value="account.code"/>
       </div>
       <div class="fandogh-form-group right">
-        <div class="row">
-          <div class="col-sm-3">
-            <f-checkbox styles="light" v-model="account.news" id="news" title="دریافت خبرنامه"/>
+        <div class="box-checkbox">
+          <div class="box-checkbox-input">
+            <f-checkbox styles="light input-checkbox-disable" v-model="account.news" id="news" title="دریافت خبرنامه"/>
           </div>
-          <div class="col-sm-9">
+          <div class="box-checkbox-info">
             <span class="mute-text">(مایل به دریافت خبرنامه‌های فندق هستم.)</span>
           </div>
         </div>
@@ -84,14 +84,24 @@ export default {
   },
   mounted() {
     this.$ga.event({
-      eventCategory: "secret",
-      eventAction: "add secret"
+      eventCategory: "account",
+      eventAction: "show information"
     });
   },
   methods: {
     accountEdit() {
+        this.$ga.event({
+          eventCategory: "account",
+          eventAction: "click btn edit information"
+        });
         this.$router.push('/dashboard/account/edit')
     }
   }
 };
 </script>
+
+
+<style lang="stylus">
+  .box-checkbox
+      display:flex
+</style>

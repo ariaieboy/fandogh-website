@@ -32,14 +32,14 @@
               v-if="!props.row.certificate"
               class="action-button-m"
               @onClick="certificateDomain(props.row)"
-              icon="ic-add.svg"
+              icon="ssl.svg"
               label="درخواست ssl"
             />
             <action-button
               v-if="props.row.certificate"
               class="action-button-m"
               @onClick="removeCertificateDomain(props.row)"
-              icon="ic-delete.svg"
+              icon="remove-ssl.svg"
               label="حذف ssl"
             />
             <action-button
@@ -54,8 +54,7 @@
               v-if="props.row.certificate"
               :data-balloon="FDate(props.row.certificate.created_at)"
               data-balloon-pos="up"
-            >{{FFromDate(props.row.certificate.created_at)}}
-            </span>
+            >{{FFromDate(props.row.certificate.created_at)}}</span>
             <span v-else>ندارد</span>
           </span>
           <span v-else-if="props.column.field == 'service'">
@@ -75,6 +74,7 @@ import FTable from "~/components/Dashboard/table";
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import FFromDate from "~/utils/fromDate";
+import { getData } from "~/utils/getData";
 import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
@@ -90,7 +90,7 @@ export default {
           sortable: false,
           label: "نام دامنه",
           field: "name",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           sortable: false,
@@ -137,9 +137,10 @@ export default {
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "domains" });
   },
-   created() {
+  created() {
     this.getData();
   },
+
   methods: {
     getData() {
       try {
@@ -155,7 +156,7 @@ export default {
       return FFromDate(value);
     },
     FDate(value) {
-      return FDate({date:value});
+      return FDate({ date: value });
     },
     getDomainStatus({ verified }) {
       return verified ? "در حال استفاده" : "تایید نشده";
@@ -190,7 +191,7 @@ export default {
             eventValue: name
           });
           this.$notify({
-            title: 'درخواست شما با موفقیت ثبت شد',
+            title: "درخواست شما با موفقیت ثبت شد",
             type: "success"
           });
         })
@@ -201,21 +202,20 @@ export default {
             eventLabel: "domain name",
             eventValue: name
           });
-          
-          // this notify for themploery 
+
+          // this notify for themploery
           if (typeof e === "object") {
-             this.$notify({
+            this.$notify({
               title: e.domain_name[0],
               time: 4000,
               type: "error"
             });
           } else {
-             this.$notify({
+            this.$notify({
               title: ErrorReporter(e, this.$data),
               time: 4000,
               type: "error"
             });
-          
           }
         });
     },
@@ -234,7 +234,7 @@ export default {
         status => {
           if (status) {
             this.$store
-              .dispatch("removeCertificateDomain", {name})
+              .dispatch("removeCertificateDomain", { name })
               .then(res => {
                 this.$store.dispatch("getDomains");
                 this.$ga.event({

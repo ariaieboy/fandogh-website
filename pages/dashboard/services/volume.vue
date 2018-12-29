@@ -71,12 +71,14 @@ export default {
         {
           label: "نام متغییر",
           sortable: false,
-          field: "mount_path"
+          field: "mount_path",
+          tdClass: "ellipsis ltr"
         },
         {
           label: "مقدار متغیر",
           sortable: false,
-          field: "sub_path"
+          field: "sub_path",
+          tdClass: "ellipsis ltr"
         },
         {
           label: "مدیریت",

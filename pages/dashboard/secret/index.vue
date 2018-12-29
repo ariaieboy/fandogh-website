@@ -51,7 +51,7 @@ export default {
           label: "نام سکرت",
           sortable: false,
           field: "name",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           label: "نوع سکرت",

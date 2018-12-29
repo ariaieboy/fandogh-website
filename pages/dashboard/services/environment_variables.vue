@@ -95,13 +95,13 @@ export default {
           label: "نام متغییر",
           sortable: false,
           field: "name",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           label: "مقدار متغیر",
           sortable: false,
           field: "value",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           label: "مقدار محرمانه",

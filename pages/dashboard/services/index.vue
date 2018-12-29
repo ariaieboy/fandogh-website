@@ -56,7 +56,7 @@ export default {
           label: "نام سرویس",
           sortable: false,
           field: "name",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           label: "نوع سرویس",

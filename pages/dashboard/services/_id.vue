@@ -113,13 +113,13 @@ export default {
           sortable: false,
           label: "نام متغییر",
           field: "name",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         },
         {
           sortable: false,
           label: "مقدار",
           field: "value",
-          tdClass: "ellipsis"
+          tdClass: "ellipsis ltr"
         }
       ],
       data: [{ name: "NODE_ENV", value: "Production" }]
