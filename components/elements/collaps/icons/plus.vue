@@ -15,7 +15,7 @@
     </style>
   </defs>
   <g id="ic_sAdd" transform="translate(-1 -1)">
-    <line id="Line_16" data-name="Line 16" class="cls-1" :class="{active:open}" y2="16" transform="translate(9.5 1.5)"/>
+    <line id="Line_16" data-name="Line 16" class="cls-1" :class="{active:open}" y2="16" transform="translate(9.5 1.5)" v-if="!open"/>
     <line id="Line_17" data-name="Line 17" class="cls-1"  :class="{active:open}" x2="16" transform="translate(1.5 9.5)"/>
   </g>
 </svg>

@@ -7,9 +7,9 @@
       :aria-expanded="active ? 'true' : 'false'"
       @click.prevent="toggle"
     >
-    <span class="collapse-icon">
-      <icon-plus :open="active"/>
-    </span>
+      <span class="collapse-icon">
+        <icon-plus :open="active"/>
+      </span>
 
       <slot name="collapse-header"></slot>
     </div>
@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import iconPlus from './icons/plus'
+import iconPlus from "./icons/plus";
 export default {
   name: "Collapse",
-  components:{
+  components: {
     iconPlus
   },
   data() {
@@ -62,7 +62,8 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-$borderColor = #b5b5b5;
+
+$borderColor = #b5b5b5
 $borderWidth = 0.6px
 $round = 10px
 .collapse
@@ -72,9 +73,11 @@ $round = 10px
   padding 15px 20px 15px 40px
   border $borderWidth solid $borderColor
   border-radius 3px
-  background #fff
-  border-top-right-radius $round
   border-top-left-radius $round
+  border-top-right-radius $round
+  border-bottom-right-radius $round
+  border-bottom-left-radius $round
+  background #fff
   cursor pointer
 .collapse .collapse-header > div
   display flex
@@ -87,21 +90,23 @@ $round = 10px
   position absolute
   // top calc(50% - 0.4em)
   left 20px
-
 .collapse.is-active .collapse-header::before
   transform rotate(0deg)
-  -moz-transform rotate(0$borderColor = #75879cdeg);
-  -o-transform rotate(0deg$borderColor = #75879c);
-  -ms-transform rotate(0$borderColor = #75879cdeg);
+  -moz-transform rotate(0 $borderColor = #75879cde g)
+  -o-transform rotate(0deg $borderColor = #75879c)
+  -ms-transform rotate(0 $borderColor = #75879cde g)
   -webkit-transform rotate(0deg)
+.collapse.is-active .collapse-header
+  border-bottom-right-radius 0
+  border-bottom-left-radius 0
 .collapse .collapse-content-box
   padding 15px 0
-  background-color #fff
   border-right $borderWidth solid $borderColor
   border-bottom $borderWidth solid $borderColor
   border-left $borderWidth solid $borderColor
   border-bottom-right-radius $round
   border-bottom-left-radius $round
+  background-color #fff
   transition all 0.2s
   -moz-transition all 0.2s
   -o-transition all 0.2s

@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in 3" >
+        <tr v-for="item in items">
           <td>{{item.reason}}</td>
           <td>{{item.message}}</td>
           <td>{{item.count}}</td>
@@ -22,38 +22,24 @@
       </tbody>
     </table>
     <table class="font-roboto mobile-table" v-else>
-      <tbody v-for="item in 4">
+      <tbody v-for="item in items">
         <tr>
-          <td> 
-             {{item.reason}}
-          </td>
-          <th>
-            Reason
-          </th>
+          <td>{{item.reason}}</td>
+          <th>Reason</th>
         </tr>
         <tr>
-            <td> 
-                {{item.message}}
-            </td>
-            <th>
-                Message
-            </th>
-          </tr>
-          <tr>
-              <td> 
-                {{item.count}}
-              </td>
-              <th>
-               Count
-             </th>
-          </tr>
-          <!-- <td>2018-10-03</td> -->
-          <tr>
-            <td class="border"> 
-              {{FDate(item.last_timestamp)}}
-            </td>
-            <th class="border">Last Seen</th>
-          </tr>
+          <td>{{item.message}}</td>
+          <th>Message</th>
+        </tr>
+        <tr>
+          <td>{{item.count}}</td>
+          <th>Count</th>
+        </tr>
+        <!-- <td>2018-10-03</td> -->
+        <tr>
+          <td class="border">{{FDate(item.last_timestamp)}}</td>
+          <th class="border">Last Seen</th>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -64,21 +50,21 @@ import FDate from "~/utils/date";
 
 export default {
   name: "replica-events",
-  props:{
-    items:{
-      type:Array,
+  props: {
+    items: {
+      type: Array
     }
   },
-    methods:{
-    FDate(value,format= ' HH:mm:ss'){
-      if(!value) return ''
-      return FDate({date:value,format})
+  methods: {
+    FDate(value, format = " HH:mm:ss") {
+      if (!value) return "";
+      return FDate({ date: value, format });
     }
   },
-  computed:{
-    windowWidth(){
-      return this.$store.state.windowWidth
-    },
+  computed: {
+    windowWidth() {
+      return this.$store.state.windowWidth;
+    }
   }
 };
 </script>
@@ -88,28 +74,26 @@ export default {
   font-family yekan
   table
     width 100%
+    border-spacing 0px
     text-align center
-    border-spacing: 0px;
     th
-      border-bottom:1pt solid black;
       padding 5px 0
-      font-size 16px
+      border-bottom 1pt solid black
       color #4f4f4f
+      font-size 16px
     td
+      padding 5px 0
       max-width 250px
       color #4f4f4f
       font-size 12px
-      padding 5px 0
   .mobile-table
     text-align left
     .border
-      border-bottom:1pt solid black;
+      border-bottom 1pt solid black
     th
       width 150px
       border none
     tbody:last-child
-      .border 
+      .border
         border-bottom none
-
-    
 </style>
