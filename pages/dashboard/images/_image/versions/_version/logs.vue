@@ -43,6 +43,7 @@ export default {
     };
   },
   mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.date = "تاریخ ساخت: " + FDate({ date: this.builds.start_date });
     let state = this.builds.state.toLowerCase();
     if (state === "building") {

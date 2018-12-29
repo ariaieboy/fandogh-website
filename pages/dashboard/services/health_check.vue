@@ -105,6 +105,9 @@ export default {
     FSelect,
     Wizard
   },
+  mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
+  },
   methods: {
     finish(e) {
       console.log(e);

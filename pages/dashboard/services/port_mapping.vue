@@ -120,9 +120,14 @@ export default {
       return this.port_mapping;
     }
   },
+  mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
+  },
   methods: {
     async deleteItem(port) {
-      return (this.port_mapping = await this.port_mapping.filter(item => item.port !== port));
+      return (this.port_mapping = await this.port_mapping.filter(
+        item => item.port !== port
+      ));
     },
     remove({ port }) {
       this.$alertify(
@@ -143,13 +148,13 @@ export default {
       );
     },
     addPath() {
-      if(this.port_mapping.filter(p=>p.port === this.port).length > 0) {
+      if (this.port_mapping.filter(p => p.port === this.port).length > 0) {
         this.$notify({
-            title: `شما برای port ${this.port} مقدار تعریف کرده اید.`,
-            time: 4000,
-            type: 'error'
+          title: `شما برای port ${this.port} مقدار تعریف کرده اید.`,
+          time: 4000,
+          type: "error"
         });
-        return
+        return;
       }
       this.port_mapping.push({
         port: this.port,

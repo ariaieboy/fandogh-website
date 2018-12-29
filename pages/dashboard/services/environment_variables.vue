@@ -27,7 +27,12 @@
               data-balloon="با فعال سازی این گزینه مقداره وارد شده نمایش داده نمیشود"
               data-balloon-pos="down"
             >
-              <f-checkbox v-model="hidden" id="checkbox3" styles="input-light" title="مقدار محرمانه"/>
+              <f-checkbox
+                v-model="hidden"
+                id="checkbox3"
+                styles="input-light"
+                title="مقدار محرمانه"
+              />
               <span class="field-description"></span>
             </div>
 
@@ -51,12 +56,8 @@
                   </div>
                 </span>
                 <span v-else-if="props.column.field == 'value'">
-                  <div v-if="props.row.hidden">
-                    ********
-                  </div>
-                  <div v-else>
-                    {{props.row.value}}
-                  </div>
+                  <div v-if="props.row.hidden">********</div>
+                  <div v-else>{{props.row.value}}</div>
                 </span>
                 <span v-else-if="props.column.field == 'action'">
                   <action-button
@@ -135,10 +136,13 @@ export default {
       return this.env;
     }
   },
+  mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
+  },
   methods: {
-    focus(){
-      let elm = document.querySelector('.focus')
-      elm.focus()
+    focus() {
+      let elm = document.querySelector(".focus");
+      elm.focus();
     },
     async removeRow(name) {
       return (this.env = await this.env.filter(item => item.name !== name));
@@ -152,7 +156,7 @@ export default {
       });
     },
     addEnv() {
-      this.focus()
+      this.focus();
       if (this.env.filter(e => e.name === this.name).length > 0) {
         this.$notify({
           title: `شما برای متغییر ${this.name} مقدار تعریف کرده اید.`,

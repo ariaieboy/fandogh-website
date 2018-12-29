@@ -64,13 +64,15 @@ export default {
     File,
     ProgressBar
   },
+  destroyed() {},
   mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
-        eventCategory: 'image',
-        eventAction: 'add image',
-        // eventLabel:'user',
-        // eventValue:'userId'
-      })
+      eventCategory: "image",
+      eventAction: "add image"
+      // eventLabel:'user',
+      // eventValue:'userId'
+    });
     var vm = this;
     let btnfile = document.querySelector("#source");
     btnfile.addEventListener("change", function(e) {
@@ -85,12 +87,21 @@ export default {
   methods: {
     createImage() {
       this.$ga.event({
-        eventCategory: 'image',
-        eventAction: 'click btn create image',
+        eventCategory: "image",
+        eventAction: "click btn create image"
         // eventLabel:'user',
         // eventValue:'userId'
-      })
-      if (!FormValidator(this.$data, {name: {required: true,pattern: "^[A-Za-z0-9-_]+$",msg: "لطفا از کاراکتر های مجاز استفاده کنید  : A-Za-z0-9-_"}})) return;
+      });
+      if (
+        !FormValidator(this.$data, {
+          name: {
+            required: true,
+            pattern: "^[A-Za-z0-9-_]+$",
+            msg: "لطفا از کاراکتر های مجاز استفاده کنید  : A-Za-z0-9-_"
+          }
+        })
+      )
+        return;
       this.loading = true;
       this.$store
         .dispatch("createImage", { name: this.name })
@@ -102,7 +113,6 @@ export default {
           });
 
           if (this.version.length && this.source) {
-
             this.loadingProgress = true;
 
             let fd = formData([
@@ -127,9 +137,9 @@ export default {
                 this.loading = false;
                 this.loadingProgress = false;
                 this.$ga.event({
-                  eventCategory: 'images',
-                  eventAction: 'images create',
-                })
+                  eventCategory: "images",
+                  eventAction: "images create"
+                });
                 this.$router.push(
                   `/dashboard/images/${this.name}/versions/${this.version}/logs`
                 );
@@ -148,9 +158,9 @@ export default {
           } else {
             this.loading = false;
             this.$ga.event({
-              eventCategory: 'images',
-              eventAction: 'images version create',
-            })
+              eventCategory: "images",
+              eventAction: "images version create"
+            });
             this.$router.push("/dashboard/images");
           }
         })

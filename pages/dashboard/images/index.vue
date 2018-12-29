@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-image">
+  <div class="wrapper-image" v-if="!loading">
     <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
     </f-empty>
@@ -85,7 +85,7 @@ export default {
       ]
     };
   },
- 
+
   components: {
     FEmpty,
     FTable,
@@ -93,6 +93,9 @@ export default {
     ActionButton
   },
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
     images() {
       let images = this.$store.state.images;
       if (images) {
@@ -114,6 +117,7 @@ export default {
       }
     }
   },
+
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "images" });
   },
@@ -121,12 +125,20 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getImages");
+        await this.$store.dispatch("getImages");
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
         if (e.status === 401) {
           this.$router.push("/user/login");
+        } else {
+          this.$notify({
+            title: e.data.message,
+            time: 4000,
+            type: "error"
+          });
         }
       }
     },

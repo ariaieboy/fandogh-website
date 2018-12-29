@@ -7,7 +7,8 @@
           <div class="fandogh-form-group">
             <f-radio v-model="image_type" :options="image_types" title="نوع ایمیج"/>
           </div>
-          <a v-if="!images.length"
+          <a
+            v-if="!images.length && !loading"
             href="https://docs.fandogh.cloud/docs/getting-started.html"
             target="_blank"
           >
@@ -91,13 +92,13 @@
           <div class="fandogh-form-group" v-if="image_type === 'خارجی'">
             <label>Image Pull Secret</label>
             <f-select
-                  tabindex="2"
-                  v-model="image_pull_secret"
-                  title="ورژن "
-                  :options="secretList"
-                  styles="input-white input-block input-dashboard"
-                  placeholder="Image Pull Secret "
-                ></f-select>
+              tabindex="2"
+              v-model="image_pull_secret"
+              title="ورژن "
+              :options="secretList"
+              styles="input-white input-block input-dashboard"
+              placeholder="Image Pull Secret "
+            ></f-select>
           </div>
         </wizard>
       </div>
@@ -136,13 +137,16 @@ export default {
   },
 
   computed: {
-    secretList(){
-      return this.$store.state.secrets.map(item=>{
+    loading() {
+      return this.$store.state.loading;
+    },
+    secretList() {
+      return this.$store.state.secrets.map(item => {
         return {
           title: item.name,
           value: item.name
         };
-      })
+      });
     },
     nameImage() {
       return getValue("name");
@@ -227,13 +231,15 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getImages");
+        await this.$store.dispatch("getImages");
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         if (e.status === 401) {
           this.$router.push("/user/login");
         }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       }
     },
     nextStep() {

@@ -64,7 +64,7 @@
           </f-collaps>
         </div>
       </div>
-        <div class="col-md-6 col-xs-12" v-if="windowWidth <= 992">
+      <div class="col-md-6 col-xs-12" v-if="windowWidth <= 992">
         <div class="table-title font-roboto">ENV</div>
         <vue-good-table :columns="header" :rows="service.env" :rtl="true" styleClass="vgt-table">
           <div slot="emptystate">
@@ -129,22 +129,25 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getServicesName", { name: this.$route.params.id });
+        await this.$store.dispatch("getServicesName", {
+          name: this.$route.params.id
+        });
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         if (e.status === 401) {
           this.$router.push("/user/login");
         }
       }
-    },
+    }
   },
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "service" });
   },
   computed: {
-    windowWidth(){
-      return this.$store.state.windowWidth
+    windowWidth() {
+      return this.$store.state.windowWidth;
     },
     service() {
       return this.$store.state.service;

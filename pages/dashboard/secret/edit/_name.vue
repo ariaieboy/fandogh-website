@@ -71,10 +71,9 @@ import FormValidator from "~/utils/formValidator";
 
 export default {
   layout: "dashboard",
-  name:'secret-name',
+  name: "secret-name",
   data() {
     return {
-     
       type: "docker-registry",
       server: "",
       username: "",
@@ -88,8 +87,8 @@ export default {
     progress() {
       return this.$store.state.progress;
     },
-    name(){
-        return this.$route.params.name
+    name() {
+      return this.$route.params.name;
     }
   },
   components: {
@@ -98,10 +97,12 @@ export default {
     File,
     ProgressBar
   },
+  destroyed() {},
   mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
-        eventCategory: "secret",
-        eventAction: "put secret",
+      eventCategory: "secret",
+      eventAction: "put secret"
     });
   },
   methods: {
@@ -120,10 +121,10 @@ export default {
         })
         .then(res => {
           this.$ga.event({
-              eventCategory: "secret",
-              eventAction: "secret put",
-                eventLabel: "secret name",
-                eventValue: this.name
+            eventCategory: "secret",
+            eventAction: "secret put",
+            eventLabel: "secret name",
+            eventValue: this.name
           });
           this.$notify({
             title: res.message,
@@ -135,10 +136,10 @@ export default {
         .catch(e => {
           this.loading = false;
           this.$ga.event({
-              eventCategory: "secret",
-              eventAction: "fail create  secret",
-              eventLabel: "secret name",
-              eventValue: this.name
+            eventCategory: "secret",
+            eventAction: "fail create  secret",
+            eventLabel: "secret name",
+            eventValue: this.name
           });
           ErrorReporter(e, this.$data, true).forEach(error => {
             this.$notify({

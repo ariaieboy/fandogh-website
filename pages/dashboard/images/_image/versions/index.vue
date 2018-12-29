@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-image">
+  <div class="wrapper-image" v-if="!loading">
     <f-empty v-if="!versions || !versions.length" title="هنوز ورژنی اضافه نشده !">
       <f-button
         styles="red"
@@ -69,13 +69,14 @@ export default {
         {
           label: "حجم",
           sortable: false,
-          field: "size"
+          field: "size",
+          tdClass: "ltr"
         },
         {
           label: "وضعیت",
           sortable: false,
           field: "state",
-          tdClass: this.getClass,
+          tdClass: this.getClass
         },
         {
           label: "مدیریت",
@@ -94,6 +95,9 @@ export default {
     FEmpty
   },
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
     versions() {
       let versions = this.$store.state.versions;
       if (versions) {
@@ -102,7 +106,7 @@ export default {
             version,
             date: FDate({ date: date }),
             state: this.getState(state),
-            size: `Mb ${(size / 1000000).toFixed(1)}`
+            size: `${(size / 1000000).toFixed(1)} Mb`
           };
         });
       }
@@ -111,18 +115,32 @@ export default {
   created() {
     this.getData();
   },
+  destroyed() {
+    this.$store.commit("SET_DATA", { data: null, id: "versions" });
+  },
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getImageVersions", this.$route.params.image);
+        await this.$store.dispatch(
+          "getImageVersions",
+          this.$route.params.image
+        );
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
         if (e.status === 401) {
           this.$router.push("/user/login");
+        } else {
+          this.$notify({
+            title: e.data.message,
+            time: 4000,
+            type: "error"
+          });
         }
       }
     },
     getClass({ state }) {
-        return state === "خطا"
+      return state === "خطا"
         ? "error-text"
         : state === "ساخته شده"
         ? "success-text"

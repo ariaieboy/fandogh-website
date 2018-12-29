@@ -1,5 +1,5 @@
 <template>
-  <div class="row center-md">
+  <div class="row center-md" v-if="!loading">
     <div class="col-md-8 col-sm-12 col-xs-12">
       <div class="plan">
         <div class="row">
@@ -18,7 +18,7 @@
               <p>نام مشتری : {{username}}</p>
               <p>نام فضا : {{namespace}}</p>
               <p>طرح انتخابی : {{plan.title}}</p>
-              <p>هزینه پلن : {{plan.price}} </p>
+              <p>هزینه پلن : {{plan.price}}</p>
               <p>مالیات بر ارزش افزوده : {{tax}}</p>
             </div>
           </div>
@@ -97,7 +97,14 @@ export default {
   data() {
     return {};
   },
+  destroyed() {},
+  mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
+  },
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
     username() {
       return getValue("username");
     },

@@ -44,9 +44,8 @@ export const checkAuthentication = ({ commit, state }, token) => {
   commit("SET_USER", { token: token });
 };
 
-export const logout = async ({app , commit, state }) => {
+export const logout = async ({ app, commit, state }) => {
   try {
-    
     commit("LOGOUT");
   } catch (e) {
     return Promise.reject(e);
@@ -171,10 +170,10 @@ export const getServices = async ({ commit, state }) => {
     return Promise.reject(e);
   }
 };
-export const getServiceLog = async ({ commit, state },{name}) => {
+export const getServiceLog = async ({ commit, state }, { name }) => {
   try {
     let logs = await Request().get(`/api/services/${name}/logs`);
-    commit("SET_DATA", {data:logs,id:'serviceLog'});
+    commit("SET_DATA", { data: logs, id: "serviceLog" });
     return logs;
   } catch (e) {
     return Promise.reject(e);
@@ -218,7 +217,7 @@ export const getDomain = async ({ commit, state }, { name }) => {
   try {
     let domain = await Request().get(`/api/domains/${name}`);
     commit("SET_DATA", { data: domain, id: "domain" });
-    return domains;
+    return domain;
   } catch (e) {
     return Promise.reject(e);
   }

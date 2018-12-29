@@ -94,16 +94,23 @@ export default {
     File,
     ProgressBar
   },
+  destroyed() {},
   mounted() {
-        this.$ga.event({
-            eventCategory: "secret",
-            eventAction: "add secret",
-        
-        });
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
+    this.$ga.event({
+      eventCategory: "secret",
+      eventAction: "add secret"
+    });
   },
   methods: {
     createSecret() {
-      if (!FormValidator(this.$data, { username: { required: true }  ,  password: { required: true } ,  name: { required: true } }))
+      if (
+        !FormValidator(this.$data, {
+          username: { required: true },
+          password: { required: true },
+          name: { required: true }
+        })
+      )
         return false;
       this.loading = true;
       this.$store
@@ -119,8 +126,8 @@ export default {
         })
         .then(res => {
           this.$ga.event({
-              eventCategory: "secret",
-              eventAction: "secret create",
+            eventCategory: "secret",
+            eventAction: "secret create"
           });
           this.$notify({
             title: res.message,
@@ -132,8 +139,8 @@ export default {
         .catch(e => {
           this.loading = false;
           this.$ga.event({
-              eventCategory: "secret",
-              eventAction: "fail create  secret",
+            eventCategory: "secret",
+            eventAction: "fail create  secret"
           });
           ErrorReporter(e, this.$data, true).forEach(error => {
             this.$notify({

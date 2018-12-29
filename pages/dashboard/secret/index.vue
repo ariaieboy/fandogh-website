@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-secrets">
+  <div class="wrapper-secrets" v-if="!loading">
     <f-empty v-if="!secrets" title="هنوز سکرتی اضافه نشده !">
       <f-button styles="red" path="/dashboard/secrets/create">افزودن سکرت</f-button>
     </f-empty>
@@ -74,6 +74,9 @@ export default {
     };
   },
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
     secrets() {
       let secrets = this.$store.state.secrets;
       if (secrets) {
@@ -98,9 +101,10 @@ export default {
     this.getData();
   },
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getSecret");
+        await this.$store.dispatch("getSecret");
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         if (e.status === 401) {
           this.$router.push("/user/login");
@@ -133,7 +137,7 @@ export default {
             this.$store
               .dispatch("deleteSecret", name)
               .then(res => {
-                this.getData()
+                this.getData();
                 this.$notify({
                   title: res.message,
                   type: "success"
@@ -144,7 +148,6 @@ export default {
                   eventLabel: "secret name",
                   eventValue: name
                 });
-               
               })
               .catch(e => {
                 this.$ga.event({

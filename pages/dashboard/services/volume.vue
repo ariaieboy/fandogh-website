@@ -107,6 +107,9 @@ export default {
       return this.volume_mounts;
     }
   },
+  mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
+  },
   methods: {
     async removeRow(mount_path) {
       return (this.volume_mounts = await this.volume_mounts.filter(

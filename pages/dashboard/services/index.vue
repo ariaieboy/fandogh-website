@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-image">
+  <div class="wrapper-image" v-if="!loading">
     <f-empty v-if="!services || !services.length" title="هنوز سرویسی اضافه نشده !">
       <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
     </f-empty>
@@ -83,6 +83,9 @@ export default {
     };
   },
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
     services() {
       let services = this.$store.state.services;
       if (services) {
@@ -109,26 +112,28 @@ export default {
     ActionButton,
     FEmpty
   },
-    created() {
+  created() {
     this.getData();
   },
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getServices");
+        await this.$store.dispatch("getServices");
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         if (e.status === 401) {
           this.$router.push("/user/login");
         }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       }
     },
     remove({ name }) {
       this.$ga.event({
-          eventCategory: 'service',
-          eventAction: 'click btn remove service',
-          eventLabel:'service name',
-          eventValue:name
-      })
+        eventCategory: "service",
+        eventAction: "click btn remove service",
+        eventLabel: "service name",
+        eventValue: name
+      });
       this.$alertify(
         {
           title: `حذف سرویس`,
@@ -139,13 +144,13 @@ export default {
             this.$store
               .dispatch("deleteService", name)
               .then(res => {
-                this.getData()
+                this.getData();
                 this.$ga.event({
-                    eventCategory: 'service',
-                    eventAction: 'remove service',
-                    eventLabel:'service name',
-                    eventValue:name
-                })
+                  eventCategory: "service",
+                  eventAction: "remove service",
+                  eventLabel: "service name",
+                  eventValue: name
+                });
                 this.$notify({
                   title: res.message,
                   type: "success"
@@ -153,11 +158,11 @@ export default {
               })
               .catch(e => {
                 this.$ga.event({
-                    eventCategory: 'service',
-                    eventAction: 'fail remove service',
-                    eventLabel:'service name',
-                    eventValue:name
-                })
+                  eventCategory: "service",
+                  eventAction: "fail remove service",
+                  eventLabel: "service name",
+                  eventValue: name
+                });
                 this.$notify({
                   title: e.data.message,
                   type: "error"
@@ -169,20 +174,20 @@ export default {
     },
     details({ name }) {
       this.$ga.event({
-            eventCategory: 'service',
-            eventAction: 'click btn details service',
-            eventLabel:'service name',
-            eventValue:name
-      })
+        eventCategory: "service",
+        eventAction: "click btn details service",
+        eventLabel: "service name",
+        eventValue: name
+      });
       this.$router.push(`/dashboard/services/${name}`);
     },
     logs({ name }) {
       this.$ga.event({
-            eventCategory: 'service',
-            eventAction: 'click btn logs service',
-            eventLabel:'service name',
-            eventValue:name
-      })
+        eventCategory: "service",
+        eventAction: "click btn logs service",
+        eventLabel: "service name",
+        eventValue: name
+      });
       this.$router.push(`/dashboard/services/${name}/logs`);
     }
   }

@@ -25,7 +25,12 @@
       <div class="fandogh-form-group right">
         <div class="box-checkbox">
           <div class="box-checkbox-input">
-            <f-checkbox styles="light input-checkbox-disable" v-model="account.news" id="news" title="دریافت خبرنامه"/>
+            <f-checkbox
+              styles="light input-checkbox-disable"
+              v-model="account.news"
+              id="news"
+              title="دریافت خبرنامه"
+            />
           </div>
           <div class="box-checkbox-info">
             <span class="mute-text">(مایل به دریافت خبرنامه‌های فندق هستم.)</span>
@@ -83,6 +88,7 @@ export default {
     FCheckbox
   },
   mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
       eventCategory: "account",
       eventAction: "show information"
@@ -90,11 +96,11 @@ export default {
   },
   methods: {
     accountEdit() {
-        this.$ga.event({
-          eventCategory: "account",
-          eventAction: "click btn edit information"
-        });
-        this.$router.push('/dashboard/account/edit')
+      this.$ga.event({
+        eventCategory: "account",
+        eventAction: "click btn edit information"
+      });
+      this.$router.push("/dashboard/account/edit");
     }
   }
 };
@@ -102,6 +108,6 @@ export default {
 
 
 <style lang="stylus">
-  .box-checkbox
-      display:flex
+.box-checkbox
+  display flex
 </style>

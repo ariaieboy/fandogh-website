@@ -39,7 +39,7 @@
         ></f-input>
       </div>
       <div class="fandogh-form-group right">
-          <div class="box-checkbox">
+        <div class="box-checkbox">
           <div class="box-checkbox-input">
             <f-checkbox styles="light" v-model="account.news" id="news" title="دریافت خبرنامه"/>
           </div>
@@ -49,8 +49,8 @@
         </div>
       </div>
       <div class="fandogh-form-group margin-top-100">
-        <f-button v-if="!loadingProgress" @onClick="saveEdit" styles="red block">ویرایش </f-button>
-        <f-button v-if="loadingProgress" styles="red block">در حال  آپدیت ... </f-button>
+        <f-button v-if="!loadingProgress" @onClick="saveEdit" styles="red block">ویرایش</f-button>
+        <f-button v-if="loadingProgress" styles="red block">در حال آپدیت ...</f-button>
         <!-- <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar> -->
       </div>
     </div>
@@ -90,6 +90,9 @@ export default {
       return this.$store.state.progress;
     }
   },
+  mounted() {
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
+  },
   components: {
     FInput,
     FButton,
@@ -100,12 +103,12 @@ export default {
   },
   methods: {
     saveEdit() {
-      this.loadingProgress = true
+      this.loadingProgress = true;
       this.$ga.event({
         eventCategory: "account",
         eventAction: "save update information"
       });
-      this.loadingProgress = false
+      this.loadingProgress = false;
     }
   }
 };

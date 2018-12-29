@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-image">
+  <div class="wrapper-image" v-if="!loading">
     <f-empty v-if="!domains || !domains.length" title="هنوز دامنه‌ای اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </f-empty>
@@ -130,6 +130,9 @@ export default {
     FEmpty
   },
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
     domains() {
       return this.$store.state.domains;
     }
@@ -142,9 +145,10 @@ export default {
   },
 
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getDomains");
+        await this.$store.dispatch("getDomains");
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         if (e.status === 401) {
           this.$router.push("/user/login");

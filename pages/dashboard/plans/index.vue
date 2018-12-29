@@ -1,5 +1,5 @@
 <template>
-  <div class="service-plan">
+  <div class="service-plan" v-if="!loading">
     <nuxt-child/>
     <div class="row">
       <h1 class="service-plan-heading">جز‌ئیات حساب شما</h1>
@@ -53,19 +53,47 @@ export default {
       return this.$store.state.plan.activePlan;
     },
     percent() {
-      let percent = Math.round((this.activePlan.current_used_resources.memory_usage / this.activePlan.quota.memory_limit) * 100);
+      let percent = Math.round(
+        (this.activePlan.current_used_resources.memory_usage /
+          this.activePlan.quota.memory_limit) *
+          100
+      );
       return percent.toString();
     }
+  },
+  loading() {
+    return this.$store.state.loading;
   },
   destroyed() {
     this.$store.commit("plan/SET_DATA", { data: null, id: "activePlan" });
   },
+  created() {
+    this.getData();
+  },
+  methods: {
+    async getData() {
+      try {
+        await this.$store.dispatch("plan/getNameSpace", this.namespace);
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
+      } catch (e) {
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        } else {
+          this.$notify({
+            title: e.data.message,
+            time: 4000,
+            type: "error"
+          });
+        }
+      }
+    }
+  },
   mounted() {
     this.$ga.event({
-        eventCategory: "plan",
-        eventAction: "see list plan",
+      eventCategory: "plan",
+      eventAction: "see list plan"
     });
-    this.$store.dispatch("plan/getNameSpace", this.namespace);
   }
 };
 </script>

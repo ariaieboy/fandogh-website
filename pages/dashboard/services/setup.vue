@@ -154,6 +154,7 @@ export default {
     Validation.$on("validation", ({ isValid, keys }) => {
       this.prevent = !isValid;
     });
+    this.$store.commit("SET_DATA", { data: false, id: "loading" });
   },
   methods: {
     nextStep() {

@@ -38,7 +38,7 @@ export default {
   },
   computed: {
     domain() {
-      return this.$store.state.domain
+      return this.$store.state.domain;
     }
   },
   layout: "dashboard",
@@ -51,10 +51,14 @@ export default {
   created() {
     this.getData();
   },
+  destroyed() {},
   methods: {
-    getData() {
+    async getData() {
       try {
-        this.$store.dispatch("getDomain",{name:this.$route.params.name});
+        await this.$store.dispatch("getDomain", {
+          name: this.$route.params.name
+        });
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         if (e.status === 401) {
           this.$router.push("/user/login");
