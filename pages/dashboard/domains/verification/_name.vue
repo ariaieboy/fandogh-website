@@ -63,6 +63,7 @@ export default {
         if (e.status === 401) {
           this.$router.push("/user/login");
         }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       }
     },
     verify() {

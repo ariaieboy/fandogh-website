@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper-image" v-if="!loading">
+    <f-loading :isFull="true" v-if="isLoading"/>
     <f-empty v-if="!domains || !domains.length" title="هنوز دامنه‌ای اضافه نشده !">
       <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
     </f-empty>
@@ -79,12 +80,14 @@ import Alert from "~/components/Dashboard/alert";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
 import ErrorReporter from "~/utils/ErrorReporter";
+import FLoading from "~/components/Loading";
 
 export default {
   layout: "dashboard",
 
   data() {
     return {
+      isLoading: false,
       header: [
         {
           sortable: false,
@@ -127,7 +130,8 @@ export default {
     FTable,
     FButton,
     ActionButton,
-    FEmpty
+    FEmpty,
+    FLoading
   },
   computed: {
     loading() {
@@ -153,6 +157,7 @@ export default {
         if (e.status === 401) {
           this.$router.push("/user/login");
         }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       }
     },
 
@@ -237,10 +242,12 @@ export default {
         },
         status => {
           if (status) {
+            this.isLoading = true;
             this.$store
               .dispatch("removeCertificateDomain", { name })
               .then(res => {
                 this.$store.dispatch("getDomains");
+                this.isLoading = false;
                 this.$ga.event({
                   eventCategory: "domain",
                   eventAction: "remove ssl domain",
@@ -253,6 +260,7 @@ export default {
                 });
               })
               .catch(e => {
+                this.isLoading = false;
                 this.$ga.event({
                   eventCategory: "domain",
                   eventAction: "fail remove ssl domain",
