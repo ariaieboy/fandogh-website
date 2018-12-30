@@ -20,11 +20,11 @@
               placeholder="مقدار متغییر"
             ></f-input>
           </div>
-          <div class="flex-space">
+          <div class="box-checkbox center-item w-100 flex-space">
             <div
               class="flex margin-40"
               data-balloon-length="medium"
-              data-balloon="با فعال سازی این گزینه مقداره وارد شده نمایش داده نمیشود"
+              data-balloon="با فعال سازی این گزینه مقدار وارد شده نمایش داده نمیشود"
               data-balloon-pos="down"
             >
               <f-checkbox
@@ -33,9 +33,8 @@
                 styles="input-light"
                 title="مقدار محرمانه"
               />
-              <span class="field-description"></span>
+              <img src="~/static/icons/plans/info-button.png">
             </div>
-
             <div class="fandogh-form-group">
               <f-button @onClick="addEnv" styles="transparent black border">افزودن به جدول</f-button>
             </div>

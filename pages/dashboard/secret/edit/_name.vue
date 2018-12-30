@@ -97,7 +97,7 @@ export default {
     File,
     ProgressBar
   },
-  destroyed() {},
+  destroyed() { },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
@@ -108,6 +108,8 @@ export default {
   methods: {
     putSecret() {
       this.loading = true;
+      if (!FormValidator(this.$data, { server: { required: true }, username: { required: true }, password: { required: true } })) return false;
+
       this.$store
         .dispatch("putSecret", {
           name: this.name,

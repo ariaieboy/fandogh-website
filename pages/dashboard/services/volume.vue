@@ -135,29 +135,28 @@ export default {
       );
     },
     addPath() {
-       if (!FormValidator(this.$data, {mount_path: {required: true,pattern:"^/.*$",msg:'مقدار Volume path را باید به صورت absolute وارد کنید'}})) return;
-        if(this.volume_mounts.filter(v => v.mount_path === this.mount_path).length > 0) {
+      if (!FormValidator(this.$data, { mount_path: { required: true, pattern: "^/.*$", msg: "مقدار Volume path را باید به صورت absolute وارد کنید" }, sub_path: { required: true } })) return;
+      if (this.volume_mounts.filter(v => v.mount_path === this.mount_path).length > 0) {
         this.$notify({
-            title: `شما برای متغییر ${this.mount_path} مقدار تعریف کرده اید.`,
-            time: 4000,
-            type: 'error'
+          title: `شما قبلا در مسیر  ${
+            this.mount_path
+            } یک volume دیگر mount کرده‌اید`,
+          time: 4000,
+          type: "error"
         });
-        return
+        return;
       }
       this.volume_mounts.push({
         mount_path: this.mount_path,
         sub_path: this.sub_path
       });
-      this.mount_path = ''
-      this.sub_path = ''
+      this.mount_path = "";
+      this.sub_path = "";
     }
   },
   watch: {
     volume_mounts(value, oldValue) {
-      this.$store.dispatch("manifestGenerator", {
-        value,
-        path: "spec.volume_mounts"
-      });
+      this.$store.dispatch("manifestGenerator", { value, path: "spec.volume_mounts" });
     }
   }
 };

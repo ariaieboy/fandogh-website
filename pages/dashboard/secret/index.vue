@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper-secrets" v-if="!loading">
     <f-loading :isFull="true" v-if="isLoading"/>
-    <f-empty v-if="!secrets" title="هنوز سکرتی اضافه نشده !">
-      <f-button styles="red" path="/dashboard/secrets/create">افزودن سکرت</f-button>
+    <f-empty v-if="!secrets || !secrets.length" title="هنوز سکرتی اضافه نشده است !">
+      <f-button styles="red" path="/dashboard/secret/create">افزودن سکرت</f-button>
     </f-empty>
     <div class="secretss" v-else>
       <div class="row-block">

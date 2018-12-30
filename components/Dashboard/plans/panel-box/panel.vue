@@ -21,13 +21,13 @@
         </div>
         <div class="service----line"></div>
         <div class="service----item service----item-second">
-          <div class="service-----information">
+          <!-- <div class="service-----information">
             <span class="service------image">
               <img :src="'/icons/plans/cpu.png'" alt>
             </span>
             <span class="service------name font-roboto">CPU</span>
             <span class="service------info">{{cpu}}</span>
-          </div>
+          </div>-->
           <div class="service-----information">
             <span class="service------image">
               <img :src="'/icons/plans/ram.png'" alt>
@@ -180,10 +180,10 @@ export default {
     display flex
     flex-direction column
     align-items flex-start
+    padding 5px 10px
     border solid 1px #e7e8ea
     background-color #ffffff
     line-height 1.75
-    padding 5px 10px
 .plan-description-toggle
   z-index 1
   display inline-block
@@ -204,9 +204,9 @@ export default {
 .bullet-list
   display flex
   align-items baseline
-  p 
-   margin 0
-   line-height 1.75
+  p
+    margin 0
+    line-height 1.75
 .bullet
   margin-left 10px
   width 8px
@@ -218,7 +218,7 @@ export default {
   font-size 14px
 .service-description-text
   margin 0
-  color: rgb(79, 79, 79);
-  font-size 12px
+  color rgb(79, 79, 79)
   text-align justify
+  font-size 12px
 </style>
