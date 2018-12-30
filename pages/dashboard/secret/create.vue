@@ -38,6 +38,7 @@
         <f-input
           name="password"
           v-model="password"
+          type="password"
           styles="input-white input-block input-dashboard"
           placeholder="رمزعبور برای احراز هویت در رجیستری"
         ></f-input>
@@ -94,7 +95,7 @@ export default {
     File,
     ProgressBar
   },
-  destroyed() {},
+  destroyed() { },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
@@ -104,14 +105,7 @@ export default {
   },
   methods: {
     createSecret() {
-      if (
-        !FormValidator(this.$data, {
-          username: { required: true },
-          password: { required: true },
-          name: { required: true }
-        })
-      )
-        return false;
+      if (!FormValidator(this.$data, { server: { required: true }, username: { required: true }, password: { required: true }, name: { required: true } })) return false;
       this.loading = true;
       this.$store
         .dispatch("createSecret", {

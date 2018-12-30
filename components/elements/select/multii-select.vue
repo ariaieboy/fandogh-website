@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown">
-    <div :tabindex="tabindex" @focus="show=true"  @blur="show=false" class="dropdown-container">
+    <div class="dropdown-container" :tabindex="tabindex" @click="show=true" @blur="show=false">
       <div class="dropdown--arrow">
         <img v-if="!show" src="./images/arrow-d.svg">
         <img v-if="show" src="./images/arrow-u.svg">
@@ -10,16 +10,16 @@
       </div>
       <div v-else class="dropdown-options">
         <span class="dropdown--option">
-          <span v-for="item in filterSelected">
-              {{item}}
-                <img  src="./images/close.svg">
+          <span v-for="(item,index) in filterSelected">
+            {{item}}
+            <img src="./images/close.svg" @click.stop="remove(item,index)">
           </span>
         </span>
       </div>
     </div>
     <div v-show="show" class="dropdown-selector">
       <ul>
-        <li v-for="option in options">
+        <li v-for="option in options" :class="{'selected':selected.includes(option.title)}">
           <a @focus="selectOption(option)" href="#">{{option.title}}</a>
         </li>
       </ul>
@@ -53,12 +53,13 @@ export default {
   data() {
     return {
       selected: [],
-      show: false
+      show: false,
+
     };
   },
-  computed:{
-    filterSelected(){
-        return this.selected.filter((obj, pos, arr) => {return arr.map(mapObj => mapObj).indexOf(obj) === pos;});
+  computed: {
+    filterSelected() {
+      return this.selected.filter((obj, pos, arr) => { return arr.map(mapObj => mapObj).indexOf(obj) === pos; });
     }
   },
   mounted() {
@@ -71,9 +72,13 @@ export default {
       this.show = !this.show;
     },
     selectOption(option, noToggle) {
-      if (!noToggle) this.toggle();
+      this.show = false
       this.selected.push(option.value || option.title);
-      this.$emit("input", option.value || option.title);
+      this.$emit("input", this.selected);
+    },
+    remove(item, index) {
+      this.show = false
+      this.$delete(this.selected, index)
     }
   }
 };
@@ -107,17 +112,17 @@ export default {
         display inline-block
         margin-right 16px
         span
-          padding  0 10px
-          height 23px
-          border-radius 5px
-          text-align center
-          line-height 23px
-          color: rgb(0, 0, 0);
-          font-size 12px
-          border 1px solid #e7e8ea
           display inline-block
-          margin 10px 0 10px 5px;
-          img 
+          margin 10px 0 10px 5px
+          padding 0 10px
+          height 23px
+          border 1px solid #e7e8ea
+          border-radius 5px
+          color rgb(0, 0, 0)
+          text-align center
+          font-size 12px
+          line-height 23px
+          img
             margin-right 10px
     .dropdown--arrow
       cursor pointer
@@ -130,6 +135,7 @@ export default {
   .dropdown-selector
     position absolute
     top 47px
+    top 98%
     right 10px
     left 10px
     z-index 1
@@ -140,6 +146,9 @@ export default {
     direction ltr
     ul
       li
+        &.selected
+          display none
+          background-color #e3e3e3
         a
           display block
           padding 5px 15px

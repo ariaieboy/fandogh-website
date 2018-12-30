@@ -37,10 +37,11 @@
             </div>
           </div>
 
-          <div v-if="kind === 'ExternalService'" class="margin-top-50">
+          <div v-show="kind === 'ExternalService'" class="margin-top-50">
             <h2>External Option</h2>
             <div class="fandogh-form-group">
-              <f-checkbox title="HTTP" id="http" styles="light" v-model="allow_http"/>
+              <f-checkbox title="HTTP فعال باشد" id="http" styles="light" v-model="allow_http"/>
+              <!-- <f-v-checkbox color="blue" label="HTTP فعال باشد" v-model="allow_http"/> -->
             </div>
             <div class="fandogh-form-group">
               <label class="font-roboto">Path</label>
@@ -53,14 +54,14 @@
             <div class="fandogh-form-group">
               <label>دامنه</label>
               <!-- <f-input v-model="domains"  styles="input-white input-block input-dashboard" placeholder="دامنه خود را وارد نمایید"> </f-input> -->
-              <f-select
+              <f-multi-select
                 tabindex="2"
                 v-model="domains"
-                title="ورژن "
+                title="لیست دامنه ها را وارد کنید "
                 :options="domainsList"
                 styles="input-white input-block input-dashboard"
                 placeholder="دامنه خود را وارد نمایید"
-              ></f-select>
+              />
             </div>
           </div>
         </wizard>
@@ -73,14 +74,25 @@
 import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 import FTable from "~/components/Dashboard/table";
-import FCheckbox from "~/components/elements/checkbox";
 import FSelect from "~/components/elements/select";
-
+import FMultiSelect from "~/components/elements/select/multii-select.vue";
+import FVCheckbox from '~/components/elements/checkbox/checkbox.vue'
+import FCheckbox from '~/components/elements/checkbox'
 // yaml generator
 import Wizard from "~/components/Dashboard/wizard";
 import { Validation } from "~/plugins/validation";
 
 export default {
+  components: {
+    FMultiSelect,
+    FVCheckbox,
+    FCheckbox,
+    FInput,
+    FButton,
+    FTable,
+    FSelect,
+    Wizard
+  },
   data() {
     return {
       internal: false,
@@ -111,6 +123,7 @@ export default {
   layout: "dashboard",
   computed: {
     domainsList() {
+      if (!this.$store.state.domains) return []
       return this.$store.state.domains.map(item => {
         return {
           title: item.name,
@@ -124,6 +137,10 @@ export default {
       this.$store.dispatch("manifestGenerator", { value, path: "name" });
     },
     kind(value, oldValue) {
+      if (value === 'ExternalService' && !this.allow_http) {
+        let elm = document.querySelector('#http')
+        elm.click()
+      }
       this.$store.dispatch("manifestGenerator", { value, path: "kind" });
     },
     allow_http(value, oldValue) {
@@ -133,7 +150,11 @@ export default {
       this.$store.dispatch("manifestGenerator", { value, path: "path" });
     },
     domains(value, oldValue) {
-      this.$store.dispatch("manifestGenerator", { value, path: "domains" });
+      let list = [...value]
+      let mapList = list.map(v => {
+        return { name: v }
+      })
+      this.$store.dispatch("manifestGenerator", { value: mapList, path: "spec.domains" });
     },
 
     memory(value, oldValue) {
@@ -161,14 +182,7 @@ export default {
       this.$router.push("/dashboard/services/create/step2");
     }
   },
-  components: {
-    FInput,
-    FButton,
-    FCheckbox,
-    FTable,
-    FSelect,
-    Wizard
-  }
+
 };
 </script>
 

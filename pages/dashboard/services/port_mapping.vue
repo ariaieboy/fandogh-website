@@ -63,6 +63,7 @@ import FSelect from "~/components/elements/select";
 import ErrorReporter from "~/utils/ErrorReporter";
 import Wizard from "~/components/Dashboard/wizard";
 import ActionButton from "~/components/Dashboard/table/action-button";
+import FormValidator from "~/utils/formValidator";
 
 export default {
   layout: "dashboard",
@@ -148,9 +149,31 @@ export default {
       );
     },
     addPath() {
+      if (
+        !FormValidator(this.$data, {
+          port_mapping: {
+            required: true
+          },
+          port: {
+            required: true
+          }
+        })
+      )
+        return;
       if (this.port_mapping.filter(p => p.port === this.port).length > 0) {
         this.$notify({
-          title: `شما برای port ${this.port} مقدار تعریف کرده اید.`,
+          title: `نگاشت پورت ${this.port} تکراری است`,
+          time: 4000,
+          type: "error"
+        });
+        return;
+      }
+      if (
+        this.port_mapping.filter(p => p.target_port === this.target_port)
+          .length > 0
+      ) {
+        this.$notify({
+          title: `شما قبلا به پورت ${this.target_port} یک نگاشت ایجاد کرده‌اید`,
           time: 4000,
           type: "error"
         });
