@@ -10,6 +10,7 @@
         </div>-->
         <div class="fandogh-form-group">
           <f-input v-model="date" styles="input-white input-block input-dashboard input-disable"></f-input>
+          <!-- <span>{{FDate(builds.last_logged_time)}}</span> -->
         </div>
       </div>
       <div class="col-sm-6"></div>
@@ -23,6 +24,8 @@ import Log from "~/components/Dashboard/log/‌index";
 import FInput from "~/components/elements/input";
 import FDate from "~/utils/date";
 import { removeValue } from "~/utils/cookie";
+import moment from "moment-jalaali";
+moment.loadPersian();
 
 export default {
   layout: "dashboard",
@@ -35,8 +38,11 @@ export default {
   created() {
     this.getData();
   },
-  destroyed() {},
+  destroyed() { },
   methods: {
+    FDate(value) {
+      return FDate({ date: value })
+    },
     async getData() {
       try {
         await this.$store.dispatch("getServiceLog", {
@@ -80,7 +86,8 @@ export default {
     },
     date() {
       if (this.builds) {
-        return "تاریخ ساخت: " + FDate({ date: this.builds.last_logged_time });
+        let date = moment.unix(this.builds.last_logged_time).format("jD jMMMM jYYYY");
+        return "تاریخ ساخت: " + date
       }
     }
   },

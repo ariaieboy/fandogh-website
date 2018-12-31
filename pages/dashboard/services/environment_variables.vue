@@ -54,13 +54,25 @@
                     <img src="/icons/fail.svg">
                   </div>
                 </span>
+                <!-- <span v-else-if="props.column.field == 'name'">{{props.row.name}}</span> -->
                 <span v-else-if="props.column.field == 'value'">
                   <div v-if="props.row.hidden">********</div>
-                  <div v-else>{{props.row.value}}</div>
+                  <div v-else class="position-relative">
+                    <i
+                      data-balloon-pos="up"
+                      :data-balloon="props.row.value"
+                      class="balloon-tip"
+                      @click="copy(props.row.value)"
+                    ></i>
+                    <div class="flex-td">
+                      <img src="~static/icons/copy.svg" class="space-image">
+                      <span>{{props.row.value}}</span>
+                    </div>
+                  </div>
                 </span>
                 <span v-else-if="props.column.field == 'action'">
                   <action-button
-                    class="action-button-s"
+                    class="action-button-x"
                     @onClick="remove(props.row)"
                     icon="ic-delete.svg"
                     label="حذف"
@@ -84,30 +96,42 @@ import FCheckbox from "~/components/elements/checkbox";
 import MultiSelect from "~/components/Dashboard/multiselect";
 import Wizard from "~/components/Dashboard/wizard";
 import ActionButton from "~/components/Dashboard/table/action-button";
+import FMarquee from '~/components/Dashboard/MarqueeText'
 
 export default {
   layout: "dashboard",
+  components: {
+    FMarquee,
+    FInput,
+    FButton,
+    FCheckbox,
+    FTable,
+    MultiSelect,
+    Wizard,
+    ActionButton
+  },
   data() {
     return {
       image: this.$route.params.image,
       header: [
         {
-          label: "نام متغییر",
+          label: "متغییر",
           sortable: false,
           field: "name",
-          tdClass: "ellipsis ltr"
+          tdClass: "ltr"
         },
         {
           label: "مقدار متغیر",
           sortable: false,
           field: "value",
-          tdClass: "ellipsis ltr"
+          tdClass: "ltr"
         },
-        {
-          label: "مقدار محرمانه",
-          sortable: false,
-          field: "hidden"
-        },
+        // {
+        //   label: "مقدار محرمانه",
+        //   sortable: false,
+        //   field: "hidden",
+
+        // },
         {
           label: "مدیریت",
           sortable: false,
@@ -121,15 +145,7 @@ export default {
       env: []
     };
   },
-  components: {
-    FInput,
-    FButton,
-    FCheckbox,
-    FTable,
-    MultiSelect,
-    Wizard,
-    ActionButton
-  },
+
   computed: {
     envsData() {
       return this.env;
@@ -137,8 +153,23 @@ export default {
   },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
+    this.name = ""
   },
   methods: {
+    copy(text) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          this.$notify({
+            title: `مقدار ${text} کپی شد.`,
+            time: 4000,
+            type: "error"
+          });
+        })
+        .catch(err => {
+          // This can happen if the user denies clipboard permissions:
+          console.error('Could not copy text: ', err);
+        });
+    },
     focus() {
       let elm = document.querySelector(".focus");
       elm.focus();
