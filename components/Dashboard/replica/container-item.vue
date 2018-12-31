@@ -2,7 +2,7 @@
   <div class="replica-containers-items">
     <div class="replica-containers-item">
       <strong>نام :</strong>
-      <span class="font-roboto ">{{name}}</span>
+      <span class="font-roboto">{{name}}</span>
     </div>
     <div class="replica-containers-item">
       <strong>ایمیج :</strong>
@@ -39,7 +39,7 @@ export default {
   filters: {
     state(value) {
       if (!value) return "";
-      return value  ? "آماده شده" : "آماده نشده";
+      return value ? "آماده شده" : "آماده نشده";
     }
   },
   computed: {
@@ -57,21 +57,20 @@ export default {
   font-family yekan
   .replica-containers-item
     strong
-        margin-left 5px
+      margin-left 5px
     .elips
-        font-size: 14px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        vertical-align: middle;
-        display: inline-block;
-        white-space: nowrap;
-        width: 200px;
-        direction ltr
+      display inline-block
+      overflow hidden
+      vertical-align middle
+      text-overflow ellipsis
+      white-space nowrap
+      font-size 14px
+      direction ltr
     span, strong
-        color #4f4f4f
-        text-align right
-        font-style normal
-        font-stretch normal
-        font-size 14px
-        line-height 3
+      color #4f4f4f
+      text-align right
+      font-style normal
+      font-stretch normal
+      font-size 14px
+      line-height 3
 </style>
