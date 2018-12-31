@@ -89,6 +89,9 @@ table.vgt-table td.ellipsis span {
   width: 200px;
   text-align: center;
 }
+.width-larg {
+  min-width: 130px;
+}
 .flex-td {
   display: flex;
   justify-content: center;

@@ -133,7 +133,7 @@ export default {
 
         // },
         {
-          label: "مدیریت",
+          label: "مدیدریت", tdClass: 'width-larg',
           sortable: false,
           field: "action",
           html: true

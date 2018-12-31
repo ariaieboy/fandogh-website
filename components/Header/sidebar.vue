@@ -57,6 +57,11 @@ export default {
     logo,
     FButton
   },
+  watch: {
+    $route() {
+      this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
+    }
+  },
   methods: {
     toggleMenu() {
       this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
@@ -71,7 +76,7 @@ export default {
           img: "/icons/exit.svg",
           title: `خروج از داشبورد`,
           description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
-          label:'خروج'
+          label: 'خروج'
         },
         status => {
           if (!status) return

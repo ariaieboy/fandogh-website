@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11.998" height="16.001" viewBox="0 0 11.998 16.001">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #4f4f4f;
+      }
+    </style>
+  </defs>
+  <g id="file" transform="translate(-64.04 0)">
+    <g id="Group_2123" data-name="Group 2123" transform="translate(64.04)">
+      <g id="Group_2122" data-name="Group 2122" transform="translate(0)">
+        <path id="Path_1267" data-name="Path 1267" class="cls-1" d="M76.037,3.239a.374.374,0,0,0-.109-.261L73.061.11h0A.373.373,0,0,0,72.8,0H64.829a.79.79,0,0,0-.789.789V15.212a.79.79,0,0,0,.789.789H75.249a.79.79,0,0,0,.789-.789V3.242A.027.027,0,0,0,76.037,3.239ZM73.17,1.279l1.589,1.589H73.21a.04.04,0,0,1-.039-.039Zm2.119,13.933a.039.039,0,0,1-.039.039H64.829a.039.039,0,0,1-.039-.039V.789a.039.039,0,0,1,.039-.039h7.592V2.828a.79.79,0,0,0,.789.789h2.079V15.212Z" transform="translate(-64.04)"/>
+      </g>
+    </g>
+    <g id="Group_2125" data-name="Group 2125" transform="translate(66.349 5.126)">
+      <g id="Group_2124" data-name="Group 2124" transform="translate(0)">
+        <path id="Path_1268" data-name="Path 1268" class="cls-1" d="M144.929,164.014H138.3a.375.375,0,0,0,0,.749h6.631a.375.375,0,0,0,0-.749Z" transform="translate(-137.924 -164.014)"/>
+      </g>
+    </g>
+    <g id="Group_2127" data-name="Group 2127" transform="translate(66.349 7.386)">
+      <g id="Group_2126" data-name="Group 2126" transform="translate(0)">
+        <path id="Path_1269" data-name="Path 1269" class="cls-1" d="M144.929,236.353H138.3a.375.375,0,0,0,0,.749h6.631a.375.375,0,1,0,0-.749Z" transform="translate(-137.924 -236.353)"/>
+      </g>
+    </g>
+    <g id="Group_2129" data-name="Group 2129" transform="translate(66.349 9.647)">
+      <g id="Group_2128" data-name="Group 2128" transform="translate(0)">
+        <path id="Path_1270" data-name="Path 1270" class="cls-1" d="M144.929,308.691H138.3a.375.375,0,0,0,0,.749h6.631a.375.375,0,1,0,0-.749Z" transform="translate(-137.924 -308.691)"/>
+      </g>
+    </g>
+    <g id="Group_2131" data-name="Group 2131" transform="translate(66.349 11.908)">
+      <g id="Group_2130" data-name="Group 2130" transform="translate(0)">
+        <path id="Path_1271" data-name="Path 1271" class="cls-1" d="M141.614,381.031H138.3a.375.375,0,1,0,0,.749h3.315a.375.375,0,1,0,0-.749Z" transform="translate(-137.924 -381.031)"/>
+      </g>
+    </g>
+  </g>
+</svg>

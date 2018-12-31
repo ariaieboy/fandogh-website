@@ -24,7 +24,7 @@
             <action-button
               class="action-button-s"
               @onClick="logs(props.row)"
-              icon="ic-logs.svg"
+              icon="file.svg"
               label="مشاهده لاگ"
             />
             <action-button
@@ -84,7 +84,8 @@ export default {
           field: "start_date"
         },
         {
-          label: "مدیریت",
+          label: "مدیدریت",
+          tdClass: 'width-larg',
           sortable: false,
           field: "action",
           html: true

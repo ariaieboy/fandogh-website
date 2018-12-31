@@ -47,7 +47,7 @@
         <f-button path="/user/register" styles="transparent border margin-10 md">ثبت نام</f-button>
       </div>
       <div class="user" v-else>
-        <f-button @onClick="logout" styles="transparent md">خروج</f-button>
+        <f-button @onClick="exit" styles="transparent md">خروج</f-button>
         <!--<f-button @onClick="$router.push('/dashboard/images')" styles="transparent border" > داشبورد </f-button>-->
         <f-button path="/dashboard/images" styles="transparent border md margin-10">داشبورد</f-button>
       </div>
@@ -116,18 +116,19 @@ export default {
   },
   methods: {
     toggleMenu(type) {
-        this.$store.dispatch("TOGGLE_NAV", { data: type, id: "sidebar" });
+      this.$store.dispatch("TOGGLE_NAV", { data: type, id: "sidebar" });
     },
     showModal(modal) {
       this.$store.dispatch("showModal", modal);
     },
-    logout() {
-            this.$alertify(
+    exit() {
+      console.log('hello')
+      this.$alertify(
         {
           img: "/icons/exit.svg",
           title: `خروج از داشبورد`,
           description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
-          label:'خروج'
+          label: 'خروج'
         },
         status => {
           if (!status) return
@@ -138,7 +139,7 @@ export default {
             eventValue: getValue("username")
           });
           this.$store.dispatch("logout");
-         this.$router.push("/user/login");
+          this.$router.push("/user/login");
         }
       );
 

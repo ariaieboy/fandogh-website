@@ -30,7 +30,7 @@ export default {
       return this.$store.state.sidebar === "halfSidebar";
     },
     isMobile() {
-      return this.$store.state.windowWidth <= 992;
+      return this.$store.state.windowWidth <= 1200;
     }
   },
   watch: {
@@ -42,7 +42,7 @@ export default {
   },
   mounted() {
     var vm = this;
-    window.addEventListener("resize", function(e) {
+    window.addEventListener("resize", function (e) {
       vm.setSize(e);
     });
     if (process.browser) {
@@ -82,12 +82,9 @@ export default {
   transition all ease 0.5s
   &.show-half
     right -350px
-  // @media only screen and (max-width: 1400px)
-  //   width 300px
-  
 @media only screen and (max-width: 1230px)
   .admin-sidebar
     top 60px
     // &.show-half
-    //   right -300px
+    // right -300px
 </style>
