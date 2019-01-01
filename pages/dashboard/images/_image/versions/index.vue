@@ -3,14 +3,14 @@
     <f-empty v-if="!versions || !versions.length" title="هنوز ورژنی اضافه نشده !">
       <f-button
         styles="red"
-        @onClick="$router.push('/dashboard/images/front/versions/create')"
+        @onClick="$router.push(`/dashboard/images/${image}/versions/create`)"
       >افزودن ورژن</f-button>
     </f-empty>
     <div class="images" v-else>
       <div class="row-block">
         <f-button
           styles="red"
-          @onClick="$router.push('/dashboard/images/front/versions/create')"
+          @onClick="$router.push(`/dashboard/images/${image}/versions/create`)"
         >افزودن ورژن</f-button>
       </div>
       <div class="table-title">ورژن های شما</div>
@@ -95,6 +95,9 @@ export default {
     FEmpty
   },
   computed: {
+    image() {
+      return this.$route.params.image
+    },
     loading() {
       return this.$store.state.loading;
     },
