@@ -69,13 +69,13 @@ export default {
       image: this.$route.params.image,
       header: [
         {
-          label: "نام متغییر",
+          label: "path",
           sortable: false,
           field: "mount_path",
           tdClass: "ellipsis ltr"
         },
         {
-          label: "مقدار متغیر",
+          label: "sub path",
           sortable: false,
           field: "sub_path",
           tdClass: "ellipsis ltr"

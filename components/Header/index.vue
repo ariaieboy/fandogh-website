@@ -122,7 +122,6 @@ export default {
       this.$store.dispatch("showModal", modal);
     },
     exit() {
-      console.log('hello')
       this.$alertify(
         {
           img: "/icons/exit.svg",

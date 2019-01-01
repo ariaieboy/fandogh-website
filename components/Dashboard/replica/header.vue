@@ -2,7 +2,15 @@
   <div class="replica-header">
     <label class="font-roboto">{{name}}</label>
     <i>,</i>
-    <label :class="stateColor">{{state | state}}</label>
+    <label v-if="state === 'Running'" :class="stateColor">{{state | state}}</label>
+    <div
+      v-if="state !== 'Running'"
+      data-balloon-visible
+      :data-balloon="state"
+      data-balloon-pos="up"
+    >
+      <img src="./images/Ellipsis-2s-167px.svg" alt>
+    </div>
     <i>,</i>
     <label>
       <span>کانتینر آماده :</span>
@@ -38,17 +46,18 @@ export default {
       return value === "Running"
         ? "در حال اجرا"
         : value === "Pendding"
-        ? "درحال ساخت"
-        : "نا مشخص";
+          ? "درحال ساخت"
+          : "نا مشخص";
     }
   },
   computed: {
     stateColor() {
+      if (!this.state) return ''
       return this.state === "Running"
         ? "pending-text"
-        : value === "Pendding"
-        ? "success-text"
-        : "error-text";
+        : this.state === "Pendding"
+          ? "success-text"
+          : "error-text";
     }
   }
 };
@@ -56,6 +65,7 @@ export default {
 <style lang="stylus" scoped>
 .replica-header
   display flex
+  align-items center
   label
     margin-left 15px
     color rgb(79, 79, 79)

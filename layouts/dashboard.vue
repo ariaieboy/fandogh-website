@@ -62,7 +62,6 @@ export default {
         this.$store.dispatch("showModal", "message");
       }
       this.$store.commit("SET_DATA", { data: true, id: "loading" });
-      this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
 
     }
   },

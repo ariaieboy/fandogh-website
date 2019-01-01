@@ -52,17 +52,18 @@ export default {
       return value === "Running"
         ? "در حال اجرا"
         : value === "Pendding"
-        ? "درحال ساخت"
-        : "نا مشخص";
+          ? "درحال ساخت"
+          : "نا مشخص";
     }
   },
   computed: {
     stateColor() {
+      if (!this.state) return ''
       return this.state === "Running"
         ? "pending-text"
-        : value === "Pendding"
-        ? "success-text"
-        : "error-text";
+        : this.state === "Pendding"
+          ? "success-text"
+          : "error-text";
     }
   },
   methods: {

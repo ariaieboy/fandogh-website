@@ -110,6 +110,4 @@ export default {
 <style lang="stylus">
 .box-checkbox
   display flex
-.fandogh-form-group
-  margin-bottom 45px
 </style>

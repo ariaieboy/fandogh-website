@@ -36,10 +36,10 @@ export default {
   display flex
   justify-content right
   font-family yekan
-  @media (min-width: 480px)
+  @media (max-width: 480px)
     flex-direction column
   div
     margin-left 30px
-    @media (min-width: 480px)
+    @media (max-width: 480px)
       margin 0 5px 10px 5px
 </style>
