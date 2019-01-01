@@ -45,15 +45,6 @@
       <li>
         <router-link
           event="disabled"
-          @click.native="closeMenu('/dashboard/plans')"
-          :to="{path:'/dashboard/plans'}"
-        >
-          <img src="./icons/domain.svg"> پلن‌های فندق
-        </router-link>
-      </li>
-      <li>
-        <router-link
-          event="disabled"
           @click.native="closeMenu('/dashboard/account')"
           :to="{path:'/dashboard/account'}"
         >
