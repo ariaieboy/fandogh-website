@@ -52,7 +52,7 @@
         </router-link>
       </li>
       <li>
-         <router-link
+        <router-link
           event="disabled"
           @click.native="closeMenu('/dashboard/account')"
           :to="{path:'/dashboard/account'}"
@@ -81,38 +81,43 @@ export default {
   mounted() {
     this.setHeight();
     var vm = this;
-    window.addEventListener("resize", function(e) {
+    window.addEventListener("resize", function (e) {
       vm.setHeight(e);
     });
+    if (localStorage && localStorage.length) {
+      if (localStorage.nav) {
+        this.$store.dispatch("TOGGLE_NAV", { data: localStorage.nav, id: "sidebar" });
+      }
+    }
   },
   methods: {
     setHeight() {
       this.height = window.innerHeight - 490 + 42;
     },
     closeMenu(path) {
-      // this.$store.dispatch("TOGGLE_NAV", {data:null,id:'sidebar'});
+      this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
       this.$router.push(path);
     },
     logout() {
-        this.$alertify(
-          {
-            img: "/icons/exit.svg",
-            title: `خروج از داشبورد`,
-            description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
-            label:'خروج'
-          },
-          status => {
-            if (!status) return
-            this.$ga.event({
-              eventCategory: "account",
-              eventAction: "user logout dashboard",
-              eventLabel: "username",
-              eventValue: getValue("username")
-            });
-            this.$store.dispatch("logout");
-            this.$router.push("/user/login");
-          }
-        );
+      this.$alertify(
+        {
+          img: "/icons/exit.svg",
+          title: `خروج از داشبورد`,
+          description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
+          label: 'خروج'
+        },
+        status => {
+          if (!status) return
+          this.$ga.event({
+            eventCategory: "account",
+            eventAction: "user logout dashboard",
+            eventLabel: "username",
+            eventValue: getValue("username")
+          });
+          this.$store.dispatch("logout");
+          this.$router.push("/user/login");
+        }
+      );
     }
   }
 };

@@ -285,6 +285,7 @@ export const getNameSpace = async ({ commit, state }, namespace) => {
 };
 
 export const TOGGLE_NAV = ({ commit, state }, { data }) => {
+  localStorage.setItem("nav", data);
   commit("SET_DATA", { data: data, id: "sidebar" });
 };
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="service">
+  <div v-if="service && !loading">
     <h2>جزییات سرویس</h2>
     <div class="row">
       <div class="col-md-6 col-xs-12">
@@ -126,14 +126,24 @@ export default {
     };
   },
   created() {
+    this.$store.commit('SET_DATA', { id: 'manifest', data: {} })
     this.getData();
   },
   methods: {
     async getData() {
       try {
-        await this.$store.dispatch("getServicesName", {
+        let res = await this.$store.dispatch("getServicesName", {
           name: this.$route.params.id
         });
+        let internal = null
+        if (res.state !== 'RUNNING') {
+          setTimeout(() => {
+            this.getData()
+          }, 5000);
+        }
+        else {
+          clearInterval(internal)
+        }
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
@@ -147,6 +157,9 @@ export default {
     this.$store.commit("SET_DATA", { data: null, id: "service" });
   },
   computed: {
+    loading() {
+      return this.$store.state.loading;
+    },
     windowWidth() {
       return this.$store.state.windowWidth;
     },

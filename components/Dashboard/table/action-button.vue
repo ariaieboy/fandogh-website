@@ -25,7 +25,6 @@ export default {
   display inline-block
   margin 10px
   padding 8px
-  width 130px
   border-radius 5px
   background #eaf0f7
   color #4f4f4f

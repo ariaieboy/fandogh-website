@@ -33,26 +33,26 @@ import Vue from "vue";
 export default {
   props: ["message", "disableOverlay", "noModal"],
   // 
-  props:{
-    message:{
-      type:String,
-      default:''
+  props: {
+    message: {
+      type: String,
+      default: ''
     },
-    disableOverlay:'',
-    noModal:''
+    disableOverlay: '',
+    noModal: ''
   },
   data() {
     return {
       display: false,
       options: null,
-      
+
     };
   },
-  computed:{
-    image(){
-      return  this.options.img ? this.options.img   : require('./images/img_delete.svg')
+  computed: {
+    image() {
+      return this.options.img ? this.options.img : require('./images/img_delete.svg')
     },
-    label(){
+    label() {
       return this.options.label || 'حذف شود'
     }
   },
@@ -86,25 +86,25 @@ export default {
 .alert
   position fixed /* Stay in place */
   top 0
-  left 50%
+  right 0
+  bottom 0
+  left 0
   z-index 999999
   overflow hidden
-  margin-top 50px
+  margin auto
+  width 435px
   border-radius 10px
-  transform translateX(-50%)
-  -webkit-transform translateX(-50%)
   .alert-image
     display flex
+    flex-direction column
     flex-flow wrap row
     justify-content center
     align-items center
-    flex-direction column
     margin-top -80px
     width 400px
     height 400px
     border-radius 200px
     background-color rgba(224, 224, 224, 0.2)
-   
   .alert-content
     text-align center
     h6
@@ -163,7 +163,7 @@ body
       margin 5% auto
     .alert-image
       margin -60px auto
-      background-color #fff;
       border-radius 150px
+      background-color #fff
 </style>
 

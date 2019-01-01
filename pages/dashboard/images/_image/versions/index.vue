@@ -29,7 +29,7 @@
             <action-button
               class="action-button-s"
               @onClick="logs(props.row)"
-              icon="ic-logs.svg"
+              icon="file.svg"
               label="مشاهده لاگ"
             />
           </span>
@@ -79,7 +79,7 @@ export default {
           tdClass: this.getClass
         },
         {
-          label: "مدیریت",
+          label: "مدیدریت", tdClass: 'width-larg',
           sortable: false,
           field: "action",
           html: true
@@ -143,8 +143,8 @@ export default {
       return state === "خطا"
         ? "error-text"
         : state === "ساخته شده"
-        ? "success-text"
-        : "pending-text";
+          ? "success-text"
+          : "pending-text";
     },
     craeteVersions({ version }) {
       this.$router.push(`/dashboard/services/setup`);
@@ -155,8 +155,8 @@ export default {
       return state === "FAILED"
         ? "خطا"
         : state === "BUILT"
-        ? "ساخته شده"
-        : "در حال ساخت ...";
+          ? "ساخته شده"
+          : "در حال ساخت ...";
     },
     logs({ version }) {
       this.$ga.event({

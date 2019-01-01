@@ -44,6 +44,7 @@ export default {
   },
   computed: {
     stateColor() {
+      if (!this.state) return ''
       return this.state ? "success-text" : "error-text";
     },
   },

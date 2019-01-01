@@ -33,6 +33,7 @@ import Notification from "~/components/Dashboard/notification";
 import Alert from "~/components/Dashboard/alert";
 import { readCookieReq, readCookie } from "../utils/cookies.js";
 import FLoading from "~/components/Loading";
+
 export default {
   components: {
     FHeader,
@@ -61,6 +62,7 @@ export default {
         this.$store.dispatch("showModal", "message");
       }
       this.$store.commit("SET_DATA", { data: true, id: "loading" });
+
     }
   },
   beforeMount() {
@@ -96,13 +98,10 @@ $spaceTop = 45
 .wrapper
   width 100%
   background #f0f4f8
-// .admin-container
-// display flex
-// flex-flow row wrap
-// justify-content flex-start
 @media only screen and (max-width: 1230px)
   .dash-container
     margin 0
     margin-top $spaceTop + 60px
+    padding 0 30px
     width 100%
 </style>
