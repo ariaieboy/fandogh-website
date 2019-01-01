@@ -39,8 +39,6 @@
       </div>
       <div class="fandogh-form-group margin-top-100">
         <f-button @onClick="accountEdit" styles="blue">ویرایش اطلاعات</f-button>
-        <!-- <f-button v-if="loading && !loadingProgress" styles="red block">در حال ساخت</f-button> -->
-        <!-- <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar> -->
       </div>
     </div>
   </div>
@@ -60,6 +58,14 @@ import FCheckbox from "~/components/elements/checkbox";
 export default {
   layout: "dashboard",
   name: "account",
+  components: {
+    FInput,
+    FButton,
+    File,
+    ProgressBar,
+    FLabelDisable,
+    FCheckbox
+  },
   data() {
     return {
       account: {
@@ -79,14 +85,7 @@ export default {
       return this.$store.state.progress;
     }
   },
-  components: {
-    FInput,
-    FButton,
-    File,
-    ProgressBar,
-    FLabelDisable,
-    FCheckbox
-  },
+
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
