@@ -151,11 +151,14 @@ export default {
     addPath() {
       if (
         !FormValidator(this.$data, {
-          port_mapping: {
-            required: true
+          target_port: {
+            required: true,
+            name: 'Inside Port'
           },
           port: {
-            required: true
+            required: true,
+            name: 'Outside Port '
+
           }
         })
       )
