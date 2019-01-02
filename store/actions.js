@@ -322,9 +322,46 @@ export const deleteSecret = async ({ commit, state }, name) => {
     return Promise.reject(e);
   }
 };
+
 export const putSecret = async ({ commit, state }, { name, type, fields }) => {
   try {
     return await Request().put(`/api/secrets/${name}`, { name, type, fields });
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getAccount = async ({ commit, state }, { username }) => {
+  try {
+    let accounts = await Request().get(`/api/accounts/${username}`);
+    commit("SET_DATA", { id: "account", data: accounts });
+    return accounts;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const updateAccount = async (
+  { commit, state },
+  {
+    national_id,
+    newsletter_subscriber,
+    first_name,
+    last_name,
+    username,
+    new_password,
+    current_password
+  }
+) => {
+  try {
+    return await Request().patch(`/api/accounts/${username}`, {
+      national_id,
+      newsletter_subscriber,
+      first_name,
+      last_name,
+      new_password,
+      current_password
+    });
   } catch (e) {
     return Promise.reject(e);
   }
