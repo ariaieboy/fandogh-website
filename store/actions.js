@@ -343,14 +343,17 @@ export const getAccount = async ({ commit, state }, { username }) => {
 
 export const updateAccount = async ({ commit, state }, payload) => {
   try {
-    console.log(payload);
     return await Request().patch(`/api/accounts/${payload.username}`, {
-      national_id: payload.national_id,
-      newsletter_subscriber: payload.newsletter_subscriber,
-      first_name: payload.first_name,
-      last_name: payload.last_name,
-      new_password: payload.new_password,
-      current_password: payload.current_password
+      national_id: payload.national_id !== "" ? payload.national_id : null,
+      newsletter_subscriber:
+        payload.newsletter_subscriber !== ""
+          ? payload.newsletter_subscriber
+          : null,
+      first_name: payload.first_name !== "" ? payload.first_name : null,
+      last_name: payload.last_name !== "" ? payload.last_name : null,
+      new_password: payload.new_password !== "" ? payload.new_password : null,
+      current_password:
+        payload.current_password !== "" ? payload.current_password : null
     });
   } catch (e) {
     return Promise.reject(e);
