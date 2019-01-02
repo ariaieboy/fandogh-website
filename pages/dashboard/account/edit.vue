@@ -7,12 +7,8 @@
         <f-label-disable label="نام کاربری :" :value="username"/>
       </div>
       <div class="fandogh-form-group">
-        <label>آدرس ایمیل</label>
-        <f-input
-          v-model="account.email"
-          styles="input-white input-block input-dashboard"
-          placeholder="آدرس ایمیل خود را وارد کنید"
-        ></f-input>
+        <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
+        <f-label-disable label="آدرس ایمیل :" :value="email"/>
       </div>
       <div class="fandogh-form-group">
         <label>نام</label>
@@ -87,6 +83,9 @@ export default {
     username() {
       return getValue("username")
     },
+    email() {
+      return getValue("email")
+    },
     progress() {
       return this.$store.state.progress;
     },
@@ -132,10 +131,10 @@ export default {
       });
       this.$store.dispatch("updateAccount", {
         username: getValue("username"),
-        national_id: this.national_id,
-        newsletter_subscriber: this.newsletter_subscriber,
-        first_name: this.first_name,
-        last_name: this.last_name,
+        national_id: this.account.national_id,
+        newsletter_subscriber: this.account.newsletter_subscriber,
+        first_name: this.account.first_name,
+        last_name: this.account.last_name,
       }).then(res => {
         this.$notify({
           title: 'پروفایل شما با موفقیت بروز رسانی شد.',
