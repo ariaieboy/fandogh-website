@@ -123,33 +123,35 @@ export default {
         }
       }
     },
-    saveEdit() {
-      this.loadingProgress = true;
+    async saveEdit() {
+      if (/^\d{10}$/.test(this.account.national_id)) {
+        this.$notify({
+          title: 'از کاراکتر های مجاز استفاده کنید',
+          time: 4000,
+          type: "error"
+        });
+        return
+      }
       this.$ga.event({
         eventCategory: "account",
         eventAction: "save update information"
       });
-      this.$store.dispatch("updateAccount", {
-        username: getValue("username"),
-        national_id: this.account.national_id,
-        newsletter_subscriber: this.account.newsletter_subscriber,
-        first_name: this.account.first_name,
-        last_name: this.account.last_name,
-      }).then(res => {
+      try {
+        await this.$store.dispatch("updateAccount", {
+          username: getValue("username"),
+          national_id: this.account.national_id !== '' ? this.account.national_id : null,
+          newsletter_subscriber: this.account.newsletter_subscriber !== '' ? this.account.newsletter_subscriber : null,
+          first_name: this.account.first_name !== '' ? this.account.first_name : null,
+          last_name: this.account.last_name !== '' ? this.account.last_name : null,
+        })
+      } catch (error) {
+        console.log(error)
         this.$notify({
-          title: 'پروفایل شما با موفقیت بروز رسانی شد.',
+          title: error,
           time: 4000,
           type: 'success'
         })
-        this.$router.push("/dashboard/account");
-      }).catch(e => {
-        this.$notify({
-          title: ErrorReporter(e, this.$data),
-          time: 4000,
-          type: "error"
-        });
-      })
-      this.loadingProgress = false;
+      }
     }
   }
 };
