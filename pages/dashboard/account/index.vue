@@ -12,7 +12,7 @@
       </div>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-        <f-label-disable label="نام :" :value="account.name"/>
+        <f-label-disable label="نام :" :value="account.first_name"/>
       </div>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
@@ -20,15 +20,15 @@
       </div>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-        <f-label-disable label="کد ملی :" :value="account.code"/>
+        <f-label-disable label="کد ملی :" :value="account.national_id"/>
       </div>
       <div class="fandogh-form-group right">
         <div class="box-checkbox">
           <div class="box-checkbox-input">
             <f-checkbox
               styles="light input-checkbox-disable"
-              v-model="account.news"
-              id="news"
+              v-model="account.newsletter_subscriber"
+              id="newsletter_subscriber"
               title="دریافت خبرنامه"
             />
           </div>
@@ -38,9 +38,8 @@
         </div>
       </div>
       <div class="fandogh-form-group margin-top-100">
-        <f-button @onClick="accountEdit" styles="blue">ویرایش اطلاعات</f-button>
-        <!-- <f-button v-if="loading && !loadingProgress" styles="red block">در حال ساخت</f-button> -->
-        <!-- <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar> -->
+        <f-button @onClick="accountEdit" styles="blue ml-45" class>ویرایش اطلاعات</f-button>
+        <f-button @onClick="accountPassword" styles="red">تغییر رمز عبور</f-button>
       </div>
     </div>
   </div>
@@ -56,29 +55,11 @@ import ErrorReporter from "~/utils/ErrorReporter";
 import FormValidator from "~/utils/formValidator";
 import FLabelDisable from "~/components/elements/label/label-disable";
 import FCheckbox from "~/components/elements/checkbox";
+import { getValue } from "~/utils/cookie";
 
 export default {
   layout: "dashboard",
   name: "account",
-  data() {
-    return {
-      account: {
-        username: "Ramin",
-        name: "رامین",
-        email: "Ramin.esmaeili91@yahoo.com",
-        last_name: "اسماعیلی",
-        code: "۰۰۱۱۴۶۵۸۲۹۸۷",
-        news: false
-      },
-      loading: false,
-      loadingProgress: false
-    };
-  },
-  computed: {
-    progress() {
-      return this.$store.state.progress;
-    }
-  },
   components: {
     FInput,
     FButton,
@@ -87,20 +68,67 @@ export default {
     FLabelDisable,
     FCheckbox
   },
+  data() {
+    return {
+      // account: {
+      //   username: "Ramin",
+      //   name: "رامین",
+      //   email: "Ramin.esmaeili91@yahoo.com",
+      //   last_name: "اسماعیلی",
+      //   code: "۰۰۱۱۴۶۵۸۲۹۸۷",
+      //   news: false
+      // },
+      loading: false,
+      loadingProgress: false
+    };
+  },
+  computed: {
+    account() {
+      return this.$store.state.account
+    },
+    progress() {
+      return this.$store.state.progress;
+    }
+  },
+
   mounted() {
-    this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
       eventCategory: "account",
       eventAction: "show information"
     });
   },
+  created() {
+    this.getData()
+  },
   methods: {
+    async getData() {
+      try {
+        let res = await this.$store.dispatch("getAccount", { username: getValue("username") });
+        if (res.newsletter_subscriber) {
+          let elm = document.querySelector('#newsletter_subscriber')
+          elm.click()
+        }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
+      } catch (e) {
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
     accountEdit() {
       this.$ga.event({
         eventCategory: "account",
         eventAction: "click btn edit information"
       });
       this.$router.push("/dashboard/account/edit");
+    },
+    accountPassword() {
+      this.$ga.event({
+        eventCategory: "account",
+        eventAction: "click btn edit information"
+      });
+      this.$router.push("/dashboard/account/password");
     }
   }
 };

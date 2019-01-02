@@ -4,10 +4,12 @@
     <div class="row">
       <div class="col-md-6 col-xs-12">
         <div class="fandogh-form-group">
-          <f-input v-model="name" styles="input-white input-block input-dashboard input-disable"></f-input>
+          <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
+          <f-label-disable label :value="name" class="center"/>
         </div>
         <div class="fandogh-form-group">
-          <f-textarea :placeholder="description" disable="true" class="textarea-disable"/>
+          <f-textarea placeholder disable="true" class="textarea-disable"/>
+          <f-label-disable label :value="description" class="center"/>
         </div>
         <div class="fandogh-form-group">
           <f-lable :value="domain.verification_key" title="کد فعالسازی"></f-lable>
@@ -26,6 +28,7 @@ import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 import FTextarea from "~/components/Dashboard/textarea";
 import FLable from "~/components/Dashboard/label";
+import FLabelDisable from "~/components/elements/label/label-disable";
 
 export default {
   data() {
@@ -33,7 +36,7 @@ export default {
       name: this.$route.params.name,
       test: "",
       description:
-        "لطفا روی دامنه مورد نظر یک رکورد با مقدار TXT زیر ایجاد کنید و روی کلید بررسی دامنه کلیک کنید"
+        "لطفا روی دامنه مورد نظر یک رکورد با مقدار TXT زیر ایجاد کنید و روی کلید بررسی دامنه کلیک کنید "
     };
   },
   computed: {
@@ -46,12 +49,13 @@ export default {
     FInput,
     FButton,
     FTextarea,
-    FLable
+    FLable,
+    FLabelDisable
   },
   created() {
     this.getData();
   },
-  destroyed() {},
+  destroyed() { },
   methods: {
     async getData() {
       try {
