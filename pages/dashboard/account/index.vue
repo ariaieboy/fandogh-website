@@ -4,11 +4,11 @@
       <h2>تنظیمات</h2>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-        <f-label-disable label="نام کاربری :" :value="account.username"/>
+        <f-label-disable label="نام کاربری :" :value="username"/>
       </div>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-        <f-label-disable label="آدرس ایمیل :" :value="account.email"/>
+        <f-label-disable label="آدرس ایمیل :" :value="email"/>
       </div>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
@@ -86,9 +86,15 @@ export default {
     account() {
       return this.$store.state.account
     },
+    email() {
+      return getValue("email")
+    },
     progress() {
       return this.$store.state.progress;
-    }
+    },
+    username() {
+      return getValue("username")
+    },
   },
 
   mounted() {
