@@ -55,7 +55,7 @@
               v-if="props.row.certificate"
               :data-balloon="FDate(props.row.certificate.created_at)"
               data-balloon-pos="up"
-            >{{FFromDate(props.row.certificate.created_at)}}</span>
+            >{{props.row.certificate.details}}</span>
             <span v-else>ندارد</span>
           </span>
           <span v-else-if="props.column.field == 'service'">
@@ -108,7 +108,8 @@ export default {
         {
           sortable: false,
           label: "گواهینامه ssl",
-          field: "certificate"
+          field: "certificate",
+          tdClass: this.getStatus
         },
         {
           label: "وضعیت",
@@ -118,7 +119,8 @@ export default {
           html: true
         },
         {
-          label: "مدیدریت", tdClass: 'width-larg',
+          label: "مدیدریت",
+          tdClass: "width-larg",
           sortable: false,
           field: "action",
           html: true
@@ -132,6 +134,21 @@ export default {
     ActionButton,
     FEmpty,
     FLoading
+  },
+  filters: {
+    status: function(value) {
+      if (!value) return "";
+      let state = value.toLowerCase();
+      if (state === "ready") {
+        return "فعال";
+      }
+      if (state === "error") {
+        return "خطا";
+      }
+      if (state === "unknown") {
+        return "نامشخص";
+      }
+    }
   },
   computed: {
     loading() {
@@ -168,7 +185,22 @@ export default {
       return FDate({ date: value });
     },
     getDomainStatus({ verified }) {
-      return verified ? "در حال استفاده" : "تایید نشده";
+      return verified ? "تایید نشده" : "تایید نشده";
+    },
+    getStatus(row) {
+      // const { state } = row.certificate.details;
+      let state = "ready";
+      if (!state) return "";
+      let value = state.toLowerCase();
+      if (value === "ready") {
+        return "success-text";
+      }
+      if (value === "error") {
+        return "error-text";
+      }
+      if (value === "unknown") {
+        return "pending-text";
+      }
     },
     getClass({ verified }) {
       return verified ? "success-text" : "error-text";
