@@ -7,6 +7,7 @@
         <f-input
           v-model="current_password"
           styles="input-white input-block input-dashboard"
+          type="password"
           placeholder="رمز عبور قبلی را وارد کنید"
         ></f-input>
       </div>
@@ -14,7 +15,8 @@
         <label>رمز عبور جدید</label>
         <f-input
           v-model="new_password"
-          styles="input-rtl input-yekan input-white input-block input-dashboard"
+          styles="input-yekan input-white input-block input-dashboard"
+          type="password"
           placeholder="رمز عبور جدید را وارد کنید"
         ></f-input>
       </div>
@@ -22,7 +24,8 @@
         <label>تکرار رمز عبور</label>
         <f-input
           v-model="re_new_password"
-          styles="input-rtl input-yekan input-white input-block input-dashboard"
+          styles="input-yekan input-white input-block input-dashboard"
+          type="password"
           placeholder="رمز عبور خود را تکرار کنید"
         ></f-input>
       </div>
@@ -71,6 +74,7 @@ export default {
   },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
+
   },
   components: {
     FInput,
@@ -91,7 +95,7 @@ export default {
         })
         return
       }
-      if (!FormValidator(this.$data, { current_password: { required: true, name: 'پسورد فعلی' } })) return
+      if (!FormValidator(this.$data, { current_password: { required: true, name: 'رمز عبور قبلی ' }, new_password: { required: true, name: 'رمز عبور جدید ' }, re_new_password: { required: true, name: 'تکرار رمز عبور' } })) return
       this.loadingProgress = true;
       this.$ga.event({
         eventCategory: "account",
@@ -109,13 +113,8 @@ export default {
         })
         this.$router.push("/dashboard/account");
       }).catch(e => {
-        this.$notify({
-          title: ErrorReporter(e, this.$data),
-          time: 4000,
-          type: "error"
-        });
+        this.$alertReport(e)
       })
-
       this.loadingProgress = false;
     }
   }

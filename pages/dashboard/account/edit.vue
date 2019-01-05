@@ -124,7 +124,7 @@ export default {
       }
     },
     async saveEdit() {
-      if (/^\d{10}$/.test(this.account.national_id)) {
+      if (!/^\d{10}$/.test(this.account.national_id)) {
         this.$notify({
           title: 'از کاراکتر های مجاز استفاده کنید',
           time: 4000,
@@ -144,12 +144,17 @@ export default {
           first_name: this.account.first_name !== '' ? this.account.first_name : null,
           last_name: this.account.last_name !== '' ? this.account.last_name : null,
         })
+        this.$notify({
+          title: 'پروفایل شما با موفقیت بروزرسانی شد',
+          time: 4000,
+          type: 'success'
+        })
+        this.$router.push("/dashboard/account");
       } catch (error) {
-        console.log(error)
         this.$notify({
           title: error,
           time: 4000,
-          type: 'success'
+          type: 'error'
         })
       }
     }

@@ -32,6 +32,7 @@ import "normalize.css";
 import Notification from "~/components/Dashboard/notification";
 import Alert from "~/components/Dashboard/alert";
 import { readCookieReq, readCookie } from "../utils/cookies.js";
+import { alertReport } from "../utils/AlertError";
 import FLoading from "~/components/Loading";
 
 export default {
