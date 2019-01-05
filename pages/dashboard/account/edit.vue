@@ -151,11 +151,7 @@ export default {
         })
         this.$router.push("/dashboard/account");
       } catch (error) {
-        this.$notify({
-          title: error,
-          time: 4000,
-          type: 'error'
-        })
+        this.$alertReport(error)
       }
     }
   }

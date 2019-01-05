@@ -83,6 +83,7 @@
             <f-select
               tabindex="3"
               v-model="image_pull_policy"
+              :isClear="true"
               styles="input-white input-block input-dashboard"
               :options="[{title: 'Always'}, {title: 'IfNotPresent'}]"
               placeholder="Image Pull Policy"
@@ -94,7 +95,7 @@
             <f-select
               tabindex="2"
               v-model="image_pull_secret"
-              title="ورژن "
+              title="Image Pull Secret"
               :options="secretList"
               styles="input-white input-block input-dashboard"
               placeholder="Image Pull Secret "

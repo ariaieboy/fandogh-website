@@ -136,7 +136,7 @@ export default {
     FLoading
   },
   filters: {
-    status: function(value) {
+    status: function (value) {
       if (!value) return "";
       let state = value.toLowerCase();
       if (state === "ready") {
@@ -189,7 +189,7 @@ export default {
     },
     getStatus(row) {
       // const { state } = row.certificate.details;
-      let state = "ready";
+      let state = "";
       if (!state) return "";
       let value = state.toLowerCase();
       if (value === "ready") {
