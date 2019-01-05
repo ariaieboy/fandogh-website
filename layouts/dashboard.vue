@@ -96,13 +96,14 @@ $spaceTop = 45
   box-sizing border-box
   margin-top $spaceTop + 68px
   min-height calc(100vh - 68px)
-.wrapper
-  width 100%
-  background #f0f4f8
-@media only screen and (max-width: 1230px)
-  .dash-container
+  @media only screen and (max-width: 1230px)
     margin 0
     margin-top $spaceTop + 60px
     padding 0 30px
     width 100%
+  @media only screen and (max-width: 992px)
+    padding 0 15px
+.wrapper
+  width 100%
+  background #f0f4f8
 </style>
