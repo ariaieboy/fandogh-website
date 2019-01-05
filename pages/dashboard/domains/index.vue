@@ -9,7 +9,7 @@
         <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
       </div>
       <div class="table-title">دامنه های شما</div>
-      <vue-good-table :columns="header" :rows="domains" :rtl="true" styleClass="vgt-table">
+      <vue-good-table :columns="header" :rows="domains" styleClass="vgt-table" :rtl="true">
         <div slot="emptystate">
           <p class="empty-table center">دیتایی وجود ندارد</p>
         </div>
@@ -356,3 +356,7 @@ export default {
   }
 };
 </script>
+<style lang="stylus" scoped>
+.scroll
+  overflow-x auto
+</style>
