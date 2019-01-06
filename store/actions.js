@@ -355,11 +355,10 @@ export const updateAccount = async (
 ) => {
   try {
     return await Request().patch(`/api/accounts/${username}`, {
-      national_id: national_id !== "" ? national_id : null,
-      newsletter_subscriber:
-        newsletter_subscriber !== "" ? newsletter_subscriber : null,
-      first_name: first_name !== "" ? first_name : null,
-      last_name: last_name !== "" ? last_name : null,
+      national_id,
+      newsletter_subscriber,
+      first_name,
+      last_name,
       new_password,
       current_password
     });

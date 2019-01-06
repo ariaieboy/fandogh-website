@@ -55,7 +55,7 @@
               v-if="props.row.certificate"
               :data-balloon="FDate(props.row.certificate.created_at)"
               data-balloon-pos="up"
-            >{{props.row.certificate.details}}</span>
+            >{{props.row.certificate.details.status | status}}</span>
             <span v-else>ندارد</span>
           </span>
           <span v-else-if="props.column.field == 'service'">
@@ -185,13 +185,13 @@ export default {
       return FDate({ date: value });
     },
     getDomainStatus({ verified }) {
-      return verified ? "تایید نشده" : "تایید نشده";
+      return verified ? "تایید شده" : "تایید نشده";
     },
-    getStatus(row) {
-      // const { state } = row.certificate.details;
-      let state = "";
-      if (!state) return "";
-      let value = state.toLowerCase();
+    getStatus({ certificate }) {
+      if (!certificate) return ''
+      const { status } = certificate.details;
+      if (!status) return "";
+      let value = status.toLowerCase();
       if (value === "ready") {
         return "success-text";
       }
