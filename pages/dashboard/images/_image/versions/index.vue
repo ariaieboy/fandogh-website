@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import FTable from "~/components/Dashboard/table";
+
 import FButton from "~/components/elements/button";
 import Alert from "~/components/Dashboard/alert";
 import FDate from "~/utils/date";
@@ -88,7 +88,6 @@ export default {
     };
   },
   components: {
-    FTable,
     FButton,
     Alert,
     ActionButton,

@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import FTable from "~/components/Dashboard/table";
+
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import FFromDate from "~/utils/fromDate";
@@ -129,7 +129,6 @@ export default {
     };
   },
   components: {
-    FTable,
     FButton,
     ActionButton,
     FEmpty,

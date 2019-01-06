@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import FTable from "~/components/Dashboard/table";
+
 import FButton from "~/components/elements/button";
 import FFromDate from "~/utils/fromDate";
 import ActionButton from "~/components/Dashboard/table/action-button";
@@ -47,7 +47,6 @@ export default {
   layout: "dashboard",
   components: {
     FLoading,
-    FTable,
     FButton,
     ActionButton,
     FEmpty

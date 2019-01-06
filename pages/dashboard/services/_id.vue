@@ -81,7 +81,7 @@ import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 import File from "~/components/elements/file";
 import FLabelDisable from "~/components/elements/label/label-disable";
-import FTable from "~/components/Dashboard/table";
+
 import FCollaps from "~/components/elements/collaps";
 import FReplicaHeader from "~/components/Dashboard/replica/header";
 import FReplicaDetails from "~/components/Dashboard/replica/details";
@@ -99,7 +99,6 @@ export default {
     FInput,
     FButton,
     File,
-    FTable,
     FLabelDisable
   },
   data() {

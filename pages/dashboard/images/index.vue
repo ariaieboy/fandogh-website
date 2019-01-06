@@ -9,42 +9,39 @@
         <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
       </div>
       <div class="table-title">ایمیج های شما</div>
-      <vue-good-table :columns="header" :rows="images" :rtl="true" styleClass="vgt-table">
-        <div slot="emptystate">
-          <p class="empty-table center">دیتایی وجود ندارد</p>
-        </div>
-        <template slot="table-row" slot-scope="props">
-          <span v-if="props.column.field == 'action'">
+      <div class="table-responsive">
+        <b-table :fields="header" stacked="lg" :items="images" empty-text="دیتایی وجود ندارد">
+          <template slot="action" slot-scope="row">
             <action-button
-              v-if="props.row.name !== ''"
+              v-if="row.item.name !== ''"
               class="action-button-s"
-              @onClick="versions(props.row)"
+              @onClick="versions(row.item)"
               icon="ic-time.svg"
               label="ورژن ها"
             />
             <action-button
-              v-if="props.row.name !== ''"
+              v-if="row.item.name !== ''"
               class="action-button-s"
-              @onClick="createVersion(props.row)"
+              @onClick="createVersion(row.item)"
               icon="ic-upload.svg"
               label="آپلود"
             />
             <action-button
+              v-if="row.item.name !== ''"
               class="action-button-s"
-              @onClick="remove(props.row)"
+              @onClick="remove(row.item)"
               icon="ic-delete.svg"
               label="حذف"
             />
-          </span>
-          <span v-else>{{props.formattedRow[props.column.field]}}</span>
-        </template>
-      </vue-good-table>
+          </template>
+        </b-table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import FTable from "~/components/Dashboard/table";
+
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
@@ -61,29 +58,30 @@ export default {
         {
           label: "نام دامنه",
           sortable: false,
-          field: "name",
+          key: "name",
           tdClass: "ellipsis ltr"
         },
         {
           label: "تاریخ ساخت ایمیج",
           sortable: false,
-          field: "created_at"
+          key: "created_at"
         },
         {
           label: "آخرین ورژن",
           sortable: false,
-          field: "version",
+          key: "version",
           tdClass: "ellipsis ltr"
         },
         {
           label: "آخرین به روز‌رسانی",
           sortable: false,
-          field: "date"
+          key: "date"
         },
         {
-          label: "مدیدریت", tdClass: 'width-larg',
+          label: "مدیدریت",
+          tdClass: 'width-larg',
           sortable: false,
-          field: "action",
+          key: "action",
           html: true
         }
       ]
@@ -93,7 +91,6 @@ export default {
   components: {
     FLoading,
     FEmpty,
-    FTable,
     FButton,
     ActionButton
   },

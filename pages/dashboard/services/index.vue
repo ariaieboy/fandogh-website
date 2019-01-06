@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import FTable from "~/components/Dashboard/table";
+
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import ActionButton from "~/components/Dashboard/table/action-button";
@@ -53,7 +53,6 @@ export default {
   layout: "dashboard",
   components: {
     FLoading,
-    FTable,
     FButton,
     ActionButton,
     FEmpty

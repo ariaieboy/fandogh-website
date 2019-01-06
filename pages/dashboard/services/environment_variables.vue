@@ -91,7 +91,7 @@
 <script>
 import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
-import FTable from "~/components/Dashboard/table";
+
 import FCheckbox from "~/components/elements/checkbox";
 import MultiSelect from "~/components/Dashboard/multiselect";
 import Wizard from "~/components/Dashboard/wizard";
@@ -105,7 +105,6 @@ export default {
     FInput,
     FButton,
     FCheckbox,
-    FTable,
     MultiSelect,
     Wizard,
     ActionButton
