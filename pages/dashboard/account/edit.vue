@@ -124,7 +124,7 @@ export default {
       }
     },
     async saveEdit() {
-      if (!/^\d{10}$/.test(this.account.national_id)) {
+      if (!/^\d{10}$/.test(this.account.national_id) && this.account.national_id) {
         this.$notify({
           title: 'از کاراکتر های مجاز استفاده کنید',
           time: 4000,
@@ -136,14 +136,16 @@ export default {
         eventCategory: "account",
         eventAction: "save update information"
       });
+      let body = {
+        username: getValue("username"),
+        national_id: this.account.national_id !== '' ? this.account.national_id : null,
+        newsletter_subscriber: this.account.newsletter_subscriber !== '' ? this.account.newsletter_subscriber : null,
+        first_name: this.account.first_name,
+        last_name: this.account.last_name
+      }
+
       try {
-        await this.$store.dispatch("updateAccount", {
-          username: getValue("username"),
-          national_id: this.account.national_id !== '' ? this.account.national_id : null,
-          newsletter_subscriber: this.account.newsletter_subscriber !== '' ? this.account.newsletter_subscriber : null,
-          first_name: this.account.first_name !== '' ? this.account.first_name : null,
-          last_name: this.account.last_name !== '' ? this.account.last_name : null,
-        })
+        await this.$store.dispatch("updateAccount", body)
         this.$notify({
           title: 'پروفایل شما با موفقیت بروزرسانی شد',
           time: 4000,
@@ -151,6 +153,7 @@ export default {
         })
         this.$router.push("/dashboard/account");
       } catch (error) {
+        console.log(error);
         this.$alertReport(error)
       }
     }

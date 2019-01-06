@@ -2,6 +2,7 @@ module.exports = {
   /*
    ** Headers of the page
    */
+  
   loading: {
     color: "#ff628f",
     height: "5px"
@@ -33,7 +34,7 @@ module.exports = {
 
   modules: [
     "@nuxtjs/pwa",
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/google-analytics',
   ],
   'google-analytics': {
     id: 'UA-120059029-1'
