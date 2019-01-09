@@ -41,46 +41,31 @@
           </div>
           <div class="fandogh-form-group margin-top-100 td-medium">
             <div class="table-title font-roboto">Environment Variables</div>
-            <vue-good-table :columns="header" :rows="envsData" :rtl="true" styleClass="vgt-table">
-              <div slot="emptystate">
-                <p class="empty-table center">دیتایی وجود ندارد</p>
-              </div>
-              <template slot="table-row" slot-scope="props">
-                <span v-if="props.column.field == 'hidden'">
-                  <div v-if="props.row.hidden">
-                    <img src="/icons/success.svg">
+            <b-table :fields="header" stacked="lg" :items="envsData" empty-text="دیتایی وجود ندارد">
+              <template slot="value" slot-scope="props">
+                <div v-if="props.item.hidden">********</div>
+                <div v-else class="position-relative">
+                  <i
+                    data-balloon-pos="up"
+                    :data-balloon="props.item.value"
+                    class="balloon-tip"
+                    @click="copy(props.item.value)"
+                  ></i>
+                  <div class="flex-td">
+                    <img src="~static/icons/copy.svg" class="space-image">
+                    <span>{{props.item.value}}</span>
                   </div>
-                  <div v-else>
-                    <img src="/icons/fail.svg">
-                  </div>
-                </span>
-                <!-- <span v-else-if="props.column.field == 'name'">{{props.row.name}}</span> -->
-                <span v-else-if="props.column.field == 'value'">
-                  <div v-if="props.row.hidden">********</div>
-                  <div v-else class="position-relative">
-                    <i
-                      data-balloon-pos="up"
-                      :data-balloon="props.row.value"
-                      class="balloon-tip"
-                      @click="copy(props.row.value)"
-                    ></i>
-                    <div class="flex-td">
-                      <img src="~static/icons/copy.svg" class="space-image">
-                      <span>{{props.row.value}}</span>
-                    </div>
-                  </div>
-                </span>
-                <span v-else-if="props.column.field == 'action'">
-                  <action-button
-                    class="action-button-x"
-                    @onClick="remove(props.row)"
-                    icon="ic-delete.svg"
-                    label="حذف"
-                  />
-                </span>
-                <span v-else>{{props.formattedRow[props.column.field]}}</span>
+                </div>
               </template>
-            </vue-good-table>
+              <template slot="action" slot-scope="props">
+                <action-button
+                  class="action-button-x"
+                  @onClick="remove(props.item)"
+                  icon="ic-delete.svg"
+                  label="حذف"
+                />
+              </template>
+            </b-table>
           </div>
         </wizard>
       </div>
@@ -91,7 +76,6 @@
 <script>
 import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
-
 import FCheckbox from "~/components/elements/checkbox";
 import MultiSelect from "~/components/Dashboard/multiselect";
 import Wizard from "~/components/Dashboard/wizard";
@@ -116,13 +100,13 @@ export default {
         {
           label: "متغییر",
           sortable: false,
-          field: "name",
+          key: "name",
           tdClass: "ltr"
         },
         {
           label: "مقدار متغیر",
           sortable: false,
-          field: "value",
+          key: "value",
           tdClass: "ltr"
         },
         // {
@@ -134,7 +118,7 @@ export default {
         {
           label: "مدیدریت", tdClass: 'width-larg',
           sortable: false,
-          field: "action",
+          key: "action",
           html: true
         }
       ],
@@ -161,7 +145,7 @@ export default {
           this.$notify({
             title: `مقدار ${text} کپی شد.`,
             time: 4000,
-            type: "error"
+            type: "success"
           });
         })
         .catch(err => {

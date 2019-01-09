@@ -9,34 +9,28 @@
         <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
       </div>
       <div class="table-title">سرویس‌ های شما</div>
-      <vue-good-table :columns="header" :rows="services" :rtl="true" styleClass="vgt-table">
-        <div slot="emptystate">
-          <p class="empty-table center">دیتایی وجود ندارد</p>
-        </div>
-        <template slot="table-row" slot-scope="props">
-          <span v-if="props.column.field == 'action'">
-            <action-button
-              class="action-button-s"
-              @onClick="details(props.row)"
-              icon="ic-logs.svg"
-              label="مشاهده جزییات"
-            />
-            <action-button
-              class="action-button-s"
-              @onClick="logs(props.row)"
-              icon="file.svg"
-              label="مشاهده لاگ"
-            />
-            <action-button
-              class="action-button-s"
-              @onClick="remove(props.row)"
-              icon="ic-delete.svg"
-              label="حذف"
-            />
-          </span>
-          <span v-else>{{props.formattedRow[props.column.field]}}</span>
+      <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
+        <template slot="action" slot-scope="props">
+          <action-button
+            class="action-button-s"
+            @onClick="details(props.item)"
+            icon="ic-logs.svg"
+            label="مشاهده جزییات"
+          />
+          <action-button
+            class="action-button-s"
+            @onClick="logs(props.item)"
+            icon="file.svg"
+            label="مشاهده لاگ"
+          />
+          <action-button
+            class="action-button-s"
+            @onClick="remove(props.item)"
+            icon="ic-delete.svg"
+            label="حذف"
+          />
         </template>
-      </vue-good-table>
+      </b-table>
     </div>
   </div>
 </template>
@@ -64,29 +58,29 @@ export default {
         {
           label: "نام سرویس",
           sortable: false,
-          field: "name",
+          key: "name",
           tdClass: "ellipsis ltr"
         },
         {
           label: "نوع سرویس",
           sortable: false,
-          field: "service_type"
+          key: "service_type"
         },
         {
           label: "حافظه",
           sortable: false,
-          field: "memory"
+          key: "memory"
         },
         {
           label: "تاریخ ساخت سرویس",
           sortable: false,
-          field: "start_date"
+          key: "start_date"
         },
         {
           label: "مدیدریت",
           tdClass: 'width-larg',
           sortable: false,
-          field: "action",
+          key: "action",
           html: true
         }
       ]

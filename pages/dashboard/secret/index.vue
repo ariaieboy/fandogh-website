@@ -9,28 +9,24 @@
         <f-button styles="red" path="/dashboard/secret/create">افزودن سکرت</f-button>
       </div>
       <div class="table-title">سکرت‌های شما</div>
-      <vue-good-table :columns="header" :rows="secrets" :rtl="true" styleClass="vgt-table">
-        <div slot="emptystate">
-          <p class="empty-table center">دیتایی وجود ندارد</p>
-        </div>
-        <template slot="table-row" slot-scope="props">
-          <span v-if="props.column.field == 'action'">
+      <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد">
+        <template slot="action" slot-scope="props">
+          <span>
             <action-button
               class="action-button-s"
-              @onClick="edit(props.row)"
+              @onClick="edit(props.item)"
               icon="edit.svg"
               label="ویرایش"
             />
             <action-button
               class="action-button-s"
-              @onClick="remove(props.row)"
+              @onClick="remove(props.item)"
               icon="ic-delete.svg"
               label="حذف"
             />
           </span>
-          <span v-else>{{props.formattedRow[props.column.field]}}</span>
         </template>
-      </vue-good-table>
+      </b-table>
     </div>
   </div>
 </template>
@@ -58,24 +54,24 @@ export default {
         {
           label: "نام سکرت",
           sortable: false,
-          field: "name",
+          key: "name",
           tdClass: "ellipsis ltr"
         },
         {
           label: "نوع سکرت",
           sortable: false,
-          field: "type"
+          key: "type"
         },
         {
           label: "تاریخ ساخت سکرت",
           sortable: false,
-          field: "created_at"
+          key: "created_at"
         },
 
         {
           label: "مدیدریت", tdClass: 'width-larg',
           sortable: false,
-          field: "action",
+          key: "action",
           html: true
         }
       ]
@@ -133,7 +129,7 @@ export default {
       });
       this.$alertify(
         {
-          title: `حذف سرویس`,
+          title: `حذف سکرت`,
           description: ` آیا از حذف ${name} مطمئن هستید؟`
         },
         status => {

@@ -14,30 +14,22 @@
         >افزودن ورژن</f-button>
       </div>
       <div class="table-title">ورژن های شما</div>
-      <vue-good-table :columns="header" :rows="versions" :rtl="true" styleClass="vgt-table">
-        <div slot="emptystate">
-          <p class="empty-table center">دیتایی وجود ندارد</p>
-        </div>
-        <template slot="table-row" slot-scope="props">
-          <span v-if="props.column.field == 'action'">
-            <action-button
-              class="action-button-s"
-              @onClick="craeteVersions(props.row)"
-              icon="ic-add.svg"
-              label="ایجاد سرویس"
-            />
-            <action-button
-              class="action-button-s"
-              @onClick="logs(props.row)"
-              icon="file.svg"
-              label="مشاهده لاگ"
-            />
-          </span>
-          <!-- <span v-else-if="props.column.field == 'action'">
-          </span>-->
-          <span v-else>{{props.formattedRow[props.column.field]}}</span>
+      <b-table :fields="header" stacked="lg" :items="versions" empty-text="دیتایی وجود ندارد">
+        <template slot="action" slot-scope="props">
+          <action-button
+            class="action-button-s"
+            @onClick="craeteVersions(props.item)"
+            icon="ic-add.svg"
+            label="ایجاد سرویس"
+          />
+          <action-button
+            class="action-button-s"
+            @onClick="logs(props.item)"
+            icon="file.svg"
+            label="مشاهده لاگ"
+          />
         </template>
-      </vue-good-table>
+      </b-table>
     </div>
   </div>
 </template>
@@ -59,29 +51,33 @@ export default {
         {
           label: "ورژن",
           sortable: false,
-          field: "version"
+          key: "version"
         },
         {
           label: "تاریخ",
           sortable: false,
-          field: "date"
+          key: "date",
+          formatter: this.getDate
         },
         {
           label: "حجم",
           sortable: false,
-          field: "size",
-          tdClass: "ltr"
+          key: "size",
+          tdClass: "ltr",
+          formatter: this.getSize
+
         },
         {
           label: "وضعیت",
           sortable: false,
-          field: "state",
-          tdClass: this.getClass
+          key: "state",
+          tdClass: this.getClass,
+          formatter: this.getState
         },
         {
           label: "مدیدریت", tdClass: 'width-larg',
           sortable: false,
-          field: "action",
+          key: "action",
           html: true
         }
       ]
@@ -101,17 +97,7 @@ export default {
       return this.$store.state.loading;
     },
     versions() {
-      let versions = this.$store.state.versions;
-      if (versions) {
-        return versions.map(({ date, version, state, size }) => {
-          return {
-            version,
-            date: FDate({ date: date }),
-            state: this.getState(state),
-            size: `${(size / 1000000).toFixed(1)} Mb`
-          };
-        });
-      }
+      return this.$store.state.versions;
     }
   },
   created() {
@@ -141,17 +127,19 @@ export default {
         }
       }
     },
-    getClass({ state }) {
-      return state === "خطا"
+    getDate(date) {
+      return FDate({ date: date })
+    },
+    getSize(size) {
+      return `${(size / 1000000).toFixed(1)} Mb`
+    },
+
+    getClass(state) {
+      return state === "FAILED"
         ? "error-text"
-        : state === "ساخته شده"
+        : state === "BUILT"
           ? "success-text"
           : "pending-text";
-    },
-    craeteVersions({ version }) {
-      this.$router.push(`/dashboard/services/setup`);
-      setValue({ key: "versions", value: version });
-      setValue({ key: "name", value: this.$route.params.image });
     },
     getState(state) {
       return state === "FAILED"
@@ -159,6 +147,11 @@ export default {
         : state === "BUILT"
           ? "ساخته شده"
           : "در حال ساخت ...";
+    },
+    craeteVersions({ version }) {
+      this.$router.push(`/dashboard/services/setup`);
+      setValue({ key: "versions", value: version });
+      setValue({ key: "name", value: this.$route.params.image });
     },
     logs({ version }) {
       this.$ga.event({

@@ -8,6 +8,8 @@ const port = process.env.PORT || 4000;
 
 app.set("port", port);
 
+app.set("port", port);
+
 // Import and Set Nuxt.js options
 let config = require("../nuxt.config.js");
 config.dev = !(process.env.NODE_ENV === "production");

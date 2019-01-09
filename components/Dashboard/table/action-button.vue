@@ -59,6 +59,11 @@ export default {
   label
     position absolute
     width 0
+.is-small
+  .action-button
+    width auto
+    label
+      display none
 @media (max-width: 1700px)
   .action-button-s, .action-button-m
     label
