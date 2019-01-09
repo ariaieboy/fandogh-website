@@ -9,69 +9,64 @@
         <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
       </div>
       <div class="table-title">دامنه های شما</div>
-      <vue-good-table :columns="header" :rows="domains" styleClass="vgt-table" :rtl="true">
-        <div slot="emptystate">
-          <p class="empty-table center">دیتایی وجود ندارد</p>
-        </div>
-        <template slot="table-row" slot-scope="props">
-          <span v-if="props.column.field == 'action'">
+      <div class="table-responsive">
+        <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
+          <template slot="action" slot-scope="props">
             <action-button
-              v-if="!props.row.verified"
+              v-if="!props.item.verified"
               class="action-button-m"
-              @onClick="verify(props.row)"
+              @onClick="verify(props.item)"
               icon="ic-tick.svg"
               label="تایید"
             />
             <action-button
-              v-if="props.row.verified"
+              v-if="props.item.verified"
               class="action-button-m disabled"
-              @onClick="verify(props.row)"
+              @onClick="verify(props.item)"
               icon="ic_tConfirm.svg"
               label="تایید"
             />
             <action-button
-              v-if="!props.row.certificate"
+              v-if="!props.item.certificate"
               class="action-button-m"
-              @onClick="certificateDomain(props.row)"
+              @onClick="certificateDomain(props.item)"
               icon="ssl.svg"
               label="درخواست ssl"
             />
             <action-button
-              v-if="props.row.certificate"
+              v-if="props.item.certificate"
               class="action-button-m"
-              @onClick="removeCertificateDomain(props.row)"
+              @onClick="removeCertificateDomain(props.item)"
               icon="remove-ssl.svg"
               label="حذف ssl"
             />
             <action-button
               class="action-button-m"
-              @onClick="remove(props.row)"
+              @onClick="remove(props.item)"
               icon="ic-delete.svg"
               label="حذف"
             />
-          </span>
-          <span v-else-if="props.column.field == 'certificate'">
+          </template>
+          <template slot="certificate" slot-scope="props">
             <span
-              v-if="props.row.certificate"
-              :data-balloon="FDate(props.row.certificate.created_at)"
+              v-if="props.item.certificate"
+              :data-balloon="FDate(props.item.certificate.created_at)"
               data-balloon-pos="up"
-            >{{props.row.certificate.details.status | status}}</span>
+            >{{props.item.certificate.details.status | status}}</span>
             <span v-else>ندارد</span>
-          </span>
-          <span v-else-if="props.column.field == 'service'">
-            <span v-if="props.row.service">{{props.row.service}}</span>
+          </template>
+          <template slot="service" slot-scope="props">
+            <span v-if="props.item.service">{{props.item.service}}</span>
             <span v-else>ندارد</span>
-          </span>
-          <span v-else-if="props.column.field == 'created_at'">{{FDate(props.row.created_at)}}</span>
-          <span v-else>{{props.formattedRow[props.column.field]}}</span>
-        </template>
-      </vue-good-table>
+          </template>
+        </b-table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import FTable from "~/components/Dashboard/table";
+
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import FFromDate from "~/utils/fromDate";
@@ -84,7 +79,12 @@ import FLoading from "~/components/Loading";
 
 export default {
   layout: "dashboard",
-
+  components: {
+    FButton,
+    ActionButton,
+    FEmpty,
+    FLoading
+  },
   data() {
     return {
       isLoading: false,
@@ -92,29 +92,32 @@ export default {
         {
           sortable: false,
           label: "نام دامنه",
-          field: "name",
+          key: "name",
           tdClass: "ellipsis ltr"
         },
         {
           sortable: false,
           label: "تاریخ ساخت",
-          field: "created_at"
+          key: "created_at",
+          formatter: this.getDate,
+
         },
         {
           sortable: false,
           label: "متصل به سرویس",
-          field: "service"
+          key: "service"
         },
         {
           sortable: false,
           label: "گواهینامه ssl",
-          field: "certificate",
-          tdClass: this.getStatus
+          key: "certificate",
+          tdClass: this.getStatus,
         },
         {
           label: "وضعیت",
           sortable: false,
-          field: this.getDomainStatus,
+          key: 'verified',
+          formatter: this.getDomainStatus,
           tdClass: this.getClass,
           html: true
         },
@@ -122,19 +125,13 @@ export default {
           label: "مدیدریت",
           tdClass: "width-larg",
           sortable: false,
-          field: "action",
+          key: "action",
           html: true
         }
       ]
     };
   },
-  components: {
-    FTable,
-    FButton,
-    ActionButton,
-    FEmpty,
-    FLoading
-  },
+
   filters: {
     status: function (value) {
       if (!value) return "";
@@ -177,17 +174,19 @@ export default {
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       }
     },
-
+    getDate(date) {
+      return FDate({ date: date })
+    },
     FFromDate(value) {
       return FFromDate(value);
     },
     FDate(value) {
       return FDate({ date: value });
     },
-    getDomainStatus({ verified }) {
+    getDomainStatus(verified) {
       return verified ? "تایید شده" : "تایید نشده";
     },
-    getStatus({ certificate }) {
+    getStatus(certificate) {
       if (!certificate) return ''
       const { status } = certificate.details;
       if (!status) return "";
@@ -202,7 +201,7 @@ export default {
         return "pending-text";
       }
     },
-    getClass({ verified }) {
+    getClass(verified) {
       return verified ? "success-text" : "error-text";
     },
     verify({ name }) {

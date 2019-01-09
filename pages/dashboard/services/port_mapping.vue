@@ -31,22 +31,16 @@
 
           <div class="fandogh-form-group margin-top-100">
             <div class="table-title font-roboto">Port Mapping</div>
-            <vue-good-table :columns="header" :rows="envsData" :rtl="true" styleClass="vgt-table">
-              <div slot="emptystate">
-                <p class="empty-table center">دیتایی وجود ندارد</p>
-              </div>
-              <template slot="table-row" slot-scope="props">
-                <span v-if="props.column.field == 'action'">
-                  <action-button
-                    class="action-button-s"
-                    @onClick="remove(props.row)"
-                    icon="ic-delete.svg"
-                    label="حذف"
-                  />
-                </span>
-                <span v-else>{{props.formattedRow[props.column.field]}}</span>
+            <b-table :fields="header" stacked="lg" :items="envsData" empty-text="دیتایی وجود ندارد">
+              <template slot="action" slot-scope="props">
+                <action-button
+                  class="action-button-s"
+                  @onClick="remove(props.item)"
+                  icon="ic-delete.svg"
+                  label="حذف"
+                />
               </template>
-            </vue-good-table>
+            </b-table>
           </div>
         </wizard>
       </div>
@@ -57,7 +51,7 @@
 <script>
 import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
-import FTable from "~/components/Dashboard/table";
+
 import FCheckbox from "~/components/elements/checkbox";
 import FSelect from "~/components/elements/select";
 import ErrorReporter from "~/utils/ErrorReporter";
@@ -74,22 +68,22 @@ export default {
         {
           label: "Inside Port",
           sortable: false,
-          field: "port"
+          key: "port"
         },
         {
           label: "Outside Port",
           sortable: false,
-          field: "target_port"
+          key: "target_port"
         },
         {
           label: "Protocol",
           sortable: false,
-          field: "protocol"
+          key: "protocol"
         },
         {
           label: "مدیدریت", tdClass: 'width-larg',
           sortable: false,
-          field: "action",
+          key: "action",
           html: true
         }
       ],
@@ -112,7 +106,6 @@ export default {
     ActionButton,
     FButton,
     FCheckbox,
-    FTable,
     FSelect,
     Wizard
   },
