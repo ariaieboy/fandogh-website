@@ -73,7 +73,7 @@
 <script>
 import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
-import FTable from "~/components/Dashboard/table";
+
 import FSelect from "~/components/elements/select";
 import FMultiSelect from "~/components/elements/select/multii-select.vue";
 import FVCheckbox from '~/components/elements/checkbox/checkbox.vue'
@@ -89,7 +89,6 @@ export default {
     FCheckbox,
     FInput,
     FButton,
-    FTable,
     FSelect,
     Wizard
   },
@@ -166,12 +165,12 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getDomains");
-    this.$store.commit("SET_DATA", { id: "manifest", data: {} });
     this.$ga.event({
       eventCategory: "service",
       eventAction: "start setup new service"
     });
+    this.$store.dispatch("getDomains", { verified: true });
+    this.$store.commit("SET_DATA", { id: "manifest", data: {} });
     Validation.$on("validation", ({ isValid, keys }) => {
       this.prevent = !isValid;
     });

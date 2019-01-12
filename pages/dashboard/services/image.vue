@@ -83,6 +83,7 @@
             <f-select
               tabindex="3"
               v-model="image_pull_policy"
+              :isClear="true"
               styles="input-white input-block input-dashboard"
               :options="[{title: 'Always'}, {title: 'IfNotPresent'}]"
               placeholder="Image Pull Policy"
@@ -94,7 +95,7 @@
             <f-select
               tabindex="2"
               v-model="image_pull_secret"
-              title="ورژن "
+              title="Image Pull Secret"
               :options="secretList"
               styles="input-white input-block input-dashboard"
               placeholder="Image Pull Secret "
@@ -109,7 +110,7 @@
 <script>
 import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
-import FTable from "~/components/Dashboard/table";
+
 import FCheckbox from "~/components/elements/checkbox";
 import FSelect from "~/components/elements/select";
 import FLabel from "~/components/Dashboard/label";
@@ -250,7 +251,6 @@ export default {
     FInput,
     FButton,
     FCheckbox,
-    FTable,
     FSelect,
     FLabel,
     Wizard,

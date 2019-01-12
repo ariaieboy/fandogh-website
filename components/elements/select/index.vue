@@ -1,8 +1,14 @@
 <template>
   <div class="dropdown">
-    <div :tabindex="tabindex" @focus="show=true" @blur="show=false" class="dropdown-container">
+    <div
+      :tabindex="tabindex"
+      @focus="toggle(true)"
+      @blur="toggle(false)"
+      class="dropdown-container"
+    >
       <div class="dropdown--arrow">
-        <img v-if="!show" src="./images/arrow-d.svg">
+        <img v-if="(!show && !isClear) || (selected === '' && !show)" src="./images/arrow-d.svg">
+        <img v-if="(isClear && !show) && selected !== ''" src="./images/close.svg">
         <img v-if="show" src="./images/arrow-u.svg">
       </div>
       <div v-if="!selected.length" class="dropdown--placeholder">
@@ -27,6 +33,10 @@
 <script>
 export default {
   props: {
+    isClear: {
+      type: Boolean,
+      default: false
+    },
     value: {
       default: ""
     },
@@ -39,10 +49,6 @@ export default {
     tabindex: {
       default: "1"
     },
-    multiselect: {
-      default: false,
-      type: Boolean
-    },
     select: {
       default: ""
     }
@@ -53,23 +59,23 @@ export default {
       show: false
     };
   },
-  watch: {
-    value(value) {
-      this.selectOption({ title: value, value }, true);
-    }
-  },
   mounted() {
     if (this.value) {
       this.selected = this.value;
     }
   },
   methods: {
-    toggle() {
-      this.show = !this.show;
+    toggle(show) {
+      this.show = show
+      if (this.show && this.isClear && this.selected !== '') {
+        this.selected = '';
+        this.$emit("input", '');
+      }
     },
     selectOption(option, noToggle) {
       this.selected = option.title;
       this.$emit("input", option.value || option.title);
+
     }
   }
 };

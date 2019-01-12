@@ -9,14 +9,14 @@
     >
       <h2>وارد شوید</h2>
       <!-- @submit.prevent -->
-      <form >
+      <form>
         <div class="fandogh-form-group center margin-10">
           <f-input
             name="username"
             v-model="username"
             styles="input-color-blue"
             type="text"
-            placeholder="نام کاربری"
+            placeholder="نام کاربری یا ایمیل"
           />
         </div>
         <div class="fandogh-form-group center margin-10">
@@ -34,7 +34,7 @@
             :id="noModal ? 'checkbox1' : 'checkbox2'"
             title="مرا بخاطر بسپار"
           />
-        </div> -->
+        </div>-->
         <div class="fandogh-form-group center margin-20">
           <f-button @onClick="login" styles="red block 80">{{title}}</f-button>
         </div>
@@ -74,7 +74,7 @@ export default {
     };
   },
   mounted() {
-    this.$refs.modal.$on("onOverlay", function() {
+    this.$refs.modal.$on("onOverlay", function () {
       this.$store.dispatch("showModal", false);
     });
   },

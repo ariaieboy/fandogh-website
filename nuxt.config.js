@@ -2,6 +2,7 @@ module.exports = {
   /*
    ** Headers of the page
    */
+
   loading: {
     color: "#ff628f",
     height: "5px"
@@ -31,14 +32,11 @@ module.exports = {
     link: [{ rel: "iScon", type: "image/x-icon", href: "/favicon.ico" }]
   },
 
-  modules: [
-    "@nuxtjs/pwa",
-    '@nuxtjs/google-analytics'
-  ],
-  'google-analytics': {
-    id: 'UA-120059029-1'
+  modules: ["@nuxtjs/pwa", "@nuxtjs/google-analytics"],
+  "google-analytics": {
+    id: "UA-120059029-1"
   },
-  
+
   manifest: {
     name: "فندق",
     description: "سرویس های ابری فندق"
@@ -59,7 +57,8 @@ module.exports = {
     { src: "~/plugins/google-map", ssr: false },
     "~/plugins/mixins",
     "~/plugins/validation",
-    { src: "~/plugins/table", ssr: false },
+    // { src: "~/plugins/table", ssr: false },
+    { src: "~/plugins/bootstrap", ssr: false }
     // { src: "~/plugins/ga.js", ssr: false }
   ]
 };

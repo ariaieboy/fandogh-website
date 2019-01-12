@@ -20,7 +20,7 @@
         <file id="source"/>
       </div>
       <div class="fandogh-form-group margin-top-100">
-        <f-button @onClick="createImageVersion" styles="red block" v-if="!loading">اتمام ساخت</f-button>
+        <f-button @onClick="createImageVersion" styles="red block" v-if="!loading">آپلود نسخه جدید</f-button>
         <progress-bar v-if="loading" :progress="progress"></progress-bar>
       </div>
     </div>
