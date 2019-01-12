@@ -165,12 +165,12 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getDomains");
-    this.$store.commit("SET_DATA", { id: "manifest", data: {} });
     this.$ga.event({
       eventCategory: "service",
       eventAction: "start setup new service"
     });
+    this.$store.dispatch("getDomains", { verified: true });
+    this.$store.commit("SET_DATA", { id: "manifest", data: {} });
     Validation.$on("validation", ({ isValid, keys }) => {
       this.prevent = !isValid;
     });
