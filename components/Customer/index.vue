@@ -8,15 +8,16 @@
       <div class="customer-wrapper">
         <div class="customer-item-wrapper">
           <div class="customer-items" v-for="item in items">
-            <div class="customer-item" v-for="image in item">
-              <img :src="`${image.src}`" alt>
-              <a href>botick.com</a>
+            <div class="customer-item" v-for="image in item" @click="setActive(image)">
+              <img :src="`${image.logo}`" alt>
+              <a :href="image.link">{{image.text}}</a>
             </div>
           </div>
         </div>
         <div class="customer-banner">
           <div class="customer-banner-item">
-            <img src="./images/img-roozame-cover.png" alt>
+            <!-- <img :src="activeImage" alt> -->
+            <span :style="{'background-image':'url('+activeImage+')'}"></span>
           </div>
         </div>
       </div>
@@ -26,22 +27,53 @@
 
 <script>
 export default {
-  name: 'customer',
+  name: "customer",
+
   data() {
     return {
+      activeImage: "img/customer/cover-roozame.png",
       items: [
         [
-          { src: 'img/customer/logo-dark.png', id: 1 },
-          { src: 'img/customer/salameno.png', id: 2 }
+          {
+            logo: "img/customer/logo-roozame.png",
+            id: 1,
+            cover: "img/customer/cover-roozame.png",
+            text: "roozame.com",
+            link: "https://roozame.com/"
+          },
+          {
+            logo: "img/customer/logo-salameno.png",
+            id: 2,
+            cover: "img/customer/cover-salameno.png",
+            text: "salameno.ir",
+            link: "http://salameno.ir"
+          }
         ],
         [
-          { src: 'img/customer/botick.png', id: 3 },
-          { src: 'img/customer/roozame.png', id: 4 }
-        ],
+          {
+            logo: "img/customer/logo-botick.png",
+            id: 3,
+            cover: "img/customer/botick-v.jpg",
+            text: "botick.com",
+            link: "https://botick.com"
+          },
+          {
+            logo: "img/customer/logo-pay-ping-small.png",
+            id: 4,
+            cover: "img/customer/cover-payping.jpg",
+            text: "payping.ir",
+            link: "https://www.payping.ir"
+          }
+        ]
       ]
-    }
+    };
   },
-}
+  methods: {
+    setActive(item) {
+      this.activeImage = item.cover;
+    }
+  }
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -78,4 +110,20 @@ export default {
       margin-left 0
   &-banner
     margin-right 30px
+    width 100%
+  &-banner-item
+    position relative
+    overflow hidden
+    margin 0
+    padding-top 66%
+    width 100%
+    span
+      position absolute
+      top 0
+      right 0
+      width 100%
+      height 100%
+      border-radius inherit
+      background-position 50%
+      background-size cover
 </style>
