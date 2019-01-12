@@ -15,31 +15,11 @@
             <action-button
               v-if="!props.item.verified"
               class="action-button-m"
-              @onClick="verify(props.item)"
-              icon="ic-tick.svg"
-              label="تایید"
+              @onClick="details(props.item)"
+              icon="edit.svg"
+              label="جزییات"
             />
-            <action-button
-              v-if="props.item.verified"
-              class="action-button-m disabled"
-              @onClick="verify(props.item)"
-              icon="ic_tConfirm.svg"
-              label="تایید"
-            />
-            <action-button
-              v-if="!props.item.certificate"
-              class="action-button-m"
-              @onClick="certificateDomain(props.item)"
-              icon="ssl.svg"
-              label="درخواست ssl"
-            />
-            <action-button
-              v-if="props.item.certificate"
-              class="action-button-m"
-              @onClick="removeCertificateDomain(props.item)"
-              icon="remove-ssl.svg"
-              label="حذف ssl"
-            />
+
             <action-button
               class="action-button-m"
               @onClick="remove(props.item)"
@@ -212,6 +192,9 @@ export default {
         eventValue: name
       });
       this.$router.push(`/dashboard/domains/verification/${name}`);
+    },
+    details({ name }) {
+      this.$router.push(`/dashboard/domains/${name}`);
     },
     certificateDomain({ name }) {
       this.$ga.event({
