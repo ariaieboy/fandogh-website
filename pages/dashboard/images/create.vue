@@ -3,6 +3,10 @@
     <div class="col-md-6 col-xs-12">
       <h2>ساخت ایمیج</h2>
       <div class="fandogh-form-group">
+        <f-textarea placeholder disable="true" class="textarea-disable"/>
+        <f-label-disable label :value="description" class="center"/>
+      </div>
+      <div class="fandogh-form-group">
         <label>نام ایمیج</label>
         <f-input
           name="name"
@@ -39,8 +43,10 @@ import FButton from "~/components/elements/button";
 import File from "~/components/elements/file";
 import { formData } from "~/utils/formData";
 import ProgressBar from "~/components/Dashboard/progress-bar";
+import FTextarea from "~/components/Dashboard/textarea";
 import ErrorReporter from "~/utils/ErrorReporter";
 import FormValidator from "~/utils/formValidator";
+import FLabelDisable from "~/components/elements/label/label-disable";
 
 export default {
   layout: "dashboard",
@@ -50,7 +56,10 @@ export default {
       version: "",
       loading: false,
       loadingProgress: false,
-      source: ""
+      source: "",
+      description: ` آپلود پروژه برای ساخت ایمیج لازم است که محتویات پروژه خود را با فرمت zip فشرده کنید.
+      <br>
+       <b style="margin-top: 8px;display: inline-block;"> در هنگام فشرده سازی حتما توجه داشته باشید که Dockerfile مستقیما در Root  فایل zip قرار بگیرد </b>.`
     };
   },
   computed: {
@@ -61,10 +70,12 @@ export default {
   components: {
     FInput,
     FButton,
+    FLabelDisable,
     File,
-    ProgressBar
+    ProgressBar,
+    FTextarea
   },
-  destroyed() {},
+  destroyed() { },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
@@ -75,7 +86,7 @@ export default {
     });
     var vm = this;
     let btnfile = document.querySelector("#source");
-    btnfile.addEventListener("change", function(e) {
+    btnfile.addEventListener("change", function (e) {
       var files = e.target.files[0];
       if (!files) {
         vm.source = null;

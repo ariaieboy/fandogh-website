@@ -4,20 +4,16 @@
       <h2>تنظیمات</h2>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-        <f-label-disable label="نام کاربری :" :value="account.username"/>
+        <f-label-disable label="نام کاربری :" :value="username"/>
       </div>
       <div class="fandogh-form-group">
-        <label>آدرس ایمیل</label>
-        <f-input
-          v-model="account.email"
-          styles="input-white input-block input-dashboard"
-          placeholder="آدرس ایمیل خود را وارد کنید"
-        ></f-input>
+        <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
+        <f-label-disable label="آدرس ایمیل :" :value="email"/>
       </div>
       <div class="fandogh-form-group">
         <label>نام</label>
         <f-input
-          v-model="account.name"
+          v-model="account.first_name"
           styles="input-rtl input-yekan input-white input-block input-dashboard"
           placeholder="نام خود را وارد کنید"
         ></f-input>
@@ -33,7 +29,7 @@
       <div class="fandogh-form-group">
         <label>کد ملی</label>
         <f-input
-          v-model="account.code"
+          v-model="account.national_id"
           styles="input-rtl input-yekan input-white input-block input-dashboard"
           placeholder="کد ملی خود را وارد کنید"
         ></f-input>
@@ -41,7 +37,12 @@
       <div class="fandogh-form-group right">
         <div class="box-checkbox">
           <div class="box-checkbox-input">
-            <f-checkbox styles="light" v-model="account.news" id="news" title="دریافت خبرنامه"/>
+            <f-checkbox
+              styles="light"
+              v-model="account.newsletter_subscriber"
+              id="newsletter_subscriber"
+              title="دریافت خبرنامه"
+            />
           </div>
           <div class="box-checkbox-info">
             <span class="mute-text">(مایل به دریافت خبرنامه‌های فندق هستم.)</span>
@@ -67,28 +68,30 @@ import ErrorReporter from "~/utils/ErrorReporter";
 import FormValidator from "~/utils/formValidator";
 import FLabelDisable from "~/components/elements/label/label-disable";
 import FCheckbox from "~/components/elements/checkbox";
+import { getValue } from "~/utils/cookie";
 
 export default {
   layout: "dashboard",
   name: "account",
   data() {
     return {
-      account: {
-        username: "Ramin",
-        name: "رامین",
-        email: "Ramin.esmaeili91@yahoo.com",
-        last_name: "اسماعیلی",
-        code: "۰۰۱۱۴۶۵۸۲۹۸۷",
-        news: false
-      },
       loading: false,
       loadingProgress: false
     };
   },
   computed: {
+    username() {
+      return getValue("username")
+    },
+    email() {
+      return getValue("email")
+    },
     progress() {
       return this.$store.state.progress;
-    }
+    },
+    account() {
+      return this.$store.state.account
+    },
   },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
@@ -101,14 +104,58 @@ export default {
     FLabelDisable,
     FCheckbox
   },
+  created() {
+    this.getData()
+  },
   methods: {
-    saveEdit() {
-      this.loadingProgress = true;
+    async getData() {
+      try {
+        let res = await this.$store.dispatch("getAccount", { username: getValue("username") });
+        if (res.newsletter_subscriber) {
+          let elm = document.querySelector('#newsletter_subscriber')
+          elm.click()
+        }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
+      } catch (e) {
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+      }
+    },
+    async saveEdit() {
+      if (!/^\d{10}$/.test(this.account.national_id) && this.account.national_id) {
+        this.$notify({
+          title: 'از کاراکتر های مجاز استفاده کنید',
+          time: 4000,
+          type: "error"
+        });
+        return
+      }
       this.$ga.event({
         eventCategory: "account",
         eventAction: "save update information"
       });
-      this.loadingProgress = false;
+      let body = {
+        username: getValue("username"),
+        national_id: this.account.national_id !== '' ? this.account.national_id : null,
+        newsletter_subscriber: this.account.newsletter_subscriber !== '' ? this.account.newsletter_subscriber : null,
+        first_name: this.account.first_name,
+        last_name: this.account.last_name
+      }
+
+      try {
+        await this.$store.dispatch("updateAccount", body)
+        this.$notify({
+          title: 'پروفایل شما با موفقیت بروزرسانی شد',
+          time: 4000,
+          type: 'success'
+        })
+        this.$router.push("/dashboard/account");
+      } catch (error) {
+        console.log(error);
+        this.$alertReport(error)
+      }
     }
   }
 };

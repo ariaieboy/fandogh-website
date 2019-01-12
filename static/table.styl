@@ -1,0 +1,132 @@
+@import url('http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900')
+
+.table-responsive
+  overflow auto
+.b-table
+  margin 0 auto
+  width 100%
+  font-family 'Roboto', yekan, sans-serif
+.b-table
+  max-width 100%
+  width 100%
+  border-collapse collapse
+  background-color white
+  table-layout auto
+  font-size 16px
+.b-table td .balloon-tip
+  position absolute
+  top 0
+  right 0
+  left 0
+  z-index 9
+  width 100%
+  height 100%
+  border 0
+.b-table td .ellipsis
+  width 10px
+.b-table td .ellipsis, .b-table td.ellipsis div
+  display inline-block
+  overflow hidden
+  width 200px
+  text-align center
+  text-overflow ellipsis
+  white-space nowrap
+.width-larg
+  min-width 130px
+.flex-td
+  display flex
+  flex-direction row-reverse
+  justify-content center
+@media (min-width: 992px)
+  .is-small .b-table td .ellipsis
+    width 150px
+  .is-small .b-table td.ellipsis div
+    width 200px
+  .is-small .b-table th span
+    display inline-block
+    overflow hidden
+    width 120px
+    text-overflow ellipsis
+    white-space nowrap
+    font-size 12px
+  .is-medium .b-table td .ellipsis
+    width 80px
+  .td-medium .b-table td.ellipsis div
+    width 100px
+@media (max-width: 768px)
+  .b-table td.ellipsis div
+    width 80px
+  .b-table th span
+    display inline-block
+    overflow hidden
+    width 80px
+    text-overflow ellipsis
+    white-space nowrap
+    font-size 14px
+@media (max-width: 992px)
+  .b-table th span
+    font-size 14px
+  .b-table td span
+    font-size 14px
+  .b-table td.ellipsis div
+    width 100px
+.b-table td span
+  color rgb(117, 135, 156)
+.b-table th
+  position relative
+  vertical-align middle
+.b-table th span
+  color #000
+.b-table thead th, .b-table tbody td
+  // overflow hidden
+  box-sizing border-box
+  padding 12px 10px
+  height 52px
+  vertical-align middle
+  text-align center
+  text-overflow ellipsis
+  white-space nowrap
+  font-size 18px
+  // &:last-child
+  // width 100%
+.b-table tbody td
+  color #75879c
+.b-table thead th
+  padding 10px 50px
+  background #fff
+  color #000
+  font-weight bold
+  font-size 16px
+.table-title
+  display block
+  box-sizing border-box
+  padding 14px 0
+  width 100%
+  border-radius 10px 10px 0 0
+  background-color #291996
+  color #fff
+  text-align center
+  font-family yekan
+.b-table tr:nth-child(odd)
+  background rgb(248, 249, 252)
+.b-table tr:nth-child(even)
+  background #fff
+.b-table tr:nth-child(even) td:nth-child(even)
+  background rgba(51, 68, 109, 0.02)
+.b-table tr:nth-child(odd) td:nth-child(even)
+  background rgba(51, 68, 109, 0.02)
+.b-table tr:nth-child(odd) th:nth-child(even)
+  background rgb(251, 251, 252)
+@media (max-width: 991.99px)
+  table.b-table.b-table-stacked-lg > tbody > tr > [data-label]::before
+    color #000
+  table.b-table.b-table-stacked-lg > tbody > tr td:last-child
+    border-bottom 1px dotted #160074
+@media (max-width: 593px)
+  table.b-table.b-table-stacked-lg > tbody > tr > [data-label]::before
+    font-weight 100
+    font-size 16px
+  table.b-table.b-table-stacked-lg > tbody > tr > [data-label]
+    font-size 12px
+  table.b-table.b-table-stacked-lg > tbody > tr td:last-child
+    border-bottom 1px dotted #160074

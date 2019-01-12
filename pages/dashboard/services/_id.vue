@@ -30,11 +30,7 @@
       </div>
       <div class="col-md-6 col-xs-12" v-if="windowWidth >= 992">
         <div class="table-title font-roboto">ENV</div>
-        <vue-good-table :columns="header" :rows="service.env" :rtl="true" styleClass="vgt-table">
-          <div slot="emptystate">
-            <p class="empty-table center">دیتایی وجود ندارد</p>
-          </div>
-        </vue-good-table>
+        <b-table :fields="header" stacked="lg" :items="service.env" empty-text="دیتایی وجود ندارد"></b-table>
       </div>
     </div>
     <h3>رپلیکاها :</h3>
@@ -66,11 +62,7 @@
       </div>
       <div class="col-md-6 col-xs-12" v-if="windowWidth <= 992">
         <div class="table-title font-roboto">ENV</div>
-        <vue-good-table :columns="header" :rows="service.env" :rtl="true" styleClass="vgt-table">
-          <div slot="emptystate">
-            <p class="empty-table center">دیتایی وجود ندارد</p>
-          </div>
-        </vue-good-table>
+        <b-table :fields="header" stacked="lg" :items="service.env" empty-text="دیتایی وجود ندارد"></b-table>
       </div>
     </div>
   </div>
@@ -81,7 +73,7 @@ import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 import File from "~/components/elements/file";
 import FLabelDisable from "~/components/elements/label/label-disable";
-import FTable from "~/components/Dashboard/table";
+
 import FCollaps from "~/components/elements/collaps";
 import FReplicaHeader from "~/components/Dashboard/replica/header";
 import FReplicaDetails from "~/components/Dashboard/replica/details";
@@ -99,7 +91,6 @@ export default {
     FInput,
     FButton,
     File,
-    FTable,
     FLabelDisable
   },
   data() {
@@ -112,13 +103,13 @@ export default {
         {
           sortable: false,
           label: "نام متغییر",
-          field: "name",
+          key: "name",
           tdClass: "ellipsis ltr"
         },
         {
           sortable: false,
           label: "مقدار",
-          field: "value",
+          key: "value",
           tdClass: "ellipsis ltr"
         }
       ],
