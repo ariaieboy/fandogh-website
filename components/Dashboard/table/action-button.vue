@@ -40,6 +40,10 @@ export default {
     margin 5px
     padding 5px
     max-height 120px
+  @media (max-width: 768px)
+    display block
+    text-align center
+    font-size 11px
   &.disabled
     pointer-events none
     label
@@ -66,17 +70,4 @@ export default {
   label
     position absolute
     width 0
-// .is-small
-// .action-button
-// width auto
-// label
-// width 0
-// &:hover
-// label
-// width 100px
-@media (max-width: 1700px)
-  .action-button-s, .action-button-m
-    label
-      position absolute
-      width 0
 </style>

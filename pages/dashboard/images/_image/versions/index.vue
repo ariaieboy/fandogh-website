@@ -14,22 +14,24 @@
         >افزودن ورژن</f-button>
       </div>
       <div class="table-title">ورژن های شما</div>
-      <b-table :fields="header" stacked="lg" :items="versions" empty-text="دیتایی وجود ندارد">
-        <template slot="action" slot-scope="props">
-          <action-button
-            class="action-button-s"
-            @onClick="craeteVersions(props.item)"
-            icon="ic-add.svg"
-            label="ایجاد سرویس"
-          />
-          <action-button
-            class="action-button-s"
-            @onClick="logs(props.item)"
-            icon="file.svg"
-            label="مشاهده لاگ"
-          />
-        </template>
-      </b-table>
+      <div class="table-responsive">
+        <b-table :fields="header" stacked="lg" :items="versions" empty-text="دیتایی وجود ندارد">
+          <template slot="action" slot-scope="props">
+            <action-button
+              class="action-button-s"
+              @onClick="craeteVersions(props.item)"
+              icon="ic-add.svg"
+              label="ایجاد سرویس"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="logs(props.item)"
+              icon="file.svg"
+              label="مشاهده لاگ"
+            />
+          </template>
+        </b-table>
+      </div>
     </div>
   </div>
 </template>

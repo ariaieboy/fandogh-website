@@ -9,28 +9,30 @@
         <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
       </div>
       <div class="table-title">سرویس‌ های شما</div>
-      <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
-        <template slot="action" slot-scope="props">
-          <action-button
-            class="action-button-s"
-            @onClick="details(props.item)"
-            icon="ic-logs.svg"
-            label="مشاهده جزییات"
-          />
-          <action-button
-            class="action-button-s"
-            @onClick="logs(props.item)"
-            icon="file.svg"
-            label="مشاهده لاگ"
-          />
-          <action-button
-            class="action-button-s"
-            @onClick="remove(props.item)"
-            icon="ic-delete.svg"
-            label="حذف"
-          />
-        </template>
-      </b-table>
+      <div class="table-responsive">
+        <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
+          <template slot="action" slot-scope="props">
+            <action-button
+              class="action-button-s"
+              @onClick="details(props.item)"
+              icon="ic-logs.svg"
+              label="مشاهده جزییات"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="logs(props.item)"
+              icon="file.svg"
+              label="مشاهده لاگ"
+            />
+            <action-button
+              class="action-button-s"
+              @onClick="remove(props.item)"
+              icon="ic-delete.svg"
+              label="حذف"
+            />
+          </template>
+        </b-table>
+      </div>
     </div>
   </div>
 </template>
