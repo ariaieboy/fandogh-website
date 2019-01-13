@@ -45,6 +45,7 @@ export default {
     Alert
   },
   computed: {
+
     loading() {
       return this.$store.state.loading;
     },
@@ -63,6 +64,7 @@ export default {
         this.$store.dispatch("showModal", "message");
       }
       this.$store.commit("SET_DATA", { data: true, id: "loading" });
+
 
     }
   },

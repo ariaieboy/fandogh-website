@@ -13,33 +13,12 @@
         <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <action-button
-              v-if="!props.item.verified"
               class="action-button-m"
-              @onClick="verify(props.item)"
-              icon="ic-tick.svg"
-              label="تایید"
+              @onClick="details(props.item)"
+              icon="edit.svg"
+              label="جزییات"
             />
-            <action-button
-              v-if="props.item.verified"
-              class="action-button-m disabled"
-              @onClick="verify(props.item)"
-              icon="ic_tConfirm.svg"
-              label="تایید"
-            />
-            <action-button
-              v-if="!props.item.certificate"
-              class="action-button-m"
-              @onClick="certificateDomain(props.item)"
-              icon="ssl.svg"
-              label="درخواست ssl"
-            />
-            <action-button
-              v-if="props.item.certificate"
-              class="action-button-m"
-              @onClick="removeCertificateDomain(props.item)"
-              icon="remove-ssl.svg"
-              label="حذف ssl"
-            />
+
             <action-button
               class="action-button-m"
               @onClick="remove(props.item)"
@@ -49,7 +28,7 @@
           </template>
           <template slot="certificate" slot-scope="props">
             <span
-              v-if="props.item.certificate"
+              v-if="props.item.certificate && props.item.certificate.details"
               :data-balloon="FDate(props.item.certificate.created_at)"
               data-balloon-pos="up"
             >{{props.item.certificate.details.status | status}}</span>
@@ -188,6 +167,7 @@ export default {
     },
     getStatus(certificate) {
       if (!certificate) return ''
+      if (!certificate.details) return ''
       const { status } = certificate.details;
       if (!status) return "";
       let value = status.toLowerCase();
@@ -213,52 +193,10 @@ export default {
       });
       this.$router.push(`/dashboard/domains/verification/${name}`);
     },
-    certificateDomain({ name }) {
-      this.$ga.event({
-        eventCategory: "domain",
-        eventAction: "click btn certificate domain",
-        eventLabel: "domain name",
-        eventValue: name
-      });
-      this.$store
-        .dispatch("certificateDomain", { name })
-        .then(res => {
-          this.$store.dispatch("getDomains");
-          this.$ga.event({
-            eventCategory: "domain",
-            eventAction: "send certificate domain",
-            eventLabel: "domain name",
-            eventValue: name
-          });
-          this.$notify({
-            title: "درخواست شما با موفقیت ثبت شد",
-            type: "success"
-          });
-        })
-        .catch(e => {
-          this.$ga.event({
-            eventCategory: "domain",
-            eventAction: "fail certificate domain",
-            eventLabel: "domain name",
-            eventValue: name
-          });
-
-          // this notify for themploery
-          if (typeof e === "object") {
-            this.$notify({
-              title: e.domain_name[0],
-              time: 4000,
-              type: "error"
-            });
-          } else {
-            this.$notify({
-              title: ErrorReporter(e, this.$data),
-              time: 4000,
-              type: "error"
-            });
-          }
-        });
+    details({ name }) {
+      this.$router.push(`/dashboard/domains/${name}`);
     },
+
     removeCertificateDomain({ name }) {
       this.$ga.event({
         eventCategory: "domain",

@@ -81,12 +81,16 @@ export default {
       }
     }
   },
+  computed: {
+    isMobile() {
+      return this.$store.state.windowWidth <= 1200;
+    }
+  },
   methods: {
     setHeight() {
       this.height = window.innerHeight - 490 + 42;
     },
     closeMenu(path) {
-      this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
       this.$router.push(path);
     },
     logout() {

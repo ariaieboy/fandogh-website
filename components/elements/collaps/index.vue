@@ -20,6 +20,9 @@
         </div>
       </div>
     </transition>
+    <div v-show="active">
+      <slot name="collapse-footer"></slot>
+    </div>
   </div>
 </template>
 
@@ -36,6 +39,11 @@ export default {
     };
   },
   props: {
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     selected: {
       type: Boolean,
       required: false,
@@ -53,6 +61,7 @@ export default {
   },
   methods: {
     toggle() {
+      if (this.disabled) return
       this.active = !this.active;
       if (this.active) {
         this.$emit("collapse-open", this.index);
