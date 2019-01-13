@@ -8,19 +8,28 @@
       <div class="customer-wrapper" @mouseover="stopSlider" @mouseout="startSlider">
         <div class="customer-item-wrapper">
           <div class="customer-items" v-for="(item,j) in items">
-            <div class="customer-item" v-for="(image,index) in item" @click="setActive(image,index,j)" :class="{active:isActive === index && parentActive === j}">
+            <div
+              class="customer-item"
+              v-for="(image,index) in item"
+              @click="setActive(image,index,j)"
+              :class="{active:isActive === index && parentActive === j}"
+            >
               <img :src="`${image.logo}`" alt>
-              <a :href="image.link">{{image.text}}</a>
+              <a :href="image.link" target="_blank">{{image.text}}</a>
             </div>
           </div>
         </div>
         <div class="customer-banner">
-          <div   v-for="(item,j) in items">
-            <div  v-for="(image,index) in item"  v-if="isActive === index && parentActive === j">
+          <div v-for="(item,j) in items">
+            <div v-for="(image,index) in item" v-if="isActive === index && parentActive === j">
               <div class="customer-banner-item">
-                <span :style="{'background-image':'url('+image.cover+')'}"></span>
+                <a
+                  :href="image.link"
+                  target="_blank"
+                  :style="{'background-image':'url('+image.cover+')'}"
+                ></a>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>
@@ -34,11 +43,11 @@ export default {
 
   data() {
     return {
-      isActive:0,
-      parentActive:0,
+      isActive: 0,
+      parentActive: 0,
       activeImage: "img/customer/cover-roozame.png",
-      interval:null,
-      activeCount : 1,
+      interval: null,
+      activeCount: 1,
       items: [
         [
           {
@@ -75,49 +84,49 @@ export default {
       ],
     };
   },
-  mounted(){
+  mounted() {
     this.startSlider()
   },
   destroyed() {
     this.stopSlider()
   },
   methods: {
-    setActive(item,index,j) {
+    setActive(item, index, j) {
       this.activeImage = item.cover;
       this.isActive = index
       this.parentActive = j
-       if(this.isActive === 0 && this.parentActive === 0) {
-             this.activeCount = 1
-        }
-        if(this.isActive === 1 && this.parentActive === 0) {
-             this.activeCount = 2
-        }
-        if(this.isActive === 0 && this.parentActive === 1) {
-             this.activeCount = 3
-        }
-        if(this.isActive === 1 && this.parentActive === 1) {
-             this.activeCount = 0
-        }
+      if (this.isActive === 0 && this.parentActive === 0) {
+        this.activeCount = 1
+      }
+      if (this.isActive === 1 && this.parentActive === 0) {
+        this.activeCount = 2
+      }
+      if (this.isActive === 0 && this.parentActive === 1) {
+        this.activeCount = 3
+      }
+      if (this.isActive === 1 && this.parentActive === 1) {
+        this.activeCount = 0
+      }
     },
-    startSlider(){
+    startSlider() {
       this.interval = setInterval(() => {
-        this.activeCount +=1
-        if(this.activeCount === 1) {
-          this.setActive(this.items[0][0],0,0)
+        this.activeCount += 1
+        if (this.activeCount === 1) {
+          this.setActive(this.items[0][0], 0, 0)
         }
-        if(this.activeCount === 2) {
-          this.setActive(this.items[1][0],1,0)
+        if (this.activeCount === 2) {
+          this.setActive(this.items[1][0], 1, 0)
         }
-        if(this.activeCount === 3) {
-          this.setActive(this.items[0][1],0,1)
+        if (this.activeCount === 3) {
+          this.setActive(this.items[0][1], 0, 1)
         }
-        if(this.activeCount === 4) {
-          this.setActive(this.items[1][1],1,1)
+        if (this.activeCount === 4) {
+          this.setActive(this.items[1][1], 1, 1)
           this.activeCount = 0
         }
       }, 5000);
     },
-    stopSlider(){
+    stopSlider() {
       clearInterval(this.interval)
     }
   }
@@ -137,6 +146,7 @@ export default {
     align-items center
     align-content center
   &-item
+    position relative
     display flex
     flex-direction column
     justify-content center
@@ -147,12 +157,10 @@ export default {
     min-width 270px
     min-height 180px
     border-radius 10px
-    position: relative;
     background-color rgba(0, 0, 0, 0.14)
-    transition: box-shadow 0.3s ease-in-out;
+    transition box-shadow 0.3s ease-in-out
     &.active
-      box-shadow: 0px 0px 2px 2px rgba(38,198,236,1);
-      
+      box-shadow 0px 0px 2px 2px rgba(38, 198, 236, 1)
     a
       margin-top 20px
       color #fff
@@ -170,7 +178,8 @@ export default {
     margin 0
     padding-top 66%
     width 100%
-    span
+    border-radius 10px
+    a
       position absolute
       top 0
       right 0
