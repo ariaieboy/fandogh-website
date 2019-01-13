@@ -31,7 +31,7 @@ export default {
     width 193.6px
     height 163.9px
   label
+    margin 90px 0 30px 0
     color rgb(160, 160, 160)
     font-size 18px
-    margin 90px 0 30px 0
 </style>
