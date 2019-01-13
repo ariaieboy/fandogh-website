@@ -97,7 +97,6 @@ export default {
   .alert-image
     display flex
     flex-direction column
-    flex-flow wrap row
     justify-content center
     align-items center
     margin-top -80px

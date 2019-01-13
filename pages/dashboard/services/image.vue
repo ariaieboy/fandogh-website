@@ -110,7 +110,7 @@
 <script>
 import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
-import FTable from "~/components/Dashboard/table";
+
 import FCheckbox from "~/components/elements/checkbox";
 import FSelect from "~/components/elements/select";
 import FLabel from "~/components/Dashboard/label";
@@ -251,7 +251,6 @@ export default {
     FInput,
     FButton,
     FCheckbox,
-    FTable,
     FSelect,
     FLabel,
     Wizard,

@@ -204,9 +204,9 @@ export const createServiceManifest = async ({ commit, state }) => {
   }
 };
 
-export const getDomains = async ({ commit, state }) => {
+export const getDomains = async ({ commit, state }, query) => {
   try {
-    let domains = await Request().get(`/api/domains`);
+    let domains = await Request(query).get(`/api/domains`);
     commit("SET_DOMAINS", domains);
     return domains;
   } catch (e) {

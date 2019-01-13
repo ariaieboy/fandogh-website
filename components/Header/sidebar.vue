@@ -59,7 +59,9 @@ export default {
   },
   watch: {
     $route() {
-      this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
+      if (this.isMobile) {
+        this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
+      }
     }
   },
   methods: {
@@ -98,6 +100,9 @@ export default {
     }
   },
   computed: {
+    isMobile() {
+      return this.$store.state.windowWidth <= 1200;
+    },
     sidebar() {
       return this.$store.state.sidebar === "navbar";
     },
