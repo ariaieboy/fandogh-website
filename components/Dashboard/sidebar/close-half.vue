@@ -1,5 +1,5 @@
 <template>
-  <div class="close-half" @click="toggleMenu('halfSidebar')">
+  <div :class="['close-half ' , {'open-half':showHalf}]" @click="toggleMenu('halfSidebar')">
     <img
       src="./icons/ic_arrowRight.svg"
       alt="arrow-right"
@@ -45,6 +45,10 @@ export default {
     align-self center
     width 8px
     transition all 0.3s ease-in
+  &.open-half
+    @media (max-width: 768px)
+      left -2px
+      border-bottom-left-radius 0
   .revers-icon
     transition all 0.3s ease-out
     transform scale(-1, 1)

@@ -9,24 +9,26 @@
         <f-button styles="red" path="/dashboard/secret/create">افزودن سکرت</f-button>
       </div>
       <div class="table-title">سکرت‌های شما</div>
-      <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد">
-        <template slot="action" slot-scope="props">
-          <span>
-            <action-button
-              class="action-button-s"
-              @onClick="edit(props.item)"
-              icon="edit.svg"
-              label="ویرایش"
-            />
-            <action-button
-              class="action-button-s"
-              @onClick="remove(props.item)"
-              icon="ic-delete.svg"
-              label="حذف"
-            />
-          </span>
-        </template>
-      </b-table>
+      <div class="table-responsive">
+        <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد">
+          <template slot="action" slot-scope="props">
+            <span>
+              <action-button
+                class="action-button-s"
+                @onClick="edit(props.item)"
+                icon="edit.svg"
+                label="ویرایش"
+              />
+              <action-button
+                class="action-button-s"
+                @onClick="remove(props.item)"
+                icon="ic-delete.svg"
+                label="حذف"
+              />
+            </span>
+          </template>
+        </b-table>
+      </div>
     </div>
   </div>
 </template>
