@@ -143,7 +143,6 @@ export default {
         first_name: this.account.first_name,
         last_name: this.account.last_name
       }
-
       try {
         await this.$store.dispatch("updateAccount", body)
         this.$notify({

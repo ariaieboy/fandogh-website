@@ -213,10 +213,10 @@ export default {
         });
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
         if (this.domain.service) {
-          this.textService = `<router-link to="servce">
+          this.textService = `<a href="/dashboard/services/${this.domain.service}" >
             ${this.domain.service}
             <img src="/icons/plans/info-button.png" >
-            </router-link>`
+            </a>`
         }
 
       } catch (e) {
@@ -320,7 +320,7 @@ export default {
 };
 </script>
 
-<style scoped lang="stylus">
+<style  lang="stylus" scoped>
 .domain
   &-description
     display flex

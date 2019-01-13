@@ -24,8 +24,10 @@
       <div class="wizard-content">
         <slot/>
       </div>
+
       <div class="wizard-footer">
         <f-button v-if="back" :path="back.path" styles="red">مرحله قبل</f-button>
+        <f-button v-if="next && prevent" styles="gray disabled">مرحله بعد</f-button>
         <f-button v-if="next && !prevent" :path="next.path" styles="blue">مرحله بعد</f-button>
         <f-button v-if="back && !loading && !prevent" @onClick="finish" :styles="built">اتمام ساخت</f-button>
         <f-button v-if="back && loading" :styles="built">در حال ساخت...</f-button>
