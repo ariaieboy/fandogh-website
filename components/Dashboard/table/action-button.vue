@@ -1,5 +1,11 @@
 <template>
-  <a @click.prevent="$emit('onClick')" class="action-button" href="#">
+  <a
+    @click.prevent="$emit('onClick')"
+    class="action-button"
+    href="#"
+    :data-balloon="label"
+    data-balloon-pos="up"
+  >
     <img :src="`/icons/${icon}`" alt>
     <label>{{label}}</label>
     <slot/>
@@ -24,7 +30,8 @@ export default {
 .action-button
   display inline-block
   margin 10px
-  padding 8px
+  padding 8px 25px
+  max-width 101px
   border-radius 5px
   background #eaf0f7
   color #4f4f4f
@@ -40,7 +47,6 @@ export default {
   label
     display inline-block
     overflow hidden
-    width 100px
     vertical-align middle
     cursor pointer
     transition all ease 0.5s
@@ -48,6 +54,7 @@ export default {
   // label
   // width 100px
   img
+    margin-left 5px
     width 16px
     height 16px
     vertical-align middle
@@ -59,11 +66,14 @@ export default {
   label
     position absolute
     width 0
-.is-small
-  .action-button
-    width auto
-    label
-      display none
+// .is-small
+// .action-button
+// width auto
+// label
+// width 0
+// &:hover
+// label
+// width 100px
 @media (max-width: 1700px)
   .action-button-s, .action-button-m
     label
