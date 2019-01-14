@@ -12,7 +12,7 @@
               <span>{{(index+1).toLocaleString("fa-EG")}}</span>
             </router-link>
             <!-- current_state -->
-            <p v-if="windowWidth >= 1200">{{step.title}}</p>
+            <p v-if="windowWidth >= 1170">{{step.title}}</p>
 
             <p v-else-if="index === current_state">{{step.title}}</p>
           </div>
@@ -203,14 +203,14 @@ export default {
             background-color #296bdd
             span
               color #fff
-@media laptop
+@media tablet
   .wizard
     &-progress
       &-steps
         .step-container
           .line
             width 30px
-@media laptop
+@media mobile
   .wizard
     &-progress
       &-steps
