@@ -85,7 +85,7 @@ export default {
     };
   },
   mounted() {
-    this.startSlider()
+    // this.startSlider()
   },
   destroyed() {
     this.stopSlider()
@@ -109,6 +109,7 @@ export default {
       }
     },
     startSlider() {
+      return
       this.interval = setInterval(() => {
         this.activeCount += 1
         if (this.activeCount === 1) {
@@ -137,14 +138,17 @@ export default {
 .customer
   display flex
   padding-bottom 100px
-  height 850px
   &-wrapper
     display flex
     margin-top 40px
+    @media (max-width: 992px)
+      flex-direction column-reverse
   &-items
     display flex
     align-items center
     align-content center
+    @media (max-width: 480px)
+      flex-direction column-reverse
   &-item
     position relative
     display flex
@@ -159,6 +163,17 @@ export default {
     border-radius 10px
     background-color rgba(0, 0, 0, 0.14)
     transition box-shadow 0.3s ease-in-out
+    @media (max-width: 992px)
+      min-width 190px
+      min-height 160px
+    @media (max-width: 480px)
+      margin-bottom 30px
+      margin-left 0
+      min-width inherit
+      min-height 140px
+      width 160px
+      img
+        transform scale(0.5)
     &.active
       box-shadow 0px 0px 2px 2px rgba(38, 198, 236, 1)
     a
@@ -167,11 +182,19 @@ export default {
       font-weight bold
       font-size 24px
       font-family Roboto
+      @media (max-width: 992px)
+        font-size 16px
+      @media (max-width: 480px)
+        margin-top 5px
+        font-size 12px
     &:last-child
       margin-left 0
   &-banner
     margin-right 30px
     width 100%
+    @media (max-width: 992px)
+      margin-right 0
+      margin-bottom 30px
   &-banner-item
     position relative
     overflow hidden
