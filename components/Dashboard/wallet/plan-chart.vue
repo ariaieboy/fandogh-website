@@ -1,9 +1,9 @@
 <template>
   <div class="chart">
     <div class="chart-item">
-      <img src="~static/icons/plans/cpu.png" alt>
-      <p class="chart-type font-roboto">CPU</p>
-      <p class="chart-size font-roboto">2Core</p>
+      <img :src="require('~/static/icons/plans/'+id+'.png')" alt>
+      <p class="chart-type font-roboto">{{id}}</p>
+      <p class="chart-size font-roboto">{{size}}</p>
     </div>
     <div class="chart-circle">
       <r-chart :id="id" :stop="stop" :startColor="startColor" :endColor="endColor"/>
@@ -12,6 +12,7 @@
 </template>
 
 <script>
+
 import RChart from './chart'
 export default {
   name: 'wallet-chart',
@@ -19,6 +20,10 @@ export default {
     stop: {
       type: Number,
       default: 0.1
+    },
+    size: {
+      type: String,
+      default: ''
     },
     id: {
       type: String,

@@ -54,7 +54,7 @@ export default {
 
         }
       });
-      //   bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+        bar.text.style.fontFamily = 'yekan-light';
       bar.text.style.fontWeight = 'bold';
       bar.text.style.fontSize = '20px';
       bar.text.style.color = '#4f4f4f';

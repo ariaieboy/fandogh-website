@@ -1,24 +1,39 @@
 <template>
   <div class="plan">
     <div class="plan-info">
-      <p class="plan-name">پلن فعلی</p>
-      <p class="plan-type">پلن ۲</p>
+      <p class="plan-name">{{name}}</p>
+      <p class="plan-type">{{type}}</p>
     </div>
     <div class="plan-icon">
-      <img src="~static/icons/plans/services-icon/blimp.png" alt="plan-2">
+      <img :src="require('~/static/icons/plans/services-icon/'+icon+'.png')" alt>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'wallet-plan'
+  name: 'wallet-plan',
+  props: {
+    name: {
+      type: String,
+      default: ''
+    },
+    type: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
 .plan
   display flex
+  justify-content space-evenly
   &-info
     display flex
     flex-direction column
