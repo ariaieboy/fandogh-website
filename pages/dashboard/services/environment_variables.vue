@@ -2,7 +2,7 @@
   <div>
     <h2>مرحله سوم</h2>
     <div class="row">
-      <div class="col-md-6 col-xs-12">
+      <div class="col-lg-6 col-md-12 col-xs-12">
         <wizard btn_title="مرحله بعد">
           <div class="fandogh-form-group">
             <label>نام متغیر</label>
@@ -116,7 +116,7 @@ export default {
 
         // },
         {
-          label: "مدیدریت", tdClass: 'width-larg',
+          label: "مدیدریت",
           sortable: false,
           key: "action",
           html: true
