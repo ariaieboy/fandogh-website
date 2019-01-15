@@ -91,6 +91,7 @@ export default {
     };
   },
   mounted() {
+
     if (!this.noFixed) {
       let headerContainer = document.querySelector(".header-container");
       document.addEventListener("scroll", () => {
