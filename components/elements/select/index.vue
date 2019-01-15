@@ -2,8 +2,8 @@
   <div class="dropdown">
     <div
       :tabindex="tabindex"
-      @focus="toggle(true)"
       @blur="toggle(false)"
+      @click="toggle(true)"
       class="dropdown-container"
     >
       <div class="dropdown--arrow">
@@ -23,7 +23,11 @@
     <div v-show="show" class="dropdown-selector">
       <ul>
         <li v-for="option in options">
-          <a @focus="selectOption(option)" href="#">{{option.title}}</a>
+          <a
+            @focus.stop="selectOption(option)"
+            @click.stop="selectOption(option)"
+            href="#"
+          >{{option.title}}</a>
         </li>
       </ul>
     </div>
@@ -66,10 +70,11 @@ export default {
   },
   methods: {
     toggle(show) {
+
       this.show = show
       if (this.show && this.isClear && this.selected !== '') {
         this.selected = '';
-        this.$emit("input", '');
+        this.$emit("input", null);
       }
     },
     selectOption(option, noToggle) {
