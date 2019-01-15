@@ -48,7 +48,7 @@
             <div class="row">
               <div class="col-md-4 p-0">
                 <r-box>
-                  <r-plan name="موجودی" type="۱۱۰٬۰۰۰ تومان" icon="bicycle"/>
+                  <r-plan name="موجودی" type="۱۱۰٬۰۰۰ تومان" icon="wallet"/>
                 </r-box>
               </div>
               <div class="col-md-8">
@@ -56,6 +56,17 @@
               </div>
             </div>
           </r-box-parent>
+        </div>
+        <div class="mt-45">
+          <div class="row">
+            <div class="col-md-8">
+              <h2>محاسبه‌گر پلن ساعتی</h2>
+              <r-box-parent>
+                <span>منابع مورد نیاز</span>
+                <r-calculator/>
+              </r-box-parent>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -68,6 +79,7 @@ import RBox from "~/components/Dashboard/wallet/box"
 import RPlan from "~/components/Dashboard/wallet/plan"
 import RPlanCahrt from "~/components/Dashboard/wallet/plan-chart"
 import RCharge from "~/components/Dashboard/wallet/charge"
+import RCalculator from "~/components/Dashboard/wallet/calculator"
 export default {
   name: 'wallet',
   layout: "dashboard",
@@ -75,6 +87,7 @@ export default {
     RBoxParent,
     RBox,
     RPlan,
+    RCalculator,
     RPlanCahrt,
     RCharge
   },
@@ -91,6 +104,7 @@ export default {
 
 <style lang="stylus" scoped>
 .wallet
+  padding-bottom 45px
   &-items
     display flex
     justify-content space-between

@@ -14,18 +14,28 @@
         </span>
       </i>
     </div>
+    <div class="charge-action mt-45">
+      <f-button styles="red ml-45">تأیید و پرداخت</f-button>
+      <f-button styles="black">مرحله قبل</f-button>
+    </div>
   </div>
 </template>
 
 <script>
+import FButton from "~/components/elements/button";
+
 export default {
-  name: 'wallet-charge'
+  name: 'wallet-charge',
+  components: {
+    FButton
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
 .charge
   display flex
+  flex-direction column
   padding 0 25px
   &-input
     position relative
@@ -35,23 +45,18 @@ export default {
     label
       margin-bottom 1px
       font-size 14px
-    &::-webkit-input-placeholder
-      color #47494e
-      text-align right
-      font-size 12px
-    &:-moz-placeholder
-      color #47494e
-      text-align right
-      font-size 12px
     input
       padding 15px
       width 100%
       border solid 1px #e7e8ea
       border-radius 10px
       background-color #ffffff
-      color #000
       color #47494e
       font-size 14px
+      &::-webkit-input-placeholder, &:-moz-placeholder
+        color #47494e
+        text-align right
+        font-size 12px
   &-calculator
     position absolute
     bottom 7px
