@@ -2,7 +2,7 @@
   <div>
     <h2>ایجاد سرویس</h2>
     <div class="row">
-      <div class="col-md-6 col-xs-12">
+      <div class="col-lg-6 col-md-12 col-xs-12">
         <wizard :prevent="prevent" btn_title="مرحله بعد">
           <div class="fandogh-form-group">
             <label>نام سرویس</label>
