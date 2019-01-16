@@ -20,7 +20,11 @@
     <div v-show="show" class="dropdown-selector">
       <ul>
         <li v-for="option in options" :class="{'selected':selected.includes(option.title)}">
-          <a @focus="selectOption(option)" href="#">{{option.title}}</a>
+          <a
+            @focus="selectOption(option)"
+            @click.stop="selectOption(option)"
+            href="#"
+          >{{option.title}}</a>
         </li>
       </ul>
     </div>

@@ -3,7 +3,7 @@ import { Nuxt, Builder } from "nuxt";
 var cookieParser = require("cookie-parser");
 const app = express();
 app.use(cookieParser());
-const host = process.env.HOST || "0.0.0.0"; //'10.0.0.108'
+const host = process.env.HOST || "0.0.0.0"; // "10.0.0.108";
 const port = process.env.PORT || 4000;
 
 app.set("port", port);
