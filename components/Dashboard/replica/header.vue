@@ -50,6 +50,12 @@ export default {
           : "نا مشخص";
     }
   },
+  mounted() {
+
+  },
+  methods: {
+
+  },
   computed: {
     stateColor() {
       if (!this.state) return ''

@@ -41,30 +41,10 @@ export default {
     }
   },
   mounted() {
-    var vm = this;
-    window.addEventListener("resize", function (e) {
-      vm.setSize(e);
-    });
-    if (process.browser) {
-      this.setDefaultSize();
-    }
+
   },
   methods: {
-    setSize(e) {
-      this.$store.dispatch("SET_SIZE", {
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-    },
-    setDefaultSize(e) {
-      this.$store.dispatch("SET_SIZE", {
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-      if (this.isMobile) {
-        this.$store.dispatch("TOGGLE_NAV", { data: null, id: "sidebar" });
-      }
-    }
+
   }
 };
 </script>
