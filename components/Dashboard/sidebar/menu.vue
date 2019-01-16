@@ -35,6 +35,15 @@
       <li>
         <router-link
           event="disabled"
+          @click.native="closeMenu('/dashboard/wallet')"
+          :to="{path:'/dashboard/wallet'}"
+        >
+          <img src="./icons/wallet.svg"> تراکنش‌های مالی
+        </router-link>
+      </li>
+      <li>
+        <router-link
+          event="disabled"
           @click.native="closeMenu('/dashboard/secret')"
           :to="{path:'/dashboard/secret'}"
         >
