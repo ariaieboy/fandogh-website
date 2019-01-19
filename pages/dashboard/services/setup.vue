@@ -44,11 +44,11 @@
               <!-- <f-v-checkbox color="blue" label="HTTP فعال باشد" v-model="allow_http"/> -->
             </div>
             <div class="fandogh-form-group">
-              <label class="font-roboto">Path</label>
+              <label class="font-roboto">Port</label>
               <f-input
-                v-model="path"
+                v-model="port"
                 styles="input-white input-block input-dashboard"
-                placeholder="Path"
+                placeholder="Port"
               ></f-input>
             </div>
             <div class="fandogh-form-group">
@@ -145,8 +145,8 @@ export default {
     allow_http(value, oldValue) {
       this.$store.dispatch("manifestGenerator", { value, path: "allow_http" });
     },
-    path(value, oldValue) {
-      this.$store.dispatch("manifestGenerator", { value, path: "path" });
+    port(value, oldValue) {
+      this.$store.dispatch("manifestGenerator", { value, path: "port" });
     },
     domains(value, oldValue) {
       let list = [...value]

@@ -55,12 +55,14 @@ export default {
           })
           .then(res => { }).catch(e => {
             if (e.status === 401) {
+              clearInterval(this.logInterval);
               this.$router.push("/user/login");
             }
           });
         if (state !== "building") clearInterval(this.logInterval);
       }, 1000);
     }
+    if (state !== "building") clearInterval(this.logInterval);
   },
   computed: {
     builds() {
