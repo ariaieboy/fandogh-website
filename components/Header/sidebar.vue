@@ -77,7 +77,7 @@ export default {
         {
           img: "/icons/exit.svg",
           title: `خروج از داشبورد`,
-          description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
+          description: "آیا برای خروج از داشبورد مطمئن هستید هستید ؟",
           label: 'خروج'
         },
         status => {

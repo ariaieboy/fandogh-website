@@ -16,7 +16,10 @@
               <!-- tooltipShow -->
             </span>
             <tooltip v-if="tooltipShow" :list="list" :description="description"/>
-            <span class="service------price">{{price}}</span>
+            <span class="service------price">
+              {{price}}
+              <label class="font-10">تومان</label>
+            </span>
           </div>
         </div>
         <div class="service----line"></div>

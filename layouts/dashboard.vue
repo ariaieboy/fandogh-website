@@ -54,6 +54,9 @@ export default {
     },
     showHalf() {
       return this.$store.state.sidebar === "halfSidebar";
+    },
+    isMobile() {
+      return this.$store.state.windowWidth <= 1200;
     }
   },
 
@@ -80,6 +83,9 @@ export default {
     }
   },
   mounted() {
+    if (!this.isMobile) {
+      this.$store.dispatch("TOGGLE_NAV", { data: 'halfSidebar', id: "sidebar" });
+    }
     let elm = document.querySelector('#raychatFrame')
     if (!elm) {
       const raychatScript = document.createElement('script')
