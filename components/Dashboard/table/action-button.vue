@@ -35,7 +35,6 @@ export default {
   border-radius 5px
   background #eaf0f7
   color #4f4f4f
-  font-size 12px
   @media (max-width: 1200px)
     margin 5px
     padding 5px
@@ -73,9 +72,6 @@ export default {
       margin-left 0
     label
       width 0
-    &:hover
-      label
-        width 85px
 .action-button-x
   width auto
   label

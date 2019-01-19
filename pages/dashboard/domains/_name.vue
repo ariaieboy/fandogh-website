@@ -2,7 +2,7 @@
   <div v-if="domain">
     <h2>جزئیات دامنه</h2>
     <div class="row">
-      <div class="col-md-6 col-xs-12">
+      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <div class="fandogh-form-group">
           <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
           <f-label-disable label="نام دامنه :" :value="name"/>
@@ -23,7 +23,7 @@
     </div>
     <h2>تأیید دامنه</h2>
     <div class="row" v-if="domain.verified">
-      <div class="col-md-6 col-xs-12">
+        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <div class="fandogh-form-group">
           <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
           <f-label-disable label="وضعیت دامنه :" :value="textVeify"/>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="row" v-if="!domain.verified">
-      <div class="col-md-6 col-xs-12">
+        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -58,7 +58,7 @@
     </div>
     <h2>گواهینامه SSL</h2>
     <div class="row" v-if="!domain.verified">
-      <div class="col-md-6 col-xs-12">
+        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="false" :disabled="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="row" v-if="domain.verified && !domain.certificate">
-      <div class="col-md-6 col-xs-12">
+        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="false" :disabled="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -88,7 +88,7 @@
       </div>
     </div>
     <div class="row" v-if="domain.verified && domain.certificate">
-      <div class="col-md-6 col-xs-12">
+        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -165,12 +165,15 @@ export default {
     };
   },
   computed: {
+    showHalf() {
+      return this.$store.state.sidebar === "halfSidebar";
+    },
     domain() {
       return this.$store.state.domain;
     },
     getStatus() {
-      let certificate = this.domain.certificate
-      if (!certificate) return ''
+      let certificate = this.domain.certificate;
+      if (!certificate) return "";
       const { status } = certificate.details;
       if (!status) return "";
       let value = status.toLowerCase();
@@ -183,11 +186,11 @@ export default {
       if (value === "unknown") {
         return "pending-text";
       }
-    },
+    }
   },
 
   filters: {
-    status: function (value) {
+    status: function(value) {
       if (!value) return "";
       let state = value.toLowerCase();
       if (state === "ready") {
@@ -204,7 +207,7 @@ export default {
   created() {
     this.getData();
   },
-  destroyed() { },
+  destroyed() {},
   methods: {
     async getData() {
       try {
@@ -213,12 +216,13 @@ export default {
         });
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
         if (this.domain.service) {
-          this.textService = `<a href="/dashboard/services/${this.domain.service}" >
+          this.textService = `<a href="/dashboard/services/${
+            this.domain.service
+          }" >
             ${this.domain.service}
             <img src="/icons/plans/info-button.png" >
-            </a>`
+            </a>`;
         }
-
       } catch (e) {
         if (e.status === 401) {
           this.$router.push("/user/login");
@@ -227,9 +231,10 @@ export default {
       }
     },
     FDate(date) {
-      return FDate({ date: date })
+      return FDate({ date: date });
     },
     verify() {
+      this.$store.commit("SET_DATA", { data: true, id: "loading" });
       this.$ga.event({
         eventCategory: "domain",
         eventAction: "verify domain",
@@ -264,13 +269,15 @@ export default {
               type: "error"
             });
           }
+          this.$store.commit("SET_DATA", { data: false, id: "loading" });
         })
         .catch(e => {
+          this.$store.commit("SET_DATA", { data: false, id: "loading" });
           console.log(e);
         });
     },
     certificateDomain() {
-      let name = this.domain.name
+      let name = this.domain.name;
       this.$ga.event({
         eventCategory: "domain",
         eventAction: "click btn certificate domain",
@@ -315,7 +322,7 @@ export default {
             });
           }
         });
-    },
+    }
   }
 };
 </script>

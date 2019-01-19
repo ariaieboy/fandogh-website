@@ -40,32 +40,39 @@
             </div>
           </div>
           <div class="fandogh-form-group margin-top-100 td-medium">
-            <div class="table-title font-roboto">Environment Variables</div>
-            <b-table :fields="header" stacked="lg" :items="envsData" empty-text="دیتایی وجود ندارد">
-              <template slot="value" slot-scope="props">
-                <div v-if="props.item.hidden">********</div>
-                <div v-else class="position-relative">
-                  <i
-                    data-balloon-pos="up"
-                    :data-balloon="props.item.value"
-                    class="balloon-tip"
-                    @click="copy(props.item.value)"
-                  ></i>
-                  <div class="flex-td">
-                    <img src="~static/icons/copy.svg" class="space-image">
-                    <span>{{props.item.value}}</span>
+            <div class="table-responsive">
+              <div class="table-title font-roboto">Environment Variables</div>
+              <b-table
+                :fields="header"
+                stacked="lg"
+                :items="envsData"
+                empty-text="دیتایی وجود ندارد"
+              >
+                <template slot="value" slot-scope="props">
+                  <div v-if="props.item.hidden">********</div>
+                  <div v-else class="position-relative">
+                    <i
+                      data-balloon-pos="up"
+                      :data-balloon="props.item.value"
+                      class="balloon-tip"
+                      @click="copy(props.item.value)"
+                    ></i>
+                    <div class="flex-td">
+                      <img src="~static/icons/copy.svg" class="space-image">
+                      <span>{{props.item.value}}</span>
+                    </div>
                   </div>
-                </div>
-              </template>
-              <template slot="action" slot-scope="props">
-                <action-button
-                  class="action-button-x"
-                  @onClick="remove(props.item)"
-                  icon="ic-delete.svg"
-                  label="حذف"
-                />
-              </template>
-            </b-table>
+                </template>
+                <template slot="action" slot-scope="props">
+                  <action-button
+                    class="action-button-x"
+                    @onClick="remove(props.item)"
+                    icon="ic-delete.svg"
+                    label="حذف"
+                  />
+                </template>
+              </b-table>
+            </div>
           </div>
         </wizard>
       </div>
@@ -80,7 +87,7 @@ import FCheckbox from "~/components/elements/checkbox";
 import MultiSelect from "~/components/Dashboard/multiselect";
 import Wizard from "~/components/Dashboard/wizard";
 import ActionButton from "~/components/Dashboard/table/action-button";
-import FMarquee from '~/components/Dashboard/MarqueeText'
+import FMarquee from "~/components/Dashboard/MarqueeText";
 
 export default {
   layout: "dashboard",
@@ -116,7 +123,7 @@ export default {
 
         // },
         {
-          label: "مدیدریت",
+          label: "مدیریت",
           sortable: false,
           key: "action",
           html: true
@@ -136,11 +143,12 @@ export default {
   },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
-    this.name = ""
+    this.name = "";
   },
   methods: {
     copy(text) {
-      navigator.clipboard.writeText(text)
+      navigator.clipboard
+        .writeText(text)
         .then(() => {
           this.$notify({
             title: `مقدار ${text} کپی شد.`,
@@ -150,10 +158,14 @@ export default {
         })
         .catch(err => {
           // This can happen if the user denies clipboard permissions:
-          console.error('Could not copy text: ', err);
+          console.error("Could not copy text: ", err);
         });
     },
     focus() {
+      if (this.hidden) {
+        let checkbox3 = document.querySelector("#checkbox3");
+        checkbox3.click();
+      }
       let elm = document.querySelector(".focus");
       elm.focus();
     },
