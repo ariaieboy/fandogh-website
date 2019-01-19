@@ -65,6 +65,17 @@ export default {
     @media (max-width: 1200px)
       width 15px
       height 15px
+.is-small
+  .action-button-mini
+    margin 5px
+    padding 8px 5px
+    img
+      margin-left 0
+    label
+      width 0
+    &:hover
+      label
+        width 85px
 .action-button-x
   width auto
   label

@@ -92,10 +92,13 @@ export default {
           this.loading = false;
           this.$router.push("/dashboard/images");
           this.$store.dispatch("showModal", false);
+
           this.$ga.event({
             eventCategory: "account",
             eventAction: "login"
           });
+          this.$store.dispatch("TOGGLE_NAV", { data: 'halfSidebar', id: "sidebar" });
+
         })
         .catch(e => {
           this.loading = false;

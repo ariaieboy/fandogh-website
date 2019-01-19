@@ -18,13 +18,13 @@
         <b-table :fields="header" stacked="lg" :items="versions" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <action-button
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="craeteVersions(props.item)"
               icon="ic-add.svg"
               label="ایجاد سرویس"
             />
             <action-button
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="logs(props.item)"
               icon="file.svg"
               label="مشاهده لاگ"

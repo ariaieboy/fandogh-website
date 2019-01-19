@@ -13,14 +13,14 @@
         <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <action-button
-              class="action-button-m"
+              class="action-button-mini"
               @onClick="details(props.item)"
               icon="edit.svg"
               label="جزییات"
             />
 
             <action-button
-              class="action-button-m"
+              class="action-button-mini"
               @onClick="remove(props.item)"
               icon="ic-delete.svg"
               label="حذف"
