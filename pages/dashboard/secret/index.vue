@@ -71,7 +71,7 @@ export default {
         },
 
         {
-          label: "مدیدریت", tdClass: 'width-larg',
+          label: "مدیریت", tdClass: 'width-larg',
           sortable: false,
           key: "action",
           html: true

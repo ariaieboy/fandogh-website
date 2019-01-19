@@ -10,7 +10,7 @@
           </div>
           <div
             class="wrapper-col"
-            :class="{'col-xs-12 col-lg-10 pr-120 pl-100 is-small':showHalf,'col-xs-12':!showHalf}"
+            :class="{'col-xs-12 col-lg-10 pr-160 pl-100 is-small':showHalf,'col-xs-12':!showHalf}"
           >
             <div class="dash-container">
               <nuxt/>

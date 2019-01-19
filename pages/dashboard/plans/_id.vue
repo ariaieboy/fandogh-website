@@ -97,7 +97,7 @@ export default {
   data() {
     return {};
   },
-  destroyed() { },
+  destroyed() {},
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
   },
@@ -117,14 +117,14 @@ export default {
     plan() {
       return this.$store.state.plan.plans[this.index];
     },
-    addTaxToPrice: function () {
+    addTaxToPrice: function() {
       const price = parseInt(this.plan.price);
       if (price === 0) return "رایگان";
       const tax = Math.ceil(9 * price) / 100;
       const taxedPrice = tax + price;
-      return `مبلغ قابل پرداختت ${taxedPrice.toLocaleString("fa-EG")} تومان`;
+      return `مبلغ قابل پرداخت ${taxedPrice.toLocaleString("fa-EG")} تومان`;
     },
-    tax: function () {
+    tax: function() {
       const price = parseInt(this.plan.price);
       if (price === 0) return "رایگان";
       const finalPrice = Math.ceil(9 * price) / 100;

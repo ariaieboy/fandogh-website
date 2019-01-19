@@ -30,17 +30,24 @@
           </div>
 
           <div class="fandogh-form-group margin-top-100">
-            <div class="table-title font-roboto">Port Mapping</div>
-            <b-table :fields="header" stacked="lg" :items="envsData" empty-text="دیتایی وجود ندارد">
-              <template slot="action" slot-scope="props">
-                <action-button
-                  class="action-button-s"
-                  @onClick="remove(props.item)"
-                  icon="ic-delete.svg"
-                  label="حذف"
-                />
-              </template>
-            </b-table>
+            <div class="table-responsive">
+              <div class="table-title font-roboto">Port Mapping</div>
+              <b-table
+                :fields="header"
+                stacked="lg"
+                :items="envsData"
+                empty-text="دیتایی وجود ندارد"
+              >
+                <template slot="action" slot-scope="props">
+                  <action-button
+                    class="action-button-s"
+                    @onClick="remove(props.item)"
+                    icon="ic-delete.svg"
+                    label="حذف"
+                  />
+                </template>
+              </b-table>
+            </div>
           </div>
         </wizard>
       </div>
@@ -81,7 +88,7 @@ export default {
           key: "protocol"
         },
         {
-          label: "مدیدریت",
+          label: "مدیریت",
           sortable: false,
           key: "action",
           html: true
@@ -146,12 +153,11 @@ export default {
         !FormValidator(this.$data, {
           target_port: {
             required: true,
-            name: 'Inside Port'
+            name: "Inside Port"
           },
           port: {
             required: true,
-            name: 'Outside Port '
-
+            name: "Outside Port "
           }
         })
       )

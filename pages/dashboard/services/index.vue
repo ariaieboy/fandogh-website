@@ -79,7 +79,7 @@ export default {
           key: "start_date"
         },
         {
-          label: "مدیدریت",
+          label: "مدیریت",
           tdClass: 'width-larg',
           sortable: false,
           key: "action",

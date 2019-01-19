@@ -5,7 +5,7 @@
     default-width="25%"
     bg-overlay="rgba(0,0,0,.8)"
     bg-panel="#fff"
-    :resize-width="{1200:'50%',992:'75%',768:'90%'}"
+    :resize-width="{1400:'50%',992:'75%',768:'90%'}"
   >
     <div class="alert">
       <!-- <div class="close-modal">
@@ -35,34 +35,34 @@
 </template>
 
 <script>
-import modal from './modal'
+import modal from "./modal";
 import FButton from "~/components/elements/button";
 import Vue from "vue";
 export default {
-
   props: ["message", "disableOverlay", "noModal"],
-  // 
+  //
   props: {
     message: {
       type: String,
-      default: ''
+      default: ""
     },
-    disableOverlay: '',
-    noModal: ''
+    disableOverlay: "",
+    noModal: ""
   },
   data() {
     return {
       display: false,
-      options: null,
-
+      options: null
     };
   },
   computed: {
     image() {
-      return this.options.img ? this.options.img : require('./images/img_delete.svg')
+      return this.options.img
+        ? this.options.img
+        : require("./images/img_delete.svg");
     },
     label() {
-      return this.options.label || 'حذف شود'
+      return this.options.label || "حذف شود";
     }
   },
   created() {

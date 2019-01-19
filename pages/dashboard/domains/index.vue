@@ -101,7 +101,7 @@ export default {
           html: true
         },
         {
-          label: "مدیدریت",
+          label: "مدیریت",
           tdClass: "width-larg",
           sortable: false,
           key: "action",

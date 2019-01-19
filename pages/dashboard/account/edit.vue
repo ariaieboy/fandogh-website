@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-6 col-xs-12">
+    <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
       <h2>تنظیمات</h2>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
@@ -80,18 +80,21 @@ export default {
     };
   },
   computed: {
+    showHalf() {
+      return this.$store.state.sidebar === "halfSidebar";
+    },
     username() {
-      return getValue("username")
+      return getValue("username");
     },
     email() {
-      return getValue("email")
+      return getValue("email");
     },
     progress() {
       return this.$store.state.progress;
     },
     account() {
-      return this.$store.state.account
-    },
+      return this.$store.state.account;
+    }
   },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
@@ -105,15 +108,17 @@ export default {
     FCheckbox
   },
   created() {
-    this.getData()
+    this.getData();
   },
   methods: {
     async getData() {
       try {
-        let res = await this.$store.dispatch("getAccount", { username: getValue("username") });
+        let res = await this.$store.dispatch("getAccount", {
+          username: getValue("username")
+        });
         if (res.newsletter_subscriber) {
-          let elm = document.querySelector('#newsletter_subscriber')
-          elm.click()
+          let elm = document.querySelector("#newsletter_subscriber");
+          elm.click();
         }
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
@@ -124,13 +129,16 @@ export default {
       }
     },
     async saveEdit() {
-      if (!/^\d{10}$/.test(this.account.national_id) && this.account.national_id) {
+      if (
+        !/^\d{10}$/.test(this.account.national_id) &&
+        this.account.national_id
+      ) {
         this.$notify({
-          title: 'از کاراکتر های مجاز استفاده کنید',
+          title: "از کاراکتر های مجاز استفاده کنید",
           time: 4000,
           type: "error"
         });
-        return
+        return;
       }
       this.$ga.event({
         eventCategory: "account",
@@ -138,22 +146,26 @@ export default {
       });
       let body = {
         username: getValue("username"),
-        national_id: this.account.national_id !== '' ? this.account.national_id : null,
-        newsletter_subscriber: this.account.newsletter_subscriber !== '' ? this.account.newsletter_subscriber : null,
+        national_id:
+          this.account.national_id !== "" ? this.account.national_id : null,
+        newsletter_subscriber:
+          this.account.newsletter_subscriber !== ""
+            ? this.account.newsletter_subscriber
+            : null,
         first_name: this.account.first_name,
         last_name: this.account.last_name
-      }
+      };
       try {
-        await this.$store.dispatch("updateAccount", body)
+        await this.$store.dispatch("updateAccount", body);
         this.$notify({
-          title: 'پروفایل شما با موفقیت بروزرسانی شد',
+          title: "پروفایل شما با موفقیت بروزرسانی شد",
           time: 4000,
-          type: 'success'
-        })
+          type: "success"
+        });
         this.$router.push("/dashboard/account");
       } catch (error) {
         console.log(error);
-        this.$alertReport(error)
+        this.$alertReport(error);
       }
     }
   }

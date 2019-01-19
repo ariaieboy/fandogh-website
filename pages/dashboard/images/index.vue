@@ -41,7 +41,6 @@
 </template>
 
 <script>
-
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
@@ -56,7 +55,7 @@ export default {
       isLoading: false,
       header: [
         {
-          label: "نام دامنه",
+          label: "نام ایمیج",
           sortable: false,
           key: "name",
           tdClass: "ellipsis ltr"
@@ -78,8 +77,8 @@ export default {
           key: "date"
         },
         {
-          label: "مدیدریت",
-          tdClass: 'width-larg',
+          label: "مدیریت",
+          tdClass: "width-larg",
           sortable: false,
           key: "action",
           html: true
