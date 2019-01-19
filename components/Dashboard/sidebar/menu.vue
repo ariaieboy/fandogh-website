@@ -28,7 +28,7 @@
           @click.native="closeMenu('/dashboard/domains')"
           :to="{path:'/dashboard/domains'}"
         >
-          <img src="./icons/domain.svg"> دامنه
+          <img src="./icons/domain.svg"> دامنه‌ها
         </router-link>
       </li>
 
@@ -98,7 +98,7 @@ export default {
         {
           img: "/icons/exit.svg",
           title: `خروج از داشبورد`,
-          description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
+          description: "آیا برای خروج از داشبورد مطمئن هستید هستید ؟",
           label: 'خروج'
         },
         status => {

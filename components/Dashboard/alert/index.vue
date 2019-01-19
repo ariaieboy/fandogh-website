@@ -1,13 +1,20 @@
 <template>
-  <div>
-    <div v-if="display" class="alert">
-      <div class="close-modal">
+  <modal
+    :visible="display"
+    @hide="onDelete(false)"
+    default-width="25%"
+    bg-overlay="rgba(0,0,0,.8)"
+    bg-panel="#fff"
+    :resize-width="{1200:'50%',992:'75%',768:'90%'}"
+  >
+    <div class="alert">
+      <!-- <div class="close-modal">
         <a href="#" @click="onDelete(false)" class="close">
           <img alt="close icon" :src="require('../../../assets/svg/ic_close.svg')">
         </a>
-      </div>
+      </div>-->
       <!-- Modal content -->
-      <div class="modal-content">
+      <div class="alert-content" v-if="options">
         <div class="alert-image">
           <img :src="image">
           <h2>{{options.title}}</h2>
@@ -18,19 +25,21 @@
             <f-button styles="alert" @onClick="onDelete(true)">{{label}}</f-button>
           </div>
           <div class="margin-20">
-            <f-button styles="blue" @onClick="onDelete(false)">منصرف شدم</f-button>
+            <f-button styles="black-light" @onClick="onDelete(false)">منصرف شدم</f-button>
           </div>
         </div>
       </div>
     </div>
-    <div @click="onDelete(false)" v-if="display" class="overlay"></div>
-  </div>
+    <!-- <div @click="onDelete(false)" v-if="display" class="overlay"></div> -->
+  </modal>
 </template>
 
 <script>
+import modal from './modal'
 import FButton from "~/components/elements/button";
 import Vue from "vue";
 export default {
+
   props: ["message", "disableOverlay", "noModal"],
   // 
   props: {
@@ -77,92 +86,49 @@ export default {
     }
   },
   components: {
-    FButton
+    FButton,
+    modal
   }
 };
 </script>
 
 <style scoped lang="stylus" >
 .alert
-  position fixed /* Stay in place */
-  top 0
-  right 0
-  bottom 0
-  left 0
-  z-index 999999
-  overflow hidden
-  margin auto
-  width 435px
-  border-radius 10px
-  .alert-image
+  display flex
+  justify-content center
+  &-image
     display flex
     flex-direction column
     justify-content center
     align-items center
-    margin-top -80px
+    margin -80px auto 0 auto
     width 400px
     height 400px
     border-radius 200px
-    background-color rgba(224, 224, 224, 0.2)
-  .alert-content
-    text-align center
-    h6
-      color #000
-      text-align center
-      font-weight normal
-      font-size 16px
-  .modal-content
-    position relative
-    overflow hidden
-    margin 25% auto
-    padding 20px
-    width 410px
-    border-radius 10px
-    background-color #fff
+    background-color hsla(0, 0%, 87.8%, 0.2)
+    @media (max-width: 593px)
+      margin -30px auto 0 auto
+      width 100%
+      height 200px
+      border-radius 0
+      img
+        width 200px
     h2
       color #000
       text-align center
       font-weight 900
       font-size 18px
-html, body
-  min-height 100%
-body
-  position relative
-.overlay
-  position fixed
-  top -50px
-  left 0
-  z-index 99999
-  width 100%
-  height 120vh
-  filter grayscale(10%)
-  background-color rgba(0, 0, 0, 0.8) /* dim the background */
-.message
-  height 50px
-  border-top 2px dotted #fff
-  text-align center
-  p
-    color #e96363
-.close-modal
-  position absolute
-  top 125px
-  right 20px
-  z-index 99
-  img
-    width 20px
-.no-modal
-  z-index 1
-  margin-top 105px
-@media only screen and (max-width: 576px)
-  .alert
-    margin-top 0
-    .close-modal
-      top 40px
-    .modal-content
-      margin 5% auto
-    .alert-image
-      margin -60px auto
-      border-radius 150px
-      background-color #fff
+      @media (max-width: 593px)
+        font-size 14px
+  &-content
+    width 100%
+    text-align center
+    h6
+      color #000
+      text-align center
+      font-weight 900
+      font-size 18px
+      @media (max-width: 593px)
+        font-size 12px
 </style>
 

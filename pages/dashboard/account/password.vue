@@ -3,12 +3,12 @@
     <div class="col-md-6 col-xs-12">
       <h2>تغییر رمز عبور</h2>
       <div class="fandogh-form-group">
-        <label>رمز عبور قبلی</label>
+        <label>رمز عبور فعلی</label>
         <f-input
           v-model="current_password"
           styles="input-white input-block input-dashboard"
           type="password"
-          placeholder="رمز عبور قبلی را وارد کنید"
+          placeholder="رمز عبور فعلی را وارد کنید"
         ></f-input>
       </div>
       <div class="fandogh-form-group">
