@@ -13,19 +13,19 @@
         <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <action-button
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="details(props.item)"
               icon="ic-logs.svg"
               label="مشاهده جزییات"
             />
             <action-button
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="logs(props.item)"
               icon="file.svg"
               label="مشاهده لاگ"
             />
             <action-button
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="remove(props.item)"
               icon="ic-delete.svg"
               label="حذف"
@@ -63,11 +63,11 @@ export default {
           key: "name",
           tdClass: "ellipsis ltr"
         },
-        {
-          label: "نوع سرویس",
-          sortable: false,
-          key: "service_type"
-        },
+        // {
+        //   label: "نوع سرویس",
+        //   sortable: false,
+        //   key: "service_type"
+        // },
         {
           label: "حافظه",
           sortable: false,

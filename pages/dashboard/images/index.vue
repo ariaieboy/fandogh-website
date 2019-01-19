@@ -14,21 +14,21 @@
           <template slot="action" slot-scope="row">
             <action-button
               v-if="row.item.name !== ''"
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="versions(row.item)"
               icon="ic-time.svg"
               label="ورژن ها"
             />
             <action-button
               v-if="row.item.name !== ''"
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="createVersion(row.item)"
               icon="ic-upload.svg"
               label="آپلود"
             />
             <action-button
               v-if="row.item.name !== ''"
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="remove(row.item)"
               icon="ic-delete.svg"
               label="حذف"

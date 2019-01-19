@@ -53,7 +53,11 @@ export default {
             name: this.$route.params.image,
             version: this.$route.params.version
           })
-          .then(res => {});
+          .then(res => { }).catch(e => {
+            if (e.status === 401) {
+              this.$router.push("/user/login");
+            }
+          });
         if (state !== "building") clearInterval(this.logInterval);
       }, 1000);
     }
