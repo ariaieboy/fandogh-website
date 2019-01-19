@@ -15,7 +15,7 @@ module.exports = {
   },
   css: [
     "flexboxgrid/css/flexboxgrid.css",
-    "balloon-css/balloon.min.css",
+    "@/assets/css/balloon.css",
     "@/assets/css/main.styl"
   ],
   head: {
