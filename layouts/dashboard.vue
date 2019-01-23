@@ -2,7 +2,7 @@
   <div class="wrapper">
     <f-loading :isFull="true" v-if="loading"/>
     <no-ssr>
-      <f-header noFixed="true"/>
+      <f-d-header/>
       <div class="container-fluid">
         <div class="row">
           <div class="wrapper-col" :class="{'col-lg-2':showHalf , 'col-lg-0':!showHalf}">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import FHeader from "~/components/Header";
+import FDHeader from "~/components/Dashboard/header";
 import FFooter from "~/components/Footer";
 import AdminSidebar from "~/components/Dashboard/sidebar";
 import "normalize.css";
@@ -37,7 +37,7 @@ import FLoading from "~/components/Loading";
 
 export default {
   components: {
-    FHeader,
+    FDHeader,
     FLoading,
     FFooter,
     AdminSidebar,
