@@ -101,7 +101,7 @@ export default {
   },
   computed: {
     isMobile() {
-      return this.$store.state.windowWidth <= 1200;
+      return this.$store.state.windowWidth <= 1230;
     },
     sidebar() {
       return this.$store.state.sidebar === "navbar";

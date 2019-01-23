@@ -33,8 +33,6 @@
   white-space nowrap
 .width-larg
   min-width 350px
-  @media only screen and (max-width: 992px)
-    min-width auto
 .is-small
   .width-larg
     min-width 180px
@@ -138,3 +136,11 @@
     text-overflow ellipsis
     white-space nowrap
     font-size 14px
+  .b-table thead th, .b-table tbody td
+    height auto
+@media (max-width: 1230px)
+  .width-larg
+    min-width inherit
+@media only screen and (max-width: 1200px) and (min-width: 992px)
+  .b-table thead th, .b-table tbody td
+    max-width 120px
