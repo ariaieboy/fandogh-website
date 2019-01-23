@@ -56,7 +56,7 @@ export default {
       return this.$store.state.sidebar === "halfSidebar";
     },
     isMobile() {
-      return this.$store.state.windowWidth <= 1200;
+      return this.$store.state.windowWidth <= 1230;
     }
   },
 

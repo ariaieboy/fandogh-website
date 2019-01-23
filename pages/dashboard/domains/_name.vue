@@ -23,7 +23,7 @@
     </div>
     <h2>تأیید دامنه</h2>
     <div class="row" v-if="domain.verified">
-        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <div class="fandogh-form-group">
           <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
           <f-label-disable label="وضعیت دامنه :" :value="textVeify"/>
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="row" v-if="!domain.verified">
-        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -58,7 +58,7 @@
     </div>
     <h2>گواهینامه SSL</h2>
     <div class="row" v-if="!domain.verified">
-        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="false" :disabled="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="row" v-if="domain.verified && !domain.certificate">
-        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="false" :disabled="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -88,12 +88,18 @@
       </div>
     </div>
     <div class="row" v-if="domain.verified && domain.certificate">
-        <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
         <f-collaps :selected="true">
           <div slot="collapse-header">
             <div class="domain-label">
               <span>وضعیت گواهینامه SSL :</span>
-              <span class="pending-text">درخواست داده‌اید</span>
+              
+              <span
+                v-if="domain.certificate && domain.certificate.details"
+                :data-balloon="domain.certificate.details.info"
+                data-balloon-pos="up"
+                :class="getStatus"
+              >{{domain.certificate.details.status | status}}</span>
             </div>
           </div>
           <div slot="collapse-body">
@@ -104,6 +110,7 @@
             <div class="domain-description">
               <span>وضعیت :</span>
               <span
+                v-if="domain.certificate && domain.certificate.details"
                 :class="getStatus"
                 :data-balloon="domain.certificate.details.info"
                 data-balloon-pos="up"
@@ -115,12 +122,10 @@
               </span>
             </div>
           </div>
-          <!-- <div slot="collapse-footer">
-            <div class="mt-45">
-              <f-button @onClick="certificateDomain" styles="blue block">درخواست SSL</f-button>
-            </div>
-          </div>-->
         </f-collaps>
+        <div class="mt-45">
+          <f-button @onClick="removeCertificateDomain" styles="red block">لغو گواهینامه SSL</f-button>
+        </div>
       </div>
     </div>
     <div class="row" v-if="domain.service">
@@ -172,8 +177,10 @@ export default {
       return this.$store.state.domain;
     },
     getStatus() {
+      if (!this.domain) return ''
       let certificate = this.domain.certificate;
       if (!certificate) return "";
+      if (!certificate.details) return ""
       const { status } = certificate.details;
       if (!status) return "";
       let value = status.toLowerCase();
@@ -190,7 +197,7 @@ export default {
   },
 
   filters: {
-    status: function(value) {
+    status: function (value) {
       if (!value) return "";
       let state = value.toLowerCase();
       if (state === "ready") {
@@ -207,7 +214,7 @@ export default {
   created() {
     this.getData();
   },
-  destroyed() {},
+  destroyed() { },
   methods: {
     async getData() {
       try {
@@ -218,7 +225,7 @@ export default {
         if (this.domain.service) {
           this.textService = `<a href="/dashboard/services/${
             this.domain.service
-          }" >
+            }" >
             ${this.domain.service}
             <img src="/icons/plans/info-button.png" >
             </a>`;
@@ -277,6 +284,7 @@ export default {
         });
     },
     certificateDomain() {
+      this.$store.commit("SET_DATA", { data: true, id: "loading" });
       let name = this.domain.name;
       this.$ga.event({
         eventCategory: "domain",
@@ -288,6 +296,7 @@ export default {
         .dispatch("certificateDomain", { name })
         .then(res => {
           this.getData();
+          this.$store.commit("SET_DATA", { data: false, id: "loading" });
           this.$ga.event({
             eventCategory: "domain",
             eventAction: "send certificate domain",
@@ -300,6 +309,8 @@ export default {
           });
         })
         .catch(e => {
+          this.$store.commit("SET_DATA", { data: false, id: "loading" });
+
           this.$ga.event({
             eventCategory: "domain",
             eventAction: "fail certificate domain",
@@ -322,7 +333,56 @@ export default {
             });
           }
         });
-    }
+    },
+    removeCertificateDomain() {
+      let name = this.domain.name;
+      this.$ga.event({
+        eventCategory: "domain",
+        eventAction: "click btn remove certificate domain",
+        eventLabel: "domain name",
+        eventValue: name
+      });
+      this.$alertify(
+        {
+          title: `حذف گواهی SLL`,
+          description: `آیا از حذف SSL دامنه ${name} مطمئن هستید؟`
+        },
+        status => {
+          if (status) {
+            this.$store.commit("SET_DATA", { data: true, id: "loading" });
+            this.$store
+              .dispatch("removeCertificateDomain", { name })
+              .then(res => {
+                this.getData()
+                this.$store.commit("SET_DATA", { data: false, id: "loading" });
+                this.$ga.event({
+                  eventCategory: "domain",
+                  eventAction: "remove ssl domain",
+                  eventLabel: "domain name",
+                  eventValue: name
+                });
+                this.$notify({
+                  title: res.message,
+                  type: "success"
+                });
+              })
+              .catch(e => {
+                this.$store.commit("SET_DATA", { data: false, id: "loading" });
+                this.$ga.event({
+                  eventCategory: "domain",
+                  eventAction: "fail remove ssl domain",
+                  eventLabel: "domain name",
+                  eventValue: name
+                });
+                this.$notify({
+                  title: e.data.message,
+                  type: "error"
+                });
+              });
+          }
+        }
+      );
+    },
   }
 };
 </script>
