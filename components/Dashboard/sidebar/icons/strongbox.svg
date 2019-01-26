@@ -1,8 +1,8 @@
-<svg id="strongbox" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.002 24.002">
+<svg id="strongbox" xmlns="http://www.w3.org/2000/svg" width="24.002" height="24.002" viewBox="0 0 24.002 24.002">
   <defs>
     <style>
       .cls-1 {
-        fill: #fff;
+        fill: #333;
       }
     </style>
   </defs>

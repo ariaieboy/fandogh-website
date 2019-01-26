@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+    <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
       <h2>تنظیمات</h2>
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
@@ -80,8 +80,8 @@ export default {
     };
   },
   computed: {
-    showHalf() {
-      return this.$store.state.sidebar === "halfSidebar";
+    openSidebar() {
+      return this.$store.state.sideMunu
     },
     username() {
       return getValue("username");

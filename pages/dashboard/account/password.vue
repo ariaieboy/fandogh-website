@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+    <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
       <h2>تغییر رمز عبور</h2>
       <div class="fandogh-form-group">
         <label>رمز عبور فعلی</label>
@@ -62,8 +62,8 @@ export default {
     };
   },
   computed: {
-    showHalf() {
-      return this.$store.state.sidebar === "halfSidebar";
+    openSidebar() {
+      return this.$store.state.sideMunu
     },
     username() {
       return getValue("username");

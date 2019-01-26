@@ -3,18 +3,13 @@
     <f-loading :isFull="true" v-if="loading"/>
     <no-ssr>
       <f-d-header/>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="wrapper-col" :class="{'col-lg-2':showHalf , 'col-lg-0':!showHalf}">
-            <admin-sidebar/>
-          </div>
-          <div
-            class="wrapper-col"
-            :class="{'col-xs-12 col-lg-10 pr-160 pl-100 is-small':showHalf,'col-xs-12':!showHalf}"
-          >
-            <div class="dash-container">
-              <nuxt/>
-            </div>
+      <div :class="['wrapper-content',{'is-small':openSidebar}]">
+        <div :class="['wrapper-sidebar', {'open':openSidebar}]">
+          <admin-sidebar/>
+        </div>
+        <div :class="['wrapper-main',{'open':openSidebar}]">
+          <div class="dash-container">
+            <nuxt/>
           </div>
         </div>
       </div>
@@ -45,15 +40,14 @@ export default {
     Alert
   },
   computed: {
-
     loading() {
       return this.$store.state.loading;
     },
     message() {
       return this.$store.state.message;
     },
-    showHalf() {
-      return this.$store.state.sidebar === "halfSidebar";
+    openSidebar() {
+      return this.$store.state.sideMunu
     },
     isMobile() {
       return this.$store.state.windowWidth <= 1230;
@@ -67,8 +61,7 @@ export default {
         this.$store.dispatch("showModal", "message");
       }
       this.$store.commit("SET_DATA", { data: true, id: "loading" });
-
-
+      this.$store.commit('SET_DATA', { id: 'isNativeMenus', data: null })
     }
   },
   beforeMount() {
@@ -100,12 +93,13 @@ export default {
 @import '../assets/css/main.styl'
 
 $spaceTop = 45
-// .wrapper-col
+.parent-sidebar
+  position relative
 // transition all 0.5s
 .dash-container
   box-sizing border-box
   margin-top $spaceTop + 68px
-  min-height calc(100vh - 68px)
+  min-height calc(100vh - 120px)
   @media only screen and (max-width: 1230px)
     margin 0
     margin-top $spaceTop + 60px
@@ -116,4 +110,34 @@ $spaceTop = 45
 .wrapper
   width 100%
   background #f0f4f8
+  &-content
+    display flex
+    width 100%
+    font-size 16px
+    transition $transitionMain
+    @media only screen and (max-width: 1250px)
+      font-size 14px
+    @media only screen and (max-width: 1230px)
+      font-size 10px
+    @media only screen and (max-width: 992px)
+      font-size 12px
+  &-sidebar
+    position relative
+    min-width $widthSidebarClose
+    transition $transitionMain
+    &.open
+      min-width $widthSidebarOpen
+  &-main
+    flex-grow 1
+    box-sizing border-box
+    margin-right 0.8em
+    margin-left 0.8em
+    min-width calc(100vh - 5.25em)
+    transition $transitionMain
+    &.open
+      min-width calc(100vh - 23em)
+    @media only screen and (max-width: 992px)
+      min-width calc(100vh - 23em)
+      &.open
+        min-width calc(100vh - 240px)
 </style>

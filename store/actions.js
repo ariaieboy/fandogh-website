@@ -284,9 +284,13 @@ export const getNameSpace = async ({ commit, state }, namespace) => {
   }
 };
 
-export const TOGGLE_NAV = ({ commit, state }, { data }) => {
-  localStorage.setItem("nav", data);
-  commit("SET_DATA", { data: data, id: "sidebar" });
+export const TOGGLE_NAV = ({ commit, state }, { data, id }) => {
+  // localStorage.setItem("nav", data);
+  if (data === state.isNativeMenus) {
+    commit("SET_DATA", { data: null, id });
+    return;
+  }
+  commit("SET_DATA", { data: data, id: id });
 };
 
 export const SET_SIZE = ({ commit, state }, { width, height }) => {

@@ -95,7 +95,6 @@ export default {
     File,
     ProgressBar
   },
-  destroyed() { },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
     this.$ga.event({
