@@ -71,10 +71,7 @@ export default {
       right 0
   @media only screen and (max-width: $sizeMd)
     right -17em
-    bottom auto
     padding-bottom 0
-  @media only screen and (max-height: 410px)
-    bottom 0
   &-list
     overflow auto
     border-top 1px solid $hoary
