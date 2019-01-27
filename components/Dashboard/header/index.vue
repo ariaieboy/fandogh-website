@@ -1,5 +1,7 @@
 <template>
   <div class="header-dashboard">
+    <hamburger-menu @onClicked="toggleSidebar()" :isVisible="open"/>
+
     <div class="header-dashboard-logo">
       <router-link to="/">
         <img src="./icons/fandogh logo.svg" alt="logo">
@@ -11,10 +13,13 @@
 
 <script>
 import FAvatar from './avatar'
+import hamburgerMenu from '~/components/Dashboard/sidebar/hamburger-menu'
+
 export default {
   name: 'header-dashboard',
   components: {
-    FAvatar
+    FAvatar,
+    hamburgerMenu
   },
   data() {
     return {
@@ -26,6 +31,30 @@ export default {
       ]
     }
   },
+  computed: {
+    open() {
+      return this.$store.state.sideMunu
+    },
+    isMobile() {
+      return this.$store.state.windowWidth <= 992;
+    }
+  },
+  watch: {
+    isMobile(val) {
+      if (val) {
+        this.$store.dispatch("TOGGLE_NAV", { data: null, id: "isNativeMenus" });
+        this.$store.commit("SET_DATA", { data: false, id: "sideMunu" });
+      }
+    }
+  },
+  methods: {
+    toggleSidebar() {
+      if (this.isMobile) {
+        this.$store.dispatch("TOGGLE_NAV", { data: null, id: "isNativeMenus" });
+      }
+      this.$store.commit("SET_DATA", { data: !this.open, id: "sideMunu" });
+    }
+  }
 }
 </script>
 
@@ -39,9 +68,11 @@ export default {
   justify-content space-between
   align-items center
   width 100%
-  height 68px
+  height 48px
   background-color $grayLight
   font-size 14px
   &-logo
     padding-right 30px
+    img
+      width 24px
 </style>

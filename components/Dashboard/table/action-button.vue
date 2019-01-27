@@ -28,6 +28,8 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import '../../../assets/css/variables.styl'
+
 .action-button
   display inline-flex
   justify-content center
@@ -63,10 +65,11 @@ export default {
     margin-left 0
   label
     display none
-.is-small
-  .action-button
-    img
-      margin-left 0
-    label
-      display none
+@media only screen and (min-width: $sizeMd)
+  .is-small
+    .action-button
+      img
+        margin-left 0
+      label
+        display none
 </style>

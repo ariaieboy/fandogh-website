@@ -21,6 +21,7 @@
 <script>
 export default {
   name: 'sidebar-dashboard',
+
   data() {
     return {
       items: [
@@ -36,9 +37,6 @@ export default {
   computed: {
     open() {
       return this.$store.state.sideMunu
-    },
-    isMobile() {
-      return this.$store.state.windowWidth <= 1230;
     }
   },
   methods: {
@@ -54,21 +52,29 @@ export default {
 @import '../../../assets/css/variables.styl'
 
 .sidebar-dashboard
-  position absolute
+  position fixed
   top 0
   right 0
   bottom 0
-  left 0
+  z-index 88
   display flex
   flex-direction column
   justify-content space-between
-  padding-top 68px
+  padding-top 48px
   padding-bottom 47px
   min-width $widthSidebarClose
   background-color $grayLight
   transition $transitionMain
   &.open
     min-width $widthSidebarOpen
+    @media only screen and (max-width: $sizeMd)
+      right 0
+  @media only screen and (max-width: $sizeMd)
+    right -17em
+    bottom auto
+    padding-bottom 0
+  @media only screen and (max-height: 410px)
+    bottom 0
   &-list
     overflow auto
     border-top 1px solid $hoary
@@ -85,6 +91,7 @@ export default {
     justify-content center
     align-items center
     padding 25px 0
+    text-align right
     &:after
       position absolute
       top 0
@@ -97,12 +104,14 @@ export default {
       transition all 0.3s ease-in
       transform scale(0)
     &.nuxt-link-active, &:hover
+      span
+        color $greenDark
       &:after
         transform none
     &.is-border
       &:before
         position absolute
-        right 1.875em
+        right 1.25em
         bottom 0
         left 1.25em
         display block
@@ -110,7 +119,7 @@ export default {
         background-color rgba(0, 0, 0, 0.25)
         content ''
     &.open
-      justify-content end
+      justify-content flex-start
       padding-right 1.875em
       span
         position static
@@ -118,7 +127,7 @@ export default {
         opacity 9
         transform none
       img
-        margin-left 1.875em
+        margin-left 1.2em
       &.is-border
         &:before
           // right 30px
@@ -143,6 +152,8 @@ export default {
     background-color $grayLight
     cursor pointer
     transition $transitionMain
+    @media only screen and (max-width: $sizeMd)
+      display none
     &.open
       min-width $widthSidebarOpen
       img
@@ -150,6 +161,7 @@ export default {
     img
       float left
       padding 15px
+      width 12px
       transform scale(-1, -1)
 </style>
 
