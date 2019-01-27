@@ -79,9 +79,10 @@ export default {
   },
   mounted() {
     this.handelEventSize()
-    // if (!this.isMobile) {
-    //   this.$store.dispatch("TOGGLE_NAV", { data: 'halfSidebar', id: "sidebar" });
-    // }
+    if (this.isMobile) {
+      this.$store.commit('SET_DATA', { id: 'isNativeMenus', data: null })
+      this.$store.commit("SET_DATA", { data: false, id: "sideMunu" });
+    }
     this.handelRyChat()
   },
   methods: {
@@ -143,7 +144,7 @@ $spaceTop = 45
     padding 0 15px
 .wrapper
   width 100%
-  background #f0f4f8
+  background #fefefe
   &-content
     display flex
     width 100%
