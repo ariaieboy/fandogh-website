@@ -147,6 +147,7 @@ export default {
 @import '../../../assets/css/mixins.styl'
 
 .wizard
+  padding-right 30px
   &-footer
     margin-top 100px
     a

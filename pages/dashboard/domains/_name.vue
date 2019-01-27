@@ -2,7 +2,7 @@
   <div v-if="domain">
     <h2>جزئیات دامنه</h2>
     <div class="row">
-      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
         <div class="fandogh-form-group">
           <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
           <f-label-disable label="نام دامنه :" :value="name"/>
@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="row" v-if="domain.verified && !domain.certificate">
-      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
         <f-collaps :selected="false" :disabled="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -88,7 +88,7 @@
       </div>
     </div>
     <div class="row" v-if="domain.verified && domain.certificate">
-      <div class="col-xs-12" :class="{'col-md-9':showHalf , 'col-md-6':!showHalf}">
+      <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
         <f-collaps :selected="true">
           <div slot="collapse-header">
             <div class="domain-label">
@@ -170,8 +170,8 @@ export default {
     };
   },
   computed: {
-    showHalf() {
-      return this.$store.state.sidebar === "halfSidebar";
+    openSidebar() {
+      return this.$store.state.sideMunu
     },
     domain() {
       return this.$store.state.domain;

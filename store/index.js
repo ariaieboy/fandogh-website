@@ -7,6 +7,8 @@ const createStore = () => {
   return new Vuex.Store({
     state: () => {
       return {
+        isNativeMenus: null,
+        sideMunu: true,
         windowHeight: null,
         windowWidth: null,
         sidebar: "halfSidebar",

@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   /*
    ** Headers of the page
@@ -52,13 +54,12 @@ module.exports = {
     extractCSS: true,
     vendor: ["axios"]
   },
+
   plugins: [
     "~/plugins/progress-hover",
     { src: "~/plugins/google-map", ssr: false },
     "~/plugins/mixins",
     "~/plugins/validation",
-    // { src: "~/plugins/table", ssr: false },
     { src: "~/plugins/bootstrap", ssr: false }
-    // { src: "~/plugins/ga.js", ssr: false }
   ]
 };
