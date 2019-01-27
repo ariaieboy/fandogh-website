@@ -1,9 +1,9 @@
 <template>
   <div class="header-avatar">
     <div class="header-avatar-box" @click="toggleAvatar('avatar')">
-      <img class="header-avatar-img" src="./icons/Group 1032.svg" alt>
+      <img class="header-avatar-img" :src="avatar" alt>
       <div class="header-avatar-name">
-        <span>رامین اسماعیلی</span>
+        <span>{{username}}</span>
         <!-- <span class="font-roboto">Ramiiiinessiiii</span> -->
       </div>
       <img
@@ -15,24 +15,26 @@
     </div>
     <div class="header-avatar-list" :class="{open:isNativeMenus === 'avatar'}">
       <div class="header-avatar-namespace">
-        <span class="font-roboto header-avatar-username">Ramiiiinessiiii</span>
-        <span class="font-roboto">Salameno.ir</span>
+        <span class="font-roboto header-avatar-username">{{username}}</span>
+        <span class="font-roboto">{{namespace}}</span>
       </div>
       <div class="header-avatar-list-item">
         <router-link :to="item.link" class="header-avatar-item" v-for="(item,i) in items" :key="i">
           <img :src="require('./icons/'+item.icon+'.svg')">
           <span>{{item.text}}</span>
         </router-link>
-        <router-link to="#" class="header-avatar-item">
+        <div @click="exit" class="header-avatar-item">
           <img src="./icons/Group 2188.svg" alt>
           <span>خروج</span>
-        </router-link>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getValue } from "~/utils/cookie";
+import Gravatar from "~/utils/gravatar";
 
 export default {
   name: "header-avatar",
@@ -42,7 +44,19 @@ export default {
       default: () => []
     }
   },
+  data() {
+    return {
+      avatar: "./icons/Group 1032.svg"
+    }
+  },
+
   computed: {
+    username() {
+      return getValue("username");
+    },
+    namespace() {
+      return getValue("namespace");
+    },
     isNativeMenus() {
       return this.$store.state.isNativeMenus
     },
@@ -50,7 +64,36 @@ export default {
       return this.$store.state.windowWidth <= 992;
     }
   },
+  mounted() {
+    this.getAvatar();
+  },
   methods: {
+    exit() {
+      this.$alertify(
+        {
+          img: "/icons/exit.svg",
+          title: `خروج از داشبورد`,
+          description: "آیا برای خروج از داشبورد مطمئن هستید هستید ؟",
+          label: 'خروج'
+        },
+        status => {
+          if (!status) return
+          this.$ga.event({
+            eventCategory: "account",
+            eventAction: "user logout dashboard",
+            eventLabel: "username",
+            eventValue: getValue("username")
+          });
+          this.$store.dispatch("logout");
+          this.$router.push("/user/login");
+        }
+      );
+
+    },
+    getAvatar() {
+      let email = getValue("email");
+      this.avatar = Gravatar(email, 150);
+    },
     toggleAvatar(type) {
       if (this.isMobile) {
         this.$store.commit("SET_DATA", { data: false, id: "sideMunu" });
@@ -96,6 +139,7 @@ $widthListAvatar = 230
       font-size 1em
   &-img
     width 30px
+    border-radius 100%
   &-arrow
     width 12px
     cursor pointer
