@@ -52,7 +52,7 @@ export default {
       return this.$store.state.sideMunu
     },
     isMobile() {
-      return this.$store.state.windowWidth <= 1230;
+      return this.$store.state.windowWidth <= 992;
     }
   },
 
@@ -64,6 +64,9 @@ export default {
       }
       this.$store.commit("SET_DATA", { data: true, id: "loading" });
       this.$store.commit('SET_DATA', { id: 'isNativeMenus', data: null })
+      if (this.isMobile) {
+        this.$store.commit("SET_DATA", { data: false, id: "sideMunu" });
+      }
     }
   },
   beforeMount() {

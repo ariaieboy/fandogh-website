@@ -62,6 +62,10 @@ export default {
         await this.$store.dispatch("getDomain", {
           name: this.$route.params.name
         });
+        if (this.domain.verified) {
+          this.$router.push("/dashboard/domains/" + this.name);
+          return
+        }
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         if (e.status === 401) {
