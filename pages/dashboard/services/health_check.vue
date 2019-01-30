@@ -83,7 +83,6 @@ import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 
 import FCheckbox from "~/components/elements/checkbox";
-import FSelect from "~/components/elements/select";
 import ErrorReporter from "~/utils/ErrorReporter";
 import Wizard from "~/components/Dashboard/wizard";
 
@@ -101,7 +100,6 @@ export default {
     FInput,
     FButton,
     FCheckbox,
-    FSelect,
     Wizard
   },
   mounted() {

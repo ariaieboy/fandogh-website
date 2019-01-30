@@ -22,7 +22,13 @@
           </div>
           <div class="fandogh-form-group">
             <label>Protocol</label>
-            <f-select v-model="protocol" :options="protocols" placeholder="Protocol"></f-select>
+            <v-select
+              v-model="protocol"
+              :options="protocols"
+              dir="rtl"
+              :clearable="false"
+              placeholder="Protocol"
+            ></v-select>
           </div>
 
           <div class="fandogh-form-group">
@@ -60,7 +66,6 @@ import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 
 import FCheckbox from "~/components/elements/checkbox";
-import FSelect from "~/components/elements/select";
 import ErrorReporter from "~/utils/ErrorReporter";
 import Wizard from "~/components/Dashboard/wizard";
 import ActionButton from "~/components/Dashboard/table/action-button";
@@ -97,14 +102,7 @@ export default {
       port: "",
       target_port: "",
       protocol: "TCP",
-      protocols: [
-        {
-          title: "TCP"
-        },
-        {
-          title: "UDP"
-        }
-      ],
+      protocols: ["TCP", "UDP"],
       port_mapping: []
     };
   },
@@ -113,7 +111,6 @@ export default {
     ActionButton,
     FButton,
     FCheckbox,
-    FSelect,
     Wizard
   },
   computed: {

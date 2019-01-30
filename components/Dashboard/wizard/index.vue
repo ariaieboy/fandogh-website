@@ -168,7 +168,7 @@ export default {
           height 6px
           border solid 1px #e7e8ea
           border-radius 10px
-          background-color #ffffff
+          background-color #f0f0f0
         .step
           position relative
           z-index 1
@@ -182,7 +182,7 @@ export default {
             height 36px
             border solid 1px #e7e8ea
             border-radius 50%
-            background-color #ffffff
+            background-color #f0f0f0
           span
             color #bfbfbf
           p
