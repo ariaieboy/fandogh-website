@@ -1,7 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-md-6 col-xs-12">
-      <h2>تنظیمات</h2>
+    <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
       <div class="fandogh-form-group">
         <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
         <f-label-disable label="نام کاربری :" :value="username"/>
@@ -83,18 +82,21 @@ export default {
     };
   },
   computed: {
+    openSidebar() {
+      return this.$store.state.sideMunu
+    },
     account() {
-      return this.$store.state.account
+      return this.$store.state.account;
     },
     email() {
-      return getValue("email")
+      return getValue("email");
     },
     progress() {
       return this.$store.state.progress;
     },
     username() {
-      return getValue("username")
-    },
+      return getValue("username");
+    }
   },
 
   mounted() {
@@ -104,15 +106,17 @@ export default {
     });
   },
   created() {
-    this.getData()
+    this.getData();
   },
   methods: {
     async getData() {
       try {
-        let res = await this.$store.dispatch("getAccount", { username: getValue("username") });
+        let res = await this.$store.dispatch("getAccount", {
+          username: getValue("username")
+        });
         if (res.newsletter_subscriber) {
-          let elm = document.querySelector('#newsletter_subscriber')
-          elm.click()
+          let elm = document.querySelector("#newsletter_subscriber");
+          elm.click();
         }
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
@@ -144,4 +148,8 @@ export default {
 <style lang="stylus">
 .box-checkbox
   display flex
+  @media only screen and (max-width: 768px)
+    flex-direction column
+    > div
+      margin-bottom 15px
 </style>

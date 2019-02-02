@@ -47,16 +47,16 @@
         <f-button path="/user/register" styles="transparent border margin-10 md">ثبت نام</f-button>
       </div>
       <div class="user" v-else>
-        <f-button @onClick="exit" styles="transparent md">خروج</f-button>
+        <f-button @onClick="exit" styles="transparent md exit">خروج</f-button>
         <!--<f-button @onClick="$router.push('/dashboard/images')" styles="transparent border" > داشبورد </f-button>-->
         <f-button path="/dashboard/images" styles="transparent border md margin-10">داشبورد</f-button>
       </div>
 
-      <div v-if="loggedIn" class="profile">
+      <!-- <div v-if="loggedIn" class="profile">
         <a href="#" @click.prevent="toggleMenu(null)">
           <img :src="avatar" alt="profile">
         </a>
-      </div>
+      </div>-->
     </nav>
     <sidebar ref="menu"/>
     <login ref="login"/>
@@ -127,7 +127,7 @@ export default {
         {
           img: "/icons/exit.svg",
           title: `خروج از داشبورد`,
-          description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
+          description: "آیا برای خروج از داشبورد مطمئن هستید هستید ؟",
           label: 'خروج'
         },
         status => {
@@ -220,8 +220,6 @@ header
         img
           width 32px
           border-radius 32px
-    .user
-      display none
     .menu
       display block
       float left
@@ -230,5 +228,9 @@ header
     .logo
       img
         width 96px
+@media only screen and (max-width: 768px)
+  header
+    .user .btn-exit
+      display none
 </style>
 

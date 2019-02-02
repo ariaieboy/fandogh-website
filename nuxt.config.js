@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   /*
    ** Headers of the page
@@ -15,7 +17,7 @@ module.exports = {
   },
   css: [
     "flexboxgrid/css/flexboxgrid.css",
-    "balloon-css/balloon.min.css",
+    "@/assets/css/balloon.css",
     "@/assets/css/main.styl"
   ],
   head: {
@@ -52,13 +54,13 @@ module.exports = {
     extractCSS: true,
     vendor: ["axios"]
   },
+
   plugins: [
     "~/plugins/progress-hover",
     { src: "~/plugins/google-map", ssr: false },
+    { src: "~/plugins/vue-select", ssr: false },
     "~/plugins/mixins",
     "~/plugins/validation",
-    // { src: "~/plugins/table", ssr: false },
     { src: "~/plugins/bootstrap", ssr: false }
-    // { src: "~/plugins/ga.js", ssr: false }
   ]
 };

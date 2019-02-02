@@ -20,27 +20,28 @@
             <div class="col-sm-8 col-xs-12">
               <div class="fandogh-form-group">
                 <label>نام ایمیج</label>
-                <f-select
-                  tabindex="1"
+                <v-select
                   v-model="image"
-                  title="نام ایمیج را انتخاب کنید"
                   :options="images"
-                  styles="input-white input-block input-dashboard"
+                  dir="rtl"
+                  label="name"
+                  :clearable="false"
                   placeholder="نام ایمیج را انتخاب کنید"
-                ></f-select>
+                ></v-select>
               </div>
             </div>
             <div class="col-sm-4 col-xs-12">
-              <div class="fandogh-form-group">
+              <div class="fix-list fandogh-form-group">
                 <label>ورژن ایمیج</label>
-                <f-select
-                  tabindex="2"
+                <v-select
                   v-model="version"
-                  title="ورژن "
                   :options="versions"
-                  styles="input-white input-block input-dashboard"
                   placeholder="ورژن ایمیج را انتخاب کنید"
-                ></f-select>
+                  dir="rtl"
+                  label="version"
+                  :clearable="false"
+                  :loading="version_loaded"
+                ></v-select>
               </div>
             </div>
           </div>
@@ -80,26 +81,23 @@
 
           <div class="fandogh-form-group" v-if="image_type === 'خارجی'">
             <label>Image Pull Policy</label>
-            <f-select
-              tabindex="3"
-              v-model="image_pull_policy"
-              :isClear="true"
-              styles="input-white input-block input-dashboard"
-              :options="[{title: 'Always'}, {title: 'IfNotPresent'}]"
+            <v-select
+              dir="rtl"
+              :v-model="image_pull_policy"
+              :options="['Always','IfNotPresent']"
               placeholder="Image Pull Policy"
-            ></f-select>
+            ></v-select>
           </div>
 
           <div class="fandogh-form-group" v-if="image_type === 'خارجی'">
             <label>Image Pull Secret</label>
-            <f-select
-              tabindex="2"
+            <v-select
+              dir="rtl"
               v-model="image_pull_secret"
               title="Image Pull Secret"
               :options="secretList"
-              styles="input-white input-block input-dashboard"
               placeholder="Image Pull Secret "
-            ></f-select>
+            ></v-select>
           </div>
         </wizard>
       </div>
@@ -112,16 +110,23 @@ import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 
 import FCheckbox from "~/components/elements/checkbox";
-import FSelect from "~/components/elements/select";
 import FLabel from "~/components/Dashboard/label";
 import Wizard from "~/components/Dashboard/wizard";
 import FRadio from "~/components/elements/radio";
-import { getValue } from "~/utils/cookie";
+import { getValue, setValue } from "~/utils/cookie";
 
 // yaml generator
 import jsyaml from "js-yaml";
 
 export default {
+  components: {
+    FInput,
+    FButton,
+    FCheckbox,
+    FLabel,
+    Wizard,
+    FRadio
+  },
   data() {
     return {
       replicas: "",
@@ -133,7 +138,8 @@ export default {
       image_type: "",
       image_pull_policy: "",
       image_pull_secret: "",
-      image_types: ["داخلی فندق", "خارجی"]
+      image_types: ["داخلی فندق", "خارجی"],
+      isMount: false
     };
   },
 
@@ -143,10 +149,7 @@ export default {
     },
     secretList() {
       return this.$store.state.secrets.map(item => {
-        return {
-          title: item.name,
-          value: item.name
-        };
+        return item.name
       });
     },
     nameImage() {
@@ -160,53 +163,45 @@ export default {
     },
     images() {
       if (!this.$store.state.images) return [];
-      return this.$store.state.images.map(item => {
-        return {
-          title: item.name,
-          value: item.name
-        };
-      });
+      return this.$store.state.images
     },
+    // spec_image() {
+    //   return ((this.$store.state.manifest || {}).spec || {}).image;
+    // },
     versions() {
       if (!this.$store.state.versions) return [];
-      return this.$store.state.versions.map(item => {
-        return {
-          title: item.version,
-          value: item.version
-        };
-      });
+      return this.$store.state.versions
     },
-    imageVersion() {
-      if (
-        (!this.image.length || !this.version.length) &&
-        (!this.image_external.length || !this.version_external.length)
-      )
-        return;
-      return this.internal
-        ? this.image + ":" + this.version
-        : this.image_external + ":" + this.version_external;
-    }
   },
   layout: "dashboard",
   watch: {
-    image(value, oldValue) {
-      this.version_loaded = false;
-      //this.version = ''
-      let imageAndVersion = value.split(":");
-      if (imageAndVersion.length > 1) {
-        this.image = imageAndVersion[0];
-        this.$store.dispatch("getImageVersions", this.image).then(res => {
-          this.version_loaded = true;
-          this.version = imageAndVersion[1];
-        });
-      } else {
-        this.$store.dispatch("getImageVersions", value).then(res => {
-          this.version_loaded = true;
-        });
-      }
+    // nameImage(val) {
+    //   console.log(val);
+    //   if (val) {
+    //     if (this.nameImage) {
+    //       this.image = this.nameImage;
+    //       this.version = this.versionsImage;
+    //     }
+    //   }
+    // },
+    image(val, oldValue) {
+      if (!val) return
+      let value = val.name
+      if (!value) return
+      this.getImageV(value)
     },
-    imageVersion(value) {
-      this.$store.dispatch("manifestGenerator", { value, path: "spec.image" });
+    version(value) {
+      this.setImageNameV()
+    },
+    image_external(value) {
+      this.setImageNameV()
+    },
+    version_external(value) {
+      this.setImageNameV()
+    },
+    image_type(value) {
+      // this.image = ""
+      this.setImageNameV()
     },
     replicas(value, oldValue) {
       this.$store.dispatch("manifestGenerator", {
@@ -243,24 +238,38 @@ export default {
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       }
     },
+    setImageV() {
+      var value = value = this.spec_image
+      if (!value) return
+      let imageAndVersion = value.split(":");
+      if (imageAndVersion.length > 1) {
+        setValue({ key: "versions", value: imageAndVersion[1] });
+        setValue({ key: "name", value: imageAndVersion[0] });
+      }
+      this.isMount = false
+    },
+    getImageV(value) {
+      this.version_loaded = false;
+      this.$store.dispatch("getImageVersions", value).then(res => {
+        this.version_loaded = false;
+      });
+    },
+    setImageNameV() {
+      let val = this.internal ? this.image.name + ":" + this.version.version : this.image_external + ":" + this.version_external;
+      let check = val.split(':')[0] && val.split(':')[1]
+      if (check !== 'undefined') {
+        this.$store.dispatch("manifestGenerator", { value: val, path: "spec.image" });
+      }
+    },
     nextStep() {
       this.$router.push("/dashboard/services/create/step3");
     }
   },
-  components: {
-    FInput,
-    FButton,
-    FCheckbox,
-    FSelect,
-    FLabel,
-    Wizard,
-    FRadio
+  destroyed() {
+    this.setImageV()
   },
+
   mounted() {
-    if (this.nameImage) {
-      this.image = this.nameImage;
-      this.version = this.versionsImage;
-    }
     this.$store.dispatch("getSecret");
   }
 };

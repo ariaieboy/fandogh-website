@@ -75,7 +75,7 @@ export default {
           tdClass: "ellipsis ltr"
         },
         {
-          label: "مدیدریت",
+          label: "مدیریت",
           sortable: false,
           key: "action",
           html: true

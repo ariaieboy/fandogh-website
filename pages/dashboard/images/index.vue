@@ -14,21 +14,21 @@
           <template slot="action" slot-scope="row">
             <action-button
               v-if="row.item.name !== ''"
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="versions(row.item)"
               icon="ic-time.svg"
               label="ورژن ها"
             />
             <action-button
               v-if="row.item.name !== ''"
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="createVersion(row.item)"
               icon="ic-upload.svg"
               label="آپلود"
             />
             <action-button
               v-if="row.item.name !== ''"
-              class="action-button-s"
+              class="action-button-mini"
               @onClick="remove(row.item)"
               icon="ic-delete.svg"
               label="حذف"
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-
 import FButton from "~/components/elements/button";
 import FDate from "~/utils/date";
 import Alert from "~/components/Dashboard/alert";
@@ -56,7 +55,7 @@ export default {
       isLoading: false,
       header: [
         {
-          label: "نام دامنه",
+          label: "نام ایمیج",
           sortable: false,
           key: "name",
           tdClass: "ellipsis ltr"
@@ -78,8 +77,8 @@ export default {
           key: "date"
         },
         {
-          label: "مدیدریت",
-          tdClass: 'width-larg',
+          label: "مدیریت",
+          tdClass: "width-larg",
           sortable: false,
           key: "action",
           html: true

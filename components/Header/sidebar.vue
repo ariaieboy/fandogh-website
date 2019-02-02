@@ -77,7 +77,7 @@ export default {
         {
           img: "/icons/exit.svg",
           title: `خروج از داشبورد`,
-          description: "آیا برای خروج از دشبورد مطمئن هستید هستید ؟",
+          description: "آیا برای خروج از داشبورد مطمئن هستید هستید ؟",
           label: 'خروج'
         },
         status => {
@@ -101,7 +101,7 @@ export default {
   },
   computed: {
     isMobile() {
-      return this.$store.state.windowWidth <= 1200;
+      return this.$store.state.windowWidth <= 1230;
     },
     sidebar() {
       return this.$store.state.sidebar === "navbar";

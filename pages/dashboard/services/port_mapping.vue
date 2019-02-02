@@ -22,7 +22,13 @@
           </div>
           <div class="fandogh-form-group">
             <label>Protocol</label>
-            <f-select v-model="protocol" :options="protocols" placeholder="Protocol"></f-select>
+            <v-select
+              v-model="protocol"
+              :options="protocols"
+              dir="rtl"
+              :clearable="false"
+              placeholder="Protocol"
+            ></v-select>
           </div>
 
           <div class="fandogh-form-group">
@@ -30,17 +36,24 @@
           </div>
 
           <div class="fandogh-form-group margin-top-100">
-            <div class="table-title font-roboto">Port Mapping</div>
-            <b-table :fields="header" stacked="lg" :items="envsData" empty-text="دیتایی وجود ندارد">
-              <template slot="action" slot-scope="props">
-                <action-button
-                  class="action-button-s"
-                  @onClick="remove(props.item)"
-                  icon="ic-delete.svg"
-                  label="حذف"
-                />
-              </template>
-            </b-table>
+            <div class="table-responsive">
+              <div class="table-title font-roboto">Port Mapping</div>
+              <b-table
+                :fields="header"
+                stacked="lg"
+                :items="envsData"
+                empty-text="دیتایی وجود ندارد"
+              >
+                <template slot="action" slot-scope="props">
+                  <action-button
+                    class="action-button-s"
+                    @onClick="remove(props.item)"
+                    icon="ic-delete.svg"
+                    label="حذف"
+                  />
+                </template>
+              </b-table>
+            </div>
           </div>
         </wizard>
       </div>
@@ -53,7 +66,6 @@ import FInput from "~/components/elements/input";
 import FButton from "~/components/elements/button";
 
 import FCheckbox from "~/components/elements/checkbox";
-import FSelect from "~/components/elements/select";
 import ErrorReporter from "~/utils/ErrorReporter";
 import Wizard from "~/components/Dashboard/wizard";
 import ActionButton from "~/components/Dashboard/table/action-button";
@@ -81,7 +93,7 @@ export default {
           key: "protocol"
         },
         {
-          label: "مدیدریت",
+          label: "مدیریت",
           sortable: false,
           key: "action",
           html: true
@@ -90,14 +102,7 @@ export default {
       port: "",
       target_port: "",
       protocol: "TCP",
-      protocols: [
-        {
-          title: "TCP"
-        },
-        {
-          title: "UDP"
-        }
-      ],
+      protocols: ["TCP", "UDP"],
       port_mapping: []
     };
   },
@@ -106,7 +111,6 @@ export default {
     ActionButton,
     FButton,
     FCheckbox,
-    FSelect,
     Wizard
   },
   computed: {
@@ -146,12 +150,11 @@ export default {
         !FormValidator(this.$data, {
           target_port: {
             required: true,
-            name: 'Inside Port'
+            name: "Inside Port"
           },
           port: {
             required: true,
-            name: 'Outside Port '
-
+            name: "Outside Port "
           }
         })
       )

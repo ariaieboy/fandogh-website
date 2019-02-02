@@ -1,14 +1,14 @@
 <template>
   <div class="row">
-    <div class="col-md-6 col-xs-12">
+    <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
       <h2>تغییر رمز عبور</h2>
       <div class="fandogh-form-group">
-        <label>رمز عبور قبلی</label>
+        <label>رمز عبور فعلی</label>
         <f-input
           v-model="current_password"
           styles="input-white input-block input-dashboard"
           type="password"
-          placeholder="رمز عبور قبلی را وارد کنید"
+          placeholder="رمز عبور فعلی را وارد کنید"
         ></f-input>
       </div>
       <div class="fandogh-form-group">
@@ -56,25 +56,27 @@ export default {
     return {
       loading: false,
       loadingProgress: false,
-      re_new_password: '',
-      new_password: '',
-      current_password: '',
+      re_new_password: "",
+      new_password: "",
+      current_password: ""
     };
   },
   computed: {
+    openSidebar() {
+      return this.$store.state.sideMunu
+    },
     username() {
-      return getValue("username")
+      return getValue("username");
     },
     progress() {
       return this.$store.state.progress;
     },
     account() {
-      return this.$store.state.account
-    },
+      return this.$store.state.account;
+    }
   },
   mounted() {
     this.$store.commit("SET_DATA", { data: false, id: "loading" });
-
   },
   components: {
     FInput,
@@ -89,32 +91,42 @@ export default {
     async saveEdit() {
       if (this.new_password !== this.re_new_password) {
         this.$notify({
-          title: 'رمز عبور و تکرار رمز عبور شما یکسان نیست',
+          title: "رمز عبور و تکرار رمز عبور شما یکسان نیست",
           time: 4000,
-          type: 'error'
-        })
-        return
+          type: "error"
+        });
+        return;
       }
-      if (!FormValidator(this.$data, { current_password: { required: true, name: 'رمز عبور قبلی ' }, new_password: { required: true, name: 'رمز عبور جدید ' }, re_new_password: { required: true, name: 'تکرار رمز عبور' } })) return
+      if (
+        !FormValidator(this.$data, {
+          current_password: { required: true, name: "رمز عبور قبلی " },
+          new_password: { required: true, name: "رمز عبور جدید " },
+          re_new_password: { required: true, name: "تکرار رمز عبور" }
+        })
+      )
+        return;
       this.loadingProgress = true;
       this.$ga.event({
         eventCategory: "account",
         eventAction: "save update information password"
       });
-      this.$store.dispatch("updateAccount", {
-        username: getValue("username"),
-        "current_password": this.current_password,
-        "new_password": this.new_password,
-      }).then(res => {
-        this.$notify({
-          title: 'رمز عبور شما با موفقیت بروز رسانی شد.',
-          time: 4000,
-          type: 'success'
+      this.$store
+        .dispatch("updateAccount", {
+          username: getValue("username"),
+          current_password: this.current_password,
+          new_password: this.new_password
         })
-        this.$router.push("/dashboard/account");
-      }).catch(e => {
-        this.$alertReport(e)
-      })
+        .then(res => {
+          this.$notify({
+            title: "رمز عبور شما با موفقیت بروز رسانی شد.",
+            time: 4000,
+            type: "success"
+          });
+          this.$router.push("/dashboard/account");
+        })
+        .catch(e => {
+          this.$alertReport(e);
+        });
       this.loadingProgress = false;
     }
   }

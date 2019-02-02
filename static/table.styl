@@ -27,14 +27,15 @@
 .b-table td .ellipsis, .b-table td.ellipsis div
   display inline-block
   overflow hidden
-  width 200px
+  width 140px
   text-align center
   text-overflow ellipsis
   white-space nowrap
 .width-larg
   min-width 350px
-  @media only screen and (max-width: 992px)
-    min-width auto
+.is-small
+  .width-larg
+    min-width 180px
 .flex-td
   display flex
   flex-direction row-reverse
@@ -43,7 +44,7 @@
   .is-small .b-table td .ellipsis
     width 150px
   .is-small .b-table td.ellipsis div
-    width 200px
+    width 110px
   .is-small .b-table th span
     display inline-block
     overflow hidden
@@ -88,8 +89,7 @@
   vertical-align middle
   text-align center
   text-overflow ellipsis
-  white-space nowrap
-  font-size 18px
+  font-size 14px
   @media (max-width: 768px)
     height auto
 .b-table tbody td
@@ -99,7 +99,7 @@
   background #fff
   color #000
   font-weight bold
-  font-size 16px
+  font-size 14px
 .table-title
   display block
   box-sizing border-box
@@ -123,7 +123,6 @@
 @media (max-width: 991.99px)
   table.b-table.b-table-stacked-lg > tbody > tr > [data-label]::before
     color #000
-    font-weight 100
     font-size 16px
   table.b-table.b-table-stacked-lg > tbody > tr td:last-child
     border-bottom 1px dotted #160074
@@ -135,4 +134,12 @@
     overflow hidden
     text-overflow ellipsis
     white-space nowrap
-    font-size 14px
+    font-size 11px
+  .b-table thead th, .b-table tbody td
+    height auto
+@media (max-width: 1230px)
+  .width-larg
+    min-width inherit
+@media only screen and (max-width: 1200px) and (min-width: 992px)
+  .b-table thead th, .b-table tbody td
+    max-width 120px
