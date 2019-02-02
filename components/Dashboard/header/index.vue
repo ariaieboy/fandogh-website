@@ -26,7 +26,7 @@ export default {
       list: [
         { icon: 'Group 2188', text: 'حساب کاربری', link: '/dashboard/account' },
         { icon: 'Group 2190', text: 'پلن من', link: '/dashboard/plans' },
-        // { icon: 'Group 2188', text: 'کیف پول', link: '/dashboard/wallet' },
+        { icon: 'Group 2188', text: 'کیف پول', link: '/dashboard/wallet' },
         { icon: 'ic_settings', text: 'تنظیمات', link: '/dashboard/account/edit' },
       ]
     }
