@@ -40,7 +40,7 @@
             </div>
           </div>
           <div class="fandogh-form-group margin-top-100 td-medium">
-            <div class="table-responsive">
+            <div class="table-responsive table-multicolor">
               <div class="table-title font-roboto">Environment Variables</div>
               <b-table
                 :fields="header"

@@ -27,17 +27,24 @@
           </div>
 
           <div class="fandogh-form-group margin-top-100">
-            <div class="table-title font-roboto">Volume Configurations</div>
-            <b-table :fields="header" stacked="lg" :items="envsData" empty-text="دیتایی وجود ندارد">
-              <template slot="action" slot-scope="props">
-                <action-button
-                  class="action-button-s"
-                  @onClick="remove(props.item)"
-                  icon="ic-delete.svg"
-                  label="حذف"
-                />
-              </template>
-            </b-table>
+            <div class="table-responsive table-multicolor">
+              <div class="table-title font-roboto">Volume Configurations</div>
+              <b-table
+                :fields="header"
+                stacked="lg"
+                :items="envsData"
+                empty-text="دیتایی وجود ندارد"
+              >
+                <template slot="action" slot-scope="props">
+                  <action-button
+                    class="action-button-s"
+                    @onClick="remove(props.item)"
+                    icon="ic-delete.svg"
+                    label="حذف"
+                  />
+                </template>
+              </b-table>
+            </div>
           </div>
         </wizard>
       </div>
@@ -128,12 +135,25 @@ export default {
       );
     },
     addPath() {
-      if (!FormValidator(this.$data, { mount_path: { required: true, pattern: "^/.*$", msg: "مقدار Volume path را باید به صورت absolute وارد کنید" }, sub_path: { required: true } })) return;
-      if (this.volume_mounts.filter(v => v.mount_path === this.mount_path).length > 0) {
+      if (
+        !FormValidator(this.$data, {
+          mount_path: {
+            required: true,
+            pattern: "^/.*$",
+            msg: "مقدار Volume path را باید به صورت absolute وارد کنید"
+          },
+          sub_path: { required: true }
+        })
+      )
+        return;
+      if (
+        this.volume_mounts.filter(v => v.mount_path === this.mount_path)
+          .length > 0
+      ) {
         this.$notify({
           title: `شما قبلا در مسیر  ${
             this.mount_path
-            } یک volume دیگر mount کرده‌اید`,
+          } یک volume دیگر mount کرده‌اید`,
           time: 4000,
           type: "error"
         });
@@ -149,7 +169,10 @@ export default {
   },
   watch: {
     volume_mounts(value, oldValue) {
-      this.$store.dispatch("manifestGenerator", { value, path: "spec.volume_mounts" });
+      this.$store.dispatch("manifestGenerator", {
+        value,
+        path: "spec.volume_mounts"
+      });
     }
   }
 };

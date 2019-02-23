@@ -9,7 +9,7 @@
         <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
       </div>
       <div class="table-title">سرویس‌ های شما</div>
-      <div class="table-responsive">
+      <div class="table-responsive table-multicolor">
         <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <action-button

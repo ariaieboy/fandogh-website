@@ -2,18 +2,18 @@
 
 .table-responsive
   overflow auto
-.b-table
+.table-multicolor .b-table
   margin 0 auto
   width 100%
   font-family 'Roboto', yekan, sans-serif
-.b-table
+.table-multicolor .b-table
   max-width 100%
   width 100%
   border-collapse collapse
   background-color white
   table-layout auto
   font-size 16px
-.b-table td .balloon-tip
+.table-multicolor .b-table td .balloon-tip
   position absolute
   top 0
   right 0
@@ -22,44 +22,44 @@
   width 100%
   height 100%
   border 0
-.b-table td .ellipsis
+.table-multicolor .b-table td .ellipsis
   width 10px
-.b-table td .ellipsis, .b-table td.ellipsis div
+.table-multicolor .b-table td .ellipsis, .table-multicolor .b-table td.ellipsis div
   display inline-block
   overflow hidden
   width 140px
   text-align center
   text-overflow ellipsis
   white-space nowrap
-.width-larg
+.table-multicolor .width-larg
   min-width 350px
-.is-small
+.table-multicolor .is-small
   .width-larg
     min-width 180px
-.flex-td
+.table-multicolor .flex-td
   display flex
   flex-direction row-reverse
   justify-content center
 @media (min-width: 992px)
-  .is-small .b-table td .ellipsis
+  .table-multicolor .is-small .table-multicolor .b-table td .ellipsis
     width 150px
-  .is-small .b-table td.ellipsis div
+  .table-multicolor .is-small .table-multicolor .b-table td.ellipsis div
     width 110px
-  .is-small .b-table th span
+  .table-multicolor .is-small .table-multicolor .b-table th span
     display inline-block
     overflow hidden
     width 120px
     text-overflow ellipsis
     white-space nowrap
     font-size 12px
-  .is-medium .b-table td .ellipsis
+  .table-multicolor .is-medium .table-multicolor .b-table td .ellipsis
     width 80px
-  .td-medium .b-table td.ellipsis div
+  .table-multicolor .td-medium .table-multicolor .b-table td.ellipsis div
     width 100px
 @media (max-width: 768px)
-  .b-table td.ellipsis div
+  .table-multicolor .b-table td.ellipsis div
     width 80px
-  .b-table th span
+  .table-multicolor .b-table th span
     display inline-block
     overflow hidden
     width 80px
@@ -67,21 +67,21 @@
     white-space nowrap
     font-size 14px
 @media (max-width: 992px)
-  .b-table th span
+  .table-multicolor .b-table th span
     font-size 14px
-  .b-table td span
+  .table-multicolor .b-table td span
     font-size 14px
-  .b-table td.ellipsis div
+  .table-multicolor .b-table td.ellipsis div
     width 100px
     text-align right
-.b-table td span
+.table-multicolor .b-table td span
   color rgb(117, 135, 156)
-.b-table th
+.table-multicolor .b-table th
   position relative
   vertical-align middle
-.b-table th span
+.table-multicolor .b-table th span
   color #000
-.b-table thead th, .b-table tbody td
+.table-multicolor .b-table thead th, .table-multicolor .b-table tbody td
   // overflow hidden
   box-sizing border-box
   padding 12px 10px
@@ -92,9 +92,9 @@
   font-size 14px
   @media (max-width: 768px)
     height auto
-.b-table tbody td
+.table-multicolor .b-table tbody td
   color #75879c
-.b-table thead th
+.table-multicolor .b-table thead th
   padding 10px 50px
   background #fff
   color #000
@@ -110,36 +110,36 @@
   color #fff
   text-align center
   font-family yekan
-.b-table tr:nth-child(odd)
+.table-multicolor .b-table tr:nth-child(odd)
   background rgb(248, 249, 252)
-.b-table tr:nth-child(even)
+.table-multicolor .b-table tr:nth-child(even)
   background #fff
-.b-table tr:nth-child(even) td:nth-child(even)
+.table-multicolor .b-table tr:nth-child(even) td:nth-child(even)
   background rgba(51, 68, 109, 0.02)
-.b-table tr:nth-child(odd) td:nth-child(even)
+.table-multicolor .b-table tr:nth-child(odd) td:nth-child(even)
   background rgba(51, 68, 109, 0.02)
-.b-table tr:nth-child(odd) th:nth-child(even)
+.table-multicolor .b-table tr:nth-child(odd) th:nth-child(even)
   background rgb(251, 251, 252)
 @media (max-width: 991.99px)
-  table.b-table.b-table-stacked-lg > tbody > tr > [data-label]::before
+  .table-multicolor .b-table.table-multicolor .b-table-stacked-lg > tbody > tr > [data-label]::before
     color #000
     font-size 16px
-  table.b-table.b-table-stacked-lg > tbody > tr td:last-child
+  .table-multicolor .b-table.table-multicolor .b-table-stacked-lg > tbody > tr td:last-child
     border-bottom 1px dotted #160074
-  table.b-table.b-table-stacked-lg > tbody > tr > [data-label]
+  .table-multicolor .b-table.table-multicolor .b-table-stacked-lg > tbody > tr > [data-label]
     text-align right
     font-size 12px
 @media (max-width: 991.99px)
-  table.b-table.b-table-stacked-lg > tbody > tr > [data-label]::before
+  .table-multicolor .b-table.table-multicolor .b-table-stacked-lg > tbody > tr > [data-label]::before
     overflow hidden
     text-overflow ellipsis
     white-space nowrap
     font-size 11px
-  .b-table thead th, .b-table tbody td
+  .table-multicolor .b-table thead th, .table-multicolor .b-table tbody td
     height auto
 @media (max-width: 1230px)
-  .width-larg
+  .table-multicolor .width-larg
     min-width inherit
 @media only screen and (max-width: 1200px) and (min-width: 992px)
-  .b-table thead th, .b-table tbody td
+  .table-multicolor .b-table thead th, .table-multicolor .b-table tbody td
     max-width 120px
