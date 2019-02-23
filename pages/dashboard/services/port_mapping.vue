@@ -36,7 +36,7 @@
           </div>
 
           <div class="fandogh-form-group margin-top-100">
-            <div class="table-responsive">
+            <div class="table-responsive table-multicolor">
               <div class="table-title font-roboto">Port Mapping</div>
               <b-table
                 :fields="header"

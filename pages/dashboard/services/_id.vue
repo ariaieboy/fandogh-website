@@ -29,8 +29,15 @@
         </div>-->
       </div>
       <div class="col-md-6 col-xs-12" v-if="windowWidth >= 992">
-        <div class="table-title font-roboto">ENV</div>
-        <b-table :fields="header" stacked="lg" :items="service.env" empty-text="دیتایی وجود ندارد"></b-table>
+        <div class="table-responsive table-multicolor">
+          <div class="table-title font-roboto">ENV</div>
+          <b-table
+            :fields="header"
+            stacked="lg"
+            :items="service.env"
+            empty-text="دیتایی وجود ندارد"
+          ></b-table>
+        </div>
       </div>
     </div>
     <h3>رپلیکاها :</h3>
@@ -61,8 +68,15 @@
         </div>
       </div>
       <div class="col-md-6 col-xs-12" v-if="windowWidth <= 992">
-        <div class="table-title font-roboto">ENV</div>
-        <b-table :fields="header" stacked="lg" :items="service.env" empty-text="دیتایی وجود ندارد"></b-table>
+        <div class="table-responsive table-multicolor">
+          <div class="table-title font-roboto">ENV</div>
+          <b-table
+            :fields="header"
+            stacked="lg"
+            :items="service.env"
+            empty-text="دیتایی وجود ندارد"
+          ></b-table>
+        </div>
       </div>
     </div>
   </div>
@@ -117,7 +131,7 @@ export default {
     };
   },
   created() {
-    this.$store.commit('SET_DATA', { id: 'manifest', data: {} })
+    this.$store.commit("SET_DATA", { id: "manifest", data: {} });
     this.getData();
   },
   methods: {
@@ -126,14 +140,13 @@ export default {
         let res = await this.$store.dispatch("getServicesName", {
           name: this.$route.params.id
         });
-        let internal = null
-        if (res.state !== 'RUNNING') {
+        let internal = null;
+        if (res.state !== "RUNNING") {
           setTimeout(() => {
-            this.getData()
+            this.getData();
           }, 5000);
-        }
-        else {
-          clearInterval(internal)
+        } else {
+          clearInterval(internal);
         }
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {

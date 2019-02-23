@@ -9,7 +9,7 @@
         <f-button styles="red" @onClick="$router.push('/dashboard/domains/create')">افزودن دامنه</f-button>
       </div>
       <div class="table-title">دامنه های شما</div>
-      <div class="table-responsive">
+      <div class="table-responsive table-multicolor">
         <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <action-button

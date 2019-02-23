@@ -14,7 +14,7 @@
         >افزودن ورژن</f-button>
       </div>
       <div class="table-title">ورژن های شما</div>
-      <div class="table-responsive">
+      <div class="table-responsive table-multicolor">
         <b-table :fields="header" stacked="lg" :items="versions" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <action-button

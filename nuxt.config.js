@@ -59,6 +59,7 @@ module.exports = {
     "~/plugins/progress-hover",
     { src: "~/plugins/google-map", ssr: false },
     { src: "~/plugins/vue-select", ssr: false },
+    { src: "~/plugins/vue-bar", ssr: false },
     "~/plugins/mixins",
     "~/plugins/validation",
     { src: "~/plugins/bootstrap", ssr: false }

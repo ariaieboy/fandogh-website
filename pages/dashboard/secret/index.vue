@@ -9,7 +9,7 @@
         <f-button styles="red" path="/dashboard/secret/create">افزودن سکرت</f-button>
       </div>
       <div class="table-title">سکرت‌های شما</div>
-      <div class="table-responsive">
+      <div class="table-responsive table-multicolor">
         <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
             <span>

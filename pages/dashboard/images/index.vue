@@ -9,7 +9,7 @@
         <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
       </div>
       <div class="table-title">ایمیج های شما</div>
-      <div class="table-responsive">
+      <div class="table-responsive table-multicolor">
         <b-table :fields="header" stacked="lg" :items="images" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="row">
             <action-button
