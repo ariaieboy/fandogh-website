@@ -2,16 +2,16 @@
   <div class="dashboard-home" v-if="!loading">
     <f-loading :isFull="true" v-if="isLoading"/>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-lg-6 col-xs-12">
         <f-imaages/>
       </div>
-      <div class="col-md-6">
+      <div class="col-lg-6 col-xs-12">
         <f-services/>
       </div>
-      <div class="col-md-6">
+      <div class="col-lg-6 col-xs-12">
         <f-domains/>
       </div>
-      <div class="col-md-6">
+      <div class="col-lg-6 col-xs-12">
         <f-secrets/>
       </div>
     </div>
@@ -139,6 +139,10 @@ export default {
           color #333
           text-align center
           font-size 14px
+          @media only screen and (max-width: 1230px)
+            padding 0 30px
+          @media only screen and (max-width: 991.99px)
+            width auto
         &:last-child
           td
             border-bottom none
@@ -149,4 +153,29 @@ export default {
         text-align center
         text-overflow ellipsis
         white-space nowrap
+        @media (max-width: 991.99px)
+          width auto
+          text-align right
+@media (max-width: 991.99px)
+  .dashboard-home-table .b-table.b-table-stacked-lg > tbody > tr > [data-label]::before
+    padding 5px 15px
+    background-color #f0f0f0
+  .dashboard-home-table .b-table.dashboard-home-table .b-table-stacked-lg > tbody > tr > [data-label]::before
+    color #aaaaaa
+  .dashboard-home-table .b-table.dashboard-home-table .b-table-stacked-lg > tbody > tr td:last-child
+    border-bottom 1px dotted #160074
+  .dashboard-home-table .b-table.dashboard-home-table .b-table-stacked-lg > tbody > tr > [data-label]
+    text-align right
+    font-size 12px
+@media (max-width: 991.99px)
+  .dashboard-home-table .b-table.dashboard-home-table .b-table-stacked-lg > tbody > tr > [data-label]::before
+    overflow hidden
+    text-overflow ellipsis
+    white-space nowrap
+    font-size 11px
+  .dashboard-home-table tbody tr td
+    text-align right
+  .dashboard-home-table .b-table thead th, .dashboard-home-table .b-table tbody td
+    padding 5px 0
+    height auto
 </style>
