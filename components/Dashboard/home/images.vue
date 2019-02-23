@@ -1,15 +1,21 @@
 <template>
   <div class="images" v-if="images || images.length">
     <div class="dashboard-home-wrapper">
-      <div class="table-responsive dashboard-home-table">
-        <div class="dashboard-home-header">
-          <div class="dashboard-home-title">
-            <img src="~assets/img/icons/ic_images.svg" alt="images">
-            <span>ایمیج های شما</span>
-            <router-link to="/dashboard/images">لیست ایمیج ها</router-link>
-          </div>
+      <div class="dashboard-home-header">
+        <div class="dashboard-home-title">
+          <img src="~assets/img/icons/ic_images.svg" alt="images">
+          <span>ایمیج های شما</span>
+          <router-link to="/dashboard/images">لیست ایمیج ها</router-link>
         </div>
-        <b-table :fields="header" stacked="lg" :items="images" empty-text="دیتایی وجود ندارد"></b-table>
+      </div>
+      <div class="table-responsive dashboard-home-table" v-bar>
+        <b-table
+          :fixed="true"
+          :fields="header"
+          stacked="lg"
+          :items="images"
+          empty-text="دیتایی وجود ندارد"
+        ></b-table>
         <!-- <div class="dashboard-home-sum">
           <span>تعداد ایمیج ها:</span>
           <span>10</span>
@@ -21,6 +27,7 @@
 
 <script>
 import FDate from "~/utils/date";
+import FFromDate from "~/utils/fromDate";
 
 export default {
   data() {
@@ -32,22 +39,23 @@ export default {
           key: "name",
           tdClass: "ltr ellipsis"
         },
+
         {
-          label: "تاریخ ساخت",
-          sortable: false,
-          key: "created_at"
-        },
-        {
-          label: "آخرین ورژن",
+          label: "ورژن",
           sortable: false,
           key: "version",
           tdClass: "ltr ellipsis"
         },
         {
-          label: "آخرین به",
+          label: "آخرین آپدیت",
           sortable: false,
           key: "date"
         }
+        // {
+        //   label: "مبداء رجیستری",
+        //   sortable: false,
+        //   key: "date"
+        // }
       ]
     };
   },
@@ -59,14 +67,14 @@ export default {
           if (last_version) {
             return {
               name,
-              created_at: FDate({ date: created_at }),
+              // created_at: FDate({ date: created_at }),
               version: last_version.version,
-              date: FDate({ date: last_version.date })
+              date: FFromDate(last_version.date)
             };
           } else {
             return {
               name,
-              created_at: FDate({ date: created_at })
+              date: FFromDate(created_at)
             };
           }
         });
@@ -76,5 +84,3 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>

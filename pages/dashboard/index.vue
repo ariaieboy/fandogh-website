@@ -112,8 +112,10 @@ export default {
     padding 0 15px 15px 15px
     font-family 'Roboto', yekan, sans-serif
   &-table
+    overflow auto
     margin 0 auto
     width 100%
+    height 450px
     font-family 'Roboto', yekan, sans-serif
     table
       border none
@@ -121,8 +123,7 @@ export default {
       border-collapse collapse
     thead
       th
-        padding 0 15px
-        width 120px
+        padding 0 5px
         height 45px
         background-color #f0f0f0
         color #aaaaaa
@@ -131,7 +132,8 @@ export default {
     tbody
       tr
         td
-          padding 0 15px
+          padding 0 5px
+          width 21%
           height 45px
           border-bottom 1px solid rgba(0, 0, 0, 0.25)
           color #333
@@ -140,7 +142,7 @@ export default {
         &:last-child
           td
             border-bottom none
-      .ellipsis, .ellipsis > div
+      .ellipsis > div
         display inline-block
         overflow hidden
         width 120px

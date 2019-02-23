@@ -1,14 +1,14 @@
 <template>
   <div class="domains" v-if="domains || domains.length">
     <div class="dashboard-home-wrapper">
-      <div class="table-responsive dashboard-home-table">
-        <div class="dashboard-home-header">
-          <div class="dashboard-home-title">
-            <img src="~assets/img/icons/ic_domain.svg" alt="images">
-            <span>دامنه های شما</span>
-            <router-link to="/dashboard/domains">لیست دامنه ها</router-link>
-          </div>
+      <div class="dashboard-home-header">
+        <div class="dashboard-home-title">
+          <img src="~assets/img/icons/ic_domain.svg" alt="images">
+          <span>دامنه های شما</span>
+          <router-link to="/dashboard/domains">لیست دامنه ها</router-link>
         </div>
+      </div>
+      <div class="table-responsive dashboard-home-table" v-bar>
         <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
           <template slot="certificate" slot-scope="props">
             <span
@@ -51,14 +51,14 @@ export default {
           key: "created_at",
           formatter: this.getDate
         },
+        // {
+        //   sortable: false,
+        //   label: "متصل به سرویس",
+        //   key: "service"
+        // },
         {
           sortable: false,
-          label: "متصل به سرویس",
-          key: "service"
-        },
-        {
-          sortable: false,
-          label: "گواهینامه ssl",
+          label: "وضعیت ssl",
           key: "certificate",
           tdClass: this.getStatus
         },
@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     getDate(date) {
-      return FDate({ date: date });
+      return FFromDate(date);
     },
     FFromDate(value) {
       return FFromDate(value);
