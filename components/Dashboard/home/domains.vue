@@ -1,5 +1,5 @@
 <template>
-  <div class="domains" v-if="domains || domains.length">
+  <div class="domains">
     <div class="dashboard-home-wrapper">
       <div class="dashboard-home-header">
         <div class="dashboard-home-title">
@@ -8,8 +8,14 @@
           <router-link to="/dashboard/domains">لیست دامنه ها</router-link>
         </div>
       </div>
-      <div class="table-responsive dashboard-home-table" v-bar>
+      <div class="table-responsive dashboard-home-table" v-bar v-if="domains && domains.length">
         <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
+          <template slot="verified" slot-scope="props">
+            <div class="badg-state">
+              <i :class="getClass(props.item.verified)"></i>
+              <span>{{props.item.verified | state }}</span>
+            </div>
+          </template>
           <template slot="certificate" slot-scope="props">
             <span
               v-if="props.item.certificate && props.item.certificate.details"
@@ -66,8 +72,8 @@ export default {
           label: "وضعیت",
           sortable: false,
           key: "verified",
-          formatter: this.getDomainStatus,
-          tdClass: this.getClass,
+          // formatter: this.getDomainStatus,
+          // tdClass: this.getClass,
           html: true
         }
       ]
@@ -87,6 +93,9 @@ export default {
       if (state === "unknown") {
         return "نامشخص";
       }
+    },
+    state: function(verified) {
+      return verified ? "تایید شده" : "تایید نشده";
     }
   },
   computed: {
@@ -127,7 +136,7 @@ export default {
       }
     },
     getClass(verified) {
-      return verified ? "success-text" : "error-text";
+      return verified ? "success-circle" : "error-circle";
     }
   }
 };
