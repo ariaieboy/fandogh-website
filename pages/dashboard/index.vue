@@ -114,10 +114,11 @@ export default {
   &-table
     overflow auto
     margin 0 auto
-    max-height 250px
     width 100%
+    height 250px
     font-family 'Roboto', yekan, sans-serif
     table
+      width 100%
       border none
       border-spacing 0
       border-collapse collapse
@@ -133,7 +134,7 @@ export default {
       tr
         td
           padding 0 5px
-          width 21%
+          // width 21%
           height 45px
           border-bottom 1px solid rgba(0, 0, 0, 0.25)
           color #333

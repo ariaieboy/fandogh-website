@@ -9,17 +9,19 @@
         </div>
       </div>
       <div class="table-responsive dashboard-home-table" v-bar v-if="images && images.length">
-        <b-table
-          :fixed="true"
-          :fields="header"
-          stacked="lg"
-          :items="images"
-          empty-text="دیتایی وجود ندارد"
-        ></b-table>
-        <!-- <div class="dashboard-home-sum">
+        <div class="table-scrolled">
+          <b-table
+            :fixed="true"
+            :fields="header"
+            stacked="lg"
+            :items="images"
+            empty-text="دیتایی وجود ندارد"
+          ></b-table>
+          <!-- <div class="dashboard-home-sum">
           <span>تعداد ایمیج ها:</span>
           <span>10</span>
-        </div>-->
+          </div>-->
+        </div>
       </div>
     </div>
   </div>

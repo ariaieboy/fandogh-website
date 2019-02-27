@@ -9,18 +9,20 @@
         </div>
       </div>
       <div class="table-responsive dashboard-home-table" v-bar v-if="services && services.length">
-        <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
-          <template slot="state" slot-scope="props">
-            <div class="badg-state">
-              <i :class="stateColor(props.item.state)"></i>
-              <span>{{props.item.state | state}}</span>
-            </div>
-          </template>
-          <template slot="url" slot-scope="props">
-            <!-- {{props.}} -->
-            داخلی
-          </template>
-        </b-table>
+        <div class="table-scrolled">
+          <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
+            <template slot="state" slot-scope="props">
+              <div class="badg-state">
+                <i :class="stateColor(props.item.state)"></i>
+                <span>{{props.item.state | state}}</span>
+              </div>
+            </template>
+            <template slot="url" slot-scope="props">
+              <!-- {{props.}} -->
+              داخلی
+            </template>
+          </b-table>
+        </div>
       </div>
     </div>
   </div>
@@ -86,8 +88,8 @@ export default {
       return val === "running"
         ? "در حال اجرا"
         : val === "pendding"
-        ? "درحال ساخت"
-        : "نا مشخص";
+          ? "درحال ساخت"
+          : "نا مشخص";
     }
   },
   computed: {
@@ -117,8 +119,8 @@ export default {
       return val === "running"
         ? "success-circle"
         : val === "pendding"
-        ? "pending-circle"
-        : "error-circle";
+          ? "pending-circle"
+          : "error-circle";
     }
   }
 };

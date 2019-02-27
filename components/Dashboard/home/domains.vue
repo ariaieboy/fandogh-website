@@ -9,26 +9,28 @@
         </div>
       </div>
       <div class="table-responsive dashboard-home-table" v-bar v-if="domains && domains.length">
-        <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
-          <template slot="verified" slot-scope="props">
-            <div class="badg-state">
-              <i :class="getClass(props.item.verified)"></i>
-              <span>{{props.item.verified | state }}</span>
-            </div>
-          </template>
-          <template slot="certificate" slot-scope="props">
-            <span
-              v-if="props.item.certificate && props.item.certificate.details"
-              :data-balloon="FDate(props.item.certificate.created_at)"
-              data-balloon-pos="up"
-            >{{props.item.certificate.details.status | status}}</span>
-            <span v-else>ندارد</span>
-          </template>
-          <template slot="service" slot-scope="props">
-            <span v-if="props.item.service">{{props.item.service}}</span>
-            <span v-else>ندارد</span>
-          </template>
-        </b-table>
+        <div class="table-scrolled">
+          <b-table :fields="header" stacked="lg" :items="domains" empty-text="دیتایی وجود ندارد">
+            <template slot="verified" slot-scope="props">
+              <div class="badg-state">
+                <i :class="getClass(props.item.verified)"></i>
+                <span>{{props.item.verified | state }}</span>
+              </div>
+            </template>
+            <template slot="certificate" slot-scope="props">
+              <span
+                v-if="props.item.certificate && props.item.certificate.details"
+                :data-balloon="FDate(props.item.certificate.created_at)"
+                data-balloon-pos="up"
+              >{{props.item.certificate.details.status | status}}</span>
+              <span v-else>ندارد</span>
+            </template>
+            <template slot="service" slot-scope="props">
+              <span v-if="props.item.service">{{props.item.service}}</span>
+              <span v-else>ندارد</span>
+            </template>
+          </b-table>
+        </div>
       </div>
     </div>
   </div>
@@ -81,7 +83,7 @@ export default {
   },
 
   filters: {
-    status: function(value) {
+    status: function (value) {
       if (!value) return "";
       let state = value.toLowerCase();
       if (state === "ready") {
@@ -94,7 +96,7 @@ export default {
         return "نامشخص";
       }
     },
-    state: function(verified) {
+    state: function (verified) {
       return verified ? "تایید شده" : "تایید نشده";
     }
   },

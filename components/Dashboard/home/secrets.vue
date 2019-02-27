@@ -9,7 +9,9 @@
         </div>
       </div>
       <div class="table-responsive dashboard-home-table" v-bar v-if="secrets && secrets.length">
-        <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد"></b-table>
+        <div class="table-scrolled">
+          <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد"></b-table>
+        </div>
       </div>
     </div>
   </div>
