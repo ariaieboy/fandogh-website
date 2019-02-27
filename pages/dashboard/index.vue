@@ -115,9 +115,10 @@ export default {
     overflow auto
     margin 0 auto
     width 100%
-    height 450px
+    height 250px
     font-family 'Roboto', yekan, sans-serif
     table
+      width 100%
       border none
       border-spacing 0
       border-collapse collapse
@@ -133,7 +134,7 @@ export default {
       tr
         td
           padding 0 5px
-          width 21%
+          // width 21%
           height 45px
           border-bottom 1px solid rgba(0, 0, 0, 0.25)
           color #333
@@ -146,6 +147,27 @@ export default {
         &:last-child
           td
             border-bottom none
+      .badg-state
+        display flex
+        justify-content center
+        align-items center
+        padding 5px
+        border-radius 16px
+        background-color #f0f0f0
+        i
+          margin-left 5px
+          width 10px
+          height 10px
+          border-radius 100%
+          &.success-circle
+            background-color #3ccc38
+          &.pending-circle
+            background-color #24d5d8
+          &.error-circle
+            background-color #fd3259
+        span
+          color #333333
+          font-size 12px
       .ellipsis > div
         display inline-block
         overflow hidden

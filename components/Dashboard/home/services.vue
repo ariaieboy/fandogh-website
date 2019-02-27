@@ -1,5 +1,5 @@
 <template>
-  <div class="services" v-if="services || services.length">
+  <div class="services">
     <div class="dashboard-home-wrapper">
       <div class="dashboard-home-header">
         <div class="dashboard-home-title">
@@ -8,14 +8,21 @@
           <router-link to="/dashboard/services">لیست سرویس ها</router-link>
         </div>
       </div>
-      <div class="table-responsive dashboard-home-table" v-bar>
-        <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
-          <template slot="state" slot-scope="props">{{props.item.state | state}}</template>
-          <template slot="url" slot-scope="props">
-            <!-- {{props.}} -->
-            داخلی
-          </template>
-        </b-table>
+      <div class="table-responsive dashboard-home-table" v-bar v-if="services && services.length">
+        <div class="table-scrolled">
+          <b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">
+            <template slot="state" slot-scope="props">
+              <div class="badg-state">
+                <i :class="stateColor(props.item.state)"></i>
+                <span>{{props.item.state | state}}</span>
+              </div>
+            </template>
+            <template slot="url" slot-scope="props">
+              <!-- {{props.}} -->
+              داخلی
+            </template>
+          </b-table>
+        </div>
       </div>
     </div>
   </div>
@@ -64,8 +71,7 @@ export default {
         {
           label: "وضعیت",
           sortable: false,
-          key: "state",
-          tdClass: this.stateColor
+          key: "state"
         },
         {
           label: "لینک اجرا",
@@ -82,8 +88,8 @@ export default {
       return val === "running"
         ? "در حال اجرا"
         : val === "pendding"
-        ? "درحال ساخت"
-        : "نا مشخص";
+          ? "درحال ساخت"
+          : "نا مشخص";
     }
   },
   computed: {
@@ -110,12 +116,11 @@ export default {
     stateColor(state) {
       if (!state) return "";
       let val = state.toLowerCase();
-      console.log(val);
       return val === "running"
-        ? "success-text"
+        ? "success-circle"
         : val === "pendding"
-        ? "pending-text"
-        : "error-text";
+          ? "pending-circle"
+          : "error-circle";
     }
   }
 };

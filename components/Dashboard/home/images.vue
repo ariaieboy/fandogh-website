@@ -1,5 +1,5 @@
 <template>
-  <div class="images" v-if="images || images.length">
+  <div class="images">
     <div class="dashboard-home-wrapper">
       <div class="dashboard-home-header">
         <div class="dashboard-home-title">
@@ -8,18 +8,20 @@
           <router-link to="/dashboard/images">لیست ایمیج ها</router-link>
         </div>
       </div>
-      <div class="table-responsive dashboard-home-table" v-bar>
-        <b-table
-          :fixed="true"
-          :fields="header"
-          stacked="lg"
-          :items="images"
-          empty-text="دیتایی وجود ندارد"
-        ></b-table>
-        <!-- <div class="dashboard-home-sum">
+      <div class="table-responsive dashboard-home-table" v-bar v-if="images && images.length">
+        <div class="table-scrolled">
+          <b-table
+            :fixed="true"
+            :fields="header"
+            stacked="lg"
+            :items="images"
+            empty-text="دیتایی وجود ندارد"
+          ></b-table>
+          <!-- <div class="dashboard-home-sum">
           <span>تعداد ایمیج ها:</span>
           <span>10</span>
-        </div>-->
+          </div>-->
+        </div>
       </div>
     </div>
   </div>

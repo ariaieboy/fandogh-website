@@ -1,6 +1,6 @@
 <template>
   <div class="secrets">
-    <div class="secretss" v-if="secrets || secrets.length">
+    <div class="secretss">
       <div class="dashboard-home-header">
         <div class="dashboard-home-title">
           <img src="~assets/img/icons/ic_secret.svg" alt="images">
@@ -8,8 +8,10 @@
           <router-link to="/dashboard/domains">لیست سکرت ها</router-link>
         </div>
       </div>
-      <div class="table-responsive dashboard-home-table" v-bar>
-        <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد"></b-table>
+      <div class="table-responsive dashboard-home-table" v-bar v-if="secrets && secrets.length">
+        <div class="table-scrolled">
+          <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد"></b-table>
+        </div>
       </div>
     </div>
   </div>
