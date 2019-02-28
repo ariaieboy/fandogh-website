@@ -49,7 +49,7 @@
       <div class="user" v-else>
         <f-button @onClick="exit" styles="transparent md exit">خروج</f-button>
         <!--<f-button @onClick="$router.push('/dashboard/images')" styles="transparent border" > داشبورد </f-button>-->
-        <f-button path="/dashboard/images" styles="transparent border md margin-10">داشبورد</f-button>
+        <f-button path="/dashboard" styles="transparent border md margin-10">داشبورد</f-button>
       </div>
 
       <!-- <div v-if="loggedIn" class="profile">
