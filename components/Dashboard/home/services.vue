@@ -18,8 +18,10 @@
               </div>
             </template>
             <template slot="url" slot-scope="props">
-              <!-- {{props.}} -->
-              داخلی
+
+              <a :href="props.item.url" v-if="props.item.url != 'internal'" target="_blank" rel="noopener">لینک</a>
+              <span v-else> -- </span>
+
             </template>
           </b-table>
         </div>
@@ -118,7 +120,7 @@ export default {
       let val = state.toLowerCase();
       return val === "running"
         ? "success-circle"
-        : val === "pendding"
+        : val === "pending"
           ? "pending-circle"
           : "error-circle";
     }

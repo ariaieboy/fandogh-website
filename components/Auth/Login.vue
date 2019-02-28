@@ -90,7 +90,7 @@ export default {
         .dispatch("login", { username: this.username, password: this.password })
         .then(res => {
           this.loading = false;
-          this.$router.push("/dashboard/images");
+          this.$router.push("/dashboard");
           this.$store.dispatch("showModal", false);
 
           this.$ga.event({
