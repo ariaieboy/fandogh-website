@@ -5,10 +5,13 @@
         <img :src="require('~/static/img/icons/'+icon+'')" alt>
         <label>{{title}}</label>
       </div>
-      <div class="chart-badg">
-        <i :style="{'background-color':badgColor}"></i>
-        <span>{{ badgLabel}}</span>
-      </div>
+      <f-badg
+        v-for="(item,i) in badgs"
+        :key="i"
+        :badg-color="item.color"
+        :badg-label="item.label"
+        :badg-value="item.value"
+      />
     </div>
     <usage-chart :colors="colors" :data="data" :labels="labels"></usage-chart>
   </div>
@@ -20,22 +23,29 @@ import UsageChart from "~/components/Dashboard/chart/UsageChart";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
 import FLoading from "~/components/Loading";
+import FBadg from "./badg-item";
 
 export default {
   layout: "dashboard",
+
   props: {
+    badgs: {
+      type: Array,
+      default: () => {
+        return [
+          {
+            color: 'red',
+            label: 'برچسب',
+            value: '20',
+          }
+        ]
+      }
+    },
     title: {
       type: String,
       default: 'آمار سرویس‌ها'
     },
-    badgColor: {
-      type: String,
-      default: '#3ccc38'
-    },
-    badgLabel: {
-      type: String,
-      default: 'درحال اجرا'
-    },
+
     icon: {
       type: String,
       default: 'ic_services.svg'
@@ -66,6 +76,7 @@ export default {
     }
   },
   components: {
+    FBadg,
     FLoading,
     FButton,
     ActionButton,
