@@ -205,7 +205,7 @@ export default {
     },
     replicas(value, oldValue) {
       this.$store.dispatch("manifestGenerator", {
-        value,
+        value: parseInt(value),
         path: "spec.replicas"
       });
     },

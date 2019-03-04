@@ -160,10 +160,10 @@ export default {
       this.$store.dispatch("manifestGenerator", { value: value ? value.label : '', path: "kind" });
     },
     allow_http(value, oldValue) {
-      this.$store.dispatch("manifestGenerator", { value, path: "allow_http" });
+      this.$store.dispatch("manifestGenerator", { value, path: "spec.allow_http" });
     },
     port(value, oldValue) {
-      this.$store.dispatch("manifestGenerator", { value, path: "port" });
+      this.$store.dispatch("manifestGenerator", { value, path: "spec.port" });
     },
     domains(value, oldValue) {
       let list = [...value]
