@@ -4,6 +4,12 @@
     <div class="dashboard-home-panel-chart">
       <div class="row">
         <div class="col-lg-4 col-sm-12 col-xs-12">
+          <f-charts :badgs="badgsService"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <f-charts/>
+        </div>
+        <div class="col-lg-4 col-sm-12 col-xs-12">
           <f-charts/>
         </div>
       </div>
@@ -50,14 +56,16 @@ export default {
     }
   },
   computed: {
+    badgsService() {
+      return this.$store.state.dashboard.badgsService
+    },
     loading() {
       return this.$store.state.loading;
     }
   },
   destroyed() {
     this.$store.commit("SET_DATA", { data: null, id: "images" });
-  }
-  ,
+  },
   created() {
     this.getData();
   },
