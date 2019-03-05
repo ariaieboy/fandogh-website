@@ -3,7 +3,7 @@
     <div class="dashboard-home-wrapper">
       <div class="dashboard-home-header">
         <div class="dashboard-home-title">
-          <img src="~assets/img/icons/ic_images.svg" alt="images">
+          <img src="~assets/img/icons/ic_services.svg" alt="images">
           <span>سرویس های شما</span>
           <router-link to="/dashboard/services">لیست سرویس ها</router-link>
         </div>
