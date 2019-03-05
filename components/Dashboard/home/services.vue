@@ -18,7 +18,7 @@
               </div>
             </template>
             <template slot="url" slot-scope="props">
-              <router-link :to="props.item.url" v-if="props.item.url != 'internal'" target="_blank" rel="noopener">لینک</router-link>
+              <a :href="props.item.url" v-if="props.item.url != 'internal'" target="_blank" rel="noopener">لینک</a>
               <span v-else> -- </span>
             </template>
           </b-table>
