@@ -55,7 +55,7 @@
             <div class="fandogh-form-group">
               <label class="font-roboto">Port</label>
               <f-input
-                v-model="port"
+                v-model.number="port"
                 styles="input-white input-block input-dashboard"
                 placeholder="Port"
               ></f-input>
@@ -114,9 +114,9 @@ export default {
       name: this.$route.params.image,
       kind: "",
       prevent: true,
-      port: "",
+      port: 80,
       path: "",
-      memory: "200",
+      memory: 200,
       allow_http: false,
       domains: "",
       service: "",
