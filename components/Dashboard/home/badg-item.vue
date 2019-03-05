@@ -33,7 +33,7 @@ export default {
   align-items center
   margin-left 10px
   padding 5px
-  width 128px
+  width 168px
   border-radius 16px
   background-color #f0f0f0
   span
