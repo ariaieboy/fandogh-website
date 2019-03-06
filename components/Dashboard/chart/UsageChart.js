@@ -9,6 +9,13 @@ export default {
   props: {
     options: {
       type: Object
+      // default: () => {
+      //   return {
+      //     tooltips: {
+      //       titleFontFamily: "yekan"
+      //     }
+      //   };
+      // }
     },
     data: {
       type: Array
@@ -26,6 +33,7 @@ export default {
           height: "114px",
           width: "114px",
           position: "relative"
+          // fontFamily: "yekan"
         };
       }
     }
