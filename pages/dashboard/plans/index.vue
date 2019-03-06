@@ -73,7 +73,7 @@ export default {
   methods: {
     async getData() {
       try {
-        await this.$store.dispatch("plan/getNameSpace", this.namespace);
+        await this.$store.dispatch("plan/getPlans", this.namespace);
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
         this.$store.commit("SET_DATA", { data: false, id: "loading" });

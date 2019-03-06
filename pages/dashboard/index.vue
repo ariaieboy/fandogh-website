@@ -1,6 +1,22 @@
 <template>
   <div class="dashboard-home" v-if="!loading">
-    <f-loading :isFull="true" v-if="isLoading"/>
+    <f-loading id="my-chart" :isFull="true" v-if="isLoading"/>
+    <div class="dashboard-home-panel-chart">
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <f-charts :data="serviceUsage" unit="مگابایت" :colors="['#086375','#3ccc38']"/>
+        </div>
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <f-charts
+            class="pr-lg-25"
+            title="ٰVolume"
+            :data="volumeUsage"
+            unit="گیگابایت"
+            :colors="['#086375','#3ccc38']"
+          />
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-6 col-xs-12">
         <f-imaages/>
@@ -24,6 +40,7 @@ import FImaages from "~/components/Dashboard/home/images.vue";
 import FServices from "~/components/Dashboard/home/services.vue";
 import FDomains from "~/components/Dashboard/home/domains.vue";
 import FSecrets from "~/components/Dashboard/home/secrets.vue";
+import FCharts from "~/components/Dashboard/home/usage.vue";
 
 export default {
   name: "dashboard-home",
@@ -33,7 +50,8 @@ export default {
     FImaages,
     FServices,
     FDomains,
-    FSecrets
+    FSecrets,
+    FCharts
   },
   data() {
     return {
@@ -41,6 +59,23 @@ export default {
     };
   },
   computed: {
+    badgsService() {
+      return this.$store.state.dashboard.badgsService;
+    },
+    serviceUsage() {
+      const used = this.$store.state.activePlan.current_used_resources
+        .memory_usage;
+      const free = this.$store.state.activePlan.quota.memory_limit - used;
+      const usage = [free, used];
+      return usage;
+    },
+    volumeUsage() {
+      const used = this.$store.state.activePlan.current_used_resources
+        .volume_usage;
+      const free = this.$store.state.activePlan.quota.volume_limit - used;
+      const usage = [free, used];
+      return usage;
+    },
     loading() {
       return this.$store.state.loading;
     }
@@ -54,6 +89,7 @@ export default {
   methods: {
     async getData() {
       try {
+        await this.$store.dispatch("getNameSpace", "ns");
         await this.$store.dispatch("getImages");
         await this.$store.dispatch("getServices");
         await this.$store.dispatch("getDomains");
@@ -78,6 +114,9 @@ export default {
 </script>
 
 <style lang="stylus">
+convas
+  width 150px
+  height 150px
 .dashboard-home
   &-sum
     padding 15px 15px 0 15px
@@ -101,6 +140,12 @@ export default {
       color #fff
       text-align center
       font-size 12px
+  &-panel-chart
+    margin-bottom 45px
+    padding 15px
+    border-radius 10px
+    background-color #ffffff
+    box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
   &-wrapper
     margin-bottom 45px
     padding 15px

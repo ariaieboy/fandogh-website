@@ -3,7 +3,7 @@
     <div class="dashboard-home-wrapper">
       <div class="dashboard-home-header">
         <div class="dashboard-home-title">
-          <img src="~assets/img/icons/ic_images.svg" alt="images">
+          <img src="~assets/img/icons/ic_services.svg" alt="images">
           <span>سرویس های شما</span>
           <router-link to="/dashboard/services">لیست سرویس ها</router-link>
         </div>
@@ -18,7 +18,7 @@
               </div>
             </template>
             <template slot="url" slot-scope="props">
-              <router-link :to="props.item.url" v-if="props.item.url != 'internal'" target="_blank" rel="noopener">لینک</router-link>
+              <a :href="props.item.url" v-if="props.item.url != 'internal'" target="_blank" rel="noopener">لینک</a>
               <span v-else> -- </span>
             </template>
           </b-table>

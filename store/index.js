@@ -3,6 +3,7 @@ import * as actions from "./actions";
 import * as mutations from "./mutations";
 import wizard from "./wizard";
 import plan from "./plan";
+import dashboard from "./dashboard";
 const createStore = () => {
   return new Vuex.Store({
     state: () => {
@@ -41,6 +42,7 @@ const createStore = () => {
     actions: actions,
     mutations: mutations,
     modules: {
+      dashboard,
       wizard,
       plan
     }
