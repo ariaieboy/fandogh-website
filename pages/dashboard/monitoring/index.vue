@@ -27,40 +27,18 @@
             this.$store.commit("SET_DATA", {data: null, id: "images"});
         },
         created() {
-            this.$store.commit("SET_DATA", {data: false, id: "loading"});
+            this.getData()
         },
         methods: {
+            async getData() {
+                await this.$store.dispatch("getCpuUsage", "ns");
+                this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                this.fillData()
+            },
             fillData() {
+                console.log('cpu_usage', this.$store.state.cpuUsage)
                 this.datacollection = {
-
-                    datasets: [
-                        {
-                            "label": "{'pod_name': 'nginx-85768f8fbf-4sbrk'}",
-                            "data": [
-                                {
-                                    "x": 1552768630.219,
-                                    "y": "0.0000033803590286110965"
-                                },
-                                {
-                                    "x": 1552768966.219,
-                                    "y": "0"
-                                },
-                                {
-                                    "x": 1552769302.219,
-                                    "y": "0"
-                                }
-                            ]
-                        },
-                        {
-                            "label": "{'pod_name': 'nginx-85768f8fbf-kc5xx'}",
-                            "data": [
-                                {
-                                    "x": 1552767622.219,
-                                    "y": "0.000003498241518222225"
-                                }
-                            ]
-                        }
-                    ]
+                    datasets: this.$store.state.cpuUsage
                 }
             },
             getRandomInt() {
