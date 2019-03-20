@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getToken} from "../utils/cookie";
+import {getToken, getValue} from "../utils/cookie";
 import store from "../store";
 
 const isClient = typeof window !== "undefined";
@@ -23,6 +23,11 @@ function request(params, {baseUrl}) {
 
             if (token && token !== "null") {
                 config.headers["Authorization"] = "JWT " + token;
+            }
+
+            const namespace = getValue("namespace")
+            if (namespace && namespace !== "null") {
+                config.headers["ACTIVE-NAMESPACE"] = namespace;
             }
 
             if (params) config.params = {...config.params, ...params};

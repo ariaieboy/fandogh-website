@@ -21,7 +21,7 @@
                     fill: false,
                     legend: {
                         // display: false
-                        position:'right'
+                        position:'bottom'
                     },
                     scales: {
                         xAxes: [{
