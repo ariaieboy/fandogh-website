@@ -1,6 +1,6 @@
 <template>
     <div>
-        <line-chart :chart-data="datacollection"></line-chart>
+        <line-chart :chart-data="datacollection" :options="options" :height="80"></line-chart>
     </div>
 </template>
 
@@ -16,7 +16,26 @@
         },
         data() {
             return {
-                datacollection: null
+                datacollection: null,
+                options: {
+                    fill: false,
+                    legend: {
+                        // display: false
+                        position:'right'
+                    },
+                    scales: {
+                        xAxes: [{
+                            type: 'time',
+                            time: {
+                                unit: 'minute',
+                                displayFormats: {
+                                    minute: 'HH:mm'
+                                }
+                                // tooltipFormat: 'mm'
+                            }
+                        }]
+                    }
+                }
             }
         },
         mounted() {
