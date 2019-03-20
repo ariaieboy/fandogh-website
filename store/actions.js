@@ -287,11 +287,11 @@ export const getNameSpace = async ({commit, state}, namespace) => {
 };
 
 
-export const getCpuUsage = async ({commit, state}, namespace) => {
+export const getMetric = async ({commit, state}, metric) => {
     try {
         console.log("calling monitoring")
-        const res = await Request(null , {baseUrl: 'http://localhost:8000'}).get('/');
-        commit("SET_DATA", {id: "cpuUsage", data: res})
+        const res = await Request(null, {baseUrl: 'http://localhost:8000'}).get(`/?metric=${metric}`);
+        commit("SET_DATA", {id: metric, data: res})
     } catch (e) {
         console.log('error', e)
         return Promise.reject(e)
