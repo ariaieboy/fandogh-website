@@ -6,6 +6,12 @@
         <div>
             <line-chart :chart-data="memoryDatacollection" :options="memoryUsageOptions" :height="80"></line-chart>
         </div>
+        <div>
+            <line-chart :chart-data="networkInDatacollection" :options="cpuUsageOptions" :height="80"></line-chart>
+        </div>
+        <div>
+            <line-chart :chart-data="networkOutDatacollection" :options="cpuUsageOptions" :height="80"></line-chart>
+        </div>
     </div>
 </template>
 
@@ -23,6 +29,8 @@
             return {
                 cpuDatacollection: null,
                 memoryDatacollection: null,
+                networkInDatacollection: null,
+                networkOutDatacollection: null,
                 cpuUsageOptions: {
                     fill: false,
                     legend: {
@@ -88,18 +96,25 @@
             async getData() {
                 await this.$store.dispatch("getMetric", "cpu_usage");
                 await this.$store.dispatch("getMetric", "memory_usage");
+                await this.$store.dispatch("getMetric", "network_in_usage");
+                await this.$store.dispatch("getMetric", "network_out_usage");
                 this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 this.fillData()
             },
             fillData() {
-                console.log('cpu_usage', this.$store.state.cpu_usage);
-                console.log('cpu_usage', this.$store.state.memory_usage);
                 this.cpuDatacollection = {
                     datasets: this.$store.state.cpu_usage
                 }
 
                 this.memoryDatacollection = {
                     datasets: this.$store.state.memory_usage
+                }
+
+                this.networkInDatacollection = {
+                    datasets: this.$store.state.network_in_usage
+                }
+                this.networkOutDatacollection = {
+                    datasets: this.$store.state.network_out_usage
                 }
             },
             getRandomInt() {
