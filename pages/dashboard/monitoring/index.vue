@@ -4,27 +4,27 @@
             <div class="title font-roboto">
                 میزان مصرف CPU سرویس‌ها
             </div>
-            <line-chart :chart-data="cpuDatacollection" :options="cpuUsageOptions" :height="80"></line-chart>
+            <line-chart :chart-data="cpuDatacollection" :options="cpuUsageOptions" :height="180"></line-chart>
         </div>
         <div class="metrics-widget">
             <div class="title font-roboto">
                 میزان مصرف حافظه سرویس‌ها
             </div>
 
-            <line-chart :chart-data="memoryDatacollection" :options="memoryUsageOptions" :height="80"></line-chart>
+            <line-chart :chart-data="memoryDatacollection" :options="memoryUsageOptions" :height="180"></line-chart>
         </div>
         <div class="metrics-widget">
             <div class="title font-roboto">
 
                 میزان ترافیک دریافتی سرویس‌ها
             </div>
-            <line-chart :chart-data="networkInDatacollection" :options="cpuUsageOptions" :height="80"></line-chart>
+            <line-chart :chart-data="networkInDatacollection" :options="cpuUsageOptions" :height="180"></line-chart>
         </div>
         <div class="metrics-widget">
             <div class="title font-roboto">
                 میزان ترافیک خروجی سرویس‌ها
             </div>
-            <line-chart :chart-data="networkOutDatacollection" :options="cpuUsageOptions" :height="80"></line-chart>
+            <line-chart :chart-data="networkOutDatacollection" :options="cpuUsageOptions" :height="180"></line-chart>
         </div>
     </div>
 </template>
@@ -49,7 +49,8 @@
                     fill: false,
                     legend: {
                         // display: false
-                        position: 'right'
+                        fullWidth: false,
+                        position: 'bottom'
                     },
                     scales: {
                         xAxes: [{
@@ -69,7 +70,7 @@
                     legend:
                         {
                             // display: false
-                            position: 'right'
+                            position: 'bottom'
                         }
                     ,
                     scales: {
