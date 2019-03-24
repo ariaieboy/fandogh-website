@@ -1,6 +1,7 @@
 import Request from "~/plugins/request";
-import {getToken} from "../utils/cookie";
+
 import {jsonManipulator} from "../utils/yaml";
+const monitoringAPI = process.env.MONITORING_API
 
 export const nuxtServerInit = async ({state, dispatch}, {req}) => {
     dispatch("checkAuthentication", req.cookies["USER_TOKEN"]);
@@ -290,7 +291,7 @@ export const getNameSpace = async ({commit, state}, namespace) => {
 export const getMetric = async ({commit, state}, metric) => {
     try {
         console.log("calling monitoring")
-        const res = await Request(null, {baseUrl: 'http://localhost:8000'}).get(`/?metric=${metric}`);
+        const res = await Request(null, {baseUrl: monitoringAPI}).get(`/?metric=${metric}`);
         commit("SET_DATA", {id: metric, data: res})
     } catch (e) {
         console.log('error', e)
