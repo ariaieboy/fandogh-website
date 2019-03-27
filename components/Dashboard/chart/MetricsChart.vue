@@ -1,5 +1,8 @@
 <template>
-    <line-chart :chart-data="chartData" :options="options" :height="100"></line-chart>
+    <div>
+        <div v-if="loading">loading</div>
+        <line-chart :chart-data="chartData" :options="options" :height="100"></line-chart>
+    </div>
 </template>
 
 <script>
@@ -20,18 +23,22 @@
         },
         data() {
             return {
-                chartData: null
+                chartData: null,
+                loading: true
             }
         },
         mounted() {
-            this.fillData()
+            this.fillData();
+            setInterval(this.fillData, 60000);
         },
         methods: {
             async fillData() {
+                this.loading = true;
                 await this.$store.dispatch("getMetric", this.metricName);
                 this.chartData = {
                     datasets: this.$store.state[this.metricName]
                 }
+                this.loading = false;
             }
         },
         components: {
