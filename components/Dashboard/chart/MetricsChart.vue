@@ -1,7 +1,14 @@
 <template>
     <div>
-        <div v-if="loading">loading</div>
-        <line-chart :chart-data="chartData" :options="options" :height="100"></line-chart>
+        <div class="metrics-widget">
+            <div class="title font-roboto">
+                {{title}}
+                <span v-if="loading">
+                    <img src="~/assets/img/icons/loading.svg" width="32px" height="32px"></img>
+                </span>
+            </div>
+            <line-chart :chart-data="chartData" :options="options" :height="100"></line-chart>
+        </div>
     </div>
 </template>
 
@@ -16,6 +23,9 @@
         props: {
             options: {
                 type: Object
+            },
+            title: {
+                type: String
             },
             metricName: {
                 type: String
@@ -80,4 +90,21 @@
             flex-wrap wrap
             align-items center
             max-width 300px
+</style>
+
+<style lang="stylus" scoped>
+    @font-face
+        font-style normal
+        font-family roboto
+        src url('~/assets/fonts/Roboto-Regular.ttf')
+
+    .metrics-widget .title
+        text-align center
+        background-color rgba(217, 217, 217, 0.2)
+        padding 5px 0
+        margin-bottom 10px
+        /*border-bottom 1pt solid black*/
+        color #4f4f4f
+        font-size 16px
+
 </style>

@@ -1,29 +1,16 @@
 <template>
     <div>
-        <div class="metrics-widget">
-            <div class="title font-roboto">
-                میزان مصرف CPU سرویس‌ها
-            </div>
-            <metrics-chart metric-name="cpu_usage" :options="defaultOptions"></metrics-chart>
-        </div>
-        <div class="metrics-widget">
-            <div class="title font-roboto">
-                میزان مصرف حافظه سرویس‌ها
-            </div>
-            <metrics-chart metric-name="memory_usage" :options="memoryUsageOptions"></metrics-chart>
-        </div>
-        <div class="metrics-widget">
-            <div class="title font-roboto">
-                میزان ترافیک دریافتی سرویس‌ها
-            </div>
-            <metrics-chart metric-name="network_in_usage" :options="defaultOptions"></metrics-chart>
-        </div>
-        <div class="metrics-widget">
-            <div class="title font-roboto">
-                میزان ترافیک خروجی سرویس‌ها
-            </div>
-            <metrics-chart metric-name="network_out_usage" :options="defaultOptions"></metrics-chart>
-        </div>
+        <metrics-chart metric-name="cpu_usage" :options="defaultOptions"
+                       title="میزان مصرف CPU سرویس‌ها"></metrics-chart>
+
+        <metrics-chart metric-name="memory_usage" :options="memoryUsageOptions"
+                       title="میزان مصرف حافظه سرویس‌ها"></metrics-chart>
+
+        <metrics-chart metric-name="network_in_usage" :options="defaultOptions"
+                       title="میزان ترافیک دریافتی سرویس‌ها"></metrics-chart>
+
+        <metrics-chart metric-name="network_out_usage" :options="defaultOptions"
+                       title="میزان ترافیک خروجی سرویس‌ها"></metrics-chart>
     </div>
 </template>
 
@@ -107,20 +94,3 @@
         }
     }
 </script>
-
-<style lang="stylus" scoped>
-
-    @font-face
-        font-style normal
-        font-family roboto
-        src url('~/assets/fonts/Roboto-Regular.ttf')
-    .metrics-widget .title
-        text-align center
-        background-color rgba(217, 217, 217, 0.2)
-        padding 5px 0
-        margin-bottom 10px
-        /*border-bottom 1pt solid black*/
-        color #4f4f4f
-        font-size 16px
-
-</style>
