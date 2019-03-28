@@ -41,7 +41,7 @@ export default {
             transition all 0.2s ease-out
 
     @media (max-width: 1500px) and (min-width:992px)
-        padding 20px 5px   
+        padding 20px 5px
     &.box-shadow
         border solid 1px #e7e8ea
     @media (max-width:992px)

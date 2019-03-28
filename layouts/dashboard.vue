@@ -3,7 +3,7 @@
     <f-loading :isFull="true" v-if="loading"/>
     <no-ssr>
       <f-d-header/>
-      <div :class="['wrapper-content',{'is-small':openSidebar}]">
+      <div :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
         <div :class="['wrapper-sidebar', {'open':openSidebar}]">
           <admin-sidebar/>
         </div>
@@ -147,17 +147,20 @@ $spaceTop = 45
     padding 0 15px
 .wrapper
   width 100%
-  background #fefefe
+  background #f5f5f5
   &-content
     display flex
-    width 100%
+    width 90%
     font-size 16px
     transition $transitionMain
     @media only screen and (max-width: 1250px)
+      width 100%
       font-size 14px
     @media only screen and (max-width: 1230px)
+      width 100%
       font-size 10px
     @media only screen and (max-width: 992px)
+      width 100%
       font-size 12px
   &-sidebar
     position relative
