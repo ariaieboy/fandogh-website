@@ -3,83 +3,85 @@
         <nuxt-child/>
 
         <div class="col-lg-12 col-md-12 col-xs-12" style="height: 48px; width: 100%;">
-            <img src="../../../assets/svg/my-plan.svg" alt="plan" style="width: 48px; height: 100%;
-             vertical-align: center; margin-left: 12px;
-                filter: invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)"
-                 align="right"/>
-
+            <img src="../../../assets/svg/my-plan.svg" alt="plan" class="section-title-image" align="right"/>
             <h1 class="service-plan-heading">پلن‌های پیشنهادی</h1>
         </div>
 
-        <plan v-bind.sync="planData" />
+        <plan v-bind.sync="planData"/>
 
         <div class="row">
             <div class="vol-lg-8 col-sm-8 col-md-8 col-xs-12" style="position: relative">
 
-                <div class="col-lg-12 col-md-12 col-xs-12" style="height: 48px; width: 100%;margin-top: 140px">
-                    <img src="../../../assets/svg/my-plan.svg" alt="plan" style="width: 48px; height: 100%;
-             vertical-align: center; margin-left: 12px;
-                filter: invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)"
-                         align="right"/>
+                <div class="col-lg-12 col-md-12 col-xs-12" style="height: 48px; width: 100%;margin-top: 100px">
+                    <img src="../../../assets/svg/my-plan.svg" alt="plan" class="section-title-image" align="right"/>
 
                     <h1 class="service-plan-heading">شخصی‌سازی پلن</h1>
                 </div>
 
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12"
-                     style="display: inline-flex; flex-direction:row; height: 32px; width: 100%; margin-top: 70px; white-space: nowrap;">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 plan-feature-title">
 
                     <h3 class="customization-title">میزان رم</h3>
-                    <div style="height: 1px; margin: auto 12px auto auto;width: 100%;display: inline-flex; background-color: #7c7c7c;"></div>
+                    <div></div>
 
                 </div>
 
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 16px;">
 
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" style="height: 100%; display: flex;">
-                        <img src="../../../assets/svg/my-plan.svg" alt="zone" style="width: 70px; height: 70px;
-                    filter: invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)">
-
-                        </img>
+                        <img class="feature-image" src="../../../assets/svg/my-plan.svg" alt="zone"></img>
                     </div>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8"
                          style="display: block; float: right; position: relative;">
+
                         <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                           style="margin: 0;color: #2979ff; font-size: 15px">به
-                            ازای هر گیگابایت
-                            رم٬ نیم هسته پردازنده به شما تعلق خواهد
-                            گرفت</p>
+                           style="margin: 0;color: #2979ff; font-size: 14px">
+                            به ازای هر گیگابایت رم٬ نیم هسته پردازنده به شما تعلق خواهد گرفت
+                        </p>
+
                         <div class="row col-lg-12 col-sm-12 col-md-12 col-xs-12"
                              style="display: flex; margin-top: 16px;">
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                                 style="display: inline-flex; position: relative">
-                                <label style="font-family: yekan-bold; font-size: 12px; color: #606060; white-space: nowrap; width: 100%;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 feature-label-container">
+                                <label class="feature-label">
                                     <input value="cpu" v-model="cpu" disabled
-                                           style="border: solid 1px #7c7c7c; border-radius: 3px;background-color: transparent; width: 70%; height: 35px;
-direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;">
+                                           style="color: #606060;">
                                     هسته
                                 </label>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                                 style="display: inline-flex; position: relative">
-                                <label style="font-family: yekan-bold; font-size: 12px; color: #606060; white-space: nowrap; width: 100%;">
-                                    <input value="planData.ram" v-model="planData.ram" style="border: solid 1px #7c7c7c; border-radius: 3px;background-color: transparent; width: 70%; height: 35px
-;direction: ltr;font-family: 'IRANSans(FaNum)'; padding: 0 12px;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 feature-label-container">
+
+
+                                <div style="display: block; width: 16px; margin: auto 0 auto 7px;">
+                                    <div v-on:click="incMemory" class="man-button" style="margin: 0 0 2px 0;">
+                                        <img alt="plus"
+                                             src="../../../assets/svg/ic-plus.svg"/>
+                                    </div>
+
+                                    <div v-on:click="dicMemory" class="man-button" style="margin: 2px 0 0 0">
+                                        <img alt="minus"
+                                             src="../../../assets/svg/ic-minus.svg"/>
+                                    </div>
+                                </div>
+
+                                <label class="feature-label">
+                                    <input value="planData.ram" v-model="planData.ram">
                                     گیگابایت
                                 </label>
                             </div>
 
                             <VueSlideBar class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left"
+                                         style="margin: 40px 0 16px 0"
                                          v-model="planData.ram"
                                          :range="[{'label': '1000G'},{'label': '1G'}]"
                                          :min="1"
                                          :max="1000"
-                                         :lineHeight="17"
-                                         :processStyle="{ backgroundImage: 'linear-gradient(to left, #2979ff, #24d5d8)',
-                                     fontFamily: 'IRANSans(FaNum)'}">
+                                         :paddingless=slider.paddingless
+                                         :lineHeight=slider.height
+                                         :processStyle="{ backgroundImage: slider.gradient,fontFamily: slider.font}">
 
                             </VueSlideBar>
+
                             <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
                                style="margin: 0;color: #3ccc38; font-size: 9px">
                                 هزینه هر گیگابایت رم ۶۰ هزارتومان است</p>
@@ -88,21 +90,17 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
                     </div>
                 </div>
 
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12"
-                     style="display: inline-flex; flex-direction:row; height: 32px; width: 100%; margin-top: 70px; white-space: nowrap;">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 plan-feature-title">
 
                     <h3 class="customization-title">هارد اختصاصی</h3>
-                    <div style="height: 1px; margin: auto 12px auto auto;width: 100%;display: inline-flex; background-color: #7c7c7c;"></div>
+                    <div></div>
 
                 </div>
 
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 16px;">
 
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" style="height: 100%; display: flex;">
-                        <img src="../../../assets/svg/my-plan.svg" alt="zone" style="width: 70px; height: 70px;
-                    filter: invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)">
-
-                        </img>
+                        <img class="feature-image" src="../../../assets/svg/my-plan.svg" alt="zone"></img>
                     </div>
 
                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8"
@@ -110,213 +108,135 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
                         <div class="row col-lg-12 col-sm-12 col-md-12 col-xs-12"
                              style="display: flex; margin-top: 16px;">
 
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-                                 style="display: inline-flex; position: relative">
-                                <label style="font-family: yekan-bold; font-size: 12px; color: #606060; white-space: nowrap; width: 100%;">
-                                    <input value="planData.storage" v-model="planData.storage" style="border: solid 1px #7c7c7c; border-radius: 3px;background-color: transparent; width: 70%; height: 35px
-;direction: ltr;font-family: 'IRANSans(FaNum)'; padding: 0 12px;">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 feature-label-container">
+
+                                <div style="display: block; width: 16px; margin: auto 0 auto 7px; box-shadow: transparent">
+                                    <div v-on:click="incStorage" class="man-button" style="margin: 0 0 2px 0;">
+                                        <img alt="plus"
+                                             src="../../../assets/svg/ic-plus.svg"/>
+                                    </div>
+
+                                    <div v-on:click="dicStorage" class="man-button" style="margin: 2px 0 0 0">
+                                        <img alt="minus"
+                                             src="../../../assets/svg/ic-minus.svg"/>
+                                    </div>
+                                </div>
+
+                                <label class="feature-label">
+                                    <input value="planData.storage" v-model="planData.storage">
                                     گیگابایت
                                 </label>
                             </div>
 
                             <VueSlideBar class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left"
+                                         style="margin-top: 40px; margin-bottom: 16px;"
                                          v-model="planData.storage"
                                          :range="[{'label': '1000G'},{'label': '10G'}]"
-                                         :min="10"
+                                         :min="0"
                                          :max="1000"
-                                         :lineHeight="17"
-                                         :processStyle="{ backgroundImage: 'linear-gradient(to left, #2979ff, #24d5d8)',
-                                     fontFamily: 'IRANSans(FaNum)'}">
+                                         :paddingless=slider.paddingless
+                                         :lineHeight=slider.height
+                                         :processStyle="{ backgroundImage: slider.gradient,fontFamily: slider.font}">
 
                             </VueSlideBar>
+
+                            <p v-if="planData.storage < 10" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                               style="margin: 0;color: white; font-size: 11px; text-align: center;
+                               background-color: orangered; border-radius: 25px; padding: 7px 0">
+                                حداقل میزان فضای قابل سفارش ۱۰ گیگابایت می‌باشد!</p>
+
                             <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                               style="margin: 0;color: #3ccc38; font-size: 9px">
+                               style="margin: 16px 0 0 0;color: #3ccc38; font-size: 9px">
                                 هزینه هر گیگابایت هارد اختصاصی ۱۲۰۰ تومان است</p>
+
                         </div>
 
                     </div>
                 </div>
 
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12"
-                     style="display: inline-flex; flex-direction:row; height: 32px; width: 100%; margin-top: 70px; white-space: nowrap;">
+                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 plan-feature-title">
 
                     <h3 class="customization-title">ویژگی‌های رایگان</h3>
-                    <div style="height: 1px; margin: auto 12px auto auto;width: 100%;display: inline-flex; background-color: #7c7c7c;"></div>
+                    <div></div>
 
                 </div>
 
-                <div class="between-xs" style="box-sizing: border-box; display: flex; flex: 0 1 auto;
-                            flex-direction: row; flex-wrap: wrap">
+                <div class="between-xs free-features-container">
 
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="middle-xs middle-sm middle-lg middle-md" style=" height: 250px;border-radius: 3px;
-                        box-shadow: 0 2px 6px 0 rgba(41, 121, 255, 0.42);
-                        margin: 1rem 0;
-                        background-color: #2979ff;">
-
-                            <div style="padding: 20px;">
-                                <img
-                                     src="../../../assets/svg/ic-auto-scaling.svg"
-                                     style="width: 90px; height: 90px; display: block;
-                                     margin-left: auto; margin-right: auto;" />
-
-                                <p style="text-align:center;font-family: 'IRANYekan';font-size: 17px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 40px;color: #fefefe;">Load Balancer</p>
-
-                                <p style="text-align:center;font-family: yekan-light;font-size: 14px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 13px;color: #fefefe;">رایگان</p>
+                        <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
+                            <div>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <p class="title">Load Balancer</p>
+                                <p class="subtitle">رایگان</p>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="middle-xs middle-sm middle-lg middle-md" style=" height: 250px;border-radius: 3px;
-                        box-shadow: 0 2px 6px 0 rgba(41, 121, 255, 0.42);
-                        margin: 1rem 0;
-                        background-color: #2979ff;">
+                        <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
 
-                            <div style="padding: 20px;">
-                                <img
-                                        src="../../../assets/svg/ic-auto-scaling.svg"
-                                        style="width: 90px; height: 90px; display: block;
-                                     margin-left: auto; margin-right: auto;" />
-
-                                <p style="text-align:center;font-family: 'IRANYekan';font-size: 17px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 40px;color: #fefefe;">پهنای باند</p>
-
-                                <p style="text-align:center;font-family: yekan-light;font-size: 14px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 13px;color: #fefefe;">رایگان</p>
+                            <div>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <p class="title">پهنای باند</p>
+                                <p class="subtitle">رایگان</p>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="middle-xs middle-sm middle-lg middle-md" style=" height: 250px;border-radius: 3px;
-                        box-shadow: 0 2px 6px 0 rgba(41, 121, 255, 0.42);
-                        margin: 1rem 0;
-                        background-color: #2979ff;">
-
-                            <div style="padding: 20px;">
-                                <img
-                                        src="../../../assets/svg/ic-auto-scaling.svg"
-                                        style="width: 90px; height: 90px; display: block;
-                                     margin-left: auto; margin-right: auto;" />
-
-                                <p style="text-align:center;font-family: 'IRANYekan';font-size: 17px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 40px;color: #fefefe;">گواهی‌نامه SSL</p>
-
-                                <p style="text-align:center;font-family: yekan-light;font-size: 14px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 13px;color: #fefefe;">رایگان</p>
+                        <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
+                            <div>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <p class="title">گواهی‌نامه SSL</p>
+                                <p class="subtitle">رایگان</p>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="middle-xs middle-sm middle-lg middle-md" style=" height: 250px;border-radius: 3px;
-                        box-shadow: 0 2px 6px 0 rgba(41, 121, 255, 0.42);
-                        margin: 1rem 0;
-                        background-color: #2979ff;">
-
-                            <div style="padding: 20px;">
-                                <img
-                                        src="../../../assets/svg/ic-auto-scaling.svg"
-                                        style="width: 90px; height: 90px; display: block;
-                                     margin-left: auto; margin-right: auto;" />
-
-                                <p style="text-align:center;font-family: 'IRANYekan';font-size: 17px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 40px;color: #fefefe;">Health Check</p>
-
-                                <p style="text-align:center;font-family: yekan-light;font-size: 14px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 13px;color: #fefefe;">رایگان</p>
+                        <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
+                            <div>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <p class="title">Health Check</p>
+                                <p class="subtitle">رایگان</p>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="middle-xs middle-sm middle-lg middle-md" style=" height: 250px;border-radius: 3px;
-                        box-shadow: 0 2px 6px 0 rgba(41, 121, 255, 0.42);
-                        margin: 1rem 0;
-                        background-color: #2979ff;">
-
-                            <div style="padding: 20px;">
-                                <img
-                                        src="../../../assets/svg/ic-auto-scaling.svg"
-                                        style="width: 90px; height: 90px; display: block;
-                                     margin-left: auto; margin-right: auto;" />
-
-                                <p style="text-align:center;font-family: 'IRANYekan';font-size: 16px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 40px;color: #fefefe;">استفاده از رجیستری دلخواه</p>
-
-                                <p style="text-align:center;font-family: yekan-light;font-size: 14px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 13px;color: #fefefe;">رایگان</p>
+                        <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
+                            <div>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <p class="title">استفاده از رجیستری دلخواه</p>
+                                <p class="subtitle">رایگان</p>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                        <div class="middle-xs middle-sm middle-lg middle-md" style=" height: 250px;border-radius: 3px;
-                        box-shadow: 0 2px 6px 0 rgba(41, 121, 255, 0.42);
-                        margin: 1rem 0;
-                        background-color: #2979ff;">
-
-                            <div style="padding: 20px;">
-                                <img
-                                        src="../../../assets/svg/ic-auto-scaling.svg"
-                                        style="width: 90px; height: 90px; display: block;
-                                     margin-left: auto; margin-right: auto;" />
-
-                                <p style="text-align:center;font-family: 'IRANYekan';font-size: 16px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 40px;color: #fefefe;">ایمیج رجیستری اختصاصی</p>
-
-                                <p style="text-align:center;font-family: yekan-light;font-size: 14px;
-                                font-style: normal;font-stretch: normal;line-height: 1.17;letter-spacing: normal;
-                                margin-top: 13px;color: #fefefe;">رایگان</p>
+                        <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
+                            <div>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <p class="title">ایمیج رجیستری اختصاصی</p>
+                                <p class="subtitle">رایگان</p>
                             </div>
                         </div>
                     </div>
-
-
 
                 </div>
             </div>
-            <div style="position: sticky; background: #ffffff; border-radius: 3px;
-                        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); width: 100%; height: 160px;top: 60px;bottom: 0;
-                        margin-top: 140px;z-index: 10;"
-                 class="container-fluid col-md-3 col-lg-3 col-sm-3 col-xs-12">
 
-                <p style="font-family: IRANYekan; padding: 0 16px; font-size: 15px; text-align: center">مبلغ نهایی
-                    (تومان):</p>
+            <div class="checkout-box container-fluid col-md-3 col-lg-3 col-sm-3 col-xs-12">
+
+                <p style="font-family: IRANYekan; padding: 0 16px; font-size: 15px; text-align: center">
+                    مبلغ نهایی (تومان):</p>
                 <p style="width: 100%; text-align: center; font-family: 'IRANSans(FaNum)';">{{total}}</p>
-
-                <button style="width: 100%; height: 40px; border-radius: 3px;
-                margin-bottom: 16px;
-                border: transparent;
-                box-shadow: 0 3px 6px 0 rgba(60, 204, 56, 0.42);background-color: #3ccc38;
-                font-family: IRANYekan; font-size: 14px">
+                <button @click="pushUrl">
                     ثبت نهایی و پرداخت
                 </button>
 
             </div>
-            <!--<panel-box>-->
-            <!--<f-panels :items="allPlan"/>-->
-            <!--</panel-box>-->
-
         </div>
     </div>
 </template>
@@ -330,6 +250,7 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
     import Image from "../services/image";
     import Plan from "~/components/Plan";
     import VueSlideBar from "vue-slide-bar";
+    import Moment from 'moment-jalaali'
 
     export default {
         layout: "dashboard",
@@ -338,8 +259,21 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
             return {
                 planData: {
                     ram: 1,
-                    storage: 10,
-                }
+                    cpu: 0.5,
+                    storage: 0,
+                },
+                slider: {
+                    gradient: 'linear-gradient(to left, #2979ff, #24d5d8)',
+                    font: 'IRANSans(FaNum)',
+                    height: '17',
+                    paddingless: 'true',
+
+                }, finalBill: {
+                    items: [],
+                    date: '',
+                    sum: ''
+                },
+
 
             }
         },
@@ -350,6 +284,7 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
             FActivePlan,
             FActivePlanBox,
             Plan,
+            Moment,
             VueSlideBar,
         },
         computed: {
@@ -370,6 +305,7 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
                 );
                 return percent.toString();
             }, cpu() {
+                this.planData.cpu = this.planData.ram / 2;
                 return this.planData.ram / 2;
             }, total() {
                 let temp = this.planData.ram * 60000 + this.planData.storage * 1200;
@@ -403,57 +339,62 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
                         });
                     }
                 }
-            },
-            scroll() {
-                new Vue({
-                    el: "#cint",
-                    methods: {
-                        /**
-                         * scrollTo - Horizontal Scrolling
-                         * @param {(HTMLElement ref)} element - Scroll Container
-                         * @param {number} scrollPixels - pixel to scroll
-                         * @param {number} duration -  Duration of scrolling animation in millisec
-                         */
-                        scrollTo(element, scrollPixels, duration) {
-                            const scrollPos = element.scrollLeft;
-                            // Condition to check if scrolling is required
-                            if (!((scrollPos === 0 || scrollPixels > 0) && (element.clientWidth + scrollPos === element.scrollWidth || scrollPixels < 0))) {
-                                // Get the start timestamp
-                                const startTime =
-                                    "now" in window.performance
-                                        ? performance.now()
-                                        : new Date().getTime();
+            }, incMemory() {
+                this.planData.ram += 1;
 
-                                function scroll(timestamp) {
-                                    //Calculate the timeelapsed
-                                    const timeElapsed = timestamp - startTime;
-                                    //Calculate progress
-                                    const progress = Math.min(timeElapsed / duration, 1);
-                                    //Set the scrolleft
-                                    element.scrollLeft = scrollPos + scrollPixels * progress;
-                                    //Check if elapsed time is less then duration then call the requestAnimation, otherwise exit
-                                    if (timeElapsed < duration) {
-                                        //Request for animation
-                                        window.requestAnimationFrame(scroll);
-                                    } else {
-                                        return;
-                                    }
-                                }
+            }, dicMemory() {
+                this.planData.ram -= 1;
+            }, incStorage() {
+                this.planData.storage += 1;
 
-                                //Call requestAnimationFrame on scroll function first time
-                                window.requestAnimationFrame(scroll);
-                            }
-                        },
-                        swipeLeft() {
-                            const content = this.$refs.content;
-                            this.scrollTo(content, -300, 800);
-                        },
-                        swipeRight() {
-                            const content = this.$refs.content;
-                            this.scrollTo(content, 300, 800);
-                        }
-                    }
+            }, dicStorage() {
+                this.planData.storage -= 1;
+            }, makeBill() {
+
+                this.finalBill.items.push({
+                    name: "memory",
+                    local_name: "رم",
+                    count: this.planData.ram,
+                    unit: "گیگابایت",
+                    unit_price: (60000).toLocaleString(),
+                    price: (this.planData.ram * 60000).toLocaleString()
+
                 });
+
+                this.finalBill.items.push({
+                    name: "cpu",
+                    local_name: "پردازنده",
+                    count: this.planData.cpu,
+                    unit: "هسته",
+                    unit_price: "---",
+                    price: "---"
+                });
+
+
+                if (this.storage >= 10) {
+                    this.finalBill.items.push({
+                        name: "storage",
+                        local_name: "حافظه اختصاصی",
+                        count: this.planData.storage,
+                        unit: "گیگابایت",
+                        unit_price: (1200).toLocaleString(),
+                        price: (this.planData.storage * 1200).toLocaleString()
+                    });
+                }
+
+                this.finalBill.sum = this.total;
+                this.finalBill.date = Moment(String(new Date())).format('jYYYY/jMM/jDD');
+
+                return this.finalBill;
+
+            }, pushUrl() {
+                // this.$ga.event({
+                //     eventCategory: "plan",
+                //     eventAction: "click plan",
+                //     eventLabel: "plan index",
+                //     eventValue: index
+                // });
+                this.$router.push({name: 'dashboard-plans-bill', params: {'bill': this.makeBill()}, props: true});
             }
         },
         mounted() {
@@ -467,8 +408,9 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
 
 
 <style lang="stylus" scoped>
+
     .service-plan-heading
-        font-family: yekan-bold
+        font-family: IRANYekanMobile(FaNum)
         font-size 18px
         min-width 220px
         line-height 48px
@@ -491,14 +433,161 @@ direction: ltr; font-family: 'IRANSans(FaNum)';padding: 0 12px; color: #606060;"
     .customization-title
         height 32px
         width 140px
-        font-family yekan-bold
-        font-size 17px
+        font-family IRANYekanMobile(FaNum)
+        font-size 1.2em
         font-style normal
         display inline-flex
         line-height 32px
         margin auto;
         letter-spacing normal
         color #2979ff
+
+    .man-button
+        border-radius 25px
+        display inline-flex
+        width 16px
+        height 16px
+        box-shadow transparent
+        background-color #adadad
+        cursor: pointer
+
+        img
+            display flex
+            margin auto
+            pointer-events none
+            filter invert(100%)
+            width 10px
+            height 10px
+            box-shadow transparent
+            user-select none
+            cursor: pointer
+
+    .checkout-box
+        position sticky
+        background-color #ffffff
+        border-radius 3px
+        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
+        width 100%
+        height 160px
+        top 60px
+        bottom 20px
+        margin-top 130px
+        z-index 10
+
+        button
+            width 100%
+            height 40px
+            border-radius 3px
+            margin-bottom 16px
+            border none
+            outline none
+            box-shadow 0 3px 6px 0 rgba(60, 204, 56, 0.42)
+            background-color #3ccc38
+            font-family IRANYekan
+            font-size 14px
+            @media only screen and (max-width: 900)
+                height 35px
+                margin-bottom 12px
+
+    .section-title-image
+        width 48px
+        height 100%
+        vertical-align center
+        margin-left 12px
+        filter invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)
+
+    .plan-feature-title
+        display inline-flex
+        flex-direction row
+        height 32px
+        width 100%
+        margin-top 60px
+        white-space nowrap
+
+        div
+            height 1px
+            margin auto 12px auto auto
+            width 100%
+            display inline-flex
+            background-color #7c7c7c
+
+    .feature-image
+        width 80%
+        height 50%
+        filter invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)
+
+    .free-features-container
+        box-sizing border-box
+        display flex
+        flex 0 1 auto
+        flex-direction row
+        flex-wrap wrap
+
+    .free-feature-card
+        height 250px
+        border-radius 3px
+        box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.42)
+        margin 1rem 0
+        background-color #2979ff
+
+        div
+            padding 20px
+
+            img
+                width 90px
+                height 90px
+                display block
+                margin-left auto
+                margin-right auto
+
+            p.title
+                text-align center
+                font-family 'IRANYekan'
+                font-size 17px
+                font-style normal
+                font-stretch normal
+                line-height 1.17
+                letter-spacing normal
+                margin-top 40px
+                color #fefefe
+
+            p.subtitle
+                text-align center
+                font-family yekan-light
+                font-size 14px
+                font-style normal
+                font-stretch normal
+                line-height 1.17
+                letter-spacing normal
+                margin-top 13px
+                color #fefefe
+
+    .feature-label-container
+        display inline-flex
+        position relative
+        margin-top 9px
+
+
+    .feature-label
+        font-family yekan-bold
+        font-size .8em
+        color #606060
+        white-space nowrap
+        width 100%
+
+        input
+            border solid 1px #7c7c7c
+            border-radius 3px
+            background-color transparent
+            width 70%
+            height 35px
+            direction ltr
+            font-family 'IRANSans(FaNum)'
+            padding 0 12px
+
+            @media only screen and (max-width: 900)
+                height 25px
+
 
 </style>
 

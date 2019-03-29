@@ -179,9 +179,4 @@
         height 100%
         width 100%
 
-
-    #cint {
-
-    }
-
 </style>
