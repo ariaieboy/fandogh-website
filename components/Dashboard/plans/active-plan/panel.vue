@@ -16,7 +16,7 @@
         <div class="service----item service----item-second">
           <div class="service-----information">
             <span class="service------image">
-              <img :src="'/icons/plans/ram.png'">
+              <img :src="'/icons/plans/memory.png'">
             </span>
             <span class="service------name font-roboto">RAM</span>
             <span class="service------info">{{memory_limit}}</span>

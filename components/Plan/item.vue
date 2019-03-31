@@ -43,7 +43,7 @@
 
 <script>
     export default {
-        props: ["icon", "title", "storage", "ram", "cpu"],
+        props: ["icon", "title", "dedicatedVolume", "memory", "cpu"],
         data() {
             return {
                 "auto-scale": require("~/assets/svg/ic-auto-scale.svg"),

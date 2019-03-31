@@ -68,7 +68,7 @@
                     </div>
 
                     <BillRow
-                            v-for="item in bill.items"
+                            v-for="item in invoice.items"
                             v-bind:bill="item"
                             :key="item.id"></BillRow>
 
@@ -76,9 +76,9 @@
 
                 <div class="row" style="margin-top: 16px">
                     <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6" style="text-align: left; padding-left: 48px; font-size: 0.9em">مجموع کل:
-                        <span style="font-family: 'IRANYekanMobile(FaNum)'; font-size: 1em; color: #222">{{bill.sum}} تومان</span></p>
-                    <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6" style="padding-right: 48px; font-size: 0.9em">تاریخ انقضا سرویس:
-                        <span style="font-family: 'IRANYekanMobile(FaNum)'; font-size: 1em; color: #222">{{bill.date}}</span></p>
+                        <span style="font-family: 'IRANYekanMobile(FaNum)'; font-size: 1em; color: #222">{{invoice.total}} تومان</span></p>
+                    <!--<p class="col-xs-12 col-md-6 col-sm-6 col-lg-6" style="padding-right: 48px; font-size: 0.9em">تاریخ انقضا سرویس:-->
+                    <!--<span style="font-family: 'IRANYekanMobile(FaNum)'; font-size: 1em; color: #222">{{invoice.created_at}}</span></p>-->
                 </div>
 
             </div>
@@ -101,7 +101,10 @@
                 <button class="col-xs-12 col-sm-5 col-md-5 col-lg-3 container-fluid"
                         style="height: 40px; border-radius: 3px;box-shadow: 0 2px 6px 0 rgba(126, 211, 33, 0.42);
                         font-size: 0.9em;font-family: IRANYekan;color: #fff;text-align: center;
-                border: none;outline: none;background-color: #7ed321;">
+                border: none;outline: none;background-color: #7ed321;"
+
+                        @click="pay"
+                >
                     تایید و پرداخت
 
                 </button>
@@ -116,88 +119,6 @@
             </div>
 
         </div>
-        <!--<div class="col-md-8 col-sm-12 col-xs-12">-->
-        <!--<div class="plan">-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-4">-->
-        <!--<img src="/icons/fandogh-logo.png">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row center-md center-xs">-->
-        <!--<div class="col-md-6 col-xs-12 col-sm-12">-->
-        <!--<h2 class="plan-heading">صورت حساب شما</h2>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-6 col-xs-12 col-sm-12">-->
-        <!--<div class="plan-details">-->
-        <!--<p>نام مشتری : {{username}}</p>-->
-        <!--<p>نام فضا : {{namespace}}</p>-->
-        <!--<p>طرح انتخابی : {{bill.memory.local_name}}</p>-->
-        <!--<p>هزینه پلن : {{}}</p>-->
-        <!--<p>مالیات بر ارزش افزوده : {{tax}}</p>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-md-6 col-xs-12 col-sm-12">-->
-        <!--<div class="plan-box">-->
-        <!--<div class="plan-inner">-->
-        <!--<div class="plan-heading">-->
-        <!--<img :src="'/icons/plans/services-icon/' ">-->
-        <!--<h3>{{}}</h3>-->
-        <!--</div>-->
-        <!--<div class="plan-divider"></div>-->
-        <!--<div class="plan-config">-->
-        <!--<div class="plan-information">-->
-        <!--<span class="plan-image">-->
-        <!--<img src="/icons/plans/cpu.png">-->
-        <!--</span>-->
-        <!--<span class="plan-name font-roboto">CPU</span>-->
-        <!--<span class="plan-info">{{}}</span>-->
-        <!--</div>-->
-        <!--<div class="plan-information">-->
-        <!--<span class="plan-image">-->
-        <!--<img src="/icons/plans/ram.png">-->
-        <!--</span>-->
-        <!--<span class="plan-name font-roboto">RAM</span>-->
-        <!--<span class="plan-info">{{}}</span>-->
-        <!--</div>-->
-        <!--<div class="plan-information">-->
-        <!--<span class="plan-image">-->
-        <!--<img src="/icons/plans/storage.png">-->
-        <!--</span>-->
-        <!--<span class="plan-name font-roboto">STORAGE</span>-->
-        <!--<span class="plan-info">{{}}</span>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-        <!--<div class="col-md-12 col-xs-12 col-sm-12">-->
-        <!--<div class="plan-price">-->
-        <!--<h3 class="plan-h3">{{addTaxToPrice}}</h3>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row center-md">-->
-        <!--<div class="col-md-10 col-xs-12 col-sm-12">-->
-        <!--<div class="plan-payment">-->
-        <!--<h3-->
-        <!--class="plan-h3"-->
-        <!--&gt;برای خرید این پلن لطفا مبلغ قابل پرداخت را به شماره حساب ۶۲۱۹-۸۶۱۰-۲۱۰۴-۲۳۱۳ واریز فرمایید و شماره پیگیری را برای support@fandogh.cloud ارسال کنید.</h3>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row end-md">-->
-        <!--<div class="col-md-12 col-xs-12 col-sm-12">-->
-        <!--<div class="back-btn">-->
-        <!--<f-button @onClick="$router.push('/dashboard/plans')" styles="red small login">بازگشت</f-button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
     </div>
 </template>
 
@@ -213,10 +134,18 @@
         },
         layout: "dashboard",
         data() {
-            console.log(this.$route.params['bill']);
+            console.log(this.$store.state.plan.requestedPlan);
             return {
-                bill: this.$route.params['bill'],
+                invoice: this.$store.state.plan.requestedPlan.invoice,
             };
+        },
+        methods: {
+            async pay() {
+                const invoiceId = this.$store.state.plan.requestedPlan.invoice.id;
+                await this.$store.dispatch('plan/requestPayment', invoiceId);
+                console.log(this.$store.state.plan.requestedPayment);
+                window.location = this.$store.state.plan.requestedPayment.payment_url;
+            }
         },
         destroyed() {
         },

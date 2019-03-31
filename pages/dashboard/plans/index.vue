@@ -58,21 +58,21 @@
                                              src="../../../assets/svg/ic-plus.svg"/>
                                     </div>
 
-                                    <div v-on:click="dicMemory" class="man-button" style="margin: 2px 0 0 0">
+                                    <div v-on:click="decMemory" class="man-button" style="margin: 2px 0 0 0">
                                         <img alt="minus"
                                              src="../../../assets/svg/ic-minus.svg"/>
                                     </div>
                                 </div>
 
                                 <label class="feature-label">
-                                    <input class="input" value="planData.ram" v-model="planData.ram">
+                                    <input class="input" value="planData.memory" v-model="planData.memory">
                                     گیگابایت
                                 </label>
                             </div>
 
                             <VueSlideBar class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left"
                                          style="margin: 40px 0 16px 0; box-sizing: content-box"
-                                         v-model="planData.ram"
+                                         v-model="planData.memory"
                                          :range=slider.memoryRange
                                          :min=slider.memoryMin
                                          :max=slider.max
@@ -111,28 +111,28 @@
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 feature-label-container">
 
                                 <div style="display: block; width: 16px; margin: auto 0 auto 7px; box-shadow: transparent">
-                                    <div v-on:click="incStorage" class="man-button" style="margin: 0 0 2px 0;">
+                                    <div v-on:click="incDedicatedVolume" class="man-button" style="margin: 0 0 2px 0;">
                                         <img alt="plus"
                                              src="../../../assets/svg/ic-plus.svg"/>
                                     </div>
 
-                                    <div v-on:click="dicStorage" class="man-button" style="margin: 2px 0 0 0">
+                                    <div v-on:click="decDedicatedVolume" class="man-button" style="margin: 2px 0 0 0">
                                         <img alt="minus"
                                              src="../../../assets/svg/ic-minus.svg"/>
                                     </div>
                                 </div>
 
                                 <label class="feature-label">
-                                    <input class="input" value="planData.storage" v-model="planData.storage">
+                                    <input class="input" value="planData.dedicatedVolume" v-model="planData.dedicatedVolume">
                                     گیگابایت
                                 </label>
                             </div>
 
                             <VueSlideBar class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left"
                                          style="margin-top: 40px; margin-bottom: 16px;box-sizing: content-box"
-                                         v-model="planData.storage"
-                                         :range=slider.storageRang
-                                         :min=slider.storageMin
+                                         v-model="planData.dedicatedVolume"
+                                         :range=slider.dedicatedVolumeRange
+                                         :min=slider.dedicatedVolumeMin
                                          :max=slider.max
                                          :paddingless=slider.paddingless
                                          :lineHeight=slider.height
@@ -140,7 +140,7 @@
 
                             </VueSlideBar>
 
-                            <p v-if="planData.storage < 10" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                            <p v-if="planData.dedicatedVolume < 10" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
                                style="margin: 0;color: white; font-size: 11px; text-align: center;
                                background-color: orangered; border-radius: 25px; padding: 7px 0">
                                 حداقل میزان فضای قابل سفارش ۱۰ گیگابایت می‌باشد!</p>
@@ -258,9 +258,9 @@
         data: function () {
             return {
                 planData: {
-                    ram: 1,
+                    memory: 1,
                     cpu: 0.5,
-                    storage: 0,
+                    dedicatedVolume: 0,
                 },
                 slider: {
                     gradient: 'linear-gradient(to left, #2979ff, #24d5d8)',
@@ -268,21 +268,21 @@
                     height: '17',
                     paddingless: 'true',
                     memoryMin: '1',
-                    storageMin: '0',
-                    max: '1000',
-                    storageRang: [
+                    dedicatedVolumeMin: '0',
+                    max: '64',
+                    dedicatedVolumeRange: [
+                        // TODO: set max separately
                         {'label': '1000G'},
                         {'label': '10G'}
                     ],
                     memoryRange: [
-                        {'label': '1000G'},
+                        {'label': '64G'},
                         {'label': '1G'}
                     ]
 
                 }, finalBill: {
-                    items: [],
-                    date: '',
-                    sum: ''
+                    memory: 0,
+                    dedicatedVolume: 0,
                 },
 
 
@@ -316,10 +316,10 @@
                 );
                 return percent.toString();
             }, cpu() {
-                this.planData.cpu = this.planData.ram / 2;
-                return this.planData.ram / 2;
+                this.planData.cpu = this.planData.memory / 2;
+                return this.planData.memory / 2;
             }, total() {
-                let temp = this.planData.ram * 60000 + this.planData.storage * 1200;
+                let temp = this.planData.memory * 60000 + this.planData.dedicatedVolume * 1200;
                 return temp.toLocaleString()
 
             }
@@ -331,81 +331,39 @@
             this.$store.commit("plan/SET_DATA", {data: null, id: "activePlan"});
         },
         created() {
-            this.getData();
+            this.$store.commit("SET_DATA", {data: false, id: "loading"});
         },
         methods: {
-            async getData() {
-                try {
-                    await this.$store.dispatch("plan/getPlans", this.namespace);
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                } catch (e) {
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    if (e.status === 401) {
-                        this.$router.push("/user/login");
-                    } else {
-                        this.$notify({
-                            title: e.data.message,
-                            time: 4000,
-                            type: "error"
-                        });
-                    }
-                }
-            }, incMemory() {
-                this.planData.ram += 1;
-
-            }, dicMemory() {
-                this.planData.ram -= 1;
-            }, incStorage() {
-                this.planData.storage += 1;
-
-            }, dicStorage() {
-                this.planData.storage -= 1;
+            incMemory() {
+                this.planData.memory += 1;
+            }, decMemory() {
+                this.planData.memory -= 1;
+            }, incDedicatedVolume() {
+                this.planData.dedicatedVolume += 1;
+            }, decDedicatedVolume() {
+                this.planData.dedicatedVolume -= 1;
             }, makeBill() {
-
-                this.finalBill.items.push({
-                    name: "memory",
-                    local_name: "رم",
-                    count: this.planData.ram,
-                    unit: "گیگابایت",
-                    unit_price: (60000).toLocaleString(),
-                    price: (this.planData.ram * 60000).toLocaleString()
-
-                });
-
-                this.finalBill.items.push({
-                    name: "cpu",
-                    local_name: "پردازنده",
-                    count: this.planData.cpu,
-                    unit: "هسته",
-                    unit_price: "---",
-                    price: "---"
-                });
-
-
-                if (this.planData.storage >= 10) {
-                    this.finalBill.items.push({
-                        name: "storage",
-                        local_name: "حافظه اختصاصی",
-                        count: this.planData.storage,
-                        unit: "گیگابایت",
-                        unit_price: (1200).toLocaleString(),
-                        price: (this.planData.storage * 1200).toLocaleString()
-                    });
+                this.finalBill.memory = this.planData.memory;
+                if (this.planData.dedicatedVolume >= 10) {
+                    this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
-
-                this.finalBill.sum = this.total;
-                this.finalBill.date = Moment(String(new Date())).format('jYYYY/jMM/jDD');
-
+                // this.finalBill.sum = this.total;
+                // this.finalBill.date = Moment(String(new Date())).format('jYYYY/jMM/jDD');
                 return this.finalBill;
-
-            }, pushUrl() {
+            },
+            async pushUrl() {
                 // this.$ga.event({
                 //     eventCategory: "plan",
                 //     eventAction: "click plan",
                 //     eventLabel: "plan index",
                 //     eventValue: index
                 // });
-                this.$router.push({name: 'dashboard-plans-bill', params: {'bill': this.makeBill()}, props: true});
+                const bill = this.makeBill();
+                console.log(bill);
+                const planRespose = await this.$store.dispatch("plan/requestPlan", bill);
+                console.log(planRespose)
+                this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                this.$router.push({name: 'dashboard-plans-bill'});
             }
         },
         mounted() {
@@ -602,9 +560,6 @@
 
 
 </style>
-
-
-
 
 
 <style lang="css">

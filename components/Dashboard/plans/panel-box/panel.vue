@@ -33,14 +33,14 @@
           </div>-->
           <div class="service-----information">
             <span class="service------image">
-              <img :src="'/icons/plans/ram.png'" alt>
+              <img :src="'/icons/plans/memory.png'" alt>
             </span>
             <span class="service------name font-roboto">RAM</span>
             <span class="service------info">{{ram}}</span>
           </div>
           <div class="service-----information">
             <span class="service------image">
-              <img :src="'/icons/plans/storage.png'" alt>
+              <img :src="'/icons/plans/dedicatedVolume.png'" alt>
             </span>
             <span class="service------name font-roboto">Storage</span>
             <span class="service------info">{{space}}</span>
@@ -85,7 +85,7 @@ export default {
     "title",
     "price",
     "space",
-    "ram",
+    "memory",
     "cpu",
     "description",
     "list"

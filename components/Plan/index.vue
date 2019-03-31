@@ -49,16 +49,16 @@
                 switch (position) {
 
                     case 0:
-                        this.$emit('update:ram', 1);
-                        this.$emit('update:storage', 10);
+                        this.$emit('update:memory', 1);
+                        this.$emit('update:dedicatedVolume', 10);
                         break;
                     case 1:
-                        this.$emit('update:ram', 2);
-                        this.$emit('update:storage', 20);
+                        this.$emit('update:memory', 2);
+                        this.$emit('update:dedicatedVolume', 20);
                         break;
                     case 2:
-                        this.$emit('update:ram', 3);
-                        this.$emit('update:storage', 30);
+                        this.$emit('update:memory', 3);
+                        this.$emit('update:dedicatedVolume', 30);
                         break;
                 }
             },

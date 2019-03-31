@@ -3,10 +3,10 @@
         <table style="width: 100%;border: none; border-collapse: collapse; margin: 6px 0">
             <tr class="data">
                 <td width="26%">{{bill.local_name}}</td>
-                <td class="number" width="17%">{{bill.count}}</td>
-                <td width="17%">{{bill.unit}}</td>
+                <td class="number" width="17%">{{bill.quantity}}</td>
+                <td width="17%">{{bill.local_unit}}</td>
                 <td class="number" width="20%">{{bill.unit_price}}</td>
-                <td class="number" width="20%">{{bill.price}}</td>
+                <td class="number" width="20%">{{bill.total_price}}</td>
             </tr>
         </table>
 
