@@ -35,7 +35,7 @@
                          style="display: block; float: right; position: relative;">
 
                         <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                           style="margin: 0;color: #2979ff; font-size: 14px">
+                           style="margin: 0;color: #2979ff; font-size: 0.9em">
                             به ازای هر گیگابایت رم٬ نیم هسته پردازنده به شما تعلق خواهد گرفت
                         </p>
 
@@ -44,7 +44,7 @@
 
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 feature-label-container">
                                 <label class="feature-label">
-                                    <input value="cpu" v-model="cpu" disabled
+                                    <input class="input" value="cpu" v-model="cpu" disabled
                                            style="color: #606060;">
                                     هسته
                                 </label>
@@ -65,17 +65,17 @@
                                 </div>
 
                                 <label class="feature-label">
-                                    <input value="planData.ram" v-model="planData.ram">
+                                    <input class="input" value="planData.ram" v-model="planData.ram">
                                     گیگابایت
                                 </label>
                             </div>
 
                             <VueSlideBar class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left"
-                                         style="margin: 40px 0 16px 0"
+                                         style="margin: 40px 0 16px 0; box-sizing: content-box"
                                          v-model="planData.ram"
-                                         :range="[{'label': '1000G'},{'label': '1G'}]"
-                                         :min="1"
-                                         :max="1000"
+                                         :range=slider.memoryRange
+                                         :min=slider.memoryMin
+                                         :max=slider.max
                                          :paddingless=slider.paddingless
                                          :lineHeight=slider.height
                                          :processStyle="{ backgroundImage: slider.gradient,fontFamily: slider.font}">
@@ -123,17 +123,17 @@
                                 </div>
 
                                 <label class="feature-label">
-                                    <input value="planData.storage" v-model="planData.storage">
+                                    <input class="input" value="planData.storage" v-model="planData.storage">
                                     گیگابایت
                                 </label>
                             </div>
 
                             <VueSlideBar class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left"
-                                         style="margin-top: 40px; margin-bottom: 16px;"
+                                         style="margin-top: 40px; margin-bottom: 16px;box-sizing: content-box"
                                          v-model="planData.storage"
-                                         :range="[{'label': '1000G'},{'label': '10G'}]"
-                                         :min="0"
-                                         :max="1000"
+                                         :range=slider.storageRang
+                                         :min=slider.storageMin
+                                         :max=slider.max
                                          :paddingless=slider.paddingless
                                          :lineHeight=slider.height
                                          :processStyle="{ backgroundImage: slider.gradient,fontFamily: slider.font}">
@@ -267,6 +267,17 @@
                     font: 'IRANSans(FaNum)',
                     height: '17',
                     paddingless: 'true',
+                    memoryMin: '1',
+                    storageMin: '0',
+                    max: '1000',
+                    storageRang: [
+                        {'label': '1000G'},
+                        {'label': '10G'}
+                    ],
+                    memoryRange: [
+                        {'label': '1000G'},
+                        {'label': '1G'}
+                    ]
 
                 }, finalBill: {
                     items: [],
@@ -371,7 +382,7 @@
                 });
 
 
-                if (this.storage >= 10) {
+                if (this.planData.storage >= 10) {
                     this.finalBill.items.push({
                         name: "storage",
                         local_name: "حافظه اختصاصی",
@@ -575,21 +586,26 @@
         white-space nowrap
         width 100%
 
-        input
-            border solid 1px #7c7c7c
-            border-radius 3px
-            background-color transparent
-            width 70%
-            height 35px
-            direction ltr
-            font-family 'IRANSans(FaNum)'
-            padding 0 12px
 
-            @media only screen and (max-width: 900)
-                height 25px
+    .input
+        border solid 1px #7c7c7c
+        border-radius 3px
+        background-color transparent
+        width 70%
+        height 35px
+        direction ltr
+        font-family yekan-number
+        padding 0 12px
+
+        @media only screen and (max-width: 900)
+            height 25px
 
 
 </style>
+
+
+
+
 
 <style lang="css">
 
@@ -626,10 +642,16 @@
         min-width: 24px !important;
         text-align: center;
         color: #fff;
+        margin: auto !important;
         border-radius: 100px !important;
         border: transparent !important;
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.17) !important;
+        background-repeat: no-repeat !important;
+        background-position: center !important;
+        background-size: 8px;
+        background-image: url("../../../assets/svg/arrow.svg") !important;
         background-color: #24d5d8 !important;
+
     }
 
     .vue-slide-bar-tooltip::before {
@@ -641,11 +663,6 @@
         height: 0 !important;
         border: 12px solid transparent !important;
         border-radius: 0 !important;
-        background-image: url("../../../assets/svg/arrow.svg") !important;
-        filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        background-size: 8px;
         transform: translate(10%, -5%) !important;
     }
 
