@@ -69,7 +69,8 @@
 
                     <BillRow
                             v-for="item in bill.items"
-                            v-bind:bill="item"></BillRow>
+                            v-bind:bill="item"
+                            :key="item.id"></BillRow>
 
                 </div>
 
