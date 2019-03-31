@@ -38,4 +38,19 @@ export const requestPayment = async ({commit, state}, invoiceId) => {
     } catch (e) {
         return Promise.reject(e);
     }
-}
+};
+
+
+export const verifyPayment = async ({commit, state}, {refId, attemptId}) => {
+    try {
+        let res = await Request().get(`/api/payments/verification/${attemptId}`,{
+            params: {
+                refid: refId
+            }
+        });
+        commit("SET_DATA", {id: "paymentVerification", data: res});
+        return res;
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
