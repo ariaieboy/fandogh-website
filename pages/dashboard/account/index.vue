@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="col-lg-11 col-md-10 col-sm-8 col-xs-12 container-fluid"
-             style="box-sizing: content-box; max-width: 1700px">
+             style="box-sizing: content-box; max-width: 1600px">
 
             <p class="title">حساب کاربری</p>
 
