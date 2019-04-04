@@ -553,7 +553,7 @@
         width 70%
         height 35px
         direction ltr
-        font-family IRANYekan
+        font-family 'IRANSans(FaNum)'
         padding 0 12px
 
         @media only screen and (max-width: 900)
