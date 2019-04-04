@@ -20,13 +20,13 @@
                 <div>
                     <img :alt="title" :src="image"/>
                     <p class="title">هارد اختصاصی</p>
-                    <p class="value">{{storage}} گیگابایت</p>
+                    <p class="value">{{dedicatedVolume}} گیگابایت</p>
                 </div>
 
                 <div>
                     <img :alt="title" :src="image"/>
                     <p class="title">رم اختصاصی</p>
-                    <p class="value">{{ram}} گیگابایت</p>
+                    <p class="value">{{memory}} گیگابایت</p>
                 </div>
 
                 <div>

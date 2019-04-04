@@ -75,7 +75,7 @@
                                          v-model="planData.memory"
                                          :range=slider.memoryRange
                                          :min=slider.memoryMin
-                                         :max=slider.max
+                                         :max=slider.memoryMax
                                          :paddingless=slider.paddingless
                                          :lineHeight=slider.height
                                          :processStyle="{ backgroundImage: slider.gradient,fontFamily: slider.font}">
@@ -133,7 +133,7 @@
                                          v-model="planData.dedicatedVolume"
                                          :range=slider.dedicatedVolumeRange
                                          :min=slider.dedicatedVolumeMin
-                                         :max=slider.max
+                                         :max=slider.dedicatedVolumeMax
                                          :paddingless=slider.paddingless
                                          :lineHeight=slider.height
                                          :processStyle="{ backgroundImage: slider.gradient,fontFamily: slider.font}">
@@ -265,18 +265,19 @@
                 slider: {
                     gradient: 'linear-gradient(to left, #2979ff, #24d5d8)',
                     font: 'IRANSans(FaNum)',
-                    height: '17',
-                    paddingless: 'true',
-                    memoryMin: '1',
-                    dedicatedVolumeMin: '0',
-                    max: '64',
+                    height: 17,
+                    paddingless: true,
+                    memoryMin: 1,
+                    dedicatedVolumeMin: 0,
+                    memoryMax: 256,
+                    dedicatedVolumeMax: 128,
                     dedicatedVolumeRange: [
                         // TODO: set max separately
-                        {'label': '1000G'},
+                        {'label': '128G'},
                         {'label': '10G'}
                     ],
                     memoryRange: [
-                        {'label': '64G'},
+                        {'label': '256G'},
                         {'label': '1G'}
                     ]
 
@@ -552,7 +553,7 @@
         width 70%
         height 35px
         direction ltr
-        font-family yekan-number
+        font-family IRANYekan
         padding 0 12px
 
         @media only screen and (max-width: 900)
@@ -587,6 +588,14 @@
         top: -4px !important;
         left: 70% !important;
         transform: translate(-50%, -100%) !important;
+    }
+
+    @media only screen and (max-width: 900px) {
+        .vue-slide-bar-tooltip-top {
+            top: -1px !important;
+            left: 70% !important;
+            transform: translate(-50%, -100%) !important;
+        }
     }
 
     .vue-slide-bar-tooltip {
