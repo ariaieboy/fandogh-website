@@ -20,24 +20,26 @@
         <ProfileWalletRow v-for="(item, index) of rowValue"
                           :key="index"
                           v-bind:rowNo="index"
-                          v-bind:celSpec="item" />
+                          v-bind:celSpec="item"/>
 
         <div class="row" style="margin-top: 32px;">
             <div class="container-fluid">
                 <div style="margin: 4px; display: flex; box-sizing: content-box; width: 300px; height: 35px; border-radius: 25px; background-color: #fefefe;">
 
-                    <div class="right-cursor" @click="swipeLeft">
+                    <div class="right-cursor" @click="nextPage">
                         <img src="~/assets/svg/arrow.svg" alt="arrow"/>
                     </div>
 
-                    <div style="width: 80%; height: 35px; overflow: hidden; white-space: nowrap; display: inline-flex; ">
+                    <div style="width: 80%; height: 35px; overflow: hidden; white-space: nowrap; display: inline-flex;direction: ltr ">
 
-                        <p style="font-family: 'IRANYekanMobile(FaNum)';line-height: 30px; font-size:16px;color: #7c7c7c; max-width:100%; height: 27px;text-align: center;text-overflow: ellipsis;
-                         overflow: hidden; white-space: nowrap; margin: auto; direction: ltr; padding-left: 10px; padding-right: 10px;">1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16</p>
+                        <a v-for="item of pageRangeSection"
+                           :class="[currentPage === item ? 'page-active': 'page-inactive']"
+                           :key="item"
+                           @click="pageClicked(item)">{{item}}</a>
 
                     </div>
 
-                    <div class="left-cursor" @click="swipeRight">
+                    <div class="left-cursor" @click="prevPage">
                         <img src="~/assets/svg/arrow.svg" alt="arrow"/>
                     </div>
 
@@ -54,15 +56,16 @@
 <script>
     import ProfileWalletRow from "~/components/Dashboard/profile/wallet-value-row";
     import TitleRow from "~/components/Dashboard/profile/title-row";
+
     export default {
         name: "profile-wallet",
-        components:{
+        components: {
             ProfileWalletRow,
             TitleRow,
 
-        },data() {
-            return{
-                rowTitle:[
+        }, data() {
+            return {
+                rowTitle: [
                     {title: 'ردیف', width: '8%'},
                     {title: 'تاریخ', width: '15%'},
                     {title: 'مقدار تراکنش (تومان)', width: '16%'},
@@ -70,23 +73,136 @@
                     {title: 'مانده موجودی (تومان)', width: '20%'},
                     {title: 'توضیحات', width: '25%'},
                 ],
-                rowValue:[
-                    {date: '۱۳۹۷/۰۱/۱۲', transactionAmount:'+ ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۱۰۰٬۰۰۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۱۳', transactionAmount:'- ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۱۴', transactionAmount:'+ ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۱۰۰٬۰۰۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۱۵', transactionAmount:'+ ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۲۰۰٬۰۰۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۱۶', transactionAmount:'- ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۱۰۰٬۰۰۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۱۷', transactionAmount:'+ ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۲۰۰٬۰۰۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۱۸', transactionAmount:'+ ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۳۰۰٬۰۰۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۱۹', transactionAmount:'+ ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۴۰۰٬۰۰۰', description: 'ندارد'},
-                    {date: '۱۳۹۷/۰۱/۲۰', transactionAmount:'+ ۱۰۰٬۰۰۰', username: 'سورنا', remaining: '۵۰۰٬۰۰۰', description: 'ندارد'},
-                ]
+                rowValue: [
+                    {
+                        date: '۱۳۹۷/۰۱/۱۲',
+                        transactionAmount: '+ ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۱۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۱۳',
+                        transactionAmount: '- ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۱۴',
+                        transactionAmount: '+ ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۱۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۱۵',
+                        transactionAmount: '+ ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۲۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۱۶',
+                        transactionAmount: '- ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۱۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۱۷',
+                        transactionAmount: '+ ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۲۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۱۸',
+                        transactionAmount: '+ ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۳۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۱۹',
+                        transactionAmount: '+ ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۴۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                    {
+                        date: '۱۳۹۷/۰۱/۲۰',
+                        transactionAmount: '+ ۱۰۰٬۰۰۰',
+                        username: 'سورنا',
+                        remaining: '۵۰۰٬۰۰۰',
+                        description: 'ندارد'
+                    },
+                ],
+                totalPage: 15,
+                currentPage: 1,
+                previousPage: 1,
+                pageRange: [],
+                pageRangeSection: []
             }
+        }, methods: {
+            pageClicked(position) {
+                console.log(position);
+                this.currentPage = position;
+                if (this.totalPage > 7 && position < this.totalPage) {
+                    this.recalculatePages(position)
+                }
+
+            }, nextPage() {
+                if (this.currentPage < this.totalPage) {
+                    this.currentPage++;
+                    if (this.totalPage > 7) {
+                        this.recalculatePages(this.currentPage)
+                    }
+                }
+            }, prevPage() {
+                if (this.currentPage > 1) {
+                    this.currentPage--;
+                    if (this.totalPage > 7) {
+                        this.recalculatePages(this.currentPage)
+                    }
+                }
+            }, createPageRange() {
+                for (var i = 1; i <= this.totalPage; i++) {
+                    this.pageRange.push(i);
+                    if (i <= 7) {
+                        this.pageRangeSection.push(i);
+                    }
+                }
+            }, recalculatePages(index) {
+
+                if (index + 6 > this.totalPage) {
+                    this.pageRangeSection.length = 0;
+                    for (var j = this.totalPage - 6; j <= this.totalPage; j++) {
+                        this.pageRangeSection.push(j)
+                    }
+                    return this.pageRangeSection;
+                } else {
+
+                    this.pageRangeSection.length = 0;
+                    for (var i = index; i <= index + 6; i++) {
+                        this.pageRangeSection.push(i)
+                    }
+                    return this.pageRangeSection;
+                }
+            }
+        }, created() {
+            this.createPageRange();
         }
     }
 </script>
 
 <style lang="stylus" scoped>
+
+    *
+        -webkit-user-select: none
+        -moz-user-select: none
+        -ms-user-select: none
+        user-select: none
 
     .box-row
         min-height 45px
@@ -175,6 +291,7 @@
         outline none
         background-color #24d5d8
         cursor pointer
+
         img
             display flex
             margin auto
@@ -203,6 +320,32 @@
             pointer-events none
             @media only screen and (max-width: 900px)
                 width 6px
+
+    .page-inactive
+        font-family 'IRANYekanMobile(FaNum)'
+        line-height 35px
+        font-size 16px
+        color #7c7c7c
+        height 35px
+        cursor pointer
+        text-align center
+        margin auto
+        margin-left 12px
+        margin-right 12px
+        direction ltr
+
+    .page-active
+        font-family 'IRANYekanMobile(FaNum)'
+        line-height 35px
+        font-size 17px
+        margin auto
+        font-weight bold
+        margin-left 12px
+        margin-right 12px
+        color #2979ff
+        height 35px
+        cursor pointer
+        text-align center
 
 
 </style>

@@ -26,9 +26,16 @@
                         <p class="profile-entity-title">تاریخ عضویت:</p>
                         <p class="profile-entity-value">۱۲/۰۲/۱۳۹۷</p>
                     </div>
-                    <div style="min-height: 3em">
-                        <p class="profile-entity-title">نام فضانام:</p>
-                        <p class="profile-entity-value">sorena</p>
+                    <div style="min-height: 3em; display: block">
+                        <p class="profile-entity-title" style="display: inline-block">نام فضانام:</p>
+                        <v-select
+                                style="display: inline-block"
+                                :options=namespaces
+                                :clearable="false"
+                                :searchable="false"
+                                :value="namespaces[0]"
+                                placeholder="نام ایمیج را انتخاب کنید">
+                        </v-select>
                     </div>
 
                 </div>
@@ -52,10 +59,10 @@
                     </div>
 
                     <div class="row">
-                    <button  @click="accountEdit" class="container-fluid left" style="border-radius: 17.5px; width: 200px; height: 35px;
+                        <button @click="accountEdit" class="container-fluid left" style="border-radius: 17.5px; width: 200px; height: 35px;
   background-color: #7ed321;color: #ffffff;font-family: IRANYekan;font-size: 14px;border: none;outline: none; cursor: pointer">
-                        ویرایش اطلاعات کاربری
-                    </button>
+                            ویرایش اطلاعات کاربری
+                        </button>
                     </div>
 
                 </div>
@@ -152,7 +159,8 @@
                 // },
                 loading: false,
                 loadingProgress: false,
-                activeSectionName: 'ProfilePlan'
+                activeSectionName: 'ProfilePlan',
+                namespaces:['sorena', 'sorena-namespace', 'namespace']
             };
         },
         computed: {
@@ -328,4 +336,26 @@
         border-radius 3px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         background-color #ffffff
+</style>
+
+<style lang="stylus">
+
+    .v-select .dropdown-toggle
+        margin-bottom 8px !important
+        min-height 25px !important
+        border none !important
+        border-radius 10px !important
+        background-color #f5f5f5 !important
+        min-width 200px !important
+        max-width 250px
+        direction rtl !important
+
+    .v-select .selected-tag
+        font-family IRANYekan !important
+        color: #000000 !important
+        font-size .9em !important
+        font-weight normal !important
+        font-style normal !important
+
+
 </style>
