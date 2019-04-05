@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="col-lg-11 col-md-10 col-sm-8 col-xs-12 container-fluid"
-             style="box-sizing: content-box; max-width: 1600px">
+             style="box-sizing: content-box; max-width: 1600px; overflow-x: scroll; overflow-y: hidden">
 
             <p class="title">حساب کاربری</p>
 
@@ -114,7 +114,9 @@
 <script>
     import FInput from "~/components/elements/input";
     import FButton from "~/components/elements/button";
-    import ProfilePlan from "../../../components/Dashboard/profile/profile-plan";
+    import ProfilePlan from "~/components/Dashboard/profile/profile-plan";
+    import ProfileWallet from "~/components/Dashboard/profile/profile-wallet";
+    import ProfileTransactions from "~/components/Dashboard/profile/profile-transaction";
     import File from "~/components/elements/file";
     import {formData} from "~/utils/formData";
     import ProgressBar from "~/components/Dashboard/progress-bar";
@@ -134,7 +136,9 @@
             ProgressBar,
             FLabelDisable,
             FCheckbox,
-            ProfilePlan
+            ProfilePlan,
+            ProfileWallet,
+            ProfileTransactions
         },
         data() {
             return {
@@ -272,14 +276,16 @@
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         background-color #ffffff
         margin-top 5px
+        display block
         margin-bottom 5px
         white-space nowrap
-        overflow scroll
+        overflow-x scroll
+        overflow-y hidden
 
         div.disabled
-            display inline-block
+            display inline-flex
             padding 0
-            margin-right -1px
+            margin-left -5px
             cursor pointer
 
             p
@@ -297,7 +303,7 @@
                 color #000000
 
         div.enabled
-            display inline-block
+            display inline-flex
             padding 0
             margin-right -1px
             background-color #2979ff
