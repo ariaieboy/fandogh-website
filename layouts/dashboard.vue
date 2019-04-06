@@ -5,11 +5,11 @@
       <f-d-header/>
       <div :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
         <div :class="['wrapper-sidebar', {'open':openSidebar}]">
-          <admin-sidebar/>
+          <admin-sidebar />
         </div>
-        <div :class="['wrapper-main',{'open':openSidebar}]">
+        <div :class="['wrapper-main',{'open':openSidebar}]" :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
           <div class="dash-container">
-            <div class="container-fluid">
+            <div :class="[(isMobile ? '' : 'container-fluid')]">
               <nuxt/>
             </div>
           </div>
@@ -63,7 +63,7 @@ export default {
         this.$store.dispatch("showModal", "message");
       }
       this.$store.commit("SET_DATA", { data: true, id: "loading" });
-      this.$store.commit('SET_DATA', { id: 'isNativeMenus', data: null })
+      this.$store.commit('SET_DATA', { id: 'isNativeMenus', data: null });
       if (this.isMobile) {
         this.$store.commit("SET_DATA", { data: false, id: "sideMunu" });
       }

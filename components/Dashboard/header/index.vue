@@ -67,9 +67,10 @@ export default {
   display flex
   justify-content space-between
   align-items center
+  border-bottom 1px solid $grayMedium
   width 100%
   height 48px
-  background-color $grayLight
+  background-color $totalWhite
   font-size 14px
   &-logo
     padding-right 30px
