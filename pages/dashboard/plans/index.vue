@@ -118,7 +118,7 @@
 
                                     <div v-on:click="decDedicatedVolume" class="man-button" style="margin: 2px 0 0 0">
                                         <img alt="minus"
-                                             src="../../../assets/svg/ic-minus.svg"/>
+                                             src="../../../assets/svg/ic-minus.svg" />
                                     </div>
                                 </div>
 
@@ -166,7 +166,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
                             <div>
-                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg" alt="feature"/>
                                 <p class="title">Load Balancer</p>
                                 <p class="subtitle">رایگان</p>
                             </div>
@@ -177,7 +177,7 @@
                         <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
 
                             <div>
-                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg" alt="feature"/>
                                 <p class="title">پهنای باند</p>
                                 <p class="subtitle">رایگان</p>
                             </div>
@@ -187,7 +187,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
                             <div>
-                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg" alt="feature"/>
                                 <p class="title">گواهی‌نامه SSL</p>
                                 <p class="subtitle">رایگان</p>
                             </div>
@@ -197,7 +197,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
                             <div>
-                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg" alt="feature"/>
                                 <p class="title">Health Check</p>
                                 <p class="subtitle">رایگان</p>
                             </div>
@@ -207,7 +207,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
                             <div>
-                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg" alt="feature"/>
                                 <p class="title">استفاده از رجیستری دلخواه</p>
                                 <p class="subtitle">رایگان</p>
                             </div>
@@ -217,7 +217,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                         <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
                             <div>
-                                <img src="../../../assets/svg/ic-auto-scaling.svg"/>
+                                <img src="../../../assets/svg/ic-auto-scaling.svg" alt="feature"/>
                                 <p class="title">ایمیج رجیستری اختصاصی</p>
                                 <p class="subtitle">رایگان</p>
                             </div>
@@ -229,9 +229,9 @@
 
             <div class="checkout-box container-fluid col-md-3 col-lg-3 col-sm-3 col-xs-12">
 
-                <p style="font-family: IRANYekan; padding: 0 16px; font-size: 15px; text-align: center">
+                <p style="font-family: iran-yekan; padding: 0 16px; font-size: 15px; text-align: center">
                     مبلغ نهایی (تومان):</p>
-                <p style="width: 100%; text-align: center; font-family: 'IRANSans(FaNum)';">{{total}}</p>
+                <p style="width: 100%; text-align: center; font-family: iran-sans;">{{total}}</p>
                 <button @click="pushUrl">
                     ثبت نهایی و پرداخت
                 </button>
@@ -264,7 +264,7 @@
                 },
                 slider: {
                     gradient: 'linear-gradient(to left, #2979ff, #24d5d8)',
-                    font: 'IRANSans(FaNum)',
+                    font: 'iran-sans',
                     height: 17,
                     paddingless: true,
                     memoryMin: 1,
@@ -553,7 +553,7 @@
         width 70%
         height 35px
         direction ltr
-        font-family 'IRANSans(FaNum)'
+        font-family 'iran-sans'
         padding 0 12px
 
         @media only screen and (max-width: 900)

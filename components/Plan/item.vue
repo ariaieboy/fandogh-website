@@ -18,19 +18,19 @@
             <div class="description-box">
 
                 <div>
-                    <img :alt="title" :src="image"/>
+                    <img :alt="title" src="~/assets/svg/ic-storage.svg"/>
                     <p class="title">هارد اختصاصی</p>
                     <p class="value">{{dedicatedVolume}} گیگابایت</p>
                 </div>
 
                 <div>
-                    <img :alt="title" :src="image"/>
+                    <img :alt="title" src="~/assets/svg/ic-memory.svg"/>
                     <p class="title">رم اختصاصی</p>
                     <p class="value">{{memory}} گیگابایت</p>
                 </div>
 
                 <div>
-                    <img :alt="title" :src="image"/>
+                    <img :alt="title" src="~/assets/svg/ic-cpu.svg"/>
                     <p class="title">پردازنده اختصاصی</p>
                     <p class="value">{{cpu}} هسته</p>
                 </div>
@@ -46,12 +46,9 @@
         props: ["icon", "title", "dedicatedVolume", "memory", "cpu"],
         data() {
             return {
-                "auto-scale": require("~/assets/svg/ic-auto-scale.svg"),
-                "cost-effective": require("~/assets/svg/ic-cost-effective.svg"),
-                docker: require("~/assets/svg/ic-docker.svg"),
-                database: require("~/assets/svg/ic-managed-d-bs.svg"),
-                ready: require("~/assets/svg/ic-ready-tg.svg"),
-                highly: require("~/assets/svg/ic-highly-av.svg")
+                "base-plan": require("~/assets/svg/base-plan.svg"),
+                "economy-plan": require("~/assets/svg/economy-plan.svg"),
+                "startup-plan": require("~/assets/svg/startup-plan.svg")
             };
         },
         computed: {

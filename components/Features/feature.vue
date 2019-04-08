@@ -22,9 +22,9 @@ export default {
   props: ["icon", "title", "local_title"],
   data() {
     return {
-      "auto-scale": require("~/assets/svg/ic-auto-scale.svg"),
-      "cost-effective": require("~/assets/svg/ic-cost-effective.svg"),
-      docker: require("~/assets/svg/ic-docker.svg"),
+      "base-plan": require("~/assets/svg/ic-auto-scale.svg"),
+      "economy-plan": require("~/assets/svg/ic-cost-effective.svg"),
+      "startup-plan": require("~/assets/svg/ic-docker.svg"),
       database: require("~/assets/svg/ic-managed-d-bs.svg"),
       ready: require("~/assets/svg/ic-ready-tg.svg"),
       highly: require("~/assets/svg/ic-highly-av.svg")
