@@ -16,7 +16,7 @@
                     <img src="../../../assets/svg/ic-fandogh-mini.svg"
                          style="width: 30%; height: auto; margin-left: auto; margin-right: auto; position:relative; display: block"/>
 
-                    <p style="margin: 16px 0 0 0;text-align: center; font-size: 1.4em; color: #fff; font-family: IRANYekan">
+                    <p style="margin: 16px 0 0 0;text-align: center; font-size: 1.4em; color: #fff; font-family: iran-yekan">
                         فاکتور سرویس ابری</p>
 
                 </div>
@@ -39,10 +39,10 @@
                      style="margin: auto;">
 
                     <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: center">
-                        <span style="font-family: IRANYekan; font-size: 1em; color: #fff;">تاریخ:</span>
+                        <span style="font-family: iran-yekan; font-size: 1em; color: #fff;">تاریخ:</span>
                         ۱۲/۱۲/۱۳۹۷ </p>
                     <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: center">
-                        <span style="font-family: IRANYekan; font-size: 1em; color: #fff;">ساعت:</span>
+                        <span style="font-family: iran-yekan; font-size: 1em; color: #fff;">ساعت:</span>
                         ۲۰:۳۱ </p>
 
                 </div>
@@ -51,7 +51,7 @@
 
 
             <div class="col-xs-12 col-sm-11 col-md-10 col-lg-10 container-fluid" style="box-sizing: content-box; margin-top: 32px; margin-bottom: 32px;">
-                <p style="font-size: 0.9em; font-family: IRANYekan; color: #000000;">این فاکتور به درخواست شما برای ثبت سفارش یک سرویس ابری به مشخصات زیر صادر شده است:</p>
+                <p style="font-size: 0.9em; font-family: iran-yekan; color: #000000;">این فاکتور به درخواست شما برای ثبت سفارش یک سرویس ابری به مشخصات زیر صادر شده است:</p>
 
                 <div style="box-sizing: content-box; margin-top: 32px">
 
@@ -76,7 +76,7 @@
 
                 <div class="row" style="margin-top: 16px">
                     <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6" style="text-align: left; padding-left: 48px; font-size: 0.9em">مجموع کل:
-                        <span style="font-family: 'IRANYekanMobile(FaNum)'; font-size: 1em; color: #222">{{invoice.total}} تومان</span></p>
+                        <span style="font-family: iran-sans; font-size: 1em; color: #222">{{invoice.total}} تومان</span></p>
                     <!--<p class="col-xs-12 col-md-6 col-sm-6 col-lg-6" style="padding-right: 48px; font-size: 0.9em">تاریخ انقضا سرویس:-->
                     <!--<span style="font-family: 'IRANYekanMobile(FaNum)'; font-size: 1em; color: #222">{{invoice.created_at}}</span></p>-->
                 </div>
@@ -88,7 +88,7 @@
 
             <div style="box-sizing: content-box; margin-top: 32px; padding-right: 32px; padding-left: 32px">
 
-                <p style="font-family: IRANYekan; font-size: 0.8em; text-align: right; color: #4a90e2; letter-spacing: normal;">
+                <p style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #4a90e2; letter-spacing: normal;">
                     در صورت ادامه و تایید شما با تمام جزئیات مطرح شده در فاکتور صادره شده موافق بوده و سکو ابری فندق هیچ مسئولیتی
                     در قبال مشکلات احتمالی ناشی از اشتباه کاربر در بررسی صحت و درستی فاکتور را ندارد.<br>
                     همچنین شما حداقل تا یک ماه نمی‌توانید پلن انتخاب شده را تنزل داده و از منابع آن کم کنید.
@@ -100,7 +100,7 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row" style="margin-top: 32px; white-space: nowrap">
                 <button class="col-xs-12 col-sm-5 col-md-5 col-lg-3 container-fluid"
                         style="height: 40px; border-radius: 3px;box-shadow: 0 2px 6px 0 rgba(126, 211, 33, 0.42);
-                        font-size: 0.9em;font-family: IRANYekan;color: #fff;text-align: center;
+                        font-size: 0.9em;font-family: iran-yekan;color: #fff;text-align: center;
                 border: none;outline: none;background-color: #7ed321;"
 
                         @click="pay"
@@ -112,7 +112,7 @@
 
                 <button @click="$router.push('/dashboard/plans')" class="col-xs-12 col-sm-5 col-md-5 col-lg-3 container-fluid"
                         style="height: 40px; float: right;box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07);
-                        font-size: 0.9em;font-family: IRANYekan;color: #000;text-align: center;
+                        font-size: 0.9em;font-family: iran-yekan;color: #000;text-align: center;
                         background-color: #ffffff;border: none; outline: none; border-radius: 3px;">
                     ویرایش سفارش
                 </button>
