@@ -21,27 +21,27 @@
 
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+                <div class="col-lg-5 col-md-5 col-sm-4 col-xs-4"
                      style="margin:auto;">
 
-                    <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: center">
-                        <span style="font-family: IRANYekan; font-size: 1em; color: #fff;">صادر کننده:</span> سکو ابری فندق</p>
+                    <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: right">
+                        <span style="font-family: iran-yekan; font-size: 1em; color: #fff;">صادر کننده:</span> سکو ابری فندق</p>
 
-                    <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: center">
-                        <span style="font-family: IRANYekan; font-size: 1em; color: #fff;">سفارش دهنده:</span> Botick</p>
+                    <p style="font-family: yekan-light; letter-spacing: 0.05em; font-size: 0.8em; color: #fff; text-align: right">
+                        <span style="font-family: iran-yekan; font-size: 1em; color: #fff;">سفارش دهنده:</span> {{username}}</p>
 
-                    <p style="font-family: 'yekan-light'; font-size: 0.8em; color: #fff; text-align: center">
-                        <span style="font-family: IRANYekan; font-size: 1em; color: #fff;">شماره سفارش:</span> 1234-xxWY-T12GH-2345</p>
+                    <p style="font-family: 'yekan-light'; font-size: 0.8em; color: #fff; text-align: right">
+                        <span style="font-family: iran-yekan; font-size: 1em; color: #fff;padding-left: 6px;">شماره سفارش:</span>{{invoice.id}}</p>
 
                 </div>
 
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4"
                      style="margin: auto;">
 
-                    <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: center">
+                    <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: right">
                         <span style="font-family: iran-yekan; font-size: 1em; color: #fff;">تاریخ:</span>
                         ۱۲/۱۲/۱۳۹۷ </p>
-                    <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: center">
+                    <p style="font-family: yekan-light; font-size: 0.8em; color: #fff; text-align: right">
                         <span style="font-family: iran-yekan; font-size: 1em; color: #fff;">ساعت:</span>
                         ۲۰:۳۱ </p>
 
@@ -137,6 +137,7 @@
             console.log(this.$store.state.plan.requestedPlan);
             return {
                 invoice: this.$store.state.plan.requestedPlan.invoice,
+                onCreatePage: true,
             };
         },
         methods: {
@@ -145,6 +146,8 @@
                 await this.$store.dispatch('plan/requestPayment', invoiceId);
                 console.log(this.$store.state.plan.requestedPayment);
                 window.location = this.$store.state.plan.requestedPayment.payment_url;
+            }, alertUser(){
+                alert("why")
             }
         },
         destroyed() {
@@ -167,20 +170,11 @@
             },
             plan() {
                 return this.$store.state.plan.plans[this.index];
-            },
-            addTaxToPrice: function () {
-                const price = parseInt(0);
-                if (price === 0) return "رایگان";
-                const tax = Math.ceil(9 * price) / 100;
-                const taxedPrice = tax + price;
-                return `مبلغ قابل پرداخت ${taxedPrice.toLocaleString("fa-EG")} تومان`;
-            },
-            tax: function () {
-                const price = parseInt(0);
-                if (price === 0) return "رایگان";
-                const finalPrice = Math.ceil(9 * price) / 100;
-                return `${finalPrice.toLocaleString("fa-EG")} تومان`;
             }
+        },created() {
+            window.addEventListener('beforeunload', () =>{
+                return 'Are you sure you want to leave?!';
+            })
         }
     };
 </script>
