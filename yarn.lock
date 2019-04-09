@@ -943,12 +943,12 @@
     consola "^2.3.0"
     fs-extra "^7.0.1"
     lru-cache "^4.1.3"
-    vue "^2.6.10"
+    vue "^2.5.17"
     vue-meta "^1.5.6"
     vue-no-ssr "^1.1.0"
     vue-router "^3.0.2"
-    vue-server-renderer "^2.6.10"
-    vue-template-compiler "^2.6.10"
+    vue-server-renderer "^2.5.17"
+    vue-template-compiler "^2.5.17"
     vuex "^3.0.1"
 
 "@nuxt/webpack@2.3.4":
@@ -7352,6 +7352,10 @@ vue-chartjs@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-3.4.0.tgz#669e4453be0676605fc9290b3b581867ccd15c88"
 
+vue-class-component@^7.0.1:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.0.2.tgz#c5f35a91c0e9341532392b84d606a84911fb13bc"
+
 vue-functional-data-merge@^2.0.5:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/vue-functional-data-merge/-/vue-functional-data-merge-2.0.7.tgz#bdee655181eacdcb1f96ce95a4cc14e75313d1da"
@@ -7394,6 +7398,12 @@ vue-no-ssr@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/vue-no-ssr/-/vue-no-ssr-1.1.0.tgz#b323807112f676324d9d7cfde85d7831ced11dd9"
 
+vue-property-decorator@^8.0.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/vue-property-decorator/-/vue-property-decorator-8.1.0.tgz#66493a5350e7f643e852e7698ec2c883554daa79"
+  dependencies:
+    vue-class-component "^7.0.1"
+
 vue-router@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
@@ -7402,7 +7412,7 @@ vue-select@^2.5.1:
   version "2.5.1"
   resolved "https://registry.yarnpkg.com/vue-select/-/vue-select-2.5.1.tgz#9886e7123150a52dc8dbfe3202d0387268835aaa"
 
-vue-server-renderer@^2.6.10:
+vue-server-renderer@^2.5.17:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue-server-renderer/-/vue-server-renderer-2.6.10.tgz#cb2558842ead360ae2ec1f3719b75564a805b375"
   dependencies:
@@ -7421,6 +7431,12 @@ vue-slide-bar@^1.1.9:
   dependencies:
     vue "^2.5.2"
 
+vue-slider-component@^3.0.26:
+  version "3.0.26"
+  resolved "https://registry.yarnpkg.com/vue-slider-component/-/vue-slider-component-3.0.26.tgz#0d649c252fc7f5e5b859f39900e33aa5e06d3f56"
+  dependencies:
+    vue-property-decorator "^8.0.0"
+
 vue-style-loader@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
@@ -7428,7 +7444,7 @@ vue-style-loader@^4.1.0:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
-vue-template-compiler@^2.6.10:
+vue-template-compiler@^2.5.17:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.10.tgz#323b4f3495f04faa3503337a82f5d6507799c9cc"
   dependencies:
@@ -7446,7 +7462,7 @@ vue2-google-maps@^0.10.0:
     babel-runtime "^5.8.0"
     marker-clusterer-plus "^2.1.4"
 
-vue@^2.5.2, vue@^2.6.10:
+vue@^2.5.17, vue@^2.5.2, vue@^2.6.10:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
 

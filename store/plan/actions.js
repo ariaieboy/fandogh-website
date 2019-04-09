@@ -25,6 +25,14 @@ export const requestPlan = async ({commit, state}, {memory, dedicatedVolume}) =>
     }
 };
 
+export const reloadPlan = async ({commit, state}, invoiceId) => {
+    try {
+        return await Request().get(`/api/plans/${invoiceId}`);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 
 export const requestPayment = async ({commit, state}, invoiceId) => {
     try {

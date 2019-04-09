@@ -34,9 +34,9 @@
     "vue-chartjs": "^3.4.0",
     "vue-good-table": "^2.16.0",
     "vue-select": "^2.5.1",
-    "vue-slide-bar": "^1.1.9",
     "vue2-google-maps": "^0.10.0",
-    "vuebar": "^0.0.20"
+    "vuebar": "^0.0.20",
+    "vue-slider-component": "^3.0.26"
   },
   "devDependencies": {
     "backpack-core": "^0.7.0",

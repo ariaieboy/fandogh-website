@@ -1,12 +1,12 @@
 <template>
-    <div style="width: 100%; border-radius: 3px; background-color: rgba(41, 121, 255, 0.3); margin: 10px 0 0 0; padding: 2px 0">
-        <table style="width: 100%;border: none; border-collapse: collapse; margin: 6px 0">
+    <div style="width: 100%; border-radius: 3px; background-color: rgba(41, 121, 255, 0.3); margin: 10px 0 0 0; padding: 2px 0; overflow-x: scroll">
+        <table style="width: 100%; min-width: 900px; border: none; border-collapse: collapse; margin: 6px 0">
             <tr class="data">
                 <td width="26%">{{bill.local_name}}</td>
                 <td class="number" width="17%">{{bill.quantity}}</td>
                 <td width="17%">{{bill.local_unit}}</td>
-                <td class="number" width="20%">{{bill.unit_price}}</td>
-                <td class="number" width="20%">{{bill.total_price}}</td>
+                <td class="number" width="20%">{{bill.unit_price.toLocaleString()}}</td>
+                <td class="number" width="20%">{{bill.total_price.toLocaleString()}}</td>
             </tr>
         </table>
 
@@ -27,18 +27,19 @@
         border-collapse collapse
 
     tr.data td
-        font-family IRANYekan
-        font-size 12px
+        font-family iran-yekan
+        font-size .8em
         line-height 20px
         color #000000
         text-align center
         border-left 2px solid #fff
 
     tr.data td.number
-        font-family 'IRANYekanMobile(FaNum)'
-        font-size 14px
+        font-family iran-sans
+        font-size .8em
         line-height 20px
         color #000000
+        direction ltr
         text-align center
         border-left 2px solid #fff
 
