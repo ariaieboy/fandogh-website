@@ -287,6 +287,16 @@ export const getNameSpace = async ({commit, state}, namespace) => {
     }
 };
 
+export const requestUserNamespaces = async ({commit, state}) => {
+    try {
+        let res = await Request().get(`/api/users/namespaces`);
+        commit("SET_DATA", {id: "namespaces", data: res});
+        return res;
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 
 export const getMetric = async ({commit, state}, metric) => {
     try {

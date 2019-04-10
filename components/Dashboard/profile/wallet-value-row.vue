@@ -30,7 +30,7 @@
         border none
 
     tr.head td
-        font-family IRANYekan
+        font-family iran-yekan
         font-size .8em
         line-height 25px
         font-weight normal
@@ -40,7 +40,7 @@
         border-left 1px solid #adadad
 
     tr.head td.number
-        font-family 'IRANYekanMobile(FaNum)'
+        font-family iran-sans
         font-size .8em
         line-height 20px
         color #000000

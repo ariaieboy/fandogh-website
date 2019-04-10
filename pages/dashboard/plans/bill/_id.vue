@@ -1,20 +1,20 @@
 <template>
     <div v-if="!loading">
-        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 container-fluid"
-             style="max-width: 1500px; margin-top: 32px">
+        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 container-fluid"
+             style="margin-top: 32px">
 
             <nuxt-child/>
 
             <div class="col-xs-12 col-sm-11 col-md-10 col-lg-10 container-fluid"
                  style="border-radius: 3px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); background-color: #ffffff;
-                    box-sizing: content-box; padding: 0">
+                    box-sizing: content-box; padding: 0; max-width: 1700px">
 
                 <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width: 100%;height: content-box;
             background-color: #2979ff;margin: 0; border-top-left-radius: 3px;
-                    border-top-right-radius: 3px; padding-left: 16px; padding-right: 16px; display: inline-flex">
+                    border-top-right-radius: 3px; padding: 16px; display: inline-flex">
 
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
-                         style="display: block;margin: 0; padding-top: 16px; padding-bottom: 16px;">
+                         style="display: block;margin: 0;">
 
                         <img src="../../../../assets/svg/ic-fandogh-mini.svg"
                              style="width: 30%; height: auto; margin-left: auto; margin-right: auto; position:relative; display: block"/>
@@ -27,30 +27,35 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
                          style="margin:auto;">
 
-                        <p style="font-family: yekan-light; font-size: 1em; color: #fff; text-align: right">
-                            <span style="font-family: iran-yekan; font-size: 1.2em; color: #fff;">صادر کننده:</span> سکو
+                        <p style="margin: 5px 0 0 0; font-family: iran-yekan; font-size: 1em; color: #fff; text-align: right">
+                            <span style="font-family: iran-yekan; font-size: 1.1em; color: #fff;">صادر کننده:</span> سکو
                             ابری
                             فندق</p>
 
-                        <p style="font-family: yekan-light; letter-spacing: 0.05em; font-size: 1em; color: #fff; text-align: right">
-                            <span style="font-family: iran-yekan; font-size: 1.2em; color: #fff;">سفارش دهنده:</span>
+                        <p style="margin: 5px 0 0 0; font-family: iran-yekan; letter-spacing: 0.05em; font-size: 1em; color: #fff; text-align: right">
+                            <span style="font-family: iran-yekan; font-size: 1.1em; color: #fff;">سفارش دهنده:</span>
                             {{username}}</p>
 
-                        <p style="font-family: 'yekan-light'; font-size: 1em; color: #fff; text-align: right">
-                            <span style="font-family: iran-yekan; font-size: 1.2em; color: #fff;padding-left: 6px;">شماره سفارش:</span>{{invoice.id}}
-                        </p>
+                        <p style="margin: 5px 0 0 0; font-family: iran-yekan; letter-spacing: 0.05em; font-size: 1em; color: #fff; text-align: right">
+                            <span style="font-family: iran-yekan; font-size: 1.1em; color: #fff;">فضانام:</span>
+                            {{namespace}}</p>
 
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
                          style="margin: auto;">
 
-                        <p style="font-family: iran-sans; font-size: 1em; color: #fff; text-align: right">
-                            <span style="font-family: iran-yekan; font-size: 1.2em; color: #fff;">تاریخ:</span>
-                            {{date}} </p>
-                        <p style="font-family: iran-sans; font-size: 1em; color: #fff; text-align: right">
-                            <span style="font-family: iran-yekan; font-size: 1.2em; color: #fff;">ساعت:</span>
-                            {{time}} </p>
+                        <p style="margin: 5px 0 0 0; font-family: iran-yekan; font-size: 1.1em; color: #fff; text-align: right">
+                            شماره سفارش: <span
+                                style="font-family: iran-sans; font-size: .8em; color: #fff;padding-left: 6px;">{{invoice.id}}</span>
+                        </p>
+
+                        <p style="margin: 5px 0 0 0; font-family: iran-yekan; font-weight: normal; font-size: 1.1em; color: #fff; text-align: right">
+                            تاریخ: <span style="font-family: iran-sans; font-size: .8em; color: #fff;">{{date}}</span>
+                        </p>
+                        <p style="margin: 5px 0 0 0; font-family: iran-yekan; font-weight: normal; font-size: 1.1em; color: #fff; text-align: right">
+                            ساعت: <span style="font-family: iran-sans; font-size: .8em; color: #fff;">{{time}}</span>
+                        </p>
 
                     </div>
 
@@ -84,10 +89,13 @@
 
                     </div>
 
-                    <div class="row" style="margin-top: 16px">
+                    <div class="row"
+                         style="height: 1px; background-color: #7c7c7c;box-sizing: content-box; margin-top: 16px"></div>
+
+                    <div class="row">
                         <p class="col-xs-12 col-md-12 col-sm-12 col-lg-12"
-                           style="text-align: center; font-size: 0.9em; color: #000;">
-                            مجموع کل: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{Number(invoice.total).toLocaleString()}} تومان</span>
+                           style="text-align: center; font-size: 0.9em; color: #000;display: inline-block">
+                            مبلغ قابل پرداخت: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{Number(invoice.total).toLocaleString()}} تومان</span>
                         </p>
                     </div>
 
@@ -113,7 +121,8 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row action-container">
                     <button class="col-xs-12 col-sm-5 col-md-5 col-lg-3 container-fluid"
                             style="color: #fff; background-color: #7ed321; box-shadow: 0 2px 6px 0 rgba(126, 211, 33, 0.42);"
-                            @click="pay">تایید و پرداخت</button>
+                            @click="pay">تایید و پرداخت
+                    </button>
 
                     <button @click="$router.push('/dashboard/plans')"
                             class="col-xs-12 col-sm-5 col-md-5 col-lg-3 container-fluid"
@@ -141,13 +150,14 @@
             FButton,
             Moment
         },
-        layout: "land",
+        layout: "dashboard",
         data() {
             return {
                 invoice: {},
                 invoice_id: this.$route.params.id,
+                items: [],
                 jDate: '',
-                jTime: ''
+                jTime: '',
             };
         },
         methods: {
@@ -162,8 +172,10 @@
                 console.log('hellooooooooo!');
                 console.log(response.invoice);
                 this.invoice = response.invoice;
+                this.items = response.invoice.items
                 console.log(this.invoice);
                 this.$store.commit("SET_DATA", {data: false, id: "loading"});
+
             }
         },
         destroyed() {
@@ -192,6 +204,14 @@
             },
             time() {
                 return Moment(this.invoice.created_at).format('HH:mm');
+            },
+            diff() {
+                for (let i = 0; i < this.items.length; i++) {
+                    if (this.items[i].total_price < 0) {
+                        return this.items[i].total_price;
+                    }
+                }
+                return 0;
             }
         }, created() {
             this.requestInvoice();
@@ -200,6 +220,11 @@
 </script>
 
 <style lang="stylus" scoped>
+
+    *::-webkit-scrollbar
+        width 0
+        height 0
+        background transparent
 
 
     tr.head

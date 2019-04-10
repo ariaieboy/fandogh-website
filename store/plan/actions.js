@@ -1,6 +1,6 @@
 import Request from "~/plugins/request";
 
-export const getPlans = async ({commit, state}, namespace) => {
+export const requestActivePlan = async ({commit, state}, namespace) => {
     try {
         let res = await Request().get(`/api/users/namespaces/${namespace}`);
         commit("SET_DATA", {id: "activePlan", data: res});

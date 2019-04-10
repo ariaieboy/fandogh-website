@@ -11,19 +11,14 @@
                 <img v-if="successful" class="payment-image" src="../../../assets/svg/payment-ok.svg" alt="payment-ok"/>
                 <img v-else class="payment-image" src="../../../assets/svg/payment-error.svg" alt="payment-error"/>
 
-                <p v-if="successful" style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت
-                    موفقیت
-                    آمیز بود</p>
-                <p v-else style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت با مشکل مواجه
-                    شده است!</p>
+                <p v-if="successful" style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت موفقیت آمیز بود</p>
+                <p v-else style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت با مشکل مواجه شد!</p>
 
-                <button v-if="successful" class="pay-button">
-                    اتمام پرداخت
-                </button>
+                <button v-if="successful" class="pay-button"
+                        style="box-shadow: 0 3px 6px 0 rgba(60, 204, 56, 0.42); background-color: #3ccc38;"
+                        @click="moveToProfile">اتمام پرداخت</button>
 
-                <button v-else class="pay-button">
-                    بازگشت
-                </button>
+                <button v-else class="pay-button" @click="moveToPlanPage">بازگشت</button>
 
             </div>
 
@@ -48,7 +43,7 @@
             }
 
         },
-        computed:{
+        computed: {
             loading() {
                 return this.$store.state.loading;
             }
@@ -70,9 +65,10 @@
                     this.showModal = true;
                     this.successful = true;
 
-
                 } catch (e) {
+
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
+
                     if (e.status === 400) {
                         this.showModal = true;
                         this.successful = false;
@@ -88,6 +84,11 @@
                         });
                     }
                 }
+            }, moveToPlanPage() {
+                this.$router.push("/dashboard/plans")
+
+            }, moveToProfile() {
+                this.$router.push("/dashboard/account")
             }
         }
     }
@@ -113,7 +114,7 @@
         outline none
         background-color #DB0A6C
         color white
-        font-family IRANYekan
+        font-family iran-yekan
         font-size 0.9em
         cursor pointer
         box-shadow 0 3px 6px 0 rgba(219, 10, 108, 0.42)

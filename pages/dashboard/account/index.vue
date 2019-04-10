@@ -16,11 +16,11 @@
 
                     <div style="min-height: 3em;">
                         <p class="profile-entity-title">نام و نام‌خانوادگی:</p>
-                        <p class="profile-entity-value">سورنا سرآبادانی</p>
+                        <p class="profile-entity-value">{{account.first_name}}</p>
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">شماره ملی:</p>
-                        <p class="profile-entity-value">۱۱۲۳۴۵۰۹۵۶</p>
+                        <p class="profile-entity-value">{{account.national_id}}</p>
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">تاریخ عضویت:</p>
@@ -30,10 +30,11 @@
                         <p class="profile-entity-title" style="display: inline-block">نام فضانام:</p>
                         <v-select
                                 style="display: inline-block"
-                                :options=namespaces
+                                :options="namespaces"
                                 :clearable="false"
                                 :searchable="false"
-                                :value="namespaces[0]"
+                                label="name"
+                                v-model="activatedNamespace"
                                 placeholder="نام ایمیج را انتخاب کنید">
                         </v-select>
                     </div>
@@ -60,7 +61,7 @@
 
                     <div class="row">
                         <button @click="accountEdit" class="container-fluid left" style="border-radius: 17.5px; width: 200px; height: 35px;
-  background-color: #7ed321;color: #ffffff;font-family: IRANYekan;font-size: 14px;border: none;outline: none; cursor: pointer">
+  background-color: #7ed321;color: #ffffff;font-family: iran-yekan;font-size: 14px;border: none;outline: none; cursor: pointer">
                             ویرایش اطلاعات کاربری
                         </button>
                     </div>
@@ -74,23 +75,25 @@
                     <p :style="{borderLeft: '1px solid #2979ff'}">پلن من</p>
                 </div>
 
-                <div @click="sectionClicked('ProfileWallet')"
-                     :class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>
-                </div>
+                <!--<div @click="sectionClicked('ProfileWallet')"-->
+                <!--:class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">-->
+                <!--<p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>-->
+                <!--</div>-->
 
                 <div @click="sectionClicked('ProfileTransactions')"
                      :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
                     <p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>
                 </div>
 
-                <div @click="sectionClicked('ProfileMessages')"
-                     :class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">
-                    <p>پیام‌های من</p>
-                </div>
+                <!--<div @click="sectionClicked('ProfileMessages')"-->
+                <!--:class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">-->
+                <!--<p>پیام‌های من</p>-->
+                <!--</div>-->
             </div>
 
-            <component v-bind:is="activeSectionName"></component>
+            <keep-alive>
+                <component v-bind:is="activeSectionName"></component>
+            </keep-alive>
 
         </div>
 
@@ -131,7 +134,7 @@
     import FormValidator from "~/utils/formValidator";
     import FLabelDisable from "~/components/elements/label/label-disable";
     import FCheckbox from "~/components/elements/checkbox";
-    import {getValue} from "~/utils/cookie";
+    import {removeValue, setValue, getValue} from "../../../utils/cookie";
 
     export default {
         layout: "dashboard",
@@ -149,21 +152,28 @@
         },
         data() {
             return {
-                // account: {
-                //   username: "Ramin",
-                //   name: "رامین",
-                //   email: "Ramin.esmaeili91@yahoo.com",
-                //   last_name: "اسماعیلی",
-                //   code: "۰۰۱۱۴۶۵۸۲۹۸۷",
-                //   news: false
-                // },
                 loading: false,
                 loadingProgress: false,
                 activeSectionName: 'ProfilePlan',
-                namespaces:['sorena', 'sorena-namespace', 'namespace']
+                namespaces: [],
+                activeNamespace: {},
             };
         },
         computed: {
+            activatedNamespace: {
+                get: function () {
+                    return this.activeNamespace;
+                }, set: function (namespace) {
+                    console.log(namespace.name);
+                    if (namespace.hasOwnProperty('name')) {
+                        if (getValue('namespace') !== namespace.name) {
+                            setValue({key: 'namespace', value: namespace.name});
+                            window.location.reload();
+                        }
+                    }
+
+                }
+            },
             openSidebar() {
                 return this.$store.state.sideMunu
             },
@@ -178,6 +188,9 @@
             },
             username() {
                 return getValue("username");
+            },
+            namespace() {
+                return getValue('namespace')
             }
         },
 
@@ -189,8 +202,19 @@
         },
         created() {
             this.getData();
+            console.log(this.fetchUserNamespaces());
         },
         methods: {
+            async fetchUserNamespaces() {
+                this.namespaces.length = 0;
+                this.namespaces = await this.$store.dispatch('requestUserNamespaces');
+                for (let i = 0; i < this.namespaces.length; i++) {
+                    if (this.namespaces[i].name === this.namespace) {
+                        this.activeNamespace = this.namespaces[i];
+                        break;
+                    }
+                }
+            },
             async getData() {
                 try {
                     let res = await this.$store.dispatch("getAccount", {
@@ -238,7 +262,7 @@
                 margin-bottom 15px
 
     .title
-        font-family IRANYekan
+        font-family iran-yekan
         font-style normal
         font-size 1.1em
         font-stretch normal
@@ -259,7 +283,7 @@
         color #111111
 
     .profile-entity-value
-        font-family IRANYekan
+        font-family iran-yekan
         font-size .9em
         display inline-block
         text-align right
@@ -303,7 +327,7 @@
                 line-height 24px
                 margin-top 8px
                 text-align center
-                font-family IRANYekan
+                font-family iran-yekan
                 font-size .9em
                 outline none
                 margin-bottom 8px
@@ -351,7 +375,7 @@
         direction rtl !important
 
     .v-select .selected-tag
-        font-family IRANYekan !important
+        font-family iran-yekan !important
         color: #000000 !important
         font-size .9em !important
         font-weight normal !important

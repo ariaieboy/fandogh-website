@@ -82,7 +82,7 @@
                             </div>
 
                             <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                               style="margin: 0;color: #3ccc38; font-size: 9px">
+                               style="margin: 0;color: #3ccc38; font-size: 11px">
                                 هزینه هر گیگابایت رم ۶۰ هزارتومان است</p>
                         </div>
 
@@ -145,7 +145,7 @@
                                 حداقل میزان فضای قابل سفارش ۱۰ گیگابایت می‌باشد!</p>
 
                             <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                               style="margin: 16px 0 0 0;color: #3ccc38; font-size: 9px">
+                               style="margin: 16px 0 0 0;color: #3ccc38; font-size: 11px">
                                 هزینه هر گیگابایت هارد اختصاصی ۱۲۰۰ تومان است</p>
 
                         </div>
@@ -171,13 +171,13 @@
 
             <div class="checkout-box container-fluid col-md-3 col-lg-3 col-sm-3 col-xs-12">
 
-                <div>
+                <div v-if="memory >= 1 || planData.memory > 0">
                     <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">میزان رم:
-                        <span style="font-family: iran-sans; color: #2979ff" v-if="memory > 0">{{memory}} گیگ</span>
+                        <span style="font-family: iran-sans; color: #2979ff" v-if="memory >= 1">{{memory}} گیگ</span>
                         <span v-if="memory >= 1 && planData.memory > 0">+</span>
                         <span style="font-family: iran-sans; font-weight: normal">{{planData.memory}} گیگ</span></p>
                 </div>
-                <div v-if="planData.dedicatedVolume >= 10 | dedicatedVolume > 10">
+                <div v-if="planData.dedicatedVolume >= 10 || dedicatedVolume > 10">
                     <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">هارد اختصاصی:
                         <span style="font-family: iran-sans; color: #2979ff" v-if="dedicatedVolume > 0">{{dedicatedVolume}} گیگ </span>
                         <span v-if="dedicatedVolume >= 10 && planData.dedicatedVolume > 0">+</span>
@@ -366,6 +366,15 @@
                 if (this.planData.dedicatedVolume >= 10) {
                     this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
+                if(this.quota !== null){
+                    if(this.quota.memory_limit/1024 >= 1){
+                        this.finalBill.memory += this.quota.memory_limit / 1024;
+                    }
+
+                    if(this.quota.volume_limit > 0){
+                        this.finalBill.dedicatedVolume += this.quota.volume_limit;
+                    }
+                }
 
                 return this.finalBill;
             },
@@ -402,6 +411,7 @@
 
 
 <style lang="stylus" scoped>
+
 
     .service-plan-heading
         font-family: iran-yekan

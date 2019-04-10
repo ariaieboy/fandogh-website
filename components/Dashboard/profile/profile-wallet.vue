@@ -1,19 +1,19 @@
 <template>
     <div style="padding-bottom: 32px">
 
-        <div class="box-row row">
-            <div class="col-lg-10 col-md-9 col-sm-8 col-xs-8 row" style="box-sizing: content-box">
-                <p class="title">موجودی حساب کیف پول:</p>
-                <p class="value">۱۲۳٬۰۰۰ تومان</p>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 row" style="box-sizing: content-box">
-                <button class="edit-button">
-                    افزایش موجودی
-                </button>
-            </div>
-        </div>
+        <!--<div class="box-row row">-->
+            <!--<div class="col-lg-10 col-md-9 col-sm-8 col-xs-8 row" style="box-sizing: content-box">-->
+                <!--<p class="title">موجودی حساب کیف پول:</p>-->
+                <!--<p class="value">۱۲۳٬۰۰۰ تومان</p>-->
+            <!--</div>-->
+            <!--<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 row" style="box-sizing: content-box">-->
+                <!--<button class="edit-button">-->
+                    <!--افزایش موجودی-->
+                <!--</button>-->
+            <!--</div>-->
+        <!--</div>-->
 
-        <p class="section-title">تاریخچه شارژ کیف‌پول شما:</p>
+        <!--<p class="section-title">تاریخچه شارژ کیف‌پول شما:</p>-->
 
         <TitleRow v-bind:celSpec="rowTitle"></TitleRow>
 
@@ -224,7 +224,7 @@
             color: #000000;
 
         p.value
-            font-family: IRANYekan;
+            font-family: iran-yekan;
             font-size: .8em;
             font-style: normal;
             font-stretch: normal;
@@ -243,7 +243,7 @@
         height 30px
         background-color #7ed321
         color #ffffff
-        font-family IRANYekan
+        font-family iran-yekan
         display block
         font-size 0.7em
         border none
@@ -322,7 +322,7 @@
                 width 6px
 
     .page-inactive
-        font-family 'IRANYekanMobile(FaNum)'
+        font-family iran-sans
         line-height 35px
         font-size 16px
         color #7c7c7c
@@ -335,7 +335,7 @@
         direction ltr
 
     .page-active
-        font-family 'IRANYekanMobile(FaNum)'
+        font-family iran-sans
         line-height 35px
         font-size 17px
         margin auto
