@@ -220,6 +220,9 @@
                     let res = await this.$store.dispatch("getAccount", {
                         username: getValue("username")
                     });
+                    console.log('index');
+                    console.log(res);
+
                     if (res.newsletter_subscriber) {
                         let elm = document.querySelector("#newsletter_subscriber");
                         elm.click();
@@ -303,7 +306,7 @@
         background-color #ffffff
 
     .box-row
-        height 40px
+        height fit-content
         border-radius 3px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         background-color #ffffff
