@@ -67,7 +67,11 @@
                                 </div>
 
                                 <label class="feature-label">
-                                    <input class="input" value="planData.memory" v-model="planData.memory">
+                                    <input
+                                            disabled
+                                            class="input"
+                                            value="planData.memory"
+                                            v-model="planData.memory">
                                     گیگابایت
                                 </label>
                             </div>
@@ -91,7 +95,7 @@
 
                 <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 plan-feature-title">
 
-                    <h3 class="customization-title">هارد اختصاصی</h3>
+                    <h3 class="customization-title">حافظه ذخیره‌سازی</h3>
                     <div></div>
 
                 </div>
@@ -123,7 +127,10 @@
                                 </div>
 
                                 <label class="feature-label">
-                                    <input class="input" value="planData.dedicatedVolume"
+                                    <input class="input"
+                                           type="number"
+                                           disabled
+                                           value="planData.dedicatedVolume"
                                            v-model="planData.dedicatedVolume">
                                     گیگابایت
                                 </label>
@@ -146,7 +153,7 @@
 
                             <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
                                style="margin: 16px 0 0 0;color: #3ccc38; font-size: 11px">
-                                هزینه هر گیگابایت هارد اختصاصی ۱۲۰۰ تومان است</p>
+                                هزینه هر گیگابایت حافظه ذخیره‌سازی ۱۲۰۰ تومان است</p>
 
                         </div>
 
@@ -172,16 +179,19 @@
             <div class="checkout-box container-fluid col-md-3 col-lg-3 col-sm-3 col-xs-12">
 
                 <div v-if="memory >= 1 || planData.memory > 0">
-                    <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">میزان رم:
+                    <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">
+                        میزان رم:
                         <span style="font-family: iran-sans; color: #2979ff" v-if="memory >= 1">{{memory}} گیگ</span>
                         <span v-if="memory >= 1 && planData.memory > 0">+</span>
                         <span style="font-family: iran-sans; font-weight: normal">{{planData.memory}} گیگ</span></p>
                 </div>
-                <div v-if="planData.dedicatedVolume >= 10 || dedicatedVolume > 10">
-                    <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">هارد اختصاصی:
+                <div v-if="planData.dedicatedVolume >= 10 || dedicatedVolume > 0">
+                    <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">
+                        حافظه ذخیره‌سازی:
                         <span style="font-family: iran-sans; color: #2979ff" v-if="dedicatedVolume > 0">{{dedicatedVolume}} گیگ </span>
-                        <span v-if="dedicatedVolume >= 10 && planData.dedicatedVolume > 0">+</span>
-                        <span style="font-family: iran-sans; font-weight: normal" v-if="planData.dedicatedVolume >= 10">{{planData.dedicatedVolume}} گیگ</span></p>
+                        <span v-if="dedicatedVolume > 0 && planData.dedicatedVolume >= 10">+</span>
+                        <span style="font-family: iran-sans; font-weight: normal" v-if="planData.dedicatedVolume >= 10">{{planData.dedicatedVolume}} گیگ</span>
+                    </p>
                 </div>
 
                 <div style="height: 1px; background-color: #999;"></div>
@@ -222,7 +232,7 @@
                     dedicatedVolume: 0,
                 },
                 dedicatedVolumeMin: '10G',
-                dedicatedVolumeMax: '128G',
+                dedicatedVolumeMax: '256G',
                 memoryRangeMin: '1G',
                 memoryRangeMax: '256G',
                 quota: {},
@@ -354,24 +364,28 @@
         },
         methods: {
             incMemory() {
-                this.planData.memory += 1;
+                if (this.planData.memory < this.memoryOptions.max)
+                    this.planData.memory += 1;
             }, decMemory() {
-                this.planData.memory -= 1;
+                if (this.planData.dedicatedVolume > this.memoryOptions.min)
+                    this.planData.memory -= 1;
             }, incDedicatedVolume() {
-                this.planData.dedicatedVolume += 1;
+                if (this.planData.dedicatedVolume < this.dedicatedVolumeOptions.max)
+                    this.planData.dedicatedVolume += 1;
             }, decDedicatedVolume() {
-                this.planData.dedicatedVolume -= 1;
+                if (this.planData.dedicatedVolume > this.dedicatedVolumeOptions.min)
+                    this.planData.dedicatedVolume -= 1;
             }, makeBill() {
                 this.finalBill.memory = this.planData.memory;
                 if (this.planData.dedicatedVolume >= 10) {
                     this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
-                if(this.quota !== null){
-                    if(this.quota.memory_limit/1024 >= 1){
+                if (this.quota !== null) {
+                    if (this.quota.memory_limit / 1024 >= 1) {
                         this.finalBill.memory += this.quota.memory_limit / 1024;
                     }
 
-                    if(this.quota.volume_limit > 0){
+                    if (this.quota.volume_limit > 0) {
                         this.finalBill.dedicatedVolume += this.quota.volume_limit;
                     }
                 }

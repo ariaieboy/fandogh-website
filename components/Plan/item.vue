@@ -19,7 +19,7 @@
 
                 <div>
                     <img :alt="title" src="~/assets/svg/ic-storage.svg"/>
-                    <p class="title">هارد اختصاصی</p>
+                    <p class="title">حافظه ذخیره‌سازی</p>
                     <p class="value">{{dedicatedVolume}} گیگابایت</p>
                 </div>
 

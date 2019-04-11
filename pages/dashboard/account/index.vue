@@ -16,7 +16,7 @@
 
                     <div style="min-height: 3em;">
                         <p class="profile-entity-title">نام و نام‌خانوادگی:</p>
-                        <p class="profile-entity-value">{{account.first_name}}</p>
+                        <p class="profile-entity-value">{{fullName}}</p>
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">شماره ملی:</p>
@@ -60,8 +60,7 @@
                     </div>
 
                     <div class="row">
-                        <button @click="accountEdit" class="container-fluid left" style="border-radius: 17.5px; width: 200px; height: 35px;
-  background-color: #7ed321;color: #ffffff;font-family: iran-yekan;font-size: 14px;border: none;outline: none; cursor: pointer">
+                        <button @click="accountEdit" class="container-fluid left curve-button">
                             ویرایش اطلاعات کاربری
                         </button>
                     </div>
@@ -75,20 +74,20 @@
                     <p :style="{borderLeft: '1px solid #2979ff'}">پلن من</p>
                 </div>
 
-                <!--<div @click="sectionClicked('ProfileWallet')"-->
-                <!--:class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">-->
-                <!--<p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>-->
-                <!--</div>-->
+                <div @click="sectionClicked('ProfileWallet')"
+                     :class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">
+                    <p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>
+                </div>
 
                 <div @click="sectionClicked('ProfileTransactions')"
                      :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
                     <p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>
                 </div>
 
-                <!--<div @click="sectionClicked('ProfileMessages')"-->
-                <!--:class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">-->
-                <!--<p>پیام‌های من</p>-->
-                <!--</div>-->
+                <div @click="sectionClicked('ProfileMessages')"
+                     :class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">
+                    <p>پیام‌های من</p>
+                </div>
             </div>
 
             <keep-alive>
@@ -191,6 +190,8 @@
             },
             namespace() {
                 return getValue('namespace')
+            }, fullName() {
+                return this.account.first_name + ' ' + this.account.last_name;
             }
         },
 
@@ -316,6 +317,8 @@
         white-space nowrap
         overflow-x scroll
         overflow-y hidden
+        -ms-overflow-style none
+        scrollbar-width none
 
         div.disabled
             display inline-flex
@@ -336,6 +339,7 @@
                 margin-bottom 8px
                 letter-spacing normal
                 color #000000
+
 
         div.enabled
             display inline-flex
@@ -358,11 +362,25 @@
                 letter-spacing normal
                 color #ffffff
 
+    .box-row::-webkit-scrollbar
+        display none
+
 
     .plan-container
         border-radius 3px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         background-color #ffffff
+
+    .curve-button
+        border-radius 17.5px
+        padding 10px 36px
+        background-color #7ed321
+        color #ffffff
+        font-family iran-yekan
+        font-size 14px
+        border none
+        outline none
+        cursor pointer
 </style>
 
 <style lang="stylus">

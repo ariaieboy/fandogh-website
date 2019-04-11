@@ -44,7 +44,10 @@
 
                         <p class="plan-title">رم</p>
                         <p class="plan-value">{{(quota.memory_limit > 1024 ? quota.memory_limit / 1024 :
-                            quota.memory_limit)}} گیگابایت</p>
+                            quota.memory_limit)}}
+                            <span v-if="quota.memory_limit>1024">گیگابایت</span>
+                            <span v-else>مگابایت</span>
+                        </p>
 
                     </div>
                 </div>
