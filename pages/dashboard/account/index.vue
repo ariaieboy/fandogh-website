@@ -74,20 +74,20 @@
                     <p :style="{borderLeft: '1px solid #2979ff'}">پلن من</p>
                 </div>
 
-                <div @click="sectionClicked('ProfileWallet')"
-                     :class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>
-                </div>
+                <!--<div @click="sectionClicked('ProfileWallet')"-->
+                     <!--:class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">-->
+                    <!--<p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>-->
+                <!--</div>-->
 
-                <div @click="sectionClicked('ProfileTransactions')"
-                     :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>
-                </div>
+                <!--<div @click="sectionClicked('ProfileTransactions')"-->
+                     <!--:class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">-->
+                    <!--<p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>-->
+                <!--</div>-->
 
-                <div @click="sectionClicked('ProfileMessages')"
-                     :class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">
-                    <p>پیام‌های من</p>
-                </div>
+                <!--<div @click="sectionClicked('ProfileMessages')"-->
+                     <!--:class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">-->
+                    <!--<p>پیام‌های من</p>-->
+                <!--</div>-->
             </div>
 
             <keep-alive>
