@@ -114,7 +114,9 @@
                     this.quota = plan.quota;
                     console.log('quota')
                     console.log(plan.quota)
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     switch (e.status) {
                         case 401:
                             this.$router.push("/user/login");
@@ -134,6 +136,7 @@
             }
         },
         created() {
+            this.$store.commit("SET_DATA", {data: true, id: "loading"});
             this.requestUserPlan();
         }
     }

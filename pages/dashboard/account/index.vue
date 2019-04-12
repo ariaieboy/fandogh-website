@@ -219,6 +219,7 @@
                     }
                     this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                 }catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     switch (e.status) {
 
                         case 401:
@@ -231,7 +232,6 @@
                                 type: "error"
                             });
                             break;
-
                     }
                 }
             },

@@ -199,9 +199,11 @@
 
                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
                     مبلغ نهایی (تومان):</p>
-                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0" v-if="fixedTotal > 0">{{fixedTotal}}</p>
+                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0"
+                   v-if="fixedTotal > 0">{{fixedTotal}}</p>
                 <p style="width: 100%; text-align: center; margin-top: 0; margin-bottom: 0" v-if="fixedTotal> 0">+</p>
-                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 0">{{total}}</p>
+                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 0">
+                    {{total}}</p>
                 <button @click="pushUrl">
                     ثبت نهایی و پرداخت
                 </button>
@@ -352,7 +354,7 @@
             }, total() {
                 let temp = this.planData.memory * 60000 + this.planData.dedicatedVolume * 1200;
                 return temp.toLocaleString()
-            },fixedTotal(){
+            }, fixedTotal() {
                 return Math.round(this.quota.memory_limit / 1024) * 60000 + this.quota.volume_limit * 1200;
             }
         },
@@ -412,10 +414,24 @@
                 this.$router.push(`plans/bill/${planRespose.invoice.id}`);
             },
             async requestActivePlan() {
-                let plan = await this.$store.dispatch('getNameSpace', this.namespace);
-                this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                this.quota = plan.quota;
-                console.log(this.quota);
+                try {
+                    let plan = await this.$store.dispatch('getNameSpace', this.namespace);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    switch (e.status) {
+                        case 401:
+                            this.$router.push("/user/login");
+                            break;
+
+                        case 400:
+                            this.$notify({
+                                title: e.data.message,
+                                type: "error"
+                            });
+                            break;
+                    }
+                }
             }
         },
         mounted() {

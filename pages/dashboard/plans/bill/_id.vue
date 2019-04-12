@@ -162,20 +162,47 @@
         },
         methods: {
             async pay() {
-                const invoiceId = this.$store.state.plan.requestedPlan.invoice.id;
-                await this.$store.dispatch('plan/requestPayment', invoiceId);
-                console.log(this.$store.state.plan.requestedPayment);
-                window.location = this.$store.state.plan.requestedPayment.payment_url;
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    const invoiceId = this.$store.state.plan.requestedPlan.invoice.id;
+                    await this.$store.dispatch('plan/requestPayment', invoiceId);
+                    console.log(this.$store.state.plan.requestedPayment);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    window.location = this.$store.state.plan.requestedPayment.payment_url;
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    switch (e.status) {
+                        case 401:
+                            this.$router.push("/user/login");
+                            break;
+                        case 400:
+                            this.$notify({
+                                title: e.data.message,
+                                type: 'error'
+                            });
+                            break;
+                    }
+                }
             }, async requestInvoice() {
-                this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                let response = await this.$store.dispatch('plan/reloadPlan', this.invoice_id);
-                console.log('hellooooooooo!');
-                console.log(response.invoice);
-                this.invoice = response.invoice;
-                this.items = response.invoice.items
-                console.log(this.invoice);
-                this.$store.commit("SET_DATA", {data: false, id: "loading"});
-
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    let response = await this.$store.dispatch('plan/reloadPlan', this.invoice_id);
+                    this.invoice = response.invoice;
+                    this.items = response.invoice.items;
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }catch (e) {
+                    switch (e.status) {
+                        case 401:
+                            this.$router.push("/user/login");
+                            break;
+                        case 400:
+                            this.$notify({
+                                title: e.data.message,
+                                type: 'error'
+                            });
+                            break;
+                    }
+                }
             }
         },
         destroyed() {
