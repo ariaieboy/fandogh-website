@@ -56,7 +56,7 @@
 
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">نوع کاربری:</p>
-                        <p class="profile-entity-value">{{account.created_at}}</p>
+                        <p class="profile-entity-value" v-if="activeNamespace.quota">{{(activeNamespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
                     </div>
 
                     <div class="row">
@@ -203,16 +203,35 @@
         },
         created() {
             this.getData();
-            console.log(this.fetchUserNamespaces());
+            this.fetchUserNamespaces()
         },
         methods: {
             async fetchUserNamespaces() {
                 this.namespaces.length = 0;
-                this.namespaces = await this.$store.dispatch('requestUserNamespaces');
-                for (let i = 0; i < this.namespaces.length; i++) {
-                    if (this.namespaces[i].name === this.namespace) {
-                        this.activeNamespace = this.namespaces[i];
-                        break;
+                try {
+                    this.namespaces = await this.$store.dispatch('requestUserNamespaces');
+                    for (let i = 0; i < this.namespaces.length; i++) {
+                        if (this.namespaces[i].name === this.namespace) {
+                            this.activeNamespace = this.namespaces[i];
+                            console.log(this.activeNamespace.quota);
+                            break;
+                        }
+                    }
+                    this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                }catch (e) {
+                    switch (e.status) {
+
+                        case 401:
+                            this.$router.push("/user/login");
+                            break;
+
+                        case 400:
+                            this.$notify({
+                                title: e.data.message,
+                                type: "error"
+                            });
+                            break;
+
                     }
                 }
             },
@@ -221,18 +240,21 @@
                     let res = await this.$store.dispatch("getAccount", {
                         username: getValue("username")
                     });
-                    console.log('index');
-                    console.log(res);
 
                     if (res.newsletter_subscriber) {
                         let elm = document.querySelector("#newsletter_subscriber");
                         elm.click();
                     }
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    this.fetchUserNamespaces();
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (e.status === 401) {
                         this.$router.push("/user/login");
+                    }else if(e.status === 400){
+                        this.$notify({
+                            title: e.data.message,
+                            type: "error"
+                        });
                     }
                 }
             },

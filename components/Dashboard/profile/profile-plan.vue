@@ -1,6 +1,10 @@
 <template>
 
     <div style="margin-bottom: 50px">
+        <p class="date-tile">تاریخ پایان پلن شما:
+            <span class="date-value" v-if="planExpirationDate">{{planExpirationDate}}</span>
+            <span class="date-value" v-else>نامحدود</span>
+        </p>
         <div class="row plan-container" style="padding: 12px;">
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="height: 100px">
@@ -75,6 +79,7 @@
 
 <script>
     import {getValue} from "../../../utils/cookie";
+    import Moment from 'moment-jalaali';
 
     export default {
         props: ['cpu', 'memory', 'dedicatedVolume'],
@@ -84,17 +89,45 @@
                 quota: {},
             }
         },
+        components:{
+          Moment,
+        },
         computed:{
 
             namespace(){
                 return getValue('namespace');
+            },
+            planExpirationDate(){
+                if(this.quota.hasOwnProperty('expires_at')){
+                    if(this.quota.expires_at){
+                        return Moment(this.quota.expires_at).format('jYYYY/jMM/jDD');
+                    }
+                }
+                return false;
             }
 
         },
         methods: {
             async requestUserPlan() {
-                let plan = await this.$store.dispatch('getNameSpace', this.namespace);
-                this.quota = plan.quota;
+                try {
+                    let plan = await this.$store.dispatch('getNameSpace', this.namespace);
+                    this.quota = plan.quota;
+                    console.log('quota')
+                    console.log(plan.quota)
+                }catch (e) {
+                    switch (e.status) {
+                        case 401:
+                            this.$router.push("/user/login");
+                            break;
+                        case 400:
+                            this.$notify({
+                                title: e.data.message,
+                                type: 'error'
+                            });
+                            break;
+                    }
+                }
+
             },
             navigateToPlanPage(){
                 this.$router.push('/dashboard/plans');
@@ -170,6 +203,27 @@
         cursor pointer
         @media only screen and (max-width: 700px)
             margin-top 12px
+
+    .date-tile
+        font-family yekan-bold
+        font-size .9em
+        font-style normal
+        margin-top 24px
+        margin-bottom 16px
+        font-stretch normal
+        letter-spacing normal
+        color: #7c7c7c
+
+
+    .date-value
+        font-family iran-sans
+        font-size .9em
+        font-style normal
+        margin-top 24px
+        margin-bottom 16px
+        font-stretch normal
+        letter-spacing normal
+        color: #222
 
 
 </style>
