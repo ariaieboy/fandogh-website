@@ -21,6 +21,13 @@
 
 <style lang="stylus" scoped>
 
+    *::-webkit-scrollbar
+        display none
+
+    *
+        -ms-overflow-style none
+        scrollbar-width none
+
     tr.head
         height 25px
         border-collapse collapse

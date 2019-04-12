@@ -70,6 +70,7 @@
                                     <input
                                             disabled
                                             class="input"
+                                            type="number"
                                             value="planData.memory"
                                             v-model="planData.memory">
                                     گیگابایت
@@ -198,7 +199,9 @@
 
                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
                     مبلغ نهایی (تومان):</p>
-                <p style="width: 100%; text-align: center; font-family: iran-sans;">{{total}}</p>
+                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0" v-if="fixedTotal > 0">{{fixedTotal}}</p>
+                <p style="width: 100%; text-align: center; margin-top: 0; margin-bottom: 0" v-if="fixedTotal> 0">+</p>
+                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 0">{{total}}</p>
                 <button @click="pushUrl">
                     ثبت نهایی و پرداخت
                 </button>
@@ -349,7 +352,8 @@
             }, total() {
                 let temp = this.planData.memory * 60000 + this.planData.dedicatedVolume * 1200;
                 return temp.toLocaleString()
-
+            },fixedTotal(){
+                return Math.round(this.quota.memory_limit / 1024) * 60000 + this.quota.volume_limit * 1200;
             }
         },
         loading() {
@@ -367,7 +371,7 @@
                 if (this.planData.memory < this.memoryOptions.max)
                     this.planData.memory += 1;
             }, decMemory() {
-                if (this.planData.dedicatedVolume > this.memoryOptions.min)
+                if (this.planData.memory > this.memoryOptions.min)
                     this.planData.memory -= 1;
             }, incDedicatedVolume() {
                 if (this.planData.dedicatedVolume < this.dedicatedVolumeOptions.max)

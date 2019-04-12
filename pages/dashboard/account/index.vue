@@ -8,7 +8,7 @@
 
             <div class="box row">
                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12; margin: 0;">
-                    <div style="border: solid 5px #24d5d8; border-radius: 100px; width: 80px; height: 80px;">
+                    <div style="border: solid 4px #24d5d8; border-radius: 100px; width: 90px; height: 90px;">
                     </div>
                 </div>
 
@@ -258,6 +258,7 @@
 
 
 <style lang="stylus" scoped>
+
     .box-checkbox
         display flex
         @media only screen and (max-width: 768px)

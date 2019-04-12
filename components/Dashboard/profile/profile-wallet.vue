@@ -204,6 +204,12 @@
         -ms-user-select: none
         user-select: none
 
+    ::-webkit-scrollbar
+        display none
+
+    -ms-overflow-style none
+    scrollbar-width none
+
     .box-row
         min-height 45px
         border-radius 3px
