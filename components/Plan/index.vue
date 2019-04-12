@@ -2,16 +2,16 @@
 
     <div class="row">
         <div class="row-custom">
-            <div ref="cint" class="center col-lg-11 col-md-11 col-xs-11 container-fluid">
-                <plan title="پلن رایگان" icon="base-plan" dedicated-volume="10" memory="400" cpu="1"
+            <div ref="cint" style="overflow-x: scroll" class="center col-lg-12 col-md-12 col-xs-12 container-fluid">
+                <plan title="پلن پایه" icon="base-plan" dedicated-volume="10" memory="1" cpu="1"
                       v-bind:class="(selected === 0 ? 'selected' : 'unselected')"
                       @click.native="clicked(0)"/>
 
-                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="20" memory="1" cpu="2"
+                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="50" memory="2" cpu="2"
                       v-bind:class="(selected === 1 ? 'selected' : 'unselected')"
                       @click.native="clicked(1)"/>
 
-                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="30" memory="2" cpu="3"
+                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="100" memory="3" cpu="3"
                       v-bind:class="(selected === 2 ? 'selected' : 'unselected')"
                       @click.native="clicked(2)"/>
 
@@ -114,6 +114,12 @@
     .unselected {
         @import "../../assets/css/inactive-plan.styl"
     }
+
+    ::-webkit-scrollbar
+        display none
+
+    -ms-overflow-style none
+    scrollbar-width none
 
     .row-custom
         height 230px
