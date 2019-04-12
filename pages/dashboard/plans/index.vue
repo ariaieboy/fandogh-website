@@ -388,9 +388,9 @@
                     this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
                 if (this.quota !== null) {
-                    // if (this.quota.memory_limit / 1024 >= 1) {
-                    //     this.finalBill.memory += this.quota.memory_limit / 1024;
-                    // }
+                    if (this.quota.memory_limit / 1024 >= 1) {
+                        this.finalBill.memory += this.quota.memory_limit / 1024;
+                    }
 
                     if (this.quota.volume_limit > 0) {
                         this.finalBill.dedicatedVolume += this.quota.volume_limit;
