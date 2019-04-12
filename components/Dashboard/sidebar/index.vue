@@ -24,13 +24,13 @@
         data() {
             return {
                 items: [
-                    {icon: 'home', isBorder: true, text: 'داشبورد', link: '/dashboard/general'},
-                    {icon: 'ic_images', text: 'ایمیج‌ها', link: '/dashboard/images'},
-                    {icon: 'ic_services', text: 'سرویس‌ها', link: '/dashboard/services'},
-                    {icon: 'ic_domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
-                    {icon: 'strongbox', text: 'سکرت‌ها', link: '/dashboard/secret'},
-                    {icon: 'strongbox', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
-                    {icon: 'Group 1784', text: 'پلن‌های فندق', link: '/dashboard/plans'},
+                    {icon: 'ic-home', isBorder: true, text: 'داشبورد', link: '/dashboard/general'},
+                    {icon: 'ic-image', text: 'ایمیج‌ها', link: '/dashboard/images'},
+                    {icon: 'ic-service', text: 'سرویس‌ها', link: '/dashboard/services'},
+                    {icon: 'ic-domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
+                    {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
+                    {icon: 'ic-monitoring', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
+                    {icon: 'ic-plans', text: 'پلن‌های فندق', link: '/dashboard/plans'},
                 ]
             }
         },
@@ -105,7 +105,7 @@
                 border-bottom-left-radius 25px
                 background-color $blueLight
                 img
-                    filter invert(41%) sepia(29%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
+                    filter invert(41%) sepia(59%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
                 span
                     color $blueMedium
 
