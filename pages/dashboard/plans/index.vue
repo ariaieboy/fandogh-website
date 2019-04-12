@@ -416,6 +416,7 @@
             async requestActivePlan() {
                 try {
                     let plan = await this.$store.dispatch('getNameSpace', this.namespace);
+                    this.quota = plan.quota;
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
