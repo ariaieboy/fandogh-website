@@ -11,12 +11,15 @@
                 <img v-if="successful" class="payment-image" src="../../../assets/svg/payment-ok.svg" alt="payment-ok"/>
                 <img v-else class="payment-image" src="../../../assets/svg/payment-error.svg" alt="payment-error"/>
 
-                <p v-if="successful" style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت موفقیت آمیز بود</p>
-                <p v-else style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت با مشکل مواجه شد!</p>
+                <p v-if="successful" style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت
+                    موفقیت آمیز بود</p>
+                <p v-else style="color: black; text-align: center; width: 100%; font-size: 1.1em">پرداخت با مشکل مواجه
+                    شد!</p>
 
                 <button v-if="successful" class="pay-button"
                         style="box-shadow: 0 3px 6px 0 rgba(60, 204, 56, 0.42); background-color: #3ccc38;"
-                        @click="moveToProfile">اتمام پرداخت</button>
+                        @click="moveToProfile">اتمام پرداخت
+                </button>
 
                 <button v-else class="pay-button" @click="moveToPlanPage">بازگشت</button>
 
@@ -28,6 +31,7 @@
 
 <script>
     import FLoading from "~/components/Loading";
+    import ErrorReporter from "~/utils/ErrorReporter";
 
     export default {
         name: "verify",
@@ -66,21 +70,18 @@
                     this.successful = true;
 
                 } catch (e) {
-
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-
-                    if (e.status === 400) {
-                        this.showModal = true;
-                        this.successful = false;
-                    } else if (e.status === 401) {
+                    this.showModal = true;
+                    this.successful = false;
+                    if (e.status === 401) {
                         this.$router.push("/user/login");
                     } else {
-                        this.showModal = true;
-                        this.successful = false;
-                        this.$notify({
-                            title: e.data.message,
-                            time: 4000,
-                            type: "error"
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
                         });
                     }
                 }
