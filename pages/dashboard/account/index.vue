@@ -56,7 +56,8 @@
 
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">نوع کاربری:</p>
-                        <p class="profile-entity-value" v-if="activeNamespace.quota">{{(activeNamespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
+                        <p class="profile-entity-value" v-if="activeNamespace.quota">
+                            {{(activeNamespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
                     </div>
 
                     <div class="row">
@@ -75,18 +76,18 @@
                 </div>
 
                 <!--<div @click="sectionClicked('ProfileWallet')"-->
-                     <!--:class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">-->
-                    <!--<p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>-->
+                <!--:class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">-->
+                <!--<p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>-->
                 <!--</div>-->
 
                 <!--<div @click="sectionClicked('ProfileTransactions')"-->
-                     <!--:class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">-->
-                    <!--<p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>-->
+                <!--:class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">-->
+                <!--<p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>-->
                 <!--</div>-->
 
                 <!--<div @click="sectionClicked('ProfileMessages')"-->
-                     <!--:class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">-->
-                    <!--<p>پیام‌های من</p>-->
+                <!--:class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">-->
+                <!--<p>پیام‌های من</p>-->
                 <!--</div>-->
             </div>
 
@@ -218,20 +219,19 @@
                         }
                     }
                     this.$store.commit('SET_DATA', {data: false, id: 'loading'})
-                }catch (e) {
+                } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    switch (e.status) {
-
-                        case 401:
-                            this.$router.push("/user/login");
-                            break;
-
-                        case 400:
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
                             this.$notify({
-                                title: e.data.message,
+                                title: error,
+                                time: 4000,
                                 type: "error"
                             });
-                            break;
+                        });
+
                     }
                 }
             },
@@ -250,10 +250,13 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (e.status === 401) {
                         this.$router.push("/user/login");
-                    }else if(e.status === 400){
-                        this.$notify({
-                            title: e.data.message,
-                            type: "error"
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
                         });
                     }
                 }

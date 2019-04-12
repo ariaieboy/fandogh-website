@@ -224,6 +224,7 @@
     import Moment from 'moment-jalaali';
     import Feature from '~/components/Plan/feature.vue';
     import 'vue-slider-component/theme/default.css';
+    import ErrorReporter from "~/utils/ErrorReporter";
 
     export default {
         layout: "dashboard",
@@ -387,9 +388,9 @@
                     this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
                 if (this.quota !== null) {
-                    if (this.quota.memory_limit / 1024 >= 1) {
-                        this.finalBill.memory += this.quota.memory_limit / 1024;
-                    }
+                    // if (this.quota.memory_limit / 1024 >= 1) {
+                    //     this.finalBill.memory += this.quota.memory_limit / 1024;
+                    // }
 
                     if (this.quota.volume_limit > 0) {
                         this.finalBill.dedicatedVolume += this.quota.volume_limit;
@@ -407,11 +408,29 @@
                 // });
                 const bill = this.makeBill();
                 console.log(bill);
-                const planRespose = await this.$store.dispatch("plan/requestPlan", bill);
-                console.log(planRespose);
-                console.log(planRespose.invoice.id);
-                this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                this.$router.push(`plans/bill/${planRespose.invoice.id}`);
+
+                await this.$store.dispatch("plan/requestPlan", bill)
+                    .then(planRespose => {
+                        console.log(planRespose);
+                        console.log(planRespose.invoice.id);
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        this.$router.push(`plans/bill/${planRespose.invoice.id}`);
+                    }).catch(e => {
+                        console.log('bemiri');
+                        console.log(e);
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    });
+
             },
             async requestActivePlan() {
                 try {
@@ -420,17 +439,16 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    switch (e.status) {
-                        case 401:
-                            this.$router.push("/user/login");
-                            break;
-
-                        case 400:
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
                             this.$notify({
-                                title: e.data.message,
+                                title: error,
+                                time: 4000,
                                 type: "error"
                             });
-                            break;
+                        });
                     }
                 }
             }

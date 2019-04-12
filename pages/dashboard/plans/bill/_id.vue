@@ -142,6 +142,7 @@
     import {getValue} from "~/utils/cookie";
     import BillRow from "../../../../components/Dashboard/plans/bill/bill-row";
     import Moment from 'moment-jalaali';
+    import ErrorReporter from "~/utils/ErrorReporter";
 
 
     export default {
@@ -171,38 +172,41 @@
                     window.location = this.$store.state.plan.requestedPayment.payment_url;
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    switch (e.status) {
-                        case 401:
-                            this.$router.push("/user/login");
-                            break;
-                        case 400:
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
                             this.$notify({
-                                title: e.data.message,
-                                type: 'error'
+                                title: error,
+                                time: 4000,
+                                type: "error"
                             });
-                            break;
+                        });
                     }
                 }
             }, async requestInvoice() {
-                try {
-                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                    let response = await this.$store.dispatch('plan/reloadPlan', this.invoice_id);
-                    this.invoice = response.invoice;
-                    this.items = response.invoice.items;
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                }catch (e) {
-                    switch (e.status) {
-                        case 401:
+
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                await this.$store
+                    .dispatch('plan/reloadPlan', this.invoice_id)
+                    .then(response => {
+                        this.invoice = response.invoice;
+                        this.items = response.invoice.items;
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    })
+                    .catch(e => {
+                        if (e.status === 401) {
                             this.$router.push("/user/login");
-                            break;
-                        case 400:
-                            this.$notify({
-                                title: e.data.message,
-                                type: 'error'
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
                             });
-                            break;
-                    }
-                }
+                        }
+                    });
             }
         },
         destroyed() {

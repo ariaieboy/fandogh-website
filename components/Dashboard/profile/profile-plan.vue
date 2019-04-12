@@ -80,6 +80,7 @@
 <script>
     import {getValue} from "../../../utils/cookie";
     import Moment from 'moment-jalaali';
+    import ErrorReporter from "~/utils/ErrorReporter";
 
     export default {
         props: ['cpu', 'memory', 'dedicatedVolume'],
@@ -117,16 +118,16 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    switch (e.status) {
-                        case 401:
-                            this.$router.push("/user/login");
-                            break;
-                        case 400:
+                    if(e.status === 401){
+                        this.$router.push('/user/login');
+                    }else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
                             this.$notify({
-                                title: e.data.message,
-                                type: 'error'
+                                title: error,
+                                time: 4000,
+                                type: "error"
                             });
-                            break;
+                        });
                     }
                 }
 
