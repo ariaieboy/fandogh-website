@@ -24,7 +24,7 @@
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">شماره ملی:</p>
-                        <p class="profile-entity-value">{{account.national_id}}</p>
+                        <p class="profile-entity-value" style="font-family: iran-sans; font-size: 0.85em">{{account.national_id}}</p>
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">تاریخ عضویت:</p>
@@ -100,13 +100,6 @@
                 <component v-bind:is="activeSectionName"></component>
             </keep-alive>
 
-        </div>
-
-        <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
-
-            <div class="fandogh-form-group margin-top-100">
-                <f-button @onClick="accountPassword" styles="red">تغییر رمز عبور</f-button>
-            </div>
         </div>
     </div>
 </template>
@@ -257,13 +250,6 @@
                     eventAction: "click btn edit information"
                 });
                 this.$router.push("/dashboard/account/edit");
-            },
-            accountPassword() {
-                this.$ga.event({
-                    eventCategory: "account",
-                    eventAction: "click btn edit information"
-                });
-                this.$router.push("/dashboard/account/password");
             }, sectionClicked(sectionName) {
                 this.activeSectionName = sectionName;
             }

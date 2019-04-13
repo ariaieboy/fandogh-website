@@ -10,6 +10,9 @@
   transition 0.6s ease transform, 0.6s ease box-shadow
   -webkit-backdrop-filter blur(30px)
   backdrop-filter blur(30px)
+  @media only screen and (max-width: 900px)
+    min-height 30px
+    line-height 30px
 .btn-black-light
   color #000
 .btn-border
@@ -26,6 +29,13 @@
   color #fff !important
   &:hover
     box-shadow 0 3px 26px 0 rgba(33, 203, 235, 1)
+
+.btn-green
+  background-image linear-gradient(to left, #84D321, #2FC02C)
+  box-shadow 0 3px 26px 0 rgba(47, 192, 44, 0.4)
+  color #fff !important
+  &:hover
+    box-shadow 0 3px 26px 0 rgba(47, 192, 44, 1)
 .btn-red
   background-image linear-gradient(to left, #ffa7ad, #ff628f)
   box-shadow 0 3px 26px 0 rgba(254, 93, 144, 0.4)
@@ -71,3 +81,6 @@
     font-size 14px
 .btn-ml-45
   margin-left 45px
+
+.btn-margin-24
+  margin-top 24px
