@@ -68,6 +68,7 @@
                 </button>
 
                 <button class="navigation-button"
+                        @click="redeemPlan"
                         style="box-shadow: 0 2px 6px 0 rgba(126, 211, 33, 0.42); background-color: #7ed321;">
                     تمدید پلن فعلی
                 </button>
@@ -88,25 +89,28 @@
         data() {
             return {
                 quota: {},
+                finalBill: {
+                    memory: 0,
+                    dedicatedVolume: 0,
+                },
             }
         },
-        components:{
-          Moment,
+        components: {
+            Moment,
         },
-        computed:{
+        computed: {
 
-            namespace(){
+            namespace() {
                 return getValue('namespace');
             },
-            planExpirationDate(){
-                if(this.quota.hasOwnProperty('expires_at')){
-                    if(this.quota.expires_at){
+            planExpirationDate() {
+                if (this.quota.hasOwnProperty('expires_at')) {
+                    if (this.quota.expires_at) {
                         return Moment(this.quota.expires_at).format('jYYYY/jMM/jDD');
                     }
                 }
                 return false;
             }
-
         },
         methods: {
             async requestUserPlan() {
@@ -116,11 +120,11 @@
                     console.log('quota')
                     console.log(plan.quota)
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                }catch (e) {
+                } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    if(e.status === 401){
+                    if (e.status === 401) {
                         this.$router.push('/user/login');
-                    }else {
+                    } else {
                         ErrorReporter(e, this.$data, true).forEach(error => {
                             this.$notify({
                                 title: error,
@@ -131,8 +135,43 @@
                     }
                 }
 
+            }, async redeemPlan() {
+
+                if(Math.round(this.quota.memory_limit / 1024) < 1){
+                    alert('اول پلن بخر بعدش تمدید کن عزیزم');
+                    return;
+                }
+
+                const bill = this.makeBill();
+
+                await this.$store.dispatch("plan/requestPlan", bill)
+                    .then(planRespose => {
+                        console.log(planRespose);
+                        console.log(planRespose.invoice.id);
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        this.$router.push(`plans/bill/${planRespose.invoice.id}`);
+                    }).catch(e => {
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    });
+
+            }, makeBill() {
+                if (this.quota) {
+                    this.finalBill.memory = this.quota.memory_limit / 1024;
+                    this.finalBill.dedicatedVolume += this.quota.volume_limit;
+                }
+                return this.finalBill;
             },
-            navigateToPlanPage(){
+            navigateToPlanPage() {
                 this.$router.push('/dashboard/plans');
             }
         },
