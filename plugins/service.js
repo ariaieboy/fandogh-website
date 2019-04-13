@@ -6,9 +6,6 @@ const isClient = typeof window !== "undefined";
 const _baseURL = process.env.API;
 
 function request(params, {baseUrl}) {
-    console.log('baseUrl', baseUrl)
-    console.log('_baseUrl', _baseURL)
-
     baseUrl = baseUrl || _baseURL
     const service = axios.create({
         baseURL: baseUrl,

@@ -10,7 +10,6 @@ export default function request(params, options) {
     return {
         get: async (url, body) => {
             try {
-                console.log('getting', {url, body, params, options})
                 const {data} = await service(params, options).get(url, body)
                 return data
             } catch (e) {
