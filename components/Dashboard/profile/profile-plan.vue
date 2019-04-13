@@ -117,8 +117,6 @@
                 try {
                     let plan = await this.$store.dispatch('getNameSpace', this.namespace);
                     this.quota = plan.quota;
-                    console.log('quota')
-                    console.log(plan.quota)
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -146,8 +144,6 @@
 
                 await this.$store.dispatch("plan/requestPlan", bill)
                     .then(planRespose => {
-                        console.log(planRespose);
-                        console.log(planRespose.invoice.id);
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
                         this.$router.push(`plans/bill/${planRespose.invoice.id}`);
                     }).catch(e => {

@@ -280,7 +280,6 @@ export default {
         })
         .catch(e => {
           this.$store.commit("SET_DATA", { data: false, id: "loading" });
-          console.log(e);
         });
     },
     certificateDomain() {

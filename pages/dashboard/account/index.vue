@@ -147,7 +147,6 @@
                 get: function () {
                     return this.activeNamespace;
                 }, set: function (namespace) {
-                    console.log(namespace.name);
                     if (namespace.hasOwnProperty('name')) {
                         if (getValue('namespace') !== namespace.name) {
                             setValue({key: 'namespace', value: namespace.name});
@@ -197,7 +196,6 @@
                     for (let i = 0; i < this.namespaces.length; i++) {
                         if (this.namespaces[i].name === this.namespace) {
                             this.activeNamespace = this.namespaces[i];
-                            console.log(this.activeNamespace.quota);
                             break;
                         }
                     }

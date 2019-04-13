@@ -407,17 +407,12 @@
                 //     eventValue: index
                 // });
                 const bill = this.makeBill();
-                console.log(bill);
 
                 await this.$store.dispatch("plan/requestPlan", bill)
                     .then(planRespose => {
-                        console.log(planRespose);
-                        console.log(planRespose.invoice.id);
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
                         this.$router.push(`plans/bill/${planRespose.invoice.id}`);
                     }).catch(e => {
-                        console.log('bemiri');
-                        console.log(e);
                         if (e.status === 401) {
                             this.$router.push("/user/login");
                         } else {

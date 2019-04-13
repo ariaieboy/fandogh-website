@@ -57,8 +57,6 @@
             this.verifyPayment();
         }, methods: {
             async verifyPayment() {
-                console.log(this.$route.params['id']);
-                console.log(this.$route.query['refid']);
 
                 let id = this.$route.params['id'];
                 let ref = this.$route.query['refid'];

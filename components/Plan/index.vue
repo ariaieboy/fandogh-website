@@ -64,7 +64,6 @@
             },
             scrollTo(element, scrollPixels, duration) {
                 const scrollPos = element.scrollLeft;
-                console.log(scrollPos);
                 // Condition to check if scrolling is required
                 if (!((scrollPos === 0 || scrollPixels > 0) && (element.clientWidth + scrollPos === element.scrollWidth || scrollPixels < 0))) {
                     // Get the start timestamp

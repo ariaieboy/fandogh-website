@@ -167,7 +167,6 @@
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     const invoiceId = this.$store.state.plan.requestedPlan.invoice.id;
                     await this.$store.dispatch('plan/requestPayment', invoiceId);
-                    console.log(this.$store.state.plan.requestedPayment);
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     window.location = this.$store.state.plan.requestedPayment.payment_url;
                 } catch (e) {

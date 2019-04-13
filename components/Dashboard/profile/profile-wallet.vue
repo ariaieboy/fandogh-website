@@ -146,7 +146,6 @@
             }
         }, methods: {
             pageClicked(position) {
-                console.log(position);
                 this.currentPage = position;
                 if (this.totalPage > 7 && position < this.totalPage) {
                     this.recalculatePages(position)

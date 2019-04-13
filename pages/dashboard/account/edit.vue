@@ -165,7 +165,6 @@
                     });
                     this.$router.push("/dashboard/account");
                 } catch (error) {
-                    console.log(error);
                     this.$alertReport(error);
                 }
             },

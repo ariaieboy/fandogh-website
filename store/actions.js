@@ -300,11 +300,9 @@ export const requestUserNamespaces = async ({commit, state}) => {
 
 export const getMetric = async ({commit, state}, metric) => {
     try {
-        console.log("calling monitoring")
         const res = await Request(null, {baseUrl: monitoringAPI}).get(`/?metric=${metric}`);
         commit("SET_DATA", {id: metric, data: res})
     } catch (e) {
-        console.log('error', e)
         return Promise.reject(e)
     }
 }
