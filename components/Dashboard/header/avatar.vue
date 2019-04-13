@@ -23,7 +23,7 @@
                     <span>{{item.text}}</span>
                 </router-link>
                 <div @click="exit" class="header-avatar-item">
-                    <img src="./icons/Group 2188.svg" alt>
+                    <img src="./icons/ic-exit.svg" alt>
                     <span>خروج</span>
                 </div>
             </div>
@@ -45,7 +45,7 @@
         },
         data() {
             return {
-                avatar: "./icons/Group 1032.svg"
+                avatar: "./icons/ic-profile.svg"
             }
         },
 
@@ -209,7 +209,7 @@
 
         &-username
             display none
-            color $blueMedium !important
+            color $silverDark !important
             @media only screen and (max-width: $sizeMd)
                 display block
                 margin-bottom 15px

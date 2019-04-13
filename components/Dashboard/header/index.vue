@@ -24,7 +24,8 @@ export default {
   data() {
     return {
       list: [
-        { icon: 'Group 2188', text: 'حساب کاربری', link: '/dashboard/account' },
+        { icon: 'ic-profile', text: 'حساب کاربری', link: '/dashboard/account' },
+        { icon: 'ic-home', text: 'داشبورد', link: '/dashboard/general' },
       ]
     }
   },

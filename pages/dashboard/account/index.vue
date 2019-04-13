@@ -7,8 +7,12 @@
             <p class="title">حساب کاربری</p>
 
             <div class="box row">
-                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12; margin: 0;">
-                    <div style="border: solid 4px #24d5d8; border-radius: 100px; width: 90px; height: 90px;">
+                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12; margin: 0;" style="height: 100%;width: 100%">
+                    <div style="border: solid 4px #24d5d8; border-radius: 100px; width: 90px; height: 90px;margin-left: auto; margin-right: auto">
+                    </div>
+
+                    <div class="row">
+                        <button @click="accountEdit" class="container-fluid left curve-button" style="margin: 24px auto;">ویرایش اطلاعات</button>
                     </div>
                 </div>
 
@@ -60,10 +64,11 @@
                             {{(activeNamespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
                     </div>
 
-                    <div class="row">
-                        <button @click="accountEdit" class="container-fluid left curve-button">
-                            ویرایش اطلاعات کاربری
-                        </button>
+
+                    <div style="min-height: 3em">
+                        <p class="profile-entity-title">دریافت خبرنامه:</p>
+                        <p class="profile-entity-value">
+                            {{(account.newsletter_subscriber ? 'تایید نکرده‌ام' : 'دریافت میکنم')}}</p>
                     </div>
 
                 </div>
@@ -99,21 +104,6 @@
 
         <div class="col-xs-12" :class="{'col-md-9':openSidebar , 'col-md-6':!openSidebar}">
 
-            <div class="fandogh-form-group right">
-                <div class="box-checkbox">
-                    <div class="box-checkbox-input">
-                        <f-checkbox
-                                styles="light input-checkbox-disable"
-                                v-model="account.newsletter_subscriber"
-                                id="newsletter_subscriber"
-                                title="دریافت خبرنامه"
-                        />
-                    </div>
-                    <div class="box-checkbox-info">
-                        <span class="mute-text">(مایل به دریافت خبرنامه‌های فندق هستم.)</span>
-                    </div>
-                </div>
-            </div>
             <div class="fandogh-form-group margin-top-100">
                 <f-button @onClick="accountPassword" styles="red">تغییر رمز عبور</f-button>
             </div>
