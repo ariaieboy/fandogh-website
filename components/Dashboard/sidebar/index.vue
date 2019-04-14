@@ -4,15 +4,14 @@
             <router-link
                     :title="item.text"
                     :to="item.link"
-                    :class="['sidebar-dashboard-item ' , {'is-border':item.isBorder,open}]"
+                    :class="['sidebar-dashboard-item' , {'is-border':item.isBorder,open}]"
                     v-for="(item,index) in items"
-                    :key="index"
-            >
+                    :key="index">
                 <img :src="require('./icons/'+item.icon+'.svg')">
                 <span>{{item.text}}</span>
             </router-link>
         </div>
-        <div :class="['sidebar-dashboard-collaps ' , {open}]" @click="toggleSidebar()">
+        <div style="background-color: transparent" :class="['sidebar-dashboard-collaps ' , {open}]" @click="toggleSidebar()">
             <img src="./icons/arrow.svg" alt="arrow">
         </div>
     </div>
@@ -25,13 +24,13 @@
         data() {
             return {
                 items: [
-                    // { icon: 'home', isBorder: true, text: 'داشبورد', link: '/dashboard/images' },
-                    {icon: 'ic_images', text: 'ایمیج‌ها', link: '/dashboard/images'},
-                    {icon: 'ic_services', text: 'سرویس‌ها', link: '/dashboard/services'},
-                    {icon: 'ic_domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
-                    {icon: 'strongbox', text: 'سکرت‌ها', link: '/dashboard/secret'},
-                    {icon: 'strongbox', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
-                    {icon: 'Group 1784', text: 'پلن‌های فندق', link: '/dashboard/plans'},
+                    {icon: 'ic-home', isBorder: true, text: 'داشبورد', link: '/dashboard/general'},
+                    {icon: 'ic-image', text: 'ایمیج‌ها', link: '/dashboard/images'},
+                    {icon: 'ic-service', text: 'سرویس‌ها', link: '/dashboard/services'},
+                    {icon: 'ic-domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
+                    {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
+                    {icon: 'ic-monitoring', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
+                    {icon: 'ic-plans', text: 'پلن‌های فندق', link: '/dashboard/plans'},
                 ]
             }
         },
@@ -61,24 +60,25 @@
         display flex
         flex-direction column
         justify-content space-between
-        padding-top 48px
+        padding-top 148px
         padding-bottom 47px
         min-width $widthSidebarClose
-        background-color $grayLight
+        background-color transparent
         transition $transitionMain
 
         &.open
             min-width $widthSidebarOpen
             @media only screen and (max-width: $sizeMd)
                 right 0
+                padding-left 32px
+                background-color #fefefe
+                box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         @media only screen and (max-width: $sizeMd)
-            right
-        -17em
-        padding-bottom 0
+            right -17em
+            padding-bottom 0
 
         &-list
             overflow auto
-            border-top 1px solid $hoary
 
             &::-webkit-scrollbar
                 width 7px
@@ -95,24 +95,19 @@
             display flex
             justify-content center
             align-items center
-            padding 25px 0
+            padding 10px 0
             text-align right
-
-            &:after
-                position absolute
-                top 0
-                right 0
-                bottom 0
-                width 0.32em
-                border-radius 7px
-                background-color $greenDark
-                content ''
-                transition all 0.3s ease-in
-                transform scale(0)
+            margin-top 16px
+            margin-bottom 16px
 
             &.nuxt-link-active, &:hover
+                border-top-left-radius 25px
+                border-bottom-left-radius 25px
+                background-color $blueLight
+                img
+                    filter invert(41%) sepia(59%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
                 span
-                    color $greenDark
+                    color $blueMedium
 
                 &:after
                     transform none
@@ -121,7 +116,7 @@
                 &:before
                     position absolute
                     right 1.25em
-                    bottom 0
+                    bottom -0.45em
                     left 1.25em
                     display block
                     height 2px
@@ -154,8 +149,9 @@
                 display inline-block
                 visibility hidden
                 color $silverDark
-                font-size 16px
+                font-size 1em
                 opacity 0.1
+                margin-right 12px
                 transition $transitionMain
                 transform translateX($widthSidebarOpen)
 
@@ -164,7 +160,7 @@
             right 0
             bottom 0
             min-width $widthSidebarClose
-            border-top 1px solid $hoary
+            border-top 1px solid $grayMedium
             background-color $grayLight
             cursor pointer
             transition $transitionMain
@@ -175,12 +171,16 @@
                 min-width $widthSidebarOpen
 
                 img
+                    filter opacity(60%)
                     transform scale(1, 1)
 
             img
                 float left
-                padding 15px
+                padding-top 15px
+                padding-bottom 15px
                 width 12px
+                filter opacity(60%)
                 transform scale(-1, -1)
+
 </style>
 

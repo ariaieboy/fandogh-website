@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section>
     <img alt="logo" src="../assets/img/logo.png"  class="logo" />
     <h1 class="title">
       {{ error.statusCode }}

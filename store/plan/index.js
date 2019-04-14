@@ -10,7 +10,7 @@ export default {
                 title: "Free",
                 price: '0',
                 cpu: "Unknown",
-                ram: "400MB",
+                memory: "400MB",
                 space: "2GB",
                 list: [
                     "امکان اجرای دو سرویس همزمان",
@@ -25,7 +25,7 @@ export default {
                 title: "Plan-1",
                 price: '60,000',
                 cpu: "Core 1",
-                ram: "1GB",
+                memory: "1GB",
                 space: "5GB",
                 list: [
                     "امکان داشتن ۲ دامنه غیر فندقی "
@@ -38,7 +38,7 @@ export default {
                 title: "Plan-2",
                 price: '120,000',
                 cpu: "Core 1",
-                ram: "2GB",
+                memory: "2GB",
                 space: "5GB",
                 list: [
                     "امکان داشتن ۴ دامنه غیر فندقی "
@@ -51,7 +51,7 @@ export default {
                 title: "Plan-4",
                 price: '240,000',
                 cpu: "Core 2",
-                ram: "4GB",
+                memory: "4GB",
                 space: "30GB",
                 list: [
                     "امکان داشتن ۸ دامنه غیر فندقی ",
@@ -65,7 +65,7 @@ export default {
                 title: "Plan-8",
                 price: '480,000',
                 cpu: "Core 4",
-                ram: "8GB",
+                memory: "8GB",
                 space: "30GB",
                 list: [
                     "امکان داشتن ۸ دامنه غیر فندقی ",
@@ -79,7 +79,7 @@ export default {
                 title: "Plan-16",
                 price: '960,000',
                 cpu: "Core 8",
-                ram: "16GB",
+                memory: "16GB",
                 space: "40GB",
                 list: [
                     "امکان داشتن ۸ دامنه غیر فندقی ",

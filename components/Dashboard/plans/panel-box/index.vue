@@ -6,7 +6,7 @@
         :title="item.title"
         :price="item.price"
         :space="item.space"
-        :ram="item.ram"
+        :ram="item.memory"
         :cpu="item.cpu"
         :isShow="index === isShow"
         @toggle="toggle(index)"
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     clickInfo(index) {
-   
+
       if (index === this.tooltipShow) {
         this.tooltipShow = -1;
         return;
@@ -60,7 +60,7 @@ export default {
           eventCategory: "plan",
           eventAction: "click plan",
           eventLabel: "plan index",
-          eventValue: index 
+          eventValue: index
       });
       this.$router.push(`/dashboard/plans/${index + 1}`);
     }

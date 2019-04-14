@@ -53,7 +53,7 @@ module.exports = {
      */
     build: {
         extractCSS: true,
-        vendor: ["axios"]
+        vendor: ["axios", "vue-slider-component"]
     },
 
     plugins: [
@@ -63,6 +63,7 @@ module.exports = {
         {src: "~/plugins/vue-bar", ssr: false},
         "~/plugins/mixins",
         "~/plugins/validation",
+        {src: "~/plugins/vue-slider-component", ssr: false},
         {src: "~/plugins/bootstrap", ssr: false}
     ]
 };

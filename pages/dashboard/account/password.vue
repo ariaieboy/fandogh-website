@@ -30,7 +30,7 @@
         ></f-input>
       </div>
       <div class="fandogh-form-group margin-top-100">
-        <f-button @onClick="saveEdit" styles="red block">تغییر رمز عبور</f-button>
+        <f-button @onClick="saveEdit" styles="green block">تغییر رمز عبور</f-button>
         <!-- <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar> -->
       </div>
     </div>

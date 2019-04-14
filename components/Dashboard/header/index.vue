@@ -24,10 +24,8 @@ export default {
   data() {
     return {
       list: [
-        { icon: 'Group 2188', text: 'حساب کاربری', link: '/dashboard/account' },
-        { icon: 'Group 2190', text: 'پلن من', link: '/dashboard/plans' },
-        { icon: 'Group 2188', text: 'کیف پول', link: '/dashboard/wallet' },
-        { icon: 'ic_settings', text: 'تنظیمات', link: '/dashboard/account/edit' },
+        { icon: 'ic-profile', text: 'حساب کاربری', link: '/dashboard/account' },
+        { icon: 'ic-home', text: 'داشبورد', link: '/dashboard/general' },
       ]
     }
   },
@@ -67,9 +65,10 @@ export default {
   display flex
   justify-content space-between
   align-items center
+  border-bottom 1px solid $grayMedium
   width 100%
   height 48px
-  background-color $grayLight
+  background-color $totalWhite
   font-size 14px
   &-logo
     padding-right 30px

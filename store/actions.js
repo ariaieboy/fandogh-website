@@ -287,14 +287,22 @@ export const getNameSpace = async ({commit, state}, namespace) => {
     }
 };
 
+export const requestUserNamespaces = async ({commit, state}) => {
+    try {
+        let res = await Request().get(`/api/users/namespaces`);
+        commit("SET_DATA", {id: "namespaces", data: res});
+        return res;
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 
 export const getMetric = async ({commit, state}, metric) => {
     try {
-        console.log("calling monitoring")
         const res = await Request(null, {baseUrl: monitoringAPI}).get(`/?metric=${metric}`);
         commit("SET_DATA", {id: metric, data: res})
     } catch (e) {
-        console.log('error', e)
         return Promise.reject(e)
     }
 }
