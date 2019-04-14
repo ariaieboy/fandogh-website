@@ -28,7 +28,7 @@
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">تاریخ عضویت:</p>
-                        <p class="profile-entity-value">۱۲/۰۲/۱۳۹۷</p>
+                        <p class="profile-entity-value"></p>
                     </div>
                     <div style="min-height: 3em; display: block">
                         <p class="profile-entity-title" style="display: inline-block">نام فضانام:</p>
@@ -118,6 +118,7 @@
     import FLabelDisable from "~/components/elements/label/label-disable";
     import FCheckbox from "~/components/elements/checkbox";
     import {removeValue, setValue, getValue} from "../../../utils/cookie";
+    import Moment from 'moment-jalaali';
 
     export default {
         layout: "dashboard",
@@ -131,7 +132,8 @@
             FCheckbox,
             ProfilePlan,
             ProfileWallet,
-            ProfileTransactions
+            ProfileTransactions,
+            Moment
         },
         data() {
             return {
@@ -140,6 +142,7 @@
                 activeSectionName: 'ProfilePlan',
                 namespaces: [],
                 activeNamespace: {},
+                dateJoined: '',
             };
         },
         computed: {
@@ -226,6 +229,7 @@
                         let elm = document.querySelector("#newsletter_subscriber");
                         elm.click();
                     }
+                    this.dateJoined = Moment(res.date_joined).format('jYYYY/jMM/jDD');
                     this.fetchUserNamespaces();
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
