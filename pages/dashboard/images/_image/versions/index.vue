@@ -17,12 +17,12 @@
       <div class="table-responsive table-multicolor">
         <b-table :fields="header" stacked="lg" :items="versions" empty-text="دیتایی وجود ندارد">
           <template slot="action" slot-scope="props">
-            <action-button
-              class="action-button-mini"
-              @onClick="craeteVersions(props.item)"
-              icon="ic-add.svg"
-              label="ایجاد سرویس"
-            />
+            <!--<action-button-->
+              <!--class="action-button-mini"-->
+              <!--@onClick="craeteVersions(props.item)"-->
+              <!--icon="ic-add.svg"-->
+              <!--label="ایجاد سرویس"-->
+            <!--/>-->
             <action-button
               class="action-button-mini"
               @onClick="logs(props.item)"
