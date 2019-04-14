@@ -51,7 +51,6 @@
         <!--<f-button @onClick="$router.push('/dashboard/images')" styles="transparent border" > داشبورد </f-button>-->
         <f-button path="/dashboard" styles="transparent border md margin-10">داشبورد</f-button>
       </div>
-
       <!-- <div v-if="loggedIn" class="profile">
         <a href="#" @click.prevent="toggleMenu(null)">
           <img :src="avatar" alt="profile">
