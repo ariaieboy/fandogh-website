@@ -20,11 +20,6 @@
               </router-link>
             </li>
             <li>
-              <a href="#prices">
-                <progress-hover :hover="true">سرویس ها</progress-hover>
-              </a>
-            </li>
-            <li>
               <a rel="noopener" target="_blank" href="https://docs.fandogh.cloud">
                 <progress-hover :hover="true">مستندات</progress-hover>
               </a>

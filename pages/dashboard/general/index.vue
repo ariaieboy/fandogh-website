@@ -21,9 +21,9 @@
       <div class="col-lg-6 col-xs-12">
         <f-images/>
       </div>
-      <!--<div class="col-lg-6 col-xs-12">-->
-        <!--<f-services/>-->
-      <!--</div>-->
+      <div class="col-lg-6 col-xs-12">
+        <f-services/>
+      </div>
       <div class="col-lg-6 col-xs-12">
         <f-domains/>
       </div>
