@@ -7,8 +7,8 @@
     <solution/>
     <devider styles="no-margin" type="tl"/>
     <tutorial/>
-    <!-- <devider styles="no-margin" type="br" />
-    <prices />-->
+    <!-- <devider styles="no-margin" type="br"/>
+    <prices/>-->
     <devider styles="no-margin" type="fc"/>
     <f-customer/>
   </section>

@@ -1,54 +1,84 @@
-@import "variables.styl"
+
+@import 'variables.styl'
+// fonts
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700')
 
-// fonts
 @font-face
+  font-style normal
+  font-weight normal
   font-family yekan
-  font-style normal
   src url('/fonts/yekan-regular.ttf')
-
 @font-face
-  font-family yekan-light
   font-style normal
+  font-weight normal
+  font-family yekan-light
   src url('/fonts/iranyekanweblight.ttf')
+@font-face
+  font-style normal
+  font-weight normal
+  font-family yekan-bold
+  src url('/fonts/yekan-bold.ttf')
+@font-face
+  font-family yekan-number
+  font-style normal
+  font-weight normal
+  src url('/fonts/yekanbakhNumber/YekanBakh_Medium.ttf')
+@font-face
+  font-family iran-sans
+  font-style normal
+  font-weight normal
+  src url('/fonts/iran-sans.ttf')
+@font-face
+  font-family iran-yekan
+  font-style normal
+  font-weight normal
+  src url('/fonts/IRANYekanRegular.ttf')
+
+body
+  background #f0f4f8
 
 .font-roboto
   font-family Roboto !important
   
 body.noscroll
-  overflow: hidden
-
+  overflow hidden
 .container
-    margin-right: auto
-    margin-left: auto
-    padding-left:  15px
-    padding-right: 15px
-    padding-bottom 90px
+  margin-right auto
+  margin-left auto
+  padding-right 15px
+  padding-bottom 90px
+  padding-left 15px
+  @media (min-width: 768px)
+    width 750px
+  @media (min-width: 1024px)
+    width 970px
+  @media (min-width: 1200px)
+    width 1170px
+li
+  list-style none
 
-    @media (min-width: 768px) { width: 750px !important; }
-    @media (min-width: 1024px) { width: 970px !important; }
-    @media (min-width: 1200px) { width: 1170px !important; }
-
-li              
-  list-style: none
 p, h1, h2, h3, h6, button, span, a, li, label
-  font-family yekan, sans-serif
   color white
+  font-family yekan, sans-serif
 .dash-container
-  p, h1, h2, h3, h6, span, a, li, label
+  a, p, h1, h2, h4, h3, h6, li, span, label
     color #000
   h2
-    line-height 1.8
     padding-bottom 20px
     font-size 18px
+    line-height 1.8
   .error-text
-    color #ff2d55
-    text-decoration underline
+    color #ff2d55 !important
+    span
+      color #ff2d55 !important
   .pending-text
-    color #296bdd
+    color #296bdd !important
+    span
+      color #296bdd !important
   .success-text
-    color #2cac46
-
+    color #2cac46 !important
+    span
+      color #2cac46 !important
 p, h6, button
   font-size font-small
 p
@@ -56,73 +86,67 @@ p
 h1, h2
   font-size font-big
   line-height 1.8
-
-a 
- text-decoration none 
-   
+a
+  text-decoration none
 input
-  font-size font-small
   color #000
-input,textarea
+  font-size font-small
+input, textarea
   &::placeholder
     color gray
-    font-family yekan, sans-serif
     font-size font-small
+    font-family yekan, sans-serif
 .img-responsive
   width 100%
-
-h2.title 
-  color white 
+h2.title
   margin 0
   padding 20px 0
+  color white
   text-align center
   font-size 30px
-  
-p.description 
+p.description
   text-align center
   font-size 18px
-
 .no-padding
   padding 0
-
 .inner-content
   padding 0 150px
-  
 .row-block
-  margin-bottom 30px
   display block
-
+  margin-bottom 30px
 .article
-  background #fff
-  width 100%
-  min-height 500px
-  border-radius 20px
-  padding 50px 100px
   box-sizing border-box
+  padding 50px 100px
+  min-height 500px
+  width 100%
+  border-radius 20px
+  background #fff
   img
     width 100%
-  h1,h2,h3
+  h1, h2, h3
     line-height initial
-  h1,h2,h3,h6,p
-    color #000
+  h1, h2, h3, h6, p
     padding-bottom 30px
+    color #000
   h6
     padding-bottom 0
   a
     color #ff859e
-
 .flex
   display flex
   align-items center
+.flex-space
+  display flex
+  justify-content space-between
+  align-items center
 .centered-page
-  min-height 86vh
   justify-content center
   align-items center
+  min-height 86vh
 @media only screen and (max-width: 991px)
   .article
     padding 50px 30px
-  
-@media (max-width: 768px )
+@media (max-width: 768px)
   .no-line-height
     line-height 1.8 !important
   .inner-content
@@ -130,18 +154,24 @@ p.description
   input, input::placeholder
     font-size font-x-small
     font-family yekan, sans-serif
-
 .font-bold
   font-weight bold
 .fandogh-form-group
-  margin 15px 0
+  position relative
   display block
+  margin 0 0 45px 0
   &:first-of-type
     margin-top 0
-
+  label
+    padding-right 5px
+    color #000
+    font-size 14px
 .center
   text-align center
-
+.pr-lg-25
+  padding-right 25px
+  @media only screen and (max-width: 1230px)
+    padding-right 0
 .margin-5
   margin 5px
 .margin-10
@@ -150,27 +180,139 @@ p.description
   margin 20px
 .margin-40
   margin 40px 0
-
+.margin-top-50
+  margin-top 50px
 .margin-top-100
   margin-top 100px
+.mb-45
+  margin-bottom 45px
 .80
   width 80%
-
-.bounce-enter-active {
-  animation: bounce-in .3s;
-}
-.bounce-leave-active {
-  animation: bounce-in .3s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.3);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
+.custom-row
+  display flex
+  justify-content space-between
+  align-items center
+.bounce-enter-active
+  animation bounce-in 0.3s
+.bounce-leave-active
+  animation bounce-in 0.3s reverse
+@keyframes bounce-in
+  0%
+    transform scale(0)
+  50%
+    transform scale(1.3)
+  100%
+    transform scale(1)
+.btn-nuxt
+  display inline-block
+  text-align center
+// *
+// box-sizing border-box
+.pr-160
+  padding-right 160px
+  @media only screen and (max-width: 1230px)
+    padding-right 0
+.pr-120
+  padding-right 120px
+  @media only screen and (max-width: 1230px)
+    padding-right 0
+.pl-100
+  padding-left 100px
+  @media only screen and (max-width: 1200px)
+    padding-left 15px
+  @media only screen and (max-width: 1230px)
+    padding-left 0
+.wrapper-col
+  &:not(.is-small)
+    padding 0 20px
+    @media only screen and (max-width: 1230px)
+      padding 0
+[data-balloon]
+  font-family yekan
+  &:after
+    font-family yekan !important
+.mute-text
+  color rgb(181, 181, 181) !important
+  font-size 14px
+.center-item
+  align-items center
+  width 100%
+.w-100
+  width 100%
+.position-relative
+  position relative
+table.vgt-table td
+  [data-balloon]
+    &:after
+      font-size 20px !important
+      font-family robot !important
+.space-image
+  margin 0 5px
+.mt-45
+  margin-top 45px
+.font-10
+  font-size 10px
+.p-0
+  padding 0 !important
+.pr-0
+  padding-right 0 !important
+.pl-0
+  padding-left 0 !important
+// vue-select
+.v-select .dropdown-toggle
+  margin-bottom 8px !important
+  min-height 46px !important
+  border 1px solid #e7e8ea !important
+  border-radius 10px !important
+  background-color #fff !important
+// .v-select .dropdown-toggle, .v-select .vs__actions, .v-select .vs__selected-options
+// flex-direction row-reverse
+.v-select .dropdown-toggle .clear
+  margin-right 0 !important
+  margin-left 6px !important
+.v-select .vs__actions
+  padding 0 3px 0 6px !important
+.v-select .dropdown-toggle .clear
+  padding-top 7px !important
+  font-weight 100 !important
+.v-select .dropdown-menu
+  overflow-y auto !important
+  text-align right !important
+.v-select .dropdown-menu>.highlight>a
+  background #296bdd !important
+.v-select .vs__selected-options
+  overflow hidden
+.fix-list
+  .v-select.single .selected-tag
+    padding-top 7px
+  .v-select .dropdown-toggle
+    height 44px
+// vue-bar
+.vb > .vb-dragger
+  left 0
+  z-index 5
+  width 12px
+.vb > .vb-dragger > .vb-dragger-styler
+  display block
+  margin 5px 5px 5px 0
+  height calc(100% - 10px)
+  border-radius 20px
+  background-color rgba(48, 121, 244, 0.1)
+  backface-visibility hidden
+  transition background-color 100ms ease-out, margin 100ms ease-out, height 100ms ease-out
+  transform rotate3d(0, 0, 0, 0)
+  -webkit-backface-visibility hidden
+  -webkit-transform rotate3d(0, 0, 0, 0)
+  -webkit-transition background-color 100ms ease-out, margin 100ms ease-out, height 100ms ease-out
+.vb.vb-scrolling-phantom > .vb-dragger > .vb-dragger-styler
+  background-color rgba(48, 121, 244, 0.3)
+.vb > .vb-dragger:hover > .vb-dragger-styler
+  margin 0px
+  height 100%
+  background-color rgba(48, 121, 244, 0.5)
+.vb.vb-dragging > .vb-dragger > .vb-dragger-styler
+  margin 0px
+  height 100%
+  background-color rgba(48, 121, 244, 0.5)
+.vb.vb-dragging-phantom > .vb-dragger > .vb-dragger-styler
+  background-color rgba(48, 121, 244, 0.5)

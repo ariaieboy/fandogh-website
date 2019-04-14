@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 6" width="8px">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-rule: evenodd;
+        opacity: 0.2;
+      }
+    </style>
+  </defs>
+  <g id="ic_closeS" transform="translate(-1148.523 -639.523)">
+    <path id="Path_651" data-name="Path 651" class="cls-1" d="M3.713,3,5.853.86A.5.5,0,0,0,5.139.147L3,2.286.861.147A.5.5,0,1,0,.148.86L2.287,3,.148,5.139a.5.5,0,0,0,.713.713L3,3.713,5.139,5.852a.5.5,0,0,0,.713-.713Z" transform="translate(1148.522 639.523)"/>
+  </g>
+</svg>

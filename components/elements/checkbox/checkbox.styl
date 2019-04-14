@@ -1,9 +1,9 @@
-.checkbox input[type="checkbox"] {
+.checkbox-fan input[type="checkbox"] {
     opacity: 0;
 
 }
 
-.checkbox label::before{
+.checkbox-fan label::before{
     content: "";
     display: inline-block;
     height: 20px;
@@ -13,7 +13,7 @@
     
 }
 
-.checkbox label::after
+.checkbox-fan label::after
     content: '';
     display: block;
     width: 6px;
@@ -24,7 +24,7 @@
 
 
 
-.checkbox
+.checkbox-fan
   box-sizing border-box
   label 
     position relative
@@ -32,29 +32,29 @@
 
 
 
-.checkbox label::before,
-.checkbox label::after {
+.checkbox-fan label::before,
+.checkbox-fan label::after {
     position: absolute;
 }
 /*Outer-box*/
-.checkbox label::before {
+.checkbox-fan label::before {
     
     right: -27px
 }
 /*Checkmark*/
-.checkbox label::after {
+.checkbox-fan label::after {
     right: -22px;
     top: 0px;
 }
 /*Hide the checkmark by default*/
-.checkbox input[type="checkbox"] + label::after {
+.checkbox-fan input[type="checkbox"] + label::after {
     content: none;
 }
 /*Unhide the checkmark on the checked state*/
-.checkbox input[type="checkbox"]:checked + label::after {
+.checkbox-fan input[type="checkbox"]:checked + label::after {
     content: "";
 }
-.checkbox input[type="checkbox"]:focus + label::before {
+.checkbox-fan input[type="checkbox"]:focus + label::before {
     outline: rgb(59, 153, 252) auto 5px;
 }
 
@@ -68,4 +68,16 @@
       border-width: 0 3px 3px 0;
       transform: rotate(45deg);
 
+
+.checkbox-fan.light
+  label::before
+    background #fff
+  label::after
+    border: solid #4fe6ff;
+    content: '';
+    display: block;
+    width: 6px;
+    height: 12px;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 

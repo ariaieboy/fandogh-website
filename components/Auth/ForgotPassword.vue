@@ -1,5 +1,5 @@
 <template>
-    <f-modal ref="modal" v-show="show" >
+    <f-modal ref="modal" v-show="show"  :message="error" >
         <h2>فراموشی رمز عبور</h2>
         <div class="fandogh-form-group center margin-10">
             <f-input v-model="identifier" styles="input-color-blue" type="text" placeholder="ایمیل یا نام کاربری خود را وارد کنید" />
@@ -16,6 +16,8 @@
   import FInput from '~/components/elements/input'
   import FButton from '~/components/elements/button'
   import FCheckbox from '~/components/elements/checkbox'
+  import ErrorReporter from "~/utils/ErrorReporter";
+
 
 
   export default {
@@ -51,7 +53,7 @@
           this.$store.dispatch('setMessage', response.message)
         }).catch(e => {
           this.loading = false
-          this.error = e
+          this.error = ErrorReporter(e, this.$data)
         })
       }
     },

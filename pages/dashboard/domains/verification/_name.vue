@@ -1,20 +1,22 @@
 <template>
-  <div>
-    <h2>ایجاد سرویس </h2>
+  <div v-if="domain">
+    <h2>ایجاد دامنه</h2>
     <div class="row">
-      <div class="col-md-6 col-xs-12" >
-
+      <div class="col-md-6 col-xs-12">
         <div class="fandogh-form-group">
-          <f-input v-model="name"  styles="input-white input-block input-dashboard input-disable" > </f-input>
+          <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
+          <f-label-disable label :value="name" class="center"/>
         </div>
         <div class="fandogh-form-group">
-          <f-textarea disabled ß placeholder="لطفا روی دامنه مورد نظر یک رکورد با مقدار TXT زیر ایجاد کنید و روی کلید بررسی دامنه کلیک کنید"></f-textarea>
+          <f-textarea placeholder disable="true" class="textarea-disable"/>
+          <f-label-disable label :value="description" class="center"/>
         </div>
         <div class="fandogh-form-group">
           <f-lable :value="domain.verification_key" title="کد فعالسازی"></f-lable>
         </div>
+
         <div class="fandogh-form-group margin-top-100">
-          <f-button @onClick="verify" styles="red block"  > بررسی دامنه </f-button>
+          <f-button @onClick="verify" styles="red block">بررسی دامنه</f-button>
         </div>
       </div>
     </div>
@@ -22,61 +24,100 @@
 </template>
 
 <script>
-  import FInput from '~/components/elements/input'
-  import FButton from '~/components/elements/button'
-  import FTextarea from '~/components/Dashboard/textarea'
-  import FLable from '~/components/Dashboard/label'
+import FInput from "~/components/elements/input";
+import FButton from "~/components/elements/button";
+import FTextarea from "~/components/Dashboard/textarea";
+import FLable from "~/components/Dashboard/label";
+import FLabelDisable from "~/components/elements/label/label-disable";
 
-  export default {
-    async asyncData({store, dispatch}){
-      await store.dispatch('getDomains')
-    },
-    data(){
-      return {
-        name: this.$route.params.name,
-        test:''
+export default {
+  data() {
+    return {
+      name: this.$route.params.name,
+      test: "",
+      description:
+        "لطفا روی دامنه مورد نظر یک رکورد با مقدار TXT زیر ایجاد کنید و روی کلید بررسی دامنه کلیک کنید "
+    };
+  },
+  computed: {
+    domain() {
+      return this.$store.state.domain;
+    }
+  },
+  layout: "dashboard",
+  components: {
+    FInput,
+    FButton,
+    FTextarea,
+    FLable,
+    FLabelDisable
+  },
+  created() {
+    this.getData();
+  },
+  destroyed() { },
+  methods: {
+    async getData() {
+      try {
+        await this.$store.dispatch("getDomain", {
+          name: this.$route.params.name
+        });
+        if (this.domain.verified) {
+          this.$router.push("/dashboard/domains/" + this.name);
+          return
+        }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
+      } catch (e) {
+        if (e.status === 401) {
+          this.$router.push("/user/login");
+        }
+        this.$store.commit("SET_DATA", { data: false, id: "loading" });
       }
     },
-    computed:{
-      domain(){
-        let domain = this.$store.state.domains.find(domain => {
-          return domain.name === this.name
-        })
-        return domain ? domain : {}
-      },
-    },
-    layout: 'dashboard',
-    components:{
-      FInput,
-      FButton,
-      FTextarea,
-      FLable
-    },
-    methods:{
-      verify(){
-        this.$store.dispatch('verificationDomain', {name: this.name}).then(res => {
-          if(res.verified){
+    verify() {
+      this.$ga.event({
+        eventCategory: "domain",
+        eventAction: "verify domain",
+        eventLabel: "domain name",
+        eventValue: this.name
+      });
+      this.$store
+        .dispatch("verificationDomain", { name: this.name })
+        .then(res => {
+          if (res.verified) {
             this.$notify({
-                  title: 'دامنه شما با موفقیت به سرویس متصل شد.',
-                  type: 'success'
-          })
-          this.$router.push('/dashboard/domains')
+              title: "دامنه شما با موفقیت به سرویس متصل شد.",
+              type: "success"
+            });
+            this.$ga.event({
+              eventCategory: "domain",
+              eventAction: "verified domain",
+              eventLabel: "domain name",
+              eventValue: this.name
+            });
+            this.$router.push("/dashboard/domains");
           } else {
+            this.$ga.event({
+              eventCategory: "domain",
+              eventAction: "fail verified domain",
+              eventLabel: "domain name",
+              eventValue: this.name
+            });
             this.$notify({
-                  title: 'رکورد TXT شما روی دامنه صحیح نیست',
-                  type: 'error'
-          })
+              title: "رکورد TXT شما روی دامنه صحیح نیست",
+              type: "error"
+            });
           }
-        }).catch(e => {
-          console.log(e)
         })
-      }
+        .catch(e => {
+        });
     }
   }
+};
 </script>
 
 <style scoped lang="stylus">
-  .field-description
-    font-size: 14px
-    color: #b5b5b5
+.field-description
+  color #b5b5b5
+  font-size 14px
 </style>

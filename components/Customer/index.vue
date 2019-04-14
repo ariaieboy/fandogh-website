@@ -1,6 +1,5 @@
 <template>
   <div class="customer">
-    <!-- <div :class="{container:!isMobile}"> -->
     <div class="container">
       <div class="text">
         <h2 class="title">فندقی‌ها</h2>
@@ -85,13 +84,9 @@ export default {
       ],
     };
   },
-  computed: {
-    isMobile() {
-      return this.$store.state.windowWidth <= 992;
-    }
-  },
   mounted() {
-    this.startSlider()
+    // this.startSlider()
+
   },
   destroyed() {
     this.stopSlider()
@@ -115,6 +110,7 @@ export default {
       }
     },
     startSlider() {
+      return
       this.interval = setInterval(() => {
         this.activeCount += 1
         if (this.activeCount === 1) {
@@ -141,23 +137,19 @@ export default {
 
 <style lang="stylus" scoped>
 .customer
+  display flex
   padding-bottom 100px
   &-wrapper
     display flex
     margin-top 40px
-    @media (max-width: 1030px)
+    @media (max-width: 992px)
       flex-direction column-reverse
-  &-item-wrapper
-    @media (max-width: 1030px)
-      display flex
-      flex-direction column
-      justify-content space-between
   &-items
     display flex
-    justify-content center
     align-items center
-    @media (max-width: 1030px)
-      justify-content space-between
+    align-content center
+    @media (max-width: 480px)
+      flex-direction column-reverse
   &-item
     position relative
     display flex
@@ -171,20 +163,18 @@ export default {
     min-height 180px
     border-radius 10px
     background-color rgba(0, 0, 0, 0.14)
-    cursor pointer
     transition box-shadow 0.3s ease-in-out
-    @media (max-width: 1200px)
-      min-width 179px
-      min-height 170px
+    @media (max-width: 992px)
+      min-width 190px
+      min-height 160px
+    @media (max-width: 480px)
+      margin-bottom 30px
+      margin-left 0
+      min-width inherit
+      min-height 140px
+      width 160px
       img
-        @media (max-width: 1200px)
-          width 96px
-    @media (max-width: 1030px)
-      padding 20px
-      min-width auto
-      min-height auto
-      min-height 94px
-      width 50%
+        transform scale(0.5)
     &.active
       box-shadow 0px 0px 2px 2px rgba(38, 198, 236, 1)
     a
@@ -193,16 +183,19 @@ export default {
       font-weight bold
       font-size 24px
       font-family Roboto
-      @media (max-width: 1200px)
-        font-size 14px
+      @media (max-width: 992px)
+        font-size 16px
+      @media (max-width: 480px)
+        margin-top 5px
+        font-size 12px
     &:last-child
       margin-left 0
   &-banner
     margin-right 30px
     width 100%
-    @media (max-width: 1030px)
+    @media (max-width: 992px)
       margin-right 0
-      margin-bottom 35px
+      margin-bottom 30px
   &-banner-item
     position relative
     overflow hidden

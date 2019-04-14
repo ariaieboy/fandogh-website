@@ -1,7 +1,7 @@
 import './button.styl'
 export default {
   functional: true,
-  render(h, {props, ...rest}){
+  render(h, { props, ...rest }) {
     let classes = ['btn']
     const clickHandler =  function clickHandler(e) {
       if(!props.path){

@@ -1,5 +1,5 @@
 <template>
-  <div class="label">
+  <div @click="e => $emit('onClick', e)" class="label">
     <div class="label-title">
       {{title}}
     </div>

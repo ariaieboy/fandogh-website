@@ -1,54 +1,86 @@
 .btn
   display inline-block
-  border-radius: 23px;
-  -webkit-backdrop-filter: blur(30px);
-  backdrop-filter: blur(30px);
+  padding 14px 0
+  min-width 160px
   border none
-  cursor pointer
-  padding: 14px 0;
-  min-width: 160px;
-  transition: .6s ease transform, .6s ease box-shadow
-  font-family yekan, sans-serif
+  border-radius 23px
   text-align center
-
+  font-family yekan, sans-serif
+  cursor pointer
+  transition 0.6s ease transform, 0.6s ease box-shadow
+  -webkit-backdrop-filter blur(30px)
+  backdrop-filter blur(30px)
+  @media only screen and (max-width: 900px)
+    min-height 30px
+    line-height 30px
+.btn-black-light
+  color #000
 .btn-border
-  border: solid 2px #ffffff;
+  border solid 2px #ffffff
 .btn-transparent
   background-color transparent
-
   &:hover
-    color #160070
     background-color white
-    transform scale(1.1)
+    color #160070
+    // transform scale(1.1)
 .btn-blue
   background-image linear-gradient(to left, #00e3dc, #4fa8fd)
-  box-shadow: 0 3px 26px 0 rgba(33, 203, 235, 0.4);
+  box-shadow 0 3px 26px 0 rgba(33, 203, 235, 0.4)
+  color #fff !important
   &:hover
-    box-shadow: 0 3px 26px 0 rgba(33, 203, 235, 1);
+    box-shadow 0 3px 26px 0 rgba(33, 203, 235, 1)
+
+.btn-green
+  background-image linear-gradient(to left, #84D321, #2FC02C)
+  box-shadow 0 3px 26px 0 rgba(47, 192, 44, 0.4)
+  color #fff !important
+  &:hover
+    box-shadow 0 3px 26px 0 rgba(47, 192, 44, 1)
 .btn-red
   background-image linear-gradient(to left, #ffa7ad, #ff628f)
-  box-shadow: 0 3px 26px 0 rgba(254, 93, 144, 0.4);
+  box-shadow 0 3px 26px 0 rgba(254, 93, 144, 0.4)
+  color #fff !important
   &:hover
-    box-shadow: 0 3px 26px 0 rgba(254, 93, 144, 1);
-
+    box-shadow 0 3px 26px 0 rgba(254, 93, 144, 1)
 .btn-alert
   background-color #ff2d55
   &:hover
-    box-shadow: 0 3px 26px 0 #ff2d55;
+    box-shadow 0 3px 26px 0 #ff2d55
+.btn-disabled
+  pointer-events none
 .btn-block
   display block
   width 100%
 .btn-light
-  color #2d2d2d
   background #fff
+  color #2d2d2d
+.btn-black
+  border #000 1px solid
+  color #000
+.btn-gray
+  background-color #b0b0b0
+  color #ffffff !important
+.btn-md
+  padding 7px 0
+  min-width 128px
+.btn-margin-10
+  margin-right 10px
 .upload-btn-wrapper input[type=file]
   &:hover
     +.btn-blue
-        box-shadow: 0 3px 26px 0 rgba(33, 203, 235, 1);
-
-
-
+      box-shadow 0 3px 26px 0 rgba(33, 203, 235, 1)
+@media only screen and (max-width: 768px)
+  .btn
+    padding 12px 0
+    min-width 140px
+    font-size 16px
 @media only screen and (max-width: 576px)
   .btn
-    padding: 12px 0;
-    min-width: 140px;
+    padding 5px 0
+    min-width 110px
+    font-size 14px
+.btn-ml-45
+  margin-left 45px
+
+.btn-margin-24
+  margin-top 24px

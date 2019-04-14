@@ -2,7 +2,7 @@
 
 # fandogh
 
-> fandogh cloud landing
+> fandogh cloud landing.
 
 ## Build Setup
 

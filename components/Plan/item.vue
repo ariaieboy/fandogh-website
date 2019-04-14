@@ -1,0 +1,66 @@
+<template>
+
+    <div class="middle-xs middle-lg middle-md middle-sm">
+
+        <div class="box middle-xs middle-lg middle-md middle-sm">
+
+            <div class="title-box">
+
+                <img :alt="title" :src="image"/>
+                <p class="title">{{title}}</p>
+                <p class="description-button">توضیحات بیشتر</p>
+
+            </div>
+
+            <div class="divider">
+            </div>
+
+            <div class="description-box">
+
+                <div>
+                    <img :alt="title" src="~/assets/svg/ic-storage.svg"/>
+                    <p class="title">حافظه ذخیره‌سازی</p>
+                    <p class="value">{{dedicatedVolume}} گیگابایت</p>
+                </div>
+
+                <div>
+                    <img :alt="title" src="~/assets/svg/ic-memory.svg"/>
+                    <p class="title">رم اختصاصی</p>
+                    <p class="value">{{memory}} گیگابایت</p>
+                </div>
+
+                <div>
+                    <img :alt="title" src="~/assets/svg/ic-cpu.svg"/>
+                    <p class="title">پردازنده اختصاصی</p>
+                    <p class="value">{{cpu}} هسته</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props: ["icon", "title", "dedicatedVolume", "memory", "cpu"],
+        data() {
+            return {
+                "base-plan": require("~/assets/svg/base-plan.svg"),
+                "economy-plan": require("~/assets/svg/economy-plan.svg"),
+                "startup-plan": require("~/assets/svg/startup-plan.svg")
+            };
+        },
+        computed: {
+            image() {
+                return this.$data[this.icon];
+            }
+        }
+    }
+</script>
+
+<style lang="stylus" scoped>
+    @import "../../assets/css/inactive-plan.styl"
+</style>
+
+

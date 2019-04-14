@@ -4,7 +4,6 @@ import br from "~/assets/svg/img-wave-br.svg";
 import bl from "~/assets/svg/img-wave-bl.svg";
 import fc from "~/assets/svg/img-wave-fc.svg";
 import "./devider.styl";
-
 export default {
   functional: true,
   render(h, { props }) {

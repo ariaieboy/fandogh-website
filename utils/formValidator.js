@@ -5,6 +5,7 @@ export default (fields, requiredFields) => {
     if(Object.keys(requiredFields).includes(key)){
       let field = fields[key]
       let name = ` "${requiredFields[key].name || key}" `
+      let msg = ` "${requiredFields[key].msg || key}" `
       if(requiredFields[key].required && (!field || !field.length)) {
         pass = false
         Vue.prototype.$notify({
@@ -17,7 +18,7 @@ export default (fields, requiredFields) => {
           if(!pattern.test(field)) {
             pass = false
             Vue.prototype.$notify({
-              title: `از کارکترهای مجاز برای فیلد ${name} استفاده کنید`,
+              title: msg || `از کارکترهای مجاز برای فیلد ${name} استفاده کنید`,
               type: 'error'
             })
           }
