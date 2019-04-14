@@ -47,7 +47,7 @@
                     <div style="margin-top: auto;margin-bottom: auto;margin-right: 24px; padding: 0;">
 
                         <p class="plan-title">رم</p>
-                        <p class="plan-value">{{(quota.memory_limit > 1024 ? quota.memory_limit / 1024 :
+                        <p class="plan-value">{{(quota.memory_limit > 1024 ? Math.round(quota.memory_limit / 1024) :
                             quota.memory_limit)}}
                             <span v-if="quota.memory_limit>1024">گیگابایت</span>
                             <span v-else>مگابایت</span>
