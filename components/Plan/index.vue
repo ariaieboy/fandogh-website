@@ -3,15 +3,15 @@
     <div class="row">
         <div class="row-custom">
             <div ref="cint" style="overflow-x: scroll" class="center col-lg-12 col-md-12 col-xs-12 container-fluid">
-                <plan title="پلن پایه" icon="base-plan" dedicated-volume="10" memory="1" cpu="1"
+                <plan title="پلن پایه" icon="base-plan" dedicated-volume="10" memory="1" cpu="0.5"
                       v-bind:class="(selected === 0 ? 'selected' : 'unselected')"
                       @click.native="clicked(0)"/>
 
-                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="50" memory="2" cpu="2"
+                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="50" memory="2" cpu="1"
                       v-bind:class="(selected === 1 ? 'selected' : 'unselected')"
                       @click.native="clicked(1)"/>
 
-                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="100" memory="3" cpu="3"
+                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="100" memory="4" cpu="2"
                       v-bind:class="(selected === 2 ? 'selected' : 'unselected')"
                       @click.native="clicked(2)"/>
 
@@ -40,7 +40,7 @@
         },
         data() {
             return {
-                selected: 0
+                selected: -1
             }
         },
         methods: {
@@ -54,11 +54,11 @@
                         break;
                     case 1:
                         this.$emit('update:memory', 2);
-                        this.$emit('update:dedicatedVolume', 20);
+                        this.$emit('update:dedicatedVolume', 50);
                         break;
                     case 2:
-                        this.$emit('update:memory', 3);
-                        this.$emit('update:dedicatedVolume', 30);
+                        this.$emit('update:memory', 4);
+                        this.$emit('update:dedicatedVolume', 100);
                         break;
                 }
             },

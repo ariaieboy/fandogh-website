@@ -5,8 +5,8 @@
                 <td width="26%">{{bill.local_name}}</td>
                 <td class="number" width="17%">{{bill.quantity}}</td>
                 <td width="17%">{{bill.local_unit}}</td>
-                <td class="number" width="20%">{{bill.unit_price.toLocaleString()}}</td>
-                <td class="number" width="20%">{{bill.total_price.toLocaleString()}}</td>
+                <td class="number" width="20%">{{(bill.description === 'cpu' ? '__' : bill.unit_price.toLocaleString())}}</td>
+                <td class="number" width="20%">{{(bill.description === 'cpu' ? '__' : bill.total_price.toLocaleString())}}</td>
             </tr>
         </table>
 

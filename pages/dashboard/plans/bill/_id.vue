@@ -107,13 +107,22 @@
 
                 <div style="box-sizing: content-box; margin-top: 32px; padding-right: 32px; padding-left: 32px">
 
-                    <p style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #4a90e2; letter-spacing: normal;">
-                        در صورت ادامه و تایید شما با تمام جزئیات مطرح شده در فاکتور صادره شده موافق بوده و سکو ابری فندق
-                        هیچ
-                        مسئولیتی
-                        در قبال مشکلات احتمالی ناشی از اشتباه کاربر در بررسی صحت و درستی فاکتور را ندارد.<br>
-                        همچنین شما حداقل تا یک ماه نمی‌توانید پلن انتخاب شده را تنزل داده و از منابع آن کم کنید.
-                    </p>
+                    <ul>
+                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #4a90e2; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
+                            در صورت ادامه و تایید٬ شما با تمام جزئیات مطرح در فاکتور صادر شده موافق بوده و سکو ابری فندق
+                            هیچ مسئولیتی
+                            در قبال مشکلات احتمالی ناشی از اشتباه کاربر در بررسی صحت و درستی فاکتور را ندارد.
+                        </li>
+
+                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #4a90e2; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
+                            همچنین شما زودتر از موعد سررسید پلن خود نمی‌توانید پلن انتخاب شده را تنزل داده و از منابع آن کم کنید.
+                        </li>
+
+                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: orangered; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
+                            هزینه <strong style="text-decoration: underline">پردازنده</strong> در محاسبات٬ بر روی حافظه رم محاسبه می‌شود و در حال حاضر سکوی ابری فندق پردازنده را به صورت تابعی از رم به فروش میرساند.
+                        </li>
+
+                    </ul>
 
 
                 </div>

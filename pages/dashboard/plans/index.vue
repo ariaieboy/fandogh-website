@@ -177,7 +177,7 @@
                 </div>
             </div>
 
-            <div class="checkout-box container-fluid col-md-3 col-lg-3 col-sm-3 col-xs-12">
+            <div class="checkout-box container-fluid col-md-4 col-lg-4 col-sm4 col-xs-12">
 
                 <div v-if="memory >= 1 || planData.memory > 0">
                     <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">
@@ -199,11 +199,12 @@
 
                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
                     مبلغ نهایی (تومان):</p>
-                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0"
-                   v-if="fixedTotal > 0">{{fixedTotal}}</p>
-                <p style="width: 100%; text-align: center; margin-top: 0; margin-bottom: 0" v-if="fixedTotal> 0">+</p>
-                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 0">
-                    {{total}}</p>
+                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 12px">
+                    <span style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0"
+                          v-if="fixedTotal > 0">{{fixedTotal.toLocaleString()}} +
+                    </span>
+                    {{total}}
+                </p>
                 <button @click="pushUrl">
                     ثبت نهایی و پرداخت
                 </button>
@@ -326,7 +327,7 @@
                 if (this.quota === null) {
                     return 0;
                 } else {
-                    return this.quota.memory_limit / 1024;
+                    return Math.round(this.quota.memory_limit / 1024);
                 }
             },
             dedicatedVolume() {
