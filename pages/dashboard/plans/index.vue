@@ -147,9 +147,9 @@
                                 <p style="float: left;">{{dedicatedVolumeMax}}</p>
                             </div>
 
-                            <p v-if="planData.dedicatedVolume < 10" class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                               style="margin: 0;color: white; font-size: 11px; text-align: center;
-                               background-color: orangered; border-radius: 25px; padding: 7px 0">
+                            <p v-if="planData.dedicatedVolume < 10"
+                               style="margin: auto;color: white; font-size: 11px; text-align: center;
+                               background-color: orangered; border-radius: 25px; padding: 7px 12px">
                                 حداقل میزان فضای قابل سفارش ۱۰ گیگابایت می‌باشد!</p>
 
                             <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
