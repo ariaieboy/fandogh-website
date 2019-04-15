@@ -550,7 +550,7 @@
         width 16px
         height 16px
         box-shadow transparent
-        background-color #adadad
+        background-color #24d5d8
         cursor: pointer
 
         img
