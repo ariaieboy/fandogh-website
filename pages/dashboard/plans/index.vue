@@ -28,12 +28,12 @@
 
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 16px;">
 
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" style="height: 100%; display: flex;">
-                        <img style="transform: rotate(-45deg) scale(1.2, 1.2)" class="feature-image"
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3" style="height: 100%;">
+                        <img style="transform: rotate(-45deg)" class="feature-image"
                              src="../../../assets/svg/ic-memory.svg" alt="memory"></img>
                     </div>
 
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8"
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9"
                          style="display: block; float: right; position: relative;">
 
                         <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
@@ -103,12 +103,12 @@
 
                 <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 16px;">
 
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4" style="height: 100%; display: flex;">
-                        <img style="transform: scale(1.2, 1.2)" class="feature-image"
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-3" style="height: 100%;">
+                        <img class="feature-image"
                              src="../../../assets/svg/ic-dedicated-volume.svg" alt="zone"></img>
                     </div>
 
-                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-8"
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-9"
                          style="display: block; float: right; position: relative;">
                         <div class="row col-lg-12 col-sm-12 col-md-12 col-xs-12"
                              style="display: flex; margin-top: 16px;float: left;">
@@ -571,7 +571,9 @@
 
     .feature-image
         width 80%
+        max-width 150px
         margin-top 26px
+        max-height 100px
         height 70%
         filter invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)
 
