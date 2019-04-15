@@ -273,7 +273,7 @@
                     order: true,
                     process: true,
                     dotStyle: {backgroundColor: '#24d5d8', boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.17)'},
-                    railStyle: {backgroundColor: 'rgba(173, 173, 173, 0.3)'},
+                    railStyle: {backgroundColor: 'rgba(173, 173, 173, 0.3)', cursor: 'pointer'},
                     processStyle: {backgroundImage: 'linear-gradient(to right, #2979ff, #24d5d8)'},
                     labelStyle: {
                         color: '#2979ff',

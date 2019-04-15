@@ -135,6 +135,7 @@
         height 48px
         width 48px
         margin-right 8px
+        cursor pointer
         margin-top 18px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.16)
         background-color #fefefe
@@ -158,6 +159,7 @@
         height 48px
         width 48px
         display inline-flex
+        cursor pointer
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.16)
         background-color #fefefe
         margin-top 18px
