@@ -21,7 +21,7 @@
 
                 <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 plan-feature-title">
 
-                    <h3 class="customization-title">میزان رم</h3>
+                    <h3 class="customization-title">حافظه تصادفی (رم)</h3>
                     <div></div>
 
                 </div>
@@ -179,32 +179,82 @@
 
             <div class="checkout-box container-fluid col-md-4 col-lg-4 col-sm4 col-xs-12">
 
-                <div v-if="memory >= 1 || planData.memory > 0">
-                    <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">
-                        میزان رم:
-                        <span style="font-family: iran-sans; color: #2979ff" v-if="memory >= 1">{{memory}} گیگ</span>
-                        <span v-if="memory >= 1 && planData.memory > 0">+</span>
-                        <span style="font-family: iran-sans; font-weight: normal">{{planData.memory}} گیگ</span></p>
-                </div>
-                <div v-if="planData.dedicatedVolume >= 10 || dedicatedVolume > 0">
-                    <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: right">
-                        حافظه ذخیره‌سازی:
-                        <span style="font-family: iran-sans; color: #2979ff" v-if="dedicatedVolume > 0">{{dedicatedVolume}} گیگ </span>
-                        <span v-if="dedicatedVolume > 0 && planData.dedicatedVolume >= 10">+</span>
-                        <span style="font-family: iran-sans; font-weight: normal" v-if="planData.dedicatedVolume >= 10">{{planData.dedicatedVolume}} گیگ</span>
-                    </p>
+                <div class="row">
+                    <div  style="flex: 1">
+                        <p style="text-align: center">حافظه تصادفی (رم)</p>
+                        <div style="height: 1px; background-color: #999; margin: 12px 5px 0 5px"></div>
+                        <div style="display: flex;">
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                    فعلی:
+                                </p>
+                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; margin: 12px 0 0 0"
+                                   v-if="memory >= 1">
+                                    {{memory}} گیگ
+                                </p>
+                            </div>
+
+                            <div v-if="planData.memory > 0" style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                    سفارش:
+                                </p>
+                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; margin: 12px 0 0 0">
+                                    {{planData.memory}} گیگ
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div  style="flex: 1">
+                        <p style="text-align: center">حافظه ذخیره‌سازی</p>
+                        <div style="height: 1px; background-color: #999; margin: 12px 5px 0 5px"></div>
+                        <div style="display: flex">
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                    فعلی:
+                                </p>
+                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; margin: 12px 0 0 0">
+                                    {{dedicatedVolume}} گیگ
+                                </p>
+                            </div>
+
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                    سفارش:
+                                </p>
+                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; margin: 12px 0 0 0">
+                                    {{(planData.dedicatedVolume >= 10 ? planData.dedicatedVolume : 0)}} گیگ
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div  style="flex: 1">
+                        <p style="text-align: center">مبلغ نهایی (تومان)</p>
+                        <div style="height: 1px; background-color: #999; margin: 12px 5px 0 5px"></div>
+                        <div style="display: flex">
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
+                                    فعلی:</p>
+
+                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0">
+                                    {{fixedTotal.toLocaleString()}}
+                                </p>
+
+                            </div>
+
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
+                                    سفارش:</p>
+                                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 12px">
+                                    {{total}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div style="height: 1px; background-color: #999;"></div>
-
-                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
-                    مبلغ نهایی (تومان):</p>
-                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 12px">
-                    <span style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0"
-                          v-if="fixedTotal > 0">{{fixedTotal.toLocaleString()}} +
-                    </span>
-                    {{total}}
-                </p>
                 <button @click="pushUrl">
                     ثبت نهایی و پرداخت
                 </button>
@@ -354,7 +404,7 @@
                 this.planData.cpu = this.planData.memory / 2;
                 return this.planData.memory / 2;
             }, total() {
-                let temp = this.planData.memory * 60000 + this.planData.dedicatedVolume * 1200;
+                let temp = this.planData.memory * 60000 + (this.planData.dedicatedVolume  >= 10 ? this.planData.dedicatedVolume * 1200 : 0);
                 return temp.toLocaleString()
             }, fixedTotal() {
                 return Math.round(this.quota.memory_limit / 1024) * 60000 + this.quota.volume_limit * 1200;
@@ -485,13 +535,12 @@
 
     .customization-title
         height 32px
-        width 140px
         font-family iran-yekan
         font-size 1.2em
         font-style normal
         display inline-flex
         line-height 32px
-        margin auto;
+        margin auto
         letter-spacing normal
         color #2979ff
 
@@ -565,6 +614,7 @@
         div
             height 1px
             margin auto 12px auto auto
+            right 12px
             width 100%
             display inline-flex
             background-color #7c7c7c
