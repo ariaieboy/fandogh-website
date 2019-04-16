@@ -25,7 +25,6 @@
                                     {{service.state | state}}</p>
                             </div>
                         </td>
-                        <td :width="headers[3].width" style="text-align: center; font-family: iran-sans; font-size: 0.9em;">{{service.service_restarts}}</td>
                     </tr>
                 </table>
             </div>
@@ -36,33 +35,6 @@
         </div>
     </div>
 
-    <!--<div class="services">-->
-    <!--<div class="dashboard-home-wrapper">-->
-    <!--<div class="dashboard-home-header">-->
-    <!--<div class="dashboard-home-title">-->
-    <!--<img src="~assets/img/icons/ic_services.svg" alt="images">-->
-    <!--<span>سرویس های شما</span>-->
-    <!--<router-link to="/dashboard/services">لیست سرویس ها</router-link>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="table-responsive dashboard-home-table" v-bar v-if="services && services.length">-->
-    <!--<div class="table-scrolled">-->
-    <!--<b-table :fields="header" stacked="lg" :items="services" empty-text="دیتایی وجود ندارد">-->
-    <!--<template slot="state" slot-scope="props">-->
-    <!--<div class="badg-state">-->
-    <!--<i :class="stateColor(props.item.state)"></i>-->
-    <!--<span>{{props.item.state | state}}</span>-->
-    <!--</div>-->
-    <!--</template>-->
-    <!--<template slot="url" slot-scope="props">-->
-    <!--<a :href="props.item.url" v-if="props.item.url != 'internal'" target="_blank" rel="noopener">لینک</a>-->
-    <!--<span v-else> &#45;&#45; </span>-->
-    <!--</template>-->
-    <!--</b-table>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
 </template>
 
 <script>
@@ -96,11 +68,10 @@
                     icon: 'ic-service'
                 },
                 headers: [
-                    {title: 'نام سرویس', width: '30%'},
-                    {title: 'تاریخ ساخت', width: '25%'},
-                    {title: 'وضعیت سرویس', width: '30%'},
-                    {title: 'ریست', width: '15%'},
-                ],
+                    {title: 'نام سرویس', width: '33%'},
+                    {title: 'تاریخ ساخت', width: '33%'},
+                    {title: 'وضعیت سرویس', width: '33%'}
+                    ],
                 navigation: {
                     title: 'تعداد سرویس‌ها',
                     button: 'لیست سرویس‌ها'
