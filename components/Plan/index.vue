@@ -139,10 +139,8 @@
         margin-top 18px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.16)
         background-color #fefefe
-        @media only screen and (max-width: 900px)
-            width 34px
-            height 34px
-            top 12px
+        @media only screen and (max-width: 600px)
+            display none
 
         img
             display flex
@@ -150,8 +148,8 @@
             transform rotate(180deg)
             pointer-events none
             filter invert(100%)
-            @media only screen and (max-width: 900px)
-                width 6px
+            @media only screen and (max-width: 600px)
+                display none
 
 
     .right-cursor
@@ -164,18 +162,16 @@
         background-color #fefefe
         margin-top 18px
         margin-left 8px
-        @media only screen and (max-width: 900px)
-            width 34px
-            height 34px
-            margin-top 12px
+        @media only screen and (max-width: 600px)
+            display none
 
         img
             display flex
             margin auto
             pointer-events none
             filter invert(100%)
-            @media only screen and (max-width: 900px)
-                width 6px
+            @media only screen and (max-width: 600px)
+                display none
 
 
 

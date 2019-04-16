@@ -12,7 +12,7 @@
         <div class="row">
             <div class="vol-lg-8 col-sm-8 col-md-8 col-xs-12" style="position: relative">
 
-                <div class="col-lg-12 col-md-12 col-xs-12" style="height: 48px; width: 100%;margin-top: 100px">
+                <div class="col-lg-12 col-md-12 col-xs-12" style="height: 48px; width: 100%;margin-top: 70px">
                     <img src="../../../assets/svg/plan-customization.svg" alt="plan" class="section-title-image"
                          align="right"/>
 
@@ -177,12 +177,19 @@
                 </div>
             </div>
 
-            <div class="checkout-box container-fluid col-md-4 col-lg-4 col-sm4 col-xs-12">
+            <div class="container-fluid col-md-4 col-lg-4 col-sm-4 col-xs-12" :class="['checkout-box', {open}]">
+                <div :class="['row' , (open ? 'expanded-invoice' : 'collapsed-invoice')]" class="row" style="margin-bottom: -1px;">
+                    <div class="one" @click="translateCheckoutBox">
+                        <img src="../../../assets/svg/arrow.svg" alt="arrow"></img>
+                    </div>
+                    <div class="two">
 
-                <div class="row">
-                    <div  style="flex: 1">
-                        <p style="text-align: center">حافظه تصادفی (رم)</p>
-                        <div style="height: 1px; background-color: #999; margin: 12px 5px 0 5px"></div>
+                    </div>
+
+                </div>
+                <div class="row" style="background-color: #ffffff" >
+                    <div style="flex: 1">
+                        <p class="checkout-section-title">حافظه تصادفی (رم)</p>
                         <div style="display: flex;">
                             <div style="flex: 1">
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
@@ -206,9 +213,8 @@
 
                     </div>
 
-                    <div  style="flex: 1">
-                        <p style="text-align: center">حافظه ذخیره‌سازی</p>
-                        <div style="height: 1px; background-color: #999; margin: 12px 5px 0 5px"></div>
+                    <div style="flex: 1">
+                        <p class="checkout-section-title">حافظه ذخیره‌سازی</p>
                         <div style="display: flex">
                             <div style="flex: 1">
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
@@ -230,9 +236,8 @@
                         </div>
                     </div>
 
-                    <div  style="flex: 1">
-                        <p style="text-align: center">مبلغ نهایی (تومان)</p>
-                        <div style="height: 1px; background-color: #999; margin: 12px 5px 0 5px"></div>
+                    <div style="flex: 1">
+                        <p class="checkout-section-title">مبلغ نهایی (تومان)</p>
                         <div style="display: flex">
                             <div style="flex: 1">
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
@@ -255,9 +260,11 @@
                     </div>
                 </div>
 
-                <button @click="pushUrl">
-                    ثبت نهایی و پرداخت
-                </button>
+                <div class="row" style="background-color: #ffffff">
+                    <button class="checkout" @click="pushUrl">
+                        ثبت نهایی و پرداخت
+                    </button>
+                </div>
 
             </div>
         </div>
@@ -288,6 +295,7 @@
                     cpu: 0.5,
                     dedicatedVolume: 0,
                 },
+                isCollapsed: false,
                 dedicatedVolumeMin: '10GB',
                 dedicatedVolumeMax: '1TB',
                 memoryRangeMin: '1GB',
@@ -373,6 +381,9 @@
             Feature
         },
         computed: {
+            open(){
+              return this.isCollapsed;
+            },
             memory() {
                 if (this.quota === null) {
                     return 0;
@@ -404,7 +415,7 @@
                 this.planData.cpu = this.planData.memory / 2;
                 return this.planData.memory / 2;
             }, total() {
-                let temp = this.planData.memory * 60000 + (this.planData.dedicatedVolume  >= 10 ? this.planData.dedicatedVolume * 1200 : 0);
+                let temp = this.planData.memory * 60000 + (this.planData.dedicatedVolume >= 10 ? this.planData.dedicatedVolume * 1200 : 0);
                 return temp.toLocaleString()
             }, fixedTotal() {
                 return Math.round(this.quota.memory_limit / 1024) * 60000 + this.quota.volume_limit * 1200;
@@ -421,6 +432,13 @@
             this.requestActivePlan();
         },
         methods: {
+            translateCheckoutBox(){
+                if(this.isCollapsed){
+                    this.isCollapsed = false;
+                }else {
+                    this.isCollapsed = true;
+                }
+            },
             incMemory() {
                 if (this.planData.memory < this.memoryOptions.max)
                     this.planData.memory += 1;
@@ -566,24 +584,47 @@
 
     .checkout-box
         position sticky
-        background-color #ffffff
         border-radius 3px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         width 100%
-        height min-content
+        max-height min-content
         top 60px
         bottom 20px
-        margin-top 130px
+        margin-top 70px
+        transition max-height 0.2s ease
         z-index 10
-        @media only screen and (max-width: 900px)
+
+        @media only screen and (max-width: 1200px)
             bottom 0
             box-shadow 0 -3px 6px 0 rgba(0, 0, 0, 0.17)
 
-        button
+        @media only screen and (max-width: 900px)
+            bottom 0
+            max-height 70px
+            z-index 999999998
+            box-shadow 0 -3px 6px 0 rgba(0, 0, 0, 0)
+            &.open
+                z-index 1000000000
+                max-height 270px
+
+        @media only screen and (max-width: 450px)
+            bottom 0
+            max-height 70px
+            box-shadow 0 -3px 6px 0 rgba(0, 0, 0, 0)
+            z-index 999999998
+            &.open
+                z-index 1000000000
+                max-height 450px
+
+
+
+        button.checkout
             width 100%
             height 40px
             border-radius 3px
             margin-bottom 16px
+            margin-right 16px
+            margin-left 16px
             border none
             outline none
             cursor pointer
@@ -594,6 +635,10 @@
             @media only screen and (max-width: 900px)
                 height 35px
                 margin-bottom 12px
+                margin-right 16px
+                margin-left 16px
+            @media only screen and (max-width: 600px)
+                max-height 73px
 
 
     .section-title-image
@@ -675,6 +720,79 @@
             font-weight bold
             margin 0
             display inline-block
+
+    .checkout-section-title
+        text-align center
+        background-color #2979ff
+        margin: 0
+        padding-top 10px
+        padding-bottom 10px
+        color #fff
+        @media only screen and (min-width: 900px)
+            border-radius 0 !important
+
+    .expanded-invoice
+        @media only screen and (min-width: 900px)
+            display none
+
+        div.one
+            margin-left: auto;
+            margin-right: auto;
+            height: 45px;
+            width: 45px;
+            display inline-flex
+            background-color: #2979ff;
+            border-radius: 25px;
+            margin-bottom: -22px;
+            cursor pointer
+            box-shadow: 0 -2px 6px 0 rgba(0, 0, 0, 0.37);
+
+            img
+                display flex
+                margin-bottom 13px
+                margin-right auto
+                margin-left auto
+                transform rotate(90deg)
+
+         div.two
+             box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
+             width 100%
+             height 1px
+             background-color #2979ff
+             z-index -1
+
+    .collapsed-invoice
+        @media only screen and (min-width: 900px)
+            display none
+
+        div.one
+            margin-left: auto;
+            margin-right: auto;
+            height: 45px;
+            width: 45px;
+            display inline-flex
+            background-color: #2979ff;
+            border-radius: 25px;
+            margin-bottom: -22px;
+            cursor pointer
+            box-shadow: 0 -2px 6px 0 rgba(0, 0, 0, 0.37);
+
+            img
+                display flex
+                margin-bottom 13px
+                margin-right auto
+                margin-left auto
+                transform rotate(-90deg)
+
+        div.two
+            box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
+            width 100%
+            height 1px
+            background-color #2979ff
+            z-index -1
+
+
+
 
 
 </style>
