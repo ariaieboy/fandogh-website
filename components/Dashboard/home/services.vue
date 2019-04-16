@@ -1,6 +1,5 @@
 <template>
 
-
     <div style="padding-bottom: 32px">
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
@@ -11,19 +10,17 @@
 
             <div style="margin-left: 12px; margin-right: 12px; margin-top: 12px">
                 <table style="width: 100%; border: none; border-collapse: collapse;">
-                    <tr v-for="service in services" style="height: 40px; border-collapse: collapse; font-family: iran-yekan;font-size: 0.8em; color: #333333;
+                    <tr v-for="(service, index) in services" v-if="index < 5" style="height: 40px; border-collapse: collapse; font-family: iran-yekan;font-size: 0.8em; color: #333333;
                             border-bottom: solid 1px rgba(0, 0, 0, 0.25); left: 12px">
                         <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis">
                             {{service.name}}
                         </td>
                         <td :width="headers[1].width" style="text-align: center">{{service.start_date}}</td>
                         <td :width="headers[2].width" style="text-align: center; padding-left: 6px; padding-right: 6px">
-                            <div style="width: 100%; display: flex; background-color: #f0f0f0; border-radius: 25px;padding-bottom: 3px; padding-top: 3px; justify-content: end">
-                                <img style="margin: auto 6px auto 12px; display: inline-flex; width: 16px; height: 16px"
-                                     :src="require('./icons/' + stateIcons[service.state.toLowerCase()] + '.svg')" alt="name"></img>
-                                <p style="font-family: iran-yekan; font-size: 0.9em; margin: 0; display: inline-block">
-                                    {{service.state | state}}</p>
-                            </div>
+                            <status-container
+                                    :icon="stateIcons[service.state.toLowerCase()]"
+                                    :status="service.state | state">
+                            </status-container>
                         </td>
                     </tr>
                 </table>
@@ -31,7 +28,7 @@
 
             <table-navigation :title="navigation.title" :count="(services ? services.length : 0)"
                               :button="navigation.button"
-            :link="goToServices"></table-navigation>
+                              :link="goToServices"></table-navigation>
         </div>
     </div>
 
@@ -48,10 +45,12 @@
     import TableTitle from "./children/table-title";
     import TableNavigation from "./children/table-navigation";
     import Moment from 'moment-jalaali'
+    import StatusContainer from "./children/status-container";
 
     export default {
         layout: "dashboard",
         components: {
+            StatusContainer,
             TableNavigation,
             TableTitle,
             TableHeader,
@@ -71,7 +70,7 @@
                     {title: 'نام سرویس', width: '33%'},
                     {title: 'تاریخ ساخت', width: '33%'},
                     {title: 'وضعیت سرویس', width: '33%'}
-                    ],
+                ],
                 navigation: {
                     title: 'تعداد سرویس‌ها',
                     button: 'لیست سرویس‌ها'

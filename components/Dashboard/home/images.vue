@@ -10,7 +10,7 @@
 
             <div style="margin-left: 12px; margin-right: 12px; margin-top: 12px">
                 <table style="width: 100%; border: none; border-collapse: collapse;">
-                    <tr v-for="item in images" style="height: 40px; border-collapse: collapse; font-family: iran-yekan;font-size: 0.8em; color: #333333;
+                    <tr v-for="(item, index) in images" v-if="index < 5" style="height: 40px; border-collapse: collapse; font-family: iran-yekan;font-size: 0.8em; color: #333333;
                             border-bottom: solid 1px rgba(0, 0, 0, 0.25); left: 12px">
                         <td :width="headers[0].width" style="text-align: center">{{item.name}}</td>
                         <td :width="headers[1].width" style="text-align: center">{{item.version}}</td>
