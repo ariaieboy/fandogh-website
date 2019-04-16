@@ -18,18 +18,21 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-6 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <f-images/>
       </div>
-      <div class="col-lg-6 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <f-services/>
       </div>
-      <div class="col-lg-6 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <f-domains/>
       </div>
-      <div class="col-lg-6 col-xs-12">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <f-secrets/>
       </div>
+      <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
+        <!--<f-volumes/>-->
+      <!--</div>-->
     </div>
   </div>
 </template>
@@ -41,6 +44,7 @@ import FServices from "~/components/Dashboard/home/services.vue";
 import FDomains from "~/components/Dashboard/home/domains.vue";
 import FSecrets from "~/components/Dashboard/home/secrets.vue";
 import FCharts from "~/components/Dashboard/home/usage.vue";
+import FVolumes from "~/components/Dashboard/home/volumes.vue";
 
 export default {
   name: "dashboard-home",
@@ -51,7 +55,8 @@ export default {
     FServices,
     FDomains,
     FSecrets,
-    FCharts
+    FCharts,
+    FVolumes
   },
   data() {
     return {
@@ -94,6 +99,7 @@ export default {
         await this.$store.dispatch("getServices");
         await this.$store.dispatch("getDomains");
         await this.$store.dispatch("getSecret");
+        await this.$store.dispatch("getVolumes");
 
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
