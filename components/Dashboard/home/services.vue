@@ -4,7 +4,10 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <div style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
+        <empty-feature v-if="services.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="goToSecrets">
+        </empty-feature>
+
+        <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
 
             <table-header :headers="headers"></table-header>
 
@@ -46,10 +49,12 @@
     import TableNavigation from "./children/table-navigation";
     import Moment from 'moment-jalaali'
     import StatusContainer from "./children/status-container";
+    import EmptyFeature from "./children/empty-feature";
 
     export default {
         layout: "dashboard",
         components: {
+            EmptyFeature,
             StatusContainer,
             TableNavigation,
             TableTitle,
@@ -62,6 +67,10 @@
         },
         data() {
             return {
+                emptySection:{
+                    title:'سرویس',
+                    icon: 'ic-service',
+                },
                 sectionTitle: {
                     title: 'سرویس‌ها',
                     icon: 'ic-service'

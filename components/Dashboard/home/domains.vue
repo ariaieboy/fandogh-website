@@ -4,7 +4,10 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <div style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
+        <empty-feature v-if="domains.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="goToDomains">
+        </empty-feature>
+
+        <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
 
             <table-header :headers="headers"></table-header>
 
@@ -55,12 +58,17 @@
     import TableNavigation from "./children/table-navigation";
     import StatusContainer from "./children/status-container";
     import Moment from 'moment-jalaali';
+    import EmptyFeature from "./children/empty-feature";
 
     export default {
         layout: "dashboard",
-        components: {StatusContainer, TableNavigation, TableHeader, TableTitle},
+        components: {EmptyFeature, StatusContainer, TableNavigation, TableHeader, TableTitle},
         data() {
             return {
+                emptySection:{
+                    title:'دامنه',
+                    icon: 'ic-domain',
+                },
                 sectionTitle: {
                     title: 'دامنه‌ها',
                     icon: 'ic-domain'

@@ -1,6 +1,6 @@
 <template>
     <div class="parent">
-        <p>{{title}}: {{count}}</p>
+        <p>{{title}}: <span>{{count}}</span></p>
         <button class="detail-button" @click="link">{{button}}</button>
     </div>
 </template>
@@ -23,6 +23,10 @@
             display inline-block
             font-size 1em
             color #7c7c7c
+            font-family iran-yekan
+            span
+                font-family iran-sans
+                color #7c7c7c
 
     .detail-button
         border-radius 5px

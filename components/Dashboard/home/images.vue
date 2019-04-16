@@ -4,7 +4,11 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <div style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
+        <empty-feature v-if="images.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="goToImages">
+
+        </empty-feature>
+
+        <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
 
             <table-header :headers="headers"></table-header>
 
@@ -32,11 +36,16 @@
     import TableTitle from "./children/table-title";
     import TableNavigation from "./children/table-navigation";
     import Moment from 'moment-jalaali'
+    import EmptyFeature from "./children/empty-feature";
 
     export default {
-        components: {TableNavigation, TableTitle, TableHeader, Moment},
+        components: {EmptyFeature, TableNavigation, TableTitle, TableHeader, Moment},
         data() {
             return {
+                emptySection:{
+                  title:'ایمیج',
+                  icon: 'ic-image',
+                },
                 sectionTitle: {
                     title: 'ایمیج‌ها',
                     icon: 'ic-image'

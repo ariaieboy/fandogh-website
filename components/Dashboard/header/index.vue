@@ -1,6 +1,6 @@
 <template>
   <div class="header-dashboard">
-    <hamburger-menu @onClicked="toggleSidebar()" :isVisible="open"/>
+    <hamburger-menu v-if="isMenuAvailable" @onClicked="toggleSidebar()" :isVisible="open"/>
 
     <div class="header-dashboard-logo">
       <router-link to="/">
@@ -35,6 +35,11 @@ export default {
     },
     isMobile() {
       return this.$store.state.windowWidth <= 992;
+    },
+    isMenuAvailable() {
+      if (this.$route.path.indexOf('account') !== -1) {
+        return false;
+      } else return this.$route.path.indexOf('bill') === -1;
     }
   },
   watch: {
