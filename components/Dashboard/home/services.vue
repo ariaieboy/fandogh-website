@@ -4,7 +4,7 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <empty-feature v-if="services.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="goToSecrets">
+        <empty-feature v-if="services.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="goToServices">
         </empty-feature>
 
         <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
