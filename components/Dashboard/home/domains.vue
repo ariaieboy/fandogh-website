@@ -15,7 +15,7 @@
                         <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis">
                             {{domain.name}}
                         </td>
-                        <td :width="headers[1].width" style="text-align: center">{{FFromDate(domain.created_at)}}</td>
+                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans;">{{FFromDate(domain.created_at)}}</td>
                         <td :width="headers[2].width" style="text-align: center; padding-left: 6px; padding-right: 6px">
 
                             <div style="width: 100%; display: flex; background-color: #f0f0f0; border-radius: 25px;padding-bottom: 3px; padding-top: 3px; justify-content: end">
@@ -54,6 +54,7 @@
     import TableHeader from "./children/table-header";
     import TableNavigation from "./children/table-navigation";
     import StatusContainer from "./children/status-container";
+    import Moment from 'moment-jalaali';
 
     export default {
         layout: "dashboard",
@@ -111,7 +112,7 @@
                 this.$router.push('/dashboard/domains/')
             },
             FFromDate(value) {
-                return FFromDate(value);
+                return Moment(value).format('jYYYY/jMM/jDD');
             },
             FDate(value) {
                 return FDate({date: value});

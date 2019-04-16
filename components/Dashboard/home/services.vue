@@ -15,7 +15,7 @@
                         <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis">
                             {{service.name}}
                         </td>
-                        <td :width="headers[1].width" style="text-align: center">{{service.start_date}}</td>
+                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans">{{service.start_date}}</td>
                         <td :width="headers[2].width" style="text-align: center; padding-left: 6px; padding-right: 6px">
                             <status-container
                                     :icon="stateIcons[service.state.toLowerCase()]"

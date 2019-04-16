@@ -14,7 +14,7 @@
                             border-bottom: solid 1px rgba(0, 0, 0, 0.25); left: 12px">
                         <td :width="headers[0].width" style="text-align: center">{{item.name}}</td>
                         <td :width="headers[1].width" style="text-align: center">{{item.version}}</td>
-                        <td :width="headers[2].width" style="text-align: center; ">{{item.date}}</td>
+                        <td :width="headers[2].width" style="text-align: center; font-family: iran-sans">{{item.date}}</td>
                     </tr>
                 </table>
             </div>

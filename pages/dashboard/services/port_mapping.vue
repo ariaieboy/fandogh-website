@@ -171,7 +171,6 @@ export default {
       }
       if (
         this.port_mapping.filter(p => p.target_port === this.target_port).length > 0
-              || this.port_mapping < 0
       ) {
         this.$notify({
           title: `شما قبلا به پورت ${this.target_port} یک نگاشت ایجاد کرده‌اید`,

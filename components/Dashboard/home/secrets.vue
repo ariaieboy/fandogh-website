@@ -15,7 +15,7 @@
                         <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis">
                             {{secret.name}}
                         </td>
-                        <td :width="headers[1].width" style="text-align: center">{{secret.created_at}}</td>
+                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans">{{secret.created_at}}</td>
                         <td :width="headers[2].width" style="text-align: center; padding-left: 6px; padding-right: 6px">
                             {{secret.type}}
                         </td>
@@ -32,27 +32,10 @@
         </div>
     </div>
 
-
-    <!--<div class="secrets">-->
-        <!--<div class="secretss">-->
-            <!--<div class="dashboard-home-header">-->
-                <!--<div class="dashboard-home-title">-->
-                    <!--<img src="~assets/img/icons/ic_secret.svg" alt="images">-->
-                    <!--<span>سکرت های شما</span>-->
-                    <!--<router-link to="/dashboard/domains">لیست سکرت ها</router-link>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="table-responsive dashboard-home-table" v-bar v-if="secrets && secrets.length">-->
-                <!--<div class="table-scrolled">-->
-                    <!--<b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد"></b-table>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
 </template>
 
 <script>
-    import FFromDate from "~/utils/fromDate";
+    import Moment from 'moment-jalaali';
     import TableTitle from "./children/table-title";
     import TableHeader from "./children/table-header";
     import TableNavigation from "./children/table-navigation";
@@ -104,7 +87,7 @@
                             name,
                             type: type,
                             memory: `Mi ${memory}`,
-                            created_at: FFromDate(created_at)
+                            created_at: Moment(created_at).format('jYYYY/jMM/jDD')
                         };
                     });
                 }

@@ -14,8 +14,8 @@
                         <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis">
                             {{volume.name}}
                         </td>
-                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans; font-size: 0.9em">{{volume.created_at}}</td>
-                        <td :width="headers[2].width" style="text-align: center; font-family: iran-sans; font-size: 0.9em">{{volume.capacity}} گیگابایت</td>
+                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans;">{{volume.created_at}}</td>
+                        <td :width="headers[2].width" style="text-align: center; font-family: iran-sans;">{{volume.capacity}} گیگابایت</td>
                         <td :width="headers[3].width" style="text-align: center">
                             <div style="width: 100%; display: flex; background-color: #f0f0f0; border-radius: 25px;padding-bottom: 3px; padding-top: 3px; justify-content: end;white-space: nowrap">
                                 <i class="status" :class="stateIcon(volume.service)"
