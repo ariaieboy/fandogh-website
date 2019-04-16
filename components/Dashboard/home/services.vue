@@ -4,21 +4,25 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <empty-feature v-if="services.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="goToServices">
+        <empty-feature v-if="services.length === 0" :title="emptySection.title" :icon="emptySection.icon"
+                       :url="createService">
         </empty-feature>
 
-        <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
+        <div v-else
+             style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
 
             <table-header :headers="headers"></table-header>
 
             <div style="margin-left: 12px; margin-right: 12px; margin-top: 12px">
-                <table style="width: 100%; border: none; border-collapse: collapse;">
+                <table style="width: 100%; border: none; border-collapse: collapse; table-layout: fixed">
                     <tr v-for="(service, index) in services" v-if="index < 5" style="height: 40px; border-collapse: collapse; font-family: iran-yekan;font-size: 0.8em; color: #333333;
                             border-bottom: solid 1px rgba(0, 0, 0, 0.25); left: 12px">
-                        <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis">
+                        <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis;; overflow: hidden; white-space: nowrap">
                             {{service.name}}
                         </td>
-                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans">{{service.start_date}}</td>
+                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans; text-overflow: ellipsis; ; overflow: hidden; white-space: nowrap">
+                            {{service.start_date}}
+                        </td>
                         <td :width="headers[2].width" style="text-align: center; padding-left: 6px; padding-right: 6px">
                             <status-container
                                     :icon="stateIcons[service.state.toLowerCase()]"
@@ -67,8 +71,8 @@
         },
         data() {
             return {
-                emptySection:{
-                    title:'سرویس',
+                emptySection: {
+                    title: 'سرویس',
                     icon: 'ic-service',
                 },
                 sectionTitle: {
@@ -135,6 +139,10 @@
             },
             goToServices() {
                 this.$router.push('/dashboard/services/')
+            },
+            createService() {
+                this.$router.push('/dashboard/services/setup')
+
             }
         }
     };
