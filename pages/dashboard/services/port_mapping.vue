@@ -10,6 +10,7 @@
               v-model="port"
               styles="input-white input-block input-dashboard"
               placeholder="Inside Port"
+              type="number"
             ></f-input>
           </div>
           <div class="fandogh-form-group">
@@ -18,6 +19,7 @@
               v-model="target_port"
               styles="input-white input-block input-dashboard"
               placeholder="Outside Port"
+              type="number"
             ></f-input>
           </div>
           <div class="fandogh-form-group">
@@ -168,11 +170,29 @@ export default {
         return;
       }
       if (
-        this.port_mapping.filter(p => p.target_port === this.target_port)
-          .length > 0
+        this.port_mapping.filter(p => p.target_port === this.target_port).length > 0
+              || this.port_mapping < 0
       ) {
         this.$notify({
           title: `شما قبلا به پورت ${this.target_port} یک نگاشت ایجاد کرده‌اید`,
+          time: 4000,
+          type: "error"
+        });
+        return;
+      }
+
+      if(this.target_port < 0){
+        this.$notify({
+          title: `target port نمی‌تواند منفی باشد`,
+          time: 4000,
+          type: "error"
+        });
+        return;
+      }
+
+      if(this.port < 0){
+        this.$notify({
+          title: `port نمی‌تواند منفی باشد`,
           time: 4000,
           type: "error"
         });
@@ -183,6 +203,8 @@ export default {
         target_port: this.target_port,
         protocol: this.protocol
       });
+      this.target_port = "";
+      this.port = "";
     }
   },
   watch: {
