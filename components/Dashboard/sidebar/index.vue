@@ -77,6 +77,9 @@
             right -17em
             padding-bottom 0
 
+        @media only screen and (max-height: 500px)
+            padding-top 48px
+
         &-list
             overflow auto
 

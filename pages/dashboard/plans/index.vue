@@ -178,34 +178,35 @@
             </div>
 
             <div class="container-fluid col-md-4 col-lg-4 col-sm-4 col-xs-12" :class="['checkout-box', {open}]">
-                <div :class="['row' , (open ? 'expanded-invoice' : 'collapsed-invoice')]" class="row" style="margin-bottom: -1px;">
-                    <div class="one" @click="translateCheckoutBox">
-                        <img src="../../../assets/svg/arrow.svg" alt="arrow"></img>
+                <div :class="['row' , (open ? 'expanded-invoice' : 'collapsed-invoice')]" class="row"
+                     style="margin-bottom: -1px;">
+                    <div class="one" @click="translateCheckoutBox" style="cursor: pointer">
+                        <img src="../../../assets/svg/arrow.svg" alt="arrow" style="cursor: pointer"></img>
                     </div>
                     <div class="two">
 
                     </div>
 
                 </div>
-                <div class="row" style="background-color: #ffffff" >
+                <div class="row" style="background-color: #ffffff">
                     <div style="flex: 1">
                         <p class="checkout-section-title">حافظه تصادفی (رم)</p>
                         <div style="display: flex;">
                             <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; margin: 12px 0 0 0"
+                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0"
                                    v-if="memory >= 1">
                                     {{memory}} گیگ
                                 </p>
                             </div>
 
                             <div v-if="planData.memory > 0" style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     سفارش:
                                 </p>
-                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; margin: 12px 0 0 0">
+                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; line-height: 2; margin: 0">
                                     {{planData.memory}} گیگ
                                 </p>
                             </div>
@@ -217,19 +218,19 @@
                         <p class="checkout-section-title">حافظه ذخیره‌سازی</p>
                         <div style="display: flex">
                             <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; margin: 12px 0 0 0">
+                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0">
                                     {{dedicatedVolume}} گیگ
                                 </p>
                             </div>
 
                             <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 12px 0 0 0 ">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     سفارش:
                                 </p>
-                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; margin: 12px 0 0 0">
+                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; line-height: 2; margin: 0">
                                     {{(planData.dedicatedVolume >= 10 ? planData.dedicatedVolume : 0)}} گیگ
                                 </p>
                             </div>
@@ -240,19 +241,19 @@
                         <p class="checkout-section-title">مبلغ نهایی (تومان)</p>
                         <div style="display: flex">
                             <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:</p>
 
-                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; margin-top: 0; margin-bottom: 0">
+                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; line-height: 2; margin: 0">
                                     {{fixedTotal.toLocaleString()}}
                                 </p>
 
                             </div>
 
                             <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     سفارش:</p>
-                                <p style="width: 100%; text-align: center; font-family: iran-sans;margin-top: 0; margin-bottom: 12px">
+                                <p style="width: 100%; text-align: center; font-family: iran-sans;line-height: 2; margin: 0">
                                     {{total}}
                                 </p>
                             </div>
@@ -381,8 +382,8 @@
             Feature
         },
         computed: {
-            open(){
-              return this.isCollapsed;
+            open() {
+                return this.isCollapsed;
             },
             memory() {
                 if (this.quota === null) {
@@ -432,10 +433,10 @@
             this.requestActivePlan();
         },
         methods: {
-            translateCheckoutBox(){
-                if(this.isCollapsed){
+            translateCheckoutBox() {
+                if (this.isCollapsed) {
                     this.isCollapsed = false;
-                }else {
+                } else {
                     this.isCollapsed = true;
                 }
             },
@@ -598,7 +599,7 @@
             bottom 0
             box-shadow 0 -3px 6px 0 rgba(0, 0, 0, 0.17)
 
-        @media only screen and (max-width: 900px)
+        @media only screen and (max-width: 768px)
             bottom 0
             max-height 70px
             z-index 999999998
@@ -615,7 +616,6 @@
             &.open
                 z-index 1000000000
                 max-height 450px
-
 
 
         button.checkout
@@ -732,7 +732,7 @@
             border-radius 0 !important
 
     .expanded-invoice
-        @media only screen and (min-width: 900px)
+        @media only screen and (min-width: 768px)
             display none
 
         div.one
@@ -754,15 +754,15 @@
                 margin-left auto
                 transform rotate(90deg)
 
-         div.two
-             box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
-             width 100%
-             height 1px
-             background-color #2979ff
-             z-index -1
+        div.two
+            box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
+            width 100%
+            height 1px
+            background-color #2979ff
+            z-index -1
 
     .collapsed-invoice
-        @media only screen and (min-width: 900px)
+        @media only screen and (min-width: 768px)
             display none
 
         div.one
@@ -790,9 +790,6 @@
             height 1px
             background-color #2979ff
             z-index -1
-
-
-
 
 
 </style>
