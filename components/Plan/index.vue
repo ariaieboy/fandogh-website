@@ -3,15 +3,15 @@
     <div class="row">
         <div class="row-custom">
             <div ref="cint" style="overflow-x: scroll" class="center col-lg-12 col-md-12 col-xs-12 container-fluid">
-                <plan title="پلن پایه" icon="base-plan" dedicated-volume="10" memory="1" cpu="1"
+                <plan title="پلن پایه" icon="base-plan" dedicated-volume="10" memory="1" cpu="0.5"
                       v-bind:class="(selected === 0 ? 'selected' : 'unselected')"
                       @click.native="clicked(0)"/>
 
-                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="50" memory="2" cpu="2"
+                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="50" memory="2" cpu="1"
                       v-bind:class="(selected === 1 ? 'selected' : 'unselected')"
                       @click.native="clicked(1)"/>
 
-                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="100" memory="3" cpu="3"
+                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="100" memory="4" cpu="2"
                       v-bind:class="(selected === 2 ? 'selected' : 'unselected')"
                       @click.native="clicked(2)"/>
 
@@ -40,7 +40,7 @@
         },
         data() {
             return {
-                selected: 0
+                selected: -1
             }
         },
         methods: {
@@ -54,11 +54,11 @@
                         break;
                     case 1:
                         this.$emit('update:memory', 2);
-                        this.$emit('update:dedicatedVolume', 20);
+                        this.$emit('update:dedicatedVolume', 50);
                         break;
                     case 2:
-                        this.$emit('update:memory', 3);
-                        this.$emit('update:dedicatedVolume', 30);
+                        this.$emit('update:memory', 4);
+                        this.$emit('update:dedicatedVolume', 100);
                         break;
                 }
             },
@@ -135,13 +135,12 @@
         height 48px
         width 48px
         margin-right 8px
+        cursor pointer
         margin-top 18px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.16)
         background-color #fefefe
-        @media only screen and (max-width: 900px)
-            width 34px
-            height 34px
-            top 12px
+        @media only screen and (max-width: 600px)
+            display none
 
         img
             display flex
@@ -149,8 +148,8 @@
             transform rotate(180deg)
             pointer-events none
             filter invert(100%)
-            @media only screen and (max-width: 900px)
-                width 6px
+            @media only screen and (max-width: 600px)
+                display none
 
 
     .right-cursor
@@ -158,22 +157,21 @@
         height 48px
         width 48px
         display inline-flex
+        cursor pointer
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.16)
         background-color #fefefe
         margin-top 18px
         margin-left 8px
-        @media only screen and (max-width: 900px)
-            width 34px
-            height 34px
-            margin-top 12px
+        @media only screen and (max-width: 600px)
+            display none
 
         img
             display flex
             margin auto
             pointer-events none
             filter invert(100%)
-            @media only screen and (max-width: 900px)
-                width 6px
+            @media only screen and (max-width: 600px)
+                display none
 
 
 

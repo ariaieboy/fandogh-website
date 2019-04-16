@@ -20,11 +20,6 @@
               </router-link>
             </li>
             <li>
-              <a href="#prices">
-                <progress-hover :hover="true">سرویس ها</progress-hover>
-              </a>
-            </li>
-            <li>
               <a rel="noopener" target="_blank" href="https://docs.fandogh.cloud">
                 <progress-hover :hover="true">مستندات</progress-hover>
               </a>
@@ -51,7 +46,6 @@
         <!--<f-button @onClick="$router.push('/dashboard/images')" styles="transparent border" > داشبورد </f-button>-->
         <f-button path="/dashboard" styles="transparent border md margin-10">داشبورد</f-button>
       </div>
-
       <!-- <div v-if="loggedIn" class="profile">
         <a href="#" @click.prevent="toggleMenu(null)">
           <img :src="avatar" alt="profile">

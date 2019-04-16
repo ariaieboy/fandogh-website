@@ -61,6 +61,8 @@
 
 <style lang="stylus" scoped>
     @import "../../assets/css/inactive-plan.styl"
+    *
+        cursor pointer
 </style>
 
 

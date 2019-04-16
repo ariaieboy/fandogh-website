@@ -2,7 +2,7 @@
 
 # fandogh
 
-> fandogh cloud landing . 
+> fandogh cloud landing.
 
 ## Build Setup
 
@@ -16,6 +16,3 @@ $ npm run dev
 # build for production and launch server
 $ npm start
 ```
-
-
-

@@ -76,7 +76,7 @@ export default {
 </script>
 
 <style lang="stylus" >
-@import url('http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900')
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900')
 
 .table
   img
