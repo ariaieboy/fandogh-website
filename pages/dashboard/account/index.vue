@@ -37,6 +37,7 @@
                                 :options="namespaces"
                                 :clearable="false"
                                 :searchable="false"
+                                dir="rtl"
                                 label="name"
                                 v-model="activatedNamespace"
                                 placeholder="نام ایمیج را انتخاب کنید">
@@ -389,7 +390,7 @@
 
 <style lang="stylus">
 
-    .v-select .dropdown-toggle
+    .v-select .vs__dropdown-toggle
         margin-bottom 8px !important
         min-height 25px !important
         border none !important
@@ -399,7 +400,7 @@
         max-width 250px
         direction rtl !important
 
-    .v-select .selected-tag
+    .v-select .vs__selected-tag
         font-family iran-yekan !important
         color: #000000 !important
         font-size .9em !important

@@ -2,9 +2,9 @@
   <div>
     <h2>راه اندازی سرویس</h2>
     <div class="row">
-      <div class="col-lg-6 col-md-12 col-xs-12">
+      <div class="col-lg-9 col-md-12 col-xs-12">
         <wizard btn_title="مرحله بعد">
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Inside Port</label>
             <f-input
               v-model="port"
@@ -13,7 +13,7 @@
               type="number"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Outside Port</label>
             <f-input
               v-model="target_port"
@@ -22,7 +22,7 @@
               type="number"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Protocol</label>
             <v-select
               v-model="protocol"
@@ -37,7 +37,7 @@
             <f-button @onClick="addPath" styles="transparent border black">افزودن به جدول</f-button>
           </div>
 
-          <div class="fandogh-form-group margin-top-100">
+          <div class="fandogh-form-group margin-top-50">
             <div class="table-responsive table-multicolor">
               <div class="table-title font-roboto">Port Mapping</div>
               <b-table
@@ -198,8 +198,8 @@ export default {
         return;
       }
       this.port_mapping.push({
-        port: this.port,
-        target_port: this.target_port,
+        port: parseInt(this.port),
+        target_port: parseInt(this.target_port),
         protocol: this.protocol
       });
       this.target_port = "";

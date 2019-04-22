@@ -2,9 +2,9 @@
   <div>
     <h2>مرحله سوم</h2>
     <div class="row">
-      <div class="col-lg-6 col-md-12 col-xs-12">
+      <div class="col-lg-9 col-md-12 col-xs-12">
         <wizard btn_title="مرحله بعد">
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>نام متغیر</label>
             <f-input
               v-model="name"
@@ -12,7 +12,7 @@
               placeholder="نام متغیر"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>مقدار متغیر</label>
             <f-input
               v-model="value"
@@ -20,7 +20,7 @@
               placeholder="مقدار متغییر"
             ></f-input>
           </div>
-          <div class="box-checkbox center-item w-100 flex-space">
+          <div class="box-checkbox center-item w-100 flex-space" style="max-width: 500px">
             <div
               class="flex margin-40"
               data-balloon-length="medium"
@@ -39,7 +39,7 @@
               <f-button @onClick="addEnv" styles="transparent black border">افزودن به جدول</f-button>
             </div>
           </div>
-          <div class="fandogh-form-group margin-top-100 td-medium">
+          <div class="fandogh-form-group margin-top-50 td-medium">
             <div class="table-responsive table-multicolor">
               <div class="table-title font-roboto">Environment Variables</div>
               <b-table

@@ -259,7 +259,7 @@ table.vgt-table td
 .pl-0
   padding-left 0 !important
 // vue-select
-.v-select .dropdown-toggle
+.v-select .vs__dropdown-toggle
   margin-bottom 8px !important
   min-height 46px !important
   border 1px solid #e7e8ea !important
@@ -267,26 +267,51 @@ table.vgt-table td
   background-color #fff !important
 // .v-select .dropdown-toggle, .v-select .vs__actions, .v-select .vs__selected-options
 // flex-direction row-reverse
-.v-select .dropdown-toggle .clear
+.v-select .vs__dropdown-toggle .vs__clear
   margin-right 0 !important
   margin-left 6px !important
 .v-select .vs__actions
   padding 0 3px 0 6px !important
-.v-select .dropdown-toggle .clear
+.v-select .vs__dropdown-toggle .vs__clear
   padding-top 7px !important
   font-weight 100 !important
-.v-select .dropdown-menu
+.v-select .vs__dropdown-menu
   overflow-y auto !important
   text-align right !important
-.v-select .dropdown-menu>.highlight>a
+.v-select .vs__dropdown-option--highlight>a
   background #296bdd !important
 .v-select .vs__selected-options
   overflow hidden
 .fix-list
-  .v-select.single .selected-tag
+  .v-select .vs--single .vs__selected-tag
     padding-top 7px
-  .v-select .dropdown-toggle
+  .v-select .vs__dropdown-toggle
     height 44px
+
+.vs__search::-webkit-input-placeholder {
+  color: #a0a3ac !important
+  font-size: .8em !important
+}
+
+.vs__search:-ms-input-placeholder {
+  color: #a0a3ac !important
+  font-size: .8em !important
+}
+
+.vs__search::-ms-input-placeholder {
+  color: #a0a3ac !important
+  font-size: .8em !important
+}
+
+.vs__search::placeholder {
+  color: #a0a3ac !important
+  font-size: .8em !important
+}
+
+.vs--unsearchable .vs__search {
+  opacity: 1 !important
+}
+
 // vue-bar
 .vb > .vb-dragger
   left 0
