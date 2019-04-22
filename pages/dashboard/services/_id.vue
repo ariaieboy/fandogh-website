@@ -18,7 +18,7 @@
                 <div class="fandogh-form-group" v-if="service.urls">
                     <span style="color: #47494e">دامنه‌های سرویس:</span>
 
-                    <div v-for="(item, index) in service.urls" style="direction: ltr; margin: 12px 0;">
+                    <div v-for="item in service.urls" style="direction: ltr; margin: 12px 0;">
                         <span style="color: blue">-</span>
                         <a :href="item" style="color: blue; direction: ltr" target="_blank">{{item}}</a>
                     </div>
