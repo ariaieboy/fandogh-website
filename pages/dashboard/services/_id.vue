@@ -44,7 +44,8 @@
                             :fields="header"
                             stacked="lg"
                             :items="service.env"
-                            empty-text="دیتایی وجود ندارد"
+                            empty-text="متغیری برای این سرویس ست نشده است"
+                            show-empty
                     ></b-table>
                 </div>
             </div>
@@ -83,7 +84,8 @@
                             :fields="header"
                             stacked="lg"
                             :items="service.env"
-                            empty-text="دیتایی وجود ندارد"
+                            empty-text="متغیری برای این سرویس ست نشده است"
+                            show-empty
                     ></b-table>
                 </div>
             </div>
