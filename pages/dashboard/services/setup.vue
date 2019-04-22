@@ -2,9 +2,9 @@
   <div>
     <h2>ایجاد سرویس</h2>
     <div class="row">
-      <div class="col-lg-6 col-md-12 col-xs-12">
+      <div class="col-lg-9 col-md-12 col-xs-12">
         <wizard :prevent="prevent" btn_title="مرحله بعد">
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>نام سرویس</label>
             <f-input
               v-required
@@ -13,7 +13,7 @@
               placeholder="نام سرویس را در این قسمت بنویسید"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>نوع سرویس</label>
             <!-- <f-select v-required v-model="kind" :options="service_types" title="انتخاب نوع سرویس"/> -->
             <v-select
@@ -27,20 +27,21 @@
             ></v-select>
           </div>
 
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <div class="custom-row">
               <div style="flex: 3;">
                 <p>مقدار رم سرویس:</p>
               </div>
-              <div style="flex: 1">
+              <div style="margin-left: 12px; margin-right: 12px">
                 <span>MB</span>
               </div>
               <div style="flex: 3;">
                 <f-input
                   v-required
                   v-model="memory"
+                  type="number"
                   styles="input-white input-block input-dashboard"
-                  placeholder="Min:128, Max:2048"
+                  placeholder="میزان رم مورد نیاز"
                 ></f-input>
               </div>
             </div>
@@ -48,11 +49,11 @@
 
           <div v-show="kind && kind.label === 'ExternalService'" class="margin-top-50">
             <h2>External Option</h2>
-            <div class="fandogh-form-group">
+            <div class="fandogh-form-group" style="max-width: 500px">
               <f-checkbox title="HTTP فعال باشد" id="http" styles="light" v-model="allow_http"/>
               <!-- <f-v-checkbox color="blue" label="HTTP فعال باشد" v-model="allow_http"/> -->
             </div>
-            <div class="fandogh-form-group">
+            <div class="fandogh-form-group" style="max-width: 500px">
               <label class="font-roboto">Port</label>
               <f-input
                 v-model.number="port"
@@ -60,7 +61,7 @@
                 placeholder="Port"
               ></f-input>
             </div>
-            <div class="fandogh-form-group">
+            <div class="fandogh-form-group" style="max-width: 500px">
               <label>دامنه</label>
               <!-- <f-input v-model="domains"  styles="input-white input-block input-dashboard" placeholder="دامنه خود را وارد نمایید"> </f-input> -->
               <v-select
@@ -71,7 +72,7 @@
                 :options="domainsList"
                 label="title"
                 language="fa-IR"
-                placeholder="انتخاب نوع سرویس"
+                placeholder="انتخاب دامنه‌ها"
                 multiple
               ></v-select>
               <!-- <f-multi-select
@@ -170,6 +171,7 @@ export default {
       let mapList = list.map(v => {
         return { name: v.title }
       })
+      console.log(list)
       this.$store.dispatch("manifestGenerator", { value: mapList, path: "spec.domains" });
     },
 

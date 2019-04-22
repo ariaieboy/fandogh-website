@@ -2,10 +2,10 @@
   <div>
     <h2>راه اندازی سرویس</h2>
     <div class="row">
-      <div class="col-lg-6 col-md-12 col-xs-12">
+      <div class="col-lg-9 col-md-12 col-xs-12">
         <wizard @onFinish="finish">
           <h2>Liveness</h2>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Initial Delay Seconds</label>
             <f-input
               v-model="initial_delay_seconds[0]"
@@ -13,7 +13,7 @@
               placeholder="Initial Delay Seconds"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Period Seconds</label>
             <f-input
               v-model="period_seconds[0]"
@@ -21,7 +21,7 @@
               placeholder="Period Seconds"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Http get path</label>
             <f-input
               v-model="http_get_path[0]"
@@ -29,7 +29,7 @@
               placeholder="Http get path"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Http get port</label>
 
             <f-input
@@ -39,7 +39,7 @@
             ></f-input>
           </div>
           <h2>Readiness</h2>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Initial Delay Seconds</label>
             <f-input
               v-model="initial_delay_seconds[1]"
@@ -47,7 +47,7 @@
               placeholder="Initial Delay Seconds"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Period Seconds</label>
             <f-input
               v-model="period_seconds[1]"
@@ -55,7 +55,7 @@
               placeholder="Period Seconds"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Http get path</label>
             <f-input
               v-model="http_get_path[1]"
@@ -63,7 +63,7 @@
               placeholder="Http get path"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Http get port</label>
 
             <f-input

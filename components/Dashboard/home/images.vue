@@ -1,108 +1,64 @@
 <template>
 
-    <!--<div>-->
-    <!--<div style="padding-bottom: 32px">-->
-        <!--<div style="box-sizing: content-box; padding: 12px; position:relative; display: flex; max-height: 36px">-->
-            <!--<img src="../../../assets/svg/ic-docker.svg" alt="images-icon" style="max-width: 36px"/>-->
-            <!--<span style="margin-top: auto; margin-bottom: auto; margin-right: 12px; color: #7c7c7c;">ایمیج ها</span>-->
-        <!--</div>-->
+    <div style="padding-bottom: 32px">
 
-        <!--<div style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">-->
-            <!--<div style="background-color: #2979ff; border-top-left-radius: 3px; border-top-right-radius: 3px; margin-top: 0; padding-left: 12px; padding-right: 12px">-->
-            <!--<table style="width: 100%; border: none; border-collapse: collapse;">-->
-                <!--<tr style="height: 40px; border-collapse: collapse;   color: #fefefe;font-family: IRANYekan;font-size: 0.8em; font-weight: bold">-->
-                    <!--<td width="25%" style="text-align: center">نام ایمیج</td>-->
-                    <!--<td width="25%" style="text-align: center">ورژن</td>-->
-                    <!--<td width="25%" style="text-align: center">آخرین آپدیت</td>-->
-                    <!--<td width="25%" style="text-align: center">مبدا رجیستری</td>-->
-                <!--</tr>-->
-            <!--</table>-->
-            <!--</div>-->
-            <!--<div style="margin-left: 12px; margin-right: 12px; margin-top: 12px">-->
-            <!--<table style="width: 100%; border: none; border-collapse: collapse;">-->
-                <!--<tr v-for="item in images" style="height: 40px; border-collapse: collapse; font-family: IRANYekan;font-size: 0.8em; color: #333333;-->
-                            <!--border-bottom: solid 1px rgba(0, 0, 0, 0.25); left: 12px">-->
-                    <!--<td width="25%" style="text-align: center">{{item.name}}</td>-->
-                    <!--<td width="25%" style="text-align: center">{{item.version}}</td>-->
-                    <!--<td width="25%" style="text-align: center">{{item.date}}</td>-->
-                    <!--<td width="25%" style="text-align: center">فندق</td>-->
-                <!--</tr>-->
-            <!--</table>-->
-            <!--</div>-->
+        <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-            <!--<div style=" display: block; padding: 12px">-->
-                <!--<p style="margin:0; display: inline-block; font-size: 1em; color: #7c7c7c">تعداد ایمیج‌ها: {{images.length}}</p>-->
-                <!--<button style="border-radius: 5px;box-shadow: 0 2px 6px 0 rgba(36, 213, 216, 0.42);background-color: #24d5d8;-->
-  <!--color: #ffffff;  font-family: IRANYekan; font-size: 12px; padding: 8px 16px; outline: none; border: none; display: inline-block; float: left;-->
-<!--cursor: pointer;" @click="goToImages">-->
-                    <!--لیست ایمیج‌ها-->
-                <!--</button>-->
-            <!--</div>-->
-        <!--</div>-->
+        <empty-feature v-if="images.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="createImage">
 
-    <!--</div>-->
+        </empty-feature>
 
-    <div class="images">
-    <div class="dashboard-home-wrapper">
-    <div class="dashboard-home-header">
-    <div class="dashboard-home-title">
-    <img src="~assets/img/icons/ic_images.svg" alt="images">
-    <span>ایمیج های شما</span>
-    <router-link to="/dashboard/images">لیست ایمیج ها</router-link>
+        <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
+
+            <table-header :headers="headers"></table-header>
+
+            <div style="margin-left: 12px; margin-right: 12px; margin-top: 12px">
+                <table style="width: 100%; border: none; border-collapse: collapse; table-layout: fixed">
+                    <tr v-for="(item, index) in images" v-if="index < 5" style="height: 40px; border-collapse: collapse; font-family: iran-yekan;font-size: 0.8em; color: #333333;
+                            border-bottom: solid 1px rgba(0, 0, 0, 0.25); left: 12px">
+                        <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{item.name}}</td>
+                        <td :width="headers[1].width" style="text-align: center; text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{item.version}}</td>
+                        <td :width="headers[2].width" style="text-align: center; font-family: iran-sans; text-overflow: ellipsis; overflow: hidden; white-space: nowrap">{{item.date}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <table-navigation :title="navigation.title" :count="(images ? images.length : 0)"
+                              :button="navigation.button" :link="goToImages"></table-navigation>
+        </div>
     </div>
-    </div>
-    <div class="table-responsive dashboard-home-table" v-bar v-if="images && images.length">
-    <div class="table-scrolled">
-    <b-table
-    :fixed="true"
-    :fields="header"
-    stacked="lg"
-    :items="images"
-    empty-text="دیتایی وجود ندارد"
-    ></b-table>
-    <!-- <div class="dashboard-home-sum">
-    <span>تعداد ایمیج ها:</span>
-    <span>10</span>
-    </div>-->
-    </div>
-    </div>
-    </div>
-    </div>
-    <!--</div>-->
 </template>
 
 <script>
     import FDate from "~/utils/date";
     import FFromDate from "~/utils/fromDate";
+    import TableHeader from "./children/table-header";
+    import TableTitle from "./children/table-title";
+    import TableNavigation from "./children/table-navigation";
+    import Moment from 'moment-jalaali'
+    import EmptyFeature from "./children/empty-feature";
 
     export default {
+        components: {EmptyFeature, TableNavigation, TableTitle, TableHeader, Moment},
         data() {
             return {
-                header: [
-                    {
-                        label: "نام ایمیج",
-                        sortable: false,
-                        key: "name",
-                        tdClass: "ltr ellipsis"
-                    },
-
-                    {
-                        label: "ورژن",
-                        sortable: false,
-                        key: "version",
-                        tdClass: "ltr ellipsis"
-                    },
-                    {
-                        label: "آخرین آپدیت",
-                        sortable: false,
-                        key: "date"
-                    }
-                    // {
-                    //   label: "مبداء رجیستری",
-                    //   sortable: false,
-                    //   key: "date"
-                    // }
-                ]
+                emptySection:{
+                  title:'ایمیج',
+                  icon: 'ic-image',
+                },
+                sectionTitle: {
+                    title: 'ایمیج‌ها',
+                    icon: 'ic-image'
+                },
+                headers: [
+                    {title: 'نام ایمیج', width: '33%'},
+                    {title: 'آخرین ورژن', width: '33%'},
+                    {title: 'آخرین آپدیت', width: '33%'}
+                ],
+                navigation: {
+                    title: 'تعداد ایمیج‌ها',
+                    button: 'لیست ایمیج‌ها'
+                }
             };
         },
         computed: {
@@ -115,21 +71,24 @@
                                 name,
                                 // created_at: FDate({ date: created_at }),
                                 version: last_version.version,
-                                date: FFromDate(last_version.date)
+                                date: Moment(last_version.date).format('jYYYY/jMM/jDD')
                             };
                         } else {
                             return {
                                 name,
-                                date: FFromDate(created_at)
+                                date: Moment(created_at.date).format('jYYYY/jMM/jDD')
                             };
                         }
                     });
                 }
             }
-        },methods:{
-            goToImages(){
+        }, methods: {
+            goToImages() {
                 this.$router.push('/dashboard/images/')
-            }
+            },
+            createImage() {
+                this.$router.push('/dashboard/images/create')
+            },
         }
     };
 </script>

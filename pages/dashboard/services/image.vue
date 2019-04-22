@@ -2,9 +2,9 @@
   <div>
     <h2>راه اندازی سرویس</h2>
     <div class="row">
-      <div class="col-lg-6 col-md-12 col-xs-12">
+      <div class="col-lg-9 col-md-12 col-xs-12">
         <wizard btn_title="مرحله بعد">
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <f-radio v-model="image_type" :options="image_types" title="نوع ایمیج"/>
           </div>
           <a
@@ -16,9 +16,8 @@
               value="شما هیچ تصویری پابلیش نکرده اید٬ برای آپلود کردن تصویر می توانید از این لینک  استفاده کنید."
             />
           </a>
-          <div v-if="internal" class="row">
-            <div class="col-sm-8 col-xs-12">
-              <div class="fandogh-form-group">
+          <div v-if="internal" >
+              <div class="fandogh-form-group" style="max-width: 500px">
                 <label>نام ایمیج</label>
                 <v-select
                   v-model="image"
@@ -26,12 +25,10 @@
                   dir="rtl"
                   label="name"
                   :clearable="false"
-                  placeholder="نام ایمیج را انتخاب کنید"
-                ></v-select>
-              </div>
+                  placeholder="نام ایمیج را انتخاب کنید">
+                </v-select>
             </div>
-            <div class="col-sm-4 col-xs-12">
-              <div class="fix-list fandogh-form-group">
+              <div class="fix-list fandogh-form-group" style="max-width: 500px">
                 <label>ورژن ایمیج</label>
                 <v-select
                   v-model="version"
@@ -43,12 +40,10 @@
                   :loading="version_loaded"
                 ></v-select>
               </div>
-            </div>
           </div>
 
-          <div v-else class="row">
-            <div class="col-sm-8 col-xs-12">
-              <div class="fandogh-form-group">
+          <div v-else>
+              <div class="fandogh-form-group" style="max-width: 500px">
                 <label>نام یا آدرس ایمیج</label>
                 <f-input
                   v-model="image_external"
@@ -56,9 +51,8 @@
                   placeholder="نام ایمیج خارجی بنویسید"
                 ></f-input>
               </div>
-            </div>
-            <div class="col-sm-4 col-xs-12">
-              <div class="fandogh-form-group">
+
+              <div class="fandogh-form-group" style="max-width: 500px">
                 <label>ورژن ایمیج</label>
                 <f-input
                   v-model="version_external"
@@ -66,10 +60,9 @@
                   placeholder="آخرین ورژن"
                 ></f-input>
               </div>
-            </div>
           </div>
 
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Replicas</label>
             <f-input
               v-model="replicas"
@@ -79,7 +72,7 @@
             ></f-input>
           </div>
 
-          <div class="fandogh-form-group" v-if="image_type === 'خارجی'">
+          <div class="fandogh-form-group" v-if="image_type === 'خارجی'" style="max-width: 500px">
             <label>Image Pull Policy</label>
             <v-select
               dir="rtl"
@@ -89,7 +82,7 @@
             ></v-select>
           </div>
 
-          <div class="fandogh-form-group" v-if="image_type === 'خارجی'">
+          <div class="fandogh-form-group" v-if="image_type === 'خارجی'" style="max-width: 500px">
             <label>Image Pull Secret</label>
             <v-select
               dir="rtl"

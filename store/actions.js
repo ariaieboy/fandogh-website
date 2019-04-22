@@ -342,6 +342,17 @@ export const getSecret = async ({commit, state}) => {
         return Promise.reject(e);
     }
 };
+
+export const getVolumes = async ({commit, state}) => {
+    try {
+        let volume = await Request().get(`/api/volumes`);
+        commit("SET_DATA", {id: "volumes", data: volume});
+        return volumes;
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 export const deleteSecret = async ({commit, state}, name) => {
     try {
         return await Request().delete(`/api/secrets/${name}`);

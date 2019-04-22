@@ -2,9 +2,9 @@
   <div>
     <h2>راه اندازی سرویس</h2>
     <div class="row">
-      <div class="col-lg-6 col-md-12 col-xs-12">
+      <div class="col-lg-9 col-md-12 col-xs-12">
         <wizard btn_title="مرحله بعد">
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Volume path</label>
             <f-input
               v-model="mount_path"
@@ -13,7 +13,7 @@
               name="نام Volume"
             ></f-input>
           </div>
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <label>Storage sub path</label>
             <f-input
               v-model="sub_path"
@@ -22,11 +22,11 @@
             ></f-input>
           </div>
 
-          <div class="fandogh-form-group">
+          <div class="fandogh-form-group" style="max-width: 500px">
             <f-button @onClick="addPath" styles="transparent border black">افزودن به جدول</f-button>
           </div>
 
-          <div class="fandogh-form-group margin-top-100">
+          <div class="fandogh-form-group margin-top-50">
             <div class="table-responsive table-multicolor">
               <div class="table-title font-roboto">Volume Configurations</div>
               <b-table
