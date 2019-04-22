@@ -2,15 +2,15 @@
   <div class="replica-containers-items">
     <div class="replica-containers-item">
       <strong>نام :</strong>
-      <span class="font-roboto">{{name}}</span>
+      <span>{{name}}</span>
     </div>
     <div class="replica-containers-item">
       <strong>ایمیج :</strong>
-      <span class="font-roboto elips">{{image}}</span>
+      <span>{{image}}</span>
     </div>
     <div class="replica-containers-item">
       <strong>وضعیت :</strong>
-      <span :class="stateColor">{{state | state}}</span>
+      <span>{{state | state}}</span>
     </div>
   </div>
 </template>

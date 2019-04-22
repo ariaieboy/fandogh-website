@@ -28,6 +28,9 @@ export default {
 <style lang="stylus" scoped>
 .replica-containers
   padding 0 15px
+  display flex
+  flex-direction column
+  white-space nowrap
   border-bottom 1px solid #b5b5b5
   font-family yekan
 </style>
