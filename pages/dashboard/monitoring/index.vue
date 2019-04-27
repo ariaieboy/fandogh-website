@@ -27,42 +27,64 @@
         data() {
             return {
                 defaultOptions: {
-                    fill: false,
+                    fill: true,
                     legend: {
-                        // display: false
+                        display: false,
                         fullWidth: false,
                         position: 'bottom'
                     },
                     scales: {
                         xAxes: [{
                             type: 'time',
+                            gridLines: {
+                                display: false,
+                            },
                             time: {
                                 unit: 'minute',
                                 displayFormats: {
                                     minute: 'HH:mm'
                                 }
                                 // tooltipFormat: 'mm'
+                            }, ticks: {
+                                fontFamily: 'iran-sans'
                             }
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                fontFamily: 'iran-sans',
+                            },
                         }]
                     }
                 },
                 memoryUsageOptions: {
-                    fill: false,
-                    legend:
-                        {
-                            // display: false
-                            position: 'bottom'
+                    fill: true,
+                    legend: {
+                        display: false,
+                        position: 'bottom',
+                        fullWidth: false,
+                        backgroundColor: 'black',
+                        labels: {
+                            backgroundColor: '#222222',
+                            boxWidth: 15,
+                            lineCap: '25'
                         }
-                    ,
+                    },
                     scales: {
                         xAxes: [{
                             type: 'time',
+                            gridLines: {
+                                display: false,
+                            },
                             time: {
                                 unit: 'minute',
                                 displayFormats: {
                                     minute: 'HH:mm'
                                 }
                                 // tooltipFormat: 'mm'
+                            }, ticks: {
+                                fontFamily: 'iran-sans',
+                            }, labels: {
+                                fontFamily: 'iran-sans'
                             }
                         }],
                         yAxes: [
@@ -71,7 +93,12 @@
                                     callback: function (value, index, values) {
                                         return `${(value / 1024 / 1024).toFixed(2)}MB`;
                                     }
-                                }
+                                    ,
+                                    fontFamily: 'iran-sans',
+                                },
+                                gridLines: {
+                                    display: false,
+                                },
                             }
                         ]
                     }

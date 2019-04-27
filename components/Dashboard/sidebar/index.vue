@@ -28,8 +28,8 @@
                     {icon: 'ic-image', text: 'ایمیج‌ها', link: '/dashboard/images'},
                     {icon: 'ic-service', text: 'سرویس‌ها', link: '/dashboard/services'},
                     {icon: 'ic-domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
-                    {icon: 'ic-secret', isBorder: true, text: 'سکرت‌ها', link: '/dashboard/secret'},
-                    // {icon: 'ic-monitoring', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
+                    {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
+                    {icon: 'ic-monitoring', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
                     {icon: 'ic-plans', text: 'پلن‌های فندق', link: '/dashboard/plans'},
                 ]
             }
