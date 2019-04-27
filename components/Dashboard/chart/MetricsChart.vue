@@ -134,7 +134,7 @@
         color #1b1b1b
         font-family iran-yekan
         font-weight bold
-        font-size 16px
+        font-size 18px
 
     /*.chartjsLegend*/
     /*li*/
