@@ -126,16 +126,19 @@ export default {
   },
   watch: {
     initial_delay_seconds(value, oldValue) {
-      this.updateManifest(value, "initial_delay_seconds");
+      let seconds = parseInt(value)
+      this.updateManifest(seconds, "initial_delay_seconds");
     },
     period_seconds(value, oldValue) {
-      this.updateManifest(value, "period_seconds");
+      let seconds = parseInt(value)
+      this.updateManifest(seconds, "period_seconds");
     },
     http_get_path(value, oldValue) {
       this.updateManifest(value, "http_get_path");
     },
     http_get_port(value, oldValue) {
-      this.updateManifest(value, "http_get_port");
+      let port = parseInt(value)
+      this.updateManifest(port, "http_get_port");
     }
   }
 };
