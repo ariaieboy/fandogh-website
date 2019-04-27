@@ -18,10 +18,9 @@ export default {
     mounted() {
 
         this.renderChart(this.chartData, this.options)
-        document.getElementById('chartjsLegend').innerHTML = this.generateLegend();
-
-        console.log('document')
-        console.log(this.generateLegend())
-
+        // document.getElementById('chartjsLegend').innerHTML = this.generateLegend();
+        //
+        // console.log('document')
+        // console.log(this.generateLegend())
     }
 };

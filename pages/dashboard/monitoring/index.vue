@@ -29,9 +29,12 @@
                 defaultOptions: {
                     fill: true,
                     legend: {
-                        display: false,
+                        // display: false,
+                        position: 'bottom',
                         fullWidth: false,
-                        position: 'bottom'
+                        labels: {
+                            boxWidth: 15
+                        }
                     },
                     scales: {
                         xAxes: [{
@@ -53,20 +56,21 @@
                             ticks: {
                                 fontFamily: 'iran-sans',
                             },
+                            gridLines: {
+                                display: false,
+                            }
                         }]
                     }
                 },
                 memoryUsageOptions: {
                     fill: true,
                     legend: {
-                        display: false,
+                        // display: false,
                         position: 'bottom',
                         fullWidth: false,
                         backgroundColor: 'black',
                         labels: {
-                            backgroundColor: '#222222',
-                            boxWidth: 15,
-                            lineCap: '25'
+                            boxWidth: 15
                         }
                     },
                     scales: {
