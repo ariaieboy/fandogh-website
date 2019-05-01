@@ -1,11 +1,9 @@
 import {Line, mixins} from "vue-chartjs";
 import Vue from "vue";
 
-const {reactiveProp} = mixins
-
 export default {
     extends: Line,
-    mixins: [reactiveProp],
+    mixins: [mixins.reactiveProp],
     props: {
         chartData: {
             type: Object,
@@ -16,11 +14,6 @@ export default {
         }
     },
     mounted() {
-
         this.renderChart(this.chartData, this.options)
-        // document.getElementById('chartjsLegend').innerHTML = this.generateLegend();
-        //
-        // console.log('document')
-        // console.log(this.generateLegend())
     }
 };
