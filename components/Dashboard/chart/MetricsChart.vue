@@ -9,9 +9,12 @@
                 </span>
             </div>
             <div>
-                <div style="border-radius: 3px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); background-color: #fefefe; box-sizing: padding-box; padding: 16px">
-                    <line-chart :chartData="chartData" :options="options" :height="200"></line-chart>
-                    <!--<div style="min-height: 35px" id='chartjsLegend' class='chartjsLegend'></div>-->
+                <div style="position: relative; border-radius: 3px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); background-color: #fefefe; box-sizing: padding-box; padding: 16px">
+                    <line-chart class="wrapper"
+                                :chartData="chartData"
+                                :options="options"
+                                :styles="{height: '500px',width: '100%'}">
+                    </line-chart>
                 </div>
             </div>
         </div>
@@ -36,7 +39,9 @@
             },
             metricName: {
                 type: String
-            }
+            },
+            dateFilter: null,
+            serviceFilter: null
         },
         data() {
             return {
@@ -52,7 +57,8 @@
         methods: {
             async fillData() {
                 this.loading = true;
-                await this.$store.dispatch("getMetric", this.metricName);
+
+                await this.$store.dispatch("getMetric", {metric: this.metricName, service: this.serviceFilter['value'], hours: this.dateFilter['value']});
                 this.chartData = {
                     datasets: this.$store.state[this.metricName]
                 };
@@ -81,40 +87,16 @@
             ActionButton,
             FEmpty,
             LineChart
+        }, watch:{
+            dateFilter(){
+                this.fillData()
+            },
+            serviceFilter(){
+                this.fillData()
+            }
         }
     };
 </script>
-
-<style lang="stylus" scoped>
-    /*.chart*/
-    /*display flex*/
-    /*flex-direction column*/
-
-    /*&-label*/
-    /*display flex*/
-    /*align-items center*/
-    /*margin-bottom 25px*/
-
-    /*img*/
-    /*margin-left 10px*/
-
-    /*span*/
-    /*color #333333*/
-    /*font-size 12px*/
-
-    /*&-items*/
-    /*display flex*/
-
-    /*&-canvas*/
-    /*margin-right 10%*/
-    /*margin-left 30px*/
-
-    /*&-info*/
-    /*display flex*/
-    /*flex-wrap wrap*/
-    /*align-items center*/
-    /*max-width 300px*/
-</style>
 
 <style lang="stylus" scoped>
     @font-face
@@ -125,30 +107,23 @@
     .metrics-widget .title
         text-align center
         border-radius 3px
-        margin-bottom 8px
+        margin-bottom 5px
         line-height 65px
         height 65px
         box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.07);
-        /*background-image: linear-gradient(to right, #2979ff, #24d5d8);*/
         background-color #fefefe
         color #1b1b1b
         font-family iran-yekan
         font-weight bold
         font-size 18px
 
-    /*.chartjsLegend*/
-    /*li*/
-    /*display inline-block*/
-    /*width 12px*/
-    /*height 12px*/
-    /*margin-right 5px*/
-    /*border-radius 25px*/
-    /*span*/
-    /*display inline-block*/
-    /*width 12px*/
-    /*height 12px*/
-    /*margin-right 5px*/
-    /*border-radius 25px*/
+</style>
+
+<style scoped lang="css">
+    .chartjs-render-monitor li span {
+        color: white !important;
+        font-size: 100px !important;
+    }
 
 
 </style>

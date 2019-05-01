@@ -1,6 +1,7 @@
 import Request from "~/plugins/request";
 
 import {jsonManipulator} from "../utils/yaml";
+
 const monitoringAPI = process.env.MONITORING_API
 
 export const nuxtServerInit = async ({state, dispatch}, {req}) => {
@@ -297,15 +298,19 @@ export const requestUserNamespaces = async ({commit, state}) => {
     }
 };
 
-
-export const getMetric = async ({commit, state}, metric) => {
+export const getMetric = async ({commit, state}, {metric, service, hours}) => {
     try {
-        const res = await Request(null, {baseUrl: monitoringAPI}).get(`/?metric=${metric}`);
+        const res = await Request(null, {baseUrl: monitoringAPI}).get(`/?metric=${metric}`, {
+            params: {
+                service: service,
+                hours: hours
+            }
+        });
         commit("SET_DATA", {id: metric, data: res})
     } catch (e) {
         return Promise.reject(e)
     }
-}
+};
 
 export const TOGGLE_NAV = ({commit, state}, {data, id}) => {
     // localStorage.setItem("nav", data);
