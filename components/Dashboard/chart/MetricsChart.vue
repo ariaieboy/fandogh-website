@@ -1,13 +1,22 @@
 <template>
-    <div>
+    <div style="margin-bottom: 64px">
         <div class="metrics-widget">
-            <div class="title font-roboto">
+            <div class="title">
                 {{title}}
                 <span v-if="loading">
-                    <img src="~/assets/img/icons/loading.svg" width="32px" height="32px"></img>
+                    <img style=" margin-top: auto; margin-bottom: auto; width: 32px; height: 32px"
+                         src="~/assets/img/icons/loading.svg"/>
                 </span>
             </div>
-            <line-chart :chart-data="chartData" :options="options" :height="100"></line-chart>
+            <div>
+                <div style="position: relative; border-radius: 3px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); background-color: #fefefe; box-sizing: padding-box; padding: 16px">
+                    <line-chart class="wrapper"
+                                :chartData="chartData"
+                                :options="options"
+                                :styles="{height: '500px',width: '100%'}">
+                    </line-chart>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -22,19 +31,23 @@
     export default {
         props: {
             options: {
-                type: Object
+                responsive: true,
+                maintainAspectRatio: false,
             },
             title: {
                 type: String
             },
             metricName: {
                 type: String
-            }
+            },
+            dateFilter: null,
+            serviceFilter: null
         },
         data() {
             return {
                 chartData: null,
-                loading: true
+                loading: true,
+                gradient: null
             }
         },
         mounted() {
@@ -44,11 +57,28 @@
         methods: {
             async fillData() {
                 this.loading = true;
-                await this.$store.dispatch("getMetric", this.metricName);
+
+                await this.$store.dispatch("getMetric", {metric: this.metricName, service: this.serviceFilter['value'], hours: this.dateFilter['value']});
                 this.chartData = {
                     datasets: this.$store.state[this.metricName]
-                }
+                };
+
+                Object.keys(this.chartData.datasets).forEach(key => {
+                    this.chartData.datasets[key]['pointBackgroundColor'] = this.chartData.datasets[key]['backgroundColor'];
+                    this.chartData.datasets[key]['pointRadius'] = 2;
+
+                    this.gradient = this.$children[0].$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450);
+
+                    this.gradient.addColorStop(0, this.getGradientColor(this.chartData.datasets[key]['backgroundColor'], ', 0.5'));
+                    this.gradient.addColorStop(0.5, this.getGradientColor(this.chartData.datasets[key]['backgroundColor'], ', 0.3'));
+                    this.gradient.addColorStop(1, this.getGradientColor(this.chartData.datasets[key]['backgroundColor'], ', 0'));
+
+                    this.chartData.datasets[key]['backgroundColor'] = this.gradient;
+                });
                 this.loading = false;
+            },
+            getGradientColor(color, opacity) {
+                return color.replace(')', opacity).replace('rgb', 'rgba');
             }
         },
         components: {
@@ -57,40 +87,16 @@
             ActionButton,
             FEmpty,
             LineChart
+        }, watch:{
+            dateFilter(){
+                this.fillData()
+            },
+            serviceFilter(){
+                this.fillData()
+            }
         }
     };
 </script>
-
-<style lang="stylus" scoped>
-    .chart
-        display flex
-        flex-direction column
-
-        &-label
-            display flex
-            align-items center
-            margin-bottom 25px
-
-            img
-                margin-left 10px
-
-            span
-                color #333333
-                font-size 12px
-
-        &-items
-            display flex
-
-        &-canvas
-            margin-right 10%
-            margin-left 30px
-
-        &-info
-            display flex
-            flex-wrap wrap
-            align-items center
-            max-width 300px
-</style>
 
 <style lang="stylus" scoped>
     @font-face
@@ -100,11 +106,24 @@
 
     .metrics-widget .title
         text-align center
-        background-color rgba(217, 217, 217, 0.2)
-        padding 5px 0
-        margin-bottom 10px
-        /*border-bottom 1pt solid black*/
-        color #4f4f4f
-        font-size 16px
+        border-radius 3px
+        margin-bottom 5px
+        line-height 65px
+        height 65px
+        box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.07);
+        background-color #fefefe
+        color #1b1b1b
+        font-family iran-yekan
+        font-weight bold
+        font-size 18px
+
+</style>
+
+<style scoped lang="css">
+    .chartjs-render-monitor li span {
+        color: white !important;
+        font-size: 100px !important;
+    }
+
 
 </style>
