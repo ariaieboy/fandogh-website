@@ -79,8 +79,16 @@
                         yAxes: [{
                             ticks: {
                                 callback: function (value, index, values) {
-                                    return `${value}%`;
+                                    if(value === 0){
+                                        return value
+                                    } else if(Math.round(value * 100) === 0){
+                                        return `${(value * 100).toFixed(4)}%`;
+                                    }else {
+                                        return `${(value * 100).toFixed(0)}%`;
+                                    }
+
                                 },
+                                min: 0,
                                 fontFamily: 'iran-sans',
                             },
                             gridLines: {
@@ -128,6 +136,7 @@
                                         return `${value.toFixed(0)}Bps`;
                                     }
                                 },
+                                min: 0,
                                 fontFamily: 'iran-sans',
                             },
                             gridLines: {
@@ -176,6 +185,7 @@
                                             return `${(value / 1024 / 1024).toFixed(2)}MB`;
                                         }
                                     },
+                                    min: 0,
                                     fontFamily: 'iran-sans',
                                 },
                                 gridLines: {
