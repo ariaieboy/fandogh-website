@@ -273,7 +273,8 @@
     .title
         font-family iran-yekan
         font-style normal
-        font-size 1.1em
+        font-weight bold
+        font-size 1.2em
         font-stretch normal
         line-height 1.75
         color #7c7c7c

@@ -1,95 +1,23 @@
 <template>
     <div v-if="service && !loading">
-        <h2>جزییات سرویس</h2>
-        <div class="row">
-            <div class="col-md-6 col-xs-12">
-                <div class="fandogh-form-group">
-                    <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-                    <f-label-disable label="نام سرویس :" :value="service.name"/>
-                </div>
-                <div class="fandogh-form-group">
-                    <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-                    <f-label-disable label="نوع سرویس :" :value="service.service_type"/>
-                </div>
-                <div class="fandogh-form-group">
-                    <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-                    <f-label-disable label="مقدار رم مصرف شده :" :value="service.memory"/>
-                </div>
-                <div class="fandogh-form-group" v-if="service.urls">
-                    <span style="color: #47494e">دامنه‌های سرویس:</span>
+        <p class="title">جزییات سرویس</p>
 
-                    <div v-for="item in service.urls" style="direction: ltr; margin: 12px 0;">
-                        <span style="color: blue">-</span>
-                        <a :href="item" style="color: blue; direction: ltr" target="_blank">{{item}}</a>
-                    </div>
+        <div class="box-row row" style="box-sizing: content-box">
+            <div @click="sectionClicked('detail')"
+                 :class="[(activeSectionName === 'detail' ? 'enabled' : 'disabled')]">
+                <p :style="{borderLeft: '1px solid #2979ff'}">جزئیات سرویس</p>
+            </div>
 
-                </div>
-                <!-- <div class="row">
-                  <div class="col-sm-6">
-                    <div class="fandogh-form-group">
-                      <f-input v-model="port"  styles="input-white input-block input-dashboard input-disable" > </f-input>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="fandogh-form-group">
-                      <f-input v-model="internal"  styles="input-white input-block input-dashboard input-disable" > </f-input>
-                    </div>
-                  </div>
-                </div>-->
+            <div @click="sectionClicked('monitor')"
+                 :class="[(activeSectionName === 'monitor' ? 'enabled' : 'disabled')]">
+                <p :style="{borderLeft: '1px solid #2979ff'}">مانیتورینگ</p>
             </div>
-            <div class="col-md-6 col-xs-12" v-if="windowWidth >= 992">
-                <div class="table-responsive table-multicolor">
-                    <div class="table-title font-roboto">ENV</div>
-                    <b-table
-                            :fields="header"
-                            stacked="lg"
-                            :items="service.env"
-                            empty-text="متغیری برای این سرویس ست نشده است"
-                            show-empty
-                    ></b-table>
-                </div>
-            </div>
+
         </div>
-        <h3>رپلیکاها :</h3>
-        <div class="row">
-            <div class="col-md-6 col-xs-12">
-                <div class="mb-45" v-for="item in service.pods" v-if="service.pods.length">
-                    <f-collaps :selected="true">
-                        <div slot="collapse-header">
-                            <f-replica-header
-                                    :name="item.name"
-                                    :state="item.phase"
-                                    :count="item.containers.length"
-                                    color="success-text"
-                            />
-                        </div>
-                        <div slot="collapse-body">
-                            <f-replica-details
-                                    :date="item.created_at"
-                                    :name="item.name"
-                                    :state="item.phase"
-                                    :count="item.containers.length"
-                                    color="success-text"
-                            />
-                            <f-replica-containers :items="item.containers"/>
-                            <f-replica-events :items="item.events"/>
-                        </div>
-                    </f-collaps>
-                </div>
-            </div>
-            <div class="col-md-6 col-xs-12" v-if="windowWidth <= 992">
-                <div class="table-responsive table-multicolor">
-                    <div class="table-title font-roboto">ENV</div>
-                    <b-table
-                            :fields="header"
-                            stacked="lg"
-                            :items="service.env"
-                            empty-text="متغیری برای این سرویس ست نشده است"
-                            show-empty
-                    ></b-table>
-                </div>
-            </div>
-        </div>
+
+        <keep-alive>
+            <component v-bind:is="activeSectionName" :service="service"></component>
+        </keep-alive>
     </div>
 </template>
 
@@ -104,6 +32,8 @@
     import FReplicaDetails from "~/components/Dashboard/replica/details";
     import FReplicaContainers from "~/components/Dashboard/replica/containers";
     import FReplicaEvents from "~/components/Dashboard/replica/events";
+    import detail from "./service/detail"
+    import monitor from "./service/monitor"
 
     export default {
         layout: "dashboard",
@@ -116,13 +46,16 @@
             FInput,
             FButton,
             File,
-            FLabelDisable
+            FLabelDisable,
+            detail,
+            monitor
         },
         data() {
             return {
                 // service: "MS.Dos",
                 version: "داخلی",
                 date: "512MB",
+                activeSectionName: 'detail',
                 image: this.$route.params.image,
                 header: [
                     {
@@ -166,7 +99,10 @@
                         this.$router.push("/user/login");
                     }
                 }
-            }
+            },
+            sectionClicked(sectionName) {
+                this.activeSectionName = sectionName;
+            },
         },
         destroyed() {
             this.$store.commit("SET_DATA", {data: null, id: "service"});
@@ -184,3 +120,83 @@
         }
     };
 </script>
+
+<style scoped lang="stylus">
+    .title
+        font-family iran-yekan
+        font-style normal
+        font-weight bold
+        font-size 1.2em
+        font-stretch normal
+        line-height 1.75
+        color #7c7c7c
+        letter-spacing normal
+
+    .box
+        padding 16px
+        box-sizing content-box
+        border-radius 3px
+        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
+        background-color #ffffff
+
+    .box-row
+        height fit-content
+        border-radius 3px
+        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
+        background-color #ffffff
+        margin-top 5px
+        display block
+        margin-bottom 32px
+        white-space nowrap
+        overflow-x scroll
+        overflow-y hidden
+        -ms-overflow-style none
+        scrollbar-width none
+
+        div.disabled
+            display inline-flex
+            padding 0
+            margin-left -5px
+            cursor pointer
+
+            p
+                font-style normal
+                font-stretch normal
+                min-width 200px
+                line-height 24px
+                margin-top 8px
+                text-align center
+                font-family iran-yekan
+                font-size .9em
+                outline none
+                margin-bottom 8px
+                letter-spacing normal
+                color #000000
+
+
+        div.enabled
+            display inline-flex
+            padding 0
+            margin-right -1px
+            background-color #2979ff
+            cursor pointer
+
+            p
+                font-style normal
+                font-stretch normal
+                min-width 200px
+                line-height 24px
+                margin-top 8px
+                text-align center
+                font-family yekan-bold
+                font-size .9em
+                outline none
+                margin-bottom 8px
+                letter-spacing normal
+                color #ffffff
+
+    .box-row::-webkit-scrollbar
+        display none
+
+
+</style>
