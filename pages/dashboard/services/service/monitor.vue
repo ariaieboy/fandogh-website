@@ -48,44 +48,6 @@
                     title: '۶ ساعت پیش',
                     value: 6
                 },
-                defaultOptions: {
-                    legend: {
-                        display: false,
-                        position: 'bottom',
-                        fullWidth: true,
-                        labels: {
-                            boxWidth: 15
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        xAxes: [{
-                            type: 'time',
-                            gridLines: {
-                                display: false,
-                            },
-                            time: {
-                                unit: 'minute',
-                                displayFormats: {
-                                    minute: 'HH:mm'
-                                }
-                                // tooltipFormat: 'mm'
-                            }, ticks: {
-                                fontFamily: 'iran-sans',
-                                source: 'data'
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                fontFamily: 'iran-sans',
-                            },
-                            gridLines: {
-                                display: false,
-                            }
-                        }]
-                    }
-                },
                 cpuOptions: {
                     legend: {
                         display: false,

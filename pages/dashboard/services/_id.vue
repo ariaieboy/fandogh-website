@@ -52,26 +52,8 @@
         },
         data() {
             return {
-                // service: "MS.Dos",
-                version: "داخلی",
-                date: "512MB",
                 activeSectionName: 'detail',
                 image: this.$route.params.image,
-                header: [
-                    {
-                        sortable: false,
-                        label: "نام متغییر",
-                        key: "name",
-                        tdClass: "ellipsis ltr"
-                    },
-                    {
-                        sortable: false,
-                        label: "مقدار",
-                        key: "value",
-                        tdClass: "ellipsis ltr"
-                    }
-                ],
-                data: [{name: "NODE_ENV", value: "Production"}]
             };
         },
         created() {
@@ -110,9 +92,6 @@
         computed: {
             loading() {
                 return this.$store.state.loading;
-            },
-            windowWidth() {
-                return this.$store.state.windowWidth;
             },
             service() {
                 return this.$store.state.service;
