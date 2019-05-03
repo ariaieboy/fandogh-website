@@ -120,6 +120,25 @@
                             boxWidth: 15
                         }
                     },
+                    tooltips:{
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                                if (label) {
+                                    label += ' -> ';
+                                }
+                                if(tooltipItem.yLabel === 0){
+                                    label += 0;
+                                } else if(Math.round(tooltipItem.yLabel * 100) === 0){
+                                    label += (tooltipItem.yLabel * 100).toFixed(4) + '%';
+                                }else {
+                                    label += (tooltipItem.yLabel * 100).toFixed(0) + '%';
+                                }
+                                return label;
+                            }
+                        }
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
@@ -169,6 +188,26 @@
                             boxWidth: 15
                         }
                     },
+                    tooltips:{
+                        callbacks: {
+                            label: function(tooltipItem, data) {
+                                var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                                if (label) {
+                                    label += ' -> ';
+                                }
+
+                                if(tooltipItem.yLabel > 1000 && tooltipItem.yLabel < 1000000){
+                                    label += (tooltipItem.yLabel / 1000).toFixed(0) + 'KBps';
+                                } else if(tooltipItem.yLabel >= 1000000){
+                                    label += (tooltipItem.yLabel / 1000000).toFixed(0) + 'MBps';
+                                }else {
+                                    label += (tooltipItem.yLabel).toFixed(0) + 'Bps';
+                                }
+                                return label;
+                            }
+                        }
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
@@ -215,6 +254,25 @@
                         fullWidth: true,
                         labels: {
                             boxWidth: 15,
+                        }
+                    },
+                    tooltips:{
+                        callbacks:{
+                            label: function (tooltipItem, data) {
+
+                                var label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+                                if (label) {
+                                    label += ' -> ';
+                                }
+
+                                if(tooltipItem.yLabel > 1024 * 1024 * 1024 ){
+                                    label += (tooltipItem.yLabel / 1024 / 1024 / 1024).toFixed(2) + 'GB';
+                                }else {
+                                    label += (tooltipItem.yLabel / 1024 / 1024).toFixed(2) + 'MB';
+                                }
+                                return label;
+                            }
                         }
                     },
                     responsive: true,
