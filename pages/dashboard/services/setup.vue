@@ -58,7 +58,8 @@
               <f-input
                 v-model.number="port"
                 styles="input-white input-block input-dashboard"
-                placeholder="Port"
+                type="number"
+                placeholder="80"
               ></f-input>
             </div>
             <div class="fandogh-form-group" style="max-width: 500px">
@@ -164,15 +165,13 @@ export default {
       this.$store.dispatch("manifestGenerator", { value, path: "spec.allow_http" });
     },
     port(value, oldValue) {
-      let port = parseInt(value)
-      this.$store.dispatch("manifestGenerator", { port, path: "spec.port" });
+      this.$store.dispatch("manifestGenerator", { value, path: "spec.port" });
     },
     domains(value, oldValue) {
       let list = [...value]
       let mapList = list.map(v => {
         return { name: v.title }
       })
-      console.log(list)
       this.$store.dispatch("manifestGenerator", { value: mapList, path: "spec.domains" });
     },
 
