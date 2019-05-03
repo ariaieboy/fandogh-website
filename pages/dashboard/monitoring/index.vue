@@ -155,7 +155,8 @@
                                 // tooltipFormat: 'mm'
                             }, ticks: {
                                 fontFamily: 'iran-sans',
-                                source: 'data'
+                                source: 'data',
+                                autoSkip: true,
                             }
                         }],
                         yAxes: [{
@@ -224,7 +225,8 @@
                                 // tooltipFormat: 'mm'
                             }, ticks: {
                                 fontFamily: 'iran-sans',
-                                source: 'data'
+                                source: 'data',
+                                autoSkip: true,
                             }
                         }],
                         yAxes: [{
@@ -291,7 +293,8 @@
                                 // tooltipFormat: 'mm'
                             }, ticks: {
                                 fontFamily: 'iran-sans',
-                                source: 'data'
+                                source: 'data',
+                                autoSkip: true,
                             }, labels: {
                                 fontFamily: 'iran-sans'
                             }
