@@ -120,7 +120,13 @@
                         yAxes: [{
                             ticks: {
                                 callback: function (value, index, values) {
-                                    return `${value}MBps`;
+                                    if(value > 1000 && value < 1000000){
+                                        return `${(value / 1000).toFixed(0)}KBps`
+                                    }else if(value >= 1000000){
+                                        return `${(value / 1000000).toFixed(0)}MBps`
+                                    }else {
+                                        return `${value.toFixed(0)}Bps`;
+                                    }
                                 },
                                 fontFamily: 'iran-sans',
                             },
@@ -164,7 +170,11 @@
                             {
                                 ticks: {
                                     callback: function (value, index, values) {
-                                        return `${value} MB`;
+                                        if(value > 1024 * 1024 * 1024 ){
+                                            return `${(value / 1024 / 1024 / 1024).toFixed(2)}GB`;
+                                        }else {
+                                            return `${(value / 1024 / 1024).toFixed(2)}MB`;
+                                        }
                                     },
                                     fontFamily: 'iran-sans',
                                 },

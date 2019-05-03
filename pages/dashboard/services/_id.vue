@@ -2,7 +2,7 @@
     <div v-if="service && !loading">
         <p class="title">جزییات سرویس</p>
 
-        <div class="box-row row" style="box-sizing: content-box">
+        <div class="box-row row">
             <div @click="sectionClicked('detail')"
                  :class="[(activeSectionName === 'detail' ? 'enabled' : 'disabled')]">
                 <p :style="{borderLeft: '1px solid #2979ff'}">جزئیات سرویس</p>
@@ -124,8 +124,10 @@
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         background-color #ffffff
         margin-top 5px
+        margin-left 0
+        margin-right 0
         display block
-        margin-bottom 32px
+        margin-bottom 24px
         white-space nowrap
         overflow-x scroll
         overflow-y hidden
@@ -142,7 +144,7 @@
                 font-style normal
                 font-stretch normal
                 min-width 200px
-                line-height 24px
+                line-height 32px
                 margin-top 8px
                 text-align center
                 font-family iran-yekan
@@ -164,7 +166,7 @@
                 font-style normal
                 font-stretch normal
                 min-width 200px
-                line-height 24px
+                line-height 32px
                 margin-top 8px
                 text-align center
                 font-family yekan-bold
