@@ -81,8 +81,8 @@
                     value: null
                 },
                 selectedTimeFilter: {
-                    title: '۷ روز پیش',
-                    value: 168
+                    title: '۶ ساعت پیش',
+                    value: 6
                 },
                 timeFilter: [
                     {
@@ -224,7 +224,6 @@
                 }
             },
             dateChanged(date) {
-                console.log(date)
                 this.selectedTimeFilter = date
             },
             serviceChanged(service) {

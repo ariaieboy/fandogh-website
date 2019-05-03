@@ -11,6 +11,20 @@
                      :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
                     <div class="dash-container">
                         <div :class="[(isMobile ? '' : 'container-fluid')]">
+                            <div v-if="accountExpired" class="box-row" style="margin-bottom: 16px">
+                                <div style="width: 100%; background-color: #fd9510;box-shadow: 0 2px 6px 0 rgba(253 ,50 ,89, 0.42); margin: 0; border-radius: 3px;">
+                                    <div style="padding: 16px; margin: auto; display: flex">
+                                        <img src="../assets/svg/warning.svg" alt="warning" style="width: 64px; height: auto; margin-top: auto; margin-bottom: auto; display: inline-flex">
+                                        <p style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: white">تنها
+                                            <span style="font-family: iran-sans; color: white">{{remainingTime}}</span>
+                                            روز دیگر از پلن شما باقی مانده است. جهت تمدید٬ از طریق
+                                            <router-link :to="{path:'account'}" style="color: snow; text-decoration: underline; text-decoration-style: double"> صفحه پروفایل </router-link>
+                                            اقدام فرمایید در غیر این صورت بعد از این تاریخ سرویس‌های شما از دسترس خارج خواهند شد.
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
                             <nuxt/>
                         </div>
                     </div>
@@ -32,6 +46,7 @@
     import {readCookieReq, readCookie} from "../utils/cookies.js";
     import {alertReport} from "../utils/AlertError";
     import FLoading from "~/components/Loading";
+    import Moment from 'moment-jalaali';
 
     export default {
         components: {
@@ -40,7 +55,8 @@
             FFooter,
             AdminSidebar,
             Notification,
-            Alert
+            Alert,
+            Moment
         },
         computed: {
             loading() {
@@ -59,6 +75,18 @@
                 if (this.$route.path.indexOf('account') !== -1) {
                     return false;
                 } else return this.$route.path.indexOf('bill') === -1;
+            }, accountExpired() {
+                let plan = this.$store.state.activePlan;
+                if (plan.hasOwnProperty('quota')) {
+                    if (plan.quota.expires_at === null)
+                        return false;
+                    else
+                        return Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear() <= 3;
+                } else
+                    return false
+            }, remainingTime(){
+                let plan = this.$store.state.activePlan;
+                return Math.max(Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear(), 0)
             }
         },
 
@@ -127,7 +155,7 @@
                     this.$store.dispatch("TOGGLE_NAV", {data: null, id: "sidebar"});
                 }
             }
-        },
+        }
     };
 </script>
 
