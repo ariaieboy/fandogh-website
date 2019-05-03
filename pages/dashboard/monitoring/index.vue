@@ -224,7 +224,6 @@
                 }
             },
             dateChanged(date) {
-                console.log(date)
                 this.selectedTimeFilter = date
             },
             serviceChanged(service) {

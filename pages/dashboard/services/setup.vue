@@ -172,7 +172,6 @@ export default {
       let mapList = list.map(v => {
         return { name: v.title }
       })
-      console.log(list)
       this.$store.dispatch("manifestGenerator", { value: mapList, path: "spec.domains" });
     },
 

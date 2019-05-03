@@ -36,7 +36,8 @@ const createStore = () => {
         domain: null,
         secrets: null,
         manifest: {},
-        account: {}
+        account: {},
+        activePlan: {},
       };
     },
     actions: actions,
