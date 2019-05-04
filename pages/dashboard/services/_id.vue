@@ -3,10 +3,10 @@
         <p class="title">جزییات سرویس</p>
 
         <div class="row" style="margin: 0 0 16px 0;">
-            <div class="row service-header">
+            <div class="service-header">
 
-                <span class="col-lg-2 col-md-2 col-sm-2 col-xs-12 service-name">
-                    <canvas style="border-radius: 100px; width: 16px; height: 16px; display: inline-block; margin-left: 7px"
+                <span class="service-name">
+                    <canvas style="border-radius: 100px; width: 16px; height: 16px; display: inline-block; margin-left: 7px; "
                     :style="{backgroundColor: (service.state.toString().toLowerCase() === 'running' ? '#3ccc38' : '#fd3259')}"></canvas>
                     {{service.name}}
                 </span>
@@ -14,12 +14,12 @@
                 <div v-if="windowWidth > 766" style="width: 1px; background-color: #7c7c7c; margin-left: 12px; margin-right: 12px; border-radius: 25px"></div>
                 <div class="col-xs-12" v-else style="height: 1px; background-color: #7c7c7c; border-radius: 25px; margin-bottom: 12px"></div>
 
-                <span class="col-lg-2 col-md-2 col-sm-2 col-xs-12 service-spec">
+                <span class="service-spec">
                     نوع سرویس<br>
                     <span style="font-size: 1.2em; color: black;padding-right: .2em">{{service.service_type}}</span>
                 </span>
 
-                <span class="col-lg-2 col-md-2 col-sm-2 col-xs-12 service-spec">
+                <span class="service-spec">
                     رم مصرفی (مگابایت)<br>
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
                 </span>
@@ -269,20 +269,26 @@
         width 100%
         display flex
         margin 0
+        @media only screen and (max-width: 766px)
+            display block
 
         span.service-name
             margin-top auto
             margin-bottom auto
-            font-size 1.6em
+            font-size 1.5em
             font-family iran-yekan
             font-weight bold
             text-align center
-            display block
-            padding-right 0
-            padding-left 0
+            display inline-block
+            padding-right 16px
+            padding-left 16px
+            text-overflow ellipsis
             @media only screen and (max-width: 766px)
-                font-size 2em
+                font-size 1.8em
                 padding-bottom 12px
+                display block
+                padding-right 0
+                padding-left 0
 
         span.service-spec
             color #7c7c7c
@@ -293,8 +299,14 @@
             font-family iran-yekan
             font-weight normal
             text-align center
+            padding-left 24px
+            padding-right 24px
+            display inline-block
             @media only screen and (max-width: 766px)
                 font-size 1.2em
+                display block
+                padding-right 0
+                padding-left 0
 
 
     .main
