@@ -3,7 +3,8 @@
         <p class="title">جزییات سرویس</p>
 
         <div class="row" style="margin: 0 0 16px 0;">
-            <div class="wrapper" style="padding: 16px; background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); height: 64px; width: 100%; display: flex">
+            <div class="wrapper"
+                 style="padding: 16px; background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); height: 64px; width: 100%; display: flex">
 
                 <span style=" margin-top: auto; margin-bottom: auto; font-size: 1.6em; font-family: iran-yekan; font-weight: bold">{{service.name}}</span>
 
@@ -23,22 +24,24 @@
 
         </div>
 
-        <div class="box-row row">
-            <div @click="sectionClicked('detail')"
-                 :class="[(activeSectionName === 'detail' ? 'enabled' : 'disabled')]">
-                <p :style="{borderLeft: '1px solid #2979ff'}">جزئیات سرویس</p>
+        <div class="row" style="margin: 0;">
+            <div class="box-row row col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0">
+                <div @click="sectionClicked('detail')"
+                     :class="[(activeSectionName === 'detail' ? 'enabled' : 'disabled')]">
+                    <p>جزئیات سرویس</p>
+                </div>
+
+                <div @click="sectionClicked('monitor')"
+                     :class="[(activeSectionName === 'monitor' ? 'enabled' : 'disabled')]">
+                    <p>مانیتورینگ</p>
+                </div>
             </div>
 
-            <div @click="sectionClicked('monitor')"
-                 :class="[(activeSectionName === 'monitor' ? 'enabled' : 'disabled')]">
-                <p :style="{borderLeft: '1px solid #2979ff'}">مانیتورینگ</p>
-            </div>
-
+            <keep-alive>
+                <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10" style="padding-left: 0" v-bind:is="activeSectionName"
+                           :service="service"></component>
+            </keep-alive>
         </div>
-
-        <keep-alive>
-            <component v-bind:is="activeSectionName" :service="service"></component>
-        </keep-alive>
     </div>
 </template>
 
@@ -135,67 +138,96 @@
     .box
         padding 16px
         box-sizing content-box
-        border-radius 3px
-        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
-        background-color #ffffff
+        @media only screen and (max-width: 766px)
+            border-radius 3px
+            box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
+            background-color #ffffff
+
 
     .box-row
         height fit-content
-        border-radius 3px
-        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
-        background-color #fefefe
-        margin-top 5px
         margin-left 0
         margin-right 0
         display block
-        margin-bottom 24px
         white-space nowrap
         overflow-x scroll
-        overflow-y hidden
+        overflow-y scroll
         -ms-overflow-style none
         scrollbar-width none
+        @media only screen and (max-width: 766px)
+            border-radius 3px
+            box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
+            background-color #fefefe
+            overflow-x scroll
+            overflow-y hidden
+            margin-bottom 24px
+            margin-top 5px
 
         div.disabled
-            display inline-flex
             padding 0
-            margin-left -5px
             cursor pointer
+            @media only screen and (max-width: 766px)
+                margin-left -5px
+                display inline-flex
 
             p
                 font-style normal
                 font-stretch normal
-                min-width 200px
-                line-height 32px
-                margin-top 8px
+                line-height 40px
                 text-align center
                 font-family iran-yekan
+                background-color #fefefe
+                border-radius 3px
+                box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.03)
                 font-size .9em
                 outline none
+                margin-top 0
                 margin-bottom 8px
                 letter-spacing normal
                 color #000000
+                @media only screen and (max-width: 766px)
+                    min-width 200px
+                    border-left: 1px solid #2979ff
+                    border-radius 0
+                    box-shadow none
+                    line-height 32px
+                    margin-top 8px
+                    margin-bottom 8px
+                    background-color transparent
 
 
         div.enabled
-            display inline-flex
             padding 0
-            margin-right -1px
-            background-color #2979ff
             cursor pointer
+            @media only screen and (max-width: 766px)
+                background-color #2979ff
+                margin-right -1px
+                display inline-flex
+
 
             p
                 font-style normal
                 font-stretch normal
-                min-width 200px
-                line-height 32px
-                margin-top 8px
+                line-height 40px
                 text-align center
                 font-family yekan-bold
                 font-size .9em
+                background-color #2979ff
+                border-radius 3px
+                box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.2)
                 outline none
+                margin-top 0
                 margin-bottom 8px
                 letter-spacing normal
                 color #ffffff
+                @media only screen and (max-width: 766px)
+                    min-width 200px
+                    border-radius 0
+                    box-shadow none
+                    line-height 32px
+                    margin-top 8px
+                    margin-bottom 8px
+                    background-color transparent
 
     .box-row::-webkit-scrollbar
         display none
