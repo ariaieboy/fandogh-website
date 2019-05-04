@@ -6,13 +6,16 @@
             <div class="service-header">
 
                 <span class="service-name">
-                    <canvas style="border-radius: 100px; width: 16px; height: 16px; display: inline-block; margin-left: 7px; "
-                    :style="{backgroundColor: (service.state.toString().toLowerCase() === 'running' ? '#3ccc38' : '#fd3259')}"></canvas>
+                    <canvas
+                            style="border-radius: 100px; width: 16px; height: 16px; display: inline-block; margin-left: 7px;"
+                            :style="{ backgroundColor: (service.state.toString().toLowerCase() === 'running' ? '#3ccc38' : '#fd3259')}"></canvas>
                     {{service.name}}
                 </span>
 
-                <div v-if="windowWidth > 766" style="width: 1px; background-color: #7c7c7c; margin-left: 12px; margin-right: 12px; border-radius: 25px"></div>
-                <div class="col-xs-12" v-else style="height: 1px; background-color: #7c7c7c; border-radius: 25px; margin-bottom: 12px"></div>
+                <div v-if="windowWidth > 766"
+                     style="width: 1px; background-color: #7c7c7c; margin-left: 12px; margin-right: 12px; border-radius: 25px"></div>
+                <div class="col-xs-12" v-else
+                     style="height: 1px; background-color: #7c7c7c; border-radius: 25px; margin-bottom: 12px"></div>
 
                 <span class="service-spec">
                     نوع سرویس<br>
@@ -150,6 +153,7 @@
 </script>
 
 <style scoped lang="stylus">
+
     .title
         font-family iran-yekan
         font-style normal
@@ -192,7 +196,7 @@
             padding 0
             cursor pointer
             @media only screen and (max-width: 766px)
-                margin-left -5px
+                margin-left  -5px
                 display inline-flex
 
             p
@@ -228,7 +232,7 @@
             cursor pointer
             @media only screen and (max-width: 766px)
                 background-color #2979ff
-                margin-right -1px
+                margin-right  -1px
                 display inline-flex
 
             p
@@ -289,24 +293,57 @@
                 display block
                 padding-right 0
                 padding-left 0
+            canvas
+                animation moved 2s infinite ease-in-out
+                -webkit-animation moved 2s infinite ease-in-out
 
-        span.service-spec
-            color #7c7c7c
-            line-height 1.75
-            margin-top auto
-            margin-bottom auto
-            font-size 1em
-            font-family iran-yekan
-            font-weight normal
-            text-align center
-            padding-left 24px
-            padding-right 24px
-            display inline-block
-            @media only screen and (max-width: 766px)
-                font-size 1.2em
-                display block
-                padding-right 0
-                padding-left 0
+
+        @keyframes moved {
+            0% {opacity: 1; transform scale(1)}
+            10% {opacity: .95; transform scale(.99)}
+            20% {opacity: .9; transform scale(.98)}
+            30% {opacity: .85; transform scale(.97)}
+            40% {opacity: .8; transform scale(.96)}
+            50% {opacity: .75; transform scale(.95)}
+            60% {opacity: .8; transform scale(.96)}
+            70% {opacity: .85; transform scale(.97)}
+            80% {opacity: .9; transform scale(.98)}
+            90% {opacity: .95; transform scale(.99)}
+            100% {opacity: 1; transform scale(1)}
+        }
+
+
+        @-webkit-keyframes moved{
+            0% {opacity: 1; transform scale(1)}
+            10% {opacity: .95; transform scale(.99)}
+            20% {opacity: .9; transform scale(.98)}
+            30% {opacity: .85; transform scale(.97)}
+            40% {opacity: .8; transform scale(.96)}
+            50% {opacity: .75; transform scale(.95)}
+            60% {opacity: .8; transform scale(.96)}
+            70% {opacity: .85; transform scale(.97)}
+            80% {opacity: .9; transform scale(.98)}
+            90% {opacity: .95; transform scale(.99)}
+            100% {opacity: 1; transform scale(1)}
+        }
+
+    .service-spec
+        color #7c7c7c
+        line-height 1.75
+        margin-top auto
+        margin-bottom auto
+        font-size 1em
+        font-family iran-yekan
+        font-weight normal
+        text-align center
+        padding-left 24px
+        padding-right 24px
+        display inline-block
+        @media only screen and (max-width: 766px)
+            font-size 1.2em
+            display block
+            padding-right 0
+            padding-left 0
 
 
     .main
@@ -315,4 +352,6 @@
             padding-left 12px
             @media only screen and (max-width: 766px)
                 padding 0
+
+
 </style>
