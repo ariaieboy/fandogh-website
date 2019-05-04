@@ -24,11 +24,23 @@
 
         </div>
 
-        <div class="row" style="margin: 0;">
-            <div class="box-row row col-lg-2 col-md-2 col-sm-2 col-xs-12" style="padding: 0">
+        <div class="row main" style="margin: 0;">
+            <div class="box-row row col-lg-2 col-md-2 col-sm-2 col-xs-12 padding">
                 <div @click="sectionClicked('detail')"
                      :class="[(activeSectionName === 'detail' ? 'enabled' : 'disabled')]">
-                    <p>جزئیات سرویس</p>
+                    <p>رپلیکاها</p>
+                </div>
+
+                <div @click="sectionClicked('env')"
+                     :class="[(activeSectionName === 'env' ? 'enabled' : 'disabled')]">
+                    <p>Environment Variables</p>
+                </div>
+
+
+                <div @click="sectionClicked('domains')"
+                     v-if="service.urls"
+                     :class="[(activeSectionName === 'domains' ? 'enabled' : 'disabled')]">
+                    <p>دامنه‌ها</p>
                 </div>
 
                 <div @click="sectionClicked('monitor')"
@@ -38,7 +50,9 @@
             </div>
 
             <keep-alive>
-                <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10" style="padding-left: 0" v-bind:is="activeSectionName"
+                <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding"
+                           v-bind:is="activeSectionName"
+                           style="padding: 0"
                            :service="service"></component>
             </keep-alive>
         </div>
@@ -58,6 +72,8 @@
     import FReplicaEvents from "~/components/Dashboard/replica/events";
     import detail from "./service/detail"
     import monitor from "./service/monitor"
+    import env from "./service/env"
+    import domains from "./service/domains"
 
     export default {
         layout: "dashboard",
@@ -72,7 +88,9 @@
             File,
             FLabelDisable,
             detail,
-            monitor
+            monitor,
+            env,
+            domains
         },
         data() {
             return {
@@ -182,6 +200,7 @@
                 font-size .9em
                 outline none
                 margin-top 0
+                font-weight normal
                 margin-bottom 8px
                 letter-spacing normal
                 color #000000
@@ -204,13 +223,13 @@
                 margin-right -1px
                 display inline-flex
 
-
             p
                 font-style normal
                 font-stretch normal
                 line-height 40px
                 text-align center
-                font-family yekan-bold
+                font-family iran-yekan
+                font-weight bold
                 font-size .9em
                 background-color #2979ff
                 border-radius 3px
@@ -233,4 +252,10 @@
         display none
 
 
+    .main
+        div.padding
+            padding-right 0
+            padding-left 12px
+            @media only screen and (max-width: 766px)
+                padding 0
 </style>
