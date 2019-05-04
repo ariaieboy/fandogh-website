@@ -3,18 +3,6 @@
     <div>
         <div class="row">
             <div class="col-md-6 col-xs-12">
-                <div class="fandogh-form-group">
-                    <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-                    <f-label-disable label="نام سرویس :" :value="service.name"/>
-                </div>
-                <div class="fandogh-form-group">
-                    <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-                    <f-label-disable label="نوع سرویس :" :value="service.service_type"/>
-                </div>
-                <div class="fandogh-form-group">
-                    <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-                    <f-label-disable label="مقدار رم مصرف شده :" :value="service.memory"/>
-                </div>
                 <div class="fandogh-form-group" v-if="service.urls">
                     <span style="color: #47494e">دامنه‌های سرویس:</span>
 
