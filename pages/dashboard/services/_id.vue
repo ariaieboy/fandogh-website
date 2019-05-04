@@ -2,6 +2,27 @@
     <div v-if="service && !loading">
         <p class="title">جزییات سرویس</p>
 
+        <div class="row" style="margin: 0 0 16px 0;">
+            <div class="wrapper" style="padding: 16px; background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); height: 64px; width: 100%; display: flex">
+
+                <span style=" margin-top: auto; margin-bottom: auto; font-size: 1.6em; font-family: iran-yekan; font-weight: bold">{{service.name}}</span>
+
+                <div style="width: 1px; background-color: #7c7c7c; margin-left: 12px; margin-right: 12px; border-radius: 25px"></div>
+
+                <span style="color: #7c7c7c; margin-top: auto; margin-bottom: auto; font-size: 1em; font-family: iran-yekan; font-weight: normal">
+                    نوع سرویس:
+                    <span style="font-size: 1.2em; color: black;padding-right: .2em">{{service.service_type}}</span>
+                </span>
+
+                <span style="color: #7c7c7c; margin-top: auto; margin-bottom: auto; margin-right: 16px; font-size: 1em; font-family: iran-yekan; font-weight: normal">
+                    رم مصرفی (مگابایت):
+                    <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
+                </span>
+
+            </div>
+
+        </div>
+
         <div class="box-row row">
             <div @click="sectionClicked('detail')"
                  :class="[(activeSectionName === 'detail' ? 'enabled' : 'disabled')]">
@@ -122,7 +143,7 @@
         height fit-content
         border-radius 3px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
-        background-color #ffffff
+        background-color #fefefe
         margin-top 5px
         margin-left 0
         margin-right 0
