@@ -3,25 +3,25 @@
         <metrics-chart metric-name="cpu_usage" :options="cpuOptions"
                        :dateFilter="selectedTimeFilter"
                        :serviceFilter="{title: service.name, value: service.name}"
-                       :title="'میزان مصرف CPU سرویس ' + serviceName ">
+                       title="میزان مصرف CPU سرویس">
         </metrics-chart>
 
         <metrics-chart metric-name="memory_usage" :options="memoryUsageOptions"
                        :dateFilter="selectedTimeFilter"
                        :serviceFilter="{title: service.name, value: service.name}"
-                       :title="'میزان مصرف حافظه سرویس ' + serviceName ">
+                       title="میزان مصرف حافظه سرویس">
         </metrics-chart>
 
         <metrics-chart metric-name="network_in_usage" :options="networkOptions"
                        :dateFilter="selectedTimeFilter"
                        :serviceFilter="{title: service.name, value: service.name}"
-                       :title="'میزان ترافیک دریافتی سرویس‌ ' + serviceName ">
+                       title="میزان ترافیک دریافتی سرویس‌">
         </metrics-chart>
 
         <metrics-chart metric-name="network_out_usage" :options="networkOptions"
                        :dateFilter="selectedTimeFilter"
                        :serviceFilter="{title: service.name, value: service.name}"
-                       :title="'میزان ترافیک خروجی سرویس ' + serviceName ">
+                       title="میزان ترافیک خروجی سرویس">
         </metrics-chart>
     </div>
 

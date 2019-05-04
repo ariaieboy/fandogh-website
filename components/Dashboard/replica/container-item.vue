@@ -56,6 +56,7 @@ export default {
   display flex
   flex-direction column
   font-family yekan
+  overflow-x hidden
   .replica-containers-item
     strong
       margin-left 5px

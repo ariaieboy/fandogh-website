@@ -2,7 +2,7 @@
   <div class="replica-containers">
     <h4>کانتینرها</h4>
     <div class="row">
-      <div class="col-md-6 col-xs-12" v-for="item in items">
+      <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12" v-for="item in items">
       <!-- color="item.color" -->
       <container-item  :name="item.name" :image="item.image" :state="item.ready"  />
     </div>
