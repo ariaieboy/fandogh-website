@@ -32,13 +32,14 @@
         </div>
 
         <div class="row main" style="margin: 0;">
-            <div class="box-row row col-lg-3 col-md-3 col-sm-3 col-xs-12 padding">
+            <div class="box-row row col-lg-2 col-md-2 col-sm-2 col-xs-12 padding">
                 <div @click="sectionClicked('detail')"
                      :class="[(activeSectionName === 'detail' ? 'enabled' : 'disabled')]">
                     <p>رپلیکاها</p>
                 </div>
 
                 <div @click="sectionClicked('env')"
+                     style="font-size: 0.8em"
                      :class="[(activeSectionName === 'env' ? 'enabled' : 'disabled')]">
                     <p>Environment Variables</p>
                 </div>
@@ -57,7 +58,7 @@
             </div>
 
             <keep-alive>
-                <component class="col-lg-9 col-md-9 col-xs-12 col-sm-9 padding"
+                <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding"
                            v-bind:is="activeSectionName"
                            style="padding: 0"
                            :service="service"></component>
