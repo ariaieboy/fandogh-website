@@ -241,9 +241,10 @@ export default {
       }
       this.isMount = false
     },
-    getImageV(value) {
+    getImageV(image_name) {
       this.version_loaded = false;
-      this.$store.dispatch("getImageVersions", value).then(res => {
+      console.log("image name: ", image_name);
+      this.$store.dispatch("getImageVersions", {"image_name": image_name, "state": "BUILT"}).then(res => {
         this.version_loaded = false;
       });
     },

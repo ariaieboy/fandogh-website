@@ -113,7 +113,7 @@ export default {
       try {
         await this.$store.dispatch(
           "getImageVersions",
-          this.$route.params.image
+          {"image_name": this.$route.params.image}
         );
         this.$store.commit("SET_DATA", { data: false, id: "loading" });
       } catch (e) {
