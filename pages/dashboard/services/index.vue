@@ -63,12 +63,12 @@
                             {{item.title}}
                         </th>
                     </tr>
-                    <tr class="data-head" v-for="(service, index) in services" @click="details(index)" style="cursor: pointer">
+                    <tr class="data-head" v-for="(service, index) in services">
 
-                        <td>{{service.name}}</td>
-                        <td>{{service.memory}}</td>
-                        <td>{{service.start_date}}</td>
-                        <td>
+                        <td @click="details(index)" style="cursor: pointer">{{service.name}}</td>
+                        <td @click="details(index)" style="cursor: pointer">{{service.memory}}</td>
+                        <td @click="details(index)" style="cursor: pointer">{{service.start_date}}</td>
+                        <td @click="details(index)" style="cursor: pointer">
                             <div style="display: flex">
                                 <canvas
                                         class="state"
