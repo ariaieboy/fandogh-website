@@ -56,14 +56,14 @@
                 </div>
             </div>
 
-            <div class="row" style="overflow-x:auto;margin: 0;">
+            <div class="row" style="overflow-x:auto;margin: 0;min-height: 300px; padding-left: 5px; padding-right: 5px">
                 <table style="width: 100%; border-collapse: separate; text-align: right; border-spacing: 0 .8em">
                     <tr class="head">
                         <th v-for="item in titleRow">
                             {{item.title}}
                         </th>
                     </tr>
-                    <tr class="data-head" v-for="(service, index) in services">
+                    <tr class="data-head" v-for="(service, index) in services" @click="details(index)" style="cursor: pointer">
 
                         <td>{{service.name}}</td>
                         <td>{{service.memory}}</td>
@@ -339,7 +339,7 @@
         border-radius 3px
         min-width: 160px;
         overflow: auto;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
         z-index: 1;
         left: 0;
         top: 0;
