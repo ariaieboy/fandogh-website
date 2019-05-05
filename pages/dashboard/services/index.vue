@@ -7,8 +7,8 @@
 
         <div class="images" v-else>
             <div style="overflow: hidden; margin-bottom: 32px">
-                <div class="right" style="float: right"><p class="title"> لیست سرویس‌ها</p></div>
-                <div class="left" style="float: left; cursor: pointer" @click="newService">
+                <div class="right" style="float: right;"><p class="title"> لیست سرویس‌ها</p></div>
+                <div class="left" style="float: left; cursor: pointer; margin-top: 8px" @click="newService">
                     <svg width="208px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
                         <defs>
