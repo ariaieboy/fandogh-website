@@ -114,9 +114,12 @@ export const deleteImage = async ({commit, state}, name) => {
     }
 };
 
-export const getImageVersions = async ({commit, state}, name) => {
+export const getImageVersions = async ({commit, state}, filters) => {
     try {
-        let versions = await Request().get(`/api/images/${name}/versions`);
+        let image_name = filters.image_name, version_state = filters.state || null;
+        let versions = await Request().get(
+            `/api/images/${image_name}/versions?` + (version_state !== null ? `state=${version_state}` : '')
+        );
         commit("SET_IMAGE_VERSIONS", versions);
         return versions;
     } catch (e) {
