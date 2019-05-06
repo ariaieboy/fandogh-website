@@ -8,27 +8,9 @@
       <div class="row-block">
         <f-button styles="red" path="/dashboard/secret/create">افزودن سکرت</f-button>
       </div>
-      <div class="table-title">سکرت‌های شما</div>
-      <div class="table-responsive table-multicolor">
-        <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد">
-          <template slot="action" slot-scope="props">
-            <span>
-              <action-button
-                class="action-button-s"
-                @onClick="edit(props.item)"
-                icon="edit.svg"
-                label="ویرایش"
-              />
-              <action-button
-                class="action-button-s"
-                @onClick="remove(props.item)"
-                icon="ic-delete.svg"
-                label="حذف"
-              />
-            </span>
-          </template>
-        </b-table>
-      </div>
+
+      <box-table :titles="titleRow" :items="secrets" :func="edit" :menu="menuList"></box-table>
+
     </div>
   </div>
 </template>
@@ -40,6 +22,8 @@ import FFromDate from "~/utils/fromDate";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
 import FLoading from "~/components/Loading";
+import BoxTable from "../../../components/Dashboard/table/box-table";
+import Moment from 'moment-jalaali'
 
 export default {
   layout: "dashboard",
@@ -47,35 +31,21 @@ export default {
     FLoading,
     FButton,
     ActionButton,
-    FEmpty
+    FEmpty,
+    BoxTable,
+    Moment
   },
   data() {
     return {
       isLoading: false,
-      header: [
-        {
-          label: "نام سکرت",
-          sortable: false,
-          key: "name",
-          tdClass: "ellipsis ltr"
-        },
-        {
-          label: "نوع سکرت",
-          sortable: false,
-          key: "type"
-        },
-        {
-          label: "تاریخ ساخت سکرت",
-          sortable: false,
-          key: "created_at"
-        },
-
-        {
-          label: "مدیریت", tdClass: 'width-larg',
-          sortable: false,
-          key: "action",
-          html: true
-        }
+      titleRow: [
+        {title: 'نام سکرت', width: '39%', name: 'name', class: {}},
+        {title: 'تاریخ ساخت', width: '19%', name: 'created_at', class: {}},
+        {title: 'نوع سکرت', width: '39%', name: 'type', class: {}},
+      ],
+      menuList: [
+        {method: this.edit, icon: 'edit.svg', title: 'ویرایش سکرت', style: {}},
+        {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سکرت', style: {color: '#fd3259'}},
       ]
     };
   },
@@ -91,7 +61,7 @@ export default {
             name,
             type: type,
             memory: `Mi ${memory}`,
-            created_at: FFromDate(created_at)
+            created_at: Moment(created_at).format('jYYYY/jMM/jDD')
           };
         });
       }
@@ -113,32 +83,32 @@ export default {
         }
       }
     },
-    edit({ name }) {
+    edit(index) {
       this.$ga.event({
         eventCategory: "secret",
         eventAction: "click btn edit secret",
         eventLabel: "secret name",
-        eventValue: name
+        eventValue: this.secrets[index].name
       });
-      this.$router.push(`/dashboard/secret/edit/${name}`);
+      this.$router.push(`/dashboard/secret/edit/${this.secrets[index].name}`);
     },
-    remove({ name }) {
+    remove(index) {
       this.$ga.event({
         eventCategory: "secret",
         eventAction: "click btn remove secret",
         eventLabel: "secret name",
-        eventValue: name
+        eventValue: this.secrets[index].name
       });
       this.$alertify(
         {
           title: `حذف سکرت`,
-          description: ` آیا از حذف ${name} مطمئن هستید؟`
+          description: ` آیا از حذف ${this.secrets[index].name} مطمئن هستید؟`
         },
         status => {
           if (status) {
             this.isLoading = true;
             this.$store
-              .dispatch("deleteSecret", name)
+              .dispatch("deleteSecret", this.secrets[index].name)
               .then(res => {
                 this.getData();
                 this.isLoading = false;
@@ -150,7 +120,7 @@ export default {
                   eventCategory: "secret",
                   eventAction: "remove secret",
                   eventLabel: "secret name",
-                  eventValue: name
+                  eventValue: this.secrets[index].name
                 });
               })
               .catch(e => {
@@ -159,7 +129,7 @@ export default {
                   eventCategory: "secret",
                   eventAction: "fail remove secret",
                   eventLabel: "secret name",
-                  eventValue: name
+                  eventValue: this.secrets[index].name
                 });
                 this.$notify({
                   title: e.data.message,
