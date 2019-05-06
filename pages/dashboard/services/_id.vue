@@ -39,6 +39,7 @@
                 </div>
 
                 <div @click="sectionClicked('env')"
+                     style="font-size: 0.8em"
                      :class="[(activeSectionName === 'env' ? 'enabled' : 'disabled')]">
                     <p>Environment Variables</p>
                 </div>

@@ -9,10 +9,12 @@
 
         <plan v-bind.sync="planData"/>
 
+        <div class="notice"><p>توجه داشته باشید قیمت‌ پلن‌ها به صورت ماهیانه محاسبه می‌شوند</p></div>
+
         <div class="row">
             <div class="vol-lg-8 col-sm-8 col-md-8 col-xs-12" style="position: relative">
 
-                <div class="col-lg-12 col-md-12 col-xs-12" style="height: 48px; width: 100%;margin-top: 70px">
+                <div class="col-lg-12 col-md-12 col-xs-12" style="height: 48px; width: 100%;margin-top: 30px">
                     <img src="../../../assets/svg/plan-customization.svg" alt="plan" class="section-title-image"
                          align="right"/>
 
@@ -591,7 +593,7 @@
         max-height min-content
         top 60px
         bottom 20px
-        margin-top 70px
+        margin-top 30px
         transition max-height 0.2s ease
         z-index 10
 
@@ -791,6 +793,19 @@
             background-color #2979ff
             z-index -1
 
+
+    .notice
+        margin-top 24px
+        border-bottom 1px solid gray
+        border-top 1px solid gray
+        @media only screen and (max-width: 766px)
+            margin-top 16px
+        p
+            font-family iran-yekan
+            font-weight bold
+            font-size 1em
+            line-height 1.7g
+            padding 0 16px
 
 </style>
 

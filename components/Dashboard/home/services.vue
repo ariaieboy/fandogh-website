@@ -43,11 +43,9 @@
 
 <script>
     import FButton from "~/components/elements/button";
-    import FDate from "~/utils/date";
     import ActionButton from "~/components/Dashboard/table/action-button";
     import FEmpty from "~/components/Dashboard/empty";
     import FLoading from "~/components/Loading";
-    import FFromDate from "~/utils/fromDate";
     import TableHeader from "./children/table-header";
     import TableTitle from "./children/table-title";
     import TableNavigation from "./children/table-navigation";

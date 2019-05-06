@@ -5,30 +5,40 @@
       <f-button styles="red" path="/dashboard/secret/create">افزودن سکرت</f-button>
     </f-empty>
     <div class="secretss" v-else>
-      <div class="row-block">
-        <f-button styles="red" path="/dashboard/secret/create">افزودن سکرت</f-button>
-      </div>
-      <div class="table-title">سکرت‌های شما</div>
-      <div class="table-responsive table-multicolor">
-        <b-table :fields="header" stacked="lg" :items="secrets" empty-text="دیتایی وجود ندارد">
-          <template slot="action" slot-scope="props">
-            <span>
-              <action-button
-                class="action-button-s"
-                @onClick="edit(props.item)"
-                icon="edit.svg"
-                label="ویرایش"
-              />
-              <action-button
-                class="action-button-s"
-                @onClick="remove(props.item)"
-                icon="ic-delete.svg"
-                label="حذف"
-              />
-            </span>
-          </template>
-        </b-table>
-      </div>
+        <div style="overflow: hidden; margin-bottom: 32px">
+
+            <div class="right" style="float: right;"><p class="title"> لیست سکرت‌ها</p></div>
+            <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
+                 @click="$router.push('/dashboard/secret/create')">
+                <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <path d="M31.5,2 L176.5,2 C191.687831,2 204,14.3121694 204,29.5 C204,44.6878306 191.687831,57 176.5,57 L31.5,57 C16.3121694,57 4,44.6878306 4,29.5 C4,14.3121694 16.3121694,2 31.5,2 Z M176.5,53 C189.478692,53 200,42.4786916 200,29.5 C200,16.5213084 189.478692,6 176.5,6 C163.521308,6 153,16.5213084 153,29.5 C153,42.4786916 163.521308,53 176.5,53 Z M179.03125,25.2185617 L179.030991,25.2185617 L179.030991,28.8125 L175.375,28.8125 L175.375,25.2185617 C175.375,24.2879693 176.19513,23.53125 177.203125,23.53125 C178.21112,23.53125 179.03125,24.2882084 179.03125,25.2185617 Z M189.375855,16.8751063 C189.75,17.0085528 190,17.363349 190,17.7612398 L190,41.2208817 C190,41.5612314 189.815982,41.8751366 189.519306,42.0413938 C189.428397,42.0925687 187.26002,43.3046052 184.652493,44.5374546 C181.065005,46.2335713 178.490225,47.09375 177,47.09375 C175.509775,47.09375 172.934995,46.2335713 169.347507,44.5374546 C166.739736,43.3046052 164.571603,42.0925687 164.48045,42.0413938 C164.183773,41.8751366 164,41.5612314 164,41.2208817 L164,17.7612398 C164,17.363349 164.25,17.0085528 164.6239,16.8751063 C164.838954,16.7987113 169.967742,15 177,15 C184.032258,15 189.161046,16.7987113 189.375855,16.8751063 Z M170.337977,29.9371881 L170.337977,37.6119509 C170.337977,38.1312902 170.758065,38.5521975 171.276393,38.5521975 L182.723607,38.5521975 C183.241935,38.5521975 183.662023,38.1312902 183.662023,37.6119509 L183.662023,29.937433 C183.662023,29.4180937 183.241935,28.9971864 182.723607,28.9971864 L181.852151,28.9971864 L181.852151,25.3177371 C181.852151,22.6326475 179.679863,20.4561236 177,20.4561236 C174.320381,20.4561236 172.147849,22.6326475 172.147849,25.3177371 L172.147849,28.9969416 L171.276393,28.9969416 C170.758065,28.9969416 170.337977,29.4180937 170.337977,29.9371881 Z M177,31.65625 C177.448568,31.65625 177.8125,32.0591019 177.8125,32.5561635 L177.8125,34.8188365 C177.8125,35.3158981 177.448568,35.71875 177,35.71875 C176.551221,35.71875 176.1875,35.3158981 176.1875,34.8188365 L176.1875,32.5561635 C176.1875,32.0593362 176.551221,31.65625 177,31.65625 Z" id="path-1"></path>
+                        <filter x="-3.5%" y="-9.1%" width="107.0%" height="125.5%" filterUnits="objectBoundingBox" id="filter-2">
+                            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+                            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                            <feColorMatrix values="0 0 0 0 0.141176471   0 0 0 0 0.835294118   0 0 0 0 0.847058824  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+                        </filter>
+                    </defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Combined-Shape">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#24D5D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                    <text x="142"
+                          y="29"
+                          fill="#FFFFFF"
+                          style="font-family: iran-sans; font-size: 1em"
+                          text-anchor="start"
+                          alignment-baseline="middle">
+                        ساخت سکرت جدید
+                    </text>
+                </svg>
+            </div>
+        </div>
+
+      <box-table :titles="titleRow" :items="secrets" :func="edit" :menu="menuList"></box-table>
+
     </div>
   </div>
 </template>
@@ -36,10 +46,11 @@
 <script>
 
 import FButton from "~/components/elements/button";
-import FFromDate from "~/utils/fromDate";
 import ActionButton from "~/components/Dashboard/table/action-button";
 import FEmpty from "~/components/Dashboard/empty";
 import FLoading from "~/components/Loading";
+import BoxTable from "../../../components/Dashboard/table/box-table";
+import Moment from 'moment-jalaali'
 
 export default {
   layout: "dashboard",
@@ -47,35 +58,21 @@ export default {
     FLoading,
     FButton,
     ActionButton,
-    FEmpty
+    FEmpty,
+    BoxTable,
+    Moment
   },
   data() {
     return {
       isLoading: false,
-      header: [
-        {
-          label: "نام سکرت",
-          sortable: false,
-          key: "name",
-          tdClass: "ellipsis ltr"
-        },
-        {
-          label: "نوع سکرت",
-          sortable: false,
-          key: "type"
-        },
-        {
-          label: "تاریخ ساخت سکرت",
-          sortable: false,
-          key: "created_at"
-        },
-
-        {
-          label: "مدیریت", tdClass: 'width-larg',
-          sortable: false,
-          key: "action",
-          html: true
-        }
+      titleRow: [
+        {title: 'نام سکرت', width: '39%', name: 'name', class: {}},
+        {title: 'تاریخ ساخت', width: '19%', name: 'created_at', class: {}},
+        {title: 'نوع سکرت', width: '39%', name: 'type', class: {}},
+      ],
+      menuList: [
+        {method: this.edit, icon: 'edit.svg', title: 'ویرایش سکرت', style: {}},
+        {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سکرت', style: {color: '#fd3259'}},
       ]
     };
   },
@@ -91,7 +88,7 @@ export default {
             name,
             type: type,
             memory: `Mi ${memory}`,
-            created_at: FFromDate(created_at)
+            created_at: Moment(created_at).format('jYYYY/jMM/jDD')
           };
         });
       }
@@ -113,32 +110,32 @@ export default {
         }
       }
     },
-    edit({ name }) {
+    edit(index) {
       this.$ga.event({
         eventCategory: "secret",
         eventAction: "click btn edit secret",
         eventLabel: "secret name",
-        eventValue: name
+        eventValue: this.secrets[index].name
       });
-      this.$router.push(`/dashboard/secret/edit/${name}`);
+      this.$router.push(`/dashboard/secret/edit/${this.secrets[index].name}`);
     },
-    remove({ name }) {
+    remove(index) {
       this.$ga.event({
         eventCategory: "secret",
         eventAction: "click btn remove secret",
         eventLabel: "secret name",
-        eventValue: name
+        eventValue: this.secrets[index].name
       });
       this.$alertify(
         {
           title: `حذف سکرت`,
-          description: ` آیا از حذف ${name} مطمئن هستید؟`
+          description: ` آیا از حذف ${this.secrets[index].name} مطمئن هستید؟`
         },
         status => {
           if (status) {
             this.isLoading = true;
             this.$store
-              .dispatch("deleteSecret", name)
+              .dispatch("deleteSecret", this.secrets[index].name)
               .then(res => {
                 this.getData();
                 this.isLoading = false;
@@ -150,7 +147,7 @@ export default {
                   eventCategory: "secret",
                   eventAction: "remove secret",
                   eventLabel: "secret name",
-                  eventValue: name
+                  eventValue: this.secrets[index].name
                 });
               })
               .catch(e => {
@@ -159,7 +156,7 @@ export default {
                   eventCategory: "secret",
                   eventAction: "fail remove secret",
                   eventLabel: "secret name",
-                  eventValue: name
+                  eventValue: this.secrets[index].name
                 });
                 this.$notify({
                   title: e.data.message,
@@ -173,4 +170,17 @@ export default {
   }
 };
 </script>
+<style scoped lang="stylus">
+
+    .title
+        font-family iran-yekan
+        font-style normal
+        font-weight bold
+        font-size 1.2em
+        font-stretch normal
+        line-height 1.75
+        color #7c7c7c
+        letter-spacing normal
+
+</style>
 
