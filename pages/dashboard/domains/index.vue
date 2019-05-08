@@ -69,6 +69,8 @@
         data() {
             return {
                 isLoading: false,
+                sslError: require('../../../assets/svg/ssl-error.svg'),
+                sslSuccess: require('../../../assets/svg/ssl-success.svg'),
                 titleRow: [
                     {title: 'نام دامنه', width: '29%', name: 'name'},
                     {title: 'تاریخ ساخت', width: '20%', name: 'date'},
@@ -153,7 +155,7 @@
                 return verified ? "تایید شده" : "تایید نشده";
             },
             getStatus(certificate) {
-                if (!certificate) return `<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" :src="require('./icons/ssl-error.svg')" alt="ssl-status"></div>`;
+                if (!certificate) return `<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" :src=${this.sslError} class="ssl"  alt="ssl-status"></div>`;
                 if (!certificate.details) return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="./icons/ssl-error.svg" alt="ssl-status"></div>';
                 const {status} = certificate.details;
                 if (!status) return "";
