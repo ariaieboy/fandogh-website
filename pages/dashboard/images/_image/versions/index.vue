@@ -71,10 +71,10 @@
         data() {
             return {
                 titleRow: [
-                    {title: 'ورژن', width: '41%', name: 'version', class: {}},
+                    {title: 'ورژن', width: '35%', name: 'version', class: {}},
                     {title: 'تاریخ ساخت', width: '21%', name: 'date', class: {}},
                     {title: 'حجم(مگابایت)', width: '20%', name: 'size', class: {}},
-                    {title: 'وضعیت', width: '14%', name: 'state', class: {}},
+                    {title: 'وضعیت', width: '20%', name: 'state', class: {}},
                 ],
                 menuList: [
                     {method: this.createVersions, icon: 'ic-add.svg', title: 'ایجاد سرویس', style: {}},
