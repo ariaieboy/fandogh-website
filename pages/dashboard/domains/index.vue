@@ -153,19 +153,19 @@
                 return verified ? "تایید شده" : "تایید نشده";
             },
             getStatus(certificate) {
-                if (!certificate) return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="/_nuxt/components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
-                if (!certificate.details) return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="/_nuxt/components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
+                if (!certificate) return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="../../../components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
+                if (!certificate.details) return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="../../../components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
                 const {status} = certificate.details;
                 if (!status) return "";
                 let value = status.toLowerCase();
                 if (value === "ready") {
-                    return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="/_nuxt/components/Dashboard/home/icons/ssl-success.svg" alt="ssl-status"></div>';
+                    return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="../../../components/Dashboard/home/icons/ssl-success.svg" alt="ssl-status"></div>';
                 }
                 if (value === "error") {
-                    return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="/_nuxt/components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
+                    return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="../../../components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
                 }
                 if (value === "unknown") {
-                    return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="/_nuxt/components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
+                    return '<div style="display: flex"><img style="margin-left: auto; margin-right: auto;" class="ssl" src="../../../components/Dashboard/home/icons/ssl-error.svg" alt="ssl-status"></div>';
                 }
             },
             verify(index) {
