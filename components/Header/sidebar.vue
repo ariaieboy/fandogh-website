@@ -3,7 +3,7 @@
     <div class="row sidebar-heading no-margin">
       <div class="col-xs-6">
         <a href="#" @click.prevent="toggleMenu" class="close">
-          <img alt="close icon" :src="require('../../assets/svg/ic_close.svg')">
+          <img alt="close icon" style="filter: invert(98%)" :src="require('../../assets/svg/ic_close.svg')">
         </a>
       </div>
       <div class="col-xs-6">
@@ -17,9 +17,9 @@
         <li>
           <a href="/">صفحه اصلی</a>
         </li>
-        <li>
-          <a @click="toggleMenu" href="#prices">سرویس ها</a>
-        </li>
+        <!--<li>-->
+          <!--<a @click="toggleMenu" href="#prices">سرویس ها</a>-->
+        <!--</li>-->
         <li>
           <a rel="noopener" target="_blank" href="https://docs.fandogh.cloud">مستندات</a>
         </li>
