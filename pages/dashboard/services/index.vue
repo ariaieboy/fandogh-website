@@ -214,7 +214,7 @@
                 });
                 this.$router.push(`/dashboard/services/${this.services[index].name}/logs`);
             }, newService() {
-                this.$router.push('/dashboard/services/setup')
+                this.$router.push('/dashboard/services/setup_router')
             }
         }
     };
