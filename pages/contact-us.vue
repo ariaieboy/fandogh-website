@@ -12,12 +12,13 @@
 
                     <no-ssr>
                         <GmapMap
-                                :center="{lat:35.716407, lng:51.366423}"
+                                :center="{lat:35.715873, lng:51.363180}"
                                 :zoom="16"
                                 :options="{styles: mapStyle, disableDefaultUI: true}"
                                 class="map soft-corner">
                             <GmapMarker
-                                    :position="{lat:35.716407, lng:51.366423}"
+
+                                    :position="{lat:35.715873, lng:51.363180}"
                                     :icon="require('~/assets/img/marker.png')"
                             />
                         </GmapMap>
@@ -26,10 +27,10 @@
                     <div>
                         <ul>
                             <li>
-                                آدرس: تهران، ستارخان، دریان‌نو، پلاک ۲۹۷، طبقه ۲
+                                آدرس: تهران، ستارخان، دریان‌نو، پلاک ۴۴، طبقه ۵
                             </li>
                             <li>
-                                تلفن: ۰۲۱۶۶۵۵۴۲۳۴
+                                تلفن: ۰۲۱۲۸۴۲۲۳۸۳
                             </li>
                             <li>
                                 ایمیل:   support@fandogh.cloud
