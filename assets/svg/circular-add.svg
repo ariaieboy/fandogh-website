@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="33px" height="33px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>ic_highlight_off</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_highlight_off">
+            <g id="Icon-24px">
+                <polygon id="Shape" points="0 0 33 0 33 33 0 33"></polygon>
+                <path d="M14.8549161,8.81127441 L14.8549161,14.8549161 L8.81127441,14.8549161 L8.81127441,18.1450839 L14.8549161,18.1450839 L14.8549161,24.1887256 L18.1450839,24.1887256 L18.1450839,18.1450839 L24.1887256,18.1450839 L24.1887256,14.8549161 L18.1450839,14.8549161 L18.1450839,8.81127441 L14.8549161,8.81127441 L14.8549161,8.81127441 Z M16.5,0 C7.3755,0 0,7.3755 0,16.5 C0,25.6245 7.3755,33 16.5,33 C25.6245,33 33,25.6245 33,16.5 C33,7.3755 25.6245,0 16.5,0 L16.5,0 Z M16.5,29.7 C9.2235,29.7 3.3,23.7765 3.3,16.5 C3.3,9.2235 9.2235,3.3 16.5,3.3 C23.7765,3.3 29.7,9.2235 29.7,16.5 C29.7,23.7765 23.7765,29.7 16.5,29.7 L16.5,29.7 Z" id="Shape" fill="#24D5D8"></path>
+            </g>
+        </g>
+    </g>
+</svg>
