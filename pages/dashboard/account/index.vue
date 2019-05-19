@@ -12,7 +12,9 @@
                     </div>
 
                     <div class="row">
-                        <button @click="accountEdit" class="container-fluid left curve-button" style="margin: 24px auto;">ویرایش اطلاعات</button>
+                        <button @click="accountEdit" class="container-fluid left curve-button"
+                                style="margin: 24px auto;">ویرایش اطلاعات
+                        </button>
                     </div>
                 </div>
 
@@ -24,13 +26,14 @@
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">شماره ملی:</p>
-                        <p class="profile-entity-value" style="font-family: iran-sans; font-size: 0.85em">{{account.national_id}}</p>
+                        <p class="profile-entity-value" style="font-family: iran-sans; font-size: 0.85em">
+                            {{account.national_id}}</p>
                     </div>
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">تاریخ عضویت:</p>
                         <p class="profile-entity-value"></p>
                     </div>
-                    <div style="min-height: 3em; display: block">
+                    <div style="min-height: 3em; display: block;">
                         <p class="profile-entity-title" style="display: inline-block">نام فضانام:</p>
                         <v-select
                                 style="display: inline-block"
@@ -40,8 +43,9 @@
                                 dir="rtl"
                                 label="name"
                                 v-model="activatedNamespace"
-                                placeholder="نام ایمیج را انتخاب کنید">
+                                placeholder="نام فضانام را انتخاب کنید">
                         </v-select>
+                        <img @click="$router.push('/dashboard/account/namespaces')" src="../../../assets/svg/circular-add.svg" alt="add-namespace" class="create-namespace">
                     </div>
 
                 </div>
@@ -287,10 +291,12 @@
         font-style normal
         display inline-block
         font-stretch normal
-        margin auto
+        margin 0
         line-height 1.75
         letter-spacing normal
         color #111111
+        @media only screen and (max-width: 1200px)
+            min-width 75px
 
     .profile-entity-value
         font-family iran-yekan
@@ -299,7 +305,7 @@
         text-align right
         line-height 1.75
         text-overflow ellipsis
-        margin auto
+        margin 0
         margin-right 10px
         letter-spacing normal
         color #000000
@@ -387,6 +393,18 @@
         border none
         outline none
         cursor pointer
+
+    .create-namespace
+        display inline-block
+        width 32px
+        height 32px
+        margin 0
+        cursor pointer
+        margin-right 12px
+        vertical-align middle
+        @media only screen and (max-width: 1100px)
+            width 27px
+            height 27px
 </style>
 
 <style lang="stylus">
@@ -398,8 +416,10 @@
         border-radius 10px !important
         background-color #f5f5f5 !important
         min-width 200px !important
-        max-width 250px
+        max-width 250px !important
         direction rtl !important
+        @media only screen and (max-width: 1100px)
+            min-width 175px !important
 
     .v-select .vs__selected-tag
         font-family iran-yekan !important
