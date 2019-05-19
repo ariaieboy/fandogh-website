@@ -45,7 +45,7 @@
                                 v-model="activatedNamespace"
                                 placeholder="نام فضانام را انتخاب کنید">
                         </v-select>
-                        <img src="../../../assets/svg/circular-add.svg" alt="add-namespace" class="create-namespace">
+                        <img @click="$router.push('/dashboard/account/namespaces')" src="../../../assets/svg/circular-add.svg" alt="add-namespace" class="create-namespace">
                     </div>
 
                 </div>
