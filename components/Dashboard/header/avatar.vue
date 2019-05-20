@@ -3,7 +3,7 @@
         <div class="header-avatar-box" @click="toggleAvatar('avatar')">
             <img class="header-avatar-img" :src="avatar" alt>
             <div class="header-avatar-name">
-                <span>{{username}}</span>
+                <span>{{namespace}}</span>
             </div>
             <img
                     class="header-avatar-arrow"
@@ -14,8 +14,8 @@
         </div>
         <div class="header-avatar-list" :class="{open:isNativeMenus === 'avatar'}">
             <div class="header-avatar-namespace">
-                <span class="font-roboto header-avatar-username">{{username}}</span>
-                <span class="font-roboto">{{namespace}}</span>
+                <span class="font-roboto header-avatar-username">{{namespace}}</span>
+                <span class="font-roboto">{{username}}</span>
             </div>
             <div class="header-avatar-list-item">
                 <router-link :to="item.link" class="header-avatar-item" v-for="(item,i) in items" :key="i">
