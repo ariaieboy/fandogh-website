@@ -43,6 +43,7 @@
             };
         },
         components: {NamespaceCard},
+
         methods: {
             async createNamespace(namespace) {
                 if(namespace.toString().trim().length === 0)
