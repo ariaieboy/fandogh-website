@@ -1,12 +1,12 @@
 <template>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="padding: 0">
         <div class="box middle-xs">
-            <!--<div style="cursor: pointer; flex: 0.2 0 auto">-->
+            <div style="cursor: pointer; flex: 0.2 0 auto">
                 <!--<img style="width: 1.4em; height: 1.4em; vertical-align: middle; justify-self: right"-->
                      <!--alt="delete-namespace"-->
                      <!--src="../../static/icons/ic_delete.svg"/>-->
-                <!--<span style="color: #fd3259; padding-right: 8px">حذف فضانام</span>-->
-            <!--</div>-->
+                <span :style="{color: namespace.quota.memory_limit/1024 >=1 ? '#2979ff' : '#6A6A6A'}">{{(namespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</span>
+            </div>
 
             <div class="text-container">
                 {{namespace.name}}
