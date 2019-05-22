@@ -1,9 +1,7 @@
 import Request from "~/plugins/request";
-
 import {jsonManipulator} from "../utils/yaml";
 
 const monitoringAPI = process.env.MONITORING_API
-
 
 export const nuxtServerInit = async ({state, dispatch}, {req}) => {
     dispatch("checkAuthentication", req.cookies["USER_TOKEN"]);
@@ -277,7 +275,6 @@ export const setPlan = async ({commit, state}, {plan, configs}) => {
         return Promise.reject(e);
     }
 };
-
 
 export const getNameSpace = async ({commit, state}, namespace) => {
     try {
