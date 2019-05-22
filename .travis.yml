@@ -14,7 +14,7 @@ install:
 script:
   - echo $TRAVIS_COMMIT  
   - COLLECT_ERROR=True fandogh login --username=$FANDOGH_USERNAME --password=$FANDOGH_PASSWORD
-  - fandogh namespace active --name=default
+  - fandogh namespace active --name=default 
   - fandogh image publish --version=$TRAVIS_COMMIT || travis_terminate 1
   - if [ $TRAVIS_BRANCH = 'master' ]; then fandogh service deploy --version=$TRAVIS_COMMIT --name=start || travis_terminate 1; fi
   - if [ $TRAVIS_BRANCH = 'develop' ]; then fandogh service deploy --version=$TRAVIS_COMMIT --name=fandogh-staging || travis_terminate 1; fi
