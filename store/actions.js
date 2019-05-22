@@ -288,6 +288,14 @@ export const getNameSpace = async ({commit, state}, namespace) => {
     }
 };
 
+export const createNewNamespace = async ({commit, state}, namespace) => {
+  try {
+      return await Request().post(`api/users/namespaces`, {namespace: namespace});
+  }  catch (e) {
+      return Promise.reject(e);
+  }
+};
+
 export const requestUserNamespaces = async ({commit, state}) => {
     try {
         let res = await Request().get(`/api/users/namespaces`);
