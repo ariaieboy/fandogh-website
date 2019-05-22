@@ -45,8 +45,6 @@
         components: {NamespaceCard},
         methods: {
             async createNamespace(namespace) {
-                console.log('namespace')
-                console.log(namespace)
                 if(namespace.toString().trim().length === 0)
                     return 0;
 
