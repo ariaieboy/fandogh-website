@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="table-responsive table-multicolor">
+        <div style="box-shadow: 0 2px 6px rgba(0,0,0,0.07); border-radius: 3px" class="table-responsive table-multicolor">
             <div class="table-title font-roboto">Environment Variables</div>
             <b-table
                     :fields="header"
