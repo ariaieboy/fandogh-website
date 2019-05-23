@@ -58,7 +58,7 @@
 
                 <div @click="sectionClicked('logs')"
                      :class="[(activeSectionName === 'logs' ? 'enabled' : 'disabled')]">
-                    <p>logs</p>
+                    <p>لاگ‌ها</p>
                 </div>
             </div>
 
