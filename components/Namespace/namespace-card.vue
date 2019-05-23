@@ -5,7 +5,7 @@
                 <!--<img style="width: 1.4em; height: 1.4em; vertical-align: middle; justify-self: right"-->
                      <!--alt="delete-namespace"-->
                      <!--src="../../static/icons/ic_delete.svg"/>-->
-                <span style="border-left: 1px solid #838383; padding-left: 12px;" :style="{color: namespace.quota.memory_limit/1024 >=1 ? '#2979ff' : '#6A6A6A'}">{{(namespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</span>
+                <span style=" padding: 5px 8px; background-color: #2979ff; border-radius: 3px; color: #fefefe">{{(namespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</span>
             </div>
 
             <div class="text-container">
@@ -30,12 +30,12 @@
         margin .5rem 0.5rem
         height 58px
         min-height 32px
-        border-radius 50px
+        border-radius 3px
         background-color #fefefe
         text-align center
         padding-left 16px
         padding-right 16px
-        box-shadow 0 2px 6px rgba(0,0,0,0.03)
+        box-shadow 0 2px 6px rgba(0,0,0,0.07)
 
     div.text-container
         margin 0 16px 0 0

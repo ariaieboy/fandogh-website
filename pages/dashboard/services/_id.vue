@@ -55,6 +55,11 @@
                      :class="[(activeSectionName === 'monitor' ? 'enabled' : 'disabled')]">
                     <p>مانیتورینگ</p>
                 </div>
+
+                <div @click="sectionClicked('logs')"
+                     :class="[(activeSectionName === 'logs' ? 'enabled' : 'disabled')]">
+                    <p>logs</p>
+                </div>
             </div>
 
             <keep-alive>
@@ -82,6 +87,7 @@
     import monitor from "./service/monitor"
     import env from "./service/env"
     import domains from "./service/domains"
+    import logs from "./service/logs"
 
     export default {
         layout: "dashboard",
@@ -98,7 +104,8 @@
             detail,
             monitor,
             env,
-            domains
+            domains,
+            logs
         },
         data() {
             return {
