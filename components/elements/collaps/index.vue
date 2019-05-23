@@ -80,12 +80,8 @@ $round = 10px
 .collapse .collapse-header
   position relative
   padding 15px 20px 15px 40px
-  border $borderWidth solid $borderColor
   border-radius 3px
-  border-top-left-radius $round
-  border-top-right-radius $round
-  border-bottom-right-radius $round
-  border-bottom-left-radius $round
+  box-shadow 0 2px 6px rgba(0,0,0,0.07)
   background #fff
   cursor pointer
 .collapse .collapse-header > div
@@ -106,15 +102,14 @@ $round = 10px
   -ms-transform rotate(0 $borderColor = #75879cde g)
   -webkit-transform rotate(0deg)
 .collapse.is-active .collapse-header
-  border-bottom-right-radius 0
   border-bottom-left-radius 0
+  border-bottom-right-radius 0
+  box-shadow 1px -2px 3px rgba(0,0,0,0.07)
 .collapse .collapse-content-box
   padding 15px 0
-  border-right $borderWidth solid $borderColor
-  border-bottom $borderWidth solid $borderColor
-  border-left $borderWidth solid $borderColor
-  border-bottom-right-radius $round
-  border-bottom-left-radius $round
+  border-bottom-left-radius 3px
+  border-bottom-right-radius 3px
+  box-shadow 0 2px 6px rgba(0,0,0,0.07)
   background-color #fff
   transition all 0.2s
   -moz-transition all 0.2s
