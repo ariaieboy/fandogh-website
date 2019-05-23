@@ -1,5 +1,4 @@
 import Request from "~/plugins/request";
-
 import {jsonManipulator} from "../utils/yaml";
 
 const monitoringAPI = process.env.MONITORING_API
@@ -277,7 +276,6 @@ export const setPlan = async ({commit, state}, {plan, configs}) => {
     }
 };
 
-
 export const getNameSpace = async ({commit, state}, namespace) => {
     try {
         let res = await Request().get(`/api/users/namespaces/${namespace}`);
@@ -286,6 +284,14 @@ export const getNameSpace = async ({commit, state}, namespace) => {
     } catch (e) {
         return Promise.reject(e);
     }
+};
+
+export const createNewNamespace = async ({commit, state}, namespace) => {
+  try {
+      return await Request().post(`api/users/namespaces`, {namespace: namespace});
+  }  catch (e) {
+      return Promise.reject(e);
+  }
 };
 
 export const requestUserNamespaces = async ({commit, state}) => {

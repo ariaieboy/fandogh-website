@@ -23,11 +23,11 @@
     min-height 500px
     max-height 600px
     overflow-y scroll
-    border solid 1px #e7e8ea
     background #fff
     direction ltr
     padding 10px 0
-    box-sizing border-box
+    border-radius 3px
+    box-shadow 0 2px 6px rgba(0,0,0, 0.07)
     table
       tr
         td
