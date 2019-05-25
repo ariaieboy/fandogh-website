@@ -26,6 +26,7 @@ export default {
   align-items center
   min-height 633px
   border-radius 10px
+  box-shadow 0 2px 6px rgba(0,0,0, 0.07)
   background-color rgb(255, 255, 255)
   img
     width 193.6px

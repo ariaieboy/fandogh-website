@@ -1,10 +1,8 @@
 <template>
     <div class="wrapper-image" v-if="!loading">
         <f-loading :isFull="true" v-if="isLoading"/>
-        <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !">
-            <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
-        </f-empty>
-        <div class="images" v-else>
+
+        <div class="images">
 
             <div style="overflow: hidden; margin-bottom: 32px">
                 <div class="right" style="float: right;"><p class="title"> لیست ایمیج‌ها</p></div>
@@ -58,7 +56,9 @@
                 </div>
             </div>
 
-            <box-table :titles="titleRow" :items="images" :func="versions" :menu="menuList"></box-table>
+            <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !"></f-empty>
+
+            <box-table v-else :titles="titleRow" :items="images" :func="versions" :menu="menuList"></box-table>
 
         </div>
     </div>

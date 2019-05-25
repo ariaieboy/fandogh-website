@@ -302,37 +302,37 @@
                 padding-right 0
                 padding-left 0
             canvas
-                animation moved 2s infinite ease-in-out
-                -webkit-animation moved 2s infinite ease-in-out
+                animation moved 2.5s infinite ease-in-out
+                -webkit-animation moved 2.5s infinite ease-in-out
 
 
         @keyframes moved {
-            0% {opacity: 1; transform scale(1)}
-            10% {opacity: .95; transform scale(.99)}
-            20% {opacity: .9; transform scale(.98)}
-            30% {opacity: .85; transform scale(.97)}
-            40% {opacity: .8; transform scale(.96)}
-            50% {opacity: .75; transform scale(.95)}
-            60% {opacity: .8; transform scale(.96)}
-            70% {opacity: .85; transform scale(.97)}
-            80% {opacity: .9; transform scale(.98)}
-            90% {opacity: .95; transform scale(.99)}
-            100% {opacity: 1; transform scale(1)}
+            0% {opacity: 1; transform scale(1.05)}
+            10% {opacity: .95; transform scale(1.03)}
+            20% {opacity: .9; transform scale(0.99)}
+            30% {opacity: .85; transform scale(.95)}
+            40% {opacity: .8; transform scale(.91)}
+            50% {opacity: .75; transform scale(.87)}
+            60% {opacity: .8; transform scale(.91)}
+            70% {opacity: .85; transform scale(.95)}
+            80% {opacity: .9; transform scale(0.99)}
+            90% {opacity: .95; transform scale(1.03)}
+            100% {opacity: 1; transform scale(1.05)}
         }
 
 
         @-webkit-keyframes moved{
-            0% {opacity: 1; transform scale(1)}
-            10% {opacity: .95; transform scale(.99)}
-            20% {opacity: .9; transform scale(.98)}
-            30% {opacity: .85; transform scale(.97)}
-            40% {opacity: .8; transform scale(.96)}
-            50% {opacity: .75; transform scale(.95)}
-            60% {opacity: .8; transform scale(.96)}
-            70% {opacity: .85; transform scale(.97)}
-            80% {opacity: .9; transform scale(.98)}
-            90% {opacity: .95; transform scale(.99)}
-            100% {opacity: 1; transform scale(1)}
+            0% {opacity: 1; transform scale(1.05)}
+            10% {opacity: .95; transform scale(1.03)}
+            20% {opacity: .9; transform scale(0.99)}
+            30% {opacity: .85; transform scale(.95)}
+            40% {opacity: .8; transform scale(.91)}
+            50% {opacity: .75; transform scale(.87)}
+            60% {opacity: .8; transform scale(.91)}
+            70% {opacity: .85; transform scale(.95)}
+            80% {opacity: .9; transform scale(0.99)}
+            90% {opacity: .95; transform scale(1.03)}
+            100% {opacity: 1; transform scale(1.05)}
         }
 
     .service-spec
