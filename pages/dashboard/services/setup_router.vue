@@ -4,48 +4,65 @@
 
         <div style="margin-top: 32px">
             <div class="row-custom between-xs">
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                    <div class="box middle-xs" @click="$router.push('/dashboard/services/cli_setup')">
-                        <img alt="cli" src="~/assets/svg/cli.svg"/>
-                        <div class="text-container">
-                            <p class="title">Fandogh Cli</p>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="text-container">
-                            <p class="description">ساخت سرویس از طریق cli فندق</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-                    <div class="box middle-xs" @click="$router.push('/dashboard/services/setup')">
-                        <img alt="cli" src="~/assets/svg/wizard.svg"/>
-                        <div class="text-container">
-                            <p class="title">Fandogh Wizard</p>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="text-container">
-                            <p class="description">ساخت سرویس از طریق داشبورد وب</p>
-                        </div>
-                    </div>
-                </div>
+                <service-card v-for="(item, index) in services"
+                              :title="item.title"
+                              :icon="item.icon"
+                              :key="index"
+                              @click.native="onSelected(item.url)">
+                </service-card>
             </div>
         </div>
+
+        <p class="title" style="margin-top: 48px">سرویس‌های مدیریت شده</p>
+
+        <div style="margin-top: 32px">
+            <div class="row-custom between-xs">
+
+                <managed-service-card v-for="(item, index) in managed_services"
+                                      :title="item.title"
+                                      :key="index"
+                                      :description="item.description"
+                                      :icon="item.icon">
+
+                </managed-service-card>
+            </div>
+        </div>
+
 
     </div>
 </template>
 
 <script>
+    import ManagedServiceCard from "../../../components/Dashboard/service/managed-service-card";
+    import ServiceCard from "../../../components/Dashboard/service/service-card";
+
     export default {
         name: "router",
+        components: {ServiceCard, ManagedServiceCard},
         layout: 'dashboard',
+        data() {
+            return {
+                managed_services: [
+                    {title: 'Mysql', description: 'Database', icon: 'mysql'},
+                    {title: 'Postgresql', description: 'Database', icon: 'postgresql'},
+                    {title: 'Redis', description: 'Cache Database', icon: 'redis'},
+                    {title: 'Proxy', description: 'Proxy Service', icon: 'proxy'}
+                ],
+                services: [
+                    {title: 'Fandogh Cli', icon: 'cli', url: 'setup'},
+                    {title: 'Fandogh Wizard', icon: 'wizard', url: 'cli_setup'}
+                ]
+            }
+        },
         created() {
             this.$store.commit("SET_DATA", {data: false, id: "loading"})
         },
         computed: {},
-        methods: {}
+        methods: {
+            onSelected(path){
+                this.$router.push('/dashboard/services/' + path)
+            },
+        }
     }
 </script>
 
@@ -67,68 +84,99 @@
         flex: 0 1 auto;
         flex-direction: row;
         flex-wrap: wrap
+        justify-content start
 
     .box
         display block
         margin 1rem 0
-        height max-content
-        padding 16px
+        padding 16px 16px 16px 16px
         border-radius 3px
         background-color #fefefe
         text-align center
         cursor pointer
+        box-sizing padding-box
         transition 0.3s ease-in-out all, 0.3s ease-in-out all
         box-shadow 0 2px 6px rgba(0, 0, 0, 0.3)
+
+        div.text-container
+            margin auto
+            display block
+            flex 0.7 0 auto
+
+        p.title
+            color: #3e3e3e
+            font-size 1.3em
+            margin 0
+            font-family iran-yekan
+            font-weight bold
+
+        div.divider
+            background-color #2979ff
+            height 2px
+            border-radius 25px
+
+        p.description
+            font-size 1.1em
+            color #7c7c7c
+            margin 0
+            font-family iran-yekan
+
 
     .box:hover
         background-color #2979ff
         box-shadow 0 2px 10px 5px rgba(41, 121, 255, 0.42)
-        transition 0.3s ease-in-out all, 0.3s ease-in-out all
+        transition 0.3s ease-in-out all
+
+        p.title
+            color: #fefefe
 
         div.divider
             background-color #fefefe
-        img
-            filter: invert(100%) sepia(91%) saturate(36%) hue-rotate(207deg) brightness(120%) contrast(200%)
 
-        div.text-container
-            width auto
-            p.title
-                color: #fefefe
-            p.description
-                color #fefefe
-
-    .box
-        img
-            position relative
-            margin-right auto
-            margin-left auto
-            width 170px
-            height 170px
-            filter none
-            @media only screen and (max-width: 766px)
-                width 140px
-                height 140px
-
-    div.divider
-        background-color rgba(0, 0, 0, 0.25)
-        margin-right 16px
-        margin-left 16px
-        margin-top 6px
-        height 2px
-        border-radius 25px
-
-    div.text-container
-        width auto
-        p.title
-            font-size 1.4em
-            color #141414
-            font-family iran-yekan
-            margin-bottom 0
-            margin-top 12px
         p.description
-            font-size 1.1em
-            color #3e3e3e
-            font-family iran-yekan
+            color #fefefe
 
+
+    div.image-container
+        display inline-flex
+        height 90px
+        width 90px
+        float left
+        margin-top auto
+        margin-bottom auto
+        margin-right 12px
+        margin-left 0
+        padding 0
+        background-color #2979ff
+        border-radius 100px
+
+        img
+            margin auto
+            width 52px
+            height 52px
+            @media only screen and (max-width: 766px)
+                width 42px
+                height 42px
 
 </style>
+
+
+.box:hover
+background-color #2979ff
+box-shadow 0 2px 10px 5px rgba(41, 121, 255, 0.42)
+transition 0.3s ease-in-out all, 0.3s ease-in-out all
+
+div.divider
+background-color #fefefe
+
+img
+filter: invert(100%) sepia(91%) saturate(36%) hue-rotate(207deg) brightness(120%) contrast(200%)
+
+div.text-container
+width auto
+
+p.title
+color: #fefefe
+
+p.description
+color #fefefe
