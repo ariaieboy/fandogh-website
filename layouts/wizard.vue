@@ -111,6 +111,7 @@
     import Moment from 'moment-jalaali';
     import ServiceKind from "../pages/dashboard/services/wizard/index";
     import ImageSetup from "../pages/dashboard/services/wizard/image-setup";
+    import EnvSetup from "../pages/dashboard/services/wizard/env-setup";
 
     export default {
         name: "wizard",
@@ -124,6 +125,7 @@
             Moment,
             ServiceKind,
             ImageSetup,
+            EnvSetup,
         },
         data() {
 
@@ -157,7 +159,7 @@
                         text: 'Environment Variable',
                         component: '/dashboard/general',
                         active: false,
-                        step_name: ''
+                        step_name: 'EnvSetup'
                     },
                     {step: 3, text: 'Volumes', component: '/dashboard/general', active: false, step_name: ''},
                     {step: 4, text: 'Port Mapping', component: '/dashboard/general', active: false, step_name: ''},
