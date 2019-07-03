@@ -1,5 +1,11 @@
 <template>
 
+    <div>
+
+        <banner :page="page"></banner>
+
+
+    </div>
     
 </template>
 
