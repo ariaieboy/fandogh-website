@@ -33,10 +33,14 @@
     "vue": "^2.6.10",
     "vue-chartjs": "^3.4.2",
     "vue-good-table": "^2.16.4",
-    "vue-select": "^3.0.2",
+    "vue-select": "^3.1.0",
     "vue2-google-maps": "^0.10.0",
     "vuebar": "^0.0.20",
-    "vue-slider-component": "^3.0.26"
+    "vue-slider-component": "^3.0.26",
+    "vuex-persistedstate": "^2.5.4",
+    "vuex": "latest",
+    "vuetify": "^1.5.14",
+    "v-tooltip": "^2.0.2"
   },
   "devDependencies": {
     "backpack-core": "^0.7.0",

@@ -1,4 +1,5 @@
 const path = require("path");
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
     /*
@@ -53,14 +54,26 @@ module.exports = {
      */
     build: {
         extractCSS: true,
-        vendor: ["axios", "vue-slider-component"]
+        vendor: ["axios", "vue-slider-component"],
+        extend(config, ctx) {
+            if (ctx.isServer) {
+                config.externals = [
+                    nodeExternals({
+                        whitelist: [/^mdbvue/]
+                    })
+                ]
+            }
+        }
     },
 
     plugins: [
         "~/plugins/progress-hover",
         {src: "~/plugins/google-map", ssr: false},
         {src: "~/plugins/vue-select", ssr: false},
+        {src: "~/plugins/vuetify", ssr: false},
         {src: "~/plugins/vue-bar", ssr: false},
+        {src: "~/plugins/tooltip", ssr: false},
+        {src: '~/plugins/localStorage.js', ssr: false, mode: 'spa'},
         "~/plugins/mixins",
         "~/plugins/validation",
         {src: "~/plugins/vue-slider-component", ssr: false},
