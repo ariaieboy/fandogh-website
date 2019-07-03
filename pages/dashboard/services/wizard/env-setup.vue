@@ -4,10 +4,15 @@
 
 <script>
     export default {
-        name: "env-setup"
+        name: "env-setup",
+        data(){
+            return{
+
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style lang="stylus" scoped>
 
 </style>
