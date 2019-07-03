@@ -1,10 +1,18 @@
 <template>
+
     
 </template>
 
 <script>
+    import Banner from "../../../../components/wizard/banner/banner";
+
+
     export default {
         name: "env-setup",
+        components:{
+            Banner,
+
+        },
         data(){
             return{
 
