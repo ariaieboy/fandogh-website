@@ -5,7 +5,7 @@
         <div class="secretss">
             <div style="overflow: hidden; margin-bottom: 32px">
 
-                <div class="right" style="float: right;"><p class="title"> لیست سکرت‌ها</p></div>
+                <div class="right" style="float: right;"><p class="title_header"> لیست سکرت‌ها</p></div>
                 <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      @click="$router.push('/dashboard/secret/create')">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
@@ -178,7 +178,7 @@
 </script>
 <style scoped lang="stylus">
 
-    .title
+    .title_header
         font-family iran-yekan
         font-style normal
         font-weight bold

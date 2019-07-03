@@ -3,7 +3,7 @@
         <f-loading :isFull="true" v-if="isLoading"/>
         <div class="images">
             <div style="overflow: hidden; margin-bottom: 32px">
-                <div class="right" style="float: right;"><p class="title"> لیست دامنه‌ها</p></div>
+                <div class="right" style="float: right;"><p class="title_header"> لیست دامنه‌ها</p></div>
                 <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      @click="$router.push('/dashboard/domains/create')">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -281,21 +281,21 @@
     };
 </script>
 <style lang="stylus" scoped>
-    .title
+
+    .title_header
         font-family iran-yekan
-        font-style normal
         font-weight bold
         font-size 1.2em
-        font-stretch normal
         line-height 1.75
         color #7c7c7c
-        letter-spacing normal
 
     .scroll
         overflow-x auto
 </style>
 
 <style lang="stylus">
+
+
     .ssl
         width 36px !important
         height 36px !important
