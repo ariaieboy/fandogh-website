@@ -177,10 +177,7 @@
                 height 16px
                 margin-top auto
                 margin-bottom auto
-                padding-left 12px
-                @media only screen and (max-width: 766px)
-                    width 36px
-                    height 36px
+                margin-left 12px
 
 
     .dropdown a:hover {
