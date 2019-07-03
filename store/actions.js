@@ -1,5 +1,5 @@
 import Request from "~/plugins/request";
-import {jsonManipulator} from "../utils/yaml";
+import {jsonDeleter, jsonManipulator} from "../utils/yaml";
 
 const monitoringAPI = process.env.MONITORING_API
 
@@ -265,6 +265,14 @@ export const manifestGenerator = ({commit, state}, {value, path}) => {
     commit("SET_JSON_MANIFEST", json);
     return json;
 };
+
+
+export const manifestDeleter = ({commit, state}, path) => {
+    let json = jsonDeleter(state.manifest, path);
+    commit("SET_JSON_MANIFEST", json);
+    return json;
+};
+
 
 export const setPlan = async ({commit, state}, {plan, configs}) => {
     try {
