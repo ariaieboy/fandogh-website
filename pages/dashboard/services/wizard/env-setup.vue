@@ -15,6 +15,9 @@
         },
         computed:{
 
+        },
+        created(){
+
         }
     }
 </script>
