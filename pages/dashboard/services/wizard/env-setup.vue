@@ -9,10 +9,26 @@
 
             <config-box :section-title="sections.create_env" :tooltip="sections.create_env_tooltip">
 
-                <div style="display: flex; flex-wrap: wrap; justify-content: center">
+                <form class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0;">
 
+                    <div style="display: flex;">
 
-                </div>
+                        <v-text-field
+                                style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                color="#0093ff"
+                                type="text"
+                                dir="ltr"
+                                v-model="env_obj.key"
+                                :hint="env_obj.key_hint"
+                                :label="env_obj.key_label">
+
+                        </v-text-field>
+
+                        <!--<popover :tooltip="tooltips.image_name"></popover>-->
+
+                    </div>
+
+                </form>
 
 
             </config-box>
@@ -22,7 +38,7 @@
 
 
     </div>
-    
+
 </template>
 
 <script>
@@ -33,14 +49,14 @@
 
     export default {
         name: "env-setup",
-        components:{
+        components: {
             Banner,
             Popover,
             ConfigBox
 
         },
-        data(){
-            return{
+        data() {
+            return {
 
                 page: {
                     title: 'Environment variables',
@@ -50,30 +66,33 @@
                         '                می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق\n' +
                         '                که می‌ماند در ذهن‌ها'
                 },
-                sections:{
+                sections: {
                     create_env: 'ساخت Environment Variable',
                     create_env_tooltip: {
                         title: 'ساخت Environment Variable',
                         text: 'برای آنکه بتوانید از Environment Variableها استفاده نمایید، باید آن‌ها را در مانیفست خود اضافه نمایید.',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
                     },
+                },
+                env_obj: {
+                    key_label: 'نام متغیر',
+                    value_label: 'مقدار متغیر',
+                    key_hint: 'نام متغیر را وارد نمایید',
+                    value_hint: 'مقدار متغیر را وارد نمایید',
+                    default: '',
+                    key: '',
+                    value: ''
                 }
 
             }
         },
-        methods:{
+        methods: {},
+        watch: {},
+        computed: {},
+        created() {
 
         },
-        watch:{
-
-        },
-        computed:{
-
-        },
-        created(){
-
-        },
-        mounted(){
+        mounted() {
 
         }
     }
