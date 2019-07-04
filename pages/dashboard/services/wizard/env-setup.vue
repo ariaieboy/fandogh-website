@@ -45,10 +45,13 @@
 
                     </div>
 
-                    <div style="display: flex; margin-top: 16px">
+                    <div style="display: inline-block; margin-top: 16px; width: 100%">
 
                         <fan-checkbox :object="hidden_obj"></fan-checkbox>
 
+                        <span class="left" style="font-size: .9em; color: #fefefe; padding: 8px 16px; border-radius: 3px;
+                        font-family: iran-yekan;
+background-color: #24d5d8; cursor: pointer; box-shadow: 0 1px 3px 0 rgba(36, 213, 216, 0.3), 0 1px 5px 0 rgba(36, 213, 216, 0.6); float: left">افزودن به جدول</span>
 
 
                     </div>
