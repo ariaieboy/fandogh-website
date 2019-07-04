@@ -11,12 +11,14 @@
 
 <script>
     import Banner from "../../../../components/wizard/banner/banner";
+    import Popover from "../../../../components/wizard/tooltip/popover";
 
 
     export default {
         name: "env-setup",
         components:{
             Banner,
+            Popover
 
         },
         data(){
