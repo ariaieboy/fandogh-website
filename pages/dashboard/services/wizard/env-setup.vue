@@ -28,6 +28,23 @@
 
                     </div>
 
+                    <div style="display: flex;">
+
+                        <v-text-field
+                                style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                color="#0093ff"
+                                type="text"
+                                dir="ltr"
+                                v-model="env_obj.value"
+                                :hint="env_obj.value_hint"
+                                :label="env_obj.value_label">
+
+                        </v-text-field>
+
+                        <popover :tooltip="tooltips.env_value"></popover>
+
+                    </div>
+
                 </form>
 
 
@@ -60,7 +77,6 @@
 
                 rules: {
                     required: value => !!value || 'این فیلد اجباری‌ است',
-                    counter: value => value.length <= 100 || 'Max 100 characters',
                     is_negative: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
                     valid_name: value => !!value || 'این فیلد اجباری‌ است'
                 },
