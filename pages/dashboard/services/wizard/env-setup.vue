@@ -4,6 +4,22 @@
 
         <banner :page="page"></banner>
 
+        <div style="margin-top: 12px">
+
+
+            <config-box :section-title="sections.create_env" :tooltip="sections.create_env_tooltip">
+
+                <div style="display: flex; flex-wrap: wrap; justify-content: center">
+
+
+                </div>
+
+
+            </config-box>
+
+
+        </div>
+
 
     </div>
     
@@ -34,6 +50,14 @@
                         '                می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق\n' +
                         '                که می‌ماند در ذهن‌ها'
                 },
+                sections:{
+                    create_env: 'ساخت Environment Variable',
+                    create_env_tooltip: {
+                        title: 'ساخت Environment Variable',
+                        text: 'برای آنکه بتوانید از Environment Variableها استفاده نمایید، باید آن‌ها را در مانیفست خود اضافه نمایید.',
+                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
+                    },
+                }
 
             }
         },
