@@ -47,11 +47,9 @@
 
                     <div style="display: inline-block; margin-top: 16px; width: 100%">
 
-                        <fan-checkbox :object="hidden_obj"></fan-checkbox>
+                        <fan-checkbox @click.native="onHiddenClicked" v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر در مانیفست hidden خواهد شد'" :object="hidden_obj"></fan-checkbox>
 
-                        <span class="left" style="font-size: .9em; color: #fefefe; padding: 8px 16px; border-radius: 3px;
-                        font-family: iran-yekan;
-background-color: #24d5d8; cursor: pointer; box-shadow: 0 1px 3px 0 rgba(36, 213, 216, 0.3), 0 1px 5px 0 rgba(36, 213, 216, 0.6); float: left">افزودن به جدول</span>
+                        <span class="left create-env-button" >افزودن به جدول</span>
 
 
                     </div>
@@ -137,7 +135,12 @@ background-color: #24d5d8; cursor: pointer; box-shadow: 0 1px 3px 0 rgba(36, 213
 
             }
         },
-        methods: {},
+        methods: {
+            onHiddenClicked(){
+
+                this.hidden_obj.selected = !this.hidden_obj.selected
+            }
+        },
         watch: {},
         computed: {},
         created() {
@@ -150,5 +153,17 @@ background-color: #24d5d8; cursor: pointer; box-shadow: 0 1px 3px 0 rgba(36, 213
 </script>
 
 <style lang="stylus" scoped>
+
+    .create-env-button
+        font-size .9em
+        color #fefefe
+        padding 8px 16px
+        border-radius 3px
+        font-family iran-yekan
+        background-color #24d5d8
+        cursor pointer
+        user-select none
+        box-shadow 0 1px 3px 0 rgba(36, 213, 216, 0.3), 0 1px 5px 0 rgba(36, 213, 216, 0.6)
+        float: left
 
 </style>
