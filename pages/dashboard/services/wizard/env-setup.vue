@@ -62,6 +62,7 @@
     import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
     import ConfigBox from "../../../../components/wizard/box/config-box";
+    import FanCheckbox from "../../../../components/wizard/select-box/fan-checkbox";
 
 
     export default {
@@ -69,7 +70,8 @@
         components: {
             Banner,
             Popover,
-            ConfigBox
+            ConfigBox,
+            FanCheckbox
 
         },
         data() {
