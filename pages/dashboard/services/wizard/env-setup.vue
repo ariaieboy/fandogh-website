@@ -58,6 +58,12 @@
         data() {
             return {
 
+                rules: {
+                    required: value => !!value || 'این فیلد اجباری‌ است',
+                    counter: value => value.length <= 100 || 'Max 100 characters',
+                    is_negative: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
+                    valid_name: value => !!value || 'این فیلد اجباری‌ است'
+                },
                 page: {
                     title: 'Environment variables',
                     description: 'برای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در\n' +
