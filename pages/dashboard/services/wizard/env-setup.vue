@@ -24,7 +24,7 @@
 
                         </v-text-field>
 
-                        <!--<popover :tooltip="tooltips.image_name"></popover>-->
+                        <popover :tooltip="tooltips.env_key"></popover>
 
                     </div>
 
@@ -73,6 +73,18 @@
                         text: 'برای آنکه بتوانید از Environment Variableها استفاده نمایید، باید آن‌ها را در مانیفست خود اضافه نمایید.',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
                     },
+                },
+                tooltips: {
+                    env_key: {
+                        title: 'نام متغیر',
+                        text: 'با تعیین نام متغیر می‌توانید در زمان اجرا، به آن متغیر با همان نام دسترسی داشته باشید.',
+                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
+                    },
+                    env_value: {
+                        title: 'مقدار متغیر',
+                        text: 'مقداری که قصد دارید به متغیر جدید تعلق گیرد',
+                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
+                    }
                 },
                 env_obj: {
                     key_label: 'نام متغیر',
