@@ -45,8 +45,15 @@
 
                     </div>
 
-                </form>
+                    <div style="display: flex; margin-top: 16px">
 
+                        <fan-checkbox :object="hidden_obj"></fan-checkbox>
+
+
+
+                    </div>
+
+                </form>
 
             </config-box>
 
@@ -118,6 +125,11 @@
                     default: '',
                     key: '',
                     value: ''
+                },
+                hidden_obj: {
+                    label: "مقدار محرمانه",
+                    value: "hidden",
+                    selected: false
                 }
 
             }
