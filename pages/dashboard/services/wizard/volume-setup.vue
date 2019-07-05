@@ -182,15 +182,15 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                 },
                 volume_kind_obj: [
                     {
-                        local_name: 'Dedicated Volume',
-                        is_active: true,
-                        tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Dedicated Volumeای که وارد کرده‌اید ذخیره می‌شود.'
-                    },
-                    {
                         local_name: 'Shared Volume',
-                        is_active: false,
+                        is_active: true,
                         tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Shared Volumeای که وارد کرده‌اید ذخیره می‌شود.'
                     },
+                    {
+                        local_name: 'Dedicated Volume',
+                        is_active: false,
+                        tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Dedicated Volumeای که وارد کرده‌اید ذخیره می‌شود.'
+                    }
                 ],
                 titleRow: [
                     {title: 'mount path', width: '30%', name: 'mount_path'},
