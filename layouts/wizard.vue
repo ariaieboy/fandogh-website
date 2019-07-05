@@ -112,6 +112,7 @@
     import ServiceKind from "../pages/dashboard/services/wizard/index";
     import ImageSetup from "../pages/dashboard/services/wizard/image-setup";
     import EnvSetup from "../pages/dashboard/services/wizard/env-setup";
+    import VolumeSetup from "../pages/dashboard/services/wizard/volume-setup";
 
     export default {
         name: "wizard",
@@ -126,6 +127,7 @@
             ServiceKind,
             ImageSetup,
             EnvSetup,
+            VolumeSetup
         },
         data() {
 
@@ -161,7 +163,7 @@
                         active: false,
                         step_name: 'EnvSetup'
                     },
-                    {step: 3, text: 'Volumes', component: '/dashboard/general', active: false, step_name: ''},
+                    {step: 3, text: 'Volumes', component: '/dashboard/general', active: false, step_name: 'VolumeSetup'},
                     {step: 4, text: 'Port Mapping', component: '/dashboard/general', active: false, step_name: ''},
                     {step: 5, text: 'Health Check', component: '/dashboard/general', active: false, step_name: ''},
                 ]
