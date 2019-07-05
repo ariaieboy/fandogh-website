@@ -17,9 +17,9 @@
 
                     <p style="font-size: 1em; font-family: iran-yekan; line-height: 1.7; color: #333333">{{tooltip.text}}</p>
 
-                    <div style="width: 100%; display: flex; justify-items: center; justify-content: center">
+                    <div style="width: 100%; display: flex;">
                         <a :href="tooltip.url" target="_blank" style=" cursor: pointer; background-color: #2979ff;box-shadow: 0 0 6px rgba(41,121, 255, 0.7), 0 0 8px rgba(41,121, 255, 0.4); font-weight: bold; padding: 7px 12px; border-radius: 3px">مطالعه‌ی مستندات</a>
-                        <a v-close-popover style=" cursor: pointer;margin-right: 12px; border: 1px solid #00e5ff; font-weight: bold; padding: 7px 12px; border-radius: 3px; color: #00e5ff">بستن</a>
+                        <a v-close-popover style="cursor: pointer;margin-right: 12px; font-weight: bold; padding: 7px 12px; color: #2c2c2c;">بستن</a>
                     </div>
                 </template>
 
