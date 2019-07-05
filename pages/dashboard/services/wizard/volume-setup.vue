@@ -22,13 +22,15 @@
 
                     <div style="display: flex">
 
-                        <v-text-field style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
-                                      dir="ltr"
-                                      color="#0093ff"
-                                      required
-                                      v-model="volume.mount_path"
-                                      :label="volume_obj.mount_path_label"
-                                      :hint="volume_obj.mount_path_hint">
+                        <v-text-field
+                                ref="mount_path_selector"
+                                style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
+                                dir="ltr"
+                                color="#0093ff"
+                                required
+                                v-model="volume.mount_path"
+                                :label="volume_obj.mount_path_label"
+                                :hint="volume_obj.mount_path_hint">
 
                         </v-text-field>
 
@@ -39,13 +41,15 @@
 
                     <div style="display: flex">
 
-                        <v-text-field style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
-                                      dir="ltr"
-                                      color="#0093ff"
-                                      required
-                                      v-model="volume.sub_path"
-                                      :label="volume_obj.sub_path_label"
-                                      :hint="volume_obj.sub_path_hint">
+                        <v-text-field
+                                ref="sub_path_selector"
+                                style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
+                                dir="ltr"
+                                color="#0093ff"
+                                required
+                                v-model="volume.sub_path"
+                                :label="volume_obj.sub_path_label"
+                                :hint="volume_obj.sub_path_hint">
 
                         </v-text-field>
 
@@ -56,7 +60,8 @@
 
                     <div v-if="volume_kind.local_name === 'Dedicated Volume'" style="display: flex">
 
-                        <v-text-field style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
+                        <v-text-field ref="volume_name_selector"
+                                      style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                       dir="ltr"
                                       color="#0093ff"
                                       required
@@ -73,12 +78,22 @@
 
                     <div style="display: flex; margin-top: 16px; width: 100%">
 
-                        <span class="create-volume-button" @click="">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
+                        <span @click="addVolume" class="create-volume-button">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
 
                     </div>
 
                 </form>
             </config-box>
+
+            <volume-table class="row"
+                          :titles="titleRow"
+                          :items="volume_list"
+                          :menu="menuList">
+                <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
+border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
+                volumeای ذخیره نشده است
+                    </span>
+            </volume-table>
 
 
         </div>
@@ -91,14 +106,15 @@
     import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
     import ConfigBox from "../../../../components/wizard/box/config-box";
-
+    import VolumeTable from "../../../../components/wizard/table/volume-table";
 
     export default {
         name: "volume-setup",
         components: {
             Banner,
             Popover,
-            ConfigBox
+            ConfigBox,
+            VolumeTable
 
         },
         data() {
@@ -106,9 +122,9 @@
 
                 isEditing: false,
                 volume: {
-                    mount_path: '',
-                    sub_path: '',
-                    volume_name: ''
+                    mount_path: null,
+                    sub_path: null,
+                    volume_name: null
                 },
                 volume_obj: {
                     mount_path_label: 'Mount Path',
@@ -130,7 +146,7 @@
                         text: 'نام مسیر یا پوشه جدیدی که داده‌های سرویس باید در آن ذخیره شوند.',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
                     },
-                    volume_name:{
+                    volume_name: {
                         title: 'Volume Name',
                         text: 'نام Dedicated Volume که قصد دارید مسیر جدید در آن ساخته شود',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
@@ -175,7 +191,21 @@
                         is_active: false,
                         tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Shared Volumeای که وارد کرده‌اید ذخیره می‌شود.'
                     },
-                ]
+                ],
+                titleRow: [
+                    {title: 'mount path', width: '30%', name: 'mount_path'},
+                    {title: 'sub path', width: '30%', name: 'sub_path'},
+                    {title: 'نام volume', width: '20%', name: 'volume_name'},
+                    {title: 'نوع حافظه', width: '16%', name: 'volume_type'},
+                    {title: '', width: '4%', name: ''},
+
+                ],
+                menuList: [
+                    {method: '', icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
+                    {method: '', icon: 'ic-upload.svg', title: 'ویرایش volume', style: {}},
+                    {method: '', icon: 'ic_delete.svg', title: 'حذف  volume', style: {color: '#fd3259'}},
+                ],
+                volume_list: []
 
             }
         },
@@ -187,14 +217,117 @@
                 this.volume_kind_obj[index].is_active = true;
                 this.volume_kind = this.volume_kind_obj[index]
             },
+            addToManifest(value, path) {
+                this.$store.dispatch('manifestGenerator', {
+                    value: value,
+                    path: path
+                })
+            },
+            deleteFromManifest(path) {
+                this.$store.dispatch('manifestDeleter', {
+                    path: path
+                })
+            },
+            addVolume() {
+
+                if (this.volume.mount_path === null) {
+                    this.$refs.mount_path_selector.focus()
+                    return;
+                }
+
+                if (this.volume.sub_path === null) {
+                    this.$refs.sub_path_selector.focus()
+                    return;
+                }
+
+
+                if (this.volume.mount_path.trim().length === 0) {
+                    this.$refs.mount_path_selector.focus()
+                    return;
+                }
+
+
+                if (this.volume.sub_path.trim().length === 0) {
+                    this.$refs.sub_path_selector.focus()
+                    return;
+                }
+
+                if (this.volume_kind.local_name === 'Dedicated Volume') {
+
+                    if (this.volume.volume_name === null) {
+                        this.$refs.volume_name_selector.focus()
+                        return;
+                    }
+
+
+                    if (this.volume.volume_name.trim().length === 0) {
+                        this.$refs.volume_name_selector.focus()
+                        return;
+                    }
+
+                }
+
+
+                if (this.isEditing) {
+                    this.env_list.forEach(env => {
+                        if (env.name === this.environment_variable.name) {
+                            env.name = this.environment_variable.name
+                            env.value = this.environment_variable.value
+                            env.hidden = this.hidden_obj.selected
+                        }
+                    })
+                } else {
+                    if (this.volume_kind.local_name === 'Dedicated Volume') {
+                        this.volume_list.push({
+                            mount_path: this.volume.mount_path,
+                            sub_path: this.volume.sub_path,
+                            volume_name: this.volume.volume_name
+                        })
+                    } else {
+                        this.volume_list.push({
+                            mount_path: this.volume.mount_path,
+                            sub_path: this.volume.sub_path
+                        })
+                    }
+                }
+
+                this.volume.mount_path = null
+                this.volume.sub_path = null
+                this.volume.volume_name = null
+                this.isEditing = false
+
+            }
         },
         computed: {},
-        watch: {},
+        watch: {
+            volume_list: {
+                handler: function (value, oldValue) {
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.volume_mounts')
+                    } else {
+                        this.addToManifest(value, 'spec.volume_mounts')
+                    }
+
+                }
+            }
+        },
         mounted() {
 
         },
         created() {
+            let manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
 
+            if (manifest.hasOwnProperty('spec')) {
+                let spec = manifest.spec
+
+                if (spec.hasOwnProperty('volume_mounts')) {
+
+                    spec.volume_mounts.forEach(item => {
+                        this.volume_list.push(item)
+                    })
+                }
+            }
         }
     }
 </script>
@@ -239,7 +372,6 @@
         user-select none
         box-shadow 0 1px 3px 0 rgba(36, 213, 216, 0.3), 0 1px 5px 0 rgba(36, 213, 216, 0.6)
         float: left
-
 
 
 </style>
