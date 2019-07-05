@@ -23,7 +23,6 @@
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"
-                                    :disabled="isEditing"
                                     v-model="environment_variable.name"
                                     :hint="env_obj.key_hint"
                                     :label="env_obj.key_label">
@@ -110,6 +109,7 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
         data() {
             return {
 
+                editing_index: -1,
                 isEditing: false,
                 environment_variable: {
                     name: '',
@@ -182,6 +182,8 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
         methods: {
             editEnv(index) {
                 this.isEditing = true
+                this.editing_index = index
+
                 this.environment_variable.name = this.env_list[index].name
                 this.environment_variable.value = this.env_list[index].value
                 this.hidden_obj.selected = this.env_list[index].hidden
@@ -230,12 +232,10 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
 
                 if (this.isEditing) {
-                    this.env_list.forEach(env => {
-                        if (env.name === this.environment_variable.name) {
-                            env.name = this.environment_variable.name
-                            env.value = this.environment_variable.value
-                            env.hidden = this.hidden_obj.selected
-                        }
+                    this.env_list.splice(this.editing_index, 1,{
+                        name: this.environment_variable.name,
+                        value: this.environment_variable.value,
+                        hidden: this.hidden_obj.selected
                     })
                 } else {
                     this.env_list.push({
@@ -249,6 +249,7 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                 this.environment_variable.name = null
                 this.hidden_obj.selected = false
                 this.isEditing = false
+                this.editing_index = -1
 
             }
         },
