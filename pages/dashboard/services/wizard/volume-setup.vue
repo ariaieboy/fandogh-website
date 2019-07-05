@@ -9,13 +9,15 @@
 
     import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
+    import ConfigBox from "../../../../components/wizard/box/config-box";
 
 
     export default {
         name: "volume-setup",
         components:{
             Banner,
-            Popover
+            Popover,
+            ConfigBox
 
         },
         data(){
