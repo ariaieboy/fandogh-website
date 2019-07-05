@@ -120,6 +120,7 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
         data() {
             return {
 
+                editing_index: -1,
                 isEditing: false,
                 volume: {
                     mount_path: null,
@@ -153,9 +154,9 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                     }
                 },
                 volume_kind: {
-                    local_name: 'Dedicated Volume',
+                    local_name: 'Shared Volume',
                     is_active: true,
-                    tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Dedicated Volumeای که وارد کرده‌اید ذخیره می‌شود.'
+                    tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Shared Volumeای که وارد کرده‌اید ذخیره می‌شود.'
                 },
                 page: {
                     title: 'Volumes',
@@ -202,20 +203,40 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                 ],
                 menuList: [
                     {method: '', icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
-                    {method: '', icon: 'ic-upload.svg', title: 'ویرایش volume', style: {}},
-                    {method: '', icon: 'ic_delete.svg', title: 'حذف  volume', style: {color: '#fd3259'}},
+                    {method: this.editVolume, icon: 'ic-upload.svg', title: 'ویرایش volume', style: {}},
+                    {method: this.removeVolume, icon: 'ic_delete.svg', title: 'حذف  volume', style: {color: '#fd3259'}},
                 ],
                 volume_list: []
 
             }
         },
         methods: {
+            editVolume(index) {
+                this.isEditing = true
+                this.editing_index = index
+                if (this.volume_list[index].hasOwnProperty('volume_name')) {
+                    this.onKindClicked(1)
+                    this.volume.volume_name = this.volume_list[index].volume_name
+                }else {
+                    this.onKindClicked(0)
+                    this.volume.volume_name = null
+                }
+                this.volume.mount_path = this.volume_list[index].mount_path
+                this.volume.sub_path = this.volume_list[index].sub_path
+            },
+            removeVolume(index) {
+                this.volume_list.splice(index, 1)
+            },
             onKindClicked(index) {
                 this.volume_kind_obj.forEach(item => {
                     item.is_active = false
                 });
                 this.volume_kind_obj[index].is_active = true;
                 this.volume_kind = this.volume_kind_obj[index]
+
+                if (this.volume_kind_obj[index].local_name === 'Dedicated Volume') {
+                    this.volume.volume_name = null
+                }
             },
             addToManifest(value, path) {
                 this.$store.dispatch('manifestGenerator', {
@@ -269,13 +290,19 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
 
                 if (this.isEditing) {
-                    this.env_list.forEach(env => {
-                        if (env.name === this.environment_variable.name) {
-                            env.name = this.environment_variable.name
-                            env.value = this.environment_variable.value
-                            env.hidden = this.hidden_obj.selected
-                        }
-                    })
+                    if (this.volume_kind.local_name === 'Dedicated Volume'){
+                        this.volume_list.splice(this.editing_index, 1,{
+                            mount_path: this.volume.mount_path,
+                            sub_path: this.volume.sub_path,
+                            volume_name: this.volume.volume_name
+                        })
+                    }else {
+                        this.volume_list.splice(this.editing_index, 1,{
+                            mount_path: this.volume.mount_path,
+                            sub_path: this.volume.sub_path,
+                        })
+                    }
+
                 } else {
                     if (this.volume_kind.local_name === 'Dedicated Volume') {
                         this.volume_list.push({
@@ -295,6 +322,7 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                 this.volume.sub_path = null
                 this.volume.volume_name = null
                 this.isEditing = false
+                this.editing_index = -1
 
             }
         },
@@ -302,10 +330,11 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
         watch: {
             volume_list: {
                 handler: function (value, oldValue) {
-
+                    console.log('watched')
                     if (value.length === 0) {
                         this.deleteFromManifest('spec.volume_mounts')
                     } else {
+                        console.log('watched')
                         this.addToManifest(value, 'spec.volume_mounts')
                     }
 

@@ -11,7 +11,7 @@
                 <td>{{item.mount_path}}</td>
                 <td>{{item.sub_path}}</td>
                 <td>{{item.volume_name ? item.volume_name : 'local storage'}}</td>
-                <td>{{(item.volume_name !== null ? 'Dedicated Volume' : 'Shared Volume')}}</td>
+                <td>{{(item.volume_name ? 'Dedicated Volume' : 'Shared Volume')}}</td>
                 <td class="more-button">
                     <div class="dropdown dropbtn" @click="notify(index)" style="display: flex; margin: auto">
                         <img style="margin: auto; align-self: center" src="../../../assets/svg/more.svg"
