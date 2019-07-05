@@ -1,31 +1,34 @@
 <template>
-
-    <div class="row" style="overflow-x:auto;margin: 0; padding-left: 5px; padding-right: 5px; padding-bottom: 150px">
-        <table style="width: 100%; border-collapse: separate; text-align: right; border-spacing: 0 .1em; table-layout: fixed">
+    <div class="row" style="overflow-x:auto;margin: 0; padding-bottom: 150px;">
+        <table style="width: 100%; border-collapse: separate; text-align: right; border-spacing: 0 .3em; table-layout: fixed; ">
             <tr class="head">
                 <th v-for="title in titles" :width="title.width">
                     {{title.title}}
                 </th>
             </tr>
-            <tr class="data-head" v-for="(item, index) in items">
+            <tr class="data-head" v-for="(item, index) in items" :key="index">
 
-                <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func(index)">
-                    {{item[title.name]}}
+                <td>{{item.name}}</td>
+                <td>{{!item.hidden ? item.value : '************'}}</td>
+                <td>
+                    <div :class="[item.hidden ? 'circle-border selected': 'circle-border']">
+                        <div :class="[item.hidden ? 'circle-fill selected': 'circle-fill']">
+                        </div>
+                    </div>
                 </td>
-
                 <td class="more-button">
-                    <div class="dropdown dropbtn" @click="notify(index)" style="margin: auto; display: flex">
+                    <div class="dropdown dropbtn" @click="notify(index)" style="display: flex; margin: auto">
                         <img style="margin: auto; align-self: center" src="../../../assets/svg/more.svg"
                              class="dropbtn" alt="more" @click="notify(index)">
 
                         <div :id="index" class="dropdown-content">
 
-                            <a v-for="item in menu" @click="item.method(index)" :style="item.style">
+                            <a v-for="item_menu in menu" @click="item_menu.method(index)" :style="item_menu.style">
 
-                                <img :src="require('../../../static/icons/' + item.icon)"
-                                     :alt="item.title"/>
+                                <img :src="require('../../../static/icons/' + item_menu.icon)"
+                                     :alt="item_menu.title"/>
 
-                                {{item.title}}
+                                {{item_menu.title}}
                             </a>
 
                         </div>
@@ -34,13 +37,13 @@
                 </td>
             </tr>
         </table>
+        <slot v-if="items.length === 0"></slot>
     </div>
-
 </template>
 
 <script>
     export default {
-        name: "box-table",
+        name: "env-table",
         props: ['items', 'titles', 'menu', 'func'],
         methods: {
             notify(id) {
@@ -69,11 +72,12 @@
                     }
                 }
             }
+
         }
     }
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus" scoped>
 
     *::-webkit-scrollbar
         display none
@@ -83,43 +87,62 @@
         scrollbar-width none
 
     tr.head
-        height 25px
+        height 36px
         border-collapse collapse
-        border none
-        padding-bottom 16px
+        @media only screen and (max-width: 766px)
+            height 28px
+
+    tr.head th:first-child
+        border-top-right-radius 3px
+        border-bottom-right-radius 3px
+
+    tr.head th:last-child
+        border-top-left-radius 3px
+        border-bottom-left-radius 3px
 
     tr.head th
-        line-height 25px
-        color #4A4A4A
-        padding-left 12px
-        padding-right 12px
-        padding-bottom 16px
-        font-size 1em
+        line-height 36px
+        color #fefefe
+        font-size .9em
         font-family iran-yekan
-        text-align right
+        text-align center
+        background #2979FF
         @media only screen and (max-width: 766px)
             font-size .8em
-            padding 5px 8px
+            line-height 28px
+
 
     tr.data-head
-        background-color #fefefe
-        margin-bottom 16px
-        box-shadow 0 1px 1px rgba(0, 0, 0, 0.07)
+        background-color #ebf4ff
+        border-collapse collapse
 
         td
-            line-height 32px
+            line-height 36px
             color #4A4A4A
-            padding 8px 12px
             font-family iran-yekan
-            text-align right
-            cursor: pointer
+            text-align center
+            user-select none
             text-overflow: ellipsis;
             overflow hidden
             white-space: nowrap
-            font-size 1em
+            border-top 1px #0093ff solid
+            border-bottom 1px #0093ff solid
+            font-size .9em
+            padding-left 5px
+            padding-right 5px
             @media only screen and (max-width: 766px)
-                font-size .7em
-                padding 5px 12px
+                font-size .8em
+                line-height 28px
+
+        td:last-child
+            border-top-left-radius 3px
+            border-bottom-left-radius 3px
+            border-left 1px #0093ff solid
+
+        td:first-child
+            border-top-right-radius 3px
+            border-bottom-right-radius 3px
+            border-right 1px #0093ff solid
 
 
         td.more-button
@@ -133,7 +156,6 @@
                     @media only screen and (max-width: 766px)
                         width 7px
                         height 15px
-
 
 
     .dropbtn {
@@ -189,5 +211,28 @@
     .show {
         display: block;
     }
+
+
+    div.circle-border
+        width 20px
+        height 20px
+        padding 1px
+        border-radius 50%
+        border 1px solid #7c7c7c
+        margin auto
+        box-sizing padding-box
+
+        &.selected
+            border-color: #0093ff
+
+    div.circle-fill
+        width 16px
+        height 16px
+        background-color transparent
+        border-radius 50%
+        transition all .3s ease-in-out
+
+        &.selected
+                background-color #0093ff
 
 </style>
