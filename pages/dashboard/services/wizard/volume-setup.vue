@@ -4,7 +4,30 @@
 
 <script>
     export default {
-        name: "volume-setup"
+        name: "volume-setup",
+        components:{
+
+        },
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+
+        },
+        computed:{
+
+        },
+        watch:{
+
+        },
+        mounted(){
+
+        },
+        created(){
+
+        }
     }
 </script>
 
