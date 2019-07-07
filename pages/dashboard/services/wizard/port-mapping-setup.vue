@@ -4,7 +4,25 @@
 
 <script>
     export default {
-        name: "port-mapping-setup"
+        name: "port-mapping-setup",
+        components:{
+
+        },
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+
+        },
+        watch:{
+
+        },mounted(){
+
+        },created(){
+
+        }
     }
 </script>
 
