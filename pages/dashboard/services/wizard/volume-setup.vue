@@ -174,7 +174,6 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
                     },
                     volume_config: 'تنظیمات Volume',
-                    external_service_config: 'تنظیمات سرویس External',
                     volume_config_tooltip: {
                         title: 'تنظیمات Volume',
                         text: 'این بخش مربوط به تنظیمات سرویس External است که با تنظیم کردن آن می‌تواند مشحخص کنید سرویس شما بر روی چه دامنه‌هایی از بیرون دسترسی پذیر بوده و کدام پورت‌ها به پورت 80 مپ شوند',

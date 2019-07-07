@@ -491,7 +491,7 @@
                     }else {
                         this.addToManifest(secret.value, 'spec.image_pull_secret')
                     }
-                    
+
                 },deep: true
             }
         }
@@ -582,8 +582,7 @@
         filter invert(0%) sepia(100%) saturate(0%) hue-rotate(203deg) brightness(205%) contrast(105%) !important
 
         @media only screen and (max-width: 900px)
-            margin-top
-        -7px !important
+            margin-top -8px !important
 
 </style>
 

@@ -113,6 +113,7 @@
     import ImageSetup from "../pages/dashboard/services/wizard/image-setup";
     import EnvSetup from "../pages/dashboard/services/wizard/env-setup";
     import VolumeSetup from "../pages/dashboard/services/wizard/volume-setup";
+    import PortMappingSetup from "../pages/dashboard/services/wizard/port-mapping-setup";
 
     export default {
         name: "wizard",
@@ -127,7 +128,8 @@
             ServiceKind,
             ImageSetup,
             EnvSetup,
-            VolumeSetup
+            VolumeSetup,
+            PortMappingSetup
         },
         data() {
 
@@ -164,7 +166,7 @@
                         step_name: 'EnvSetup'
                     },
                     {step: 3, text: 'Volumes', component: '/dashboard/general', active: false, step_name: 'VolumeSetup'},
-                    {step: 4, text: 'Port Mapping', component: '/dashboard/general', active: false, step_name: ''},
+                    {step: 4, text: 'Port Mapping', component: '/dashboard/general', active: false, step_name: 'PortMappingSetup'},
                     {step: 5, text: 'Health Check', component: '/dashboard/general', active: false, step_name: ''},
                 ]
             }
@@ -365,7 +367,7 @@
         &-content
             display flex
             width 95%
-            max-width 1600px
+            max-width 1800px
             font-size 16px
             transition $transitionMain
             @media only screen and (max-width: 1250px)
