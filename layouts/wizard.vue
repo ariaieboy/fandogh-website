@@ -114,6 +114,7 @@
     import EnvSetup from "../pages/dashboard/services/wizard/env-setup";
     import VolumeSetup from "../pages/dashboard/services/wizard/volume-setup";
     import PortMappingSetup from "../pages/dashboard/services/wizard/port-mapping-setup";
+    import HealthCheckSetup from "../pages/dashboard/services/wizard/health-check-setup";
 
     export default {
         name: "wizard",
@@ -129,7 +130,8 @@
             ImageSetup,
             EnvSetup,
             VolumeSetup,
-            PortMappingSetup
+            PortMappingSetup,
+            HealthCheckSetup
         },
         data() {
 
@@ -167,7 +169,7 @@
                     },
                     {step: 3, text: 'Volumes', component: '/dashboard/general', active: false, step_name: 'VolumeSetup'},
                     {step: 4, text: 'Port Mapping', component: '/dashboard/general', active: false, step_name: 'PortMappingSetup'},
-                    {step: 5, text: 'Health Check', component: '/dashboard/general', active: false, step_name: ''},
+                    {step: 5, text: 'Health Check', component: '/dashboard/general', active: false, step_name: 'HealthCheckSetup'},
                 ]
             }
         },
