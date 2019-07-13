@@ -2,11 +2,9 @@
     <div class="row" style="display: block; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.07); width: 100%; background-color: #fefefe; margin: 0 0 14px 0;">
 
         <div class="col-xs" style="background-color: #2979ff;height: 35px; border-top-left-radius: 3px; border-top-right-radius: 3px; display: flex">
-            <p style="font-family: iran-yekan; font-size: 16px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 35px;
+            <p style="font-family: iran-yekan; font-size: .9em; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 35px;
                         margin: 0;letter-spacing: normal; text-align: right; color: #fefefe;">
                 {{sectionTitle}}</p>
-
-
 
             <v-popover offset="16" :disabled="!isEnabled" v-if="tooltip">
                 <img @click="isEnabled = !isEnabled" src="../../../assets/svg/ic_info.svg" alt="tooltip" style="vertical-align: middle; cursor: pointer; height: 35px; padding: 7px"/>
