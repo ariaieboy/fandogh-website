@@ -1,10 +1,12 @@
 <template>
-    <div class="row banner">
-        <div class="banner-title">
-            {{page.title}}
-        </div>
-        <div class="banner-description">
-            {{page.description}}
+    <div class="banner">
+        <div style="padding: 24px 16px">
+            <div class="banner-title">
+                {{page.title}}
+            </div>
+            <div class="banner-description">
+                {{page.description}}
+            </div>
         </div>
     </div>
 </template>
@@ -23,7 +25,6 @@
         border-radius 3px
         background-color #2979FF
         width 100%
-        padding 24px 16px
         box-shadow 0 3px 6px 0 rgba(41, 121, 255, 0.4)
 
         div.banner-title
