@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class="title">انتخاب نحوه ساخت</p>
+        <p class="router-title">انتخاب نحوه ساخت</p>
 
         <div style="margin-top: 32px">
             <div class="row-custom between-xs">
@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <p class="title" style="margin-top: 48px">سرویس‌های مدیریت شده</p>
+        <p class="router-title" style="margin-top: 48px">سرویس‌های مدیریت شده</p>
 
         <div style="margin-top: 32px">
             <div class="row-custom between-xs">
@@ -49,8 +49,8 @@
                     {title: 'Proxy', description: 'Proxy Service', icon: 'proxy'}
                 ],
                 services: [
-                    {title: 'Fandogh Cli', icon: 'cli', url: 'setup'},
-                    {title: 'Fandogh Wizard', icon: 'wizard', url: 'cli_setup'}
+                    {title: 'Fandogh Cli', icon: 'cli', url: 'cli_setup'},
+                    {title: 'Fandogh Wizard', icon: 'wizard', url: 'wizard'}
                 ]
             }
         },
@@ -68,7 +68,7 @@
 
 <style lang="stylus" scoped>
 
-    .title
+    .router-title
         font-family iran-yekan
         font-style normal
         font-weight bold
@@ -159,24 +159,3 @@
                 height 42px
 
 </style>
-
-
-.box:hover
-background-color #2979ff
-box-shadow 0 2px 10px 5px rgba(41, 121, 255, 0.42)
-transition 0.3s ease-in-out all, 0.3s ease-in-out all
-
-div.divider
-background-color #fefefe
-
-img
-filter: invert(100%) sepia(91%) saturate(36%) hue-rotate(207deg) brightness(120%) contrast(200%)
-
-div.text-container
-width auto
-
-p.title
-color: #fefefe
-
-p.description
-color #fefefe
