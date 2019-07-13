@@ -205,6 +205,21 @@ export const createServiceManifest = async ({commit, state}) => {
     }
 };
 
+export const dumpServiceManifest = async ({commit, state}, service_name) => {
+    try {
+        const manifest =  await Request().get('api/services/manifests', {
+            params: {
+                service_name: service_name
+            }
+        })
+        delete manifest.data['requested_at']
+        commit("SET_JSON_MANIFEST", manifest.data);
+        return true
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const getDomains = async ({commit, state}, query) => {
     try {
         let domains = await Request(query).get(`/api/domains`);
@@ -295,11 +310,11 @@ export const getNameSpace = async ({commit, state}, namespace) => {
 };
 
 export const createNewNamespace = async ({commit, state}, namespace) => {
-  try {
-      return await Request().post(`api/users/namespaces`, {namespace: namespace});
-  }  catch (e) {
-      return Promise.reject(e);
-  }
+    try {
+        return await Request().post(`api/users/namespaces`, {namespace: namespace});
+    } catch (e) {
+        return Promise.reject(e);
+    }
 };
 
 export const requestUserNamespaces = async ({commit, state}) => {
