@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" style="padding-bottom: 100px">
-        <!--<f-loading :isFull="true" v-if="loading"/>-->
+        <f-loading :isFull="true" v-if="loading"/>
         <no-ssr>
             <f-d-header style="z-index: 10000"/>
             <div :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
@@ -11,9 +11,58 @@
                      :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
                     <div class="dash-container">
                         <div :class="[(isMobile ? '' : 'container-fluid')]">
-                            <keep-alive>
-                                <component :is="stepPage.step_name"></component>
-                            </keep-alive>
+
+                            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style=" margin: 0;"
+                                 :style="{padding:(isMobile ? '0 16px': '0px')}">
+                                <banner class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0; margin: 0;"
+                                        :page="stepPage.page"></banner>
+                                <keep-alive>
+                                    <component :is="stepPage.step_name"
+                                               class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                                               style="padding: 0;"
+                                               v-model="manifest_model"></component>
+                                </keep-alive>
+
+                                <!--<div class="col-lg-6 col-xs-12 col-sm-12 col-md-12"-->
+                                <!--style="margin: 0; padding: 0; display: flex;">-->
+                                <!--<div style="width: 100%; min-height: 700px; margin-bottom: 14px; margin-top: 12px; border-radius: 3px;box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);background-color: #212426; padding: 16px; margin-right: 6px;box-sizing: padding-box; color: #fefefe; font-family: 'Helvetica Neue'">-->
+                                <!--<span style="text-align: left; color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr; ">-->
+                                <!--kind:-->
+                                <!--<input style="color: #fefefe; text-align: left; width: 100%; margin: auto 0; padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
+                                <!--v-model="manifest_model.service.kind.name">-->
+                                <!--</span>-->
+                                <!--<span style=" color: #3ccc38; padding-right: 6px; margin: auto 0; display: flex; width: 100%; direction: ltr; ">-->
+                                <!--name:-->
+                                <!--<input style="color: #fefefe; width: 100%; padding-left: 6px; direction: ltr; margin-bottom: 3px; font-size: .9em; font-family: 'Helvetica Neue'"-->
+                                <!--v-model="manifest_model.service.service_name.name">-->
+                                <!--</span>-->
+                                <!--<span style="color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr">-->
+                                <!--spec:-->
+                                <!--</span>-->
+                                <!--<div style="padding-left: 8px">-->
+                                <!--<span style="color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr;">-->
+                                <!--image:-->
+                                <!--<input style="color: #fefefe; padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
+                                <!--placeholder="image name"-->
+                                <!--type="text"-->
+                                <!--v-autowidth="{maxWidth: '200px', minWidth: '92px', comfortZone: 0}"-->
+                                <!--v-model="manifest_model.image.image_object.name">-->
+                                <!--<span style="color: #fefefe;padding-left: 3px; padding-right: 3px">:</span>-->
+                                <!--<input style="color: #fefefe;padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
+                                <!--placeholder="image version"-->
+                                <!--v-autowidth="{maxWidth: '200px', minWidth: '100px', comfortZone: 0}"-->
+                                <!--v-model="manifest_model.image.image_object.version">-->
+                                <!--</span>-->
+                                <!--<span style="color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr;">-->
+                                <!--image_pull_policy:-->
+                                <!--<input style="color: #fefefe; padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
+                                <!--type="text"-->
+                                <!--v-model="manifest_model.image.image_pull_policy.value">-->
+                                <!--</span>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            </div>
 
                             <div class="navigation-container">
 
@@ -50,7 +99,7 @@
                                     </svg>
                                 </span>
 
-                                <button class="create-svc-btn">اتمام ساخت</button>
+                                <button class="create-svc-btn" @click="deploy">اتمام ساخت</button>
 
                                 <span class="navigation-btn" @click="forward">
 
@@ -115,6 +164,7 @@
     import VolumeSetup from "../pages/dashboard/services/wizard/volume-setup";
     import PortMappingSetup from "../pages/dashboard/services/wizard/port-mapping-setup";
     import HealthCheckSetup from "../pages/dashboard/services/wizard/health-check-setup";
+    import Banner from "../components/wizard/banner/banner";
 
     export default {
         name: "wizard",
@@ -131,18 +181,217 @@
             EnvSetup,
             VolumeSetup,
             PortMappingSetup,
-            HealthCheckSetup
+            HealthCheckSetup,
+            Banner
         },
         data() {
 
             return {
 
+                loading: false,
+                finished: false,
+                rules: {
+                    required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
+                    counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
+                    default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
+                    service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
+                    default_replica: value => value >= 1 || 'کمترین مقدار مجاز ۱ است',
+                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد'
+                },
+                manifest_model: {
+                    service: {
+                        kind: {local_name: 'External Service', name: 'ExternalService', is_active: true},
+                        kinds: [
+                            {
+                                local_name: 'External Service',
+                                name: 'ExternalService',
+                                is_active: true,
+                                tooltip: 'این نوع سرویس‌ها از خارج namespace در دسترس هستند'
+                            },
+                            {
+                                local_name: 'Internal Service',
+                                name: 'InternalService',
+                                is_active: false,
+                                tooltip: 'این نوع سرویس‌ها فقط از داخل namespace در دسترس هستند'
+                            },
+
+                        ],
+                        service_name: {
+                            label: 'نام سرویس',
+                            hint: 'تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند',
+                            counter: 100,
+                            name: ''
+                        },
+                        memory: {
+                            label: 'تعیین رم سرویس',
+                            hint: 'میزان رم مورد نیاز برای ساخت سرویس',
+                            default: '200',
+                            amount: 200
+                        },
+                        replica: {
+                            label: 'تعداد Replica‌',
+                            hint: 'تعداد سرویس‌های مشابهی که میخواهید با این تنظیمات همزمان ساخته شوند',
+                            default: '1',
+                            count: 1
+                        },
+                        port: {
+                            label: 'پورت',
+                            hint: 'پورتی از پروژه شما که به ۸۰ مپ شده و از بیرون در دسترس قرار میگیرد',
+                            default: '80',
+                            number: null
+                        },
+                        path: {
+                            label: 'path',
+                            hint: 'path خاصی که مایل هستید سرویس شما روی آن پاسخ دهد',
+                            dir: null
+                        },
+                        allow_http: {
+                            label: 'HTTP فعال باشد',
+                            value: "allow_http",
+                            selected: true
+                        },
+                        domains: []
+
+                    },
+                    image: {
+                        image_pull_policy: {title: 'If Not Present', value: 'IfNotPresent', selected: true},
+                        registry: {
+                            prefix: '',
+                            local_name: 'Fandogh',
+                            icon: 'ic-fandogh-mini.svg',
+                            is_active: true,
+                            tooltip: 'مبدا ایمیج رجیستری فندق'
+
+                        },
+                        registries: [
+
+                            {
+                                suffix: '',
+                                local_name: 'Fandogh',
+                                icon: 'ic-fandogh-mini-fill.svg',
+                                is_active: true,
+                                tooltip: 'مبدا ایمیج رجیستری فندق'
+
+                            },
+                            {
+                                suffix: '/library',
+                                local_name: 'Docker',
+                                icon: 'ic_docker.svg',
+                                is_active: false,
+                                tooltip: 'مبدا ایمیج رجیستری داکرهاب'
+                            },
+                            {
+                                suffix: '',
+                                local_name: 'Other',
+                                icon: 'free_feature_img/favorite-image-registry.svg',
+                                is_active: false,
+                                tooltip: 'مبدا ایمیج رجیستری‌های دیگر'
+                            }
+
+                        ],
+                        image_object: {
+                            name: '',
+                            version: ''
+                        },
+                        secret_obj: {
+                            label: 'سکرت',
+                            hint: 'نام سکرت را از این قسمت انتخاب نمایید',
+                            default: '',
+                            value: ''
+                        },
+                        image_pull_policy_obj: [
+                            {
+                                label: "If Not Present",
+                                value: "IfNotPresent",
+                                selected: true,
+                                tooltip: 'در صورت فعال کردن این ویژگی، تنها در صورتی که ایمیج وجود نداشته باشد، فندق آن را دانلود میکند'
+                            },
+                            {
+                                label: "Always",
+                                value: "Always",
+                                selected: false,
+                                tooltip: 'در صورت فعال کردن این ویژگی، در هر بار ساخت سرویس، فندق آن ایمیج را دوباره دانلود می‌کند'
+                            }
+                        ]
+                    },
+                    environment_variable: {
+                        name: '',
+                        value: '',
+                        env_list: []
+                    },
+                    port_mapping: {
+                        port_map: {
+                            port: null,
+                            target_port: null,
+                            protocol: 'TCP'
+                        },
+                        protocol_list: [
+                            {
+                                label: "TCP",
+                                value: "TCP",
+                                selected: true
+                            },
+                            {
+                                label: "UDP",
+                                value: "UDP",
+                                selected: false
+                            }
+                        ],
+                        port_map_list: []
+                    },
+                    volumes: {
+                        volume: {
+                            mount_path: null,
+                            sub_path: null,
+                            volume_name: null
+                        },
+                        volume_kind: {
+                            local_name: 'Shared Volume',
+                            is_active: true,
+                            tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Shared Volumeای که وارد کرده‌اید ذخیره می‌شود.'
+                        },
+                        volume_kind_obj: [
+                            {
+                                local_name: 'Shared Volume',
+                                is_active: true,
+                                tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Shared Volumeای که وارد کرده‌اید ذخیره می‌شود.'
+                            },
+                            {
+                                local_name: 'Dedicated Volume',
+                                is_active: false,
+                                tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Dedicated Volumeای که وارد کرده‌اید ذخیره می‌شود.'
+                            }
+                        ],
+                        volume_list: []
+                    },
+                    health_check: {
+                        liveness_object: {
+                            initial_delay_seconds: null,
+                            period_seconds: null,
+                            timeout_seconds: 1,
+                            http_get_method: null,
+                            http_get_port: 80
+                        },
+                        readiness_object: {
+                            initial_delay_seconds: null,
+                            period_seconds: null,
+                            timeout_seconds: 1,
+                            http_get_method: null,
+                            http_get_port: 80
+                        },
+                    }
+                },
                 stepPage: {
                     step: 0,
                     text: 'نوع سرویس',
                     component: '/dashboard/general',
                     active: true,
-                    step_name: 'ServiceKind'
+                    step_name: 'ServiceKind',
+                    edited: true,
+                    page: {
+                        title: 'انتخاب نوع سرویس',
+                        description: 'هر سرویس در فندق یک نسخه در حال اجرا از یک ورژن بخصوص از یکی از image های شماست. سرویس ها انواع مختلفی دارند و برای ساخت آن ها روش های متفاوتی در نظر گرفته شده است.'
+                    }
                 }
                 ,
                 items: [
@@ -151,32 +400,79 @@
                         text: 'نوع سرویس',
                         component: '/dashboard/general',
                         active: true,
-                        step_name: 'ServiceKind'
+                        step_name: 'ServiceKind',
+                        edited: true,
+                        page: {
+                            title: 'انتخاب نوع سرویس',
+                            description: 'هر سرویس در فندق یک نسخه در حال اجرا از یک ورژن بخصوص از یکی از image های شماست. سرویس ها انواع مختلفی دارند و برای ساخت آن ها روش های متفاوتی در نظر گرفته شده است.'
+                        }
                     },
                     {
                         step: 1,
                         text: 'انتخاب ایمیج',
                         component: '/dashboard/general',
                         active: false,
-                        step_name: 'ImageSetup'
+                        step_name: 'ImageSetup',
+                        edited: false,
+                        page: {
+                            title: 'انتخاب ایمیج',
+                            description: 'سرویس ها در فندق از روی ایمیج ها ساخته می شوند و از طرفی سرویس ها همواره در حال بهبود و تغییر هستند. برای آنکه بتوانیم تاریخچه تغییرات در هر بار را در اختیار داشته باشیم image ها دارای یک شماره نسخه منحصر به فرد می باشند که کاربر در هر بار publish کردن٬ آن را مشخص می کند. به طور کلی در فندق هر Image معادل یک پروژه است. هر image دارای یک نام و تعداد دلخواه ورژن می باشد.'
+                        },
                     },
                     {
                         step: 2,
                         text: 'Environment Variable',
                         component: '/dashboard/general',
                         active: false,
-                        step_name: 'EnvSetup'
+                        step_name: 'EnvSetup',
+                        edited: false,
+                        page: {
+                            title: 'Environment variables',
+                            description: 'environment variable‌ها آرایه‌ای از متغیر‌ها و مقادیری هستند که شما می‌خواهید هنگام اجرای سرویس، بر روی کانتینر‌ها set شوند و در دسترس باشند.'
+                        },
                     },
-                    {step: 3, text: 'Volumes', component: '/dashboard/general', active: false, step_name: 'VolumeSetup'},
-                    {step: 4, text: 'Port Mapping', component: '/dashboard/general', active: false, step_name: 'PortMappingSetup'},
-                    {step: 5, text: 'Health Check', component: '/dashboard/general', active: false, step_name: 'HealthCheckSetup'},
+                    {
+                        step: 3,
+                        text: 'Volumes',
+                        component: '/dashboard/general',
+                        active: false,
+                        step_name: 'VolumeSetup',
+                        edited: false,
+                        page: {
+                            title: 'Volumes',
+                            description: 'همانطور که می‌دانید فندق به هر کدام از کاربران یک فضای ذخیره‌سازی مانا هنگام عضویت ارائه می‌دهد که محتویات آن با از بین رفتن یا ریست شدن سرویس از بین نمی‌رود.این فضای ذخیره سازی همواره در مسیر /mnt/shared-volume در تمام سرویس‌ها در دسترسی است. اما بعضا کاربران نیاز دارند که بخشی از این فضا را در مسیری بخصوص در دسترس قرار دهند یا به اصطلاح mount کنند.شما می‌توانید در صورت نیاز این فضا را بروی فضای ذخیره‌سازی shared یا بر روی یک Dedicated Volume، ایجاد نمایید.'
+                        },
+                    },
+                    {
+                        step: 4,
+                        text: 'Port Mapping',
+                        component: '/dashboard/general',
+                        active: false,
+                        step_name: 'PortMappingSetup',
+                        edited: false,
+                        page: {
+                            title: 'Port Mapping',
+                            description: 'بعضی مواقع یک سرویس بخصوص ممکن است نیاز داشته باشد بیش از یک پورت از خود را expose کند، البته منظور expose کردن برای سرویس‌های داخل همان namespace است، برای اینکار می‌توانید از این فیلد استفاده کنید.\n' +
+                                '\n' +
+                                'توجه داشته باشید که از طریق port_mapping نمی‌توانید پورتی را به طور External اکسپوز کنید، port_mapping پورت‌های یک سرویس را برای سرویس‌های دیگر همان namespace در دسترس قرار می‌دهد.'
+                        },
+                    },
+                    {
+                        step: 5,
+                        text: 'Health Check',
+                        component: '/dashboard/general',
+                        active: false,
+                        step_name: 'HealthCheckSetup',
+                        edited: false,
+                        page: {
+                            title: 'Health Check',
+                            description: 'پایداری سرویس شما در گروی این است که فندق بتواند به درستی سلامت و آمادگی آن را تشخیص دهد. در بسیاری از موارد بدون همکاری سرویس شما امکان اینکه این امر به طور دقیق انجام شود وجود ندارد٬ به همین دلیل، امکانی در manifest وجود دارد که از طریق آن می‌توانید یک API در اختیار فندق قرار دهید تا از طریق آن API فندق بتواند از صحت و آمادگی سرویس شما مطلع شود. روش کار به این شکل است که یک HTTP API مشخص می‌کنید که فندق آن را در بازه‌های زمانی مشخص فراخوانی می‌کند و اگر با کد 200 پاسخ دریافت کند به معنی سلامت سرویس شماست و در غیر اینصورت یعنی سرویس دچار مشکل شده است.'
+                        },
+                    },
                 ]
             }
         },
         computed: {
-            loading() {
-                return this.$store.state.loading;
-            },
             message() {
                 return this.$store.state.message;
             },
@@ -206,6 +502,190 @@
         },
 
         watch: {
+
+            'manifest_model.service.kinds': {
+                handler: function (value, oldValue) {
+                    let kind = this.manifest_model.service.kind
+                    this.addToManifest(kind.name, 'kind')
+                },
+                deep: true
+            },
+            'manifest_model.service.service_name': {
+                handler: function (value, oldValue) {
+                    let name = value.name
+                    if (name.length.valueOf() === 0) {
+                        this.deleteFromManifest('name')
+                    } else {
+                        if (this.rules.required(name) === true && this.rules.counter(name) === true && this.rules.service_regex(name) === true) {
+                            this.addToManifest(name, 'name')
+                        } else {
+                            this.deleteFromManifest('name')
+                        }
+                    }
+                }, deep: true
+            },
+            'manifest_model.service.memory': {
+                handler: function (value, oldValue) {
+                    let memory = parseInt(value.amount);
+                    if (this.rules.default_memory(memory) !== true) {
+                        this.deleteFromManifest('spec.resources.memory')
+                    } else {
+                        this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
+                    }
+                }, deep: true
+            },
+            'manifest_model.service.replica': {
+                handler: function (value, oldValue) {
+                    let count = parseInt(value.count);
+                    if (this.rules.default_replica(count) !== true) {
+                        this.deleteFromManifest('spec.replicas')
+                    } else {
+                        this.addToManifest(count, 'spec.replicas')
+                    }
+                }, deep: true
+            },
+            'manifest_model.service.allow_http': {
+                handler: function (value, oldValue) {
+                    if (value.selected === null) {
+                        this.deleteFromManifest('spec.allow_http');
+                        return
+                    }
+                    this.addToManifest(value.selected, 'spec.allow_http')
+                }, deep: true
+            },
+            'manifest_model.service.path': {
+                handler: function (value, oldValue) {
+                    if (value.dir === null) {
+                        this.deleteFromManifest('spec.path')
+                        return
+                    }
+                    if (value.dir.toString().length === 0) {
+                        this.deleteFromManifest('spec.path')
+                    } else {
+                        this.addToManifest(value.dir, 'spec.path')
+                    }
+                }, deep: true
+            },
+            'manifest_model.service.port': {
+                handler: function (value, oldValue) {
+                    if (value.number === null) {
+                        this.deleteFromManifest('spec.port')
+                    } else if (this.rules.valid_port(value.number) !== true) {
+                        this.deleteFromManifest('spec.port')
+                    } else {
+                        this.addToManifest(parseInt(value.number), 'spec.port')
+                    }
+                }, deep: true
+            },
+            'manifest_model.service.domains': {
+                handler: function (value, oldValue) {
+                    let list = [...value]
+                    let mapList = list.map(v => {
+                        return {name: v}
+                    })
+                    this.addToManifest(mapList, 'spec.domains')
+                    if (mapList.length === 0) {
+                        this.deleteFromManifest('spec.domains')
+                    }
+                }
+            },
+            'manifest_model.health_check': {
+                handler: function (value, oldValue) {
+                    let empty = true
+                    console.log('khelt')
+                    console.log(value)
+                    const liveness_keys = Object.keys(value['liveness_object'])
+                    const readiness_keys = Object.keys(value['readiness_object'])
+
+                    for (let key of liveness_keys) {
+                        if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
+                            empty = false;
+                            break
+                        }
+                    }
+
+                    if (empty) {
+                        for (let key of readiness_keys) {
+                            if (value.readiness_object[key] === null || value.readiness_object[key] === '') {
+                                empty = false;
+                                break
+                            }
+                        }
+                    }
+
+                    if (!empty) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'HealthCheckSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'HealthCheckSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+                }, deep: true
+            },
+            'manifest_model.environment_variable.env_list': {
+                handler: function (value, oldValue) {
+                    if ([...value].length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'EnvSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'EnvSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+                }, deep: true
+            },
+            'manifest_model.port_mapping.port_map_list': {
+                handler: function (value, oldValue) {
+                    if ([...value].length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'PortMappingSetup') {
+                                item.edited = true;
+                            }
+                        })
+                        this.addToManifest([...value], 'spec.port_mapping')
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'PortMappingSetup') {
+                                item.edited = false;
+                            }
+                        })
+                        this.deleteFromManifest([...value], 'spec.port_mapping')
+                    }
+                }, deep: true
+            },
+            'manifest_model.volumes.volume_list': {
+                handler: function (value, oldValue) {
+                    if ([...value].length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'VolumeSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'VolumeSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+                }, deep: true
+            },
+            manifest_model: {
+                handler: function (value, oldValue) {
+
+                }, deep: true
+            },
             $route() {
                 if (this.message) {
                     this.$store.dispatch("setMessage", this.message);
@@ -217,6 +697,8 @@
                     this.$store.commit("SET_DATA", {data: false, id: "sideMunu"});
                 }
             }
+        },
+        created() {
         },
         beforeMount() {
             let token;
@@ -230,6 +712,12 @@
             }
         },
         mounted() {
+            this.$store.dispatch("getDomains", {verified: true});
+            this.getImages()
+            this.$store.dispatch("getSecret");
+
+
+
             this.handelEventSize();
             window.addEventListener('beforeunload', (event) => {
                 // event.returnValue = 'There is pending work. Sure you want to leave?';
@@ -243,10 +731,251 @@
             // if (!Object.keys(manifest).length) this.$router.push({ path: this._steps[0].path })
             this.persistData(manifest)
             this.handelRyChat()
+
+            //populating manifest
+            if(this.$route.query.hasOwnProperty('service')){
+                this.dumpManifest(this.$route.query.service, manifest)
+            }else {
+                manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
+                this.populateManifest(manifest)
+            }
+
+
+        },
+        beforeDestroy(){
+          this.leaving()
         },
         methods: {
-            leaving(){
-              alert('really?')
+            async getImages() {
+                try {
+                    await this.$store.dispatch("getImages");
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    }
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+            },
+            async dumpManifest(service_name, manifest){
+                this.loading = true;
+                await this.$store.dispatch('dumpServiceManifest', service_name)
+                    .then(response => {
+                        this.loading = false
+                        manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
+                        this.populateManifest(manifest)
+                    }).catch(e => {
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    })
+            },
+            populateManifest(manifest){
+                if (manifest.hasOwnProperty('name')) {
+                    this.manifest_model.service.service_name.name = manifest.name
+                }
+
+                if (manifest.hasOwnProperty('kind')) {
+                    let kind_name = manifest.kind;
+
+                    this.manifest_model.service.kinds.forEach(item => {
+                        item.is_active = false
+                        if (item.name === kind_name) {
+                            item.is_active = true;
+                            this.manifest_model.service.kind = item
+                        }
+                    })
+                } else {
+                    this.manifest_model.service.kinds[0].is_active = true
+                    this.manifest_model.service.kind = this.manifest_model.service.kinds[0]
+                }
+
+                if (manifest.hasOwnProperty('spec')) {
+                    let spec = manifest.spec
+
+                    if (spec.hasOwnProperty('resources')) {
+                        if (spec.resources.hasOwnProperty('memory')) {
+                            let memory = spec.resources.memory;
+                            this.manifest_model.service.memory.amount = memory.toString().replace('Mi', '')
+                        }
+                    } else {
+                        this.manifest_model.service.memory.amount = this.memory.default
+                    }
+
+                    if (spec.hasOwnProperty('replicas')) {
+                        this.manifest_model.service.replica.count = spec.replicas
+                    } else {
+                        this.manifest_model.service.replica.count = this.manifest_model.service.replica.default
+                    }
+
+                    if (spec.hasOwnProperty('image')) {
+                        let image = '';
+                        image = spec.image;
+                        this.manifest_model.image.image_object.name = image.split(':')[0] || '';
+                        this.manifest_model.image.image_object.version = image.split(':')[1] || '';
+                    }
+
+                    if (spec.hasOwnProperty('image_pull_policy')) {
+                        this.manifest_model.image.image_pull_policy_obj.forEach((item, index) => {
+                            item.selected = false
+                            if (item.value === spec.image_pull_policy) {
+                                item.selected = true
+                            }
+                        })
+                    }
+
+                    if (spec.hasOwnProperty('image_pull_secret')) {
+                        this.manifest_model.image.secret_obj.value = spec.image_pull_secret
+                    }
+
+                    if (spec.hasOwnProperty('env')) {
+
+                        spec.env.forEach(item => {
+                            this.manifest_model.environment_variable.env_list.push(item)
+                        })
+                    }
+
+                    if (spec.hasOwnProperty('port_mapping')) {
+
+                        spec.port_mapping.forEach(item => {
+                            this.manifest_model.port_mapping.port_map_list.push(item)
+                        })
+                    }
+
+                    if (spec.hasOwnProperty('volume_mounts')) {
+
+                        spec.volume_mounts.forEach(item => {
+                            this.manifest_model.volumes.volume_list.push(item)
+                        })
+                    }
+
+                    if (manifest.spec.hasOwnProperty('port')) {
+                        this.manifest_model.service.port.number = spec.port
+                    }
+
+                    if(spec.hasOwnProperty('path')){
+                        this.manifest_model.service.path.dir = spec.path
+                    }
+
+                    if(spec.hasOwnProperty('allow_http')){
+                        this.manifest_model.service.allow_http.selected = spec.allow_http
+                    }
+
+                    if (spec.hasOwnProperty('domains')) {
+                        spec.domains.forEach(item => {
+                            this.manifest_model.service.domains.push(item['name'])
+                        })
+                    }
+
+                    if (spec.hasOwnProperty('liveness_probe')) {
+                        this.manifest_model.health_check.liveness_object = spec.liveness_probe
+                    }
+
+                    if (spec.hasOwnProperty('readiness_probe')) {
+                        this.manifest_model.health_check.readiness_object = spec.readiness_probe
+                    }
+
+                } else {
+
+                    this.manifest_model.service.kinds.forEach(item => {
+                        item.is_active = false
+                    });
+                    this.manifest_model.service.kinds[0].is_active = true;
+                    this.manifest_model.service.kind = this.manifest_model.service.kinds[0]
+
+                    this.manifest_model.service.replica.count = this.manifest_model.service.replica.default
+                    this.manifest_model.service.memory.amount = this.manifest_model.service.memory.default
+                    this.manifest_model.service.allow_http.selected = false
+                    this.manifest_model.service.allow_http.selected = true
+
+                }
+            },
+            isManifestValid() {
+                if (this.manifest_model.service.service_name.name.length === 0) {
+                    this.$notify({
+                        title: 'نام سرویس را وارد نکرده‌اید',
+                        time: 4000,
+                        type: 'error'
+                    });
+                    return false
+                }
+
+                if(this.manifest_model.service.kind.name === 'ExternalService'){
+                    if(this.manifest_model.service.port.number === null){
+                        this.$notify({
+                            title: 'لطفا پورت را مشخص نمایید',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false
+                    }
+                }
+
+                if (this.manifest_model.image.image_object.name.length === 0 || this.manifest_model.image.image_object.version.length === 0) {
+                    this.$notify({
+                        title: 'ایمیج و نسخه آن را مشخص نمایید',
+                        time: 4000,
+                        type: 'error'
+                    });
+                    return false
+                }
+
+                return true
+            },
+            deploy() {
+
+                if (this.isManifestValid()) {
+                    this.loading = true
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.$store.dispatch('createServiceManifest').then(res => {
+                        this.loading = false
+                        this.finished = true
+                        // removeValue('name')
+                        // removeValue('versions')
+                        this.$store.commit("SET_DATA", {id: "service", data: res});
+                        this.$router.push(`/dashboard/services/${res.name}`)
+                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                    }).catch(e => {
+                        this.loading = false
+                        this.finished = false
+                        // ErrorReporter(e, [], true).forEach(error => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        //
+                        // })
+                        this.$notify({
+                            title: e,
+                            time: 4000,
+                            type: 'error'
+                        })
+                    })
+                }
+            },
+            addToManifest(value, path) {
+                this.$store.dispatch('manifestGenerator', {
+                    value: value,
+                    path: path
+                })
+            },
+            deleteFromManifest(path) {
+                this.$store.dispatch('manifestDeleter', {
+                    path: path
+                })
+            },
+            leaving() {
+                if(!this.finished){
+                    if(confirm('اگر میخواهید تغییرات مانیفست draft شوند ok را انتخاب نمایید، در غیر این صورت دکمه cancel را بزنید')){
+                    }else {
+                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                    }
+                }
             },
             persistData(manifest) {
                 for (let key in manifest) {
@@ -307,6 +1036,8 @@
                             this.stepPage.active = item.active;
                             this.stepPage.text = item.text;
                             this.stepPage.component = item.component;
+                            this.stepPage.edited = item.edited;
+                            this.stepPage.page = item.page;
                         }
                     })
                 }
@@ -326,6 +1057,8 @@
                             this.stepPage.active = item.active;
                             this.stepPage.text = item.text;
                             this.stepPage.component = item.component;
+                            this.stepPage.edited = item.edited;
+                            this.stepPage.page = item.page;
                         }
                     })
 
@@ -350,21 +1083,18 @@
 
     // transition all 0.5s
     .dash-container
-        box-sizing border-box
+        box-sizing content-box
         margin-top $spaceTop + 68px
         padding-bottom 20px
         min-height calc(100vh - 120px)
         @media only screen and (max-width: 1230px)
             margin 0
             margin-top $spaceTop + 60px
-            padding 0 30px
             width 100%
-        @media only screen and (max-width: 992px)
-            padding 0 15px
 
     .wrapper
         width 100%
-        background #f5f5f5
+        background $bgColor
 
         &-content
             display flex
@@ -450,7 +1180,6 @@
         background-color: #24d5d8
 
 </style>
-
 
 
 <style lang="stylus">
@@ -744,9 +1473,17 @@
         transition: opacity .15s;
     }
 
-    div.v-text-field__suffix{
+    div.v-text-field__suffix {
         margin-left 16px
     }
 
+    .cancel-button
+        font-size .9em
+        color $grayMedium
+        padding 8px 16px
+        border-radius 3px
+        font-family iran-yekan
+        cursor pointer
+        user-select none
 
 </style>

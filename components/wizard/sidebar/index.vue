@@ -1,7 +1,7 @@
 <template>
     <div :class="['sidebar-dashboard ', {open}]">
         <div :class="['sidebar-dashboard-list open']" >
-            <div :class="['sidebar-dashboard-item open', {'is-active':item.active }]"
+            <div :class="['sidebar-dashboard-item open', {'is-active':item.active }, {'is-edited': (!item.active && item.edited)}]"
                  v-for="(item,index) in items"
                  :key="index"
                  v-on:click="menuItemSelected(item.step)">
@@ -38,6 +38,8 @@
                 this.$emit('update:component', this.items[index].component);
                 this.$emit('update:active', this.items[index].active);
                 this.$emit('update:step_name', this.items[index].step_name);
+                this.$emit('update:edited', this.items[index].edited);
+                this.$emit('update:page', this.items[index].page);
 
                 console.log(this.items)
 
@@ -120,6 +122,31 @@
                 span.step
                     margin-left 1.2em
                     background-color $blueMedium !important
+                    border-radius 100px
+                    color white
+                    text-align center
+                    line-height 40px
+                    width 40px
+                    font-family iran-sans
+                    height 40px
+                    @media only screen and (max-width: 990px)
+                        width 30px
+                        height 30px
+                        line-height 30px
+
+            &.is-edited
+                span
+                    position static
+                    visibility visible
+                    opacity 9
+                    font-family iran-yekan
+                    color $colorAccent
+                    font-weight normal
+                    transform none
+
+                span.step
+                    margin-left 1.2em
+                    background-color $colorAccent !important
                     border-radius 100px
                     color white
                     text-align center
