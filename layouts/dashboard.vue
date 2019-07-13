@@ -187,7 +187,7 @@
 
         &-content
             display flex
-            width 90%
+            width 95%
             max-width 1600px
             font-size 16px
             transition $transitionMain
