@@ -9,7 +9,8 @@
             </tr>
             <tr class="data-head" v-for="(item, index) in items">
 
-                <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func(index)">
+                <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func? func(index) : ''"
+                    :style="{cursor: (func ? 'pointer' : 'unset')}">
                     {{item[title.name]}}
                 </td>
 
@@ -75,6 +76,8 @@
 
 <style scoped lang="stylus">
 
+    @import '../../../assets/css/variables.styl'
+
     *::-webkit-scrollbar
         display none
 
@@ -107,7 +110,7 @@
         box-shadow 0 1px 1px rgba(0, 0, 0, 0.07)
 
         td
-            line-height 32px
+            line-height $indexTableRowHeight
             color #4A4A4A
             padding 8px 12px
             font-family iran-yekan
