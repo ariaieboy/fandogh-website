@@ -73,6 +73,7 @@ module.exports = {
         {src: "~/plugins/vuetify", ssr: false},
         {src: "~/plugins/vue-bar", ssr: false},
         {src: "~/plugins/tooltip", ssr: false},
+        {src: "~/plugins/input", ssr: false},
         {src: '~/plugins/localStorage.js', ssr: false, mode: 'spa'},
         "~/plugins/mixins",
         "~/plugins/validation",
