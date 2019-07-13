@@ -119,7 +119,7 @@
                         } else {
                             return {
                                 name,
-                                created_at: Moment(created_at).format('jYYYY/jMM/jDD')
+                                created_at: Moment(created_at).format('jYYYY/jMM/jDD'),
                             };
                         }
                     });
