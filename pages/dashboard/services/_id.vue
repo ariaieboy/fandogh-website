@@ -6,9 +6,11 @@
             <div class="service-header">
 
                 <span class="service-name">
-                    <canvas
-                            style="border-radius: 100px; width: 16px; height: 16px; display: inline-block; margin-left: 7px;"
-                            :style="{ backgroundColor: (service.state.toString().toLowerCase() === 'running' ? '#3ccc38' : '#fd3259')}"></canvas>
+                    <img
+                            style="border-radius: 100px; width: 24px; height: 24px; display: inline-block; margin-left: 7px;vertical-align: middle"
+                            :src="(service.state.toString().toLowerCase() === 'running' ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
+                            :class="[service.state.toString().toLowerCase() === 'running' ? 'success' : 'failed']"
+                            >
                     {{service.name}}
                 </span>
 
@@ -25,6 +27,10 @@
                 <span class="service-spec">
                     رم مصرفی (مگابایت)<br>
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
+                </span>
+
+                <span class="service-edit" @click="$router.push({ path: '/dashboard/services/wizard', query: {service: service_name} })">
+                    تغییر مانیفست
                 </span>
 
             </div>
@@ -110,18 +116,20 @@
         data() {
             return {
                 activeSectionName: 'detail',
+                service_name: '',
                 image: this.$route.params.image,
             };
         },
         created() {
             this.$store.commit("SET_DATA", {id: "manifest", data: {}});
-            this.getData();
+            this.service_name = this.$route.params.id;
+            this.getData(this.service_name);
         },
         methods: {
-            async getData() {
+            async getData(service_name) {
                 try {
                     let res = await this.$store.dispatch("getServicesName", {
-                        name: this.$route.params.id
+                        name: service_name
                     });
                     let internal = null;
                     if (res.state !== "RUNNING") {
@@ -162,15 +170,17 @@
 
 <style scoped lang="stylus">
 
+    @import '../../../assets/css/variables.styl'
+
     .title
-        font-family iran-yekan
-        font-style normal
-        font-weight bold
-        font-size 1.2em
-        font-stretch normal
-        line-height 1.75
-        color #7c7c7c
-        letter-spacing normal
+        font-family iran-yekan !important
+        font-style normal !important
+        font-weight bold !important
+        font-size 1.2em !important
+        font-stretch normal !important
+        line-height 1.75 !important
+        color #7c7c7c !important
+        letter-spacing normal !important
 
     .box
         padding 16px
@@ -204,7 +214,7 @@
             padding 0
             cursor pointer
             @media only screen and (max-width: 766px)
-                margin-left  -5px
+                margin-left -5px
                 display inline-flex
 
             p
@@ -240,7 +250,7 @@
             cursor pointer
             @media only screen and (max-width: 766px)
                 background-color #2979ff
-                margin-right  -1px
+                margin-right -1px
                 display inline-flex
 
             p
@@ -301,39 +311,136 @@
                 display block
                 padding-right 0
                 padding-left 0
-            canvas
-                animation moved 2.5s infinite ease-in-out
-                -webkit-animation moved 2.5s infinite ease-in-out
+
+            img
+                &.success
+                    animation rotating 5s infinite linear
+                    -webkit-animation rotating 5s infinite linear
+                    -moz-animation rotating 5s infinite linear
+                    -o-animation  rotating 5s infinite linear
+                    -ms-animation rotating 5s infinite linear
+                &.failed
+                    animation broken-rotating 1.5s infinite linear
+                    -webkit-animation broken-rotating 1.5s infinite linear
+                    -moz-animation broken-rotating 1.5s infinite linear
+                    -o-animation  broken-rotating 1.5s infinite linear
+                    -ms-animation broken-rotating 1.5s infinite linear
 
 
-        @keyframes moved {
-            0% {opacity: 1; transform scale(1.05)}
-            10% {opacity: .95; transform scale(1.03)}
-            20% {opacity: .9; transform scale(0.99)}
-            30% {opacity: .85; transform scale(.95)}
-            40% {opacity: .8; transform scale(.91)}
-            50% {opacity: .75; transform scale(.87)}
-            60% {opacity: .8; transform scale(.91)}
-            70% {opacity: .85; transform scale(.95)}
-            80% {opacity: .9; transform scale(0.99)}
-            90% {opacity: .95; transform scale(1.03)}
-            100% {opacity: 1; transform scale(1.05)}
+
+        @-webkit-keyframes rotating {
+            from{
+                -webkit-transform: rotate(0deg);
+            }
+            to{
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes rotating {
+            from{
+                -webkit-transform: rotate(0deg);
+            }
+            to{
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes broken-rotating {
+
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            10% {
+                -webkit-transform: rotate(4deg);
+            }
+            20% {
+                -webkit-transform: rotate(8deg);
+            }
+            30% {
+                -webkit-transform: rotate(12deg);
+            }
+            40% {
+                -webkit-transform: rotate(16deg);
+            }
+            50% {
+                -webkit-transform: rotate(20deg);
+            }
+            60% {
+                -webkit-transform: rotate(16deg);
+            }
+            70% {
+                -webkit-transform: rotate(12deg);
+            }
+            80% {
+                -webkit-transform: rotate(8deg);
+            }
+            90% {
+                -webkit-transform: rotate(4deg);
+            }
+            100% {
+                -webkit-transform: rotate(0deg);
+            }
+        }
+        @keyframes broken-rotating {
+
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            10% {
+                -webkit-transform: rotate(4deg);
+            }
+            20% {
+                -webkit-transform: rotate(8deg);
+            }
+            30% {
+                -webkit-transform: rotate(12deg);
+            }
+            40% {
+                -webkit-transform: rotate(16deg);
+            }
+            50% {
+                -webkit-transform: rotate(20deg);
+            }
+            60% {
+                -webkit-transform: rotate(16deg);
+            }
+            70% {
+                -webkit-transform: rotate(12deg);
+            }
+            80% {
+                -webkit-transform: rotate(8deg);
+            }
+            90% {
+                -webkit-transform: rotate(4deg);
+            }
+            100% {
+                -webkit-transform: rotate(0deg);
+            }
         }
 
 
-        @-webkit-keyframes moved{
-            0% {opacity: 1; transform scale(1.05)}
-            10% {opacity: .95; transform scale(1.03)}
-            20% {opacity: .9; transform scale(0.99)}
-            30% {opacity: .85; transform scale(.95)}
-            40% {opacity: .8; transform scale(.91)}
-            50% {opacity: .75; transform scale(.87)}
-            60% {opacity: .8; transform scale(.91)}
-            70% {opacity: .85; transform scale(.95)}
-            80% {opacity: .9; transform scale(0.99)}
-            90% {opacity: .95; transform scale(1.03)}
-            100% {opacity: 1; transform scale(1.05)}
-        }
+    .service-edit
+        color $totalWhite
+        line-height 1.75
+        margin-top auto
+        margin-bottom auto
+        font-size 1em
+        font-family iran-yekan
+        font-weight normal
+        background-color $green
+        border-radius 3px
+        box-shadow 0 2px 6px rgba(60, 204, 56, 0.7)
+        text-align center
+        align-self start
+        padding 6px 24px
+        cursor pointer
+        order 2
+        margin-right auto
+        @media only screen and (max-width: 766px)
+            font-size 1.2em
+            display block
+            padding-right 0
+            padding-left 0
 
     .service-spec
         color #7c7c7c
