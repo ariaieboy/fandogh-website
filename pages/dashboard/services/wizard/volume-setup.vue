@@ -1,12 +1,11 @@
 <template>
     <div>
-        <banner :page="page"></banner>
-        <div style="margin-top: 12px">
+        <div style="margin-top: 12px;">
 
             <config-box :section-title="sections.volume_type" :tooltip="sections.volume_type_tooltip">
                 <div style="display: flex; flex-wrap: wrap; justify-content: center">
 
-                    <span v-for="(volume, index) in volume_kind_obj"
+                    <span v-for="(volume, index) in manifest_model.volumes.volume_kind_obj"
                           :key="index"
                           v-tooltip="volume.tooltip"
                           :class="['kind-button', {'is-active': volume.is_active}]"
@@ -27,8 +26,8 @@
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
                                 color="#0093ff"
-                                required
-                                v-model="volume.mount_path"
+                                :rules="[rules.is_root_addressed, rules.required, rules.redundant]"
+                                v-model="manifest_model.volumes.volume.mount_path"
                                 :label="volume_obj.mount_path_label"
                                 :hint="volume_obj.mount_path_hint">
 
@@ -46,8 +45,8 @@
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
                                 color="#0093ff"
-                                required
-                                v-model="volume.sub_path"
+                                :rules="[rules.required]"
+                                v-model="manifest_model.volumes.volume.sub_path"
                                 :label="volume_obj.sub_path_label"
                                 :hint="volume_obj.sub_path_hint">
 
@@ -58,14 +57,15 @@
 
                     </div>
 
-                    <div v-if="volume_kind.local_name === 'Dedicated Volume'" style="display: flex">
+                    <div v-if="manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume'"
+                         style="display: flex">
 
                         <v-text-field ref="volume_name_selector"
                                       style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                       dir="ltr"
                                       color="#0093ff"
-                                      required
-                                      v-model="volume.volume_name"
+                                      :rules="[rules.volume_name_regex, rules.required]"
+                                      v-model="manifest_model.volumes.volume.volume_name"
                                       :label="volume_obj.volume_name_label"
                                       :hint="volume_obj.volume_name_hint">
 
@@ -79,6 +79,7 @@
                     <div style="display: flex; margin-top: 16px; width: 100%">
 
                         <span @click="addVolume" class="create-volume-button">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
+                        <span v-if="isEditing" style="margin-right: 16px" @click="cancelEdit" class="cancel-button">{{'انصراف'}}</span>
 
                     </div>
 
@@ -87,7 +88,7 @@
 
             <volume-table class="row"
                           :titles="titleRow"
-                          :items="volume_list"
+                          :items="manifest_model.volumes.volume_list"
                           :menu="menuList">
                 <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
 border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
@@ -103,15 +104,22 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
 <script>
 
-    import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
     import ConfigBox from "../../../../components/wizard/box/config-box";
     import VolumeTable from "../../../../components/wizard/table/volume-table";
 
     export default {
         name: "volume-setup",
+        props: {
+            manifest_model: {
+                type: Object,
+                required: true
+            }
+        },
+        model: {
+            prop: 'manifest_model',
+        },
         components: {
-            Banner,
             Popover,
             ConfigBox,
             VolumeTable
@@ -120,13 +128,16 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
         data() {
             return {
 
+                rules: {
+                    required: value => value !== '' || 'مقدار این فیلد نمی‌تواند خالی باشد',
+                    is_root_addressed: value => value.toString().startsWith('/') || value.toString() === '' || 'آدرس وارد شده، باید از root (/) شروع شود',
+                    no_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
+                    volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
+                    redundant: value => (this.allowed_name === null ? this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0 : this.allowed_name === value || this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0) || 'مقدار تکراری است',
+                },
                 editing_index: -1,
                 isEditing: false,
-                volume: {
-                    mount_path: null,
-                    sub_path: null,
-                    volume_name: null
-                },
+                allowed_name: null,
                 volume_obj: {
                     mount_path_label: 'Mount Path',
                     mount_path_hint: 'آدرس محلی از سرویس که داده‌ها در آن ذخیره می‌شوند',
@@ -153,19 +164,6 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
                     }
                 },
-                volume_kind: {
-                    local_name: 'Shared Volume',
-                    is_active: true,
-                    tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Shared Volumeای که وارد کرده‌اید ذخیره می‌شود.'
-                },
-                page: {
-                    title: 'Volumes',
-                    description: 'برای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در\n' +
-                        '                ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند\n' +
-                        '                در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که\n' +
-                        '                می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق\n' +
-                        '                که می‌ماند در ذهن‌ها'
-                },
                 sections: {
                     volume_type: 'نوع Volume',
                     volume_type_tooltip: {
@@ -180,18 +178,6 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#%D9%81%DB%8C%D9%84%D8%AF-spec-%D8%AF%D8%B1-externalservice-%D9%87%D8%A7'
                     }
                 },
-                volume_kind_obj: [
-                    {
-                        local_name: 'Shared Volume',
-                        is_active: true,
-                        tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Shared Volumeای که وارد کرده‌اید ذخیره می‌شود.'
-                    },
-                    {
-                        local_name: 'Dedicated Volume',
-                        is_active: false,
-                        tooltip: 'با انتخاب این گزینه داده‌های شما بر روی آدرس Dedicated Volumeای که وارد کرده‌اید ذخیره می‌شود.'
-                    }
-                ],
                 titleRow: [
                     {title: 'mount path', width: '30%', name: 'mount_path'},
                     {title: 'sub path', width: '30%', name: 'sub_path'},
@@ -201,40 +187,51 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
                 ],
                 menuList: [
-                    {method: '', icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
                     {method: this.editVolume, icon: 'ic-upload.svg', title: 'ویرایش volume', style: {}},
                     {method: this.removeVolume, icon: 'ic_delete.svg', title: 'حذف  volume', style: {color: '#fd3259'}},
                 ],
-                volume_list: []
-
             }
         },
         methods: {
             editVolume(index) {
                 this.isEditing = true
                 this.editing_index = index
-                if (this.volume_list[index].hasOwnProperty('volume_name')) {
+                if (this.manifest_model.volumes.volume_list[index].hasOwnProperty('volume_name')) {
                     this.onKindClicked(1)
-                    this.volume.volume_name = this.volume_list[index].volume_name
-                }else {
+                    this.manifest_model.volumes.volume.volume_name = this.manifest_model.volumes.volume_list[index].volume_name
+                } else {
                     this.onKindClicked(0)
-                    this.volume.volume_name = null
+                    this.manifest_model.volumes.volume.volume_name = null
                 }
-                this.volume.mount_path = this.volume_list[index].mount_path
-                this.volume.sub_path = this.volume_list[index].sub_path
+                this.manifest_model.volumes.volume.mount_path = this.manifest_model.volumes.volume_list[index].mount_path
+                this.manifest_model.volumes.volume.sub_path = this.manifest_model.volumes.volume_list[index].sub_path
+                this.allowed_name = this.manifest_model.volumes.volume_list[index].mount_path
+
+                this.$refs.mount_path_selector.focus()
+            },
+            cancelEdit() {
+                this.isEditing = false
+                this.manifest_model.volumes.volume.mount_path = null
+                this.manifest_model.volumes.volume.sub_path = null
+                if (this.manifest_model.volumes.volume_list[this.editing_index].hasOwnProperty('volume_name')) {
+                    this.manifest_model.volumes.volume.volume_name = null
+                }
+                this.onKindClicked(0)
+                this.editing_index = -1
+                this.allowed_name = null
             },
             removeVolume(index) {
-                this.volume_list.splice(index, 1)
+                this.manifest_model.volumes.volume_list.splice(index, 1)
             },
             onKindClicked(index) {
-                this.volume_kind_obj.forEach(item => {
+                this.manifest_model.volumes.volume_kind_obj.forEach(item => {
                     item.is_active = false
                 });
-                this.volume_kind_obj[index].is_active = true;
-                this.volume_kind = this.volume_kind_obj[index]
+                this.manifest_model.volumes.volume_kind_obj[index].is_active = true;
+                this.manifest_model.volumes.volume_kind = this.manifest_model.volumes.volume_kind_obj[index]
 
-                if (this.volume_kind_obj[index].local_name === 'Dedicated Volume') {
-                    this.volume.volume_name = null
+                if (this.manifest_model.volumes.volume_kind_obj[index].local_name === 'Dedicated Volume') {
+                    this.manifest_model.volumes.volume.volume_name = null
                 }
             },
             addToManifest(value, path) {
@@ -250,37 +247,55 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
             },
             addVolume() {
 
-                if (this.volume.mount_path === null) {
+                if (this.manifest_model.volumes.volume.mount_path === null) {
                     this.$refs.mount_path_selector.focus()
                     return;
                 }
 
-                if (this.volume.sub_path === null) {
+                if (this.manifest_model.volumes.volume.sub_path === null) {
                     this.$refs.sub_path_selector.focus()
                     return;
                 }
 
 
-                if (this.volume.mount_path.trim().length === 0) {
+                if (this.manifest_model.volumes.volume.mount_path.trim().length === 0) {
+                    this.$refs.mount_path_selector.focus()
+                    return;
+                }
+
+                if (this.rules.is_root_addressed(this.manifest_model.volumes.volume.mount_path) !== true ||
+                    this.rules.no_space(this.manifest_model.volumes.volume.mount_path) !== true) {
+                    this.$refs.mount_path_selector.focus()
+                    return;
+                }
+
+                if(this.rules.redundant(this.manifest_model.volumes.volume.mount_path) !== true){
                     this.$refs.mount_path_selector.focus()
                     return;
                 }
 
 
-                if (this.volume.sub_path.trim().length === 0) {
+                if (this.manifest_model.volumes.volume.sub_path.trim().length === 0 ||
+                    this.rules.no_space(this.manifest_model.volumes.volume.sub_path) !== true) {
                     this.$refs.sub_path_selector.focus()
                     return;
                 }
 
-                if (this.volume_kind.local_name === 'Dedicated Volume') {
+                if (this.manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume') {
 
-                    if (this.volume.volume_name === null) {
+                    if (this.manifest_model.volumes.volume.volume_name === null) {
                         this.$refs.volume_name_selector.focus()
                         return;
                     }
 
 
-                    if (this.volume.volume_name.trim().length === 0) {
+                    if (this.manifest_model.volumes.volume.volume_name.trim().length === 0) {
+                        this.$refs.volume_name_selector.focus()
+                        return;
+                    }
+
+                    if (this.rules.volume_name_regex(this.manifest_model.volumes.volume.volume_name.trim()) !== true ||
+                        this.rules.no_space(this.manifest_model.volumes.volume.volume_name.trim()) !== true) {
                         this.$refs.volume_name_selector.focus()
                         return;
                     }
@@ -289,71 +304,53 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
 
                 if (this.isEditing) {
-                    if (this.volume_kind.local_name === 'Dedicated Volume'){
-                        this.volume_list.splice(this.editing_index, 1,{
-                            mount_path: this.volume.mount_path,
-                            sub_path: this.volume.sub_path,
-                            volume_name: this.volume.volume_name
+                    if (this.manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume') {
+                        this.manifest_model.volumes.volume_list.splice(this.editing_index, 1, {
+                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
+                            sub_path: this.manifest_model.volumes.volume.sub_path.trim(),
+                            volume_name: this.manifest_model.volumes.volume.volume_name.trim()
                         })
-                    }else {
-                        this.volume_list.splice(this.editing_index, 1,{
-                            mount_path: this.volume.mount_path,
-                            sub_path: this.volume.sub_path,
+                    } else {
+                        this.manifest_model.volumes.volume_list.splice(this.editing_index, 1, {
+                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
+                            sub_path: this.manifest_model.volumes.volume.sub_path.trim(),
                         })
                     }
 
                 } else {
-                    if (this.volume_kind.local_name === 'Dedicated Volume') {
-                        this.volume_list.push({
-                            mount_path: this.volume.mount_path,
-                            sub_path: this.volume.sub_path,
-                            volume_name: this.volume.volume_name
+                    if (this.manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume') {
+                        this.manifest_model.volumes.volume_list.push({
+                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
+                            sub_path: this.manifest_model.volumes.volume.sub_path.trim(),
+                            volume_name: this.manifest_model.volumes.volume.volume_name.trim()
                         })
                     } else {
-                        this.volume_list.push({
-                            mount_path: this.volume.mount_path,
-                            sub_path: this.volume.sub_path
+                        this.manifest_model.volumes.volume_list.push({
+                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
+                            sub_path: this.manifest_model.volumes.volume.sub_path.trim()
                         })
                     }
                 }
 
-                this.volume.mount_path = null
-                this.volume.sub_path = null
-                this.volume.volume_name = null
+                this.manifest_model.volumes.volume.mount_path = null
+                this.manifest_model.volumes.volume.sub_path = null
+                this.manifest_model.volumes.volume.volume_name = null
                 this.isEditing = false
+                this.allowed_name = null
                 this.editing_index = -1
 
             }
         },
         computed: {},
         watch: {
-            volume_list: {
+            'manifest_model.volumes.volume_list': {
                 handler: function (value, oldValue) {
-                    console.log('watched')
                     if (value.length === 0) {
                         this.deleteFromManifest('spec.volume_mounts')
                     } else {
-                        console.log('watched')
                         this.addToManifest(value, 'spec.volume_mounts')
                     }
 
-                }
-            }
-        },
-        mounted() {
-
-        },
-        created() {
-            let manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
-
-            if (manifest.hasOwnProperty('spec')) {
-                let spec = manifest.spec
-
-                if (spec.hasOwnProperty('volume_mounts')) {
-
-                    spec.volume_mounts.forEach(item => {
-                        this.volume_list.push(item)
-                    })
                 }
             }
         }

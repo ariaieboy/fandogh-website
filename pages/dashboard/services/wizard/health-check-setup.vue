@@ -1,10 +1,7 @@
 <template>
     <div>
 
-        <banner :page="page"></banner>
-
-        <div style="margin-top: 12px">
-
+        <div style="margin-top: 12px;">
 
             <config-box :section-title="sections.liveness_probe"
                         :tooltip="sections.liveness_probe_tooltip">
@@ -21,7 +18,10 @@
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
-                                    v-model.number="liveness_object.initial_delay_seconds"
+                                    min
+                                    :rules="[rules.required, rules.min_value]"
+                                    prefix="ثانیه"
+                                    v-model.number="manifest_model.health_check.liveness_object.initial_delay_seconds"
                                     :hint="health_check_obj.initial_delay_seconds_hint"
                                     :label="health_check_obj.initial_delay_seconds_label">
 
@@ -39,7 +39,9 @@
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
-                                    v-model.number="liveness_object.period_seconds"
+                                    :rules="[rules.required, rules.min_value]"
+                                    prefix="ثانیه"
+                                    v-model.number="manifest_model.health_check.liveness_object.period_seconds"
                                     :hint="health_check_obj.period_seconds_hint"
                                     :label="health_check_obj.period_seconds_label">
 
@@ -55,9 +57,31 @@
                                     ref="key"
                                     style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
+                                    type="number"
+                                    dir="ltr"
+                                    min="1"
+                                    :rules="[rules.required, rules.min_value]"
+                                    prefix="ثانیه"
+                                    v-model.number="manifest_model.health_check.liveness_object.timeout_seconds"
+                                    :hint="health_check_obj.timeout_seconds_hint"
+                                    :label="health_check_obj.timeout_seconds_label">
+
+                            </v-text-field>
+
+                            <popover :tooltip="tooltips.timeout_seconds"></popover>
+
+                        </div>
+
+                        <div style="display: flex;">
+
+                            <v-text-field
+                                    ref="key"
+                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    color="#0093ff"
                                     type="text"
                                     dir="ltr"
-                                    v-model="liveness_object.http_get_method"
+                                    :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
+                                    v-model="manifest_model.health_check.liveness_object.http_get_method"
                                     :hint="health_check_obj.http_get_method_hint"
                                     :label="health_check_obj.http_get_method_label">
 
@@ -75,7 +99,8 @@
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
-                                    v-model.number="liveness_object.http_get_port"
+                                    :rules="[rules.required, rules.valid_port]"
+                                    v-model.number="manifest_model.health_check.liveness_object.http_get_port"
                                     :hint="health_check_obj.http_get_port_hint"
                                     :label="health_check_obj.http_get_port_label">
 
@@ -105,7 +130,9 @@
                                     color="#0093ff"
                                     dir="ltr"
                                     type="number"
-                                    v-model.number="readiness_object.initial_delay_seconds"
+                                    :rules="[rules.required, rules.min_value]"
+                                    prefix="ثانیه"
+                                    v-model.number="manifest_model.health_check.readiness_object.initial_delay_seconds"
                                     :hint="health_check_obj.initial_delay_seconds_hint"
                                     :label="health_check_obj.initial_delay_seconds_label">
 
@@ -123,13 +150,37 @@
                                     color="#0093ff"
                                     dir="ltr"
                                     type="number"
-                                    v-model.number="readiness_object.period_seconds"
+                                    :rules="[rules.required, rules.min_value]"
+                                    prefix="ثانیه"
+                                    v-model.number="manifest_model.health_check.readiness_object.period_seconds"
                                     :hint="health_check_obj.period_seconds_hint"
                                     :label="health_check_obj.period_seconds_label">
 
                             </v-text-field>
 
                             <popover :tooltip="tooltips.period_seconds"></popover>
+
+                        </div>
+
+
+                        <div style="display: flex;">
+
+                            <v-text-field
+                                    ref="key"
+                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    color="#0093ff"
+                                    type="number"
+                                    dir="ltr"
+                                    min="1"
+                                    :rules="[rules.required, rules.min_value]"
+                                    prefix="ثانیه"
+                                    v-model.number="manifest_model.health_check.readiness_object.timeout_seconds"
+                                    :hint="health_check_obj.timeout_seconds_hint"
+                                    :label="health_check_obj.timeout_seconds_label">
+
+                            </v-text-field>
+
+                            <popover :tooltip="tooltips.timeout_seconds"></popover>
 
                         </div>
 
@@ -141,7 +192,8 @@
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"
-                                    v-model="readiness_object.http_get_method"
+                                    :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
+                                    v-model="manifest_model.health_check.readiness_object.http_get_method"
                                     :hint="health_check_obj.http_get_method_hint"
                                     :label="health_check_obj.http_get_method_label">
 
@@ -159,7 +211,8 @@
                                     color="#0093ff"
                                     dir="ltr"
                                     type="number"
-                                    v-model.number="readiness_object.http_get_port"
+                                    :rules="[rules.required, rules.valid_port]"
+                                    v-model.number="manifest_model.health_check.readiness_object.http_get_port"
                                     :hint="health_check_obj.http_get_port_hint"
                                     :label="health_check_obj.http_get_port_label">
 
@@ -182,41 +235,35 @@
 
 <script>
 
-    import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
     import ConfigBox from "../../../../components/wizard/box/config-box";
 
     export default {
         name: "health-check-setup",
+        props: {
+            manifest_model: {
+                type: Object,
+                required: true
+            }
+        },
+        model: {
+            prop: 'manifest_model',
+        },
         components: {
-            Banner,
             Popover,
             ConfigBox
         },
         data() {
             return {
+                rules: {
+                    required: value => !!value || 'مقدار این فیلد اجباری‌ است',
+                    min_value: value => value >= 1 || 'کمترین زمان ۱ ثانیه است',
+                    is_root_addressed: value => value.toString().startsWith('/') || 'آدرس وارد شده، باید از root (/) شروع شود',
+                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد',
+                    has_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست'
+                },
                 editing_index: -1,
                 isEditing: false,
-                liveness_object:{
-                    initial_delay_seconds: null,
-                    period_seconds: null,
-                    http_get_method: null,
-                    http_get_port:null
-                },
-                readiness_object:{
-                    initial_delay_seconds: null,
-                    period_seconds: null,
-                    http_get_method: null,
-                    http_get_port:null
-                },
-                page: {
-                    title: 'Health Check',
-                    description: 'برای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در\n' +
-                        '                ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند\n' +
-                        '                در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که\n' +
-                        '                می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق\n' +
-                        '                که می‌ماند در ذهن‌ها'
-                },
                 sections: {
                     liveness_probe: 'Liveness',
                     liveness_probe_tooltip: {
@@ -235,6 +282,11 @@
                     initial_delay_seconds: {
                         title: 'Initial Delay Seconds',
                         text: 'Initial Delay Second مدت زمانی است که فندق پیش از آن که سرویس را بررسی کند صبر میکند و بعد از اینکه این مدت تمام شد، بررسی وضعیت سرویس آغاز می‌شود.',
+                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#readiness-probe-%D9%88-liveness-probe'
+                    },
+                    timeout_seconds: {
+                        title: 'Timeout Seconds',
+                        text: 'ُTimeout Seconds به فندق میگوید چند ثاینه برای دریافت پاسخی با کد ۲۰۰ منتظر بماند (در صورتی که مقدار را وارد نکنید، این مقدار به صورت پیش‌فرض ۱ ثانیه خواهد بود)',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#readiness-probe-%D9%88-liveness-probe'
                     },
                     period_seconds: {
@@ -256,12 +308,14 @@
                 health_check_obj: {
                     initial_delay_seconds_label: 'Initial Delay Seconds',
                     period_seconds_label: 'Period Seconds',
+                    timeout_seconds_label: 'Timeout Seconds',
                     http_get_method_label: 'Http get path',
                     http_get_port_label: 'Http get port',
                     initial_delay_seconds_hint: 'زمان اولیه را به ثانیه وارد کنید',
+                    timeout_seconds_hint: 'میزان زمانی که فندق باید منتظر پاسخ سرویس بماند(مقدار پیش فرض ۱ ثانیه است)',
                     period_seconds_hint: 'بازه تکرار زمانی را به ثانیه وارد نمایید',
                     http_get_method_hint: 'نام متدی که باید برای بررسی سرویس صدا زده شود را وارد نمایید',
-                    http_get_port_hint: 'پورت مورد نطر برای متدی که صدا زده می‌شود را وارد نمایید',
+                    http_get_port_hint: 'پورت مربوط به آدرس http get method را وارد نمایید',
                 },
             }
         },
@@ -280,44 +334,77 @@
         },
         computed: {},
         watch: {
-            liveness_object: {
-                handler: function(value, oldValue){
+            'manifest_model.health_check.liveness_object': {
+                handler: function (value, oldValue) {
                     let empty = false
                     let keys = Object.keys(value)
-                    for(let key of keys){
-                        if(value[key] === null || value[key] === ''){
-                            this.deleteFromManifest('spec.liveness_probe')
-                            empty = true
+                    for (let key of keys) {
+                        if (value[key] === null || value[key] === '') {
+                            this.deleteFromManifest('spec.liveness_probe');
+                            empty = true;
                             break
+                        }else if(key === 'http_get_method'){
+                            if(this.rules.is_root_addressed(value[key]) !== true || this.rules.has_space(value[key]) !== true){
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
+                        }else if(key === 'http_get_port'){
+                            if(this.rules.valid_port(value[key]) !== true){
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
+                        }else {
+                            if(this.rules.min_value(value[key])){
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
                         }
                     }
 
-                    if(!empty){
+                    if (!empty) {
                         this.addToManifest(value, 'spec.liveness_probe')
                     }
 
-                },deep: true
+                }, deep: true
             },
-            readiness_object: {
-                handler: function(value, oldValue){
+            'manifest_model.health_check.readiness_object': {
+                handler: function (value, oldValue) {
                     let empty = false
                     let keys = Object.keys(value)
-                    for(let key of keys){
-                        if(value[key] === null || value[key] === ''){
+                    for (let key of keys) {
+                        if (value[key] === null || value[key] === '') {
                             this.deleteFromManifest('spec.readiness_probe')
                             empty = true
                             break
+                        }else if(key === 'http_get_method'){
+                            if(this.rules.is_root_addressed(value[key]) !== true || this.rules.has_space(value[key]) !== true){
+                                this.deleteFromManifest('spec.readiness_probe')
+                                empty = true
+                                break
+                            }
+                        }else if(this.rules.valid_port(value[key]) !== true){
+                            if(value[key] > 65535 || value[key] < 1){
+                                this.deleteFromManifest('spec.readiness_probe')
+                                empty = true
+                                break
+                            }
+                        }else {
+                            if(this.rules.min_value(value[key])){
+                                this.deleteFromManifest('spec.readiness_probe')
+                                empty = true
+                                break
+                            }
                         }
                     }
 
-                    if(!empty){
+                    if (!empty) {
                         this.addToManifest(value, 'spec.readiness_probe')
                     }
-                },deep: true
+                }, deep: true
             }
-        },
-        created() {
-        }, mounted() {
         }
     }
 </script>

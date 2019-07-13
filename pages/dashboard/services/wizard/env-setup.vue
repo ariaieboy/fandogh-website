@@ -2,9 +2,7 @@
 
     <div>
 
-        <banner :page="page"></banner>
-
-        <div style="margin-top: 12px">
+        <div style="margin-top: 12px;">
 
 
             <config-box :section-title="sections.create_env"
@@ -18,12 +16,13 @@
 
                             <v-text-field
                                     ref="key"
-                                    :rules="[rules.name_required]"
+                                    :rules="[rules.name_required, rules.regex, rules.no_space, rules.redundant]"
                                     style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"
-                                    v-model="environment_variable.name"
+                                    @change="(manifest_model.environment_variable.name = manifest_model.environment_variable.name.trim())"
+                                    v-model="manifest_model.environment_variable.name"
                                     :hint="env_obj.key_hint"
                                     :label="env_obj.key_label">
 
@@ -42,7 +41,8 @@
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"
-                                    v-model="environment_variable.value"
+                                    v-model="manifest_model.environment_variable.value"
+                                    @change="(manifest_model.environment_variable.value = manifest_model.environment_variable.value.trim())"
                                     :hint="env_obj.value_hint"
                                     :label="env_obj.value_label">
 
@@ -59,7 +59,7 @@
                                           :object="hidden_obj"></fan-checkbox>
 
                             <span class="left create-env-button" @click="onSubmitClicked">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
-
+                            <span v-if="isEditing" style="margin-left: 16px" @click="cancelEdit" class="left cancel-button">{{'انصراف'}}</span>
 
                         </div>
 
@@ -72,7 +72,7 @@
 
             <env-table class="row"
                        :titles="titleRow"
-                       :items="env_list"
+                       :items="manifest_model.environment_variable.env_list"
                        :menu="menuList">
                 <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
 border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
@@ -89,7 +89,6 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 </template>
 
 <script>
-    import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
     import ConfigBox from "../../../../components/wizard/box/config-box";
     import FanCheckbox from "../../../../components/wizard/select-box/fan-checkbox";
@@ -98,8 +97,16 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
     export default {
         name: "env-setup",
+        props: {
+            manifest_model: {
+                type: Object,
+                required: true
+            }
+        },
+        model:{
+            prop: 'manifest_model',
+        },
         components: {
-            Banner,
             Popover,
             ConfigBox,
             FanCheckbox,
@@ -111,23 +118,13 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
                 editing_index: -1,
                 isEditing: false,
-                environment_variable: {
-                    name: '',
-                    value: ''
-                },
+                allowed_name: null,
                 rules: {
-                    name_required: value => value !== '' || 'نام متغیر نمی‌تواند خالی باشد',
-                    value_required: value => value !== '' || 'مقدار متغیر نمی‌تواند خالی باشد',
-                    is_negative: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
-                    valid_name: value => !!value || 'این فیلد اجباری‌ است'
-                },
-                page: {
-                    title: 'Environment variables',
-                    description: 'برای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در\n' +
-                        '                ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند\n' +
-                        '                در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که\n' +
-                        '                می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق\n' +
-                        '                که می‌ماند در ذهن‌ها'
+                    name_required: value => !!value.trim() || 'نام متغیر نمی‌تواند خالی باشد',
+                    value_required: value => !!value.trim() || 'مقدار متغیر نمی‌تواند خالی باشد',
+                    no_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
+                    regex: value => new RegExp('^[a-zA-Z1-9_]+$').test(value) || 'فقط حروف کوچک، حروف بزرگ، underscore و اعداد معتبر هستند',
+                    redundant: value => (this.allowed_name === null ? this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0 : this.allowed_name === value || this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0) || 'مقدار تکراری است',
                 },
                 sections: {
                     create_env: 'ساخت Environment Variable',
@@ -171,11 +168,9 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
                 ],
                 menuList: [
-                    {method: '', icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
                     {method: this.editEnv, icon: 'ic-upload.svg', title: 'ویرایش متغیر', style: {}},
                     {method: this.removeEnv, icon: 'ic_delete.svg', title: 'حذف  متغیر', style: {color: '#fd3259'}},
-                ],
-                env_list: []
+                ]
 
             }
         },
@@ -183,13 +178,26 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
             editEnv(index) {
                 this.isEditing = true
                 this.editing_index = index
+                this.manifest_model.environment_variable.name = this.manifest_model.environment_variable.env_list[index].name
+                this.manifest_model.environment_variable.value = this.manifest_model.environment_variable.env_list[index].value
+                this.hidden_obj.selected = this.manifest_model.environment_variable.env_list[index].hidden
 
-                this.environment_variable.name = this.env_list[index].name
-                this.environment_variable.value = this.env_list[index].value
-                this.hidden_obj.selected = this.env_list[index].hidden
+                this.allowed_name =  this.manifest_model.environment_variable.env_list[index].name
+
+                this.$refs.key.focus()
+            },
+            cancelEdit(){
+                this.isEditing = false
+
+                this.manifest_model.environment_variable.name = null;
+                this.manifest_model.environment_variable.value = null;
+                this.hidden_obj.selected = false;
+                this.allowed_name = null
+
+                this.editing_index = -1
             },
             removeEnv(index) {
-                this.env_list.splice(index, 1)
+                this.manifest_model.environment_variable.env_list.splice(index, 1)
             },
             onHiddenClicked() {
 
@@ -208,53 +216,61 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
             },
             onSubmitClicked() {
 
-                if (this.environment_variable.name === null) {
+                if (this.manifest_model.environment_variable.name === null) {
                     this.$refs.key.focus()
                     return;
                 }
 
-                if (this.environment_variable.value === null) {
+                if (this.manifest_model.environment_variable.value === null) {
                     this.$refs.value.focus()
                     return;
                 }
 
 
-                if (this.environment_variable.name.trim().length === 0) {
+                if (this.manifest_model.environment_variable.name.trim().length === 0) {
+                    this.$refs.key.focus()
+                    return;
+                }
+
+                if(this.rules.no_space(this.manifest_model.environment_variable.name.trim()) !== true ||
+                this.rules.regex(this.manifest_model.environment_variable.name.trim()) !== true ||
+                this.rules.redundant(this.manifest_model.environment_variable.name.trim()) !== true){
                     this.$refs.key.focus()
                     return;
                 }
 
 
-                if (this.environment_variable.value.trim().length === 0) {
+                if (this.manifest_model.environment_variable.value.trim().length === 0) {
                     this.$refs.value.focus()
                     return;
                 }
 
 
                 if (this.isEditing) {
-                    this.env_list.splice(this.editing_index, 1,{
-                        name: this.environment_variable.name,
-                        value: this.environment_variable.value,
+                    this.manifest_model.environment_variable.env_list.splice(this.editing_index, 1, {
+                        name: this.manifest_model.environment_variable.name.trim(),
+                        value: this.manifest_model.environment_variable.value.trim(),
                         hidden: this.hidden_obj.selected
                     })
                 } else {
-                    this.env_list.push({
-                        name: this.environment_variable.name,
-                        value: this.environment_variable.value,
+                    this.manifest_model.environment_variable.env_list.push({
+                        name: this.manifest_model.environment_variable.name.trim(),
+                        value: this.manifest_model.environment_variable.value.trim(),
                         hidden: this.hidden_obj.selected
                     })
                 }
 
-                this.environment_variable.value = null
-                this.environment_variable.name = null
+                this.manifest_model.environment_variable.value = null
+                this.manifest_model.environment_variable.name = null
                 this.hidden_obj.selected = false
                 this.isEditing = false
                 this.editing_index = -1
+                this.allowed_name = null
 
             }
         },
         watch: {
-            env_list: {
+            'manifest_model.environment_variable.env_list': {
                 handler: function (value, oldValue) {
                     if (value.length === 0)
                         this.deleteFromManifest('spec.env')
@@ -265,24 +281,6 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
             }
         },
         computed: {},
-        created() {
-
-            let manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
-
-            if (manifest.hasOwnProperty('spec')) {
-                let spec = manifest.spec
-
-                if (spec.hasOwnProperty('env')) {
-
-                    spec.env.forEach(item => {
-                        this.env_list.push(item)
-                    })
-                }
-            }
-        },
-        mounted() {
-
-        }
     }
 </script>
 

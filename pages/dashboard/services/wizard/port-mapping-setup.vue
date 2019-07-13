@@ -1,8 +1,6 @@
 <template>
     <div>
-        <banner :page="page"></banner>
-
-        <div style="margin-top: 12px">
+        <div style="margin-top: 12px;">
 
             <config-box :section-title="sections.port_mapping" :tooltip="sections.port_mapping_tooltip">
                 <form class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0">
@@ -14,9 +12,9 @@
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
                                 color="#0093ff"
-                                required
+                                :rules="[rules.valid_port]"
                                 type="number"
-                                v-model="port_map.port"
+                                v-model.number="manifest_model.port_mapping.port_map.port"
                                 :label="port_map_obj.port_label"
                                 :hint="port_map_obj.port_hint">
 
@@ -34,9 +32,9 @@
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
                                 color="#0093ff"
-                                required
+                                :rules="[rules.valid_port]"
                                 type="number"
-                                v-model="port_map.target_port"
+                                v-model.number="manifest_model.port_mapping.port_map.target_port"
                                 :label="port_map_obj.target_port_label"
                                 :hint="port_map_obj.target_port_hint">
 
@@ -54,7 +52,7 @@
                         </span>
 
                         <div>
-                            <fan-checkbox v-for="(protocol ,index) in protocol_list"
+                            <fan-checkbox v-for="(protocol ,index) in manifest_model.port_mapping.protocol_list"
                                           :key="index"
                                           @click.native="checkBoxSelected(index)"
                                           :object="protocol">
@@ -68,6 +66,7 @@
                     <div style="display: flex; margin-top: 16px; width: 100%">
 
                         <span @click="addPortMap" class="create-port-map-button">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
+                        <span v-if="isEditing" style="margin-right: 16px" @click="cancelEdit" class="cancel-button">{{'انصراف'}}</span>
 
                     </div>
 
@@ -76,7 +75,7 @@
 
             <port-map-table class="row"
                             :titles="titleRow"
-                            :items="port_map_list"
+                            :items="manifest_model.port_mapping.port_map_list"
                             :menu="menuList">
                 <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
                             border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">پورتی ذخیره نشده است</span>
@@ -90,7 +89,6 @@
 
 <script>
 
-    import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
     import ConfigBox from "../../../../components/wizard/box/config-box";
     import FanCheckbox from "../../../../components/wizard/select-box/fan-checkbox";
@@ -98,8 +96,17 @@
 
     export default {
         name: "port-mapping-setup",
+        props: {
+            manifest_model: {
+                type: Object,
+                required: true
+            }
+        },
+        model: {
+            prop: 'manifest_model',
+        },
         components: {
-            Banner,
+
             Popover,
             ConfigBox,
             FanCheckbox,
@@ -109,29 +116,19 @@
         data() {
             return {
 
+                rules: {
+                    valid_port: value => value >= 1 && value <= 65535 || value === null || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد'
+                },
                 editing_index: -1,
                 isEditing: false,
-                port_map: {
-                    port: null,
-                    target_port: null,
-                    protocol: 'TCP'
-                },
                 port_map_obj: {
                     port_label: 'Inside Port',
-                    port_hint: 'شماره پورت داخل سرویس که قرار است map شود',
+                    port_hint: 'شماره پورت از داخل سرویس که قرار است به بیرون map شود',
                     target_port_label: 'Outside Port',
-                    target_port_hint: 'شماره پورتی که قرار سات port بر روی آن map شود',
+                    target_port_hint: 'شماره پورتی که قرار است inside port بر روی آن map شود',
                     protocol_label: 'Protocol',
                     protocol_hint: '',
 
-                },
-                page: {
-                    title: 'Port Mapping',
-                    description: 'برای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در\n' +
-                        '                ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند\n' +
-                        '                در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که\n' +
-                        '                می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق\n' +
-                        '                که می‌ماند در ذهن‌ها'
                 },
                 tooltips: {
                     port: {
@@ -165,18 +162,6 @@
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#%D9%81%DB%8C%D9%84%D8%AF-spec-%D8%AF%D8%B1-externalservice-%D9%87%D8%A7'
                     }
                 },
-                protocol_list: [
-                    {
-                        label: "TCP",
-                        value: "TCP",
-                        selected: true
-                    },
-                    {
-                        label: "UDP",
-                        value: "UDP",
-                        selected: false
-                    }
-                ],
                 titleRow: [
                     {title: 'Inside Port', width: '40%', name: 'port'},
                     {title: 'Outside Port', width: '40%', name: 'target_port'},
@@ -185,11 +170,10 @@
 
                 ],
                 menuList: [
-                    {method: '', icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
                     {method: this.editPortMap, icon: 'ic-upload.svg', title: 'ویرایش متغیر', style: {}},
                     {method: this.removePortMap, icon: 'ic_delete.svg', title: 'حذف  متغیر', style: {color: '#fd3259'}},
                 ],
-                port_map_list: []
+
 
             }
         },
@@ -198,73 +182,91 @@
                 this.isEditing = true
                 this.editing_index = index
 
-                this.port_map.port = this.port_map_list[index].port
-                this.port_map.target_port = this.port_map_list[index].target_port
-                this.port_map.protocol = this.port_map_list[index].protocol
+                this.manifest_model.port_mapping.port_map.port = this.manifest_model.port_mapping.port_map_list[index].port
+                this.manifest_model.port_mapping.port_map.target_port = this.manifest_model.port_mapping.port_map_list[index].target_port
+                this.manifest_model.port_mapping.port_map.protocol = this.manifest_model.port_mapping.port_map_list[index].protocol
 
-                this.protocol_list.forEach(item => {
+                this.manifest_model.port_mapping.protocol_list.forEach(item => {
                     item.selected = false
-                    if (item.value === this.port_map.protocol) {
+                    if (item.value === this.manifest_model.port_mapping.port_map.protocol) {
                         item.selected = true
                     }
                 })
             },
+            cancelEdit() {
+                this.isEditing = false
+
+                this.manifest_model.port_mapping.port_map.port = null
+                this.manifest_model.port_mapping.port_map.target_port = null
+                this.checkBoxSelected(0)
+
+                this.editing_index = -1
+            },
             removePortMap(index) {
-                this.port_map_list.splice(index, 1)
+                this.manifest_model.port_mapping.port_map_list.splice(index, 1)
             },
             checkBoxSelected(index) {
-                this.protocol_list.forEach(item => {
+                this.manifest_model.port_mapping.protocol_list.forEach(item => {
                     item.selected = false
                 });
-                this.protocol_list[index].selected = true;
-                this.port_map.protocol = this.protocol_list[index].value;
+                this.manifest_model.port_mapping.protocol_list[index].selected = true;
+                this.manifest_model.port_mapping.port_map.protocol = this.manifest_model.port_mapping.protocol_list[index].value;
             },
             addPortMap() {
 
-                if (this.port_map.port === null) {
+                if (this.manifest_model.port_mapping.port_map.port === null) {
                     this.$refs.port_selector.focus();
                     return;
                 }
 
-                if (this.port_map.target_port === null) {
+                if (this.manifest_model.port_mapping.port_map.target_port === null) {
                     this.$refs.target_port_selector.focus();
                     return;
                 }
 
 
-                if (this.port_map.port.toString().trim().length === 0) {
+                if (this.manifest_model.port_mapping.port_map.port.toString().trim().length === 0) {
                     this.$refs.port_selector.focus();
                     return;
                 }
 
 
-                if (this.port_map.target_port.toString().trim().length === 0) {
+                if (this.manifest_model.port_mapping.port_map.target_port.toString().trim().length === 0) {
                     this.$refs.traget_port_selector.focus();
                     return;
                 }
 
+                if (this.rules.valid_port(this.manifest_model.port_mapping.port_map.port) !== true) {
+                    this.$refs.port_selector.focus();
+                    return;
+                }
+
+                if (this.rules.valid_port(this.manifest_model.port_mapping.port_map.target_port) !== true) {
+                    this.$refs.traget_port_selector.focus();
+                    return;
+                }
 
                 if (this.isEditing) {
 
-                    this.port_map_list.splice(this.editing_index, 1, {
-                        port: parseInt(this.port_map.port),
-                        target_port: parseInt(this.port_map.target_port),
-                        protocol: this.port_map.protocol
+                    this.manifest_model.port_mapping.port_map_list.splice(this.editing_index, 1, {
+                        port: this.manifest_model.port_mapping.port_map.port,
+                        target_port: this.manifest_model.port_mapping.port_map.target_port,
+                        protocol: this.manifest_model.port_mapping.port_map.protocol
                     })
 
 
                 } else {
 
-                    this.port_map_list.push({
-                        port: parseInt(this.port_map.port),
-                        target_port: parseInt(this.port_map.target_port),
-                        protocol: this.port_map.protocol
+                    this.manifest_model.port_mapping.port_map_list.push({
+                        port: this.manifest_model.port_mapping.port_map.port,
+                        target_port: this.manifest_model.port_mapping.port_map.target_port,
+                        protocol: this.manifest_model.port_mapping.port_map.protocol
                     })
 
                 }
 
-                this.port_map.port = null;
-                this.port_map.target_port = null;
+                this.manifest_model.port_mapping.port_map.port = null;
+                this.manifest_model.port_mapping.port_map.target_port = null;
                 this.checkBoxSelected(0);
                 this.isEditing = false;
                 this.editing_index = -1
@@ -281,36 +283,6 @@
                     path: path
                 })
             },
-        },
-        watch: {
-            port_map_list: {
-                handler: function (value, oldValue) {
-                    if (value.length === 0) {
-                        this.deleteFromManifest('spec.port_mapping')
-                    } else {
-                        this.addToManifest(value, 'spec.port_mapping')
-                    }
-
-                }
-            }
-        },
-        mounted() {
-
-        }, created() {
-
-            let manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
-
-            if (manifest.hasOwnProperty('spec')) {
-                let spec = manifest.spec
-
-                if (spec.hasOwnProperty('port_mapping')) {
-
-                    spec.port_mapping.forEach(item => {
-                        this.port_map_list.push(item)
-                    })
-                }
-            }
-
         }
     }
 </script>

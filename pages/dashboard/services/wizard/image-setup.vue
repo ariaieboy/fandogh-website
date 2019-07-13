@@ -1,16 +1,14 @@
 <template>
     <div>
 
-        <banner :page="page"></banner>
-
-        <div style="margin-top: 12px">
+        <div style="margin-top: 12px;">
 
 
             <config-box :section-title="sections.image_registry" :tooltip="sections.image_registry_tooltip">
 
                 <div style="display: flex; flex-wrap: wrap; justify-content: center">
 
-                    <span v-for="(registry, index) in registries"
+                    <span v-for="(registry, index) in manifest_model.image.registries"
                           :key="index"
                           v-tooltip="registry.tooltip"
                           :class="['registry-button', {'is-active': registry.is_active}]"
@@ -30,7 +28,7 @@
 
                 <form class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0;">
 
-                    <div v-if="registry.local_name === 'Fandogh'"
+                    <div v-if="manifest_model.image.registry.local_name === 'Fandogh'"
                          style="display: flex; margin-top: 12px; position: relative; margin-bottom: 0;">
 
                         <div class="fandogh-form-group"
@@ -43,7 +41,7 @@
                                     @input="changedImage"
                                     :clearable="clearable"
                                     :options="images"
-                                    v-model="image_object.name"
+                                    v-model="manifest_model.image.image_object.name"
                                     label="name"
                                     language="fa-IR"
                                     :searchable="searchable"
@@ -60,12 +58,13 @@
 
                         <v-text-field
                                 style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                :rules="[rules.valid_name]"
+                                :rules="[rules.required]"
                                 color="#0093ff"
                                 type="text"
                                 dir="ltr"
-                                :suffix="registry.suffix"
-                                v-model="image_object.name"
+                                required
+                                :suffix="manifest_model.image.registry.suffix"
+                                v-model="manifest_model.image.image_object.name"
                                 :hint="image_name_obj.hint"
                                 :label="image_name_obj.label">
 
@@ -76,7 +75,7 @@
                     </div>
 
 
-                    <div v-if="registry.local_name === 'Fandogh'"
+                    <div v-if="manifest_model.image.registry.local_name === 'Fandogh'"
                          style="display: flex; margin-top: 12px; position: relative">
 
                         <div class="fandogh-form-group"
@@ -89,7 +88,7 @@
                                     dir="rtl"
                                     :clearable="clearable"
                                     :options="versions"
-                                    v-model="image_object.version"
+                                    v-model="manifest_model.image.image_object.version"
                                     label="version"
                                     language="fa-IR"
                                     :loading="version_loaded"
@@ -107,11 +106,12 @@
                     <div v-else style="display: flex;">
 
                         <v-text-field style="font-family: iran-sans; font-size: 1em;margin-left: -15px"
-                                      :rules="[rules.valid_name]"
+                                      :rules="[rules.required]"
                                       color="#0093ff"
                                       type="text"
                                       dir="ltr"
-                                      v-model="image_object.version"
+                                      required
+                                      v-model="manifest_model.image.image_object.version"
                                       :hint="image_version_obj.hint"
                                       :clearable="false"
                                       :label="image_version_obj.label">
@@ -132,22 +132,22 @@
 
                 <form class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0;">
 
-                    <div v-if="registry.local_name !== 'Fandogh'"
+                    <div v-if="manifest_model.image.registry.local_name !== 'Fandogh'"
                          style="display: flex; margin-top: 12px; position: relative; margin-bottom: 16px;">
 
                         <div class="fandogh-form-group"
                              style="display: block; width: 100%; margin-left: -15px; margin-bottom: 16px;">
-                            <label style="font-size: 12px; color: #6c6c6c; margin-bottom: 7px; z-index: 1002; position: relative;">{{secret_obj.label}}</label>
+                            <label style="font-size: 12px; color: #6c6c6c; margin-bottom: 7px; z-index: 1002; position: relative;">{{manifest_model.image.secret_obj.label}}</label>
                             <v-select
                                     ref="secret_selector"
                                     style="height: 38px; font-family: iran-yekan;margin-top: -5px; position: relative; z-index: 1001;"
                                     dir="rtl"
                                     :clearable="clearable"
                                     :options="secretList"
-                                    v-model="secret_obj.value"
+                                    v-model="manifest_model.image.secret_obj.value"
                                     language="fa-IR"
                                     :searchable="searchable"
-                                    :placeholder="secret_obj.hint">
+                                    :placeholder="manifest_model.image.secret_obj.hint">
                             </v-select>
 
                         </div>
@@ -159,13 +159,14 @@
                     <div class="image-pull-policy-container">
                         <span style="height: 35px; display: flex; margin-left: 12px; background-color: #0093ff; border-radius: 25px;">
                             <span style="line-height: 35px; font-size: 1em; margin-right: 12px;color: #fefefe; font-family: iran-yekan">Image Pull Policy</span>
-                            <popover class="popover-style" :tooltip="tooltips.image_secret"></popover>
+                            <popover class="popover-style" :tooltip="tooltips.image_pull_policy"></popover>
                         </span>
 
                         <div>
-                            <fan-checkbox v-for="(policy,index) in image_pull_policy_obj"
+                            <fan-checkbox v-for="(policy,index) in manifest_model.image.image_pull_policy_obj"
                                           :key="index"
                                           @click.native="checkBoxSelected(index)"
+                                          v-tooltip="policy.tooltip"
                                           :object="policy">
 
                             </fan-checkbox>
@@ -186,16 +187,23 @@
 <script>
     import ConfigBox from "../../../../components/wizard/box/config-box";
     import 'vuetify/dist/vuetify.min.css';
-    import Banner from "../../../../components/wizard/banner/banner";
     import Popover from "../../../../components/wizard/tooltip/popover";
     import FanCheckbox from "../../../../components/wizard/select-box/fan-checkbox";
 
     export default {
         name: "image-setup",
+        props: {
+            manifest_model: {
+                type: Object,
+                required: true
+            }
+        },
+        model: {
+            prop: 'manifest_model',
+        },
         components: {
             FanCheckbox,
             ConfigBox,
-            Banner,
             Popover
         },
         layout: 'wizard',
@@ -206,20 +214,8 @@
                 clearable: true,
                 searchable: true,
                 version_loaded: false,
-                image_pull_policy: {title: 'If Not Present', value: 'IfNotPresent', selected: true},
-                registry: {
-                    prefix: '',
-                    local_name: 'Fandogh',
-                    icon: 'ic-fandogh-mini.svg',
-                    is_active: true,
-                    tooltip: 'مبدا ایمیج رجیستری فندق'
-
-                },
                 rules: {
                     required: value => !!value || 'این فیلد اجباری‌ است',
-                    counter: value => value.length <= 100 || 'Max 100 characters',
-                    is_negative: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
-                    valid_name: value => !!value || 'این فیلد اجباری‌ است'
                 },
                 tooltips: {
                     image_name: {
@@ -236,6 +232,11 @@
                         title: 'سکرت',
                         text: 'اگر ایمیج شما جایی خارج از رجیستری فندق قرار داشته باشد و آن رجیستری private باشد٬ فندق برای دستیابی به آن ایمیج یک سکرت نیاز دارد.',
                         url: 'https://docs.fandogh.cloud/docs/secret.html'
+                    },
+                    image_pull_policy: {
+                        title: 'ّImage Pull Policy',
+                        text: 'زمانی که از رجیستری‌های خارجی استفاده می‌کنید بسته به اینکه چطور ورژن‌های مربوط به تصاویر خود را مدیریت می‌کنید٬ ممکن است نیاز پیدا کنید همیشه٬ صرف‌نظر از اینکه image روی سرور فندق وجود داشته باشد یا نه٬ حتما دوباره ایمیج از رجیستری دریافت شود، برای این کار باید این فیلد را روی مقدار Always‍ ست کنید، حالت پیشفرض این فیلد IfNotPresent است.',
+                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#image-pull-policy'
                     }
                 },
                 source: {
@@ -244,21 +245,13 @@
                     is_active: true,
                     tooltip: 'ایمیج‌هایی که مبدا آنها داخل رجیستری فندق است'
                 },
-                page: {
-                    title: 'انتخاب نوع سرویس',
-                    description: 'برای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در\n' +
-                        '                ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند\n' +
-                        '                در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که\n' +
-                        '                می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق\n' +
-                        '                که می‌ماند در ذهن‌ها'
-                },
                 sections: {
                     image_registry: 'مبدا رجیستری خارجی',
                     image_info: 'مشخصات ایمیج',
                     image_settings: 'تنظیمات ایمیج',
                     image_registry_tooltip: {
                         title: 'مبدا رجیستری ایمیج',
-                        text: 'برای آنکه بتوانید سرویس ایجاد کنید٬ باید یک ایمیج را انتخاب نمایید. اگر ایمیج شما داخل رجیستری سکوی ابری فندق است٬ پس مبدا را داخلی انتخاب نمایید ولی چنانچه ایمیج در رجیستری دیگری مثل داکرهاب یا گیتلب و ... قرار دارد، مبدا ایمیج را خارجی انتخاب نمایید ',
+                        text: 'برای آنکه بتوانید سرویس ایجاد کنید٬ باید یک ایمیج را انتخاب نمایید. اگر ایمیج شما داخل رجیستری سکوی ابری فندق است٬ پس مبدا را داخلی انتخاب نمایید ولی چنانچه ایمیج در رجیستری دیگری مثل داکرهاب یا گیتلب و ... قرار دارد، از مبدا‌های دیگر استفاده نمایید.',
                         url: 'https://docs.fandogh.cloud/docs/images.html'
                     },
                     image_settings_tooltip: {
@@ -266,36 +259,6 @@
                         text: 'برای آنکه بتوانید سرویس ایجاد کنید٬ باید یک ایمیج را انتخاب نمایید. اگر ایمیج شما داخل رجیستری سکوی ابری فندق است٬ پس مبدا را داخلی انتخاب نمایید ولی چنانچه ایمیج در رجیستری دیگری مثل داکرهاب یا گیتلب و ... قرار دارد، مبدا ایمیج را خارجی انتخاب نمایید ',
                         url: 'https://docs.fandogh.cloud/docs/images.html'
                     }
-                },
-                registries: [
-
-                    {
-                        suffix: '',
-                        local_name: 'Fandogh',
-                        icon: 'ic-fandogh-mini-fill.svg',
-                        is_active: true,
-                        tooltip: 'مبدا ایمیج رجیستری فندق'
-
-                    },
-                    {
-                        suffix: '/library',
-                        local_name: 'Docker',
-                        icon: 'ic_docker.svg',
-                        is_active: false,
-                        tooltip: 'مبدا ایمیج رجیستری داکرهاب'
-                    },
-                    {
-                        suffix: '',
-                        local_name: 'Other',
-                        icon: 'free_feature_img/favorite-image-registry.svg',
-                        is_active: false,
-                        tooltip: 'مبدا ایمیج رجیستری‌های دیگر'
-                    }
-
-                ],
-                image_object: {
-                    name: '',
-                    version: ''
                 },
                 image_name_obj: {
                     label: 'نام ایمیج',
@@ -308,29 +271,11 @@
                     hint: 'ورژن مورد نظر از ایمیجی که میخواهید سرویس از آن ورژن ساخته شود',
                     default: 'latest',
                     value: ''
-                },
-                secret_obj: {
-                    label: 'سکرت',
-                    hint: 'نام سکرت را از این قسمت انتخاب نمایید',
-                    default: '',
-                    value: ''
-                },
-                image_pull_policy_obj: [
-                    {
-                        label: "If Not Present",
-                        value: "IfNotPresent",
-                        selected: true
-                    },
-                    {
-                        label: "Always",
-                        value: "Always",
-                        selected: false
-                    }
-                ]
+                }
             }
         },
         created() {
-            this.getData()
+            this.getImages()
 
             let manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
 
@@ -350,53 +295,37 @@
 
                         this.getImageV(image.split(':')[0])
                     }
-                    this.image_object.name = image.split(':')[0] || ''
-                    this.image_object.version = image.split(':')[1] || ''
+                    this.manifest_model.image.image_object.name = image.split(':')[0] || ''
+                    this.manifest_model.image.image_object.version = image.split(':')[1] || ''
                 }
 
                 if (spec.hasOwnProperty('image_pull_policy')) {
-                    this.image_pull_policy_obj.forEach((item, index) => {
+                    this.manifest_model.image.image_pull_policy_obj.forEach((item, index) => {
                         if (item.value === spec.image_pull_policy) {
                             this.checkBoxSelected(index)
                         }
                     })
+                } else {
+                    this.checkBoxSelected(0)
                 }
 
-                if(spec.hasOwnProperty('image_pull_secret')){
-                    this.secret_obj.value = spec.image_pull_secret
+                if (spec.hasOwnProperty('image_pull_secret')) {
+                    this.manifest_model.image.secret_obj.value = spec.image_pull_secret
                 }
             }
 
 
         },
-        mounted() {
-            this.$store.dispatch("getSecret");
-
-        },
-        updated() {
-
-        },
         methods: {
             checkBoxSelected(index) {
-                this.image_pull_policy_obj.forEach(item => {
+                this.manifest_model.image.image_pull_policy_obj.forEach(item => {
                     item.selected = false
                 })
-                this.image_pull_policy_obj[index].selected = true
-                this.image_pull_policy = this.image_pull_policy_obj[index]
+                this.manifest_model.image.image_pull_policy_obj[index].selected = true
+                this.manifest_model.image.image_pull_policy = this.manifest_model.image.image_pull_policy_obj[index]
             },
             changedImage(value) {
                 this.getImageV(value)
-            },
-            async getData() {
-                try {
-                    await this.$store.dispatch("getImages");
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                } catch (e) {
-                    if (e.status === 401) {
-                        this.$router.push("/user/login");
-                    }
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                }
             },
             addToManifest(value, path) {
                 this.$store.dispatch('manifestGenerator', {
@@ -410,16 +339,18 @@
                 })
             },
             onRegistryClicked(index) {
-                this.registries.forEach(item => {
+                this.manifest_model.image.registries.forEach(item => {
                     item.is_active = false
                 });
-                this.registries[index].is_active = true;
-                this.registry = this.registries[index]
+                this.manifest_model.image.registries[index].is_active = true;
+                this.manifest_model.image.registry = this.manifest_model.image.registries[index]
 
-                this.image_object.name = ''
-                this.image_object.version = ''
+                this.manifest_model.image.image_object.name = null
+                this.manifest_model.image.image_object.version = null
 
-                if(this.registry.local_name === 'Fandogh' && this.secret_obj.value !== null && this.secret_obj.value !== '' ){
+                if (this.manifest_model.image.registry.local_name === 'Fandogh' &&
+                    this.manifest_model.image.secret_obj.value !== null &&
+                    this.manifest_model.image.secret_obj.value !== '') {
                     this.$refs.secret_selector.clearSelection()
                 }
 
@@ -440,7 +371,7 @@
                 return this.$store.state.images
             },
             versions() {
-                if (!this.$store.state.versions || this.image_object.name === null || this.image_object.name === '') return [];
+                if (!this.$store.state.versions || this.manifest_model.image.image_object.name === null || this.manifest_model.image.image_object.name === '') return [];
                 return this.$store.state.versions
             },
             secretList() {
@@ -451,7 +382,7 @@
             },
         },
         watch: {
-            image_object: {
+            'manifest_model.image.image_object': {
 
                 handler: function (value, oldValue) {
 
@@ -459,40 +390,40 @@
                     let image_version = value.version || '';
 
                     if (image_name === null) {
-                        this.image_object.name = '';
-                        this.image_object.version = '';
+                        this.manifest_model.image.image_object.name = '';
+                        this.manifest_model.image.image_object.version = '';
                         this.version_loaded = false
                         this.deleteFromManifest('spec.image');
                         this.$refs.version_selector.clearSelection()
-                    } else if(image_name !== '') {
+                    } else if (image_name !== '') {
                         let docker_prefix = '';
-                        if (this.registry.local_name === 'Docker')
+                        if (this.manifest_model.image.registry.local_name === 'Docker')
                             docker_prefix = 'library/';
                         let final_image = docker_prefix + image_name.concat(':').concat(image_version);
-                        this.addToManifest(final_image, 'spec.image')
+                        if (image_version !== '') {
+                            this.addToManifest(final_image, 'spec.image')
+                        }
+
                     }
                 }, deep: true
 
             },
-            image_pull_policy_obj: {
+            'manifest_model.image.image_pull_policy_obj': {
                 handler: function (value, oldValue) {
-                    let policy = this.image_pull_policy.value
-                    console.log('watched')
+                    let policy = this.manifest_model.image.image_pull_policy.value
                     this.addToManifest(policy, "spec.image_pull_policy");
-                    console.log(policy)
-
                 }, deep: true
             },
-            secret_obj: {
+            'manifest_model.image.secret_obj': {
                 handler: function (value, oldValue) {
                     let secret = value
-                    if(secret.value === null || secret.value === ''){
+                    if (secret.value === null || secret.value === '') {
                         this.deleteFromManifest('spec.image_pull_secret')
-                    }else {
+                    } else {
                         this.addToManifest(secret.value, 'spec.image_pull_secret')
                     }
 
-                },deep: true
+                }, deep: true
             }
         }
     }
