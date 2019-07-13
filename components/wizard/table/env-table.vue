@@ -8,8 +8,8 @@
             </tr>
             <tr class="data-head" v-for="(item, index) in items" :key="index">
 
-                <td>{{item.name}}</td>
-                <td>{{!item.hidden ? item.value : '************'}}</td>
+                <td style="direction: ltr">{{item.name}}</td>
+                <td style="direction: ltr">{{!item.hidden ? item.value : '************'}}</td>
                 <td>
                     <div :class="[item.hidden ? 'circle-border selected': 'circle-border']">
                         <div :class="[item.hidden ? 'circle-fill selected': 'circle-fill']">

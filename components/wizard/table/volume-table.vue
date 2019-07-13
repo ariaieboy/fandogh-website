@@ -8,10 +8,10 @@
             </tr>
             <tr class="data-head" v-for="(item, index) in items" :key="index">
 
-                <td>{{item.mount_path}}</td>
-                <td>{{item.sub_path}}</td>
-                <td>{{item.volume_name ? item.volume_name : 'local storage'}}</td>
-                <td>{{(item.volume_name ? 'Dedicated Volume' : 'Shared Volume')}}</td>
+                <td style="direction: ltr">{{item.mount_path}}</td>
+                <td style="direction: ltr">{{item.sub_path}}</td>
+                <td style="direction: ltr">{{item.volume_name ? item.volume_name : 'local storage'}}</td>
+                <td style="direction: ltr">{{(item.volume_name ? 'Dedicated Volume' : 'Shared Volume')}}</td>
                 <td class="more-button">
                     <div class="dropdown dropbtn" @click="notify(index)" style="display: flex; margin: auto">
                         <img style="margin: auto; align-self: center" src="../../../assets/svg/more.svg"
