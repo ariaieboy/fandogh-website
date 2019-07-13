@@ -40,7 +40,8 @@
     "vuex-persistedstate": "^2.5.4",
     "vuex": "latest",
     "vuetify": "^1.5.14",
-    "v-tooltip": "^2.0.2"
+    "v-tooltip": "^2.0.2",
+    "vue-input-autowidth": "^1.0.5"
   },
   "devDependencies": {
     "backpack-core": "^0.7.0",
