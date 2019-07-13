@@ -294,7 +294,7 @@
         data: function () {
             return {
                 planData: {
-                    memory: 1,
+                    memory: .5,
                     cpu: 0.5,
                     dedicatedVolume: 0,
                 },
@@ -320,12 +320,11 @@
                     height: 19,
                     contained: false,
                     direction: 'rtl',
-                    interval: 1,
-                    min: 1,
+                    interval: 0.5,
+                    min: 0.5,
                     max: 64,
                     disabled: false,
                     clickable: true,
-                    duration: 0.5,
                     tooltip: 'none',
                     useKeyboard: false,
                     enableCross: true,
@@ -443,11 +442,22 @@
                 }
             },
             incMemory() {
-                if (this.planData.memory < this.memoryOptions.max)
-                    this.planData.memory += 1;
+                if (this.planData.memory < this.memoryOptions.max) {
+                    if (this.planData.memory >= 2) {
+                        this.planData.memory += 1;
+                    } else {
+                        this.planData.memory += 0.5;
+                    }
+                }
             }, decMemory() {
-                if (this.planData.memory > this.memoryOptions.min)
-                    this.planData.memory -= 1;
+                if (this.planData.memory > this.memoryOptions.min) {
+                    if (this.planData.memory > 2) {
+                        this.planData.memory -= 1;
+                    } else {
+                        this.planData.memory -= 0.5;
+                    }
+                }
+
             }, incDedicatedVolume() {
                 if (this.planData.dedicatedVolume < this.dedicatedVolumeOptions.max)
                     this.planData.dedicatedVolume += 1;
@@ -525,6 +535,18 @@
                 eventCategory: "plan",
                 eventAction: "see list plan"
             });
+        },
+        watch: {
+            planData: {
+                handler: function (value) {
+                    let memory = value.memory
+                    if (Math.abs(parseFloat(memory) - parseInt(memory)) === .5 && parseFloat(memory) > 2) {
+                        this.planData.memory += .5
+
+                    }
+
+                }, deep: true
+            }
         }
     };
 </script>
@@ -628,6 +650,7 @@
             margin-right 16px
             margin-left 16px
             border none
+            color #fefefe
             outline none
             cursor pointer
             box-shadow 0 3px 6px 0 rgba(60, 204, 56, 0.42)
@@ -800,12 +823,14 @@
         border-top 1px solid gray
         @media only screen and (max-width: 766px)
             margin-top 16px
+
         p
             font-family iran-yekan
             font-weight bold
             font-size 1em
-            line-height 1.7g
-            padding 0 16px
+            margin 0
+            line-height 1.7 g
+            padding 7px 16px
 
 </style>
 

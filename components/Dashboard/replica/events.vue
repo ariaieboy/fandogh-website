@@ -1,6 +1,6 @@
 <template>
   <div class="replica-events">
-    <h4>رخداد‌ها</h4>
+    <h4 style="margin-bottom: 12px">رخداد‌ها</h4>
     <table class="font-roboto" v-if="windowWidth >= 992">
       <thead>
         <tr>

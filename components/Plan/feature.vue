@@ -3,8 +3,8 @@
         <div class="middle-xs middle-sm middle-lg middle-md free-feature-card">
             <div>
                 <img :src="require('../../assets/svg/free_feature_img/' + item.image)" alt="feature"/>
-                <p class="title">{{item.title}}</p>
-                <p class="subtitle">{{item.subtitle}}</p>
+                <p class="feature-title">{{item.title}}</p>
+                <p class="feature-subtitle">{{item.subtitle}}</p>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                 margin-right auto
                 transform scale(0.9, 0.9)
 
-            p.title
+            p.feature-title
                 text-align center
                 font-family iran-yekan
                 font-size 1em
@@ -48,7 +48,7 @@
                 margin-top 40px
                 color #fefefe
 
-            p.subtitle
+            p.feature-subtitle
                 text-align center
                 font-family yekan-light
                 font-size .9em

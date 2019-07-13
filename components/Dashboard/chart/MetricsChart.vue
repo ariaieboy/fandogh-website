@@ -1,7 +1,7 @@
 <template>
     <div style="margin-bottom: 64px">
         <div class="metrics-widget">
-            <div class="title">
+            <div class="metric-title">
                 {{title}}
                 <span v-if="loading">
                     <img style=" margin-top: auto; margin-bottom: auto; width: 32px; height: 32px"
@@ -104,7 +104,7 @@
         font-family roboto
         src url('~/assets/fonts/Roboto-Regular.ttf')
 
-    .metrics-widget .title
+    .metrics-widget .metric-title
         text-align center
         border-radius 3px
         margin-bottom 5px

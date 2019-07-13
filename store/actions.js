@@ -1,5 +1,5 @@
 import Request from "~/plugins/request";
-import {jsonManipulator} from "../utils/yaml";
+import {jsonDeleter, jsonManipulator} from "../utils/yaml";
 
 const monitoringAPI = process.env.MONITORING_API
 
@@ -205,6 +205,21 @@ export const createServiceManifest = async ({commit, state}) => {
     }
 };
 
+export const dumpServiceManifest = async ({commit, state}, service_name) => {
+    try {
+        const manifest =  await Request().get('api/services/manifests', {
+            params: {
+                service_name: service_name
+            }
+        })
+        delete manifest.data['requested_at']
+        commit("SET_JSON_MANIFEST", manifest.data);
+        return true
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const getDomains = async ({commit, state}, query) => {
     try {
         let domains = await Request(query).get(`/api/domains`);
@@ -266,6 +281,14 @@ export const manifestGenerator = ({commit, state}, {value, path}) => {
     return json;
 };
 
+
+export const manifestDeleter = ({commit, state}, path) => {
+    let json = jsonDeleter(state.manifest, path);
+    commit("SET_JSON_MANIFEST", json);
+    return json;
+};
+
+
 export const setPlan = async ({commit, state}, {plan, configs}) => {
     try {
         const planData = {plan, configs};
@@ -287,11 +310,11 @@ export const getNameSpace = async ({commit, state}, namespace) => {
 };
 
 export const createNewNamespace = async ({commit, state}, namespace) => {
-  try {
-      return await Request().post(`api/users/namespaces`, {namespace: namespace});
-  }  catch (e) {
-      return Promise.reject(e);
-  }
+    try {
+        return await Request().post(`api/users/namespaces`, {namespace: namespace});
+    } catch (e) {
+        return Promise.reject(e);
+    }
 };
 
 export const requestUserNamespaces = async ({commit, state}) => {

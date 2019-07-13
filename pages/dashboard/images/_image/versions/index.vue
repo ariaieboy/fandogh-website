@@ -49,7 +49,7 @@
                 </div>
             </div>
 
-            <box-table :titles="titleRow" :items="versions" :func="versions" :menu="menuList"></box-table>
+            <box-table :titles="titleRow" :items="versions" :menu="menuList"></box-table>
 
 
         </div>
