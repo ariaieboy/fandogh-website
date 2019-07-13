@@ -56,6 +56,7 @@
         div.divider
             background-color #2979ff
             height 2px
+            margin-top 7px
             border-radius 25px
 
         p.description
@@ -71,9 +72,11 @@
         transition 0.3s ease-in-out all
 
         p.title
+            padding-bottom 7px
             color: #fefefe
 
         div.divider
+            margin-top 0
             background-color #fefefe
 
         p.description
