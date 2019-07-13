@@ -7,7 +7,7 @@
             <div class="title-box">
 
                 <img :alt="title" :src="image"/>
-                <p class="title">{{title}}</p>
+                <p class="box-title">{{title}}</p>
                 <p class="description-button">توضیحات بیشتر</p>
 
             </div>
@@ -19,19 +19,19 @@
 
                 <div>
                     <img :alt="title" src="~/assets/svg/ic-storage.svg"/>
-                    <p class="title">حافظه ذخیره‌سازی</p>
+                    <p class="description-title">حافظه ذخیره‌سازی</p>
                     <p class="value">{{dedicatedVolume}} گیگابایت</p>
                 </div>
 
                 <div>
                     <img :alt="title" src="~/assets/svg/ic-memory.svg"/>
-                    <p class="title">رم اختصاصی</p>
+                    <p class="description-title">رم اختصاصی</p>
                     <p class="value">{{memory}} گیگابایت</p>
                 </div>
 
                 <div>
                     <img :alt="title" src="~/assets/svg/ic-cpu.svg"/>
-                    <p class="title">پردازنده اختصاصی</p>
+                    <p class="description-title">پردازنده اختصاصی</p>
                     <p class="value">{{cpu}} هسته</p>
                 </div>
 
