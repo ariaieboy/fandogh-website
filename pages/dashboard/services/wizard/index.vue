@@ -188,7 +188,6 @@
 
 <script>
     import ConfigBox from "../../../../components/wizard/box/config-box";
-    import 'vuetify/dist/vuetify.min.css';
     import Popover from "../../../../components/wizard/tooltip/popover";
     import FanCheckbox from "../../../../components/wizard/select-box/fan-checkbox";
 
@@ -434,6 +433,11 @@
         line-height 1.4 !important
         margin 4px 2px 0 !important
         padding 0 0 0 16px !important
+
+    .v-input--has-state.error--text .v-label {
+        -webkit-animation: none !important;
+        animation: none !important;
+    }
 
 
 </style>

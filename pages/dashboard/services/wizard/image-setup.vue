@@ -186,7 +186,6 @@
 
 <script>
     import ConfigBox from "../../../../components/wizard/box/config-box";
-    import 'vuetify/dist/vuetify.min.css';
     import Popover from "../../../../components/wizard/tooltip/popover";
     import FanCheckbox from "../../../../components/wizard/select-box/fan-checkbox";
 

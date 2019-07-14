@@ -165,6 +165,7 @@
     import PortMappingSetup from "../pages/dashboard/services/wizard/port-mapping-setup";
     import HealthCheckSetup from "../pages/dashboard/services/wizard/health-check-setup";
     import Banner from "../components/wizard/banner/banner";
+    import 'vuetify/dist/vuetify.min.css';
 
     export default {
         name: "wizard",
@@ -1179,6 +1180,57 @@
         box-shadow: 0 2px 5px 1px rgba(36, 213, 216, 0.5)
         background-color: #24d5d8
 
+    @-webkit-keyframes shake {
+        59% {
+            margin-left: 0 !important
+        }
+        60%, 80% {
+            margin-left: 0 !important
+        }
+        70%, 90% {
+            margin-left: 0 !important
+        }
+    }
+
+    @keyframes shake {
+        59% {
+            margin-left: 0 !important
+        }
+        60%, 80% {
+            margin-left: !important
+        }
+        70%, 90% {
+            margin-left: !important
+        }
+    }
+
+    .v-input--has-state.error--text .v-label {
+        -webkit-animation: none !important;
+        animation: none !important
+        color: #f44336 !important;
+        caret-color: #f44336 !important
+    }
+
+    .v-input--has-state.error--text .v-messages {
+        -webkit-animation: none !important;
+        animation: none !important
+        color: #f44336 !important;
+        caret-color: #f44336 !important
+    }
+
+    .v-input--has-state.error--text .v-input__slot {
+        -webkit-animation: none !important;
+        animation: none !important
+        color: #f44336 !important;
+        caret-color: #f44336 !important
+    }
+
+    .v-input--has-state.error--text input {
+        -webkit-animation: none !important;
+        animation: none !important
+        color: #f44336 !important;
+        caret-color: #f44336 !important
+    }
 </style>
 
 
@@ -1296,36 +1348,29 @@
         background-color #fff !important
 
     .v-input--has-state.error--text .v-label {
-        -webkit-animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important;
-        animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important
+        -webkit-animation: none !important;
+        animation: none !important
         color: #f44336 !important;
         caret-color: #f44336 !important
     }
 
     .v-input--has-state.error--text .v-messages {
-        -webkit-animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important;
-        animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important
-        color: #f44336 !important;
-        caret-color: #f44336 !important
-    }
-
-    .v-input--has-state.error--text .v-messages {
-        -webkit-animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important;
-        animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important
+        -webkit-animation: none !important;
+        animation: none !important
         color: #f44336 !important;
         caret-color: #f44336 !important
     }
 
     .v-input--has-state.error--text .v-input__slot {
-        -webkit-animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important;
-        animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important
+        -webkit-animation: none !important;
+        animation: none !important
         color: #f44336 !important;
         caret-color: #f44336 !important
     }
 
     .v-input--has-state.error--text input {
-        -webkit-animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important;
-        animation: shake .6s cubic-bezier(.25, .8, .5, 1) !important
+        -webkit-animation: none !important;
+        animation: none !important
         color: #f44336 !important;
         caret-color: #f44336 !important
     }
@@ -1485,5 +1530,29 @@
         font-family iran-yekan
         cursor pointer
         user-select none
+
+    @-webkit-keyframes shake {
+        59% {
+            margin-left: 0 !important
+        }
+        60%, 80% {
+            margin-left: 0 !important
+        }
+        70%, 90% {
+            margin-left: 0 !important
+        }
+    }
+
+    @keyframes shake {
+        59% {
+            margin-left: 0 !important
+        }
+        60%, 80% {
+            margin-left: !important
+        }
+        70%, 90% {
+            margin-left: !important
+        }
+    }
 
 </style>
