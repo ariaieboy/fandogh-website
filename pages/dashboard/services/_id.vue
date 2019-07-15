@@ -123,18 +123,18 @@
         created() {
             this.$store.commit("SET_DATA", {id: "manifest", data: {}});
             this.service_name = this.$route.params.id;
-            this.getData(this.service_name);
+            this.getData();
         },
         methods: {
-            async getData(service_name) {
+            async getData() {
                 try {
                     let res = await this.$store.dispatch("getServicesName", {
-                        name: service_name
+                        name: this.service_name
                     });
                     let internal = null;
                     if (res.state !== "RUNNING") {
                         setTimeout(() => {
-                            this.getData(this.service_name);
+                            this.getData();
                         }, 5000);
                     } else {
                         clearInterval(internal);
