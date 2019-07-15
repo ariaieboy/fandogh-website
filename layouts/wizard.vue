@@ -474,6 +474,15 @@
             }
         },
         computed: {
+            domainsList() {
+                if (!this.$store.state.domains) return []
+                return this.$store.state.domains.map(item => {
+                    return {
+                        title: item.name,
+                        value: item.name
+                    };
+                });
+            },
             message() {
                 return this.$store.state.message;
             },
@@ -718,7 +727,6 @@
             this.$store.dispatch("getSecret");
 
 
-
             this.handelEventSize();
             window.addEventListener('beforeunload', (event) => {
                 // event.returnValue = 'There is pending work. Sure you want to leave?';
@@ -734,17 +742,17 @@
             this.handelRyChat()
 
             //populating manifest
-            if(this.$route.query.hasOwnProperty('service')){
+            if (this.$route.query.hasOwnProperty('service')) {
                 this.dumpManifest(this.$route.query.service, manifest)
-            }else {
+            } else {
                 manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
                 this.populateManifest(manifest)
             }
 
 
         },
-        beforeDestroy(){
-          this.leaving()
+        beforeDestroy() {
+            this.leaving()
         },
         methods: {
             async getImages() {
@@ -758,7 +766,7 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }
             },
-            async dumpManifest(service_name, manifest){
+            async dumpManifest(service_name, manifest) {
                 this.loading = true;
                 await this.$store.dispatch('dumpServiceManifest', service_name)
                     .then(response => {
@@ -779,7 +787,7 @@
                         }
                     })
             },
-            populateManifest(manifest){
+            populateManifest(manifest) {
                 if (manifest.hasOwnProperty('name')) {
                     this.manifest_model.service.service_name.name = manifest.name
                 }
@@ -862,15 +870,22 @@
                         this.manifest_model.service.port.number = spec.port
                     }
 
-                    if(spec.hasOwnProperty('path')){
+                    if (spec.hasOwnProperty('path')) {
                         this.manifest_model.service.path.dir = spec.path
                     }
 
-                    if(spec.hasOwnProperty('allow_http')){
+                    if (spec.hasOwnProperty('allow_http')) {
                         this.manifest_model.service.allow_http.selected = spec.allow_http
                     }
 
                     if (spec.hasOwnProperty('domains')) {
+                        spec.domains.forEach((domain, index) => {
+                            if (domain.name.toString().includes('fandogh.cloud')) {
+                                spec.domains.splice(index, 1);
+                                return
+                            }
+                        });
+
                         spec.domains.forEach(item => {
                             this.manifest_model.service.domains.push(item['name'])
                         })
@@ -909,8 +924,8 @@
                     return false
                 }
 
-                if(this.manifest_model.service.kind.name === 'ExternalService'){
-                    if(this.manifest_model.service.port.number === null){
+                if (this.manifest_model.service.kind.name === 'ExternalService') {
+                    if (this.manifest_model.service.port.number === null) {
                         this.$notify({
                             title: 'لطفا پورت را مشخص نمایید',
                             time: 4000,
@@ -971,9 +986,9 @@
                 })
             },
             leaving() {
-                if(!this.finished){
-                    if(confirm('اگر میخواهید تغییرات مانیفست draft شوند ok را انتخاب نمایید، در غیر این صورت دکمه cancel را بزنید')){
-                    }else {
+                if (!this.finished) {
+                    if (confirm('اگر میخواهید تغییرات مانیفست draft شوند ok را انتخاب نمایید، در غیر این صورت دکمه cancel را بزنید')) {
+                    } else {
                         this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                     }
                 }
