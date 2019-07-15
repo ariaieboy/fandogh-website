@@ -1,5 +1,5 @@
 <template>
-  <div class="logs">
+  <div v-if="logs" class="logs">
     <table>
       <tbody>
         <tr v-for="(log, index) in logs">
@@ -9,11 +9,16 @@
       </tbody>
     </table>
   </div>
+  <f-loading v-else :isFull="true" />
 </template>
 
 <script>
+  import FLoading from "~/components/Loading";
   export default {
-    props:['logs']
+    props:['logs'],
+    components:{
+      FLoading
+    }
   }
 </script>
 
@@ -21,7 +26,7 @@
   .logs
     width 100%
     min-height 500px
-    max-height 600px
+    max-height 1000px
     overflow-y scroll
     background #fff
     direction ltr
@@ -35,6 +40,7 @@
           font-size 14px
           height 25px
           text-align left
+          padding 4px 16px 4px 0
           font-family Roboto, sans-serif
           &:first-child
             min-width 60px

@@ -60,7 +60,7 @@
         computed: {},
         methods: {
             onSelected(path){
-                this.$router.push('/dashboard/services/' + path)
+                this.$router.replace('/dashboard/services/' + path)
             },
         }
     }

@@ -2,15 +2,15 @@
     <div v-if="service && !loading">
         <p class="title">جزییات سرویس</p>
 
-        <div class="row" style="margin: 0 0 16px 0;">
+        <div class="row" style="margin: 0 0 12px 0;">
             <div class="service-header">
 
                 <span class="service-name">
                     <img
                             style="border-radius: 100px; width: 24px; height: 24px; display: inline-block; margin-left: 7px;vertical-align: middle"
-                            :src="(service.state.toString().toLowerCase() === 'running' ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
-                            :class="[service.state.toString().toLowerCase() === 'running' ? 'success' : 'failed']"
-                            >
+                            :src="(service.state.toString().toLowerCase() === 'running' && !this.removing ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
+                            :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']"
+                    >
                     {{service.name}}
                 </span>
 
@@ -29,9 +29,16 @@
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
                 </span>
 
-                <span class="service-edit" @click="$router.push({ path: '/dashboard/services/wizard', query: {service: service_name} })">
-                    تغییر مانیفست
-                </span>
+                <div v-if="!removing" class="service-edit-container">
+                    <span class="service-edit"
+                          @click="$router.push({ path: '/dashboard/services/wizard', query: {service: service_name} })">
+                        تغییر مانیفست
+                    </span>
+                    <span class="service-delete"
+                          @click="this.remove">
+                        حذف سرویس
+                    </span>
+                </div>
 
             </div>
 
@@ -45,7 +52,7 @@
                 </div>
 
                 <div @click="sectionClicked('env')"
-                     style="font-size: 0.8em"
+                     style="font-size: 0.9em"
                      :class="[(activeSectionName === 'env' ? 'enabled' : 'disabled')]">
                     <p>Environment Variables</p>
                 </div>
@@ -72,7 +79,9 @@
                 <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding"
                            v-bind:is="activeSectionName"
                            style="padding: 0"
-                           :service="service"></component>
+                           :service="service">
+
+                </component>
             </keep-alive>
         </div>
     </div>
@@ -115,6 +124,7 @@
         },
         data() {
             return {
+                removing: false,
                 activeSectionName: 'detail',
                 service_name: '',
                 image: this.$route.params.image,
@@ -126,16 +136,65 @@
             this.getData();
         },
         methods: {
+            remove() {
+                this.$ga.event({
+                    eventCategory: "service",
+                    eventAction: "click btn remove service",
+                    eventLabel: "service name",
+                    eventValue: this.service_name
+                });
+                this.$alertify(
+                    {
+                        title: `حذف سرویس`,
+                        description: `آیا از حذف ${this.service_name}  مطمئن هستید؟`
+                    },
+                    status => {
+                        if (status) {
+                            // this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.removing = true
+                            this.getData()
+                            this.$store.dispatch("deleteService", this.service_name)
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "service",
+                                        eventAction: "remove service",
+                                        eventLabel: "service name",
+                                        eventValue: this.service_name
+                                    });
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "service",
+                                        eventAction: "fail remove service",
+                                        eventLabel: "service name",
+                                        eventValue: this.service_name
+                                    });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                });
+                        }
+                    }
+                );
+            },
             async getData() {
                 try {
                     let res = await this.$store.dispatch("getServicesName", {
                         name: this.service_name
                     });
                     let internal = null;
-                    if (res.state !== "RUNNING") {
+                    if (res.state !== "RUNNING" || this.removing) {
                         setTimeout(() => {
                             this.getData();
-                        }, 5000);
+                            console.log(this.removing ? 1000 : 5000)
+                        }, this.removing? 1000 : 5000);
                     } else {
                         clearInterval(internal);
                     }
@@ -144,6 +203,8 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (e.status === 401) {
                         this.$router.push("/user/login");
+                    }else {
+                        this.$router.push("/dashboard/services")
                     }
                 }
             },
@@ -207,8 +268,8 @@
             background-color #fefefe
             overflow-x scroll
             overflow-y hidden
-            margin-bottom 24px
-            margin-top 5px
+            margin-bottom 12px
+            margin-top 0
 
         div.disabled
             padding 0
@@ -250,7 +311,7 @@
             cursor pointer
             @media only screen and (max-width: 766px)
                 background-color #2979ff
-                margin-right -1px
+                margin-right  -1px
                 display inline-flex
 
             p
@@ -317,30 +378,30 @@
                     animation rotating 5s infinite linear
                     -webkit-animation rotating 5s infinite linear
                     -moz-animation rotating 5s infinite linear
-                    -o-animation  rotating 5s infinite linear
+                    -o-animation rotating 5s infinite linear
                     -ms-animation rotating 5s infinite linear
+
                 &.failed
                     animation broken-rotating 1.5s infinite linear
                     -webkit-animation broken-rotating 1.5s infinite linear
                     -moz-animation broken-rotating 1.5s infinite linear
-                    -o-animation  broken-rotating 1.5s infinite linear
+                    -o-animation broken-rotating 1.5s infinite linear
                     -ms-animation broken-rotating 1.5s infinite linear
 
 
-
         @-webkit-keyframes rotating {
-            from{
+            from {
                 -webkit-transform: rotate(0deg);
             }
-            to{
+            to {
                 -webkit-transform: rotate(360deg);
             }
         }
         @keyframes rotating {
-            from{
+            from {
                 -webkit-transform: rotate(0deg);
             }
-            to{
+            to {
                 -webkit-transform: rotate(360deg);
             }
         }
@@ -419,28 +480,70 @@
         }
 
 
+
+    .service-edit-container
+        margin-top -5px
+        order 2
+        margin-bottom auto
+        margin-right auto
+        display block
+
     .service-edit
+        display block
         color $totalWhite
         line-height 1.75
-        margin-top auto
         margin-bottom auto
         font-size 1em
         font-family iran-yekan
         font-weight normal
-        background-color $green
-        border-radius 3px
-        box-shadow 0 2px 6px rgba(60, 204, 56, 0.7)
+        background-color $greenLight
+        border-radius 50px
         text-align center
         align-self start
         padding 6px 24px
         cursor pointer
-        order 2
-        margin-right auto
         @media only screen and (max-width: 766px)
             font-size 1.2em
-            display block
-            padding-right 0
-            padding-left 0
+            display inline-block
+            padding-right 24px
+            padding-left 24px
+            margin-top 0
+
+        &:hover
+            background-color $green
+            box-shadow 0 2px 6px rgba(53, 204, 51, 0.3)
+            transition all .3s ease-in-out
+
+
+    .service-delete
+        display block
+        color $red
+        line-height 1.75
+        margin-top 6px
+        margin-bottom -5px
+        font-size 1em
+        font-family iran-yekan
+        font-weight normal
+        background-color transparent
+        border 1px solid $red
+        border-radius 50px
+        text-align center
+        align-self start
+        padding 4px 24px
+        cursor pointer
+        @media only screen and (max-width: 766px)
+            font-size 1.2em
+            display inline-block
+            float left
+            padding-right 24px
+            padding-left 24px
+            margin-top 0
+
+        &:hover
+            background-color $red
+            color $totalWhite
+            box-shadow 0 2px 6px rgba(253, 50, 80, 0.3)
+            transition all .3s ease-in-out
 
     .service-spec
         color #7c7c7c

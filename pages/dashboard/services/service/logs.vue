@@ -11,7 +11,6 @@
     import FDate from "~/utils/date";
     import {removeValue} from "~/utils/cookie";
     import moment from "moment-jalaali";
-
     moment.loadPersian();
 
 
@@ -76,6 +75,7 @@
         },
         beforeDestroy() {
             clearInterval(this.logInterval);
+            this.$store.commit("SET_DATA", {data: null, id: "serviceLog"});
         }
     }
 </script>

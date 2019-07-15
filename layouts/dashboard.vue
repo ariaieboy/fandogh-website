@@ -191,6 +191,8 @@
             max-width 1600px
             font-size 16px
             transition $transitionMain
+            @media only screen and (min-width: 1600px)
+                width 100%
             @media only screen and (max-width: 1250px)
                 width 100%
                 font-size 14px
