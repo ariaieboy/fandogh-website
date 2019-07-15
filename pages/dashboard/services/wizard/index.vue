@@ -44,7 +44,7 @@
 
                     <div style="display: flex; margin-top: 12px">
 
-                        <v-text-field style="font-family: iran-sans; font-size: 1em; margin-left: -15px" color="#0093ff"
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px" color="#0093ff"
                                       dir="ltr"
                                       prefix="Mi"
                                       :rules="[rules.default_memory, rules.required]"
@@ -66,7 +66,7 @@
 
 
                     <div style="display: flex; margin-top: 12px">
-                        <v-text-field style="font-family: iran-sans; font-size: 1em; margin-left: -15px"
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px"
                                       color="#0093ff"
                                       dir="ltr"
                                       :rules="[rules.required, rules.default_replica]"
@@ -110,7 +110,7 @@
 
                     <div style="display: flex;margin-top: 16px">
 
-                        <v-text-field style="font-family: iran-sans; font-size: 1em;margin-left: -15px"
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       color="#0093ff"
                                       type="text"
                                       dir="ltr"
@@ -126,7 +126,7 @@
 
                     <div style="display: flex;margin-top: 16px">
 
-                        <v-text-field style="font-family: iran-sans; font-size: 1em;margin-left: -15px"
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       :rules="[rules.valid_port]"
                                       color="#0093ff"
                                       type="number"

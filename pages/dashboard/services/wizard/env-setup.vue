@@ -17,7 +17,7 @@
                             <v-text-field
                                     ref="key"
                                     :rules="[rules.name_required, rules.regex, rules.no_space, rules.redundant]"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"
@@ -37,7 +37,7 @@
                             <v-text-field
                                     ref="value"
                                     :rules="[rules.value_required]"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"

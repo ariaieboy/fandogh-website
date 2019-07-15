@@ -57,7 +57,7 @@
                     <div v-else style="display: flex;">
 
                         <v-text-field
-                                style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                 :rules="[rules.required]"
                                 color="#0093ff"
                                 type="text"
@@ -105,7 +105,7 @@
 
                     <div v-else style="display: flex;">
 
-                        <v-text-field style="font-family: iran-sans; font-size: 1em;margin-left: -15px"
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       :rules="[rules.required]"
                                       color="#0093ff"
                                       type="text"

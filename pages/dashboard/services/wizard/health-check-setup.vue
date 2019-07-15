@@ -14,7 +14,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
@@ -35,7 +35,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
@@ -55,7 +55,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
@@ -76,7 +76,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"
@@ -95,7 +95,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
@@ -126,7 +126,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     dir="ltr"
                                     type="number"
@@ -146,7 +146,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     dir="ltr"
                                     type="number"
@@ -167,7 +167,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="number"
                                     dir="ltr"
@@ -188,7 +188,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     type="text"
                                     dir="ltr"
@@ -207,7 +207,7 @@
 
                             <v-text-field
                                     ref="key"
-                                    style="font-family: iran-sans; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                     color="#0093ff"
                                     dir="ltr"
                                     type="number"
