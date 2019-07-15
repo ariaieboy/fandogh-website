@@ -134,7 +134,7 @@
                     let internal = null;
                     if (res.state !== "RUNNING") {
                         setTimeout(() => {
-                            this.getData();
+                            this.getData(this.service_name);
                         }, 5000);
                     } else {
                         clearInterval(internal);
