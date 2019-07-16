@@ -466,14 +466,15 @@
                     this.planData.dedicatedVolume -= 1;
             }, makeBill() {
                 this.finalBill.memory = this.planData.memory;
+                console.log(this.finalBill.memory)
                 if (this.planData.dedicatedVolume >= 10) {
                     this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
                 if (this.quota !== null) {
+                    console.log('inside quota')
                     if (this.quota.memory_limit / 1024 >= 1) {
                         this.finalBill.memory += Math.round(this.quota.memory_limit / 1024);
                     }
-
                     if (this.quota.volume_limit > 0) {
                         this.finalBill.dedicatedVolume += this.quota.volume_limit;
                     }

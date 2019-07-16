@@ -602,8 +602,6 @@
             'manifest_model.health_check': {
                 handler: function (value, oldValue) {
                     let empty = true
-                    console.log('khelt')
-                    console.log(value)
                     const liveness_keys = Object.keys(value['liveness_object'])
                     const readiness_keys = Object.keys(value['readiness_object'])
 
@@ -691,6 +689,32 @@
                     }
                 }, deep: true
             },
+            'manifest_model.image.image_object':{
+              handler: function(value, oldValue){
+                  if(value.name === null){
+                      this.items.forEach(item => {
+                          if (item.step_name === 'ImageSetup') {
+                              item.edited = false;
+                              return
+                          }
+                      })
+                  }
+
+                  if (value.name !== '') {
+                      this.items.forEach(item => {
+                          if (item.step_name === 'ImageSetup') {
+                              item.edited = true;
+                          }
+                      })
+                  } else {
+                      this.items.forEach(item => {
+                          if (item.step_name === 'ImageSetup') {
+                              item.edited = false;
+                          }
+                      })
+                  }
+              }, deep: true
+            },
             manifest_model: {
                 handler: function (value, oldValue) {
 
@@ -766,6 +790,27 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }
             },
+            getImageV(value) {
+
+                this.$store.dispatch("getImageVersions", value)
+
+            },
+            onRegistryClicked(index) {
+                this.manifest_model.image.registries.forEach(item => {
+                    item.is_active = false
+                });
+                this.manifest_model.image.registries[index].is_active = true;
+                this.manifest_model.image.registry = this.manifest_model.image.registries[index]
+
+                this.manifest_model.image.image_object.name = null
+                this.manifest_model.image.image_object.version = null
+
+                if (this.manifest_model.image.registry.local_name === 'Fandogh' &&
+                    this.manifest_model.image.secret_obj.value !== null &&
+                    this.manifest_model.image.secret_obj.value !== '') {
+                }
+
+            },
             async dumpManifest(service_name, manifest) {
                 this.loading = true;
                 await this.$store.dispatch('dumpServiceManifest', service_name)
@@ -828,8 +873,18 @@
                     if (spec.hasOwnProperty('image')) {
                         let image = '';
                         image = spec.image;
+
+                        if (image.split('/').length > 2) {
+                            this.onRegistryClicked(2)
+                        } else if (image.split('/').length === 2) {
+                            this.onRegistryClicked(1)
+                        } else {
+                            this.onRegistryClicked(0)
+                            this.getImageV(image.split(':')[0])
+                        }
                         this.manifest_model.image.image_object.name = image.split(':')[0] || '';
                         this.manifest_model.image.image_object.version = image.split(':')[1] || '';
+
                     }
 
                     if (spec.hasOwnProperty('image_pull_policy')) {
@@ -886,9 +941,14 @@
                             }
                         });
 
-                        spec.domains.forEach(item => {
-                            this.manifest_model.service.domains.push(item['name'])
-                        })
+                        if([...spec.domains].length === 0){
+                            this.deleteFromManifest('spec.domains')
+                        }else {
+                            spec.domains.forEach(item => {
+                                this.manifest_model.service.domains.push(item['name'])
+                            })
+                        }
+
                     }
 
                     if (spec.hasOwnProperty('liveness_probe')) {
@@ -943,6 +1003,29 @@
                     });
                     return false
                 }
+
+                if (this.manifest_model.image.registry.local_name === 'Docker') {
+                    if(this.manifest_model.image.image_object.name.split('/').length !== 2){
+                        this.$notify({
+                            title: 'ساختار ایمیج وارد شده برای داکر صحیح نمی‌باشد',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false
+                    }
+                }
+
+                if (this.manifest_model.image.registry.local_name === 'Other') {
+                    if(this.manifest_model.image.image_object.name.split('/').length < 3){
+                        this.$notify({
+                            title: 'ساختار ایمیج وارد شده برای رجیستری‌های غیر داکر صحیح نمی‌باشد',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false
+                    }
+                }
+
 
                 return true
             },

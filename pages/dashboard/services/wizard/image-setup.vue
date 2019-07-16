@@ -63,7 +63,7 @@
                                 type="text"
                                 dir="ltr"
                                 required
-                                :suffix="manifest_model.image.registry.suffix"
+                                :placeholder="manifest_model.image.registry.local_name === 'Docker' ? 'library/image-name OR your-docker-registry/image-name' : ''"
                                 v-model="manifest_model.image.image_object.name"
                                 :hint="image_name_obj.hint"
                                 :label="image_name_obj.label">
@@ -294,8 +294,6 @@
 
                         this.getImageV(image.split(':')[0])
                     }
-                    this.manifest_model.image.image_object.name = image.split(':')[0] || ''
-                    this.manifest_model.image.image_object.version = image.split(':')[1] || ''
                 }
 
                 if (spec.hasOwnProperty('image_pull_policy')) {
@@ -394,11 +392,10 @@
                         this.version_loaded = false
                         this.deleteFromManifest('spec.image');
                         this.$refs.version_selector.clearSelection()
+
                     } else if (image_name !== '') {
-                        let docker_prefix = '';
-                        if (this.manifest_model.image.registry.local_name === 'Docker')
-                            docker_prefix = 'library/';
-                        let final_image = docker_prefix + image_name.concat(':').concat(image_version);
+
+                        let final_image = image_name.concat(':').concat(image_version);
                         if (image_version !== '') {
                             this.addToManifest(final_image, 'spec.image')
                         }
