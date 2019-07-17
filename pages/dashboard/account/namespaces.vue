@@ -14,7 +14,7 @@
                 </button>
             </div>
 
-            <p class="namespace-title">لیست فضانام‌های شما</p>
+            <p class="namespace-title">لیست فضانام‌های شما </p>
 
             <div style="margin-top: 24px">
                 <div class="row-custom between-xs">
