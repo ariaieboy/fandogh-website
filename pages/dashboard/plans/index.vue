@@ -198,7 +198,7 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p v-if="memory > 0.48" style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0">
+                                <p v-if="memory > 0.49" style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0">
                                     {{memory}} گیگ
                                 </p>
                             </div>
