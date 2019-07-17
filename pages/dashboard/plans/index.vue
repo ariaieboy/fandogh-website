@@ -391,7 +391,7 @@
                     return 0;
                 } else {
 
-                    return Math.fround(this.quota.memory_limit / 1024).toPrecision(1)
+                    return parseFloat(Math.fround(this.quota.memory_limit / 1024).toFixed(1))
 
                 }
             },
