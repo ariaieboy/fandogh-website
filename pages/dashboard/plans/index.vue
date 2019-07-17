@@ -199,7 +199,7 @@
                                     فعلی:
                                 </p>
                                 <p style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0"
-                                   v-if="memory >= 1">
+                                   v-if="memory >= 0.5">
                                     {{memory}} گیگ
                                 </p>
                             </div>
@@ -390,7 +390,7 @@
                 if (this.quota === null) {
                     return 0;
                 } else {
-                    return Math.round(this.quota.memory_limit / 1024);
+                    return this.quota.memory_limit / 1024
                 }
             },
             dedicatedVolume() {
