@@ -69,6 +69,7 @@
     import MetricsChart from "~/components/Dashboard/chart/MetricsChart";
 
     export default {
+
         name: "dashboard-monitoring",
         layout: "dashboard",
         components: {
