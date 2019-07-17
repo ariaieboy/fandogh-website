@@ -390,7 +390,9 @@
                 if (this.quota === null) {
                     return 0;
                 } else {
-                    return this.quota.memory_limit / 1024
+
+                    return Math.fround(this.quota.memory_limit / 1024).toPrecision(1)
+
                 }
             },
             dedicatedVolume() {
