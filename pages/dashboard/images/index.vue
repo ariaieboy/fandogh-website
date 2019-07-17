@@ -1,13 +1,11 @@
 <template>
     <div class="wrapper-image" v-if="!loading">
         <f-loading :isFull="true" v-if="isLoading"/>
-        <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !">
-            <f-button styles="red" @onClick="$router.push('/dashboard/images/create')">افزودن ایمیج</f-button>
-        </f-empty>
-        <div class="images" v-else>
+
+        <div class="images">
 
             <div style="overflow: hidden; margin-bottom: 32px">
-                <div class="right" style="float: right;"><p class="title"> لیست ایمیج‌ها</p></div>
+                <div class="right" style="float: right;"><p class="title_header"> لیست ایمیج‌ها</p></div>
                 <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      @click="$router.push('/dashboard/images/create')">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
@@ -58,7 +56,9 @@
                 </div>
             </div>
 
-            <box-table :titles="titleRow" :items="images" :func="versions" :menu="menuList"></box-table>
+            <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !"></f-empty>
+
+            <box-table v-else :titles="titleRow" :items="images" :func="versions" :menu="menuList"></box-table>
 
         </div>
     </div>
@@ -119,7 +119,7 @@
                         } else {
                             return {
                                 name,
-                                created_at: Moment(created_at).format('jYYYY/jMM/jDD')
+                                created_at: Moment(created_at).format('jYYYY/jMM/jDD'),
                             };
                         }
                     });
@@ -222,7 +222,7 @@
 </script>
 
 <style lang="stylus" scoped>
-    .title
+    .title_header
         font-family iran-yekan
         font-style normal
         font-weight bold

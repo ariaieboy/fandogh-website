@@ -1,7 +1,7 @@
 <template>
 
     <div class="row" style="overflow-x:auto;margin: 0; padding-left: 5px; padding-right: 5px; padding-bottom: 150px">
-        <table style="width: 100%; border-collapse: separate; text-align: right; border-spacing: 0 .8em; table-layout: fixed">
+        <table style="width: 100%; border-collapse: separate; text-align: right; border-spacing: 0 .1em; table-layout: fixed">
             <tr class="head">
                 <th v-for="title in titles" :width="title.width">
                     {{title.title}}
@@ -9,7 +9,10 @@
             </tr>
             <tr class="data-head" v-for="(item, index) in items">
 
-                <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func(index)">{{item[title.name]}}</td>
+                <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func? func(index) : ''"
+                    :style="{cursor: (func ? 'pointer' : 'unset')}">
+                    {{item[title.name]}}
+                </td>
 
                 <td class="more-button">
                     <div class="dropdown dropbtn" @click="notify(index)" style="margin: auto; display: flex">
@@ -73,6 +76,8 @@
 
 <style scoped lang="stylus">
 
+    @import '../../../assets/css/variables.styl'
+
     *::-webkit-scrollbar
         display none
 
@@ -99,27 +104,26 @@
             font-size .8em
             padding 5px 8px
 
-
     tr.data-head
         background-color #fefefe
         margin-bottom 16px
-        box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
+        box-shadow 0 1px 1px rgba(0, 0, 0, 0.07)
 
         td
-            line-height 32px
+            line-height $indexTableRowHeight
             color #4A4A4A
-            padding 12px
+            padding 8px 12px
             font-family iran-yekan
             text-align right
             cursor: pointer
             text-overflow: ellipsis;
             overflow hidden
             white-space: nowrap
-            border-radius 3px
             font-size 1em
             @media only screen and (max-width: 766px)
                 font-size .7em
                 padding 5px 12px
+
 
         td.more-button
             padding 0
@@ -132,6 +136,7 @@
                     @media only screen and (max-width: 766px)
                         width 7px
                         height 15px
+
 
 
     .dropbtn {
@@ -177,10 +182,7 @@
                 height 16px
                 margin-top auto
                 margin-bottom auto
-                padding-left 12px
-                @media only screen and (max-width: 766px)
-                    width 36px
-                    height 36px
+                margin-left 12px
 
 
     .dropdown a:hover {

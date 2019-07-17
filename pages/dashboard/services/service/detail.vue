@@ -3,7 +3,7 @@
     <div>
         <div class="row">
             <div class="col-xs-12 col-md-12 col-lg-12 col-sm-12">
-                <div class="mb-45" v-for="item in service.pods" v-if="service.pods.length">
+                <div class="mb-12" v-for="item in service.pods" v-if="service.pods.length">
                     <f-collaps :selected="true">
                         <div slot="collapse-header">
                             <f-replica-header

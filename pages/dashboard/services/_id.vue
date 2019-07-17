@@ -2,13 +2,15 @@
     <div v-if="service && !loading">
         <p class="title">جزییات سرویس</p>
 
-        <div class="row" style="margin: 0 0 16px 0;">
+        <div class="row" style="margin: 0 0 12px 0;">
             <div class="service-header">
 
                 <span class="service-name">
-                    <canvas
-                            style="border-radius: 100px; width: 16px; height: 16px; display: inline-block; margin-left: 7px;"
-                            :style="{ backgroundColor: (service.state.toString().toLowerCase() === 'running' ? '#3ccc38' : '#fd3259')}"></canvas>
+                    <img
+                            style="border-radius: 100px; width: 24px; height: 24px; display: inline-block; margin-left: 7px;vertical-align: middle"
+                            :src="(service.state.toString().toLowerCase() === 'running' && !this.removing ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
+                            :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']"
+                    >
                     {{service.name}}
                 </span>
 
@@ -27,6 +29,17 @@
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
                 </span>
 
+                <div v-if="!removing" class="service-edit-container">
+                    <span class="service-edit"
+                          @click="$router.push({ path: '/dashboard/services/wizard', query: {service: service_name} })">
+                        ویرایش سرویس
+                    </span>
+                    <span class="service-delete"
+                          @click="this.remove">
+                        حذف سرویس
+                    </span>
+                </div>
+
             </div>
 
         </div>
@@ -39,7 +52,7 @@
                 </div>
 
                 <div @click="sectionClicked('env')"
-                     style="font-size: 0.8em"
+                     style="font-size: 0.9em"
                      :class="[(activeSectionName === 'env' ? 'enabled' : 'disabled')]">
                     <p>Environment Variables</p>
                 </div>
@@ -66,7 +79,9 @@
                 <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding"
                            v-bind:is="activeSectionName"
                            style="padding: 0"
-                           :service="service"></component>
+                           :service="service">
+
+                </component>
             </keep-alive>
         </div>
     </div>
@@ -109,25 +124,77 @@
         },
         data() {
             return {
+                removing: false,
                 activeSectionName: 'detail',
+                service_name: '',
                 image: this.$route.params.image,
             };
         },
         created() {
             this.$store.commit("SET_DATA", {id: "manifest", data: {}});
+            this.service_name = this.$route.params.id;
             this.getData();
         },
         methods: {
+            remove() {
+                this.$ga.event({
+                    eventCategory: "service",
+                    eventAction: "click btn remove service",
+                    eventLabel: "service name",
+                    eventValue: this.service_name
+                });
+                this.$alertify(
+                    {
+                        title: `حذف سرویس`,
+                        description: `آیا از حذف ${this.service_name}  مطمئن هستید؟`
+                    },
+                    status => {
+                        if (status) {
+                            // this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.removing = true
+                            this.getData()
+                            this.$store.dispatch("deleteService", this.service_name)
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "service",
+                                        eventAction: "remove service",
+                                        eventLabel: "service name",
+                                        eventValue: this.service_name
+                                    });
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "service",
+                                        eventAction: "fail remove service",
+                                        eventLabel: "service name",
+                                        eventValue: this.service_name
+                                    });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                });
+                        }
+                    }
+                );
+            },
             async getData() {
                 try {
                     let res = await this.$store.dispatch("getServicesName", {
-                        name: this.$route.params.id
+                        name: this.service_name
                     });
                     let internal = null;
-                    if (res.state !== "RUNNING") {
+                    if (res.state !== "RUNNING" || this.removing) {
                         setTimeout(() => {
                             this.getData();
-                        }, 5000);
+                            console.log(this.removing ? 1000 : 5000)
+                        }, this.removing? 1000 : 5000);
                     } else {
                         clearInterval(internal);
                     }
@@ -136,6 +203,8 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (e.status === 401) {
                         this.$router.push("/user/login");
+                    }else {
+                        this.$router.push("/dashboard/services")
                     }
                 }
             },
@@ -162,15 +231,17 @@
 
 <style scoped lang="stylus">
 
+    @import '../../../assets/css/variables.styl'
+
     .title
-        font-family iran-yekan
-        font-style normal
-        font-weight bold
-        font-size 1.2em
-        font-stretch normal
-        line-height 1.75
-        color #7c7c7c
-        letter-spacing normal
+        font-family iran-yekan !important
+        font-style normal !important
+        font-weight bold !important
+        font-size 1.2em !important
+        font-stretch normal !important
+        line-height 1.75 !important
+        color #7c7c7c !important
+        letter-spacing normal !important
 
     .box
         padding 16px
@@ -197,14 +268,14 @@
             background-color #fefefe
             overflow-x scroll
             overflow-y hidden
-            margin-bottom 24px
-            margin-top 5px
+            margin-bottom 12px
+            margin-top 0
 
         div.disabled
             padding 0
             cursor pointer
             @media only screen and (max-width: 766px)
-                margin-left  -5px
+                margin-left -5px
                 display inline-flex
 
             p
@@ -301,39 +372,178 @@
                 display block
                 padding-right 0
                 padding-left 0
-            canvas
-                animation moved 2s infinite ease-in-out
-                -webkit-animation moved 2s infinite ease-in-out
+
+            img
+                &.success
+                    animation rotating 5s infinite linear
+                    -webkit-animation rotating 5s infinite linear
+                    -moz-animation rotating 5s infinite linear
+                    -o-animation rotating 5s infinite linear
+                    -ms-animation rotating 5s infinite linear
+
+                &.failed
+                    animation broken-rotating 1.5s infinite linear
+                    -webkit-animation broken-rotating 1.5s infinite linear
+                    -moz-animation broken-rotating 1.5s infinite linear
+                    -o-animation broken-rotating 1.5s infinite linear
+                    -ms-animation broken-rotating 1.5s infinite linear
 
 
-        @keyframes moved {
-            0% {opacity: 1; transform scale(1)}
-            10% {opacity: .95; transform scale(.99)}
-            20% {opacity: .9; transform scale(.98)}
-            30% {opacity: .85; transform scale(.97)}
-            40% {opacity: .8; transform scale(.96)}
-            50% {opacity: .75; transform scale(.95)}
-            60% {opacity: .8; transform scale(.96)}
-            70% {opacity: .85; transform scale(.97)}
-            80% {opacity: .9; transform scale(.98)}
-            90% {opacity: .95; transform scale(.99)}
-            100% {opacity: 1; transform scale(1)}
+        @-webkit-keyframes rotating {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes rotating {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes broken-rotating {
+
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            10% {
+                -webkit-transform: rotate(4deg);
+            }
+            20% {
+                -webkit-transform: rotate(8deg);
+            }
+            30% {
+                -webkit-transform: rotate(12deg);
+            }
+            40% {
+                -webkit-transform: rotate(16deg);
+            }
+            50% {
+                -webkit-transform: rotate(20deg);
+            }
+            60% {
+                -webkit-transform: rotate(16deg);
+            }
+            70% {
+                -webkit-transform: rotate(12deg);
+            }
+            80% {
+                -webkit-transform: rotate(8deg);
+            }
+            90% {
+                -webkit-transform: rotate(4deg);
+            }
+            100% {
+                -webkit-transform: rotate(0deg);
+            }
+        }
+        @keyframes broken-rotating {
+
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            10% {
+                -webkit-transform: rotate(4deg);
+            }
+            20% {
+                -webkit-transform: rotate(8deg);
+            }
+            30% {
+                -webkit-transform: rotate(12deg);
+            }
+            40% {
+                -webkit-transform: rotate(16deg);
+            }
+            50% {
+                -webkit-transform: rotate(20deg);
+            }
+            60% {
+                -webkit-transform: rotate(16deg);
+            }
+            70% {
+                -webkit-transform: rotate(12deg);
+            }
+            80% {
+                -webkit-transform: rotate(8deg);
+            }
+            90% {
+                -webkit-transform: rotate(4deg);
+            }
+            100% {
+                -webkit-transform: rotate(0deg);
+            }
         }
 
 
-        @-webkit-keyframes moved{
-            0% {opacity: 1; transform scale(1)}
-            10% {opacity: .95; transform scale(.99)}
-            20% {opacity: .9; transform scale(.98)}
-            30% {opacity: .85; transform scale(.97)}
-            40% {opacity: .8; transform scale(.96)}
-            50% {opacity: .75; transform scale(.95)}
-            60% {opacity: .8; transform scale(.96)}
-            70% {opacity: .85; transform scale(.97)}
-            80% {opacity: .9; transform scale(.98)}
-            90% {opacity: .95; transform scale(.99)}
-            100% {opacity: 1; transform scale(1)}
-        }
+
+    .service-edit-container
+        margin-top -5px
+        order 2
+        margin-bottom auto
+        margin-right auto
+        display block
+
+    .service-edit
+        display block
+        color $totalWhite
+        line-height 1.75
+        margin-bottom auto
+        font-size 1em
+        font-family iran-yekan
+        font-weight normal
+        background-color $greenLight
+        border-radius 50px
+        text-align center
+        align-self start
+        padding 6px 24px
+        cursor pointer
+        @media only screen and (max-width: 766px)
+            font-size 1.2em
+            display inline-block
+            padding-right 24px
+            padding-left 24px
+            margin-top 0
+
+        &:hover
+            background-color $green
+            box-shadow 0 2px 6px rgba(53, 204, 51, 0.3)
+            transition all .3s ease-in-out
+
+
+    .service-delete
+        display block
+        color $red
+        line-height 1.75
+        margin-top 6px
+        margin-bottom -5px
+        font-size 1em
+        font-family iran-yekan
+        font-weight normal
+        background-color transparent
+        border 1px solid $red
+        border-radius 50px
+        text-align center
+        align-self start
+        padding 4px 24px
+        cursor pointer
+        @media only screen and (max-width: 766px)
+            font-size 1.2em
+            display inline-block
+            float left
+            padding-right 24px
+            padding-left 24px
+            margin-top 0
+
+        &:hover
+            background-color $red
+            color $totalWhite
+            box-shadow 0 2px 6px rgba(253, 50, 80, 0.3)
+            transition all .3s ease-in-out
 
     .service-spec
         color #7c7c7c

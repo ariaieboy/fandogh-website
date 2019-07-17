@@ -11,12 +11,13 @@ export const requestActivePlan = async ({commit, state}, namespace) => {
 };
 
 
-export const requestPlan = async ({commit, state}, {memory, dedicatedVolume}) => {
+export const requestPlan = async ({commit, state}, {memory, dedicatedVolume, voucher_code}) => {
     try {
         let res = await Request().post(`/api/plans`,
             {
                 memory,
-                dedicated_volume: dedicatedVolume
+                dedicated_volume: dedicatedVolume,
+                voucher_code: voucher_code
             });
         commit("SET_DATA", {id: "requestedPlan", data: res});
         return res;

@@ -4,7 +4,7 @@
         <div class="col-lg-11 col-md-10 col-sm-8 col-xs-12 container-fluid"
              style="box-sizing: content-box; max-width: 1600px; overflow-x: scroll; overflow-y: hidden">
 
-            <p class="title">حساب کاربری</p>
+            <p class="title_header">حساب کاربری</p>
 
             <div class="box row">
                 <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12; margin: 0;" style="height: 100%;width: 100%">
@@ -274,7 +274,7 @@
             > div
                 margin-bottom 15px
 
-    .title
+    .title_header
         font-family iran-yekan
         font-style normal
         font-weight bold

@@ -1,13 +1,9 @@
 <template>
     <div class="wrapper-image" v-if="!loading">
         <f-loading :isFull="true" v-if="isLoading"/>
-        <f-empty v-if="!services || !services.length" title="هنوز سرویسی اضافه نشده !">
-            <f-button styles="red" path="/dashboard/services/setup">اجرای سرویس جدید</f-button>
-        </f-empty>
-
-        <div class="images" v-else>
+        <div class="images">
             <div style="overflow: hidden; margin-bottom: 32px">
-                <div class="right" style="float: right;"><p class="title"> لیست سرویس‌ها</p></div>
+                <div class="right" style="float: right;"><p class="title_header"> لیست سرویس‌ها</p></div>
                 <div class="left" style="float: left; cursor: pointer; margin-top: 8px" @click="newService">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -33,7 +29,7 @@
                         <text x="148"
                               y="29"
                               fill="#FFFFFF"
-                              style="font-family: iran-sans; font-size: 1em"
+                              style="font-family: iran-sans; font-size: 1em; font-weight: bold"
                               text-anchor="start"
                               alignment-baseline="middle">
                             ساخت سرویس جدید
@@ -42,7 +38,9 @@
                 </div>
             </div>
 
-            <box-table :titles="titleRow" :items="services" :func="details" :menu="menuList"></box-table>
+
+            <f-empty v-if="!services || !services.length" title="هنوز سرویسی اضافه نشده !"></f-empty>
+            <box-table v-else :titles="titleRow" :items="services" :func="details" :menu="menuList"></box-table>
 
         </div>
     </div>
@@ -223,7 +221,7 @@
 <style scoped lang="stylus">
 
 
-    .title
+    .title_header
         font-family iran-yekan
         font-style normal
         font-weight bold

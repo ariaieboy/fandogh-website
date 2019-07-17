@@ -29,6 +29,7 @@ export default {
 .replica-containers
   padding 0 15px
   display flex
+  margin-top 12px
   flex-direction column
   white-space nowrap
   border-bottom 1px solid #b5b5b5
