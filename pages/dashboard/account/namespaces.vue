@@ -34,6 +34,7 @@
     import ErrorReporter from "~/utils/ErrorReporter";
 
     export default {
+
         name: "namespaces",
         layout: "dashboard",
         data() {
