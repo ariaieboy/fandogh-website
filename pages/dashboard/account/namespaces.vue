@@ -34,7 +34,6 @@
     import ErrorReporter from "~/utils/ErrorReporter";
 
     export default {
-
         name: "namespaces",
         layout: "dashboard",
         data() {
@@ -129,9 +128,7 @@
 </style>
 
 <style lang="css">
-
-
-        input[type="text"]:-moz-placeholder {
+    input[type="text"]:-moz-placeholder {
         text-align: right;
         direction: rtl;
     }
