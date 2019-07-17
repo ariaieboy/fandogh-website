@@ -190,7 +190,7 @@
                     </div>
 
                 </div>
-                <div class="row" style="background-color: #ffffff">
+                <div class="row" style="background-color: #fefefe">
                     <div style="flex: 1">
                         <p class="checkout-section-title">حافظه تصادفی (رم)</p>
                         <div style="display: flex;">
@@ -198,8 +198,7 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0"
-                                   v-if="memory >= 0.5">
+                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0">
                                     {{memory}} گیگ
                                 </p>
                             </div>
@@ -263,7 +262,23 @@
                     </div>
                 </div>
 
-                <div class="row" style="background-color: #ffffff">
+                <div class="row"
+                     style="display: block; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span>
+                        کد تخفیف:
+                        <v-text-field
+                                type="text"
+                                style=" direction: rtl !important;"
+                                dir="ltr"
+                                :placeholder="'کد تخفیف را اینجا وارد نمایید'"
+                                v-model="finalBill.voucher_code">
+
+                        </v-text-field>
+                    </span>
+
+                </div>
+
+                <div class="row">
                     <button class="checkout" @click="pushUrl">
                         ثبت نهایی و پرداخت
                     </button>
@@ -307,6 +322,7 @@
                 finalBill: {
                     memory: 0,
                     dedicatedVolume: 0,
+                    voucher_code: null
                 }, features: [
                     {title: 'Load Balancer', subtitle: 'رایگان', image: 'load-balancer.png'},
                     {title: 'پهنای باند', subtitle: 'رایگان', image: 'band-width.svg'},
@@ -390,8 +406,7 @@
                 if (this.quota === null) {
                     return 0;
                 } else {
-
-                    return parseFloat(Math.fround(this.quota.memory_limit / 1024).toFixed(1))
+                    return parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1))
 
                 }
             },
@@ -475,13 +490,14 @@
                 if (this.quota !== null) {
                     console.log('inside quota')
                     if (this.quota.memory_limit / 1024 >= 1) {
-                        this.finalBill.memory += Math.round(this.quota.memory_limit / 1024);
+                        this.finalBill.memory += parseFloat(Math.fround(this.quota.memory_limit / 1024).toPrecision(1));
                     }
                     if (this.quota.volume_limit > 0) {
                         this.finalBill.dedicatedVolume += this.quota.volume_limit;
                     }
                 }
 
+                console.log(this.finalBill)
                 return this.finalBill;
             },
             async pushUrl() {
