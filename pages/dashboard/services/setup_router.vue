@@ -13,20 +13,20 @@
             </div>
         </div>
 
-        <p class="router-title" style="margin-top: 48px">سرویس‌های مدیریت شده</p>
+        <!--<p class="router-title" style="margin-top: 48px">سرویس‌های مدیریت شده</p>-->
 
-        <div style="margin-top: 32px">
-            <div class="row-custom between-xs">
+        <!--<div style="margin-top: 32px">-->
+            <!--<div class="row-custom between-xs">-->
 
-                <managed-service-card v-for="(item, index) in managed_services"
-                                      :title="item.title"
-                                      :key="index"
-                                      :description="item.description"
-                                      :icon="item.icon">
+                <!--<managed-service-card v-for="(item, index) in managed_services"-->
+                                      <!--:title="item.title"-->
+                                      <!--:key="index"-->
+                                      <!--:description="item.description"-->
+                                      <!--:icon="item.icon">-->
 
-                </managed-service-card>
-            </div>
-        </div>
+                <!--</managed-service-card>-->
+            <!--</div>-->
+        <!--</div>-->
 
 
     </div>
