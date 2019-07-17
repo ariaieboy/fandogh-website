@@ -12,7 +12,7 @@
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
                                 color="#0093ff"
-                                :rules="[rules.valid_port]"
+                                :rules="[rules.valid_port, rules.redundant]"
                                 type="number"
                                 v-model.number="manifest_model.port_mapping.port_map.port"
                                 :label="port_map_obj.port_label"
@@ -117,10 +117,12 @@
             return {
 
                 rules: {
-                    valid_port: value => value >= 1 && value <= 65535 || value === null || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد'
+                    valid_port: value => value >= 1 && value <= 65535 || value === null || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد',
+                    redundant: value => (this.allowed_name === null ? this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0 : this.allowed_name === value || this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0) || 'مقدار تکراری است'
                 },
                 editing_index: -1,
                 isEditing: false,
+                allowed_name: null,
                 port_map_obj: {
                     port_label: 'Inside Port',
                     port_hint: 'شماره پورت از داخل سرویس که قرار است به بیرون map شود',
@@ -186,6 +188,9 @@
                 this.manifest_model.port_mapping.port_map.target_port = this.manifest_model.port_mapping.port_map_list[index].target_port
                 this.manifest_model.port_mapping.port_map.protocol = this.manifest_model.port_mapping.port_map_list[index].protocol
 
+                this.allowed_name =  this.manifest_model.port_mapping.port_map_list[index].port
+
+
                 this.manifest_model.port_mapping.protocol_list.forEach(item => {
                     item.selected = false
                     if (item.value === this.manifest_model.port_mapping.port_map.protocol) {
@@ -199,6 +204,8 @@
                 this.manifest_model.port_mapping.port_map.port = null
                 this.manifest_model.port_mapping.port_map.target_port = null
                 this.checkBoxSelected(0)
+
+                this.allowed_name =  null
 
                 this.editing_index = -1
             },
@@ -246,6 +253,12 @@
                     return;
                 }
 
+                console.log(this.rules.redundant(this.manifest_model.port_mapping.port_map.port))
+                if(this.rules.redundant(this.manifest_model.port_mapping.port_map.port) !== true){
+                    this.$refs.port_selector.focus();
+                    return;
+                }
+
                 if (this.isEditing) {
 
                     this.manifest_model.port_mapping.port_map_list.splice(this.editing_index, 1, {
@@ -270,6 +283,7 @@
                 this.checkBoxSelected(0);
                 this.isEditing = false;
                 this.editing_index = -1
+                this.allowed_name = null
 
             },
             addToManifest(value, path) {

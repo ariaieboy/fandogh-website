@@ -63,7 +63,7 @@
                                 type="text"
                                 dir="ltr"
                                 required
-                                :placeholder="manifest_model.image.registry.local_name === 'Docker' ? 'library/image-name OR your-docker-registry/image-name' : ''"
+                                :placeholder="manifest_model.image.registry.local_name === 'Docker' ? 'library/image-name OR organization-name/image-name' : ''"
                                 v-model="manifest_model.image.image_object.name"
                                 :hint="image_name_obj.hint"
                                 :label="image_name_obj.label">

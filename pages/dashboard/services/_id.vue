@@ -32,7 +32,7 @@
                 <div v-if="!removing" class="service-edit-container">
                     <span class="service-edit"
                           @click="$router.push({ path: '/dashboard/services/wizard', query: {service: service_name} })">
-                        تغییر مانیفست
+                        ویرایش سرویس
                     </span>
                     <span class="service-delete"
                           @click="this.remove">
