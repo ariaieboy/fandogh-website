@@ -129,7 +129,9 @@
 </style>
 
 <style lang="css">
-    input[type="text"]:-moz-placeholder {
+
+
+        input[type="text"]:-moz-placeholder {
         text-align: right;
         direction: rtl;
     }
