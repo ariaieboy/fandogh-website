@@ -3,17 +3,22 @@
     <div class="row">
         <div class="row-custom">
             <div ref="cint" style="overflow-x: scroll" class="center col-lg-12 col-md-12 col-xs-12 container-fluid">
-                <plan title="پلن پایه" icon="base-plan" dedicated-volume="10" memory="1" cpu="0.5"
+
+                <plan title="پلن پایه" icon="base-plan" dedicated-volume="2.5" memory="0.5" cpu="0.5"
                       v-bind:class="(selected === 0 ? 'selected' : 'unselected')"
                       @click.native="clicked(0)"/>
 
-                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="50" memory="2" cpu="1"
+                <plan title="پلن اقتصادی" icon="economy-plan" dedicated-volume="10" memory="1" cpu="0.5"
                       v-bind:class="(selected === 1 ? 'selected' : 'unselected')"
                       @click.native="clicked(1)"/>
 
-                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="100" memory="4" cpu="2"
+                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="50" memory="2" cpu="1"
                       v-bind:class="(selected === 2 ? 'selected' : 'unselected')"
                       @click.native="clicked(2)"/>
+
+                <plan title="پلن حرفه‌ای" icon="professional-plan" dedicated-volume="100" memory="4" cpu="2"
+                      v-bind:class="(selected === 3 ? 'selected' : 'unselected')"
+                      @click.native="clicked(3)"/>
 
             </div>
         </div>
@@ -49,14 +54,18 @@
                 switch (position) {
 
                     case 0:
+                        this.$emit('update:memory', 0.5);
+                        this.$emit('update:dedicatedVolume', 0);
+                        break;
+                    case 1:
                         this.$emit('update:memory', 1);
                         this.$emit('update:dedicatedVolume', 10);
                         break;
-                    case 1:
+                    case 2:
                         this.$emit('update:memory', 2);
                         this.$emit('update:dedicatedVolume', 50);
                         break;
-                    case 2:
+                    case 3:
                         this.$emit('update:memory', 4);
                         this.$emit('update:dedicatedVolume', 100);
                         break;
