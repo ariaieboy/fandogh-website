@@ -278,7 +278,7 @@
 
                 </div>
 
-                <div class="row">
+                <div class="row" style="background-color: #fefefe">
                     <button class="checkout" @click="pushUrl">
                         ثبت نهایی و پرداخت
                     </button>
