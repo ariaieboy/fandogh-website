@@ -22,14 +22,14 @@
 
                 </div>
                 <span style="flex: 1; font-family: iran-yekan; font-size: 1.8em; text-align: left; margin-top: auto; margin-bottom: auto; order:1; color: #6c6c6c; padding: 0 12px;">
-                    {{managed_service[service_name].description}}
+                    {{managed_service[service_name].short_desc}}
                 </span>
 
             </div>
             <div style="width: 100%; margin-top: 16px; background-color: #2979ff; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px; display: block">
                 <span style="color: #fefefe; font-size: 1.2em;display: block; font-weight: bold">{{managed_service[service_name].title}}</span>
                 <span style="color: #fefefe; font-size: 1em;display: block; margin-top: 16px; line-height: 1.75; font-weight: normal;">
-                    برای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در ذهن‌هابرای انتحا توه سرویس برای آنکه این متن بک تست بمانید سمنیا در دست داشتن است برای فندق که می‌ماند در ذهن‌ها
+                    {{managed_service[service_name].description}}
                 </span>
             </div>
 
@@ -51,33 +51,41 @@
                     mysql:
                         {
                             title: 'Mysql',
-                            description: 'Database',
+                            short_desc: 'Database',
                             icon: 'mysql',
-                            path: "mysql"
+                            path: "mysql",
+                            description: 'MySQL یکی از محبوب‌ترین RDBMS‌های امروزی است که طرفداران زیادی در ایران داد، به همین دلیل MySQL به عنوان اولین managed-service به فندق اضافه شد.\n' +
+                                'این managed-service از دو image متفاوت تشکیل شده، یکی خود MySQL و دیگری PHPMyAdmin که یک رابط کاربری تحت وب برای MySQL است.'
+
                         },
 
                     postgresql:
                         {
                             title: 'Postgresql',
-                            description: 'Database',
+                            short_desc: 'Database',
                             icon: 'postgresql',
-                            path: "postgresql"
+                            path: "postgresql",
+                            description:'Postgresql یک ORDBMS معروف و پرطرفدار است که می‌توانید به سادگی به عنوان یک managed-service روی Namespace خود دیپلوی کنید. '
                         },
 
                     redis:
                         {
                             title: 'Redis',
-                            description: 'Cache Database',
+                            short_desc: 'Cache Database',
                             icon: 'redis',
-                            path: "redis"
+                            path: "redis",
+                            description:'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
                         },
 
                     proxy:
                         {
                             title: 'Proxy',
-                            description: 'Proxy Service',
+                            short_desc: 'Proxy Service',
                             icon: 'proxy',
-                            path: "proxy"
+                            path: "proxy",
+                            description:'هنگامی که شما سرویس‌های خود را دیپلوی می‌کنید٬ سکو ترافیک خروجی سرویس شما را بر روی IP های متفاوتی برمی‌گرداند.\n' +
+                                'این حالت در برخی شرایط که نیاز به یک IP آدرس مشخص وجود دارد٬ کار را کمی دشوار می‌کند.\n' +
+                                'برای اینکه بتوانید از این مشکل جلوگیری به عمل آورید می‌توانید از Proxy Managed Service استفاده کنید. تنها کافی‌ است با استفاده از دستور fandogh managed-service deploy proxy 1 -c service_name proxy-server یک سرویس Proxy ایجاد کرده و داخل سرویسی که می‌خواهید ترافیک خروجی آن بر روی range ip مشخصی قرار گیرد تنظیم می‌کنید که این سرویس٬ responseهای خود را به proxy-server:3128 هدایت کند.'
                         }
                 }
 
