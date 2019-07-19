@@ -278,7 +278,7 @@
 
                 </div>
 
-                <div class="row">
+                <div class="row" style="background-color: #fefefe">
                     <button class="checkout" @click="pushUrl">
                         ثبت نهایی و پرداخت
                     </button>
@@ -431,8 +431,8 @@
                 );
                 return percent.toString();
             }, cpu() {
-                this.planData.cpu = this.planData.memory / 2;
-                return this.planData.memory / 2;
+                this.planData.cpu = Math.max(this.planData.memory / 2, 0.5);
+                return Math.max(this.planData.memory / 2, 0.5);
             }, total() {
                 let temp = this.planData.memory * 60000 + (this.planData.dedicatedVolume >= 10 ? this.planData.dedicatedVolume * 1200 : 0);
                 return temp.toLocaleString()
