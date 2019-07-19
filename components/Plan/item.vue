@@ -46,9 +46,10 @@
         props: ["icon", "title", "dedicatedVolume", "memory", "cpu"],
         data() {
             return {
-                "base-plan": require("~/assets/svg/base-plan.svg"),
-                "economy-plan": require("~/assets/svg/economy-plan.svg"),
-                "startup-plan": require("~/assets/svg/startup-plan.svg")
+                "base-plan": require("~/assets/svg/basic-plan.svg"),
+                "economy-plan": require("~/assets/svg/base-plan.svg"),
+                "startup-plan": require("~/assets/svg/economy-plan.svg"),
+                "professional-plan": require("~/assets/svg/startup-plan.svg")
             };
         },
         computed: {
