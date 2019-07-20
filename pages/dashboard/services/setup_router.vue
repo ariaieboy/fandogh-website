@@ -13,20 +13,21 @@
             </div>
         </div>
 
-        <!--<p class="router-title" style="margin-top: 48px">سرویس‌های مدیریت شده</p>-->
+        <p class="router-title" style="margin-top: 48px">سرویس‌های مدیریت شده</p>
 
-        <!--<div style="margin-top: 32px">-->
-            <!--<div class="row-custom between-xs">-->
+        <div style="margin-top: 32px">
+            <div class="row-custom between-xs">
 
-                <!--<managed-service-card v-for="(item, index) in managed_services"-->
-                                      <!--:title="item.title"-->
-                                      <!--:key="index"-->
-                                      <!--:description="item.description"-->
-                                      <!--:icon="item.icon">-->
+                <managed-service-card v-for="(item, index) in managed_services"
+                                      :title="item.title"
+                                      :key="index"
+                                      :description="item.description"
+                                      @click.native="$router.push({ path: '/dashboard/services/managed-service-setup', query: {service: item.path} })"
+                                      :icon="item.icon">
 
-                <!--</managed-service-card>-->
-            <!--</div>-->
-        <!--</div>-->
+                </managed-service-card>
+            </div>
+        </div>
 
 
     </div>
@@ -43,10 +44,10 @@
         data() {
             return {
                 managed_services: [
-                    {title: 'Mysql', description: 'Database', icon: 'mysql'},
-                    {title: 'Postgresql', description: 'Database', icon: 'postgresql'},
-                    {title: 'Redis', description: 'Cache Database', icon: 'redis'},
-                    {title: 'Proxy', description: 'Proxy Service', icon: 'proxy'}
+                    {title: 'Mysql', description: 'Database', icon: 'mysql', path: "mysql"},
+                    {title: 'Postgresql', description: 'Database', icon: 'postgresql', path: "postgresql"},
+                    {title: 'Redis', description: 'Cache Database', icon: 'redis', path: "redis"},
+                    {title: 'Proxy', description: 'Proxy Service', icon: 'proxy', path: "proxy"}
                 ],
                 services: [
                     {title: 'Fandogh Cli', icon: 'cli', url: 'cli_setup'},
@@ -59,7 +60,7 @@
         },
         computed: {},
         methods: {
-            onSelected(path){
+            onSelected(path) {
                 this.$router.replace('/dashboard/services/' + path)
             },
         }
