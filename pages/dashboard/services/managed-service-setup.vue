@@ -47,6 +47,31 @@
         data() {
             return {
 
+                managed_service_manifest: {
+                    kind:  {
+                        local_name: 'Managed Service',
+                        name: 'ManagedService',
+                        tooltip: 'این نوع سرویس‌ها از خارج namespace در دسترس هستند'
+                    },
+                    service_name: {
+                        label: 'نام سرویس',
+                        hint: 'تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند',
+                        counter: 100,
+                        name: ''
+                    },
+                    version: {
+                        label: 'نسخه سرویس',
+                        hint: 'نسخه‌ها در سرویس‌های مدیریت شده توسط خود فندق انتخاب می‌شوند',
+                        name: null
+                    },
+                    parameters:[],
+                    memory: {
+                        label: 'تعیین رم سرویس',
+                        hint: 'میزان رم مورد نیاز برای ساخت سرویس',
+                        default: '200',
+                        amount: 200
+                    },
+                },
                 managed_service: {
                     mysql:
                         {
@@ -54,6 +79,7 @@
                             short_desc: 'Database',
                             icon: 'mysql',
                             path: "mysql",
+                            version: '5.7',
                             description: 'MySQL یکی از محبوب‌ترین RDBMS‌های امروزی است که طرفداران زیادی در ایران داد، به همین دلیل MySQL به عنوان اولین managed-service به فندق اضافه شد.\n' +
                                 'این managed-service از دو image متفاوت تشکیل شده، یکی خود MySQL و دیگری PHPMyAdmin که یک رابط کاربری تحت وب برای MySQL است.'
 
@@ -65,7 +91,8 @@
                             short_desc: 'Database',
                             icon: 'postgresql',
                             path: "postgresql",
-                            description:'Postgresql یک ORDBMS معروف و پرطرفدار است که می‌توانید به سادگی به عنوان یک managed-service روی Namespace خود دیپلوی کنید. '
+                            version: '10.4',
+                            description: 'Postgresql یک ORDBMS معروف و پرطرفدار است که می‌توانید به سادگی به عنوان یک managed-service روی Namespace خود دیپلوی کنید. '
                         },
 
                     redis:
@@ -74,7 +101,8 @@
                             short_desc: 'Cache Database',
                             icon: 'redis',
                             path: "redis",
-                            description:'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
+                            version: '5.0.3',
+                            description: 'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
                         },
 
                     proxy:
@@ -83,7 +111,8 @@
                             short_desc: 'Proxy Service',
                             icon: 'proxy',
                             path: "proxy",
-                            description:'هنگامی که شما سرویس‌های خود را دیپلوی می‌کنید٬ سکو ترافیک خروجی سرویس شما را بر روی IP های متفاوتی برمی‌گرداند.\n' +
+                            version: 'latest',
+                            description: 'هنگامی که شما سرویس‌های خود را دیپلوی می‌کنید٬ سکو ترافیک خروجی سرویس شما را بر روی IP های متفاوتی برمی‌گرداند.\n' +
                                 'این حالت در برخی شرایط که نیاز به یک IP آدرس مشخص وجود دارد٬ کار را کمی دشوار می‌کند.\n' +
                                 'برای اینکه بتوانید از این مشکل جلوگیری به عمل آورید می‌توانید از Proxy Managed Service استفاده کنید. تنها کافی‌ است با استفاده از دستور fandogh managed-service deploy proxy 1 -c service_name proxy-server یک سرویس Proxy ایجاد کرده و داخل سرویسی که می‌خواهید ترافیک خروجی آن بر روی range ip مشخصی قرار گیرد تنظیم می‌کنید که این سرویس٬ responseهای خود را به proxy-server:3128 هدایت کند.'
                         }
@@ -98,6 +127,22 @@
         },
         created() {
             this.$store.commit("SET_DATA", {data: false, id: "loading"})
+            let manifest = this.$store.state.manifest
+            this.addToManifest(this.managed_service[this.service_name].title.toLowerCase(), 'spec.service_name')
+
+        },
+        methods: {
+            addToManifest(value, path) {
+                this.$store.dispatch('manifestGenerator', {
+                    value: value,
+                    path: path
+                })
+            },
+            deleteFromManifest(path) {
+                this.$store.dispatch('manifestDeleter', {
+                    path: path
+                })
+            },
         }
     }
 </script>
