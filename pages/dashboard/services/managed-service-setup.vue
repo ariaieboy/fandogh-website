@@ -50,6 +50,7 @@
 
     import Mysql from "../../../components/managed-services/mysql";
     import Postgresql from "../../../components/managed-services/postgresql";
+    import Redis from "../../../components/managed-services/redis";
 
     export default {
         name: "managed-service-setup",
@@ -57,7 +58,8 @@
         service_name: null,
         components: {
             Mysql,
-            Postgresql
+            Postgresql,
+            Redis
         },
         data() {
             return {

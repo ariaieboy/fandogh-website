@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <div>
             <config-box :section-title="sections.service_config">
@@ -34,7 +35,7 @@
                                 color="#0093ff"
                                 required
                                 :rules="[rules.counter, rules.required, rules.regex]"
-                                v-model="postgresql_manifest.password.value"
+                                v-model="redis_manifest.password.value"
                                 :label="password.label"
                                 :hint="password.hint">
 
@@ -71,39 +72,13 @@
 
             </config-box>
 
-            <config-box :section-title="sections.adminer_config">
-
-                <div style="width: 100%">
-
-
-                    <div>
-                        <span style="font-size: 0.8em; line-height: 1.75">
-                            {{adminer_enbled.hint}}
-                        </span>
-                    </div>
-
-                    <div style="margin-top: 16px">
-                        <fan-checkbox
-                                @click.native="adminerSelected"
-                                v-tooltip="adminer.tooltip"
-                                :object="adminer">
-
-                        </fan-checkbox>
-                    </div>
-                </div>
-
-
-            </config-box>
-
             <config-box :section-title="sections.storage_config">
 
                 <div style="width: 100%">
                     <div>
-                        <fan-checkbox v-for="(volume, index) in volumes"
-                                      :key="index"
-                                      @click.native="checkBoxSelected(index)"
-                                      v-tooltip="volume.tooltip"
-                                      :object="volume">
+                        <fan-checkbox @click.native="checkBoxSelected(index)"
+                                      v-tooltip="selected_volume.tooltip"
+                                      :object="selected_volume">
 
                         </fan-checkbox>
                     </div>
@@ -114,14 +89,15 @@
                         </span>
                     </div>
 
-                    <div v-if="selected_volume.value === 'DedicatedVolume'" style="display: flex; margin-top: 12px">
+                    <div style="display: flex; margin-top: 12px">
 
                         <v-text-field ref="volume_name_selector"
                                       style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                       dir="ltr"
+                                      :disabled="!selected_volume.selected"
                                       color="#0093ff"
-                                      :rules="[rules.volume_name_regex, rules.required]"
-                                      v-model="postgresql_manifest.volume_name.value"
+                                      :rules="selected_volume.selected? [rules.volume_name_regex, rules.required] : []"
+                                      v-model="redis_manifest.volume_name.value"
                                       :label="volume_name.label"
                                       :hint="volume_name.hint">
 
@@ -139,6 +115,7 @@
 
 
     </div>
+
 </template>
 
 <script>
@@ -147,9 +124,8 @@
     import Popover from "../../components/wizard/tooltip/popover";
     import FanCheckbox from "../../components/wizard/select-box/fan-checkbox";
 
-
     export default {
-        name: "postgresql",
+        name: "redis",
         components: {
             ConfigBox,
             Popover,
@@ -167,55 +143,26 @@
         data() {
             return {
                 selected_volume: {
-                    label: "Shared Storage",
-                    value: "SharedStorage",
-                    selected: true,
-                    tooltip: 'در صورت فعال بودن این گزینه داده‌های شما در پوشه postgresql در Shared Storage ذخیره خواهند شد'
+                    label: "Dedicated Volume",
+                    value: "DedicatedVolume",
+                    selected: false,
+                    tooltip: 'داده‌های شما در پوشه redis در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
                 },
-                adminer: {
-                    label: "Adminer",
-                    value: "Adminer",
-                    selected: true,
-                    tooltip: 'با استفاده از این دکمه می‌توانید تعیین کنید رابط ادمین Adminer ساخته شود یا خیر'
-                },
-                volumes: [
-                    {
-                        label: "Shared Storage",
-                        value: "SharedStorage",
-                        selected: true,
-                        tooltip: 'داده‌های شما در پوشه postgresql در Shared Storage ذخیره خواهند شد'
-                    },
-                    {
-                        label: "Dedicated Volume",
-                        value: "DedicatedVolume",
-                        selected: false,
-                        tooltip: 'داده‌های شما در پوشه postgresql در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
-                    }
-                ],
                 password: {
                     label: 'رمز عبور database',
-                    hint: 'رمز عبور به صورت پیش فرض posgres است',
+                    hint: 'رمز عبور سرویس دیتابیس شما',
                     name: ''
 
-                },
-                adminer_enbled: {
-                    label: 'Adminer رابط ادمین',
-                    hint: 'در صورتی که نیاز دارید از رابط ادمین Adminer استفاده کنید، آن را فعال نمایید. این قابلیت به صورت پیش‌فرض انتخاب برای شما ساخته خواهد شد.',
-                    name: ''
                 },
                 volume_name: {
                     label: 'نام Volume',
                     hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند',
                     name: ''
                 },
-                postgresql_manifest: {
+                redis_manifest: {
                     password: {
-                        name: 'postgres_password',
-                        value: 'postgres'
-                    },
-                    adminer_enbled: {
-                        name: 'adminer_enabled',
-                        value: true
+                        name: 'redis_password',
+                        value: 'redis'
                     },
                     volume_name: {
                         name: 'volume_name',
@@ -249,26 +196,17 @@
                     }
                 },
                 sections: {
-                    service_config: 'تنظیمات سرویس Postgresql',
+                    service_config: 'تنظیمات سرویس Redis',
                     storage_config: 'تعیین محل ذخیره سازی',
-                    adminer_config: 'تنظیمات Adminer'
                 },
             }
         }, methods: {
-            checkBoxSelected(index) {
-                this.volumes.forEach(item => {
-                    item.selected = false
-                })
-
-                this.volumes[index].selected = true
-                this.selected_volume = this.volumes[index]
-                if (this.selected_volume.label !== 'DedicatedVolume') {
-                    this.postgresql_manifest.volume_name.value = null
+            checkBoxSelected() {
+                this.selected_volume.selected = !this.selected_volume.selected
+                if (!this.selected_volume.selected) {
+                    this.redis_manifest.volume_name.value = null
                 }
             },
-            adminerSelected() {
-                this.adminer.selected = !this.adminer.selected
-            }
         }
     }
 </script>
