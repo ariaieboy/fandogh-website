@@ -47,13 +47,14 @@
         data() {
             return {
 
+
                 managed_service_manifest: {
-                    kind:  {
+                    kind: {
                         local_name: 'Managed Service',
                         name: 'ManagedService',
                         tooltip: 'این نوع سرویس‌ها از خارج namespace در دسترس هستند'
                     },
-                    service_name: {
+                    name: {
                         label: 'نام سرویس',
                         hint: 'تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند',
                         counter: 100,
@@ -64,7 +65,7 @@
                         hint: 'نسخه‌ها در سرویس‌های مدیریت شده توسط خود فندق انتخاب می‌شوند',
                         name: null
                     },
-                    parameters:[],
+                    parameters: [],
                     memory: {
                         label: 'تعیین رم سرویس',
                         hint: 'میزان رم مورد نیاز برای ساخت سرویس',
@@ -116,6 +117,14 @@
                                 'این حالت در برخی شرایط که نیاز به یک IP آدرس مشخص وجود دارد٬ کار را کمی دشوار می‌کند.\n' +
                                 'برای اینکه بتوانید از این مشکل جلوگیری به عمل آورید می‌توانید از Proxy Managed Service استفاده کنید. تنها کافی‌ است با استفاده از دستور fandogh managed-service deploy proxy 1 -c service_name proxy-server یک سرویس Proxy ایجاد کرده و داخل سرویسی که می‌خواهید ترافیک خروجی آن بر روی range ip مشخصی قرار گیرد تنظیم می‌کنید که این سرویس٬ responseهای خود را به proxy-server:3128 هدایت کند.'
                         }
+                },
+                rules: {
+                    required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
+                    counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
+                    default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
+                    service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
+                    default_replica: value => value >= 1 || 'کمترین مقدار مجاز ۱ است',
+                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد'
                 }
 
             }
@@ -128,7 +137,10 @@
         created() {
             this.$store.commit("SET_DATA", {data: false, id: "loading"})
             let manifest = this.$store.state.manifest
+
+            this.addToManifest(this.managed_service_manifest.kind.name, 'kind')
             this.addToManifest(this.managed_service[this.service_name].title.toLowerCase(), 'spec.service_name')
+            this.addToManifest(this.managed_service[this.service_name].version, 'spec.version')
 
         },
         methods: {
@@ -143,6 +155,41 @@
                     path: path
                 })
             },
+        }, watch: {
+            'managed_service_manifest.name': {
+                handler: function (value, oldValue) {
+                    let name = value.name
+                    if (name.length.valueOf() === 0) {
+                        this.deleteFromManifest('name')
+                    } else {
+                        if (this.rules.required(name) === true && this.rules.counter(name) === true && this.rules.service_regex(name) === true) {
+                            this.addToManifest(name, 'name')
+                        } else {
+                            this.deleteFromManifest('name')
+                        }
+                    }
+                }
+            },
+            'managed_service_manifest.memory': {
+                handler: function (value, oldValue) {
+                    let memory = parseInt(value.amount);
+                    if (this.rules.default_memory(memory) !== true) {
+                        this.deleteFromManifest('spec.resources.memory')
+                    } else {
+                        this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
+                    }
+
+                }, deep: true
+            },
+            'managed_service_manifest.parameters': {
+                handler: function (value, oldValue) {
+                    if ([...value].length === 0) {
+                        this.deleteFromManifest('spec.parameters')
+                    } else {
+                        this.addToManifest([...value], 'spec.parameters')
+                    }
+                }, deep: true
+            }
         }
     }
 </script>
