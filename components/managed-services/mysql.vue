@@ -194,7 +194,7 @@
                 ],
                 password: {
                     label: 'رمز عبور database',
-                    hint: 'رمز عبور به صورت پیش فرض mysql است',
+                    hint: 'رمز عبور به صورت پیش فرض root است',
                     name: ''
 
                 },
@@ -211,7 +211,7 @@
                 mysql_manifest: {
                     password: {
                         name: 'mysql_root_password',
-                        value: 'mysql'
+                        value: 'root'
                     },
                     phpmyadmin_enbled: {
                         name: 'phpmyadmin_enabled',
