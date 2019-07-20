@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div>
             <config-box :section-title="sections.service_config">
@@ -140,16 +139,17 @@
 
 
     </div>
-
 </template>
 
 <script>
+
     import ConfigBox from "../../components/wizard/box/config-box";
     import Popover from "../../components/wizard/tooltip/popover";
     import FanCheckbox from "../../components/wizard/select-box/fan-checkbox";
 
+
     export default {
-        name: "mysql",
+        name: "postgresql",
         components: {
             ConfigBox,
             Popover,
