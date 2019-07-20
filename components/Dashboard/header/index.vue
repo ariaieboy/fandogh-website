@@ -66,7 +66,7 @@ export default {
 
 .header-dashboard
   position fixed
-  z-index 1000
+  z-index 2000
   display flex
   justify-content space-between
   align-items center

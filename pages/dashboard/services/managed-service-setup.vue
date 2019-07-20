@@ -1,8 +1,7 @@
 <template>
-    <div class="row">
+    <div class="row" style="display: flex; padding-bottom: 128px">
 
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-             style="width: 100%; min-height: 600px;padding: 0">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right-pane">
 
             <component :is="managed_service[service_name].title"
                        class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
@@ -11,9 +10,17 @@
 
             </component>
 
+
+            <div v-if="isMobile" style="width: 100%; margin-top: 16px; display: flex; justify-content: center">
+
+                <button class="create-msvc-btn" @click="deploy">اتمام ساخت</button>
+                <button class="cancel-msvc-btn" @click="cancel">انصراف</button>
+
+            </div>
+
         </div>
 
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="width: 100%;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 left-pane">
 
             <div style="width: 100%; padding: 16px; display: flex; justify-content: end; background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.16)">
 
@@ -22,13 +29,13 @@
                          :src="require('../../../assets/svg/'+ managed_service[service_name].icon +'.svg')"/>
                 </div>
 
-                <span style="display: inline-flex; font-family: iran-yekan; font-size: 1.8em; text-align: left; margin-top: auto; margin-bottom: auto; order: 3; padding: 0 12px; color: #2979ff">
+                <span style="display: inline-flex; font-family: iran-yekan; font-size: 2em; text-align: left; margin-top: auto; margin-bottom: auto; order: 3; padding: 0 12px; color: #2979ff; font-weight: bold">
                     {{managed_service[service_name].title}}
                 </span>
-                <div style="width: 2px; background-color: #2979ff; margin: 12px 0; border-radius: 25px; order: 2">
+                <div style="width: 2px; background-color: #2979ff; margin: 16px 0; border-radius: 25px; order: 2">
 
                 </div>
-                <span style="flex: 1; font-family: iran-yekan; font-size: 1.8em; text-align: left; margin-top: auto; margin-bottom: auto; order:1; color: #6c6c6c; padding: 0 12px;">
+                <span style="flex: 1; font-family: iran-yekan; font-size: 2em; text-align: left; margin-top: auto; margin-bottom: auto; order:1; color: #6c6c6c; padding: 0 12px;">
                     {{managed_service[service_name].short_desc}}
                 </span>
 
@@ -38,6 +45,13 @@
                 <span style="color: #fefefe; font-size: 1em;display: block; margin-top: 16px; line-height: 1.75; font-weight: normal;">
                     {{managed_service[service_name].description}}
                 </span>
+            </div>
+
+            <div v-if="!isMobile" style="width: 100%; margin-top: 16px; display: flex; justify-content: center">
+
+                <button class="create-msvc-btn" @click="deploy">اتمام ساخت</button>
+                <button class="cancel-msvc-btn" @click="cancel">انصراف</button>
+
             </div>
 
         </div>
@@ -151,6 +165,9 @@
         computed: {
             service_name() {
                 return this.$route.query.hasOwnProperty('service') ? this.$route.query.service : null
+            },
+            isMobile() {
+                return this.$store.state.windowWidth <= 1024;
             }
         },
         created() {
@@ -163,6 +180,48 @@
 
         },
         methods: {
+            deploy() {
+
+                if (this.isManifestValid()) {
+                    this.loading = true
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.$store.dispatch('createServiceManifest').then(res => {
+                        this.loading = false
+                        this.finished = true
+                        // removeValue('name')
+                        // removeValue('versions')
+                        this.$store.commit("SET_DATA", {id: "service", data: res});
+                        this.$router.replace(`/dashboard/services/${res.name}`)
+                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                    }).catch(e => {
+                        this.loading = false
+                        this.finished = false
+                        // ErrorReporter(e, [], true).forEach(error => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        //
+                        // })
+                        this.$notify({
+                            title: e,
+                            time: 4000,
+                            type: 'error'
+                        })
+                    })
+                }
+            },
+            cancel(){
+                if (confirm('در صورت خروج تغییراتی که وارد کرده‌اید از بین خواهند رفت. آیا خارج می‌شوید؟')) {
+                    this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                    this.$router.go(-1)
+                }
+            },
+            leaving() {
+                if (!this.finished) {
+                    if (confirm('در صورت خروج تغییراتی که وارد کرده‌اید از بین خواهند رفت. آیا خارج می‌شوید؟')) {
+                    } else {
+                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                    }
+                }
+            },
             addToManifest(value, path) {
                 this.$store.dispatch('manifestGenerator', {
                     value: value,
@@ -214,6 +273,69 @@
 </script>
 
 <style lang="stylus" scoped>
+
+    .right-pane
+        width 100%
+        min-height 600px
+        padding 0
+        order 1
+        @media only screen and (max-width: 1025px)
+            order: 2
+            padding 16px
+
+
+    .left-pane
+        width 100%
+        order 2
+        position: sticky;
+        top: 60px;
+        z-index: 10;
+        height: max-content
+        @media only screen and (max-width: 1025px)
+            order: 1
+            position: unset
+
+
+    .create-msvc-btn
+        font-family: iran-yekan
+        text-align: center
+        font-size: 1em
+        font-weight: bold
+        color: #fefefe
+        flex 1 1 auto
+        max-width 200px
+        min-width 100px
+        min-font-size 10px
+        max-font-size 16px
+        height 45px
+        border-radius: 3px
+        vertical-align: middle
+        margin-left 6px
+        margin-right 6px
+        outline: none
+        box-shadow: 0 2px 5px 1px rgba(36, 213, 216, 0.5)
+        background-color: #24d5d8
+
+    .cancel-msvc-btn
+        font-family: iran-yekan
+        text-align: center
+        font-size: 1em
+        font-weight: bold
+        color: #151515
+        flex 1 1 auto
+        max-width 200px
+        min-width 100px
+        min-font-size 10px
+        max-font-size 16px
+        height 45px
+        border-radius: 3px
+        vertical-align: middle
+        margin-left 6px
+        margin-right 6px
+        outline: none
+        box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.1)
+        background-color: #fefefe
+
 
     div.image-container
         display inline-flex
