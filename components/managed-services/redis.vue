@@ -207,6 +207,36 @@
                     this.redis_manifest.volume_name.value = null
                 }
             },
+        },
+        mounted() {
+            this.redis_manifest.password.value = 'root'
+            this.redis_manifest.volume_name.value = null
+
+        }, watch: {
+            'redis_manifest.password': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'redis_password') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value.toString().length > 0)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
+            'redis_manifest.volume_name': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'volume_name') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value !== null)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
         }
     }
 </script>

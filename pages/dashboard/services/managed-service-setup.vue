@@ -182,7 +182,7 @@
         methods: {
             deploy() {
 
-                if (this.isManifestValid()) {
+                // if (this.isManifestValid()) {
                     this.loading = true
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.$store.dispatch('createServiceManifest').then(res => {
@@ -206,7 +206,7 @@
                             type: 'error'
                         })
                     })
-                }
+                // }
             },
             cancel(){
                 if (confirm('در صورت خروج تغییراتی که وارد کرده‌اید از بین خواهند رفت. آیا خارج می‌شوید؟')) {
@@ -246,7 +246,7 @@
                             this.deleteFromManifest('name')
                         }
                     }
-                }
+                }, deep: true
             },
             'managed_service_manifest.memory': {
                 handler: function (value, oldValue) {
@@ -289,7 +289,6 @@
         order 2
         position: sticky;
         top: 60px;
-        z-index: 10;
         height: max-content
         @media only screen and (max-width: 1025px)
             order: 1

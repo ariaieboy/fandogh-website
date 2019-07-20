@@ -79,7 +79,7 @@
 
                     <div>
                         <span style="font-size: 0.8em; line-height: 1.75">
-                            {{phpmyadmin_enbled.hint}}
+                            {{phpmyadmin_enabled.hint}}
                         </span>
                     </div>
 
@@ -150,6 +150,7 @@
 
     export default {
         name: "mysql",
+        layout: 'dashboard',
         components: {
             ConfigBox,
             Popover,
@@ -198,7 +199,7 @@
                     name: ''
 
                 },
-                phpmyadmin_enbled: {
+                phpmyadmin_enabled: {
                     label: 'PhpMyAdmin رابط ادمین',
                     hint: 'در صورتی که نیاز دارید از رابط ادمین PhpMyAdmin استفاده کنید، آن را فعال نمایید. این قابلیت به صورت پیش‌فرض انتخاب برای شما ساخته خواهد شد.',
                     name: ''
@@ -213,7 +214,7 @@
                         name: 'mysql_root_password',
                         value: 'root'
                     },
-                    phpmyadmin_enbled: {
+                    phpmyadmin_enabled: {
                         name: 'phpmyadmin_enabled',
                         value: true
                     },
@@ -268,7 +269,50 @@
             },
             phpMyAdminSelected() {
                 this.phpmyadmin.selected = !this.phpmyadmin.selected
+                this.mysql_manifest.phpmyadmin_enabled.value = this.phpmyadmin.selected
             }
+        },
+        mounted() {
+            this.mysql_manifest.phpmyadmin_enabled.value = true
+            this.mysql_manifest.password.value = 'root'
+            this.mysql_manifest.volume_name.value = null
+
+        }, watch: {
+            'mysql_manifest.phpmyadmin_enabled': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'phpmyadmin_enabled') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
+            'mysql_manifest.password': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'mysql_root_password') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value.toString().length > 0)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
+            'mysql_manifest.volume_name': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'volume_name') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value !== null)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
         }
     }
 </script>

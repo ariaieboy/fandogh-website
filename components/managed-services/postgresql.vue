@@ -78,7 +78,7 @@
 
                     <div>
                         <span style="font-size: 0.8em; line-height: 1.75">
-                            {{adminer_enbled.hint}}
+                            {{adminer_enabled.hint}}
                         </span>
                     </div>
 
@@ -198,7 +198,7 @@
                     name: ''
 
                 },
-                adminer_enbled: {
+                adminer_enabled: {
                     label: 'Adminer رابط ادمین',
                     hint: 'در صورتی که نیاز دارید از رابط ادمین Adminer استفاده کنید، آن را فعال نمایید. این قابلیت به صورت پیش‌فرض انتخاب برای شما ساخته خواهد شد.',
                     name: ''
@@ -213,7 +213,7 @@
                         name: 'postgres_password',
                         value: 'postgres'
                     },
-                    adminer_enbled: {
+                    adminer_enabled: {
                         name: 'adminer_enabled',
                         value: true
                     },
@@ -269,6 +269,48 @@
             adminerSelected() {
                 this.adminer.selected = !this.adminer.selected
             }
+        },
+        mounted() {
+            this.postgresql_manifest.adminer_enabled.value = true
+            this.postgresql_manifest.password.value = 'postgres'
+            this.postgresql_manifest.volume_name.value = null
+
+        }, watch: {
+            'postgresql_manifest.adminer_enabled': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'adminer_enabled') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
+            'postgresql_manifest.password': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'postgres_password') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value.toString().length > 0)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
+            'postgresql_manifest.volume_name': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'volume_name') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value !== null)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+                ,immediate: true
+            },
         }
     }
 </script>
