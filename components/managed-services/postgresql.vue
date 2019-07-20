@@ -84,7 +84,7 @@
 
                     <div style="margin-top: 16px">
                         <fan-checkbox
-                                @click.native="phpMyAdminSelected"
+                                @click.native="adminerSelected"
                                 v-tooltip="adminer.tooltip"
                                 :object="adminer">
 
@@ -266,7 +266,7 @@
                     this.postgresql_manifest.volume_name.value = null
                 }
             },
-            phpMyAdminSelected() {
+            adminerSelected() {
                 this.adminer.selected = !this.adminer.selected
             }
         }
