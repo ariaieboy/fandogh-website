@@ -2,7 +2,14 @@
     <div class="row">
 
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-             style="width: 100%; min-height: 600px; background-color: orangered">
+             style="width: 100%; min-height: 600px;padding: 0">
+
+            <component :is="'Mysql'"
+                       class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                       style="padding: 0;"
+                       v-model="managed_service_manifest">
+
+            </component>
 
         </div>
 
@@ -40,10 +47,16 @@
 </template>
 
 <script>
+
+    import Mysql from "../../../components/managed-services/mysql";
+
     export default {
         name: "managed-service-setup",
         layout: 'dashboard',
         service_name: null,
+        components:{
+          Mysql,
+        },
         data() {
             return {
 
