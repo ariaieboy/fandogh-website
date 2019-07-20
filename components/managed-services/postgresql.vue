@@ -1,5 +1,4 @@
 <template>
-
     <div>
         <div>
             <config-box :section-title="sections.service_config">
@@ -35,7 +34,7 @@
                                 color="#0093ff"
                                 required
                                 :rules="[rules.counter, rules.required, rules.regex]"
-                                v-model="mysql_manifest.password.value"
+                                v-model="postgresql_manifest.password.value"
                                 :label="password.label"
                                 :hint="password.hint">
 
@@ -72,22 +71,22 @@
 
             </config-box>
 
-            <config-box :section-title="sections.phpmyadmin_config">
+            <config-box :section-title="sections.adminer_config">
 
                 <div style="width: 100%">
 
 
                     <div>
                         <span style="font-size: 0.8em; line-height: 1.75">
-                            {{phpmyadmin_enbled.hint}}
+                            {{adminer_enbled.hint}}
                         </span>
                     </div>
 
                     <div style="margin-top: 16px">
                         <fan-checkbox
                                 @click.native="phpMyAdminSelected"
-                                v-tooltip="phpmyadmin.tooltip"
-                                :object="phpmyadmin">
+                                v-tooltip="adminer.tooltip"
+                                :object="adminer">
 
                         </fan-checkbox>
                     </div>
@@ -122,7 +121,7 @@
                                       dir="ltr"
                                       color="#0093ff"
                                       :rules="[rules.volume_name_regex, rules.required]"
-                                      v-model="mysql_manifest.volume_name.value"
+                                      v-model="postgresql_manifest.volume_name.value"
                                       :label="volume_name.label"
                                       :hint="volume_name.hint">
 
@@ -140,16 +139,17 @@
 
 
     </div>
-
 </template>
 
 <script>
+
     import ConfigBox from "../../components/wizard/box/config-box";
     import Popover from "../../components/wizard/tooltip/popover";
     import FanCheckbox from "../../components/wizard/select-box/fan-checkbox";
 
+
     export default {
-        name: "mysql",
+        name: "postgresql",
         components: {
             ConfigBox,
             Popover,
@@ -170,37 +170,37 @@
                     label: "Shared Storage",
                     value: "SharedStorage",
                     selected: true,
-                    tooltip: 'در صورت فعال بودن این گزینه داده‌های شما در پوشه mysql در Shared Storage ذخیره خواهند شد'
+                    tooltip: 'در صورت فعال بودن این گزینه داده‌های شما در پوشه postgresql در Shared Storage ذخیره خواهند شد'
                 },
-                phpmyadmin: {
-                    label: "PhpMyAdmin",
-                    value: "PhpMyAdmin",
+                adminer: {
+                    label: "Adminer",
+                    value: "Adminer",
                     selected: true,
-                    tooltip: 'با استفاده از این دکمه می‌توانید تعیین کنید رابط ادمین PhpMyAdmin ساخته شود یا خیر'
+                    tooltip: 'با استفاده از این دکمه می‌توانید تعیین کنید رابط ادمین Adminer ساخته شود یا خیر'
                 },
                 volumes: [
                     {
                         label: "Shared Storage",
                         value: "SharedStorage",
                         selected: true,
-                        tooltip: 'داده‌های شما در پوشه mysql در Shared Storage ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه postgresql در Shared Storage ذخیره خواهند شد'
                     },
                     {
                         label: "Dedicated Volume",
                         value: "DedicatedVolume",
                         selected: false,
-                        tooltip: 'داده‌های شما در پوشه mysql در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه postgresql در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
                     }
                 ],
                 password: {
                     label: 'رمز عبور database',
-                    hint: 'رمز عبور به صورت پیش فرض root است',
+                    hint: 'رمز عبور به صورت پیش فرض posgres است',
                     name: ''
 
                 },
-                phpmyadmin_enbled: {
-                    label: 'PhpMyAdmin رابط ادمین',
-                    hint: 'در صورتی که نیاز دارید از رابط ادمین PhpMyAdmin استفاده کنید، آن را فعال نمایید. این قابلیت به صورت پیش‌فرض انتخاب برای شما ساخته خواهد شد.',
+                adminer_enbled: {
+                    label: 'Adminer رابط ادمین',
+                    hint: 'در صورتی که نیاز دارید از رابط ادمین Adminer استفاده کنید، آن را فعال نمایید. این قابلیت به صورت پیش‌فرض انتخاب برای شما ساخته خواهد شد.',
                     name: ''
                 },
                 volume_name: {
@@ -208,13 +208,13 @@
                     hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند',
                     name: ''
                 },
-                mysql_manifest: {
+                postgresql_manifest: {
                     password: {
-                        name: 'mysql_root_password',
-                        value: 'root'
+                        name: 'postgres_password',
+                        value: 'postgres'
                     },
-                    phpmyadmin_enbled: {
-                        name: 'phpmyadmin_enabled',
+                    adminer_enbled: {
+                        name: 'adminer_enabled',
                         value: true
                     },
                     volume_name: {
@@ -249,9 +249,9 @@
                     }
                 },
                 sections: {
-                    service_config: 'تنظیمات سرویس Mysql',
+                    service_config: 'تنظیمات سرویس Postgresql',
                     storage_config: 'تعیین محل ذخیره سازی',
-                    phpmyadmin_config: 'تنظیمات PhpMyAdmin'
+                    adminer_config: 'تنظیمات Adminer'
                 },
             }
         }, methods: {
@@ -263,11 +263,11 @@
                 this.volumes[index].selected = true
                 this.selected_volume = this.volumes[index]
                 if (this.selected_volume.label !== 'DedicatedVolume') {
-                    this.mysql_manifest.volume_name.value = null
+                    this.postgresql_manifest.volume_name.value = null
                 }
             },
             phpMyAdminSelected() {
-                this.phpmyadmin.selected = !this.phpmyadmin.selected
+                this.adminer.selected = !this.adminer.selected
             }
         }
     }
