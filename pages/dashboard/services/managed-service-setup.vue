@@ -211,7 +211,7 @@
 
 
                 this.managed_service_manifest.parameters.forEach(item => {
-                    if(item.name === 'volume_name'){
+                    if (item.name === 'volume_name') {
                         if (this.rules.regex(item.value) !== true ||
                             this.rules.required(item.value) !== true ||
                             this.rules.counter(item.value) !== true) {
@@ -225,6 +225,44 @@
                     }
                 });
 
+
+                if (this.managed_service[this.service_name].title === 'Mysql' || this.managed_service[this.service_name].title === 'Postgresql') {
+
+
+                    if (this.managed_service[this.service_name].title === 'Mysql') {
+                        let mysql_root_password_enbabaled = false
+                        this.managed_service_manifest.parameters.forEach(item => {
+                            if (item.name === 'mysql_root_password') {
+                                mysql_root_password_enbabaled = true
+                            }
+                        });
+
+                        if (!mysql_root_password_enbabaled) {
+                            this.$notify({
+                                title: 'لطفا رمز عبور Mysql را مشخص نمایید',
+                                time: 4000,
+                                type: 'error'
+                            });
+                            return false
+                        }
+                    } else {
+                        let postgres_password = false
+                        this.managed_service_manifest.parameters.forEach(item => {
+                            if (item.name === 'postgres_password') {
+                                postgres_password = true
+                            }
+                        });
+
+                        if (!postgres_password) {
+                            this.$notify({
+                                title: 'لطفا رمز عبور Postgresql را مشخص نمایید',
+                                time: 4000,
+                                type: 'error'
+                            });
+                            return false
+                        }
+                    }
+                }
 
                 return true
             },
@@ -334,42 +372,57 @@
                     path: path
                 })
             },
-        }, watch: {
-            'managed_service_manifest.name': {
-                handler: function (value, oldValue) {
-                    let name = value.name
-                    if (name.length.valueOf() === 0) {
-                        this.deleteFromManifest('name')
-                    } else {
-                        if (this.rules.required(name) === true && this.rules.counter(name) === true && this.rules.service_regex(name) === true) {
-                            this.addToManifest(name, 'name')
-                        } else {
+        }
+        ,
+        watch: {
+            'managed_service_manifest.name':
+                {
+                    handler: function (value, oldValue) {
+                        let name = value.name
+                        if (name.length.valueOf() === 0) {
                             this.deleteFromManifest('name')
+                        } else {
+                            if (this.rules.required(name) === true && this.rules.counter(name) === true && this.rules.service_regex(name) === true) {
+                                this.addToManifest(name, 'name')
+                            } else {
+                                this.deleteFromManifest('name')
+                            }
                         }
                     }
-                }, deep: true
-            },
-            'managed_service_manifest.memory': {
-                handler: function (value, oldValue) {
-                    let memory = parseInt(value.amount);
-                    if (this.rules.default_memory(memory) !== true) {
-                        this.deleteFromManifest('spec.resources.memory')
-                    } else {
-                        this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
-                    }
+                    ,
+                    deep: true
+                }
+            ,
+            'managed_service_manifest.memory':
+                {
+                    handler: function (value, oldValue) {
+                        let memory = parseInt(value.amount);
+                        if (this.rules.default_memory(memory) !== true) {
+                            this.deleteFromManifest('spec.resources.memory')
+                        } else {
+                            this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
+                        }
 
-                }, deep: true
-            },
-            'managed_service_manifest.parameters': {
-                handler: function (value, oldValue) {
-                    if ([...value].length === 0) {
-                        this.deleteFromManifest('spec.parameters')
-                    } else {
-                        this.addToManifest([...value], 'spec.parameters')
                     }
-                }, deep: true
-            }
-        }, beforeDestroy() {
+                    ,
+                    deep: true
+                }
+            ,
+            'managed_service_manifest.parameters':
+                {
+                    handler: function (value, oldValue) {
+                        if ([...value].length === 0) {
+                            this.deleteFromManifest('spec.parameters')
+                        } else {
+                            this.addToManifest([...value], 'spec.parameters')
+                        }
+                    }
+                    ,
+                    deep: true
+                }
+        }
+        ,
+        beforeDestroy() {
             this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
         }
     }

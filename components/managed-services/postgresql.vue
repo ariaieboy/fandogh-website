@@ -211,7 +211,7 @@
                 postgresql_manifest: {
                     password: {
                         name: 'postgres_password',
-                        value: 'postgres'
+                        value: ''
                     },
                     adminer_enabled: {
                         name: 'adminer_enabled',
@@ -249,7 +249,7 @@
                     },
                     password:{
                         title: 'رمز عبور database',
-                        text: 'رمز عبوری که برای database خود انتخاب میکنید،‌در صورتی خالی گذاشتن این بخش، رمز عبور پیش فرض postgres خواهد بود.',
+                        text: 'رمز عبوری که برای database خود انتخاب میکنید.',
                         url: '#'
                     }
                 },
@@ -278,11 +278,7 @@
         },
         mounted() {
 
-            if (this.manifest_model.parameters.length === 0) {
-                this.postgresql_manifest.adminer_enabled.value = true
-                this.postgresql_manifest.password.value = 'postgres'
-                this.postgresql_manifest.volume_name.value = null
-            }else {
+            if (this.manifest_model.parameters.length !== 0) {
                 this.manifest_model.parameters.forEach(param => {
                     if(param.name === 'adminer_enabled'){
                         this.postgresql_manifest.adminer_enabled.value = param.value
