@@ -171,7 +171,7 @@
                     label: "Shared Storage",
                     value: "SharedStorage",
                     selected: true,
-                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد'
+                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد.'
                 },
                 phpmyadmin: {
                     label: "PhpMyAdmin",
@@ -184,13 +184,13 @@
                         label: "Shared Storage",
                         value: "SharedStorage",
                         selected: true,
-                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد.'
                     },
                     {
                         label: "Dedicated Volume",
                         value: "DedicatedVolume",
                         selected: false,
-                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume مورد نظر شما ذخیره خواهند شد.'
                     }
                 ],
                 password: {

@@ -170,7 +170,7 @@
                     label: "Shared Storage",
                     value: "SharedStorage",
                     selected: true,
-                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد'
+                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد.'
                 },
                 adminer: {
                     label: "Adminer",
@@ -183,13 +183,13 @@
                         label: "Shared Storage",
                         value: "SharedStorage",
                         selected: true,
-                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد.'
                     },
                     {
                         label: "Dedicated Volume",
                         value: "DedicatedVolume",
                         selected: false,
-                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume مورد نظر شما ذخیره خواهند شد.'
                     }
                 ],
                 password: {
@@ -205,7 +205,7 @@
                 },
                 volume_name: {
                     label: 'نام Volume',
-                    hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند',
+                    hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند.',
                     name: ''
                 },
                 postgresql_manifest: {

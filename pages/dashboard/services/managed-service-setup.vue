@@ -3,13 +3,13 @@
 
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right-pane">
 
-                <component :is="managed_service[service_name].title"
-                           class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                           style="padding: 0;"
-                           v-if="isInitialized"
-                           v-model="managed_service_manifest">
+            <component :is="managed_service[service_name].title"
+                       class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                       style="padding: 0;"
+                       v-if="isInitialized"
+                       v-model="managed_service_manifest">
 
-                </component>
+            </component>
 
 
             <div v-if="isMobile" style="width: 100%; margin-top: 16px; display: flex; justify-content: center">
@@ -36,7 +36,8 @@
                 <div style="width: 2px; background-color: #2979ff; margin: 16px 0; border-radius: 25px; order: 2">
 
                 </div>
-                <span :style="{fontSize: (managed_service[service_name].title.toLowerCase() === 'redis'? '1.5em': '2em')}" style="flex: 1; font-family: iran-yekan; text-align: left; margin-top: auto; margin-bottom: auto; order:1; color: #6c6c6c; padding: 0 12px;">
+                <span :style="{fontSize: (managed_service[service_name].title.toLowerCase() === 'redis'? '1.5em': '2em')}"
+                      style="flex: 1; font-family: iran-yekan; text-align: left; margin-top: auto; margin-bottom: auto; order:1; color: #6c6c6c; padding: 0 12px;">
                     {{managed_service[service_name].short_desc}}
                 </span>
 
@@ -116,7 +117,7 @@
                             icon: 'mysql',
                             path: "mysql",
                             version: '5.7',
-                            description: 'MySQL یکی از محبوب‌ترین RDBMS‌های امروزی است که طرفداران زیادی در ایران داد، به همین دلیل MySQL به عنوان اولین managed-service به فندق اضافه شد.\n' +
+                            description: 'MySQL یکی از محبوب‌ترین RDBMS‌های امروزی است که طرفداران زیادی در ایران دارد، به همین دلیل MySQL به عنوان اولین managed-service به فندق اضافه شد.\n' +
                                 'این managed-service از دو سرویس متفاوت تشکیل شده، یکی خود MySQL و دیگری PHPMyAdmin که یک رابط کاربری تحت وب برای MySQL است.'
 
                         },
@@ -158,8 +159,8 @@
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
                     service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
-                    default_replica: value => value >= 1 || 'کمترین مقدار مجاز ۱ است',
-                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد'
+                    regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
+                    volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                 }
 
             }
@@ -187,6 +188,46 @@
 
         },
         methods: {
+            isManifestValid() {
+                if (this.managed_service_manifest.name.name.length === 0) {
+                    this.$notify({
+                        title: 'نام سرویس را وارد نکرده‌اید',
+                        time: 4000,
+                        type: 'error'
+                    });
+                    return false
+                }
+
+                if (this.rules.regex(this.managed_service_manifest.name.name) !== true ||
+                    this.rules.required(this.managed_service_manifest.name.name) !== true ||
+                    this.rules.counter(this.managed_service_manifest.name.name) !== true) {
+                    this.$notify({
+                        title: 'نام سرویس قابل قبول نیست',
+                        time: 4000,
+                        type: 'error'
+                    });
+                    return false
+                }
+
+
+                this.managed_service_manifest.parameters.forEach(item => {
+                    if(item.name === 'volume_name'){
+                        if (this.rules.regex(item.value) !== true ||
+                            this.rules.required(item.value) !== true ||
+                            this.rules.counter(item.value) !== true) {
+                            this.$notify({
+                                title: 'نام volume قابل قبول نیست',
+                                time: 4000,
+                                type: 'error'
+                            });
+                            return false
+                        }
+                    }
+                });
+
+
+                return true
+            },
             populateManifest(manifest) {
 
                 this.addToManifest(this.managed_service_manifest.kind.name, 'kind')
@@ -239,34 +280,34 @@
             },
             deploy() {
 
-                // if (this.isManifestValid()) {
-                this.loading = true
-                this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                this.$store.dispatch('createServiceManifest').then(res => {
-                    setTimeout(() => {
-                        this.loading = false
-                        this.finished = true
-                        // removeValue('name')
-                        // removeValue('versions')
-                        this.$store.commit("SET_DATA", {id: "service", data: res});
-                        this.$router.replace(`/dashboard/services/${res.name}`)
-                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
-                    }, 5000);
+                if (this.isManifestValid()) {
+                    this.loading = true
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.$store.dispatch('createServiceManifest').then(res => {
+                        setTimeout(() => {
+                            this.loading = false
+                            this.finished = true
+                            // removeValue('name')
+                            // removeValue('versions')
+                            this.$store.commit("SET_DATA", {id: "service", data: res});
+                            this.$router.replace(`/dashboard/services/${res.name}`)
+                            this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                        }, 5000);
 
-                }).catch(e => {
-                    this.loading = false
-                    this.finished = false
-                    // ErrorReporter(e, [], true).forEach(error => {
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    //
-                    // })
-                    this.$notify({
-                        title: e,
-                        time: 4000,
-                        type: 'error'
+                    }).catch(e => {
+                        this.loading = false
+                        this.finished = false
+                        // ErrorReporter(e, [], true).forEach(error => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        //
+                        // })
+                        this.$notify({
+                            title: e,
+                            time: 4000,
+                            type: 'error'
+                        })
                     })
-                })
-                // }
+                }
             },
             cancel() {
                 if (confirm('در صورت خروج تغییراتی که وارد کرده‌اید از بین خواهند رفت. آیا خارج می‌شوید؟')) {
@@ -328,7 +369,7 @@
                     }
                 }, deep: true
             }
-        },beforeDestroy() {
+        }, beforeDestroy() {
             this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
         }
     }

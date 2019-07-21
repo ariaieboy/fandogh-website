@@ -146,7 +146,7 @@
                     label: "Dedicated Volume",
                     value: "DedicatedVolume",
                     selected: false,
-                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume ذخیره خواهند شد'
+                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume ذخیره خواهند شد.'
                 },
                 password: {
                     label: 'رمز عبور database',
@@ -156,7 +156,7 @@
                 },
                 volume_name: {
                     label: 'نام Volume',
-                    hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند',
+                    hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند.',
                     name: ''
                 },
                 redis_manifest: {
