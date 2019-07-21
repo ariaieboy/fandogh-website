@@ -277,7 +277,6 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
 
                 if (this.manifest_model.volumes.volume.sub_path.trim().length === 0 ||
-                    this.rules.no_space(this.manifest_model.volumes.volume.sub_path) !== true ||
                     this.rules.no_slash(this.manifest_model.volumes.volume.sub_path) !== true) {
                     this.$refs.sub_path_selector.focus()
                     return;
