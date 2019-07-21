@@ -207,10 +207,20 @@
                     this.redis_manifest.volume_name.value = null
                 }
             },
-        },
-        mounted() {
-            this.redis_manifest.password.value = 'root'
-            this.redis_manifest.volume_name.value = null
+        },mounted() {
+
+            if (this.manifest_model.parameters.length === 0) {
+                this.redis_manifest.password.value = 'root'
+                this.redis_manifest.volume_name.value = null
+            }else {
+                this.manifest_model.parameters.forEach(param => {
+                    if(param.name === 'redis_password'){
+                        this.redis_manifest.password.value = param.value
+                    }else {
+                        this.redis_manifest.volume_name.value = param.value
+                    }
+                })
+            }
 
         }, watch: {
             'redis_manifest.password': {
@@ -223,7 +233,6 @@
                     if (value.value.toString().length > 0)
                         this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
             'redis_manifest.volume_name': {
                 handler: function (value, oldvalue) {
@@ -235,7 +244,6 @@
                     if (value.value !== null)
                         this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
         }
     }

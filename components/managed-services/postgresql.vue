@@ -268,12 +268,27 @@
             },
             adminerSelected() {
                 this.adminer.selected = !this.adminer.selected
+                this.postgresql_manifest.adminer_enabled.value = this.adminer.selected
             }
         },
         mounted() {
-            this.postgresql_manifest.adminer_enabled.value = true
-            this.postgresql_manifest.password.value = 'postgres'
-            this.postgresql_manifest.volume_name.value = null
+
+            if (this.manifest_model.parameters.length === 0) {
+                this.postgresql_manifest.adminer_enabled.value = true
+                this.postgresql_manifest.password.value = 'postgres'
+                this.postgresql_manifest.volume_name.value = null
+            }else {
+                this.manifest_model.parameters.forEach(param => {
+                    if(param.name === 'adminer_enabled'){
+                        this.postgresql_manifest.adminer_enabled.value = param.value
+                        this.adminer.selected = param.value
+                    }else if(param.name === 'postgres_password'){
+                        this.postgresql_manifest.password.value = param.value
+                    }else {
+                        this.postgresql_manifest.volume_name.value = param.value
+                    }
+                })
+            }
 
         }, watch: {
             'postgresql_manifest.adminer_enabled': {
@@ -285,7 +300,6 @@
                     });
                     this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
             'postgresql_manifest.password': {
                 handler: function (value, oldvalue) {
@@ -297,7 +311,6 @@
                     if (value.value.toString().length > 0)
                         this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
             'postgresql_manifest.volume_name': {
                 handler: function (value, oldvalue) {
@@ -309,7 +322,6 @@
                     if (value.value !== null)
                         this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
         }
     }

@@ -273,9 +273,23 @@
             }
         },
         mounted() {
-            this.mysql_manifest.phpmyadmin_enabled.value = true
-            this.mysql_manifest.password.value = 'root'
-            this.mysql_manifest.volume_name.value = null
+
+            if (this.manifest_model.parameters.length === 0) {
+                this.mysql_manifest.phpmyadmin_enabled.value = true
+                this.mysql_manifest.password.value = 'root'
+                this.mysql_manifest.volume_name.value = null
+            }else {
+                this.manifest_model.parameters.forEach(param => {
+                    if(param.name === 'phpmyadmin_enabled'){
+                        this.mysql_manifest.phpmyadmin_enabled.value = param.value
+                        this.phpmyadmin.selected = param.value
+                    }else if(param.name === 'mysql_root_password'){
+                        this.mysql_manifest.password.value = param.value
+                    }else {
+                        this.mysql_manifest.volume_name.value = param.value
+                    }
+                })
+            }
 
         }, watch: {
             'mysql_manifest.phpmyadmin_enabled': {
@@ -287,7 +301,6 @@
                     });
                     this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
             'mysql_manifest.password': {
                 handler: function (value, oldvalue) {
@@ -299,7 +312,6 @@
                     if (value.value.toString().length > 0)
                         this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
             'mysql_manifest.volume_name': {
                 handler: function (value, oldvalue) {
@@ -311,7 +323,6 @@
                     if (value.value !== null)
                         this.manifest_model.parameters.push(value)
                 }, deep: true
-                ,immediate: true
             },
         }
     }

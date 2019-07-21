@@ -3,12 +3,13 @@
 
         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 right-pane">
 
-            <component :is="managed_service[service_name].title"
-                       class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                       style="padding: 0;"
-                       v-model="managed_service_manifest">
+                <component :is="managed_service[service_name].title"
+                           class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                           style="padding: 0;"
+                           v-if="isInitialized"
+                           v-model="managed_service_manifest">
 
-            </component>
+                </component>
 
 
             <div v-if="isMobile" style="width: 100%; margin-top: 16px; display: flex; justify-content: center">
@@ -81,6 +82,7 @@
             return {
 
 
+                isInitialized: false,
                 managed_service_manifest: {
                     kind: {
                         local_name: 'Managed Service',
@@ -170,22 +172,77 @@
                 return this.$store.state.windowWidth <= 1024;
             }
         },
-        created() {
+        mounted() {
             this.$store.commit("SET_DATA", {data: false, id: "loading"})
             let manifest = this.$store.state.manifest
 
-            this.addToManifest(this.managed_service_manifest.kind.name, 'kind')
-            this.addToManifest(this.managed_service[this.service_name].title.toLowerCase(), 'spec.service_name')
-            this.addToManifest(this.managed_service[this.service_name].version, 'spec.version')
+            //populating manifest
+            if (this.$route.query.hasOwnProperty('service_name')) {
+                this.dumpManifest(this.$route.query.service_name, manifest)
+            } else {
+                manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
+                this.populateManifest(manifest)
+            }
 
         },
         methods: {
+            populateManifest(manifest) {
+
+                this.addToManifest(this.managed_service_manifest.kind.name, 'kind')
+                this.addToManifest(this.managed_service[this.service_name].title.toLowerCase(), 'spec.service_name')
+                this.addToManifest(this.managed_service[this.service_name].version, 'spec.version')
+
+
+                if (manifest.hasOwnProperty('name')) {
+                    this.managed_service_manifest.name.name = manifest.name
+                }
+
+                if (manifest.hasOwnProperty('spec')) {
+                    let spec = manifest.spec
+
+                    if (spec.hasOwnProperty('parameters')) {
+                        spec.parameters.forEach(param => {
+                            this.managed_service_manifest.parameters.push(param)
+                        })
+                    }
+
+                    if (spec.hasOwnProperty('resources')) {
+                        this.managed_service_manifest.memory.amount = parseInt(spec.resources.memory.toString().replace('Mi', ''))
+                    }
+
+                }
+
+                this.isInitialized = true
+            },
+            async dumpManifest(service_name, manifest) {
+                this.loading = true;
+                await this.$store.dispatch('dumpServiceManifest', service_name)
+                    .then(response => {
+                        this.loading = false
+                        manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
+                        this.deleteFromManifest('spec.replicas');
+                        this.populateManifest(manifest)
+                    }).catch(e => {
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    })
+            },
             deploy() {
 
                 // if (this.isManifestValid()) {
-                    this.loading = true
-                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                    this.$store.dispatch('createServiceManifest').then(res => {
+                this.loading = true
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                this.$store.dispatch('createServiceManifest').then(res => {
+                    setTimeout(() => {
                         this.loading = false
                         this.finished = true
                         // removeValue('name')
@@ -193,22 +250,24 @@
                         this.$store.commit("SET_DATA", {id: "service", data: res});
                         this.$router.replace(`/dashboard/services/${res.name}`)
                         this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
-                    }).catch(e => {
-                        this.loading = false
-                        this.finished = false
-                        // ErrorReporter(e, [], true).forEach(error => {
-                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                        //
-                        // })
-                        this.$notify({
-                            title: e,
-                            time: 4000,
-                            type: 'error'
-                        })
+                    }, 5000);
+
+                }).catch(e => {
+                    this.loading = false
+                    this.finished = false
+                    // ErrorReporter(e, [], true).forEach(error => {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    //
+                    // })
+                    this.$notify({
+                        title: e,
+                        time: 4000,
+                        type: 'error'
                     })
+                })
                 // }
             },
-            cancel(){
+            cancel() {
                 if (confirm('در صورت خروج تغییراتی که وارد کرده‌اید از بین خواهند رفت. آیا خارج می‌شوید؟')) {
                     this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                     this.$router.go(-1)
@@ -268,6 +327,8 @@
                     }
                 }, deep: true
             }
+        },beforeDestroy() {
+            this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
         }
     }
 </script>
@@ -319,7 +380,7 @@
         font-family: iran-yekan
         text-align: center
         font-size: 1em
-        font-weight: bold
+        font-weight: normal
         color: #151515
         flex 1 1 auto
         max-width 200px
