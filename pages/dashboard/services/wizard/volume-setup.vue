@@ -45,7 +45,7 @@
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
                                 color="#0093ff"
-                                :rules="[rules.required]"
+                                :rules="[rules.required, rules.no_slash]"
                                 v-model="manifest_model.volumes.volume.sub_path"
                                 :label="volume_obj.sub_path_label"
                                 :hint="volume_obj.sub_path_hint">
@@ -132,6 +132,7 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
                     required: value => value !== '' || 'مقدار این فیلد نمی‌تواند خالی باشد',
                     is_root_addressed: value => value.toString().startsWith('/') || value.toString() === '' || 'آدرس وارد شده، باید از root (/) شروع شود',
                     no_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
+                    no_slash: value => !value.toString().startsWith('/') || '/ مجاز نیست',
                     volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     redundant: value => (this.allowed_name === null ? this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0 : this.allowed_name === value || this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0) || 'مقدار تکراری است',
                 },
@@ -276,7 +277,8 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
 
                 if (this.manifest_model.volumes.volume.sub_path.trim().length === 0 ||
-                    this.rules.no_space(this.manifest_model.volumes.volume.sub_path) !== true) {
+                    this.rules.no_space(this.manifest_model.volumes.volume.sub_path) !== true ||
+                    this.rules.no_slash(this.manifest_model.volumes.volume.sub_path) !== true) {
                     this.$refs.sub_path_selector.focus()
                     return;
                 }
