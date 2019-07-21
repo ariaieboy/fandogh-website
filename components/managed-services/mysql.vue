@@ -212,7 +212,7 @@
                 mysql_manifest: {
                     password: {
                         name: 'mysql_root_password',
-                        value: 'root'
+                        value: ''
                     },
                     phpmyadmin_enabled: {
                         name: 'phpmyadmin_enabled',
@@ -250,7 +250,7 @@
                     },
                     password:{
                         title: 'رمز عبور database',
-                        text: 'رمز عبوری که برای database خود انتخاب میکنید،‌در صورتی خالی گذاشتن این بخش، رمز عبور پیش فرض root خواهد بود.',
+                        text: 'رمز عبوری که برای database خود انتخاب میکنید.',
                         url: '#'
                     }
                 },
@@ -279,11 +279,7 @@
         },
         mounted() {
 
-            if (this.manifest_model.parameters.length === 0) {
-                this.mysql_manifest.phpmyadmin_enabled.value = true
-                this.mysql_manifest.password.value = 'root'
-                this.mysql_manifest.volume_name.value = null
-            }else {
+            if (this.manifest_model.parameters.length !== 0) {
                 this.manifest_model.parameters.forEach(param => {
                     if(param.name === 'phpmyadmin_enabled'){
                         this.mysql_manifest.phpmyadmin_enabled.value = param.value
