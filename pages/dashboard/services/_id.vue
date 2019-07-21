@@ -5,14 +5,12 @@
         <div class="row" style="margin: 0 0 12px 0;">
             <div class="service-header">
 
-                <span class="service-name">
+                <div class="service-name-container">
                     <img
-                            style="border-radius: 100px; width: 24px; height: 24px; display: inline-block; margin-left: 7px;vertical-align: middle"
                             :src="(service.state.toString().toLowerCase() === 'running' && !this.removing ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
-                            :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']"
-                    >
-                    {{service.name}}
-                </span>
+                            :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']">
+                    <span >sdjndakjsndlaksdmalksdnaklsndasndasndasndkasndknaskjdnaskjdnaskjndjkansdnasjnd</span>
+                </div>
 
                 <div v-if="windowWidth > 766"
                      style="width: 1px; background-color: #7c7c7c; margin-left: 12px; margin-right: 12px; border-radius: 25px"></div>
@@ -21,7 +19,9 @@
 
                 <span class="service-spec">
                     نوع سرویس<br>
-                    <span style="font-size: 1.2em; color: black;padding-right: .2em">{{service.service_type}}</span>
+                    <span style="font-size: 1.2em; color: black;padding-right: .2em">{{service.service_type === 'managed'? 'Managed Service' :
+                        service.service_type === 'internal'? 'Internal Service': 'External Service'}}
+                    </span>
                 </span>
 
                 <span class="service-spec">
@@ -31,7 +31,7 @@
 
                 <div v-if="!removing" class="service-edit-container">
                     <span class="service-edit"
-                          @click="$router.push({ path: '/dashboard/services/wizard', query: {service: service_name} })">
+                          @click="editService">
                         ویرایش سرویس
                     </span>
                     <span class="service-delete"
@@ -128,6 +128,7 @@
                 activeSectionName: 'detail',
                 service_name: '',
                 image: this.$route.params.image,
+                manifest: Object
             };
         },
         created() {
@@ -136,6 +137,13 @@
             this.getData();
         },
         methods: {
+            editService() {
+                if (this.service.service_type === 'managed') {
+                    this.dumpManifest(this.service.name)
+                } else {
+                    this.$router.push({path: '/dashboard/services/wizard', query: {service: this.service.name}})
+                }
+            },
             remove() {
                 this.$ga.event({
                     eventCategory: "service",
@@ -193,8 +201,7 @@
                     if (res.state !== "RUNNING" || this.removing) {
                         setTimeout(() => {
                             this.getData();
-                            console.log(this.removing ? 1000 : 5000)
-                        }, this.removing? 1000 : 5000);
+                        }, this.removing ? 1000 : 5000);
                     } else {
                         clearInterval(internal);
                     }
@@ -203,10 +210,40 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (e.status === 401) {
                         this.$router.push("/user/login");
-                    }else {
+                    } else {
                         this.$router.push("/dashboard/services")
                     }
                 }
+            },
+            async dumpManifest(service_name) {
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                await this.$store.dispatch('dumpServiceManifest', service_name)
+                    .then(response => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+
+                        let service_name = JSON.parse(localStorage.getItem('vuex')).manifest.spec.service_name;
+                        this.$store.commit("SET_JSON_MANIFEST", {});
+
+                        this.$router.push({
+                            path: '/dashboard/services/managed-service-setup',
+                            query: {service: service_name, service_name: this.service.name}
+                        })
+
+
+                    }).catch(e => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    })
             },
             sectionClicked(sectionName) {
                 this.activeSectionName = sectionName;
@@ -311,7 +348,7 @@
             cursor pointer
             @media only screen and (max-width: 766px)
                 background-color #2979ff
-                margin-right  -1px
+                margin-right -1px
                 display inline-flex
 
             p
@@ -355,25 +392,49 @@
         @media only screen and (max-width: 766px)
             display block
 
-        span.service-name
-            margin-top auto
-            margin-bottom auto
-            font-size 1.5em
-            font-family iran-yekan
-            font-weight bold
-            text-align center
-            display inline-block
-            padding-right 16px
-            padding-left 16px
-            text-overflow ellipsis
+        .service-name-container
+            display flex
+            overflow auto
+            box-sizing border-box
+            max-width 550px
             @media only screen and (max-width: 766px)
-                font-size 1.8em
-                padding-bottom 12px
                 display block
-                padding-right 0
-                padding-left 0
+            span
+                margin-top auto
+                margin-bottom auto
+                font-size 1.5em
+                font-family iran-yekan
+                width 100%
+                font-weight bold
+                text-align center
+                display inline-block
+                padding-right 16px
+                padding-left 16px
+                white-space nowrap
+                overflow hidden
+                text-overflow ellipsis
+                @media only screen and (max-width: 766px)
+                    font-size 1.8em
+                    padding-bottom 12px
+                    display inline-block
+                    padding-right 0
+                    padding-left 0
+                    margin-top 12px
 
             img
+                border-radius 100px
+                width 30px
+                height 30px
+                display inline-flex
+                margin-left 7px
+                margin-top auto
+                margin-bottom auto
+                @media only screen and (max-width: 766px)
+                    display block
+                    margin-left auto
+                    margin-right auto
+                    margin-bottom 16
+
                 &.success
                     animation rotating 5s infinite linear
                     -webkit-animation rotating 5s infinite linear
@@ -478,7 +539,6 @@
                 -webkit-transform: rotate(0deg);
             }
         }
-
 
 
     .service-edit-container

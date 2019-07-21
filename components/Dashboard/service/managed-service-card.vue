@@ -64,6 +64,8 @@
             color #7c7c7c
             margin 0
             font-family iran-yekan
+            @media only screen and (max-width: 1000px)
+                font-size 1.5em
 
 
     .box:hover
