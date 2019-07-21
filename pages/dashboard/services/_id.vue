@@ -9,7 +9,7 @@
                     <img
                             :src="(service.state.toString().toLowerCase() === 'running' && !this.removing ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
                             :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']">
-                    <span >{{service.name}}</span>
+                    <span >sdjndakjsndlaksdmalksdnaklsndasndasndasndkasndknaskjdnaskjdnaskjndjkansdnasjnd</span>
                 </div>
 
                 <div v-if="windowWidth > 766"
@@ -394,6 +394,9 @@
 
         .service-name-container
             display flex
+            overflow auto
+            box-sizing border-box
+            max-width 550px
             @media only screen and (max-width: 766px)
                 display block
             span
@@ -401,6 +404,7 @@
                 margin-bottom auto
                 font-size 1.5em
                 font-family iran-yekan
+                width 100%
                 font-weight bold
                 text-align center
                 display inline-block
@@ -408,7 +412,6 @@
                 padding-left 16px
                 white-space nowrap
                 overflow hidden
-                max-width 300px
                 text-overflow ellipsis
                 @media only screen and (max-width: 766px)
                     font-size 1.8em
@@ -416,7 +419,7 @@
                     display inline-block
                     padding-right 0
                     padding-left 0
-                    margin-bottom 12px
+                    margin-top 12px
 
             img
                 border-radius 100px
