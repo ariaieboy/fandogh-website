@@ -1,20 +1,6 @@
 <template>
     <div class="row" style="margin: 0" v-if="service.urls">
         <div style="width: 100%">
-            <!--<div v-for="item in service.urls"-->
-            <!--style="float: left;-->
-            <!--direction: ltr;-->
-            <!--margin: 2px;-->
-            <!--padding: 5px 12px;-->
-            <!--background-color: #fefefe;-->
-            <!--box-shadow: 0 2px 6px rgba(0,0,0,0.07);-->
-            <!--height: 32px;-->
-            <!--border-radius: 25px;-->
-            <!--width: max-content">-->
-            <!--<a :href="item" style="color: dodgerblue; direction: ltr; line-height: 32px"-->
-            <!--target="_blank">{{item}}</a>-->
-            <!--</div>-->
-
             <span class="vs__selected" v-for="(item, index) in service.urls" style="float: left">
 
                 <button style="outline: none; border: none" class="vs__deselect"
