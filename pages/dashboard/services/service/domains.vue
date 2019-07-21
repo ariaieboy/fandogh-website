@@ -21,7 +21,8 @@
                         @click.prevent="openWindow(item)">
                     <img src="../../../../assets/img/external-link.png" alt="open new window">
                 </button>
-                <a :href="item" style="color: #fefefe; direction: ltr; font-family: iran-yekan" target="_blank">{{item}}</a>
+                <a :href="(item.toString().startsWith('http://') && item.toString().startsWith('https://') ?
+                    item : 'https://'.concat(item))" style="color: #fefefe; direction: ltr; font-family: iran-yekan" target="_blank">{{item}}</a>
 
             </span>
 
@@ -36,7 +37,10 @@
         props: ['service'],
         methods:{
             openWindow(url){
-                window.open(url, "_blank");
+
+                let _url = (url.toString().startsWith('http://') && url.toString().startsWith('https://') ?
+                    url : 'https://'.concat(url))
+                window.open(_url, "_blank")
             }
         }
     }
