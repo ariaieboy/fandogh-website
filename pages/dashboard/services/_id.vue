@@ -197,13 +197,10 @@
                     let res = await this.$store.dispatch("getServicesName", {
                         name: this.service_name
                     });
-                    console.log('after manifest edited')
-                    console.log(res)
                     let internal = null;
                     if (res.state !== "RUNNING" || this.removing) {
                         setTimeout(() => {
                             this.getData();
-                            console.log(this.removing ? 1000 : 5000)
                         }, this.removing ? 1000 : 5000);
                     } else {
                         clearInterval(internal);
