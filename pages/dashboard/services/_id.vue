@@ -9,6 +9,7 @@
                     <img
                             :src="(service.state.toString().toLowerCase() === 'running' && !this.removing ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
                             :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']">
+
                     <span >{{service.name}}</span>
                 </div>
 
