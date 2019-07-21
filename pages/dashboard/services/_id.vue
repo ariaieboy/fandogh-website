@@ -9,7 +9,7 @@
                     <img
                             :src="(service.state.toString().toLowerCase() === 'running' && !this.removing ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
                             :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']">
-                    <span >sdjndakjsndlaksdmalksdnaklsndasndasndasndkasndknaskjdnaskjdnaskjndjkansdnasjnd</span>
+                    <span >{{service.name}}</span>
                 </div>
 
                 <div v-if="windowWidth > 766"
