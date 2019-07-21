@@ -40,7 +40,7 @@
 
                         </v-text-field>
 
-                        <popover :tooltip="tooltips.name"></popover>
+                        <popover :tooltip="tooltips.password"></popover>
 
                     </div>
 
@@ -170,7 +170,7 @@
                     label: "Shared Storage",
                     value: "SharedStorage",
                     selected: true,
-                    tooltip: 'در صورت فعال بودن این گزینه داده‌های شما در پوشه postgresql در Shared Storage ذخیره خواهند شد'
+                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد'
                 },
                 adminer: {
                     label: "Adminer",
@@ -183,13 +183,13 @@
                         label: "Shared Storage",
                         value: "SharedStorage",
                         selected: true,
-                        tooltip: 'داده‌های شما در پوشه postgresql در Shared Storage ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Shared Storage ذخیره خواهند شد'
                     },
                     {
                         label: "Dedicated Volume",
                         value: "DedicatedVolume",
                         selected: false,
-                        tooltip: 'داده‌های شما در پوشه postgresql در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
+                        tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
                     }
                 ],
                 password: {
@@ -246,6 +246,11 @@
                         title: 'Volume Name',
                         text: 'نام Dedicated Volume که قصد دارید داده‌ها در آن ذخیره شوند',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
+                    },
+                    password:{
+                        title: 'رمز عبور database',
+                        text: 'رمز عبوری که برای database خود انتخاب میکنید،‌در صورتی خالی گذاشتن این بخش، رمز عبور پیش فرض postgres خواهد بود.',
+                        url: '#'
                     }
                 },
                 sections: {

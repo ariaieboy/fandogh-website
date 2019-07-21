@@ -46,7 +46,7 @@
                 managed_services: [
                     {title: 'Mysql', description: 'Database', icon: 'mysql', path: "mysql"},
                     {title: 'Postgresql', description: 'Database', icon: 'postgresql', path: "postgresql"},
-                    {title: 'Redis', description: 'Cache Database', icon: 'redis', path: "redis"},
+                    {title: 'Redis', description: 'In Memory Data Store', icon: 'redis', path: "redis"},
                     {title: 'Proxy', description: 'Proxy Service', icon: 'proxy', path: "proxy"}
                 ],
                 services: [
@@ -123,6 +123,7 @@
             font-family iran-yekan
 
 
+
     .box:hover
         background-color #2979ff
         box-shadow 0 2px 10px 5px rgba(41, 121, 255, 0.42)
@@ -136,7 +137,6 @@
 
         p.description
             color #fefefe
-
 
     div.image-container
         display inline-flex

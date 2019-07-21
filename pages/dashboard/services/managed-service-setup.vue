@@ -36,7 +36,7 @@
                 <div style="width: 2px; background-color: #2979ff; margin: 16px 0; border-radius: 25px; order: 2">
 
                 </div>
-                <span style="flex: 1; font-family: iran-yekan; font-size: 2em; text-align: left; margin-top: auto; margin-bottom: auto; order:1; color: #6c6c6c; padding: 0 12px;">
+                <span :style="{fontSize: (managed_service[service_name].title.toLowerCase() === 'redis'? '1.5em': '2em')}" style="flex: 1; font-family: iran-yekan; text-align: left; margin-top: auto; margin-bottom: auto; order:1; color: #6c6c6c; padding: 0 12px;">
                     {{managed_service[service_name].short_desc}}
                 </span>
 
@@ -117,7 +117,7 @@
                             path: "mysql",
                             version: '5.7',
                             description: 'MySQL یکی از محبوب‌ترین RDBMS‌های امروزی است که طرفداران زیادی در ایران داد، به همین دلیل MySQL به عنوان اولین managed-service به فندق اضافه شد.\n' +
-                                'این managed-service از دو image متفاوت تشکیل شده، یکی خود MySQL و دیگری PHPMyAdmin که یک رابط کاربری تحت وب برای MySQL است.'
+                                'این managed-service از دو سرویس متفاوت تشکیل شده، یکی خود MySQL و دیگری PHPMyAdmin که یک رابط کاربری تحت وب برای MySQL است.'
 
                         },
 
@@ -134,7 +134,7 @@
                     redis:
                         {
                             title: 'Redis',
-                            short_desc: 'Cache Database',
+                            short_desc: 'In Memory Data Store',
                             icon: 'redis',
                             path: "redis",
                             version: '5.0.3',
@@ -173,6 +173,7 @@
             }
         },
         mounted() {
+            this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
             this.$store.commit("SET_DATA", {data: false, id: "loading"})
             let manifest = this.$store.state.manifest
 

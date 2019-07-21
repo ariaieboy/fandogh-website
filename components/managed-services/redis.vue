@@ -41,7 +41,7 @@
 
                         </v-text-field>
 
-                        <popover :tooltip="tooltips.name"></popover>
+                        <popover :tooltip="tooltips.password"></popover>
 
                     </div>
 
@@ -146,7 +146,7 @@
                     label: "Dedicated Volume",
                     value: "DedicatedVolume",
                     selected: false,
-                    tooltip: 'داده‌های شما در پوشه redis در Dedicated Volume مورد نظر شما ذخیره خواهند شد'
+                    tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume ذخیره خواهند شد'
                 },
                 password: {
                     label: 'رمز عبور database',
@@ -162,7 +162,7 @@
                 redis_manifest: {
                     password: {
                         name: 'redis_password',
-                        value: 'redis'
+                        value: ''
                     },
                     volume_name: {
                         name: 'volume_name',
@@ -193,6 +193,11 @@
                         title: 'Volume Name',
                         text: 'نام Dedicated Volume که قصد دارید داده‌ها در آن ذخیره شوند',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
+                    },
+                    password:{
+                        title: 'رمز عبور database',
+                        text: 'رمز عبوری که برای database خود انتخاب میکنید،‌در صورتی خالی گذاشتن این بخش، رمز عبوی ساخته نخواهد شد.',
+                        url: '#'
                     }
                 },
                 sections: {
@@ -210,7 +215,6 @@
         },mounted() {
 
             if (this.manifest_model.parameters.length === 0) {
-                this.redis_manifest.password.value = 'root'
                 this.redis_manifest.volume_name.value = null
             }else {
                 this.manifest_model.parameters.forEach(param => {
