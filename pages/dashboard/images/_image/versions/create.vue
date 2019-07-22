@@ -52,6 +52,34 @@ export default {
         version_regex: value => new RegExp('^[a-zA-Z0-9]+([@$.a-zA-Z0-9]+)*$').test(value) || 'فقط حروف کوچک و بزرگ، اعداد، @، . و $ قابل قبول هستند',
         version_start_regex: value => new RegExp('^[a-zA-Z0-9]').test(value) || 'نام نسخه فقط باید با عدد یا حرف شروع شود'
       },
+      image: {
+        name: {
+          label: 'نام ایمیج',
+          hint: 'نام ایمیجی که میخواهید آپلود کنید',
+          default: '80',
+          counter: 100,
+          value: ''
+        },
+        version: {
+          label: 'نسخه ایمیج',
+          hint: 'نسخه دلخواهی برای ایمیجی که میخواهید وارد کنید',
+          default: '',
+          value: '',
+          counter: 127
+        }
+      },
+      tooltips: {
+        name: {
+          title: 'نام ایمیج',
+          text: 'name-- یا n- پارامتر name یا n نمایانگر نام پروژه ای می باشد که میخواهید بارگذاری کنید.',
+          url: 'https://docs.fandogh.cloud/docs/images.html#%D8%B3%D8%A7%D8%AE%D8%AA-%D8%A7%DB%8C%D9%85%DB%8C%D8%AC-%D9%87%D8%A7'
+        },
+        version: {
+          title: 'نسخه ایمیج',
+          text: 'version-- یا v- پارامتر version یا v نمایانگر ورژن پروژه ای می باشد که میخواهید بارگذاری کنید.',
+          url: 'https://docs.fandogh.cloud/docs/images.html#%D8%B3%D8%A7%D8%AE%D8%AA-%D8%A7%DB%8C%D9%85%DB%8C%D8%AC-%D9%87%D8%A7'
+        },
+      },
     };
   },
   computed: {

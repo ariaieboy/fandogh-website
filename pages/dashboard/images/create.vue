@@ -99,6 +99,7 @@
                     version_start_regex: value => new RegExp('^[a-zA-Z0-9]').test(value) || 'نام نسخه فقط باید با عدد یا حرف شروع شود'
                 },
                 loadingProgress: false,
+                source: "",
                 image: {
                     name: {
                         label: 'نام ایمیج',
@@ -115,7 +116,6 @@
                         counter: 127
                     }
                 },
-                source: "",
                 tooltips: {
                     name: {
                         title: 'نام ایمیج',
