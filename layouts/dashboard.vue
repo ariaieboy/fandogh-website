@@ -189,6 +189,7 @@
             display flex
             width 95%
             max-width 1600px
+            padding-bottom 128px
             font-size 16px
             transition $transitionMain
             @media only screen and (min-width: 1600px)
