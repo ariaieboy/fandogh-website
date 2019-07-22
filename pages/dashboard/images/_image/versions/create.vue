@@ -1,7 +1,7 @@
 <template>
-  <div class="row">
-    <div class="col-md-6 col-xs-12">
-      <h2>آپلود ورژن</h2>
+  <div >
+    <div>
+      <h2 class="title_header">آپلود ورژن</h2>
       <div class="fandogh-form-group">
         <f-input
           v-model="name"
@@ -43,7 +43,15 @@ export default {
       name: this.$route.params.image,
       version: "",
       loading: false,
-      source: null
+      source: null,
+      rules:{
+        required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
+        service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
+        counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
+        version_counter: value => value.length <= 127 || 'مقدار وارد شده نباید بیش از ۱۲۷ کاراکتر باشد',
+        version_regex: value => new RegExp('^[a-zA-Z0-9]+([@$.a-zA-Z0-9]+)*$').test(value) || 'فقط حروف کوچک و بزرگ، اعداد، @، . و $ قابل قبول هستند',
+        version_start_regex: value => new RegExp('^[a-zA-Z0-9]').test(value) || 'نام نسخه فقط باید با عدد یا حرف شروع شود'
+      },
     };
   },
   computed: {
@@ -139,7 +147,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
 
   .title_header
     font-family iran-yekan
