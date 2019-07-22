@@ -12,7 +12,7 @@
             <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.17); padding: 16px">
                 <div class="row">
 
-                    <div style="display: flex;" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       color="#0093ff"
@@ -31,7 +31,7 @@
 
                     </div>
 
-                    <div style="display: flex;" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       color="#0093ff"
@@ -50,20 +50,19 @@
 
                     </div>
 
-                </div>
-
-                <div class="fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-top: 16px">
-                    <file class="file" id="source"/>
-                </div>
-
-                <div class="fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12">
-                    <button style="background: #00E5FF; width: 100%; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4);
+                    <div class="uploader-container fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12" style="display: flex;">
+                        <button style="background: #00E5FF; width: 100%; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4);
                                     outline: none; font-family: iran-yekan; color: #fefefe" v-if="!loading" @click="createImage" >ایجاد ایمیج جدید</button>
-                    <button
-                            style="width: 100%; color: #47494e; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px;
-                                    font-family: iran-yekan; border-color: #00E5FF; outline: none; border: 1px solid;"
-                            v-if="loading && !loadingProgress" >در حال ساخت</button>
-                    <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar>
+                        <button
+                                style="width: 100%; color: #47494e; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px;
+                                    font-family: iran-yekan; outline: none; border: 1px solid #00E5FF;"
+                                v-if="loading && !loadingProgress" >در حال ساخت</button>
+                        <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar>
+                    </div>
+
+                    <div class="browser-container fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-top: 16px">
+                        <file class="file" id="source"/>
+                    </div>
                 </div>
 
             </div>
@@ -99,6 +98,7 @@
                     version_start_regex: value => new RegExp('^[a-zA-Z0-9]').test(value) || 'نام نسخه فقط باید با عدد یا حرف شروع شود'
                 },
                 loadingProgress: false,
+                source: "",
                 image: {
                     name: {
                         label: 'نام ایمیج',
@@ -115,7 +115,6 @@
                         counter: 127
                     }
                 },
-                source: "",
                 tooltips: {
                     name: {
                         title: 'نام ایمیج',
@@ -294,6 +293,17 @@
     };
 </script>
 <style lang="stylus" scoped>
+
+
+    .browser-container
+        order 2
+        @media only screen and (max-width: 993px)
+            order 1
+
+    .uploader-container
+        order 1
+        @media only screen and (max-width: 993px)
+            order 2
 
     .title_header
         font-family iran-yekan
