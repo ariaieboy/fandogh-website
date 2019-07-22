@@ -137,3 +137,18 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+
+
+  .title_header
+    font-family iran-yekan
+    font-style normal
+    font-weight bold
+    font-size 1.2em
+    font-stretch normal
+    line-height 1.75
+    color #7c7c7c
+    letter-spacing normal
+
+</style>
