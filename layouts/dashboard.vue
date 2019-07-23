@@ -64,6 +64,7 @@
     import {alertReport} from "../utils/AlertError";
     import FLoading from "~/components/Loading";
     import Moment from 'moment-jalaali';
+    import {removeValue, setValue, getValue} from "../utils/cookie";
 
     export default {
         components: {
@@ -146,7 +147,31 @@
             }
             this.handelRyChat()
         },
+        created(){
+          this.fetchUserNamespace()
+        },
         methods: {
+            async fetchUserNamespace() {
+                this.$store.commit('SET_DATA', {data: true, id: 'loading'})
+                try {
+                    await this.$store.dispatch('getNameSpace', getValue('namespace'));
+                    this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+
+                    }
+                }
+            },
             async redeemPlan() {
 
                 let plan = this.$store.state.activePlan;
