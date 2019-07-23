@@ -62,6 +62,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 @import '../../../assets/css/variables.styl'
 
 .header-dashboard
