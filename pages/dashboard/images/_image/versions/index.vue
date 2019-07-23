@@ -9,7 +9,7 @@
         </f-empty>
         <div class="images" v-else>
             <div style="overflow: hidden; margin-bottom: 32px">
-                <div class="right" style="float: right;"><p class="title"> لیست ورژن‌های
+                <div class="right" style="float: right;"><p class="title_header"> لیست ورژن‌های
                     {{image}}</p></div>
                 <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      @click="$router.push(`/dashboard/images/${image}/versions/create`)">
@@ -167,7 +167,7 @@
     };
 </script>
 <style lang="stylus" scoped>
-    .title
+    .title_header
         font-family iran-yekan
         font-style normal
         font-weight bold
