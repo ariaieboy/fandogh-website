@@ -46,7 +46,7 @@
                     <div class="uploader-container fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12"
                          style="display: flex">
                         <button style="background: #00E5FF; width: 100%; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4);
-                                    outline: none; font-family: iran-yekan; color: #fefefe" v-if="!loading"
+                                    outline: none; font-family: iran-yekan; color: #1d1d1d" v-if="!loading"
                                 @click="createImageVersion">آپلود نسخه جدید
                         </button>
                         <progress-bar style="margin-top: auto; margin-bottom: auto" v-if="loading"

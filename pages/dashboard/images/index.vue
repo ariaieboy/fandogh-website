@@ -46,7 +46,7 @@
                         </g>
                         <text x="142"
                               y="29"
-                              fill="#FFFFFF"
+                              fill="#1d1d1d"
                               style="font-family: iran-sans; font-size: 1em"
                               text-anchor="start"
                               alignment-baseline="middle">
