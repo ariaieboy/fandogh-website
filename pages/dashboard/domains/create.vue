@@ -56,7 +56,7 @@
                             time: 4000,
                             type: "success"
                         });
-                        this.$router.push(`/dashboard/domains/verification/${this.name}`);
+                        this.$router.push(`/dashboard/domains/${this.name}`);
                     })
                     .catch(e => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
