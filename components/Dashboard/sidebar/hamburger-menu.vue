@@ -28,10 +28,11 @@ export default {
 .tcon
   display none
   padding-right 15px
-  width 24px
+  width 32px
   cursor pointer
   @media only screen and (max-width: $sizeMd)
     display inline-block
+    width 32px
   span
     display block
     margin-bottom 7px

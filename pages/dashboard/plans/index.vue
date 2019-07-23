@@ -460,19 +460,11 @@
             },
             incMemory() {
                 if (this.planData.memory < this.memoryOptions.max) {
-                    if (this.planData.memory >= 2) {
-                        this.planData.memory += 1;
-                    } else {
                         this.planData.memory += 0.5;
-                    }
                 }
             }, decMemory() {
                 if (this.planData.memory > this.memoryOptions.min) {
-                    if (this.planData.memory > 2) {
-                        this.planData.memory -= 1;
-                    } else {
                         this.planData.memory -= 0.5;
-                    }
                 }
 
             }, incDedicatedVolume() {
@@ -488,9 +480,8 @@
                     this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
                 if (this.quota !== null) {
-                    console.log('inside quota')
-                    if (this.quota.memory_limit / 1024 >= 1) {
-                        this.finalBill.memory += parseFloat(Math.fround(this.quota.memory_limit / 1024).toPrecision(1));
+                    if (parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1)) >= 0.5) {
+                        this.finalBill.memory += parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1));
                     }
                     if (this.quota.volume_limit > 0) {
                         this.finalBill.dedicatedVolume += this.quota.volume_limit;
@@ -554,18 +545,6 @@
                 eventCategory: "plan",
                 eventAction: "see list plan"
             });
-        },
-        watch: {
-            planData: {
-                handler: function (value) {
-                    let memory = value.memory
-                    if (Math.abs(parseFloat(memory) - parseInt(memory)) === .5 && parseFloat(memory) > 2) {
-                        this.planData.memory += .5
-
-                    }
-
-                }, deep: true
-            }
         }
     };
 </script>

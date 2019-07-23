@@ -32,7 +32,7 @@
         border-radius 5px
         box-shadow 0 2px 6px 0 rgba(36, 213, 216, 0.42)
         background-color #24d5d8
-        color #ffffff
+        color #1d1d1d
         font-family iran-yekan
         font-size 12px
         padding 8px 16px

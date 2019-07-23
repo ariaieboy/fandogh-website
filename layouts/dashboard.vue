@@ -11,21 +11,38 @@
                      :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
                     <div class="dash-container">
                         <div :class="[(isMobile ? '' : 'container-fluid')]">
+
                             <div v-if="accountExpired" class="box-row" style="margin-bottom: 16px">
-                                <div style="width: 100%; background-color: #fd9510;box-shadow: 0 2px 6px 0 rgba(253 ,50 ,89, 0.42); margin: 0; border-radius: 3px;">
-                                    <div style="padding: 16px; margin: auto; display: flex">
-                                        <img src="../assets/svg/warning.svg" alt="warning" style="width: 64px; height: auto; margin-top: auto; margin-bottom: auto; display: inline-flex">
-                                        <p style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: white">تنها
-                                            <span style="font-family: iran-sans; color: white">{{remainingTime}}</span>
-                                            روز دیگر از پلن شما باقی مانده است. جهت تمدید٬ از طریق
-                                            <router-link :to="{path:'account'}" style="color: snow; text-decoration: underline; text-decoration-style: double"> صفحه پروفایل </router-link>
-                                            اقدام فرمایید در غیر این صورت بعد از این تاریخ سرویس‌های شما از دسترس خارج خواهند شد.
+
+                                <div style="width: 100%; background-color: #FFBABA; margin: 0; border-radius: 5px; padding: 16px; border: 2px solid #D8000C ">
+
+                                    <div style="margin: auto; display: flex">
+                                        <img src="../assets/svg/warning.svg" alt="warning"
+                                             style="width: 64px; height: auto; margin-top: auto; margin-bottom: auto; display: inline-flex;
+                                                    filter: invert(23%) sepia(92%) saturate(7318%) hue-rotate(347deg) brightness(78%) contrast(122%);">
+                                        <p v-if="remainingTime !== 0" style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: #D8000C">
+                                            تنها
+                                            <span style="font-family: iran-sans; color: #D8000C">{{remainingTime}}</span>
+                                            روز دیگر از پلن شما باقی مانده است. جهت تمدید، لطفا نسبت به تمدید پلن خو
+                                            اقدام فرمایید، در غیر این صورت بعد از این تاریخ سرویس‌های شما از دسترس خارج
+                                            خواهند شد.
                                         </p>
+                                        <p v-else style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: #D8000C">
+                                            مدت اعتبار پلن شما به پایان رسیده است! لطفا برای جلوگیری از خاموش شدن سرویس‌هایتان پلن خود را تمدید نمایید.
+                                        </p>
+                                    </div>
+                                    <div style="width: 100%; display: flex;">
+                                        <button @click="redeemPlan"
+                                                style="outline: none; font-size: 1em; font-weight: bold; background: #35cc33;box-shadow: 0 2px 6px rgba(53,204,51, 0.4); padding:12px 62px; border-radius: 3px; cursor: pointer; color: #fefefe; margin-right: auto">
+                                            تمدید پلن
+                                        </button>
                                     </div>
                                 </div>
 
                             </div>
+
                             <nuxt/>
+
                         </div>
                     </div>
                 </div>
@@ -47,6 +64,7 @@
     import {alertReport} from "../utils/AlertError";
     import FLoading from "~/components/Loading";
     import Moment from 'moment-jalaali';
+    import {removeValue, setValue, getValue} from "../utils/cookie";
 
     export default {
         components: {
@@ -76,6 +94,9 @@
                     return false;
                 } else return this.$route.path.indexOf('bill') === -1;
             }, accountExpired() {
+                if(this.$route.path.indexOf('bill') !== -1)
+                    return false
+
                 let plan = this.$store.state.activePlan;
                 if (plan.hasOwnProperty('quota')) {
                     if (plan.quota.expires_at === null)
@@ -84,9 +105,13 @@
                         return Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear() <= 3;
                 } else
                     return false
-            }, remainingTime(){
+            }, remainingTime() {
                 let plan = this.$store.state.activePlan;
-                return Math.max(Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear(), 0)
+                if (plan.hasOwnProperty('quota')) {
+                    return Math.max(Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear(), 0)
+                } else {
+                    return 0
+                }
             }
         },
 
@@ -122,7 +147,77 @@
             }
             this.handelRyChat()
         },
+        created(){
+          this.fetchUserNamespace()
+        },
         methods: {
+            async fetchUserNamespace() {
+                this.$store.commit('SET_DATA', {data: true, id: 'loading'})
+                try {
+                    await this.$store.dispatch('getNameSpace', getValue('namespace'));
+                    this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+
+                    }
+                }
+            },
+            async redeemPlan() {
+
+                let plan = this.$store.state.activePlan;
+
+                if (!plan.hasOwnProperty('quota')) {
+                    return
+                }
+
+                let quota = plan.quota
+
+                if (parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1)) < 0.5) {
+                    return;
+                }
+
+                const bill = this.makeBill(quota);
+
+                await this.$store.dispatch("plan/requestPlan", bill)
+                    .then(planRespose => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        this.$router.push(`plans/bill/${planRespose.invoice.id}`);
+                    }).catch(e => {
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    });
+
+            },
+            makeBill(quota) {
+                let finalBill =  {
+                    memory: 0.0,
+                        dedicatedVolume: 0,
+                }
+                if (quota) {
+                    finalBill.memory = parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1));
+                    finalBill.dedicatedVolume += quota.volume_limit;
+                }
+                return finalBill;
+            },
             handelRyChat() {
                 let elm = document.querySelector('#raychatFrame')
                 if (!elm) {
@@ -189,6 +284,7 @@
             display flex
             width 95%
             max-width 1600px
+            padding-bottom 128px
             font-size 16px
             transition $transitionMain
             @media only screen and (min-width: 1600px)

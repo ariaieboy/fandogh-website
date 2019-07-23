@@ -47,9 +47,8 @@
                     <div style="margin-top: auto;margin-bottom: auto;margin-right: 24px; padding: 0;">
 
                         <p class="plan-title">رم</p>
-                        <p class="plan-value">{{(quota.memory_limit > 1024 ? Math.round(quota.memory_limit / 1024) :
-                            quota.memory_limit)}}
-                            <span v-if="quota.memory_limit>1024">گیگابایت</span>
+                        <p class="plan-value">{{(quota.memory_limit > 511 ? parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1)) : quota.memory_limit)}}
+                            <span v-if="quota.memory_limit>=1024">گیگابایت</span>
                             <span v-else>مگابایت</span>
                         </p>
 
@@ -135,7 +134,7 @@
 
             }, async redeemPlan() {
 
-                if(Math.round(this.quota.memory_limit / 1024) < 1){
+                if(parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1)) < 0.5){
                     alert('اول پلن بخر بعدش تمدید کن عزیزم');
                     return;
                 }
@@ -162,7 +161,7 @@
 
             }, makeBill() {
                 if (this.quota) {
-                    this.finalBill.memory = this.quota.memory_limit / 1024;
+                    this.finalBill.memory = parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1));
                     this.finalBill.dedicatedVolume += this.quota.volume_limit;
                 }
                 return this.finalBill;
