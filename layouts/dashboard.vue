@@ -75,14 +75,6 @@
             Alert,
             Moment
         },
-        data() {
-            return {
-                finalBill: {
-                    memory: 0,
-                    dedicatedVolume: 0,
-                }
-            }
-        },
         computed: {
             loading() {
                 return this.$store.state.loading;
@@ -164,7 +156,8 @@
                 }
 
                 let quota = plan.quota
-                if (Math.round(quota.memory_limit / 1024) < 1) {
+
+                if (parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1)) < 0.5) {
                     return;
                 }
 
@@ -190,11 +183,15 @@
 
             },
             makeBill(quota) {
-                if (quota) {
-                    this.finalBill.memory = quota.memory_limit / 1024;
-                    this.finalBill.dedicatedVolume += quota.volume_limit;
+                let finalBill =  {
+                    memory: 0.0,
+                        dedicatedVolume: 0,
                 }
-                return this.finalBill;
+                if (quota) {
+                    finalBill.memory = parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1));
+                    finalBill.dedicatedVolume += quota.volume_limit;
+                }
+                return finalBill;
             },
             handelRyChat() {
                 let elm = document.querySelector('#raychatFrame')
