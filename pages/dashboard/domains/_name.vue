@@ -62,15 +62,14 @@
                 <h2 class="title_header" style="margin-top: 32px">تأیید دامنه</h2>
                 <div class="row" v-if="domain.verified">
                     <div class="col-xs-12">
-                        <div class="fandogh-form-group">
-                            <f-input styles="input-white input-block input-dashboard input-disable"></f-input>
-                            <f-label-disable label="وضعیت دامنه :" :value="textVeify"/>
+                        <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); margin-bottom: 12px; padding: 16px">
+                            <span>وضعیت دامنه: <span v-html="textVeify"></span></span>
                         </div>
                         <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17);">
                             <div style="border-top-right-radius: 3px; border-top-left-radius: 3px; height: 4px; background-color: #fd3259"></div>
                             <p style="font-size: 1em; padding: 16px">{{cname_description}}</p>
                             <p style="font-weight: bold; text-align: center; font-size: 1.1em; background-color: #0093ff; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; padding: 8px 16px; color: #fefefe;">
-                                lb.fandogh.cloud<span style="color: #fefefe"> :CNAME</span></p>
+                                <span style="color: #fefefe; font-weight: normal">CNAME: </span>lb.fandogh.cloud</p>
 
                         </div>
                     </div>
@@ -96,7 +95,7 @@
                             <div slot="collapse-footer">
                                 <div style="margin-top: 12px">
                                     <button @click="verify"
-                                            style="color: #fefefe; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0">
+                                            style="color: #1d1d1d; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0">
                                         بررسی تأیید دامنه
                                     </button>
                                 </div>
@@ -135,7 +134,7 @@
                         </f-collaps>
                         <div style="margin-top: 12px">
                             <button @click="certificateDomain"
-                                    style="color: #fefefe; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0">درخواست SSL</button>
+                                    style="color: #1d1d1d; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0">درخواست SSL</button>
                         </div>
                     </div>
                 </div>

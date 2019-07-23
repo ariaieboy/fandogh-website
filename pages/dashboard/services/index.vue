@@ -28,8 +28,8 @@
                         </g>
                         <text x="148"
                               y="29"
-                              fill="#FFFFFF"
-                              style="font-family: iran-sans; font-size: 1em; font-weight: bold"
+                              fill="#1d1d1d"
+                              style="font-family: iran-sans; font-size: 1em;"
                               text-anchor="start"
                               alignment-baseline="middle">
                             ساخت سرویس جدید

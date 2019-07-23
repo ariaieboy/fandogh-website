@@ -7,7 +7,7 @@
                  style="border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.09); width: 100%; height: 62px; background-color: #fefefe; margin-top: 24px;margin-bottom: 64px; display: flex; padding: 0">
                 <input v-model="name" dir="ltr" type="text" placeholder="نام دامنه جدید را وارد نمایید..."
                        style="flex: 0.7 0 auto; padding: 0 16px; border: none; outline: none;border-radius: 3px;font-family: iran-yekan">
-                <button style="color: #fefefe; flex: 0.3 0 auto; border: none; outline: none; background-color: #24D5D8;
+                <button style="color: #1d1d1d; flex: 0.3 0 auto; border: none; outline: none; background-color: #24D5D8;
                 font-family: iran-yekan; border-top-left-radius: 3px; border-bottom-left-radius: 3px; cursor: pointer; font-size: 1.2em"
                         @click="createDomain">
                     ساخت دامنه
