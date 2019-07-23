@@ -11,7 +11,7 @@
                      :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
                     <div class="dash-container">
                         <div :class="[(isMobile ? '' : 'container-fluid')]">
-                            <div v-if="accountExpired" class="box-row" style="margin-bottom: 16px">
+                            <div  class="box-row" style="margin-bottom: 16px">
                                 <div style="width: 100%; background-color: #fd9510;box-shadow: 0 2px 6px 0 rgba(253 ,50 ,89, 0.42); margin: 0; border-radius: 3px;">
                                     <div style="padding: 16px; margin: auto; display: flex">
                                         <img src="../assets/svg/warning.svg" alt="warning" style="width: 64px; height: auto; margin-top: auto; margin-bottom: auto; display: inline-flex">
