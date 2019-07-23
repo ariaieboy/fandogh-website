@@ -16,9 +16,9 @@
                                     <div style="padding: 16px; margin: auto; display: flex">
                                         <img src="../assets/svg/warning.svg" alt="warning" style="width: 64px; height: auto; margin-top: auto; margin-bottom: auto; display: inline-flex">
                                         <p style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: white">تنها
-                                            <span style="font-family: iran-sans; color: white">{{remainingTime}}</span>
+                                            <span style="font-family: iran-sans; color: white">{{}}</span>
                                             روز دیگر از پلن شما باقی مانده است. جهت تمدید٬ از طریق
-                                            <router-link :to="{path:'account'}" style="color: snow; text-decoration: underline; text-decoration-style: double"> صفحه پروفایل </router-link>
+                                            <span @click="$router.push('/dashboard/account')" style="cursor: pointer; color: snow; text-decoration: underline; text-decoration-style: solid"> صفحه پروفایل </span>
                                             اقدام فرمایید در غیر این صورت بعد از این تاریخ سرویس‌های شما از دسترس خارج خواهند شد.
                                         </p>
                                     </div>
