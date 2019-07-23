@@ -37,7 +37,7 @@ export default {
     display block
     margin-bottom 7px
     width 100%
-    height 2.9px
+    height 1.9px
     background-color #333333
     transition all 0.2s ease-in
     &:last-child

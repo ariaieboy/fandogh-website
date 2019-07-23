@@ -86,7 +86,7 @@
                             </div>
                             <div slot="collapse-body">
                                 <div class="domain-description domain-column">
-                                    <p>{{description}}</p>
+                                    <p style="font-size: 1em">{{description}}</p>
                                 </div>
                                 <div class="domain-description">
                                     <span>کد فعال سازی :</span>

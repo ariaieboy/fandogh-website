@@ -76,7 +76,7 @@ export default {
   background-color $totalWhite
   font-size 14px
   &-logo
-    padding-right 30px
+    padding-right 16px
     img
       width 24px
 </style>
