@@ -15,7 +15,7 @@
     import Right from './right.vue'
     import Left from './left.vue'
     import FButton from '../elements/button'
-    
+
 
     export default {
       components:{

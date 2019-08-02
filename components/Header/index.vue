@@ -7,10 +7,11 @@
             <img alt="hamburger button" :src="require('../../assets/svg/ic_hamburger.svg')">
           </a>
         </div>
-        <div class="logo">
+        <div class="logo" style="display: flex">
           <router-link title="fandogh logo" :to="{path:'/'}">
             <logo/>
           </router-link>
+          <span style="margin-top: auto; margin-bottom: auto; padding-right: 12px;  font-family: iran-yekan;font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: left;color: #fefefe;"> سکوی ابری فندق</span>
         </div>
         <div class="navbar">
           <ul>
@@ -155,20 +156,18 @@ export default {
   box-sizing border-box
   padding 13.5px 30px
   width 100%
-  background-color transparent
+  background-color #0045ff
+  box-shadow 0 3px 6px rgba(0,0,0,0.37)
 .header-container
   transition all 0.3s
   -webkit-transition all 0.3s
   -moz-transition all 0.3s
 .header-container-fixed
   position fixed
-  padding 15px 90px
-  background-color #3f10ae
-  .logo
-    img
-      width 96px
+  /*padding 15px 90px*/
+  background-color #0045ff
 .no-fixed
-  background linear-gradient(to right, #160074, #0f0050)
+  background #0045ff
 header
   display block
   .right-menu
@@ -188,9 +187,6 @@ header
   .header-container
     .profile
       display none
-  .logo
-    img
-      width 126px
   .user
     button
       margin-right 10px
@@ -202,7 +198,7 @@ header
   .header-container-fixed
     z-index 10
     padding 0 30px
-    background-color transparent
+    background-color #0045ff
   .header-dashboard, &.dashboard
     position fixed
   .navbar
@@ -219,9 +215,7 @@ header
       float left
       img
         width 24px
-    .logo
-      img
-        width 96px
+
 @media only screen and (max-width: 768px)
   header
     .user .btn-exit
