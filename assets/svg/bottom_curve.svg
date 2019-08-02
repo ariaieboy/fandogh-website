@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280px" height="222px" viewBox="0 0 1280 222" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>bottom_curve</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-5.0%" y="-34.0%" width="109.9%" height="167.9%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="11.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.296601836 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="bottom_curve" filter="url(#filter-1)" transform="translate(0.000000, 2.000000)" fill="#0045FF" fill-rule="nonzero">
+            <path d="M0,70 C0,70 135.788,67.5 296.483,50 C457.178,32.5 521.818,0 642.779,0 C755.419,0 806.9,32.5 966.2,50 C1125.5,67.5 1280,70 1280,70 L1280,187 L0,187 L0,70 Z" id="Path_1747" transform="translate(640.000000, 93.500000) rotate(180.000000) translate(-640.000000, -93.500000) "></path>
+        </g>
+    </g>
+</svg>

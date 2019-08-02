@@ -20,7 +20,8 @@ module.exports = {
     css: [
         "flexboxgrid/css/flexboxgrid.css",
         "@/assets/css/balloon.css",
-        "@/assets/css/main.styl"
+        "@/assets/css/main.styl",
+        'vue-plyr/dist/vue-plyr.css'
     ],
     head: {
         title: "سرویس های ابری فندق",
@@ -74,6 +75,7 @@ module.exports = {
         {src: "~/plugins/vue-bar", ssr: false},
         {src: "~/plugins/tooltip", ssr: false},
         {src: "~/plugins/input", ssr: false},
+        {src: "~/plugins/vue-plyr", ssr: false, mode: 'spa'},
         {src: '~/plugins/localStorage.js', ssr: false, mode: 'spa'},
         "~/plugins/mixins",
         "~/plugins/validation",

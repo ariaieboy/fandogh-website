@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1398.957" height="474.928" viewBox="0 0 1398.957 474.928">
+    <defs>
+        <style >
+            .cls-1{fill:none}.cls-2,.cls-3{fill:none;stroke:#0037ff;stroke-width:2px}.cls-3{stroke-linecap:square;fill-rule:evenodd}.cls-4{opacity:.7}.cls-5{opacity:.5}.cls-6{opacity:.9}
+        </style>
+    </defs>
+    <g id="Group_28" data-name="Group 28" transform="translate(58.957 48.928)">
+        <g id="Group-28">
+            <g id="Group_17" data-name="Group 17">
+                <path id="Mask" d="M0 0h1280v400H0z" class="cls-1"/>
+                <g id="Group_16" data-name="Group 16">
+                    <g id="Group_15" data-name="Group 15" transform="translate(-133 -86)">
+                        <g id="Group-27" transform="translate(601.547 162.109)">
+                            <circle id="Oval" cx="39.5" cy="39.5" r="39.5" class="cls-2" transform="translate(99.784 87.136)"/>
+                            <circle id="Oval-Copy-20" cx="18.5" cy="18.5" r="18.5" class="cls-2" transform="translate(305.784 77.136)"/>
+                            <path id="Line-11" d="M178.784 119.636l126.5-18.5" class="cls-3"/>
+                            <circle id="Oval-Copy-20-2" cx="18.5" cy="18.5" r="18.5" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -117.638 376.218)"/>
+                            <path id="Line-11-2" d="M155.379 182.164l71.829-2.513" class="cls-3" data-name="Line-11" transform="rotate(45 190.88 180.664)"/>
+                            <circle id="Oval-Copy-20-3" cx="18.5" cy="18.5" r="18.5" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-60 118.383 -112.69)"/>
+                            <path id="Line-11-3" d="M144.367 73.5l38.6-1.278" class="cls-3" data-name="Line-11" transform="rotate(-60 163.366 73.001)"/>
+                            <circle id="Oval-Copy-20-4" cx="18.5" cy="18.5" r="18.5" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -8.716 126.133)"/>
+                            <path id="Line-11-4" d="M51.52 182.295l71.829-2.513" class="cls-3" data-name="Line-11" transform="rotate(135 87.02 180.795)"/>
+                            <circle id="Oval-Copy-20-5" cx="18.5" cy="18.5" r="18.5" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 24.157 20.843)"/>
+                            <path id="Line-11-5" d="M27.621 73.8l91.76-2.787" class="cls-3" data-name="Line-11" transform="rotate(-135 73.12 72.3)"/>
+                        </g>
+                        <g id="Group-27-Copy" transform="translate(36)">
+                            <circle id="Oval-2" cx="39.5" cy="39.5" r="39.5" class="cls-2" data-name="Oval" transform="translate(99.784 87.136)"/>
+                            <circle id="Oval-Copy-20-6" cx="18.5" cy="18.5" r="18.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(305.784 77.136)"/>
+                            <path id="Line-11-6" d="M178.784 119.636l126.5-18.5" class="cls-3" data-name="Line-11"/>
+                            <circle id="Oval-Copy-20-7" cx="18.5" cy="18.5" r="18.5" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -117.638 376.218)"/>
+                            <path id="Line-11-7" d="M155.379 182.164l71.829-2.513" class="cls-3" data-name="Line-11" transform="rotate(45 190.88 180.664)"/>
+                            <path id="Line-11-8" d="M144.367 73.5l38.6-1.278" class="cls-3" data-name="Line-11" transform="rotate(-60 163.366 73.001)"/>
+                            <path id="Line-11-9" d="M51.52 182.295l71.829-2.513" class="cls-3" data-name="Line-11" transform="rotate(135 87.02 180.795)"/>
+                            <path id="Line-11-10" d="M27.621 73.8l91.76-2.787" class="cls-3" data-name="Line-11" transform="rotate(-135 73.12 72.3)"/>
+                        </g>
+                        <g id="Group-27-Copy-2" transform="translate(1242 162)">
+                            <ellipse id="Oval-3" cx="50.5" cy="51.5" class="cls-2" data-name="Oval" rx="50.5" ry="51.5" transform="translate(129 114)"/>
+                            <circle id="Oval-Copy-20-8" cx="24.005" cy="24.005" r="24.005" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -11.932 164.56)"/>
+                            <path id="Line-11-11" d="M64.759 239.12l94.756-5.841" class="cls-3" data-name="Line-11" transform="rotate(135 112.137 236.2)"/>
+                            <circle id="Oval-Copy-20-9" cx="24.005" cy="24.005" r="24.005" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 31.276 27.212)"/>
+                            <path id="Line-11-12" d="M33.908 96.638l120.636-4.361" class="cls-3" data-name="Line-11" transform="rotate(-135 94.225 94.457)"/>
+                        </g>
+                        <g id="Group-27-Copy-3" transform="translate(994 162)">
+                            <circle id="Oval-4" cx="13.5" cy="13.5" r="13.5" class="cls-2" data-name="Oval" transform="translate(34 30)"/>
+                            <circle id="Oval-Copy-20-10" cx="6.5" cy="6.5" r="6.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(104 27)"/>
+                            <path id="Line-11-13" d="M61 41.816L103.831 35" class="cls-3" data-name="Line-11"/>
+                            <circle id="Oval-Copy-20-11" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -41.539 128.916)"/>
+                            <path id="Line-11-14" d="M52.562 63.234l25.1-1.169" class="cls-3" data-name="Line-11" transform="rotate(45 65.11 62.65)"/>
+                            <ellipse id="Oval-Copy-20-12" cx="6.389" cy="6.337" class="cls-2" data-name="Oval-Copy-20" rx="6.389" ry="6.337" transform="rotate(-60 40.591 -38.246)"/>
+                            <path id="Line-11-15" d="M48.816 25.707l13.819-.783" class="cls-3" data-name="Line-11" transform="rotate(-60 55.725 25.315)"/>
+                            <circle id="Oval-Copy-20-13" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -3.196 43.668)"/>
+                            <path id="Line-11-16" d="M17.124 63.486L42.243 61.9" class="cls-3" data-name="Line-11" transform="rotate(135 29.683 62.695)"/>
+                            <circle id="Oval-Copy-20-14" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 8.286 7.222)"/>
+                            <path id="Line-11-17" d="M8.954 25.628l31.976-1.112" class="cls-3" data-name="Line-11" transform="rotate(-135 24.942 25.072)"/>
+                        </g>
+                        <g id="Group-27-Copy-12" class="cls-4" transform="translate(667 443)">
+                            <circle id="Oval-5" cx="13.5" cy="13.5" r="13.5" class="cls-2" data-name="Oval" transform="translate(34 30)"/>
+                            <circle id="Oval-Copy-20-15" cx="6.5" cy="6.5" r="6.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(104 27)"/>
+                            <path id="Line-11-18" d="M61 41.816L103.831 35" class="cls-3" data-name="Line-11"/>
+                            <ellipse id="Oval-Copy-20-16" cx="6.389" cy="6.337" class="cls-2" data-name="Oval-Copy-20" rx="6.389" ry="6.337" transform="rotate(-60 40.591 -38.246)"/>
+                            <path id="Line-11-19" d="M48.816 25.707l13.819-.783" class="cls-3" data-name="Line-11" transform="rotate(-60 55.725 25.315)"/>
+                            <circle id="Oval-Copy-20-17" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 8.286 7.222)"/>
+                            <path id="Line-11-20" d="M8.954 25.628l31.976-1.112" class="cls-3" data-name="Line-11" transform="rotate(-135 24.942 25.072)"/>
+                        </g>
+                        <g id="Group-27-Copy-10" transform="translate(773 43)">
+                            <circle id="Oval-6" cx="13.5" cy="13.5" r="13.5" class="cls-2" data-name="Oval" transform="translate(34 30)"/>
+                            <circle id="Oval-Copy-20-18" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -41.539 128.916)"/>
+                            <path id="Line-11-21" d="M52.562 63.234l25.1-1.169" class="cls-3" data-name="Line-11" transform="rotate(45 65.11 62.65)"/>
+                            <circle id="Oval-Copy-20-19" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -3.196 43.668)"/>
+                            <path id="Line-11-22" d="M17.124 63.486L42.243 61.9" class="cls-3" data-name="Line-11" transform="rotate(135 29.683 62.695)"/>
+                        </g>
+                        <g id="Group-27-Copy-9" class="cls-5" transform="translate(1125 286)">
+                            <circle id="Oval-7" cx="13.5" cy="13.5" r="13.5" class="cls-2" data-name="Oval" transform="translate(34 30)"/>
+                            <circle id="Oval-Copy-20-20" cx="6.5" cy="6.5" r="6.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(104 27)"/>
+                            <path id="Line-11-23" d="M61 41.816L103.831 35" class="cls-3" data-name="Line-11"/>
+                            <circle id="Oval-Copy-20-21" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -41.539 128.916)"/>
+                            <path id="Line-11-24" d="M52.562 63.234l25.1-1.169" class="cls-3" data-name="Line-11" transform="rotate(45 65.11 62.65)"/>
+                            <ellipse id="Oval-Copy-20-22" cx="6.389" cy="6.337" class="cls-2" data-name="Oval-Copy-20" rx="6.389" ry="6.337" transform="rotate(-60 40.591 -38.246)"/>
+                            <path id="Line-11-25" d="M48.816 25.707l13.819-.783" class="cls-3" data-name="Line-11" transform="rotate(-60 55.725 25.315)"/>
+                            <circle id="Oval-Copy-20-23" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -3.196 43.668)"/>
+                            <path id="Line-11-26" d="M17.124 63.486L42.243 61.9" class="cls-3" data-name="Line-11" transform="rotate(135 29.683 62.695)"/>
+                            <circle id="Oval-Copy-20-24" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 8.286 7.222)"/>
+                            <path id="Line-11-27" d="M8.954 25.628l31.976-1.112" class="cls-3" data-name="Line-11" transform="rotate(-135 24.942 25.072)"/>
+                        </g>
+                        <g id="Group-27-Copy-4" transform="translate(379 367)">
+                            <circle id="Oval-8" cx="13.5" cy="13.5" r="13.5" class="cls-2" data-name="Oval" transform="translate(34 30)"/>
+                            <circle id="Oval-Copy-20-25" cx="6.5" cy="6.5" r="6.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(104 27)"/>
+                            <path id="Line-11-28" d="M61 41.816L103.831 35" class="cls-3" data-name="Line-11"/>
+                            <circle id="Oval-Copy-20-26" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -41.539 128.916)"/>
+                            <path id="Line-11-29" d="M52.562 63.234l25.1-1.169" class="cls-3" data-name="Line-11" transform="rotate(45 65.11 62.65)"/>
+                            <ellipse id="Oval-Copy-20-27" cx="6.389" cy="6.337" class="cls-2" data-name="Oval-Copy-20" rx="6.389" ry="6.337" transform="rotate(-60 40.591 -38.246)"/>
+                            <path id="Line-11-30" d="M48.816 25.707l13.819-.783" class="cls-3" data-name="Line-11" transform="rotate(-60 55.725 25.315)"/>
+                            <circle id="Oval-Copy-20-28" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -3.196 43.668)"/>
+                            <path id="Line-11-31" d="M17.124 63.486L42.243 61.9" class="cls-3" data-name="Line-11" transform="rotate(135 29.683 62.695)"/>
+                            <circle id="Oval-Copy-20-29" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 8.286 7.222)"/>
+                            <path id="Line-11-32" d="M8.954 25.628l31.976-1.112" class="cls-3" data-name="Line-11" transform="rotate(-135 24.942 25.072)"/>
+                        </g>
+                        <g id="Group-27-Copy-8" transform="translate(150 276)">
+                            <circle id="Oval-9" cx="13.5" cy="13.5" r="13.5" class="cls-2" data-name="Oval" transform="translate(34 30)"/>
+                            <circle id="Oval-Copy-20-30" cx="6.5" cy="6.5" r="6.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(104 27)"/>
+                            <path id="Line-11-33" d="M61 41.816L103.831 35" class="cls-3" data-name="Line-11"/>
+                            <circle id="Oval-Copy-20-31" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -41.539 128.916)"/>
+                            <path id="Line-11-34" d="M52.562 63.234l25.1-1.169" class="cls-3" data-name="Line-11" transform="rotate(45 65.11 62.65)"/>
+                            <ellipse id="Oval-Copy-20-32" cx="6.389" cy="6.337" class="cls-2" data-name="Oval-Copy-20" rx="6.389" ry="6.337" transform="rotate(-60 40.591 -38.246)"/>
+                            <path id="Line-11-35" d="M48.816 25.707l13.819-.783" class="cls-3" data-name="Line-11" transform="rotate(-60 55.725 25.315)"/>
+                            <circle id="Oval-Copy-20-33" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -3.196 43.668)"/>
+                            <path id="Line-11-36" d="M17.124 63.486L42.243 61.9" class="cls-3" data-name="Line-11" transform="rotate(135 29.683 62.695)"/>
+                            <circle id="Oval-Copy-20-34" cx="6.363" cy="6.363" r="6.363" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 8.286 7.222)"/>
+                            <path id="Line-11-37" d="M8.954 25.628l31.976-1.112" class="cls-3" data-name="Line-11" transform="rotate(-135 24.942 25.072)"/>
+                        </g>
+                        <g id="Group-27-Copy-5" class="cls-6" transform="translate(379 200)">
+                            <circle id="Oval-10" cx="24" cy="24" r="24" class="cls-2" data-name="Oval" transform="translate(60 53)"/>
+                            <circle id="Oval-Copy-20-35" cx="11.5" cy="11.5" r="11.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(184 48)"/>
+                            <path id="Line-11-38" d="M108 73.684L183.7 62" class="cls-3" data-name="Line-11"/>
+                            <circle id="Oval-Copy-20-36" cx="11.252" cy="11.252" r="11.252" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -73.337 228.018)"/>
+                            <path id="Line-11-39" d="M93.005 111.774l44.38-2.09" class="cls-3" data-name="Line-11" transform="rotate(45 115.196 110.729)"/>
+                            <ellipse id="Oval-Copy-20-37" cx="11.295" cy="11.208" class="cls-2" data-name="Oval-Copy-20" rx="11.295" ry="11.208" transform="rotate(-60 71.792 -67.688)"/>
+                            <path id="Line-11-40" d="M86.376 45.43l24.43-1.375" class="cls-3" data-name="Line-11" transform="rotate(-60 98.591 44.743)"/>
+                            <circle id="Oval-Copy-20-38" cx="11.252" cy="11.252" r="11.252" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -5.63 77.188)"/>
+                            <path id="Line-11-41" d="M30.308 112.2l44.417-2.776" class="cls-3" data-name="Line-11" transform="rotate(135 52.516 110.81)"/>
+                            <circle id="Oval-Copy-20-39" cx="11.252" cy="11.252" r="11.252" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 14.656 12.765)"/>
+                            <path id="Line-11-42" d="M15.856 45.311l56.544-2" class="cls-3" data-name="Line-11" transform="rotate(-135 44.128 44.313)"/>
+                        </g>
+                        <g id="Group-27-Copy-11" class="cls-6" transform="translate(483 10)">
+                            <circle id="Oval-11" cx="24" cy="24" r="24" class="cls-2" data-name="Oval" transform="translate(60 53)"/>
+                            <circle id="Oval-Copy-20-40" cx="11.252" cy="11.252" r="11.252" class="cls-2" data-name="Oval-Copy-20" transform="rotate(45 -73.337 228.018)"/>
+                            <path id="Line-11-43" d="M93.005 111.774l44.38-2.09" class="cls-3" data-name="Line-11" transform="rotate(45 115.196 110.729)"/>
+                            <circle id="Oval-Copy-20-41" cx="11.252" cy="11.252" r="11.252" class="cls-2" data-name="Oval-Copy-20" transform="rotate(135 -5.63 77.188)"/>
+                            <path id="Line-11-44" d="M30.308 112.2l44.417-2.776" class="cls-3" data-name="Line-11" transform="rotate(135 52.516 110.81)"/>
+                        </g>
+                        <g id="Group-27-Copy-6" transform="translate(903 410)">
+                            <circle id="Oval-12" cx="24" cy="24" r="24" class="cls-2" data-name="Oval" transform="translate(60 53)"/>
+                            <circle id="Oval-Copy-20-42" cx="11.5" cy="11.5" r="11.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(184 48)"/>
+                            <path id="Line-11-45" d="M108 73.684L183.7 62" class="cls-3" data-name="Line-11"/>
+                            <ellipse id="Oval-Copy-20-43" cx="11.295" cy="11.208" class="cls-2" data-name="Oval-Copy-20" rx="11.295" ry="11.208" transform="rotate(-60 71.792 -67.688)"/>
+                            <path id="Line-11-46" d="M86.376 45.43l24.43-1.375" class="cls-3" data-name="Line-11" transform="rotate(-60 98.591 44.743)"/>
+                            <circle id="Oval-Copy-20-44" cx="11.252" cy="11.252" r="11.252" class="cls-2" data-name="Oval-Copy-20" transform="rotate(-135 14.656 12.765)"/>
+                            <path id="Line-11-47" d="M15.856 45.311l56.544-2" class="cls-3" data-name="Line-11" transform="rotate(-135 44.128 44.313)"/>
+                        </g>
+                        <g id="Group-27-Copy-7" transform="translate(0 400)">
+                            <circle id="Oval-Copy-20-45" cx="11.5" cy="11.5" r="11.5" class="cls-2" data-name="Oval-Copy-20" transform="translate(184 48)"/>
+                            <path id="Line-11-48" d="M108 73.684L183.7 62" class="cls-3" data-name="Line-11"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
