@@ -393,9 +393,9 @@
                         خود را به درستی نمی‌توانند محاسبه کنند از این پلن‌های آماده استفاده کنند.</p>
                 </div>
 
-                <div class="row" style="width: 100%; box-sizing: content-box; clear: both">
+                <div class="row" style="width: 100%; box-sizing: content-box; clear: both;">
 
-                    <img src="../assets/svg/price_bg.svg" style="margin-top: 32px; width: 80%; position: relative">
+                    <img src="../assets/svg/price_bg.svg" style="margin-top: 32px; width: 70%; position: relative;">
                     <div class="row"
                          style="width: 100%; z-index: 2; position: absolute; padding: 32px; box-sizing: padding-box">
 
@@ -461,7 +461,7 @@
                                 </div>
 
                                 <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
-                                    <button style="width: 250px; height: 45px;border-radius: 15px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em">
+                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none">
                                         ثبت‌نام
                                     </button>
                                 </div>
@@ -529,7 +529,7 @@
                                 </div>
 
                                 <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
-                                    <button style="width: 250px; height: 45px;border-radius: 15px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em">
+                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none">
                                         ثبت‌نام
                                     </button>
                                 </div>
@@ -597,7 +597,7 @@
                                 </div>
 
                                 <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
-                                    <button style="width: 250px; height: 45px;border-radius: 15px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em">
+                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none">
                                         ثبت‌نام
                                     </button>
                                 </div>
@@ -665,7 +665,7 @@
                                 </div>
 
                                 <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
-                                    <button style="width: 250px; height: 45px;border-radius: 15px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em">
+                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none">
                                         ثبت‌نام
                                     </button>
                                 </div>
@@ -755,6 +755,84 @@
 
                                 </div>
                             </div>
+                        </div>
+
+
+                        <div style="width: 100%; margin-top: 64px">
+
+                            <div style="width: 100%; padding: 16px; box-sizing: padding-box">
+
+                                <div class="row"
+                                     style="width: 100%; height: max-content;  border-radius: 25px 25px 25px 25px; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16); background-color: #0045ff; display: flex; flex: 3">
+
+                                    <div style="flex: 1; height: available; padding: 32px; display: flex">
+
+                                        <p style="margin-top: auto; margin-bottom: auto; text-align: center;width: 100%; font-family: iran-yekan; font-size: 3.5em; font-weight: bold">به زودی...</p>
+
+                                    </div>
+
+                                    <div style="flex: 2; height: 100%; background-color: #fefefe; border-radius: 125px 1000px 1000px 125px; display: flex; flex-direction: column; padding: 32px; box-sizing: padding-box">
+
+                                        <p style="text-align: center;width: 100%; font-family: iran-yekan; font-size: 2.5em; font-weight: bold; color: #0045ff">Pay As You Go</p>
+
+                                        <div class="row" style="width: 100%; margin-top: 16px">
+
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: flex; justify-content: center; margin-right: 48px; margin-bottom: 32px">
+                                                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                                     style="display: flex; flex-direction: column">
+                                                    <div style="display: flex; width: 100%">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">رم (حافظه تصادفی)</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">۴۰۰ مگابایت</span>
+                                                    </div>
+
+                                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">حافظه ذخیره‌سازی</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">۲.۵ گیگابایت</span>
+                                                    </div>
+
+                                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Load Balancer</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>
+                                                    </div>
+
+                                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Monitoring</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                                     style="display: flex; flex-direction: column">
+                                                    <div style="display: flex; width: 100%">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">پردازنده</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">۰.۵ هسته</span>
+                                                    </div>
+
+                                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Dedicated Volume</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">ندارد</span>
+                                                    </div>
+
+                                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Image Registry</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>
+                                                    </div>
+
+                                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                        <span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">پشتیبانی حرفه‌ای</span>
+                                                        <span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </div>
