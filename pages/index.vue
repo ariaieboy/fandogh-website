@@ -369,9 +369,10 @@
 
             </div>
 
-            <div style="width: 100%; margin: -2.8px 0 0 0;">
+            <div class="row" style="width: 100%; margin: -2.8px 0 0 0; height: max-content; position: relative">
 
-                <div class="row" style="width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0;">
+                <div class="row"
+                     style="width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; height: max-content; position: relative">
                     <img src="../assets/svg/bottom_curve.svg" alt="bt" class="bottom-curve" width="100%"
                          style="position: relative"/>
                     <p style="width: 100%; margin-top: 7%;  font-family: iran-yekan; font-size: 2.4em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.71;letter-spacing: normal;text-align: center;color: #fefefe;position: absolute;z-index: 2">
@@ -379,7 +380,7 @@
 
                 </div>
 
-                <div style="width: 100%; margin-top: 100px">
+                <div style="width: 100%; margin-top: 100px; position: relative">
                     <p style="padding: 0 20%;  font-family: iran-yekan; font-size: 1.4em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #3c3c3c;">
                         سرویس‌ها در فندق با منابع کاملا اختصاصی کار میکنند و معماری آن‌ها به صورتی طراحی شده است تا
                         بهینه‌ترین استفاده از منابع را داشته و بهترین راندمان را داشته باشند.</p>
@@ -393,11 +394,10 @@
                         خود را به درستی نمی‌توانند محاسبه کنند از این پلن‌های آماده استفاده کنند.</p>
                 </div>
 
-                <div class="row" style="width: 100%; box-sizing: content-box; clear: both;">
+                <div style="width: 100%; box-sizing: border-box; clear: both; height: max-content; display: flex; flex-direction: column; position: relative">
 
-                    <img src="../assets/svg/price_bg.svg" style="margin-top: 32px; width: 70%; position: relative;">
-                    <div class="row"
-                         style="width: 100%; z-index: 2; position: absolute; padding: 32px; box-sizing: padding-box">
+                    <div class="row bg-test"
+                         style="width: 100%;padding: 32px; box-sizing: padding-box;">
 
                         <div style="padding: 16px" class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
                             <div style="border-radius: 25px; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16); background-color: #ffffff; padding: 16px;">
@@ -671,7 +671,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div style="width: 100%; margin-top: 64px">
                             <p style="  font-family: iran-yekan;font-size: 2.4em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #0045ff;">
@@ -738,10 +737,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="display: flex; flex-direction: column; justify-content: center">
-                                            <p style="  font-family: iran-yekan;font-size: 2.5em;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #535353;">ماهیانه</p>
-                                            <p style="  font-family: iran-sans;font-size: 3em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #0045ff;">2,160,000</p>
-                                            <p style="  font-family: iran-yekan;font-size: 2.5em;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #535353;">تومان</p>
+                                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
+                                             style="display: flex; flex-direction: column; justify-content: center">
+                                            <p style="  font-family: iran-yekan;font-size: 2.5em;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #535353;">
+                                                ماهیانه</p>
+                                            <p style="  font-family: iran-sans;font-size: 3em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #0045ff;">
+                                                2,160,000</p>
+                                            <p style="  font-family: iran-yekan;font-size: 2.5em;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.73;letter-spacing: normal;text-align: center;color: #535353;">
+                                                تومان</p>
 
                                         </div>
 
@@ -756,8 +759,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                         <div style="width: 100%; margin-top: 64px">
 
                             <div style="width: 100%; padding: 16px; box-sizing: padding-box">
@@ -767,17 +768,20 @@
 
                                     <div style="flex: 1; height: available; padding: 32px; display: flex">
 
-                                        <p style="margin-top: auto; margin-bottom: auto; text-align: center;width: 100%; font-family: iran-yekan; font-size: 3.5em; font-weight: bold">به زودی...</p>
+                                        <p style="margin-top: auto; margin-bottom: auto; text-align: center;width: 100%; font-family: iran-yekan; font-size: 3.5em; font-weight: bold">
+                                            به زودی...</p>
 
                                     </div>
 
                                     <div style="flex: 2; height: 100%; background-color: #fefefe; border-radius: 125px 1000px 1000px 125px; display: flex; flex-direction: column; padding: 32px; box-sizing: padding-box">
 
-                                        <p style="text-align: center;width: 100%; font-family: iran-yekan; font-size: 2.5em; font-weight: bold; color: #0045ff">Pay As You Go</p>
+                                        <p style="text-align: center;width: 100%; font-family: iran-yekan; font-size: 2.5em; font-weight: bold; color: #0045ff">
+                                            Pay As You Go</p>
 
                                         <div class="row" style="width: 100%; margin-top: 16px">
 
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="display: flex; justify-content: center; margin-right: 48px; margin-bottom: 32px">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                                 style="display: flex; justify-content: center; margin-right: 48px; margin-bottom: 32px">
                                                 <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
                                                      style="display: flex; flex-direction: column">
                                                     <div style="display: flex; width: 100%">
@@ -838,7 +842,6 @@
                     </div>
 
                 </div>
-
 
             </div>
 
@@ -901,6 +904,11 @@
 <style lang="stylus" scoped>
     .row
         margin 0
+
+    .bg-test
+        width 50%
+        background-size contain
+        background url("../assets/svg/price_bg.svg") no-repeat right
 </style>
 
 <style lang="stylus">
