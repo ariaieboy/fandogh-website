@@ -3,9 +3,9 @@
 
         <div class="row">
 
-            <div style="width: 100%; padding-top: 100px; position: relative; clear: both">
+            <div style="width: 100%; padding-top: 100px; clear: both">
 
-                <div style="width: 100%; min-height: 450px; background: white; display: block">
+                <div style="width: 100%; min-height: 450px; background: white;">
                     <div class="row" style="height: 100%">
                         <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 container-fluid"
                              style="height: 100%; padding: 32px; display: block">
@@ -32,9 +32,9 @@
                     </div>
                 </div>
 
-                <div style="width: 100%; height: 81px; position: relative">
+                <div style="width: 100%; height: auto;">
                     <img src="../assets/svg/bullet_bg.svg" width="100%" class="top-curve"/>
-                    <div style="width: 100%; position: absolute; display: flex; margin-top: -48px; justify-content: center;">
+                    <div style="width: 100%; display: flex; margin-top: -24px; justify-content: center;">
                         <div style="width: 10px; height: 10px; border-radius: 25px; margin: 4px; background-color: rgba(254,254,254,0.4)"></div>
                         <div style="width: 10px; height: 10px; border-radius: 25px; margin: 4px; background-color: rgba(254,254,254,0.4)"></div>
                         <div style="width: 10px; height: 10px; border-radius: 25px; margin: 4px; background-color: rgba(254,254,254,0.4)"></div>
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <div style="width: 100%; background-color: #0045FF; height: 120px; display: flex; justify-content: center; position: relative; z-index: 1">
+            <div style="width: 100%; background-color: #0045FF; height: 130px; display: flex; justify-content: center; z-index: 1">
 
                 <img src="../assets/svg/languages/laravel.svg" style="margin-left: 16px; margin-right: 16px">
                 <img src="../assets/svg/languages/asp-core.svg" style="margin-left: 16px; margin-right: 16px">
@@ -372,11 +372,13 @@
             <div class="row" style="width: 100%; margin: -2.8px 0 0 0; height: max-content; position: relative">
 
                 <div class="row"
-                     style="width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; height: max-content; position: relative">
+                     style="width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; height: auto;">
                     <img src="../assets/svg/bottom_curve.svg" alt="bt" class="bottom-curve" width="100%"
-                         style="position: relative"/>
-                    <p style="width: 100%; margin-top: 7%;  font-family: iran-yekan; font-size: 2.4em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.71;letter-spacing: normal;text-align: center;color: #fefefe;position: absolute;z-index: 2">
+                         style=""/>
+                    <div style="width: 100%; z-index: 2; margin-top: -10%; display: flex">
+                    <p style="width: 100%; font-family: iran-yekan; font-size: 2.4em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.71;letter-spacing: normal;text-align: center;color: #fefefe;">
                         قیمت‌گذاری‌ها</p>
+                    </div>
 
                 </div>
 
@@ -891,12 +893,11 @@
         background: url('~/assets/svg/bullet_bg.svg');
         background-size cover
         height: 100%
+        width 100%
 
     .bottom-curve
         background: url('~/assets/svg/bottom_curve.svg');
         background-size cover
-        height: 100%
-        margin 0
         width 100%
 
 </style>
