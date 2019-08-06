@@ -153,6 +153,7 @@
                 <p style="font-family: iran-yekan; font-size: 16px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: center; color: #3c3c3c; margin-top: 12px;">
                     دیگر محصولات</p>
 
+
                 <div class="row" style="width: 100%; margin: 12px 0 0 0; display: flex; justify-items: left; justify-content: left">
 
                     <div style=" width: 50%; flex-direction: column; margin-top: 12px">
