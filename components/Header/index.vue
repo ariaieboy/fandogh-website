@@ -1,51 +1,53 @@
 <template>
-    <div style="width: 100%; position: sticky; top: 0; z-index: 1000;">
+    <div style="width: 100%; position: absolute; top: 0; z-index: 1000; display: flex; flex-direction: column">
         <header>
             <nav class="header-container" :class="{'no-fixed': noFixed, 'header-dashboard': dashboard}">
                 <div class="right-menu">
                     <div class="menu">
-                        <a href="#" @click.prevent="toggleMenu('navbar')">
-                            <img alt="hamburger button" :src="require('../../assets/svg/ic_hamburger.svg')">
+                        <a  href="#" >
+                            <img class="nev-button" @click="toggleMenu" alt="hamburger button" :src="require('../../assets/svg/ic_hamburger.svg')">
                         </a>
                     </div>
                     <div class="logo" style="display: flex">
                         <router-link title="fandogh logo" :to="{path:'/'}">
                             <logo/>
                         </router-link>
-                        <span style="margin-top: auto; margin-bottom: auto; padding-right: 12px;  font-family: iran-yekan;font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: left;color: #fefefe;"> سکوی ابری فندق</span>
+                        <span class="logo-span"> سکوی ابری فندق</span>
                     </div>
                     <div class="navbar">
-                        <ul style="padding-left: 16px; padding-right: 16px;">
-                            <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer;"
+                        <ul style="padding-left: 32px; padding-right: 32px;">
+                            <li class="nev-button"
+                                style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px"
                                 @click="toggleMenu">
                                 محصولات
                             </li>
-                            <li>
-                                <a rel="noopener" target="_blank" href="https://docs.fandogh.cloud">
-                                    <progress-hover :hover="true">مستندات</progress-hover>
+                            <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; display: inline-flex; padding: 0 12px">
+                                <a rel="noopener" target="_blank" href="https://docs.fandogh.cloud"
+                                   style="height: 100%; width: 100%; padding: 0; text-align: center; margin-right: auto; margin-left: auto">
+                                    مستندات
                                 </a>
                             </li>
-                            <li>
-                                <a rel="noopener" target="_blank" href="https://blog.fandogh.cloud">
-                                    <progress-hover :hover="true">بلاگ</progress-hover>
+                            <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; display: inline-flex; padding: 0 12px">
+                                <a rel="noopener" target="_blank" href="https://blog.fandogh.cloud"
+                                   style="height: 100%; width: 100%; padding: 0; text-align: center; margin-right: auto; margin-left: auto">
+                                    بلاگ
                                 </a>
                             </li>
-                            <li>
-                                <router-link :to="{path:'/about-us'}">
-                                    <progress-hover :hover="true">درباره ما</progress-hover>
-                                </router-link>
+                            <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px"
+                                v-scroll-to="{el: '#prices', duration:1000, easing: 'linear'}">
+                                قیمت‌ها
                             </li>
                         </ul>
                     </div>
                 </div>
                 <div class="user" v-if="!loggedIn">
-                    <f-button path="/user/login" styles="transparent md">ورود</f-button>
-                    <f-button path="/user/register" styles="transparent border margin-10 md">ثبت نام</f-button>
+                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none" @click="$router.push('/user/login')">ورود</button>
+                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none" @click="$router.push('/user/register')">ثبت نام</button>
                 </div>
                 <div class="user" v-else>
-                    <f-button @onClick="exit" styles="transparent md exit">خروج</f-button>
+                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none" @click="exit">خروج</button>
                     <!--<f-button @onClick="$router.push('/dashboard/images')" styles="transparent border" > داشبورد </f-button>-->
-                    <f-button path="/dashboard" styles="transparent border md margin-10">داشبورد</f-button>
+                    <button @click="$router.push('/dashboard')" style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none">داشبورد</button>
                 </div>
                 <!-- <div v-if="loggedIn" class="profile">
                   <a href="#" @click.prevent="toggleMenu(null)">
@@ -53,108 +55,109 @@
                   </a>
                 </div>-->
             </nav>
-            <sidebar ref="menu"/>
             <login ref="login"/>
             <register ref="register"/>
             <message ref="message"/>
         </header>
 
-        <div id="sub_menu" ref="sub_menu"
-             style="width: 100%; height: 400px; box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.16); top: 60px; position: absolute; background-color: #ffffff; padding: 16px;display: none">
-            <div style="flex: 1; height: 100%; display: flex; flex-direction: column;">
-                <p style="  font-family: iran-yekan; font-size: 16px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: center; color: #3c3c3c;margin-top: 12px;">
-                    سرویس‌های مدیریت شده</p>
+        <div id="sub_menu" ref="sub_menu" class="sub_menu">
+            <div class="menu_section">
+                <p>سرویس‌های مدیریت شده</p>
+                <div class="horiz_line"></div>
                 <div class="row" style="width: 100%; margin: 0;">
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6" style="display: flex; flex-direction: column">
-                        <div style="width: 100%; display: flex; cursor: pointer; margin-top: 12px">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: flex; flex-direction: column; height: 100%">
+                        <a class="managed-service"
+                           href="https://docs.fandogh.cloud/docs/mysql-managed-service.html" target="_blank">
                             <img src="../../assets/svg/services/managed/managed_service_mysql.svg"
                                  style="max-width: 48px; max-height: 48px"/>
                             <div style="flex: 1; margin-top: 5px">
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 15px; font-style: normal; font-weight: bold; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #535353; padding-right: 12px; margin-bottom: 5px;">
-                                    Mysql</p>
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 14px; font-style: normal; font-weight: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #7c7c7c; padding-right: 12px;">
-                                    Database</p>
+                                <p class="english_title">Mysql</p>
+                                <p class="english_subtitle">Database</p>
                             </div>
-                        </div>
+                        </a>
 
-                        <div style="width: 100%; display: flex; cursor: pointer; margin-top: 12px">
-                            <img src="../../assets/svg/services/managed/managed_service_redis.svg"
-                                 style="max-width: 48px; max-height: 48px"/>
-                            <div style="flex: 1; margin-top: 5px">
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 15px; font-style: normal; font-weight: bold; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #535353; padding-right: 12px; margin-bottom: 5px;">
-                                    Redis</p>
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 14px; font-style: normal; font-weight: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #7c7c7c; padding-right: 12px;">
-                                    In Memory Database Cache</p>
-                            </div>
-                        </div>
-
-                        <div style="width: 100%; display: flex; cursor: pointer; margin-top: 12px">
+                        <a class="managed-service"
+                           href="https://docs.fandogh.cloud/docs/postgresql-managed-service.html" target="_blank">
                             <img src="../../assets/svg/services/managed/managed_service_postgresql.svg"
                                  style="max-width: 48px; max-height: 48px"/>
                             <div style="flex: 1; margin-top: 5px">
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 15px; font-style: normal; font-weight: bold; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #535353; padding-right: 12px; margin-bottom: 5px;">
-                                    Postgresql</p>
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 14px; font-style: normal; font-weight: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #7c7c7c; padding-right: 12px;">
-                                    Database</p>
+                                <p class="english_title">Postgresql</p>
+                                <p class="english_subtitle">Database</p>
                             </div>
-                        </div>
+                        </a>
 
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"  style="display: flex; flex-direction: column; height: 100%">
 
-                        <div style="width: 100%; display: flex; cursor: pointer; margin-top: 12px">
+                        <a class="managed-service"
+                           href="https://docs.fandogh.cloud/docs/proxy-managed-service.html" target="_blank">
                             <img src="../../assets/svg/services/managed/managed_service_proxy.svg"
                                  style="max-width: 48px; max-height: 48px"/>
                             <div style="flex: 1; margin-top: 5px">
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 15px; font-style: normal; font-weight: bold; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #535353; padding-right: 12px; margin-bottom: 5px;">
-                                    Proxy</p>
-                                <p style="  font-family: 'Helvetica Neue'; font-size: 14px; font-style: normal; font-weight: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: right; color: #7c7c7c; padding-right: 12px;">
-                                    Ip Range Limiter</p>
+                                <p class="english_title">Proxy</p>
+                                <p class="english_subtitle">Ip Range Limiter</p>
                             </div>
-                        </div>
+                        </a>
+
+
+                        <a class="managed-service"
+                           href="https://docs.fandogh.cloud/docs/redis-managed-service.html" target="_blank">
+                            <img src="../../assets/svg/services/managed/managed_service_redis.svg"
+                                 style="max-width: 48px; max-height: 48px"/>
+                            <div style="flex: 1; margin-top: 5px">
+                                <p class="english_title">Redis</p>
+                                <p class="english_subtitle">In Memory Database Cache</p>
+                            </div>
+                        </a>
 
                     </div>
                 </div>
-                <p style="cursor: pointer; font-family: iran-yekan; margin-top: auto; font-size: 13px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.69; letter-spacing: normal; text-align: center; color: #0045ff;">
-                    مشاهده همه</p>
+
+                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده همه</a>
 
             </div>
-            <div style="width: 1px; border: solid 1px #e8e8e8; margin-top: 16px; margin-bottom: 16px"></div>
-            <div style="flex: 1; height: 100%; display: flex; flex-direction: column;">
-                <p style="  font-family: iran-yekan; font-size: 16px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: center; color: #3c3c3c;margin-top: 12px;">
-                    اجرای مستقیم کدها</p>
-                <div class="row" style="width: 100%; margin: 12px 0 0 0;">
-                    <div style="display: flex; flex-grow: 1; flex-direction: column; width: 33%;">
+            <div class="vertical_line"></div>
+            <div class="menu_section">
+                <p>اجرای مستقیم کدها</p>
+                <div class="horiz_line"></div>
+
+                <div class="row" style="width: 100%;">
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-spring-boot.html" target="_blank">
                         <img src="../../assets/svg/services/language/java_lang.svg"/>
-                        <p style="margin-top: 12px; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: center; color: #535353;">
-                            Java</p>
-                    </div>
+                        <p>Java</p>
+                    </a>
 
-                    <div style="display: flex; flex-grow: 1; flex-direction: column; width: 33%;">
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-django.html" target="_blank">
                         <img src="../../assets/svg/services/language/python_lang.svg"/>
-                        <p style="margin-top: 12px; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: center; color: #535353;">
-                            Python</p>
-                    </div>
+                        <p>Python</p>
+                    </a>
 
-                    <div style="display: flex; flex-grow: 1; flex-direction: column; width: 33%;">
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-nodejs.html" target="_blank">
                         <img src="../../assets/svg/services/language/nodejs_lang.svg"/>
-                        <p style="margin-top: 12px; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: center; color: #535353;">
-                            Node.js</p>
-                    </div>
+                        <p>Node.js</p>
+                    </a>
+
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-laravel.html" target="_blank">
+                        <img src="../../assets/svg/services/language/laravel_lang.svg"/>
+                        <p>Laravel</p>
+                    </a>
+
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-aspnetcore.html" target="_blank" style="margin-left: auto">
+                        <img src="../../assets/svg/services/language/net_core_lang.svg"/>
+                        <p>ASP.Net Core</p>
+                    </a>
 
                 </div>
 
-                <p style="cursor: pointer; font-family: iran-yekan; margin-top: auto; font-size: 13px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.69; letter-spacing: normal; text-align: center; color: #0045ff;">
-                    مشاهده همه</p>
+                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده همه</a>
 
             </div>
-            <div style="width: 1px; border: solid 1px #e8e8e8; margin-top: 16px; margin-bottom: 16px"></div>
-            <div style="flex: 1; height: 100%;display: flex; flex-direction: column;">
-                <p style="font-family: iran-yekan; font-size: 16px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: center; color: #3c3c3c; margin-top: 12px;">
-                    دیگر محصولات</p>
-
-
-                <div class="row" style="width: 100%; margin: 12px 0 0 0; display: flex; justify-items: left; justify-content: left">
+            <div class="vertical_line"></div>
+            <div class="menu_section">
+                <p>دیگر محصولات</p>
+                <div class="horiz_line"></div>
+                <div class="row"
+                     style="width: 100%; margin: 12px 0 0 0; display: flex; justify-items: left; justify-content: left">
 
                     <div style=" width: 50%; flex-direction: column; margin-top: 12px">
                         <div style="width: 100%; display: flex; direction: ltr; height: max-content; flex-direction: column">
@@ -208,8 +211,7 @@
 
                 </div>
 
-                <p style="cursor: pointer; font-family: iran-yekan; margin-top: auto; font-size: 13px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.69; letter-spacing: normal; text-align: center; color: #0045ff;">
-                    مشاهده همه</p>
+                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده همه</a>
 
             </div>
         </div>
@@ -258,15 +260,16 @@
                 });
             }
 
-            // window.onclick = function (event) {
-            //     console.log(event.target.matches('li'))
-            //     if(!event.target.matches('li')){
-            //         if (document.getElementById("sub_menu").style.display === 'flex'){
-            //             document.getElementById("sub_menu").style.display = 'none'
-            //         }
-            //     }
-            //
-            // }
+            window.onclick = function (event) {
+                console.log(event.target.matches('.nev-button'))
+                if (!event.target.matches('.nev-button')) {
+                    if (document.getElementById("sub_menu").style.visibility === 'visible') {
+                        document.getElementById("sub_menu").style.visibility = 'hidden'
+                        document.getElementById("sub_menu").style.opacity = '0'
+                    }
+                }
+
+            }
         },
         computed: {
             loggedIn() {
@@ -284,10 +287,12 @@
             toggleMenu() {
                 // this.$store.dispatch("TOGGLE_NAV", {data: type, id: "sidebar"});
 
-                if (this.$refs.sub_menu.style.display === 'flex') {
-                    this.$refs.sub_menu.style.display = 'none'
+                if (this.$refs.sub_menu.style.visibility === 'hidden') {
+                    this.$refs.sub_menu.style.opacity = '100';
+                    this.$refs.sub_menu.style.visibility = 'visible'
                 } else {
-                    this.$refs.sub_menu.style.display = 'flex'
+                    this.$refs.sub_menu.style.opacity = '0';
+                    this.$refs.sub_menu.style.visibility = 'hidden'
                 }
             },
             showModal(modal) {
@@ -321,40 +326,167 @@
 
 <style lang="stylus" scoped>
 
-    .dropdown-content
-        display none
+
+    .sub_menu
+        width 100%
+        min-height 400px
+        box-shadow 0 3px 15px 0 rgba(0, 0, 0, 0.16)
+        top 60px
         position absolute
-        background-color #fefefe
-        border-radius 3px
-        min-width 160px
-        overflow auto
-        box-shadow 3px 4px 12px 0 rgba(0, 0, 0, 0.2)
-        z-index 1
-        left 10px
-        top 0
-        @media only screen and (max-width: 766px)
-            left 4px
+        background-color #ffffff
+        padding 16px
+        z-index 990
+        display flex
+        visibility hidden
+        opacity 0
+        transition all 0.2s ease-in-out
+        div.vertical_line
+            width 1px
+            border solid 1px #e8e8e8
+            margin-top 16px
+            border-radius 25px
+            margin-bottom 16px
+            @media only screen and (max-width: 992px)
+                display none
+
+        @media only screen and (max-width: 992px)
+            flex-direction column
+            position relative
+            border-radius 15px
+            width 95%
+            top 16px
+            margin-left auto
+            margin-right auto
 
 
-    .dropdown-content
-        a
-            color: #000000;
-            padding: 8px 16px;
-            text-decoration: none;
+
+    .logo-span
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-right: 12px;
+        font-family: iran-yekan;
+        font-size: 1.1em;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.75;
+        letter-spacing: normal;
+        text-align: left;
+        color: #fefefe;
+        @media only screen and (max-width: 992px)
+            display none
+
+    .menu_section
+        flex 1
+        display flex
+        flex-direction column
+        div.horiz_line
+            width 100%
+            height 0
+            border 1px solid #0045ff
+            border-radius 25px
+            display none
+        p
             font-family iran-yekan
-            font-size .8em
-            margin auto
-            display: flex;
-            @media only screen and (max-width: 766px)
-                padding: 0 16px;
-                font-size 1em
+            font-size 1.2em
+            font-weight bold
+            font-style normal
+            font-stretch normal
+            letter-spacing normal
+            text-align center
+            color #3c3c3c
+            margin-top 12px
+            margin-bottom 8px
+        a.button
+            cursor pointer
+            width 100%
+            margin-top auto
+            padding-top 16px
+            font-family iran-yekan
+            font-size .9em
+            font-weight bold
+            font-style normal
+            font-stretch normal
+            letter-spacing normal
+            text-align center
+            color #0045ff
+        @media only screen and (max-width: 992px)
+            div.horiz_line
+                display unset
+            p
+                text-align right
+            a.button
+                text-align left
 
+    .language-support
+        display flex
+        cursor pointer
+        flex-direction column
+        width 33%
+        padding-top 16px
+        p
+            margin-top: 12px;
+            font-family: 'Helvetica Neue';
+            font-size: 14px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.21;
+            letter-spacing: normal;
+            text-align: center;
+            color: #535353;
+
+        @media only screen and (max-width: 992px)
+            width unset
+            padding 8px 16px
             img
-                width 16px
-                height 16px
-                margin-top auto
-                margin-bottom auto
-                margin-left 12px
+                display none
+
+    .language-support:hover
+        p
+            color #0045ff
+
+
+    .managed-service
+        width 100%
+        display flex
+        cursor pointer
+        padding-top 16px
+        img
+            display unset
+            @media only screen and (max-width: 992px)
+                display none
+        p.english_title
+            font-family 'Helvetica Neue'
+            font-size 1.1em
+            font-style normal
+            font-weight bold
+            font-stretch normal
+            line-height 1.21
+            letter-spacing normal
+            text-align right
+            color #535353
+            padding-right 12px
+            margin 0 0 5px 0
+
+        p.english_subtitle
+            font-family 'Helvetica Neue'
+            font-size 0.9em
+            font-style normal
+            font-weight normal
+            font-stretch normal
+            line-height 1.21
+            letter-spacing normal
+            text-align right
+            color #7c7c7c
+            padding-right 12px
+            margin 0 0 5px 0
+
+    .managed-service:hover
+        p.english_title
+            color #0045ff
+        p.english_subtitle
+            color #0045ff
 
 </style>
 
@@ -424,12 +556,10 @@
     @media only screen and (max-width: 1230px)
         .header-container
             position initial
-            padding 30px
             height 60px
 
         .header-container-fixed
-            z-index 10
-            padding 0 30px
+            z-index 1000
             background-color #0045ff
 
         .header-dashboard, &.dashboard

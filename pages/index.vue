@@ -369,7 +369,7 @@
 
             </div>
 
-            <div class="row" style="width: 100%; margin: -2.8px 0 0 0; height: max-content; position: relative">
+            <div id="prices" class="row" style="width: 100%; margin: -2.8px 0 0 0; height: max-content; position: relative">
 
                 <div class="row"
                      style="width: 100%; display: flex; flex-direction: column; margin: 0; padding: 0; height: auto;">

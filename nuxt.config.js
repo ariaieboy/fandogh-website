@@ -37,7 +37,7 @@ module.exports = {
         link: [{rel: "iScon", type: "image/x-icon", href: "/favicon.ico"}]
     },
 
-    modules: ["@nuxtjs/pwa", "@nuxtjs/google-analytics"],
+    modules: ["@nuxtjs/pwa", "@nuxtjs/google-analytics", 'vue-scrollto/nuxt',],
     "google-analytics": {
         id: "UA-120059029-1"
     },
@@ -76,6 +76,7 @@ module.exports = {
         {src: "~/plugins/tooltip", ssr: false},
         {src: "~/plugins/input", ssr: false},
         {src: "~/plugins/vue-plyr", ssr: false, mode: 'spa'},
+        {src: "~/plugins/vue-scroll-to", ssr: false},
         {src: '~/plugins/localStorage.js', ssr: false, mode: 'spa'},
         "~/plugins/mixins",
         "~/plugins/validation",

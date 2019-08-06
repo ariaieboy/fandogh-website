@@ -108,5 +108,4 @@ export default {
   display block
   box-sizing border-box
   width 100%
-  background linear-gradient(to left, #0f0050, #160074)
 </style>
