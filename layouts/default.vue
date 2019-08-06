@@ -2,7 +2,7 @@
   <div class="wrapper-default">
     <f-header/>
     <nuxt/>
-    <div class="row" style="width: 100%; background-color: #001069; height: max-content; position: relative; display: flex">
+    <div class="row" style="width: 100%; background-color: #001069; height: max-content; position: relative; display: flex; margin-left: 0; margin-right: 0;">
 
       <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="display: flex; box-sizing: padding-box">
         <div style=" padding: 32px 24px; width: max-content">
