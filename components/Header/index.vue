@@ -123,28 +123,28 @@
 
                 <div class="row" style="width: 100%;">
                     <a class="language-support" href="https://docs.fandogh.cloud/docs/source-spring-boot.html" target="_blank">
-                        <img src="../../assets/svg/services/language/java_lang.svg"/>
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/java_lang.svg"/>
                         <p>Java</p>
                     </a>
 
                     <a class="language-support" href="https://docs.fandogh.cloud/docs/source-django.html" target="_blank">
-                        <img src="../../assets/svg/services/language/python_lang.svg"/>
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/python_lang.svg"/>
                         <p>Python</p>
                     </a>
 
                     <a class="language-support" href="https://docs.fandogh.cloud/docs/source-nodejs.html" target="_blank">
-                        <img src="../../assets/svg/services/language/nodejs_lang.svg"/>
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/nodejs_lang.svg"/>
                         <p>Node.js</p>
                     </a>
 
 
                     <a class="language-support" href="https://docs.fandogh.cloud/docs/source-laravel.html" target="_blank">
-                        <img src="../../assets/svg/services/language/laravel_lang.svg"/>
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/laravel_lang.svg"/>
                         <p>Laravel</p>
                     </a>
 
                     <a class="language-support" href="https://docs.fandogh.cloud/docs/source-aspnetcore.html" target="_blank" style="margin-left: auto">
-                        <img src="../../assets/svg/services/language/net_core_lang.svg"/>
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/net_core_lang.svg"/>
                         <p>ASP.Net Core</p>
                     </a>
 
@@ -339,7 +339,6 @@
 
     .sub_menu
         width 100%
-        min-height 400px
         box-shadow 0 3px 15px 12px rgba(0, 0, 0, 0.16)
         top 60px
         position absolute

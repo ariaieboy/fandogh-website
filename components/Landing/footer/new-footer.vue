@@ -113,7 +113,7 @@
             margin-left auto
             margin-right auto
             width 54px
-            filter invert(65%) sepia(59%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(118%)
+            filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 
         p
             margin-top 12px
