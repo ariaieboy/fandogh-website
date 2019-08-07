@@ -604,18 +604,6 @@
             <!--</div>-->
 
         </div>
-
-        <!--<main-app/>-->
-        <!--<devider styles="no-margin" type="tr"/>-->
-        <!--<features/>-->
-        <!--<devider styles="no-margin" type="bl"/>-->
-        <!--<solution/>-->
-        <!--<devider styles="no-margin" type="tl"/>-->
-        <!--<tutorial/>-->
-        <!--&lt;!&ndash; <devider styles="no-margin" type="br"/>-->
-        <!--<prices/>&ndash;&gt;-->
-        <!--<devider styles="no-margin" type="fc"/>-->
-        <!--<f-customer/>-->
     </section>
 </template>
 <script>
@@ -630,6 +618,7 @@
     import Languages from "../components/Landing/sections/languages";
     import Audiences from "../components/Landing/sections/audiences";
     import LanguageTutorials from "../components/Landing/sections/language-tutorials";
+    import PlatformFeatures from "../components/Landing/sections/platform-features";
 
     export default {
         components: {
@@ -643,7 +632,8 @@
             Prices,
             Languages,
             Audiences,
-            LanguageTutorials
+            LanguageTutorials,
+            PlatformFeatures
         },
         data() {
             return {}
