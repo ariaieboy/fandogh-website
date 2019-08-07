@@ -6,26 +6,8 @@
             <slider/>
             <languages/>
             <audiences/>
+            <language-tutorials/>
 
-            <!--<div style="width: 100%; min-height: 300px; background: #0045ff; margin-top: 32px; display: flex; flex-direction: column; position:relative;">-->
-
-                <!--<p style="font-family: iran-yekan; font-size: 2em; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.71; letter-spacing: normal; text-align: center; color: #fefefe; margin-left: auto; margin-right: auto; margin-top: 32px">-->
-                    <!--نگاهی به زبان‌های پشتیبانی شده بر روی سکوی ابری فندق-->
-                <!--</p>-->
-
-
-                <!--<div style="border-radius: 5px; box-shadow: 0 0 44px 0 rgba(0, 0, 0, 0.51); background-color: #080295; width: 70%; margin: 64px auto; display: flex;">-->
-
-                    <!--<vue-plyr class="tut_player"-->
-                              <!--style="margin-top: 100px; border-radius: 5px !important; background: #080295; width: 100%"-->
-                              <!--:options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume' ,'current-time','fullscreen', 'download']}">-->
-                        <!--<video style="width: 100%">-->
-                            <!--<source style="width: 100%" src="../assets/media/sample.mp4" type="video/mp4"/>-->
-                        <!--</video>-->
-                    <!--</vue-plyr>-->
-                <!--</div>-->
-
-            <!--</div>-->
 
             <!--<div style="width: 100%; min-height: 700px; margin-top: 32px; position:relative; box-sizing: padding-box; padding: 32px">-->
 
@@ -778,6 +760,7 @@
     import Slider from "../components/Landing/sections/slider";
     import Languages from "../components/Landing/sections/languages";
     import Audiences from "../components/Landing/sections/audiences";
+    import LanguageTutorials from "../components/Landing/sections/language-tutorials";
 
     export default {
         components: {
@@ -790,7 +773,8 @@
             Tutorial,
             Prices,
             Languages,
-            Audiences
+            Audiences,
+            LanguageTutorials
         },
         data() {
             return {}
@@ -843,10 +827,20 @@
     .success_player
         .plyr
             border-radius 25px !important
+            width 100% !important
+            @media only screen and (max-width: 992px) {
+                border-radius 0 !important
+            }
+
 
     .tut_player
         .plyr
             border-radius 0 0 5px 5px !important
+            width 100% !important
+            @media only screen and (max-width: 992px) {
+                border-radius 0 !important
+            }
+
 
     .plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
         background: transparent !important;
@@ -857,6 +851,10 @@
     .plyr--full-ui input[type=range] {
         border-radius: 25px !important;
         color: rgba(255, 255, 255, 0.99) !important;
+        @media only screen and (max-width: 992px) {
+            border-radius 0 !important
+        }
+
     }
 
     .plyr--video .plyr__controls {
