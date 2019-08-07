@@ -220,20 +220,16 @@
             box-shadow 0 0 6px 0 rgba(0, 69, 255, 0.4)
             div.feature-selected
                 border none
-                height 48px
-                line-height 48px
                 color #fefefe
                 width max-content
-                font-family .8em
+                font-size .9em
                 text-align right
                 padding-left 12px
 
             div.feature-unselected
                 border none
                 color #e3e6ef
-                height 48px
-                line-height 48px
-                font-family .8em
+                font-size .9em
                 width max-content
                 padding-left 12px
                 text-align right
