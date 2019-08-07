@@ -8,86 +8,8 @@
             <audiences/>
             <language-tutorials/>
             <platform-features/>
+            <business-solution/>
 
-            <!--<div style="width: 100%; padding-bottom: 64px">-->
-
-                <!--<div style="display: flex; width: 100%">-->
-                    <!--<div style="height: 0; border: solid 1px #0045ff; border-radius: 25px; width: 100%; margin: auto 32px;"></div>-->
-                    <!--<img src="../assets/svg/services/enterprise/company.svg" alt="company"/>-->
-                    <!--<div style="height: 0; border: solid 1px #0045ff; border-radius: 25px; width: 100%; margin: auto 32px;"></div>-->
-                <!--</div>-->
-                <!--<div style="width: 100%; padding: 32px; box-sizing: padding-box">-->
-                    <!--<p style="  font-family: iran-yekan;font-size: 2.5em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.71;letter-spacing: normal;text-align: center;color: #0045ff;">-->
-                        <!--راه حل‌های شرکتی</p>-->
-                    <!--<p style="  font-family: iran-yekan; font-size: 1.5em;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.71;letter-spacing: normal;text-align: center;color: #3c3c3c; padding-left: 20%; padding-right: 20%">-->
-                        <!--تجربیات و تیم فندق را به صورت اختصاصی برای شرکت خود داشته باشید</p>-->
-                <!--</div>-->
-
-                <!--<div class="row" style="width: 100%; padding: 0 64px; box-sizing: padding-box">-->
-                    <!--<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"-->
-                         <!--style="box-sizing: padding-box; padding: 16px; display: flex; height: 300px">-->
-
-                        <!--<img src="../assets/svg/services/enterprise/security.svg" alt="mysql"-->
-                             <!--class="col-2" style="margin-top: 0; top: 0; height: max-content"/>-->
-                        <!--<div class="col-10"-->
-                             <!--style="width: 100%; display: flex; flex-direction: column; padding-right: 12px">-->
-                            <!--<p style="margin-top: 5%; font-family: iran-yekan;font-size: 1.5em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.25;letter-spacing: normal;text-align: right;color: #0045ff;margin-bottom: 6px">-->
-                                <!--امنیت بالا</p>-->
-                            <!--<p style="  font-family: iran-yekan;font-size: 1.1em;margin-top: 12px; font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c;">-->
-                                <!--سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده از-->
-                                <!--بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به کاربران-->
-                                <!--ارائه کند.-->
-                            <!--</p>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"-->
-                         <!--style="box-sizing: padding-box; padding: 16px; display: flex; height: 300px">-->
-
-                        <!--<img src="../assets/svg/services/enterprise/registry.svg" alt="registry"-->
-                             <!--class="col-2" style="margin-top: 0; top: 0; height: max-content"/>-->
-                        <!--<div class="col-10"-->
-                             <!--style="width: 100%; display: flex; flex-direction: column; padding-right: 12px">-->
-                            <!--<p style="margin-top: 5%; font-family: iran-yekan;font-size: 1.5em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.25;letter-spacing: normal;text-align: right;color: #0045ff;margin-bottom: 6px">-->
-                                <!--رجیستری اختصاصی</p>-->
-                            <!--<p style="  font-family: iran-yekan;font-size: 1.1em;margin-top: 12px; font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c;">-->
-                                <!--سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده از-->
-                                <!--بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به کاربران-->
-                                <!--ارائه کند.-->
-                            <!--</p>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"-->
-                         <!--style="box-sizing: padding-box; padding: 16px; display: flex; height: 300px">-->
-
-                        <!--<img src="../assets/svg/services/enterprise/image.svg" alt="mysql"-->
-                             <!--class="col-2" style="margin-top: 0; top: 0; height: max-content"/>-->
-                        <!--<div class="col-10"-->
-                             <!--style="width: 100%; display: flex; flex-direction: column; padding-right: 12px">-->
-                            <!--<p style="margin-top: 5%; font-family: iran-yekan;font-size: 1.5em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.25;letter-spacing: normal;text-align: right;color: #0045ff;margin-bottom: 6px">-->
-                                <!--ایمیج نامحدود</p>-->
-                            <!--<p style="  font-family: iran-yekan;font-size: 1.1em;margin-top: 12px; font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c;">-->
-                                <!--سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده از-->
-                                <!--بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به کاربران-->
-                                <!--ارائه کند.-->
-                            <!--</p>-->
-
-                        <!--</div>-->
-
-                    <!--</div>-->
-                <!--</div>-->
-
-                <!--<div style="width: 100%; display: flex">-->
-                    <!--<button style="outline: none; margin-left: auto; margin-right: auto; width: 250px; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(0, 69, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff; font-family: iran-yekan;font-size: 1.2em;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: center;color: #fefefe;">-->
-                        <!--درخواست سرویس-->
-                    <!--</button>-->
-                <!--</div>-->
-
-
-            <!--</div>-->
 
             <!--<div style="z-index: 2; width: 100%;padding-bottom: 16px; background: #0045ff; margin-top: 32px; display: flex; flex-direction: column; position:relative;">-->
 
@@ -619,9 +541,11 @@
     import Audiences from "../components/Landing/sections/audiences";
     import LanguageTutorials from "../components/Landing/sections/language-tutorials";
     import PlatformFeatures from "../components/Landing/sections/platform-features";
+    import BusinessSolution from "../components/Landing/sections/business-solution";
 
     export default {
         components: {
+            BusinessSolution,
             Slider,
             FCustomer,
             MainApp,
