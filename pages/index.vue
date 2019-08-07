@@ -3,44 +3,7 @@
 
         <div class="row" style="width: 100%">
 
-            <div style="width: 100%; padding-top: 100px; clear: both">
-                <div style="width: 100%; min-height: 450px; background: white;">
-                    <div class="row" style="height: 100%">
-                        <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 container-fluid"
-                             style="height: 100%; padding: 32px; display: block">
-
-                            <div style="width: 100%; float: left; display: flex; flex-direction: column; margin-top: 16px; padding-right: 20%">
-                                <div style="width: 100%; font-size: 23px;font-family: iran-yekan; font-weight: bold;color: #0045ff;">
-                                    برای هر زبانی راه حلی داریم…
-                                </div>
-                                <div style="margin-top: 32px; font-family: iran-yekan;font-size: 18px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.72;letter-spacing: normal;text-align: right;color: #1d1d1d;">
-                                    فندق یه PaaS است که به شما این امکان رو میده که سرویس‌های خودتون رو بر روی سرورهای
-                                    ابری
-                                    مستقر کنید و نگران مدیریت سرورها و سرویس‌هایی که نیاز دارید نباشید.
-                                </div>
-                                <button style="outline:none; margin-left: auto; margin-right: auto;margin-top: 48px;  width: 200px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(0, 69, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan">
-                                    ثبت‌نام رایگان
-                                </button>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 container-fluid"
-                             style="height: 100%; padding: 32px; display: flex">
-
-                            <img style="max-width: 100%" src="../assets/svg/banner_one.svg">
-                        </div>
-                    </div>
-                </div>
-
-                <div style="width: 100%; height: auto;">
-                    <img src="../assets/svg/bullet_bg.svg" width="100%" class="top-curve"/>
-                    <div style="width: 100%; display: flex; margin-top: -24px; justify-content: center;">
-                        <div style="width: 10px; height: 10px; border-radius: 25px; margin: 4px; background-color: rgba(254,254,254,0.4)"></div>
-                        <div style="width: 10px; height: 10px; border-radius: 25px; margin: 4px; background-color: rgba(254,254,254,0.4)"></div>
-                        <div style="width: 10px; height: 10px; border-radius: 25px; margin: 4px; background-color: rgba(254,254,254,0.4)"></div>
-                        <div style="width: 10px; height: 10px; border-radius: 25px; margin: 4px; background-color: #fefefe"></div>
-                    </div>
-                </div>
-            </div>
+            <slider/>
 
             <!--<div style="width: 100%; background-color: #0045FF; height: 130px; display: flex; justify-content: center; z-index: 1">-->
 
@@ -869,9 +832,11 @@
     import Tutorial from '~/components/Tutorial'
     import Prices from '~/components/Prices'
     import FCustomer from '~/components/Customer'
+    import Slider from "../components/Landing/sections/slider";
 
     export default {
         components: {
+            Slider,
             FCustomer,
             MainApp,
             Features,
@@ -887,12 +852,6 @@
 </script>
 
 <style lang="stylus" scoped>
-
-    .top-curve
-        background: url('~/assets/svg/bullet_bg.svg');
-        background-size cover
-        height: 100%
-        width 100%
 
     .bottom-curve
         background: url('~/assets/svg/bottom_curve.svg');

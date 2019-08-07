@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%; position: absolute; top: 0; z-index: 1000; display: flex; flex-direction: column">
+    <div class="toolbar-container">
         <header>
             <nav class="header-container" :class="{'no-fixed': noFixed, 'header-dashboard': dashboard}">
                 <div class="right-menu">
@@ -327,11 +327,20 @@
 
 <style lang="stylus" scoped>
 
+    .toolbar-container
+        width: 100%;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column
+        @media only screen and (max-width: 1230px)
+            position absolute
 
     .sub_menu
         width 100%
         min-height 400px
-        box-shadow 0 3px 15px 0 rgba(0, 0, 0, 0.16)
+        box-shadow 0 3px 15px 12px rgba(0, 0, 0, 0.16)
         top 60px
         position absolute
         background-color #ffffff
@@ -347,15 +356,16 @@
             margin-top 16px
             border-radius 25px
             margin-bottom 16px
-            @media only screen and (max-width: 992px)
+            @media only screen and (max-width: 1230px)
                 display none
 
-        @media only screen and (max-width: 992px)
+        @media only screen and (max-width: 1230px)
             flex-direction column
             position relative
             border-radius 15px
             width 95%
             top 16px
+            box-shadow 0 3px 15px 2px rgba(0, 0, 0, 0.25)
             margin-left auto
             margin-right auto
 
@@ -374,7 +384,7 @@
         letter-spacing: normal;
         text-align: left;
         color: #fefefe;
-        @media only screen and (max-width: 992px)
+        @media only screen and (max-width: 1230px)
             display none
 
     .menu_section
@@ -411,7 +421,7 @@
             letter-spacing normal
             text-align center
             color #0045ff
-        @media only screen and (max-width: 992px)
+        @media only screen and (max-width: 1230px)
             div.horiz_line
                 display unset
             p
@@ -437,7 +447,7 @@
             text-align: center;
             color: #535353;
 
-        @media only screen and (max-width: 992px)
+        @media only screen and (max-width: 1230px)
             width unset
             padding 8px 16px
             img
@@ -455,7 +465,7 @@
         padding-top 16px
         img
             display unset
-            @media only screen and (max-width: 992px)
+            @media only screen and (max-width: 1230px)
                 display none
         p.english_title
             font-family 'Helvetica Neue'
