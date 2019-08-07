@@ -9,43 +9,8 @@
             <language-tutorials/>
             <platform-features/>
             <business-solution/>
+            <success-story/>
 
-
-            <!--<div style="z-index: 2; width: 100%;padding-bottom: 16px; background: #0045ff; margin-top: 32px; display: flex; flex-direction: column; position:relative;">-->
-
-                <!--<p style="font-family: iran-yekan; font-size: 2.4em; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.71; letter-spacing: normal; text-align: center; color: #fefefe; margin-left: auto; margin-right: auto; margin-top: 64px">-->
-                    <!--داستان‌هایی از موفقیت فندق-->
-                <!--</p>-->
-
-                <!--<div class="row" style="padding: 0 64px; box-sizing: padding-box">-->
-
-                    <!--<div class="col-lg-5 col-md-5 col-sm-12 col-xs-12"-->
-                         <!--style="display: flex; flex-direction: column; margin-top: 32px">-->
-                        <!--<img src="../assets/svg/customers/botick.png" width="200px" alt="botick"-->
-                             <!--style="margin-left: auto; margin-right: auto">-->
-
-                        <!--<p style="  font-family: iran-yekan; margin-top:16px;font-size: 20px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: center;color: #fefefe;">-->
-                            <!--میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات-->
-                            <!--ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای-->
-                            <!--نگرانی بابت زیرساخت داشته باشیم….</p>-->
-
-                    <!--</div>-->
-                    <!--<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">-->
-
-                        <!--<vue-plyr class="success_player"-->
-                                  <!--style="margin-top: 32px; border-radius: 25px !important; background: #080295; width: 100%; margin-bottom: 1px"-->
-                                  <!--:options="{controls: ['play-large', 'progress','fullscreen']}">-->
-                            <!--<video style="width: 100%">-->
-                                <!--<source style="width: 100%" src="../assets/media/sample.mp4" type="video/mp4"/>-->
-                            <!--</video>-->
-                        <!--</vue-plyr>-->
-
-
-                    <!--</div>-->
-
-                <!--</div>-->
-
-            <!--</div>-->
 
             <!--<div id="prices" class="row" style="width: 100%; margin: -2.8px 0 0 0; height: max-content; position: relative">-->
 
@@ -542,9 +507,11 @@
     import LanguageTutorials from "../components/Landing/sections/language-tutorials";
     import PlatformFeatures from "../components/Landing/sections/platform-features";
     import BusinessSolution from "../components/Landing/sections/business-solution";
+    import SuccessStory from "../components/Landing/sections/success-story";
 
     export default {
         components: {
+            SuccessStory,
             BusinessSolution,
             Slider,
             FCustomer,

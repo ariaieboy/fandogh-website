@@ -21,7 +21,7 @@
                      style="width: 100%; display: flex; flex-direction: column; padding-right: 12px">
                     <p class="solution-card-title">
                         {{item.title}}</p>
-                    <p class="solution-card-description" style="  font-family: iran-yekan;font-size: 1.1em;margin-top: 12px; font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c;">
+                    <p class="solution-card-description">
                       {{item.description}}
                     </p>
 
@@ -108,6 +108,8 @@
             letter-spacing normal
             text-align center
             color #0045ff
+            @media only screen and (max-width: 992px)
+                font-size 1.8em
         p.business-desc
             font-family iran-yekan
             font-size 1.5em
@@ -120,6 +122,10 @@
             color #3c3c3c
             padding-left 20%
             padding-right 20%
+            @media only screen and (max-width: 992px)
+                font-size 1.1em
+                padding-left 10%
+                padding-right 10%
 
     .solution-container
         width 100%
@@ -148,19 +154,21 @@
                 text-align right
                 color #0045ff
                 margin-bottom 6px
+                @media only screen and (max-width: 992px)
+                    font-size 1.2em
+                    margin-top 9%
 
             p.solution-card-description
-                margin-top 5%
                 font-family iran-yekan
-                font-size 1.5em
-                font-weight bold
+                font-size 1.1em
+                margin-top 12px
+                font-weight normal
                 font-style normal
                 font-stretch normal
-                line-height 1.25
+                line-height 1.75
                 letter-spacing normal
                 text-align right
-                color #0045ff
-                margin-bottom 6px
+                color #3c3c3c
 
     .business-solution-button
         outline none
