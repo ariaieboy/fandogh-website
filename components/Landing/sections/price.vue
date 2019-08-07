@@ -165,6 +165,7 @@
                                             <span class="calculator-config-description">{{planData.memory}} گیگابایت</span>
                                         </div>
 
+
                                         <div style="display: flex; width: 100%; margin-top: 16px;">
                                             <span class="calculator-config-title">حافظه ذخیره‌سازی</span>
                                             <span class="calculator-config-description">۲.۵ گیگابایت</span>
