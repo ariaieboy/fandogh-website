@@ -216,7 +216,7 @@
                             </div>
 
                             <div style="width: 100%; margin-top: 16px; display: flex; justify-content: center;">
-                                <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 15px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;">
+                                <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;">
                                     خرید پلن
                                 </button>
                             </div>
@@ -683,6 +683,8 @@
     .calculator-parent-container
         width: 100%;
         margin-top: 64px
+        @media only screen and (max-width: 992px)
+            margin-top 32px
 
     .calculator-title
         font-family: iran-yekan;
@@ -694,6 +696,8 @@
         letter-spacing: normal;
         text-align: center;
         color: #0045ff;
+        @media only screen and (max-width: 992px)
+            font-size 1.7em
 
     .calculator-description
         font-family: iran-yekan;
@@ -706,6 +710,9 @@
         text-align: center;
         color: #707070;
         padding: 0 20%;
+        @media only screen and (max-width: 992px)
+            font-size 1.2em
+
 
     .calculator-container
         width: 100%;
