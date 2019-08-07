@@ -5,7 +5,7 @@
 
         <div class="audience-inner-container">
 
-            <p class="aud-title">فندق برای چه کسانی است؟</p>
+            <p class="aud-title">{{title}}</p>
 
             <div class="horizontal-line"></div>
 
@@ -22,11 +22,7 @@
 
             </div>
 
-            <div class="aud-description">
-                مهم نیست که در حال توسعه یک محصول اولیه هستید یا صاحب یک کسب‌وکار بزرگ، سکوی ابری فندق برای هر
-                زمان
-                از نیاز‌های شما، یک راه حل دارد.
-            </div>
+            <div class="aud-description">{{description}}</div>
         </div>
     </div>
 
@@ -37,6 +33,10 @@
         name: "audiences",
         data() {
             return {
+                title: 'فندق برای چه کسانی است؟',
+                description: '          مهم نیست که در حال توسعه یک محصول اولیه هستید یا صاحب یک کسب‌وکار بزرگ، سکوی ابری فندق برای هر\n' +
+                    '                زمان\n' +
+                    '                از نیاز‌های شما، یک راه حل دارد.',
                 audiences: [
                     {
                         image: 'innovators',
