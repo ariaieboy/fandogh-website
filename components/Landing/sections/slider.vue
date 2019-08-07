@@ -5,7 +5,7 @@
 
             <div v-for="item in slider_data" class="row" style="height: 100%">
 
-                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 container-fluid fade"
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container-fluid fade"
                      style="height: 100%; padding: 32px;" :style="{display: item.selected? 'block' : 'none'}">
 
                     <div class="slider-main">
@@ -153,18 +153,23 @@
         flex-direction column
         margin-top 16px
         padding-right 20%
+        @media only screen and (max-width: 992px)
+            padding-right 16px
+            padding-left 16px
 
         div.main-title
             width: 100%
-            font-size: 23px
+            font-size: 1.8em
             font-family: iran-yekan
             font-weight: bold
             color: #0045ff
+            @media only screen and (max-width: 992px)
+                font-size 1.5em
 
         div.main-description
             margin-top 32px
             font-family iran-yekan
-            font-size 18px
+            font-size 1.3em
             font-weight normal
             font-style normal
             font-stretch normal
@@ -172,11 +177,12 @@
             letter-spacing normal
             text-align right
             color #1d1d1d
+            @media only screen and (max-width: 992px)
+                font-size 1em
 
         button.main-button
             outline none
             margin-left auto
-            margin-right auto
             margin-top 48px
             width 200px
             height 45px
@@ -186,6 +192,11 @@
             background-color #0045ff
             color #fefefe
             font-family iran-yekan
+            font-size 1.2em
+            @media only screen and (max-width: 992px)
+                font-size .9em
+                margin-left auto
+                margin-right auto
 
 
     .top-curve
