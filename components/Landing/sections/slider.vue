@@ -1,36 +1,40 @@
 <template>
-    <div class="slider-container">
+    <div style="width: 100%">
+        <div class="slider-container">
 
-        <div class="top-section">
+            <div class="top-section">
 
-            <div v-for="item in slider_data" class="row" style="height: 100%">
+                <div v-for="item in slider_data" class="row" style="height: 100%; margin-left: 0; margin-right: 0">
 
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container-fluid fade"
-                     style="height: 100%; padding: 32px;" :style="{display: item.selected? 'block' : 'none'}">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container-fluid fade"
+                         style="height: 100%; padding: 32px;" :style="{display: item.selected? 'block' : 'none'}">
 
-                    <div class="slider-main">
+                        <div class="slider-main">
 
-                        <div class="main-title">{{item.title}}</div>
+                            <div class="main-title">{{item.title}}</div>
 
-                        <div class="main-description">{{item.description}}</div>
+                            <div class="main-description">{{item.description}}</div>
 
-                        <button class="main-button">{{item.button_text}}</button>
+                            <button class="main-button">{{item.button_text}}</button>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 container-fluid slide-banner fade"
+                         :style="{display: item.selected? 'flex' : 'none'}">
+                        <img src="../../../assets/svg/banner_one.svg">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="bullet-section">
+                <img src="../../../assets/svg/bullet_bg.svg" width="100%" class="top-curve"/>
+                <div class="main-slider-bullet-container">
+                    <div v-for="(item, index) in slider_data" @click="bulletClicked(index)" class="main-slider-bullet"
+                         :style="{backgroundColor: item.selected ? '#fefefe' : 'rgba(254, 254, 254, 0.4)'}">
 
                     </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 container-fluid slide-banner fade" :style="{display: item.selected? 'flex' : 'none'}">
-                    <img src="../../../assets/svg/banner_one.svg">
-                </div>
-
-            </div>
-        </div>
-
-        <div class="bullet-section">
-            <img src="../../../assets/svg/bullet_bg.svg" width="100%" class="top-curve"/>
-            <div class="main-slider-bullet-container">
-                <div v-for="(item, index) in slider_data" @click="bulletClicked(index)" class="main-slider-bullet" :style="{backgroundColor: item.selected ? '#fefefe' : 'rgba(254, 254, 254, 0.4)'}">
-
                 </div>
             </div>
         </div>
@@ -84,19 +88,19 @@
 
                 this.slider_data[index].selected = true
             },
-            todo: function(){
+            todo: function () {
                 this.intervalId = setInterval(() => {
                     let temp_index = 0
                     this.slider_data.forEach((slide, index) => {
-                        if(slide.selected){
+                        if (slide.selected) {
                             temp_index = index
                         }
                         slide.selected = false
                     })
 
-                    if(temp_index === this.slider_data.length - 1){
+                    if (temp_index === this.slider_data.length - 1) {
                         this.slider_data[0].selected = true
-                    }else {
+                    } else {
                         this.slider_data[temp_index + 1].selected = true
                     }
 
@@ -115,7 +119,6 @@
     .slider-container
         width 100%
         padding-top 60px
-        clear both
         height max-content
 
         div.top-section
@@ -143,6 +146,7 @@
     .slide-banner
         height 100%
         padding 32px
+
         img
             max-width 100%
 
@@ -213,13 +217,21 @@
 
 
     @-webkit-keyframes fade
-        from {left: .4}
-        to {opacity: 1}
+        from {
+            left: .4
+        }
+        to {
+            opacity: 1
+        }
 
 
     @keyframes fade
-        from {opacity: .4}
-        to {opacity: 1}
+        from {
+            opacity: .4
+        }
+        to {
+            opacity: 1
+        }
 
 
 </style>
