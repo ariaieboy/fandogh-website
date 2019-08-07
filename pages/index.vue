@@ -5,15 +5,8 @@
 
             <slider/>
 
-            <!--<div style="width: 100%; background-color: #0045FF; height: 130px; display: flex; justify-content: center; z-index: 1">-->
 
-                <!--<img src="../assets/svg/languages/laravel.svg" style="margin-left: 16px; margin-right: 16px">-->
-                <!--<img src="../assets/svg/languages/asp-core.svg" style="margin-left: 16px; margin-right: 16px">-->
-                <!--<img src="../assets/svg/languages/java.svg" style="margin-left: 16px; margin-right: 16px">-->
-                <!--<img src="../assets/svg/languages/python.svg" style="margin-left: 16px; margin-right: 16px">-->
-                <!--<img src="../assets/svg/languages/nodejs.svg" style="margin-left: 16px; margin-right: 16px">-->
-
-            <!--</div>-->
+            <languages/>
 
             <!--<div style="width: 100%; min-height: 600px; position: relative; margin-top: -48px;">-->
                 <!--<img src="../assets/svg/pod_bg.svg" width="100%" style="opacity: 20%;position: absolute"/>-->
@@ -833,6 +826,7 @@
     import Prices from '~/components/Prices'
     import FCustomer from '~/components/Customer'
     import Slider from "../components/Landing/sections/slider";
+    import Languages from "../components/Landing/sections/languages";
 
     export default {
         components: {
@@ -843,7 +837,8 @@
             Devider,
             Solution,
             Tutorial,
-            Prices
+            Prices,
+            Languages
         },
         data() {
             return {}
