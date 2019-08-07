@@ -234,6 +234,7 @@
                 padding-left 12px
                 text-align right
 
+
     .feature-sec-card
         box-sizing padding-box
         padding 16px
