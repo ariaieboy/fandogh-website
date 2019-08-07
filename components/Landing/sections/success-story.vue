@@ -266,6 +266,7 @@
         font-size 1.2em
         font-family iran-yekan
         transition all .2s ease-in-out
+        outline none
         @media only screen and (max-width: 992px)
             order 3
 

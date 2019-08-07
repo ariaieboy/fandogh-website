@@ -419,7 +419,7 @@
                 volumeRangeMin: '10GB',
                 volumeRangeMax: '1T',
                 memoryOptions: {
-                    dotSize: 30,
+                    dotSize: 32,
                     width: 'auto',
                     height: 24,
                     contained: false,
@@ -447,7 +447,7 @@
                     }
                 },
                 dedicatedVolumeOptions: {
-                    dotSize: 30,
+                    dotSize: 32,
                     width: 'auto',
                     height: 24,
                     contained: false,
