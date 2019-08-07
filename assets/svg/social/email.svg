@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>gmail</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="gmail" fill="#FEFEFE" fill-rule="nonzero">
+            <path d="M24,0 C10.7451111,0 0,10.7451111 0,24 C0,37.2548889 10.7451111,48 24,48 C37.2548889,48 48,37.2548889 48,24 C48,10.7451111 37.2548889,0 24,0 Z M34.8126667,13.3333333 L23.9911111,21.8884444 L12.8175556,13.3333333 L34.8126667,13.3333333 Z M35.926,34.6666667 L11.7037778,34.6666667 L11.7037778,16.9464444 L22.8691111,25.4153333 C23.1684444,25.6442222 23.6113333,25.7586667 23.9684444,25.7586667 C24.334,25.7586667 24.6513333,25.6386667 24.954,25.3995556 L35.926,16.6715556 L35.926,34.6666667 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
