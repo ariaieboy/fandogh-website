@@ -208,7 +208,8 @@
 
                                 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 calculator-result-container">
                                     <p>ماهیانه</p>
-                                    <p class="calc-result">{{(planData.memory * 60000 + planData.dedicatedVolume * 1200).toLocaleString()}}</p>
+                                    <p class="calc-result">{{(planData.memory * 60000 + planData.dedicatedVolume *
+                                        1200).toLocaleString()}}</p>
                                     <p>تومان</p>
 
                                 </div>
@@ -227,85 +228,83 @@
 
                 </div>
 
-                <!--<div style="width: 100%; margin-top: 64px">-->
 
-                <!--<div style="width: 100%; padding: 16px; box-sizing: padding-box">-->
+                <div style="width: 100%; margin-top: 64px">
 
-                <!--<div class="row"-->
-                <!--style="width: 100%; height: max-content;  border-radius: 25px 25px 25px 25px; box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16); background-color: #0045ff; display: flex; flex: 3">-->
+                    <div class="payg-parent-container">
 
-                <!--<div style="flex: 1; height: available; padding: 32px; display: flex">-->
+                        <div class="row payg-div">
 
-                <!--<p style="margin-top: auto; margin-bottom: auto; text-align: center;width: 100%; font-family: iran-yekan; font-size: 3.5em; font-weight: bold">-->
-                <!--به زودی...</p>-->
+                            <div class="coming-soon-container">
+                                <p>به زودی...</p>
+                            </div>
 
-                <!--</div>-->
 
-                <!--<div style="flex: 2; height: 100%; background-color: #fefefe; border-radius: 125px 1000px 1000px 125px; display: flex; flex-direction: column; padding: 32px; box-sizing: padding-box">-->
+                            <div class="payg-container">
 
-                <!--<p style="text-align: center;width: 100%; font-family: iran-yekan; font-size: 2.5em; font-weight: bold; color: #0045ff">-->
-                <!--Pay As You Go</p>-->
+                                <p class="payg-title">{{pay_as_you_go_title}}</p>
 
-                <!--<div class="row" style="width: 100%; margin-top: 16px">-->
+                                <div class="row" style="width: 100%; margin-top: 16px; margin-left: 0; margin-right: 0">
 
-                <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"-->
-                <!--style="display: flex; justify-content: center; margin-right: 48px; margin-bottom: 32px">-->
-                <!--<div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"-->
-                <!--style="display: flex; flex-direction: column">-->
-                <!--<div style="display: flex; width: 100%">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">رم (حافظه تصادفی)</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">۴۰۰ مگابایت</span>-->
-                <!--</div>-->
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 payg-config-container">
 
-                <!--<div style="display: flex; width: 100%; margin-top: 16px;">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">حافظه ذخیره‌سازی</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">۲.۵ گیگابایت</span>-->
-                <!--</div>-->
+                                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                             style="display: flex; flex-direction: column">
 
-                <!--<div style="display: flex; width: 100%; margin-top: 16px;">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Load Balancer</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>-->
-                <!--</div>-->
+                                            <div style="display: flex; width: 100%">
+                                                <span class="card-plan-config-title">رم (حافظه تصادفی)</span>
+                                                <span class="card-plan-config-description">۴۰۰ مگابایت</span>
+                                            </div>
 
-                <!--<div style="display: flex; width: 100%; margin-top: 16px;">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Monitoring</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>-->
-                <!--</div>-->
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
+                                                <span class="card-plan-config-description">۲.۵ گیگابایت</span>
+                                            </div>
 
-                <!--</div>-->
-                <!--<div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"-->
-                <!--style="display: flex; flex-direction: column">-->
-                <!--<div style="display: flex; width: 100%">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">پردازنده</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">۰.۵ هسته</span>-->
-                <!--</div>-->
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="card-plan-config-title">Load Balancer</span>
+                                                <span class="card-plan-config-description">رایگان</span>
+                                            </div>
 
-                <!--<div style="display: flex; width: 100%; margin-top: 16px;">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Dedicated Volume</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">ندارد</span>-->
-                <!--</div>-->
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="card-plan-config-title">Monitoring</span>
+                                                <span class="card-plan-config-description">رایگان</span>
+                                            </div>
 
-                <!--<div style="display: flex; width: 100%; margin-top: 16px;">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">Image Registry</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>-->
-                <!--</div>-->
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                             style="display: flex; flex-direction: column">
+                                            <div style="display: flex; width: 100%">
+                                                <span class="card-plan-config-title">پردازنده</span>
+                                                <span class="card-plan-config-description">۰.۵ هسته</span>
+                                            </div>
 
-                <!--<div style="display: flex; width: 100%; margin-top: 16px;">-->
-                <!--<span style=" font-family: iran-yekan; font-size: 16px;font-weight: bold;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1">پشتیبانی حرفه‌ای</span>-->
-                <!--<span style="  font-family: iran-yekan;font-size: 16px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.75;letter-spacing: normal;text-align: right;color: #3c3c3c; flex: 1; padding-right: 16px">رایگان</span>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="card-plan-config-title">Dedicated Volume</span>
+                                                <span class="card-plan-config-description">ندارد</span>
+                                            </div>
 
-                <!--</div>-->
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="card-plan-config-title">Image Registry</span>
+                                                <span class="card-plan-config-description">رایگان</span>
+                                            </div>
 
-                <!--</div>-->
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="card-plan-config-title">پشتیبانی حرفه‌ای</span>
+                                                <span class="card-plan-config-description">رایگان</span>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                <!--</div>-->
+                                </div>
 
-                <!--</div>-->
+                            </div>
 
-                <!--</div>-->
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -335,6 +334,7 @@
                     '                خود را به درستی نمی‌توانند محاسبه کنند از این پلن‌های آماده استفاده کنند.',
                 calculator_title: 'ماشین حساب',
                 calculator_description: 'با استفاده از ماشین حساب، پلن دلخواه خود را بسازید',
+                pay_as_you_go_title: 'Pay As You Go',
                 plans: [
                     {
                         title: 'پلن رایگان',
@@ -505,7 +505,7 @@
                 margin-top -10%
                 display flex
                 @media only screen and (max-width: 920px)
-                    margin-top -16%
+                    margin-top: -16%
 
                 img
                     margin-top -1px
@@ -641,157 +641,157 @@
             font-size 1.1em
 
     .card-plan-config-title
-        font-family: iran-yekan;
-        font-size: 1em;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.75;
-        letter-spacing: normal;
-        text-align: right;
-        color: #3c3c3c;
+        font-family iran-yekan
+        font-size 1em
+        font-weight bold
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align right
+        color #3c3c3c
         @media only screen and (max-width: 992px)
-            font-size: .85em;
+            font-size .85em
 
     .card-plan-config-description
-        font-family: iran-yekan;
-        font-size: 1em;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.75;
-        letter-spacing: normal;
-        text-align: left;
-        color: #3c3c3c;
-        padding-right: 16px
+        font-family iran-yekan
+        font-size 1em
+        font-weight normal
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align left
+        color #3c3c3c
+        padding-right 16px
         padding-left 16px
         flex 1
         @media only screen and (max-width: 992px)
-            font-size: .85em;
-            padding-right: 0
+            font-size .85em
+            padding-right 0
             padding-left 0
 
     .card-plan-container
-        width: 100%;
-        padding: 32px;
-        box-sizing: padding-box;
-        margin-left: 0;
-        margin-right: 0;
+        width 100%
+        padding 32px
+        box-sizing padding-box
+        margin-left 0
+        margin-right 0
         @media only screen and (max-width: 992px)
             padding 0
 
     .calculator-parent-container
-        width: 100%;
-        margin-top: 64px
+        width 100%
+        margin-top 64px
         @media only screen and (max-width: 992px)
             margin-top 32px
 
     .calculator-title
-        font-family: iran-yekan;
-        font-size: 2.4em;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.73;
-        letter-spacing: normal;
-        text-align: center;
-        color: #0045ff;
+        font-family iran-yekan
+        font-size 2.4em
+        font-weight bold
+        font-style normal
+        font-stretch normal
+        line-height 1.73
+        letter-spacing normal
+        text-align center
+        color #0045ff
         @media only screen and (max-width: 992px)
             font-size 1.7em
 
     .calculator-description
-        font-family: iran-yekan;
-        font-size: 1.6em;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.73;
-        letter-spacing: normal;
-        text-align: center;
-        color: #707070;
-        padding: 0 20%;
+        font-family iran-yekan
+        font-size 1.6em
+        font-weight normal
+        font-style normal
+        font-stretch normal
+        line-height 1.73
+        letter-spacing normal
+        text-align center
+        color #707070
+        padding 0 20%
         @media only screen and (max-width: 992px)
             font-size 1.2em
 
 
     .calculator-container
-        width: 100%;
-        border-radius: 25px;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.16);
-        background-color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        padding: 32px;
-        box-sizing: padding-box;
-        margin-left: 0;
-        margin-right: 0
+        width 100%
+        border-radius 25px
+        box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.16)
+        background-color #ffffff
+        display flex
+        flex-direction column
+        padding 32px
+        box-sizing padding-box
+        margin-left 0
+        margin-right 0
 
 
     .calculator-config-title
-        font-family: iran-yekan;
-        font-size: 1.2em;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.75;
-        letter-spacing: normal;
-        text-align: right;
-        color: #3c3c3c;
+        font-family iran-yekan
+        font-size 1.2em
+        font-weight bold
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align right
+        color #3c3c3c
         margin-top 8px
         @media only screen and (max-width: 992px)
-            font-size: .9em;
+            font-size .9em
 
     .calculator-config-description
-        font-family: iran-sans;
-        font-size: 1.3em;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.75;
-        letter-spacing: normal;
-        text-align: left;
-        color: #3c3c3c;
+        font-family iran-sans
+        font-size 1.3em
+        font-weight normal
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align left
+        color #3c3c3c
         margin-top 8px
-        padding-right: 16px
+        padding-right 16px
         padding-left 16px
         flex 1
         @media only screen and (max-width: 992px)
-            font-size: .9em;
-            padding-right: 0
+            font-size .9em
+            padding-right 0
             padding-left 0
 
     .calculator-result-container
-        display: flex;
-        flex-direction: column;
-        justify-content: center
+        display flex
+        flex-direction column
+        justify-content center
         @media only screen and (max-width: 992px)
             margin-top 16px
-            flex-direction: unset;
+            flex-direction unset
 
         p
-            font-family: iran-yekan;
-            font-size: 2.5em;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.73;
-            letter-spacing: normal;
-            text-align: center;
-            color: #535353;
+            font-family iran-yekan
+            font-size 2.5em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.73
+            letter-spacing normal
+            text-align center
+            color #535353
             @media only screen and (max-width: 992px)
-                font-size: 1.4em;
+                font-size 1.4em
 
 
         p.calc-result
-            font-family: iran-sans;
-            font-size: 3em;
-            font-weight: bold;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.73;
-            letter-spacing: normal;
-            text-align: center;
-            color: #0045ff;
+            font-family iran-sans
+            font-size 3em
+            font-weight bold
+            font-style normal
+            font-stretch normal
+            line-height 1.73
+            letter-spacing normal
+            text-align center
+            color #0045ff
             @media only screen and (max-width: 992px)
                 font-size 1.8em
                 padding-left 24px
@@ -813,12 +813,78 @@
             display inline-block
 
     .calculator-slider-container
-        padding: 0;
-        display: flex;
-        flex-direction: row;
-        height: max-content
+        padding 0
+        display flex
+        flex-direction row
+        height max-content
         @media only screen and (max-width: 1230px)
             flex-direction column
+
+    .payg-parent-container
+        width 100%
+        padding 16px
+        box-sizing padding-box
+
+        div.payg-div
+            width 100%
+            height max-content
+            border-radius 25px 25px 25px 25px
+            box-shadow 0 0 10px 0 rgba(0, 0, 0, 0.16)
+            background-color #0045ff
+            margin-left 0
+            margin-right 0
+            display flex
+            flex 3
+            @media only screen and (max-width: 992px)
+                flex-direction column
+
+
+    .coming-soon-container
+        flex 1
+        height available
+        padding 32px
+        display flex
+
+        p
+            margin-top auto
+            margin-bottom auto
+            text-align center
+            width 100%
+            font-family iran-yekan
+            font-size 3.5em
+            font-weight bold
+            @media only screen and (max-width: 992px)
+                font-size 2.6em
+
+
+    .payg-container
+        flex 2
+        height 100%
+        background-color #fefefe
+        border-radius 125px 1000px 1000px 125px
+        display flex
+        flex-direction column
+        padding 32px
+        box-sizing padding-box
+        @media only screen and (max-width: 992px)
+            border-radius 0 0 25px 25px
+
+        p.payg-title
+            text-align center
+            width 100%
+            font-family iran-yekan
+            font-size 2.5em
+            font-weight bold
+            color #0045ff
+
+    .payg-config-container
+        display flex
+        justify-content center
+        margin-right 48px
+        margin-bottom 32px
+        @media only screen and (max-width: 992px)
+            margin-right 0
+            margin-bottom 16px
 
 </style>
 
