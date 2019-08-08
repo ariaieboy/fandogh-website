@@ -11,9 +11,9 @@
 
                 <img :src="require('../../../assets/svg/customers/' + story.logo + '.png')" width="200px"
                      :alt="story.logo">
+                <q style="quotes: '”' '“';" class="story-description">{{story.description}}</q>
                 <p class="story-teller">{{story.teller}}</p>
-                <p class="story-description">{{story.description}}</p>
-                <a :href="story.company_href" target="_blank">مشاهده وب‌سایت</a>
+                <p class="story-teller-position">{{story.teller_position + ' ' + story.title}}</p>
             </div>
 
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="padding: 0">
@@ -51,30 +51,32 @@
             return {
                 title: 'داستان‌هایی از موفقیت فندق',
                 story: {
-                    title: '',
+                    title: 'بوتیک',
                     description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
                         '                    ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای\n' +
                         '                    نگرانی بابت زیرساخت داشته باشیم….',
                     logo: 'botick',
                     link: 'sample',
                     company_href:'https://botick.com',
-                    teller: 'سامان احمدی - بنیان‌گذار',
+                    teller: 'سامان احمدی',
+                    teller_position: 'بنیان‌گذار',
                     selected: true
                 },
                 stories:[
                     {
-                        title: '',
+                        title: 'بوتیک',
                         description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
                             '                    ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای\n' +
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
                         company_href:'https://botick.com',
-                        teller: 'سامان  - بنیان‌گذار',
+                        teller: 'سامان احمدی',
+                        teller_position: 'بنیان‌گذار',
                         selected: true
                     },
                     {
-                        title: '',
+                        title: 'بوتیک',
                         description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
                             '                    ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای\n' +
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
@@ -82,50 +84,55 @@
                         link: 'more',
                         company_href:'https://botick.com',
                         teller: ' احمدی - بنیان‌گذار',
+                        teller_position: 'بنیان‌گذار',
                         selected: false
                     },
                     {
-                        title: '',
+                        title: 'بوتیک',
                         description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
                             '                    ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای\n' +
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
                         company_href:'https://botick.com',
-                        teller: 'سامان احمدی - بنیان‌گذار',
+                        teller: 'سامان احمدی',
+                        teller_position: 'بنیان‌گذار',
                         selected: false
                     },
                     {
-                        title: '',
+                        title: 'بوتیک',
                         description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
                             '                    ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای\n' +
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
                         company_href:'https://botick.com',
-                        teller: 'سامان احمدی - بنیان‌گذار',
+                        teller: 'سامان احمدی',
+                        teller_position: 'بنیان‌گذار',
                         selected: false
                     },
                     {
-                        title: '',
+                        title: 'بوتیک',
                         description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
                             '                    ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای\n' +
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
                         company_href:'https://botick.com',
-                        teller: 'سامان احمدی - بنیان‌گذار',
+                        teller: 'سامان احمدی',
+                        teller_position: 'بنیان‌گذار',
                         selected: false
                     },
                     {
-                        title: '',
+                        title: 'بوتیک',
                         description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
                             '                    ما رو حل کرده و باعث شده ما زمان بیشتری رو صرف توسعه محصولمون بکنیم، بدون اینکه ذره‌ای\n' +
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
                         company_href:'https://botick.com',
-                        teller: 'سامان احمدی - بنیان‌گذار',
+                        teller: 'سامان احمدی',
+                        teller_position: 'بنیان‌گذار',
                         selected: false
                     },
 
@@ -194,19 +201,32 @@
         p.story-teller
             font-family iran-yekan
             margin-top 16px
-            font-size 1.2em
+            font-size 1.1em
             font-weight bold
             font-style normal
             font-stretch normal
             line-height 1.75
             letter-spacing normal
+            margin-bottom 8px
             text-align right
             color #fefefe
 
-        p.story-description
+        p.story-teller-position
+            font-family iran-yekan
+            font-size 1em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.75
+            margin-top 0
+            letter-spacing normal
+            text-align right
+            color #fefefe
+
+        q.story-description
             font-family iran-yekan
             margin-top 16px
-            font-size 1.2em
+            font-size 1.3em
             font-weight normal
             font-style normal
             font-stretch normal
@@ -215,26 +235,7 @@
             text-align right
             color #fefefe
             @media only screen and (max-width: 992px)
-                font-size 1.1em
-
-        a
-            font-family iran-yekan
-            font-size 1.1em
-            text-align center
-            padding 8px
-            cursor pointer
-            color #0045ff
-            border-radius 5px
-            background rgba(209, 209, 209, 0.75)
-            transition all .2s ease-in-out
-            @media only screen and (max-width: 992px)
-                font-size 1em
-
-        a:hover
-            background-color #fefefe
-            font-weight bold
-            transition all .2s ease-in-out
-
+                font-size 1.2em
 
     .suc-player
         margin-top: 32px
