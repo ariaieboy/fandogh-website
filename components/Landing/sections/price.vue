@@ -129,9 +129,9 @@
                                         Dedicated Volume
                                         <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
                                                type="number"
-                                               min="0.5"
-                                               step="0.5"
-                                               max="64"
+                                               min="0"
+                                               step="1"
+                                               max="1000"
                                                value="planData.dedicatedVolume"
                                                v-model="planData.dedicatedVolume"/>
 

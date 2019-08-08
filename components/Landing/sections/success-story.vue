@@ -13,6 +13,7 @@
                      :alt="story.logo">
                 <p class="story-teller">{{story.teller}}</p>
                 <p class="story-description">{{story.description}}</p>
+                <a :href="story.company_href" target="_blank">مشاهده وب‌سایت</a>
             </div>
 
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="padding: 0">
@@ -56,6 +57,7 @@
                         '                    نگرانی بابت زیرساخت داشته باشیم….',
                     logo: 'botick',
                     link: 'sample',
+                    company_href:'https://botick.com',
                     teller: 'سامان احمدی - بنیان‌گذار',
                     selected: true
                 },
@@ -67,6 +69,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
+                        company_href:'https://botick.com',
                         teller: 'سامان  - بنیان‌گذار',
                         selected: true
                     },
@@ -77,6 +80,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
+                        company_href:'https://botick.com',
                         teller: ' احمدی - بنیان‌گذار',
                         selected: false
                     },
@@ -87,6 +91,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
+                        company_href:'https://botick.com',
                         teller: 'سامان احمدی - بنیان‌گذار',
                         selected: false
                     },
@@ -97,6 +102,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
+                        company_href:'https://botick.com',
                         teller: 'سامان احمدی - بنیان‌گذار',
                         selected: false
                     },
@@ -107,6 +113,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
+                        company_href:'https://botick.com',
                         teller: 'سامان احمدی - بنیان‌گذار',
                         selected: false
                     },
@@ -117,6 +124,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
+                        company_href:'https://botick.com',
                         teller: 'سامان احمدی - بنیان‌گذار',
                         selected: false
                     },
@@ -209,6 +217,24 @@
             @media only screen and (max-width: 992px)
                 font-size 1.1em
 
+        a
+            font-family iran-yekan
+            font-size 1.1em
+            text-align center
+            padding 8px
+            cursor pointer
+            color #0045ff
+            border-radius 5px
+            background rgba(209, 209, 209, 0.75)
+            transition all .2s ease-in-out
+            @media only screen and (max-width: 992px)
+                font-size 1em
+
+        a:hover
+            background-color #fefefe
+            font-weight bold
+            transition all .2s ease-in-out
+
 
     .suc-player
         margin-top: 32px
@@ -262,6 +288,7 @@
         color #fefefe
         text-align center
         line-height 45px
+        font-weight bold
         border 1px solid #fefefe
         font-size 1.2em
         font-family iran-yekan
