@@ -254,6 +254,7 @@
         div
             width 100%
 
+
     .language-card
         width 100%
         display flex
