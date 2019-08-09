@@ -261,10 +261,12 @@
         margin-top 64px
 
         img
-            width  48px
-            margin-top 0
+            width  58px
+            margin-top 8px
             height max-content
             filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+            @media only screen and (max-width  992px)
+                width 48px
 
         div
             width 100%
