@@ -1,5 +1,5 @@
 <template>
-  <div class="flex centered-page">
+  <div class="flex centered-page" style="background: #EAEFFF">
     <login :disableOverlay="true" :noModal="true" force="true"> </login>
   </div>
 </template>
