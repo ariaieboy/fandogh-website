@@ -32,7 +32,7 @@
                         <div>
                             <p class="language-title">{{item.title}}</p>
                             <p class="language-description">{{item.description}}</p>
-                            <a class="language-link" :href="item.href" target="_blank">مشاهده مستندات</a>
+                            <p @click="$router.push('/languages/' + item.href)" class="language-link">مشاهده مستندات</p>
                         </div>
 
                     </div>
@@ -297,7 +297,7 @@
                 text-align  right
                 color  #535353
 
-            a.language-link
+            p.language-link
                 font-family  iran-yekan
                 font-size  .9em
                 font-weight  normal
@@ -305,7 +305,8 @@
                 font-stretch  normal
                 line-height  1.79
                 letter-spacing  normal
-                text-align  center
+                text-align  right
                 color  #2979ff
+                cursor pointer
 
 </style>

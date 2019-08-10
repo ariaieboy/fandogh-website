@@ -1,6 +1,6 @@
 <template>
     <div class="audience-container">
-        <img src="../../../assets/svg/pod_bg.svg" width="100%" style="opacity: 20%;position: absolute"/>
+        <!--<img src="../../../assets/svg/pod_bg.svg" width="100%" style="opacity: 20%;position: absolute"/>-->
 
 
         <div class="audience-inner-container">
@@ -69,15 +69,16 @@
     .audience-container
         width 100%
         min-height 600px
-        position relative
+        background url("../../../assets/svg/pod_bg.svg") no-repeat top
+        background-size contain
         margin-top -48px
 
 
     .audience-inner-container
         width 100%
         background-image linear-gradient(to bottom, rgba(254, 254, 254, 0.75), #fefefe 47%, #fefefe)
-        position relative
         display flex
+        height 100%
         flex-direction column
         padding-top 250px
         @media only screen and (max-width: 992px)

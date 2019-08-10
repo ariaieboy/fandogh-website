@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <div class="ready-plan-container">
+        <div class="ready-plan-container container-fluid">
             <p class="resource-description">{{resource_description}}</p>
             <p class="ready-plan-title">{{plan_title}}</p>
             <div></div>
@@ -18,282 +18,290 @@
 
         <div style="width: 100%; box-sizing: border-box; clear: both; height: max-content; display: flex; flex-direction: column; position: relative">
 
-            <div class="row bg-test card-plan-container">
+            <div class="row bg-test" style="width: 100%; display: flex; justify-content: center">
+                <div class="row card-plan-container container-fluid" style="max-width: 2200px">
 
-                <div v-for="item in plans" style="padding: 16px" class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+                    <div v-for="item in plans" style="padding: 16px; max-width: 700px"
+                         class="col-auto col-md-6 col-xs-12 col-sm-12 container-fluid">
 
-                    <div class="card-plan">
-                        <div>
-                            <img :src="require('../../../assets/svg/plans/' + item.icon + '.svg')" :alt="item.icon"/>
-                            <div style="width: 100%; display: flex; flex-direction: column">
-                                <p class="card-plan-title">{{item.title}}</p>
-                                <p class="card-plan-price">{{item.price}}</p>
+                        <div class="card-plan">
+                            <div>
+                                <img :src="require('../../../assets/svg/plans/' + item.icon + '.svg')"
+                                     :alt="item.icon"/>
+                                <div style="width: 100%; display: flex; flex-direction: column">
+                                    <p class="card-plan-title">{{item.title}}</p>
+                                    <p class="card-plan-price">{{item.price}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row" style="width: 100%; margin-top: 32px; margin-left: 0; margin-right: 0">
-                            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
-                                 style="display: flex; flex-direction: column">
-                                <div style="display: flex; width: 100%">
-                                    <span class="card-plan-config-title">رم (حافظه تصادفی)</span>
-                                    <span class="card-plan-config-description">{{item.config['memory']}}</span>
-                                </div>
+                            <div class="row" style="width: 100%; margin-top: 32px; margin-left: 0; margin-right: 0">
+                                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                     style="display: flex; flex-direction: column">
+                                    <div style="display: flex; width: 100%">
+                                        <span class="card-plan-config-title">رم (حافظه تصادفی)</span>
+                                        <span class="card-plan-config-description">{{item.config['memory']}}</span>
+                                    </div>
 
-                                <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
-                                    <span class="card-plan-config-description">{{item.config['shared_storage']}}</span>
-                                </div>
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
+                                        <span class="card-plan-config-description">{{item.config['shared_storage']}}</span>
+                                    </div>
 
-                                <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="card-plan-config-title">Load Balancer</span>
-                                    <span class="card-plan-config-description">{{item.config['load_balancer']}}</span>
-                                </div>
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Load Balancer</span>
+                                        <span class="card-plan-config-description">{{item.config['load_balancer']}}</span>
+                                    </div>
 
-                                <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="card-plan-config-title">Monitoring</span>
-                                    <span class="card-plan-config-description">{{item.config['monitoring']}}</span>
-                                </div>
-
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
-                                 style="display: flex; flex-direction: column">
-                                <div style="display: flex; width: 100%">
-                                    <span class="card-plan-config-title">پردازنده</span>
-                                    <span class="card-plan-config-description">{{item.config['cpu']}}</span>
-                                </div>
-
-                                <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="card-plan-config-title">Dedicated Volume</span>
-                                    <span class="card-plan-config-description">{{item.config['dedicated_storage']}}</span>
-                                </div>
-
-                                <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="card-plan-config-title">Image Registry</span>
-                                    <span class="card-plan-config-description">{{item.config['image_registry']}}</span>
-                                </div>
-
-                                <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="card-plan-config-title">پشتیبانی حرفه‌ای</span>
-                                    <span class="card-plan-config-description">{{item.config['support']}}</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
-                            <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none">
-                                {{item.action}}
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="calculator-parent-container">
-                    <p class="calculator-title">{{calculator_title}}</p>
-                    <p class="calculator-description">{{calculator_description}}</p>
-
-                    <div style="width: 100%; padding: 16px; box-sizing: padding-box">
-                        <div class="row calculator-container">
-
-                            <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calculator-slider-container">
-
-                                    <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
-                                           style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
-                                        رم (حافظه تصادفی)
-                                        <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
-                                               type="number"
-                                               min="0.5"
-                                               step="0.5"
-                                               max="64"
-                                               value="planData.memory"
-                                               v-model="planData.memory"/>
-
-                                    </label>
-
-                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
-                                         style="margin-top: 20px; padding: 0; height: max-content">
-                                        <vue-slider
-                                                v-model="planData.memory"
-                                                v-bind="memoryOptions"/>
-                                        <div class="range-title">
-                                            <p>{{memoryRangeMin}}</p>
-                                            <p style="float: left;">{{memoryRangeMax}}</p>
-                                        </div>
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Monitoring</span>
+                                        <span class="card-plan-config-description">{{item.config['monitoring']}}</span>
                                     </div>
 
                                 </div>
+                                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                     style="display: flex; flex-direction: column">
+                                    <div style="display: flex; width: 100%">
+                                        <span class="card-plan-config-title">پردازنده</span>
+                                        <span class="card-plan-config-description">{{item.config['cpu']}}</span>
+                                    </div>
 
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calculator-slider-container">
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Dedicated Volume</span>
+                                        <span class="card-plan-config-description">{{item.config['dedicated_storage']}}</span>
+                                    </div>
 
-                                    <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
-                                           style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
-                                        Dedicated Volume
-                                        <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
-                                               type="number"
-                                               min="0"
-                                               step="1"
-                                               max="1000"
-                                               value="planData.dedicatedVolume"
-                                               v-model="planData.dedicatedVolume"/>
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Image Registry</span>
+                                        <span class="card-plan-config-description">{{item.config['image_registry']}}</span>
+                                    </div>
 
-                                    </label>
-
-                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
-                                         style="margin-top: 20px; padding: 0; height: max-content">
-                                        <vue-slider
-                                                v-model="planData.dedicatedVolume"
-                                                v-bind="dedicatedVolumeOptions"/>
-                                        <div class="range-title">
-                                            <p>{{volumeRangeMin}}</p>
-                                            <p style="float: left;">{{volumeRangeMax}}</p>
-                                        </div>
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">پشتیبانی حرفه‌ای</span>
+                                        <span class="card-plan-config-description">{{item.config['support']}}</span>
                                     </div>
 
                                 </div>
-
-
                             </div>
-
-                            <div style="height: 0; border: solid 1px #d8d8d8; border-radius: 25px;"></div>
-
-                            <div class="row" style="width: 100%; margin-top: 32px; margin-right: 0; margin-left: 0">
-
-                                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" style="display: flex; padding: 0">
-                                    <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
-                                         style="display: flex; flex-direction: column">
-                                        <div style="display: flex; width: 100%">
-                                            <span class="calculator-config-title">رم (حافظه تصادفی)</span>
-                                            <span class="calculator-config-description">{{planData.memory}} گیگابایت</span>
-                                        </div>
-
-
-                                        <div style="display: flex; width: 100%; margin-top: 16px;">
-                                            <span class="calculator-config-title">حافظه ذخیره‌سازی</span>
-                                            <span class="calculator-config-description">۲.۵ گیگابایت</span>
-                                        </div>
-
-                                        <div style="display: flex; width: 100%; margin-top: 16px;">
-                                            <span class="calculator-config-title">Load Balancer</span>
-                                            <span class="calculator-config-description">رایگان</span>
-                                        </div>
-
-                                        <div style="display: flex; width: 100%; margin-top: 16px;">
-                                            <span class="calculator-config-title">Monitoring</span>
-                                            <span class="calculator-config-description">رایگان</span>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
-                                         style="display: flex; flex-direction: column">
-                                        <div style="display: flex; width: 100%">
-                                            <span class="calculator-config-title">پردازنده</span>
-                                            <span class="calculator-config-description">۰.۵ هسته</span>
-                                        </div>
-
-                                        <div style="display: flex; width: 100%; margin-top: 16px;">
-                                            <span class="calculator-config-title">Dedicated Volume</span>
-                                            <span class="calculator-config-description">{{planData.dedicatedVolume}} گیگابات</span>
-                                        </div>
-
-                                        <div style="display: flex; width: 100%; margin-top: 16px;">
-                                            <span class="calculator-config-title">Image Registry</span>
-                                            <span class="calculator-config-description">رایگان</span>
-                                        </div>
-
-                                        <div style="display: flex; width: 100%; margin-top: 16px;">
-                                            <span class="calculator-config-title">پشتیبانی حرفه‌ای</span>
-                                            <span class="calculator-config-description">رایگان</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 calculator-result-container">
-                                    <p>ماهیانه</p>
-                                    <p class="calc-result">{{(planData.memory * 60000 + planData.dedicatedVolume *
-                                        1200).toLocaleString()}}</p>
-                                    <p>تومان</p>
-
-                                </div>
-
-                            </div>
-
-                            <div style="width: 100%; margin-top: 16px; display: flex; justify-content: center;">
-                                <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;">
-                                    خرید پلن
+                            <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
+                                <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none">
+                                    {{item.action}}
                                 </button>
                             </div>
-
                         </div>
                     </div>
 
+                    <div class="calculator-parent-container">
+                        <p class="calculator-title">{{calculator_title}}</p>
+                        <p class="calculator-description">{{calculator_description}}</p>
 
-                </div>
+                        <div class="container-fluid"
+                             style="width: 100%; padding: 16px; box-sizing: padding-box; max-width: 2100px">
+                            <div class="row calculator-container">
+
+                                <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calculator-slider-container">
+
+                                        <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                                               style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
+                                            رم (حافظه تصادفی)
+                                            <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
+                                                   type="number"
+                                                   min="0.5"
+                                                   step="0.5"
+                                                   max="64"
+                                                   value="planData.memory"
+                                                   v-model="planData.memory"/>
+
+                                        </label>
+
+                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
+                                             style="margin-top: 20px; padding: 0; height: max-content">
+                                            <vue-slider
+                                                    v-model="planData.memory"
+                                                    v-bind="memoryOptions"/>
+                                            <div class="range-title">
+                                                <p>{{memoryRangeMin}}</p>
+                                                <p style="float: left;">{{memoryRangeMax}}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calculator-slider-container">
+
+                                        <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                                               style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
+                                            Dedicated Volume
+                                            <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
+                                                   type="number"
+                                                   min="0"
+                                                   step="1"
+                                                   max="1000"
+                                                   value="planData.dedicatedVolume"
+                                                   v-model="planData.dedicatedVolume"/>
+
+                                        </label>
+
+                                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
+                                             style="margin-top: 20px; padding: 0; height: max-content">
+                                            <vue-slider
+                                                    v-model="planData.dedicatedVolume"
+                                                    v-bind="dedicatedVolumeOptions"/>
+                                            <div class="range-title">
+                                                <p>{{volumeRangeMin}}</p>
+                                                <p style="float: left;">{{volumeRangeMax}}</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
 
 
-                <div style="width: 100%; margin-top: 64px">
+                                </div>
 
-                    <div class="payg-parent-container">
+                                <div style="height: 0; border: solid 1px #d8d8d8; border-radius: 25px;"></div>
 
-                        <div class="row payg-div">
+                                <div class="row" style="width: 100%; margin-top: 32px; margin-right: 0; margin-left: 0">
 
-                            <div class="coming-soon-container">
-                                <p>به زودی...</p>
+                                    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"
+                                         style="display: flex; padding: 0">
+                                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                             style="display: flex; flex-direction: column">
+                                            <div style="display: flex; width: 100%">
+                                                <span class="calculator-config-title">رم (حافظه تصادفی)</span>
+                                                <span class="calculator-config-description">{{planData.memory}} گیگابایت</span>
+                                            </div>
+
+
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="calculator-config-title">حافظه ذخیره‌سازی</span>
+                                                <span class="calculator-config-description">۲.۵ گیگابایت</span>
+                                            </div>
+
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="calculator-config-title">Load Balancer</span>
+                                                <span class="calculator-config-description">رایگان</span>
+                                            </div>
+
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="calculator-config-title">Monitoring</span>
+                                                <span class="calculator-config-description">رایگان</span>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                             style="display: flex; flex-direction: column">
+                                            <div style="display: flex; width: 100%">
+                                                <span class="calculator-config-title">پردازنده</span>
+                                                <span class="calculator-config-description">۰.۵ هسته</span>
+                                            </div>
+
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="calculator-config-title">Dedicated Volume</span>
+                                                <span class="calculator-config-description">{{planData.dedicatedVolume}} گیگابات</span>
+                                            </div>
+
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="calculator-config-title">Image Registry</span>
+                                                <span class="calculator-config-description">رایگان</span>
+                                            </div>
+
+                                            <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                <span class="calculator-config-title">پشتیبانی حرفه‌ای</span>
+                                                <span class="calculator-config-description">رایگان</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 calculator-result-container">
+                                        <p>ماهیانه</p>
+                                        <p class="calc-result">{{(planData.memory * 60000 + planData.dedicatedVolume *
+                                            1200).toLocaleString()}}</p>
+                                        <p>تومان</p>
+
+                                    </div>
+
+                                </div>
+
+                                <div style="width: 100%; margin-top: 16px; display: flex; justify-content: center;">
+                                    <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;">
+                                        خرید پلن
+                                    </button>
+                                </div>
+
                             </div>
+                        </div>
 
 
-                            <div class="payg-container">
+                    </div>
 
-                                <p class="payg-title">{{pay_as_you_go_title}}</p>
 
-                                <div class="row" style="width: 100%; margin-top: 16px; margin-left: 0; margin-right: 0">
+                    <div style="width: 100%; margin-top: 64px">
 
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 payg-config-container">
+                        <div class="payg-parent-container container-fluid" style="max-width: 2100px">
 
-                                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
-                                             style="display: flex; flex-direction: column">
+                            <div class="row payg-div">
 
-                                            <div style="display: flex; width: 100%">
-                                                <span class="card-plan-config-title">رم (حافظه تصادفی)</span>
-                                                <span class="card-plan-config-description">۴۰۰ مگابایت</span>
+                                <div class="coming-soon-container">
+                                    <p>به زودی...</p>
+                                </div>
+
+
+                                <div class="payg-container">
+
+                                    <p class="payg-title">{{pay_as_you_go_title}}</p>
+
+                                    <div class="row"
+                                         style="width: 100%; margin-top: 16px; margin-left: 0; margin-right: 0">
+
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 payg-config-container">
+
+                                            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                                 style="display: flex; flex-direction: column">
+
+                                                <div style="display: flex; width: 100%">
+                                                    <span class="card-plan-config-title">رم (حافظه تصادفی)</span>
+                                                    <span class="card-plan-config-description">۴۰۰ مگابایت</span>
+                                                </div>
+
+                                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                    <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
+                                                    <span class="card-plan-config-description">۲.۵ گیگابایت</span>
+                                                </div>
+
+                                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                    <span class="card-plan-config-title">Load Balancer</span>
+                                                    <span class="card-plan-config-description">رایگان</span>
+                                                </div>
+
+                                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                    <span class="card-plan-config-title">Monitoring</span>
+                                                    <span class="card-plan-config-description">رایگان</span>
+                                                </div>
+
                                             </div>
+                                            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                                 style="display: flex; flex-direction: column">
+                                                <div style="display: flex; width: 100%">
+                                                    <span class="card-plan-config-title">پردازنده</span>
+                                                    <span class="card-plan-config-description">۰.۵ هسته</span>
+                                                </div>
 
-                                            <div style="display: flex; width: 100%; margin-top: 16px;">
-                                                <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
-                                                <span class="card-plan-config-description">۲.۵ گیگابایت</span>
+                                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                    <span class="card-plan-config-title">Dedicated Volume</span>
+                                                    <span class="card-plan-config-description">ندارد</span>
+                                                </div>
+
+                                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                    <span class="card-plan-config-title">Image Registry</span>
+                                                    <span class="card-plan-config-description">رایگان</span>
+                                                </div>
+
+                                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                                    <span class="card-plan-config-title">پشتیبانی حرفه‌ای</span>
+                                                    <span class="card-plan-config-description">رایگان</span>
+                                                </div>
                                             </div>
-
-                                            <div style="display: flex; width: 100%; margin-top: 16px;">
-                                                <span class="card-plan-config-title">Load Balancer</span>
-                                                <span class="card-plan-config-description">رایگان</span>
-                                            </div>
-
-                                            <div style="display: flex; width: 100%; margin-top: 16px;">
-                                                <span class="card-plan-config-title">Monitoring</span>
-                                                <span class="card-plan-config-description">رایگان</span>
-                                            </div>
-
                                         </div>
-                                        <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
-                                             style="display: flex; flex-direction: column">
-                                            <div style="display: flex; width: 100%">
-                                                <span class="card-plan-config-title">پردازنده</span>
-                                                <span class="card-plan-config-description">۰.۵ هسته</span>
-                                            </div>
 
-                                            <div style="display: flex; width: 100%; margin-top: 16px;">
-                                                <span class="card-plan-config-title">Dedicated Volume</span>
-                                                <span class="card-plan-config-description">ندارد</span>
-                                            </div>
-
-                                            <div style="display: flex; width: 100%; margin-top: 16px;">
-                                                <span class="card-plan-config-title">Image Registry</span>
-                                                <span class="card-plan-config-description">رایگان</span>
-                                            </div>
-
-                                            <div style="display: flex; width: 100%; margin-top: 16px;">
-                                                <span class="card-plan-config-title">پشتیبانی حرفه‌ای</span>
-                                                <span class="card-plan-config-description">رایگان</span>
-                                            </div>
-                                        </div>
                                     </div>
 
                                 </div>
@@ -305,7 +313,6 @@
                     </div>
 
                 </div>
-
             </div>
 
         </div>
@@ -531,8 +538,11 @@
         width 100%
         margin-top 100px
         position relative
+        max-width 1500px
         @media only screen and (max-width: 992px)
             margin-top 50px
+        @media only screen and (min-width: 1850px)
+            margin-top 200px
 
         div
             height 0
@@ -589,8 +599,7 @@
             font-size 1.1em
 
     .bg-test
-        width 50%
-        background-size contain
+        background-size 50%
         background url("../../../assets/svg/price_bg.svg") no-repeat right top
         @media only screen and (max-width: 1230px)
             background none
@@ -652,6 +661,8 @@
         color #3c3c3c
         @media only screen and (max-width: 992px)
             font-size .85em
+        @media only screen and (min-width: 1850px)
+            font-size 1.2em
 
     .card-plan-config-description
         font-family iran-yekan
@@ -670,13 +681,13 @@
             font-size .85em
             padding-right 0
             padding-left 0
+        @media only screen and (min-width: 1850px)
+            font-size 1.2em
 
     .card-plan-container
         width 100%
         padding 32px
         box-sizing padding-box
-        margin-left 0
-        margin-right 0
         @media only screen and (max-width: 992px)
             padding 0
 

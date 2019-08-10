@@ -1,85 +1,88 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1736 543.815">
-    <defs>
-        <style>.cls-1{fill:#2a1975}.cls-2,.cls-5{fill:none}.cls-2{stroke:#2a1975;stroke-width:2px}.cls-4{stroke:none}
-        </style>
-    </defs>
-    <g id="Group_1935" data-name="Group 1935" transform="translate(-113 -2213)">
-        <circle id="Ellipse_184" data-name="Ellipse 184" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(113 2411)"/>
-        <path id="Path_1125" data-name="Path 1125" class="cls-1" d="M16 0A16 16 0 110 16 16 16 0 0116 0z"
-              transform="translate(385 2242)"/>
-        <path id="Rectangle_858" data-name="Rectangle 858" class="cls-1" transform="rotate(-60 2167.98 1102.912)"
-              d="M0 0h2v267H0z"/>
-        <path id="Rectangle_860" data-name="Rectangle 860" class="cls-1" transform="rotate(60 -1919.675 1670.795)"
-              d="M0 0h2v140H0z"/>
-        <path id="Rectangle_861" data-name="Rectangle 861" class="cls-1" transform="rotate(150 -73.566 1284.738)"
-              d="M0 0h2v204H0z"/>
-        <path id="Rectangle_862" data-name="Rectangle 862" class="cls-1" transform="rotate(111 -491.857 1556.955)"
-              d="M0 0h2v229H0z"/>
-        <path id="Rectangle_863" data-name="Rectangle 863" class="cls-1" transform="rotate(174.87 364.728 1285.52)"
-              d="M0 0h2v183H0z"/>
-        <path id="Rectangle_864" data-name="Rectangle 864" class="cls-1" transform="rotate(-135 980.114 1092.178)"
-              d="M0 0h2v183H0z"/>
-        <path id="Rectangle_865" data-name="Rectangle 865" class="cls-1" transform="rotate(-150 862.506 1024.955)"
-              d="M0 0h2v107H0z"/>
-        <path id="Rectangle_866" data-name="Rectangle 866" class="cls-1" transform="rotate(-135 1234.285 997.465)"
-              d="M0 0h2v146H0z"/>
-        <path id="Rectangle_868" data-name="Rectangle 868" class="cls-1" transform="rotate(-150 1216.676 1072.657)"
-              d="M0 0h2v198H0z"/>
-        <path id="Rectangle_867" data-name="Rectangle 867" class="cls-1" transform="rotate(165.02 589.492 1334.26)"
-              d="M0 0h2v187H0z"/>
-        <path id="Rectangle_859" data-name="Rectangle 859" class="cls-1" transform="rotate(-149 507.534 1343.668)"
-              d="M0 0h2v226H0z"/>
-        <circle id="Ellipse_185" data-name="Ellipse 185" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(350 2548)"/>
-        <g id="Ellipse_186" data-name="Ellipse 186" class="cls-2" transform="translate(480 2427)">
-            <circle class="cls-4" cx="48" cy="48" r="48"/>
-            <circle class="cls-5" cx="48" cy="48" r="47"/>
-        </g>
-        <g id="Ellipse_188" data-name="Ellipse 188" class="cls-2" transform="translate(778 2533)">
-            <circle class="cls-4" cx="70" cy="70" r="70"/>
-            <circle class="cls-5" cx="70" cy="70" r="69"/>
-        </g>
-        <g id="Ellipse_190" data-name="Ellipse 190" class="cls-2" transform="translate(749 2213)">
-            <circle class="cls-4" cx="70" cy="70" r="70"/>
-            <circle class="cls-5" cx="70" cy="70" r="69"/>
-        </g>
-        <g id="Ellipse_191" data-name="Ellipse 191" class="cls-2" transform="translate(1014 2335)">
-            <circle class="cls-4" cx="55" cy="55" r="55"/>
-            <circle class="cls-5" cx="55" cy="55" r="54"/>
-        </g>
-        <circle id="Ellipse_193" data-name="Ellipse 193" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(1053 2374)"/>
-        <circle id="Ellipse_194" data-name="Ellipse 194" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(1340 2602)"/>
-        <circle id="Ellipse_197" data-name="Ellipse 197" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(1489 2455)"/>
-        <circle id="Ellipse_199" data-name="Ellipse 199" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(1716 2594)"/>
-        <circle id="Ellipse_200" data-name="Ellipse 200" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(1817 2422)"/>
-        <circle id="Ellipse_198" data-name="Ellipse 198" class="cls-1" cx="16" cy="16" r="16"
-                transform="translate(1438 2274)"/>
-        <g id="Ellipse_195" data-name="Ellipse 195" class="cls-2" transform="translate(1308 2570)">
-            <circle class="cls-4" cx="48" cy="48" r="48"/>
-            <circle class="cls-5" cx="48" cy="48" r="47"/>
-        </g>
-        <g id="Ellipse_196" data-name="Ellipse 196" class="cls-2" transform="translate(1292 2554)">
-            <circle class="cls-4" cx="64" cy="64" r="64"/>
-            <circle class="cls-5" cx="64" cy="64" r="63"/>
-        </g>
-        <g id="Ellipse_192" data-name="Ellipse 192" transform="translate(791 2255)" stroke-dasharray="2 2"
-           stroke="#2a1975" stroke-width="2" fill="none">
-            <circle class="cls-4" cx="28" cy="28" r="28"/>
-            <circle class="cls-5" cx="28" cy="28" r="27"/>
-        </g>
-        <g id="Ellipse_189" data-name="Ellipse 189" class="cls-2" transform="translate(816 2571)">
-            <circle class="cls-4" cx="32" cy="32" r="32"/>
-            <circle class="cls-5" cx="32" cy="32" r="31"/>
-        </g>
-        <g id="Ellipse_187" data-name="Ellipse 187" class="cls-2" transform="translate(496 2443)">
-            <circle class="cls-4" cx="32" cy="32" r="32"/>
-            <circle class="cls-5" cx="32" cy="32" r="31"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1736px" height="574px" viewBox="0 0 1736 574" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>pod_bg</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-144.000000, -317.000000)">
+            <g id="pod_bg" transform="translate(144.000000, 317.000000)">
+                <circle id="Ellipse_184" fill="#2A1975" fill-rule="nonzero" cx="16" cy="214" r="16"></circle>
+                <polygon id="Rectangle_858" fill="#2A1975" fill-rule="nonzero" transform="translate(131.954581, 281.865729) rotate(-60.000000) translate(-131.954581, -281.865729) " points="130.954581 148.365729 132.954581 148.365729 132.954581 415.365729 130.954581 415.365729"></polygon>
+                <polygon id="Rectangle_860" fill="#2A1975" fill-rule="nonzero" transform="translate(313.991636, 320.750842) rotate(60.000000) translate(-313.991636, -320.750842) " points="312.991636 250.750842 314.991636 250.750842 314.991636 390.750842 312.991636 390.750842"></polygon>
+                <polygon id="Rectangle_861" fill="#2A1975" fill-rule="nonzero" transform="translate(340.226950, 133.302154) rotate(150.000000) translate(-340.226950, -133.302154) " points="339.22695 31.302154 341.22695 31.302154 341.22695 235.302154 339.22695 235.302154"></polygon>
+                <polygon id="Rectangle_862" fill="#2A1975" fill-rule="nonzero" transform="translate(565.166602, 321.006289) rotate(111.000000) translate(-565.166602, -321.006289) " points="564.166602 206.506289 566.166602 206.506289 566.166602 435.506289 564.166602 435.506289"></polygon>
+                <polygon id="Rectangle_863" fill="#2A1975" fill-rule="nonzero" transform="translate(720.763311, 229.234180) rotate(174.870000) translate(-720.763311, -229.234180) " points="719.763311 137.73418 721.763311 137.73418 721.763311 320.73418 719.763311 320.73418"></polygon>
+                <polygon id="Rectangle_864" fill="#2A1975" fill-rule="nonzero" transform="translate(851.865949, 279.102349) rotate(-135.000000) translate(-851.865949, -279.102349) " points="850.865949 187.602349 852.865949 187.602349 852.865949 370.602349 850.865949 370.602349"></polygon>
+                <polygon id="Rectangle_865" fill="#2A1975" fill-rule="nonzero" transform="translate(1009.864582, 84.012709) rotate(-150.000000) translate(-1009.864582, -84.012709) " points="1008.86458 30.5127086 1010.86458 30.5127086 1010.86458 137.512709 1008.86458 137.512709"></polygon>
+                <g id="Group" transform="translate(1179.000000, 257.224657)">
+                    <polygon id="Rectangle_866" fill="#2A1975" fill-rule="nonzero" transform="translate(160.653716, 53.000000) rotate(-135.000000) translate(-160.653716, -53.000000) " points="159.653716 -20 161.653716 -20 161.653716 126 159.653716 126"></polygon>
+                    <circle id="Ellipse_194" fill="#2A1975" fill-rule="nonzero" cx="64" cy="147.775343" r="16"></circle>
+                    <g id="Ellipse_195" transform="translate(16.000000, 99.775343)">
+                        <circle id="Oval" cx="48" cy="48" r="48"></circle>
+                        <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="48" cy="48" r="47"></circle>
+                    </g>
+                    <g id="Ellipse_196" transform="translate(0.000000, 83.775343)">
+                        <circle id="Oval" cx="64" cy="64" r="64"></circle>
+                        <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="64" cy="64" r="63"></circle>
+                    </g>
+                </g>
+                <g id="Group-Copy" transform="translate(1497.789598, 154.724657) scale(-1, -1) translate(-1497.789598, -154.724657) translate(1394.289598, 52.224657)">
+                    <polygon id="Rectangle_866" fill="#2A1975" fill-rule="nonzero" transform="translate(155.805136, 50.972611) rotate(-135.000000) translate(-155.805136, -50.972611) " points="154.889634 -19.2811931 156.814413 -19.2824777 156.720638 121.226416 154.795858 121.227701"></polygon>
+                    <circle id="Ellipse_194" fill="#2A1975" fill-rule="nonzero" cx="61.7895981" cy="141.724657" r="15.5"></circle>
+                    <g id="Ellipse_195" transform="translate(16.289598, 96.224657)">
+                        <circle id="Oval" cx="46.5" cy="46.5" r="46.5"></circle>
+                        <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="46.5" cy="46.5" r="45.53125"></circle>
+                    </g>
+                    <g id="Ellipse_196" transform="translate(0.289598, 81.224657)">
+                        <circle id="Oval" cx="61.5" cy="61.5" r="61.5"></circle>
+                        <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="61.5" cy="61.5" r="60.5390625"></circle>
+                    </g>
+                </g>
+                <polygon id="Rectangle_868" fill="#2A1975" fill-rule="nonzero" transform="translate(1669.653799, 310.706697) rotate(-150.000000) translate(-1669.653799, -310.706697) " points="1668.6538 211.706697 1670.6538 211.706697 1670.6538 409.706697 1668.6538 409.706697"></polygon>
+                <g id="Group-2" transform="translate(1325.000000, 61.000000)" fill="#2A1975" fill-rule="nonzero">
+                    <polygon id="Rectangle_867" transform="translate(40.698704, 106.739646) rotate(165.020000) translate(-40.698704, -106.739646) " points="39.6987036 13.2396462 41.6987036 13.2396462 41.6987036 200.239646 39.6987036 200.239646"></polygon>
+                    <circle id="Ellipse_198" cx="16" cy="16" r="16"></circle>
+                </g>
+                <g id="Group-2" transform="translate(1424.000000, 358.000000) scale(-1, -1) translate(-1424.000000, -358.000000) translate(1391.000000, 259.000000)" fill="#2A1975" fill-rule="nonzero">
+                    <polygon id="Rectangle_867" transform="translate(40.698704, 106.739646) rotate(165.020000) translate(-40.698704, -106.739646) " points="39.6987036 13.2396462 41.6987036 13.2396462 41.6987036 200.239646 39.6987036 200.239646"></polygon>
+                    <circle id="Ellipse_198" cx="16" cy="16" r="16"></circle>
+                </g>
+                <polygon id="Rectangle_859" fill="#2A1975" fill-rule="nonzero" transform="translate(194.877504, 446.440664) rotate(-149.000000) translate(-194.877504, -446.440664) " points="193.877504 333.440664 195.877504 333.440664 195.877504 559.440664 193.877504 559.440664"></polygon>
+                <circle id="Ellipse_185" fill="#2A1975" fill-rule="nonzero" cx="130" cy="558" r="16"></circle>
+                <g id="Ellipse_186" transform="translate(367.000000, 214.000000)">
+                    <circle id="Oval" cx="48" cy="48" r="48"></circle>
+                    <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="48" cy="48" r="47"></circle>
+                </g>
+                <g id="Ellipse_188" transform="translate(665.000000, 320.000000)">
+                    <circle id="Oval" cx="70" cy="70" r="70"></circle>
+                    <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="70" cy="70" r="69"></circle>
+                </g>
+                <g id="Ellipse_190" transform="translate(636.000000, 0.000000)">
+                    <circle id="Oval" cx="70" cy="70" r="70"></circle>
+                    <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="70" cy="70" r="69"></circle>
+                </g>
+                <g id="Ellipse_191" transform="translate(901.000000, 122.000000)">
+                    <circle id="Oval" cx="55" cy="55" r="55"></circle>
+                    <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="55" cy="55" r="54"></circle>
+                </g>
+                <circle id="Ellipse_193" fill="#2A1975" fill-rule="nonzero" cx="956" cy="177" r="16"></circle>
+                <circle id="Ellipse_197" fill="#2A1975" fill-rule="nonzero" cx="1392" cy="258" r="16"></circle>
+                <circle id="Ellipse_199" fill="#2A1975" fill-rule="nonzero" cx="1619" cy="397" r="16"></circle>
+                <circle id="Ellipse_200" fill="#2A1975" fill-rule="nonzero" cx="1720" cy="225" r="16"></circle>
+                <circle id="Ellipse_198-Copy" fill="#2A1975" fill-rule="nonzero" cx="282" cy="32" r="16"></circle>
+                <g id="Ellipse_192" stroke-dasharray="2" transform="translate(678.000000, 42.000000)">
+                    <circle id="Oval" cx="28" cy="28" r="28"></circle>
+                    <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="28" cy="28" r="27"></circle>
+                </g>
+                <g id="Ellipse_189" transform="translate(703.000000, 358.000000)">
+                    <circle id="Oval" cx="32" cy="32" r="32"></circle>
+                    <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="32" cy="32" r="31"></circle>
+                </g>
+                <g id="Ellipse_187" transform="translate(383.000000, 230.000000)">
+                    <circle id="Oval" cx="32" cy="32" r="32"></circle>
+                    <circle id="Oval" stroke="#2A1975" stroke-width="2" cx="32" cy="32" r="31"></circle>
+                </g>
+            </g>
         </g>
     </g>
 </svg>
