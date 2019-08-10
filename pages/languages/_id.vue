@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%; background: #EAEFFF">
+    <div style="width: 100%; background: #E6ECFF">
 
         <div class="parallax-container">
             <div class="lang-detail-parent-container">
@@ -279,7 +279,7 @@
         div
             width: 320px
             height 320px
-            background-color #EAEFFF
+            background-color #E6ECFF
             border-radius 100%
             display flex
             margin-left auto
