@@ -1,11 +1,12 @@
 <template>
 
 
-    <div class="success-story-container">
+    <div class="success-story-container" style="width: 100%">
 
         <p class="success-title">{{title}}</p>
 
-        <div class="row story-parent-container">
+        <div class="story-parent-container container-fluid">
+            <div class="row" style="width:100%">
 
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 story-container">
 
@@ -32,7 +33,7 @@
                 <img @click="onStorySelected(index)" :style="{opacity: item.selected? '1' : '.6'}" v-for="(item, index) in stories" class="story-card" :src="require('../../../assets/svg/customers/' + item.logo + '.png')" :alt="item.logo"/>
 
             </div>
-
+            </div>
         </div>
 
         <div style="width: 100%; display: flex; padding: 16px;">
@@ -156,6 +157,10 @@
 
 <style lang="stylus" scoped>
 
+    .row
+        margin-left 0
+        margin-right 0
+
     .success-story-container
         z-index 2
         width 100%
@@ -163,8 +168,9 @@
         background #0045ff
         margin-top 32px
         display flex
+        justify-content center
         flex-direction column
-        position relative
+        justify-items center
 
         p.success-title
             font-family iran-yekan;
@@ -187,6 +193,8 @@
         display flex
         flex-direction column
         margin-top 32px
+        margin-left auto
+        margin-right auto
         order 0
         @media only screen and (max-width: 992px)
             order 1
@@ -249,8 +257,9 @@
     .story-parent-container
         padding 0 64px
         box-sizing padding-box
-        margin-right 0
-        margin-left 0
+        max-width 1750px
+        padding-left 0
+        padding-right 0
         @media only screen and (max-width: 992px)
             padding 0
 

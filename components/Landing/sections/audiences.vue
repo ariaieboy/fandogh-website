@@ -1,5 +1,5 @@
 <template>
-    <div class="audience-container">
+    <div class="audience-container container-fluid">
         <!--<img src="../../../assets/svg/pod_bg.svg" width="100%" style="opacity: 20%;position: absolute"/>-->
 
 
@@ -68,16 +68,20 @@
 
     .audience-container
         width 100%
-        min-height 600px
+        min-height 500px
+        max-width 1750px
         background url("../../../assets/svg/pod_bg.svg") no-repeat top
         background-size contain
         margin-top -48px
+        padding-left 0
+        padding-right 0
 
 
     .audience-inner-container
         width 100%
         background-image linear-gradient(to bottom, rgba(254, 254, 254, 0.75), #fefefe 47%, #fefefe)
         display flex
+        max-width 1750px
         height 100%
         flex-direction column
         padding-top 250px

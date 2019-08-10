@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%; padding-bottom: 64px">
+    <div style="width: 100%; padding-bottom: 64px; max-width: 1750px; padding-right: 0; padding-left: 0" class="container-fluid">
 
         <div class="business-image-header">
             <div class="semi-line"></div>

@@ -1,5 +1,5 @@
 <template>
-    <section style="background: #fefefe; width: 100%">
+    <section style="background: #fefefe; width: 100%;">
 
         <div class="row" style="width: 100%">
 

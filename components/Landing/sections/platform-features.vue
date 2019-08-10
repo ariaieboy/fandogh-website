@@ -1,5 +1,5 @@
 <template>
-    <div class="features-container">
+    <div class="features-container container-fluid">
 
         <p class="feature-sec-title">{{title}}</p>
         <p class="feature-sec-description">{{description}}</p>
@@ -132,10 +132,13 @@
     .features-container
         width 100%
         min-height 700px
+        max-width 1750px
         margin-top 32px
         position relative
         box-sizing padding-box
         padding 32px
+        @media only screen and (min-width  1500px)
+            padding 32px 0
 
     .feature-sec-title
         font-family iran-yekan

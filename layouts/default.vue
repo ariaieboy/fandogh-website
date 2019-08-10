@@ -52,4 +52,5 @@ export default {
   display block
   box-sizing border-box
   width 100%
+  background #fefefe
 </style>

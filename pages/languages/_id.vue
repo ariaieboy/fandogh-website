@@ -261,8 +261,7 @@
         flex-direction column
         margin-top -241px
         @media only screen and (max-width 1230px)
-            margin-top
-        -191px
+            margin-top: -191px
 
         p
             font-family: 'Helvetica Neue';

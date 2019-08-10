@@ -1,13 +1,13 @@
 <template>
-    <div style="width: 100%">
+    <div style="width: 100%;">
         <div class="slider-container">
 
             <div class="top-section">
 
-                <div v-for="item in slider_data" class="row" style="height: 100%; margin-left: 0; margin-right: 0">
+                <div v-for="item in slider_data" class="row" style="height: 100%; margin-left: 0; margin-right: 0;display: flex">
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container-fluid fade"
-                         style="height: 100%; padding: 32px;" :style="{display: item.selected? 'block' : 'none'}">
+                         style="height: 100%; padding: 32px;max-width: 1700px;" :style="{display: item.selected? 'block' : 'none'}">
 
                         <div class="slider-main">
 
@@ -153,6 +153,7 @@
     .slider-main
         width 100%
         float left
+        max-width 800px
         display flex
         flex-direction column
         margin-top 16px

@@ -3,7 +3,7 @@
 
         <p class="tut-title">{{title}}</p>
 
-        <div class="tut-player-container">
+        <div class="tut-player-container container-fluid">
 
             <div class="tut-language-bar">
                 <div v-for="(item, index) in tutorials" class="tut-item" @click="onTutorialClicked(index)" :style="{opacity: item.selected? '1' : '0.5'}">
@@ -114,6 +114,9 @@
         background-color #080295
         width 70%
         margin 64px auto
+        max-width 1750px
+        padding-right 0
+        padding-left 0
         display flex
         flex-direction column
         @media only screen and (max-width: 992px)
