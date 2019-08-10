@@ -1,46 +1,50 @@
 <template>
 
 
-    <div class="success-story-container" style="width: 100%">
+    <div style="width: 100%; background: #0045ff;padding-bottom: 16px; margin-top: 32px;display: flex; justify-content: center">
+        <div class="success-story-container">
 
-        <p class="success-title">{{title}}</p>
+            <p class="success-title">{{title}}</p>
 
-        <div class="story-parent-container container-fluid">
-            <div class="row" style="width:100%">
+            <div class="row story-parent-container">
 
-            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 story-container">
+                <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 story-container">
 
-                <img :src="require('../../../assets/svg/customers/' + story.logo + '.png')" width="200px"
-                     :alt="story.logo">
-                <q style="quotes: '”' '“';" class="story-description">{{story.description}}</q>
-                <p class="story-teller">{{story.teller}}</p>
-                <p class="story-teller-position">{{story.teller_position + ' ' + story.title}}</p>
+                    <img :src="require('../../../assets/svg/customers/' + story.logo + '.png')" width="200px"
+                         :alt="story.logo">
+                    <q style="quotes: '”' '“';" class="story-description">{{story.description}}</q>
+                    <p class="story-teller">{{story.teller}}</p>
+                    <p class="story-teller-position">{{story.teller_position + ' ' + story.title}}</p>
+                </div>
+
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="padding: 0">
+
+                    <vue-plyr class="success_player suc-player"
+                              :key="story.link"
+                              :options="{controls: ['play-large', 'progress','fullscreen']}">
+                        <video style="width: 100%">
+                            <source style="width: 100%" :src="require('../../../assets/media/' + story.link + '.mp4')"
+                                    type="video/mp4"/>
+                        </video>
+                    </vue-plyr>
+
+                </div>
+
+                <div class="story-rail">
+                    <img @click="onStorySelected(index)" :style="{opacity: item.selected? '1' : '.6'}"
+                         v-for="(item, index) in stories" class="story-card"
+                         :src="require('../../../assets/svg/customers/' + item.logo + '.png')" :alt="item.logo"/>
+
+                </div>
+
             </div>
 
-            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="padding: 0">
-
-                <vue-plyr class="success_player suc-player"
-                          :key="story.link"
-                          :options="{controls: ['play-large', 'progress','fullscreen']}">
-                    <video style="width: 100%">
-                        <source style="width: 100%" :src="require('../../../assets/media/' + story.link + '.mp4')" type="video/mp4"/>
-                    </video>
-                </vue-plyr>
+            <div style="width: 100%; display: flex; padding: 16px;">
+                <button class="all-customers">مشاهده مشتریان</button>
 
             </div>
 
-            <div class="story-rail">
-                <img @click="onStorySelected(index)" :style="{opacity: item.selected? '1' : '.6'}" v-for="(item, index) in stories" class="story-card" :src="require('../../../assets/svg/customers/' + item.logo + '.png')" :alt="item.logo"/>
-
-            </div>
-            </div>
         </div>
-
-        <div style="width: 100%; display: flex; padding: 16px;">
-            <button class="all-customers">مشاهده مشتریان</button>
-
-        </div>
-
     </div>
 
 </template>
@@ -58,12 +62,12 @@
                         '                    نگرانی بابت زیرساخت داشته باشیم….',
                     logo: 'botick',
                     link: 'sample',
-                    company_href:'https://botick.com',
+                    company_href: 'https://botick.com',
                     teller: 'سامان احمدی',
                     teller_position: 'بنیان‌گذار',
                     selected: true
                 },
-                stories:[
+                stories: [
                     {
                         title: 'بوتیک',
                         description: 'میتونیم به جرات بگیم فندق یک محصول داخلی، با کیفیت بین‌المللی هستش که واقعا خیلی از مشکلات\n' +
@@ -71,7 +75,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
-                        company_href:'https://botick.com',
+                        company_href: 'https://botick.com',
                         teller: 'سامان احمدی',
                         teller_position: 'بنیان‌گذار',
                         selected: true
@@ -83,7 +87,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
-                        company_href:'https://botick.com',
+                        company_href: 'https://botick.com',
                         teller: ' احمدی - بنیان‌گذار',
                         teller_position: 'بنیان‌گذار',
                         selected: false
@@ -95,7 +99,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
-                        company_href:'https://botick.com',
+                        company_href: 'https://botick.com',
                         teller: 'سامان احمدی',
                         teller_position: 'بنیان‌گذار',
                         selected: false
@@ -107,7 +111,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
-                        company_href:'https://botick.com',
+                        company_href: 'https://botick.com',
                         teller: 'سامان احمدی',
                         teller_position: 'بنیان‌گذار',
                         selected: false
@@ -119,7 +123,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'sample',
-                        company_href:'https://botick.com',
+                        company_href: 'https://botick.com',
                         teller: 'سامان احمدی',
                         teller_position: 'بنیان‌گذار',
                         selected: false
@@ -131,7 +135,7 @@
                             '                    نگرانی بابت زیرساخت داشته باشیم….',
                         logo: 'botick',
                         link: 'more',
-                        company_href:'https://botick.com',
+                        company_href: 'https://botick.com',
                         teller: 'سامان احمدی',
                         teller_position: 'بنیان‌گذار',
                         selected: false
@@ -142,8 +146,8 @@
 
             }
         },
-        methods:{
-            onStorySelected(index){
+        methods: {
+            onStorySelected(index) {
                 this.stories.forEach(story => {
                     story.selected = false
                 });
@@ -157,6 +161,10 @@
 
 <style lang="stylus" scoped>
 
+    .container-fluid
+        padding-left 0
+        padding-right 0
+
     .row
         margin-left 0
         margin-right 0
@@ -164,13 +172,11 @@
     .success-story-container
         z-index 2
         width 100%
-        padding-bottom 16px
         background #0045ff
-        margin-top 32px
         display flex
-        justify-content center
+        max-width 1750px
         flex-direction column
-        justify-items center
+        position relative
 
         p.success-title
             font-family iran-yekan;
@@ -193,8 +199,6 @@
         display flex
         flex-direction column
         margin-top 32px
-        margin-left auto
-        margin-right auto
         order 0
         @media only screen and (max-width: 992px)
             order 1
@@ -257,9 +261,6 @@
     .story-parent-container
         padding 0 64px
         box-sizing padding-box
-        max-width 1750px
-        padding-left 0
-        padding-right 0
         @media only screen and (max-width: 992px)
             padding 0
 
@@ -288,7 +289,6 @@
         opacity 1 !important
 
 
-
     .all-customers
         border-radius 25px
         width 250px
@@ -315,7 +315,7 @@
 
 </style>
 <style lang="css">
-    ::-webkit-scrollbar{
+    ::-webkit-scrollbar {
         width: 0 !important;
         height: 0 !important;
     }
