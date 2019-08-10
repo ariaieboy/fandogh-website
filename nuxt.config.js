@@ -9,7 +9,6 @@ module.exports = {
     loading: {
         color: "#080295",
         height: "5px"
-
     },
     env: {
         API: process.env.API || "https://api.fandogh.cloud/fa",
