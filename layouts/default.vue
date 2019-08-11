@@ -1,56 +1,71 @@
 <template>
-  <div class="wrapper-default">
-    <f-header/>
-    <nuxt/>
-    <new-footer/>
-    <alert/>
-  </div>
+    <div class="wrapper-default">
+        <div v-if="isMenuAvailable">
+            <f-header/>
+        </div>
+        <nuxt/>
+        <div v-if="isMenuAvailable">
+            <new-footer/>
+        </div>
+        <alert/>
+    </div>
 </template>
 
 <script>
-import FHeader from '~/components/Header'
-import FFooter from '~/components/Footer'
-import Alert from "~/components/Dashboard/alert";
-import 'normalize.css'
-import NewFooter from "../components/Landing/footer/new-footer";
-export default {
-  components: {
-    NewFooter,
-    FHeader,
-    FFooter,
-    Alert
-  },
-  computed: {
-    message() {
-      return this.$store.state.message
-    }
-  },
-  mounted() {
-    let elm = document.querySelector('#raychatFrame')
-    if (!elm) {
-      const raychatScript = document.createElement('script')
-      raychatScript.innerText = '!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="b34779ab-3e49-4256-8f71-ec8ae7e76d64";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();'
-      document.head.appendChild(raychatScript)
-    }
+    import FHeader from '~/components/Header'
+    import FFooter from '~/components/Footer'
+    import Alert from "~/components/Dashboard/alert";
+    import 'normalize.css'
+    import NewFooter from "../components/Landing/footer/new-footer";
 
-  },
-  watch: {
-    $route() {
-      if (this.message) {
-        this.$store.dispatch('setMessage', this.message)
-        this.$store.dispatch('showModal', 'message')
-      }
+    export default {
+        components: {
+            NewFooter,
+            FHeader,
+            FFooter,
+            Alert
+        },
+        computed: {
+            message() {
+                return this.$store.state.message
+            },
+            isMenuAvailable() {
+                if (this.$route.path.indexOf('login') !== -1) {
+                    return false;
+                } else if (this.$route.path.indexOf('register') !== -1) {
+                    return false
+                } else {
+                    return true
+                }
+            }
+        },
+        mounted() {
+            let elm = document.querySelector('#raychatFrame')
+            if (!elm) {
+                const raychatScript = document.createElement('script')
+                raychatScript.innerText = '!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="b34779ab-3e49-4256-8f71-ec8ae7e76d64";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();'
+                document.head.appendChild(raychatScript)
+            }
+
+        },
+        watch: {
+            $route() {
+                if (this.message) {
+                    this.$store.dispatch('setMessage', this.message)
+                    this.$store.dispatch('showModal', 'message')
+                }
+            }
+        },
     }
-  },
-}
 </script>
 
 <style lang="stylus" scoped>
-@import '../assets/css/main.styl'
+    @import '../assets/css/main.styl'
 
-.wrapper-default
-  display block
-  box-sizing border-box
-  width 100%
-  background #fefefe
+    .wrapper-default
+        display block
+        box-sizing border-box
+        height 100%
+        width 100%
+        background #fefefe
 </style>

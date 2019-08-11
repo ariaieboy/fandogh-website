@@ -1,17 +1,20 @@
 <template>
-  <div class="flex centered-page" style="background: #E6ECFF">
-    <login :disableOverlay="true" :noModal="true" force="true"> </login>
-  </div>
+    <div style="  background-image: linear-gradient(to bottom, #0045ff, #002380); min-height: 1000px">
+        <vlogin></vlogin>
+    </div>
 </template>
 
 <script>
-  import Login from  '~/components/Auth/Login.vue'
-  export default {
-    components: {
-      Login
-    },
-    mounted(){
-      this.$store.dispatch('logout')
+    import Login from '~/components/Auth/Login.vue'
+    import Vlogin from "../../components/Auth/vlogin";
+
+    export default {
+        components: {
+            Vlogin,
+            Login
+        },
+        mounted() {
+            // this.$store.dispatch('logout')
+        }
     }
-  }
 </script>
