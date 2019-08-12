@@ -11,6 +11,7 @@
             <p class="login-dialog-title">تغییر گذرواژه</p>
 
             <v-text-field
+                    ref="new_password"
                     style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
                     color="#0045ff"
                     type="text"
@@ -27,6 +28,7 @@
             </v-text-field>
 
             <v-text-field
+                    ref="repeat_password"
                     style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
                     color="#0045ff"
                     type="text"
@@ -110,6 +112,11 @@
                     this.error = e
                 })
             }
+        },
+        mounted() {
+
+            this.$refs.repeat_password.focus()
+            this.$refs.new_password.focus()
         }
 
     }

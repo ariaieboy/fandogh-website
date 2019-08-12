@@ -61,6 +61,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                 <p class="register-dialog-title">ثبت‌نام رایگان</p>
 
                 <v-text-field
+                        ref="username"
                         style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
                         color="#0045ff"
                         type="text"
@@ -72,6 +73,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                 </v-text-field>
 
                 <v-text-field
+                        ref="password"
                         style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
                         color="#0045ff"
                         type="text"
@@ -87,6 +89,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                 </v-text-field>
 
                 <v-text-field
+                        ref="repeat_password"
                         style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
                         color="#0045ff"
                         type="text"
@@ -102,6 +105,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                 </v-text-field>
 
                 <v-text-field
+                        ref="email"
                         style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto; max-height: 70px"
                         color="#0045ff"
                         type="text"
@@ -114,6 +118,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                 </v-text-field>
 
                 <v-text-field
+                        ref="namespace"
                         style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto; max-height: 70px"
                         color="#0045ff"
                         type="text"
@@ -202,6 +207,14 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                     this.error = ErrorReporter(error, this.$data)
                 })
             }
+        },
+        mounted() {
+
+            this.$refs.namespace.focus()
+            this.$refs.email.focus()
+            this.$refs.password.focus()
+            this.$refs.repeat_password.focus()
+            this.$refs.username.focus()
         }
     }
 </script>

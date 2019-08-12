@@ -19,6 +19,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
             <p class="login-dialog-title">بازیابی گذرواژه</p>
 
             <v-text-field
+                    ref="identifier"
                     style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
                     color="#0045ff"
                     type="text"
@@ -77,6 +78,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
                 loading: false,
                 show_pass: false,
                 error: null,
+                message: null,
                 user: {
                     identifier: ''
                 },
@@ -101,6 +103,9 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
                     })
                 }
             }
+        },
+        mounted(){
+            this.$refs.identifier.focus()
         }
     }
 </script>
