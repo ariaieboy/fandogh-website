@@ -1,35 +1,40 @@
 <template>
 
-    <section>
+    <section class="error-container"
+             :style="{backgroundImage: isDefaultLayout? 'linear-gradient(to bottom, #0045ff, #002380)' : 'none'}">
+        <div :class="[isDefaultLayout ? 'error-header' : '']">
 
-        <div class="error-container">
+        </div>
 
-            <div class="error-header">
+        <div class="error-inner-container" :style="{backgroundImage: isDefaultLayout ? 'linear-gradient(to bottom, rgba(0, 69, 255, 0.6), #0045ff 20%, #002380)' : 'none',
+        position: isDefaultLayout ? 'absolute' : 'unset'}">
+
+            <div class="error-title-container" :style="{maxWidth: isDefaultLayout ?
+            '650px' : 'unset', flexDirection: isDefaultLayout? 'unset' : 'column'}">
+
+                <span class="error-message" :style="{color: isDefaultLayout ? 'rgba(254, 254, 254, 0.7)' : 'rgba(51, 51, 51, 0.7)',
+                textAlign: isDefaultLayout ? 'left' : 'center'}">
+                    {{error.statusCode === 404 ? 'Page not found' : error.message}}
+                </span>
+
+                <span class="error-title" :style="{color: isDefaultLayout ? '#fefefe' : '#333333',
+                textAlign: isDefaultLayout ? 'left' : 'center'}">
+                    {{error.statusCode}}
+                </span>
 
             </div>
 
-            <div class="error-inner-container">
+            <div v-if="error.statusCode === 404" class="error-action-container">
 
-                <div class="error-title-container">
-
-                    <span class="error-message">{{error.statusCode === 404 ? 'Page not found' : error.message}}</span>
-                    <span class="error-title">{{error.statusCode}}</span>
+                <div class="line">
 
                 </div>
 
-                <div v-if="error.statusCode === 404" class="error-action-container">
+                <div class="row" style="display: flex; justify-content: center">
 
-                    <div class="line">
-
-                    </div>
-
-                    <div class="row" style="display: flex; justify-content: center">
-
-                        <nuxt-link class="button" to="/">صفحه اصلی</nuxt-link>
-                        <a class="button" href="https://docs.fandogh.cloud" target="_self">مستندات</a>
-                        <a class="button" href="https://blog.fandogh.cloud" target="_self">وبلاگ</a>
-
-                    </div>
+                    <nuxt-link class="button" to="/">صفحه اصلی</nuxt-link>
+                    <a class="button" href="https://docs.fandogh.cloud" target="_self">مستندات</a>
+                    <a class="button" href="https://blog.fandogh.cloud" target="_self">وبلاگ</a>
 
                 </div>
 
@@ -43,7 +48,16 @@
 
 <script>
     export default {
-        props: ['error']
+        props: ['error'],
+        computed: {
+            isDefaultLayout() {
+                if (this.$route.path.indexOf('dashboard') !== -1) {
+                    return false;
+                } else {
+                    return true
+                }
+            }
+        }
     }
 </script>
 
@@ -52,7 +66,6 @@
         font-size 3.5em
         font-family iran-yekan
         line-height 1.75
-        color #fefefe
         margin-top auto
         direction ltr
         margin-right 12px
@@ -64,7 +77,6 @@
         font-size 3.2em
         font-family iran-yekan
         line-height 1.75
-        color rgba(254, 254, 254, 0.7)
         margin-top auto
         direction ltr
         letter-spacing normal
@@ -79,7 +91,6 @@
         height 100%
         min-height 700px
         padding-top 60px
-        background-image linear-gradient(to bottom, #0045ff, #002380)
 
         div.error-title-container
             width 100%
@@ -99,7 +110,6 @@
         min-height 700px
         position absolute
         padding-top 60px
-        background-image: linear-gradient(to bottom, rgba(0, 69, 255, 0.6), #0045ff 20%, #002380);
 
     .error-action-container
         width 100%

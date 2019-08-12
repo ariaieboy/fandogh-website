@@ -7,7 +7,7 @@
                 {{message}}
             </p>
             <button @click="$router.replace('/user/login')" style="width: 300px; height: 45px; color: #fefefe; background: #0045ff;
-text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5px; margin-left: auto; margin-right: auto; margin-top: 32px">باشه</button>
+text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; border-radius: 5px; margin-left: auto; margin-right: auto; margin-top: 32px">باشه</button>
         </div>
 
         <div v-else class="row register-box-inner-container">

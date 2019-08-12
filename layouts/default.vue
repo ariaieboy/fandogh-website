@@ -30,10 +30,8 @@
                 return this.$store.state.message
             },
             isMenuAvailable() {
-                if (this.$route.path.indexOf('login') !== -1) {
+                if (this.$route.path.indexOf('user') !== -1) {
                     return false;
-                } else if (this.$route.path.indexOf('register') !== -1) {
-                    return false
                 } else {
                     return true
                 }

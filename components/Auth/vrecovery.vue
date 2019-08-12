@@ -8,17 +8,21 @@
 
 
         <div class="login-dialog-box container-fluid">
-            <p class="login-dialog-title">ورود به حساب کاربری</p>
+            <p class="login-dialog-title">تغییر گذرواژه</p>
 
             <v-text-field
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
+                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
                     color="#0045ff"
                     type="text"
                     dir="ltr"
-                    :prepend-inner-icon="'person'"
-                    v-model="user.username"
-                    :hint="username.hint"
-                    :label="username.label">
+                    :type="show_pass ? 'text' : 'password'"
+                    browser-autocomplete="new-password"
+                    :prepend-inner-icon="'lock'"
+                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                    v-model="user.new_password"
+                    :hint="new_password.hint"
+                    @click:append="show_pass = !show_pass"
+                    :label="new_password.label">
 
             </v-text-field>
 
@@ -31,14 +35,18 @@
                     browser-autocomplete="new-password"
                     :prepend-inner-icon="'lock'"
                     :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                    v-model="user.password"
-                    :hint="password.hint"
+                    v-model="user.repeat_password"
+                    :hint="repeat_password.hint"
                     @click:append="show_pass = !show_pass"
-                    :label="password.label">
+                    :label="repeat_password.label">
 
             </v-text-field>
 
-            <button @click="login" class="login-dialog-button">ورود</button>
+
+            <p class="recovery-error" v-html="error" v-if="error !== null"
+               :style="{display: error === null ?  'none' : 'unset'}"></p>
+
+            <button @click="resetPassword" class="login-dialog-button">تایید</button>
 
 
             <v-progress-linear
@@ -47,19 +55,7 @@
                     :active="loading"
                     color="rgba(0,255,255, 0.7) rgba(0,255,255, 1)"
             ></v-progress-linear>
-            <div class="register-section">
-                <div class="register-section-line"></div>
-                <div class="register-section-container">
-                    <span style="font-family: iran-yekan; font-size: 1.1em; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: left; color: #707070;">
-                        از اینجا
-                        <span @click="$router.replace('/user/register')" style="cursor: pointer; color: #0045ff">ثبت‌نام</span>
-                        کنید
-                    </span>
-                </div>
-            </div>
         </div>
-
-        <p @click="$router.push('/user/forgot_password')" class="forgot-pass-button">فراموشی گذرواژه</p>
 
         <div class="bottom-info-container">
 
@@ -75,56 +71,47 @@
 </template>
 
 <script>
-    import 'vuetify/dist/vuetify.min.css';
-
     export default {
-        name: "vlogin",
+        name: "vrecovery",
         data() {
             return {
                 loading: false,
                 show_pass: false,
                 error: null,
                 user: {
-                    username: '',
-                    password: ''
+                    new_password: '',
+                    repeat_password: '',
+                    code: this.$route.query.code,
+                    id: this.$route.query.user_id,
                 },
-                username: {
-                    hint: 'نام کاربری را وارد نمایید',
-                    label: 'نام کاربری'
-                },
-                password: {
-                    hint: 'گذرواژه را وارد نمایید',
+                new_password: {
+                    hint: 'گذرواژه جدید را وارد نمایید',
                     label: 'گذرواژه'
+                },
+                repeat_password: {
+                    hint: 'گذرواژه جدید را تکرار نمایید',
+                    label: 'تکرار گذرواژه'
                 }
             }
         },
         methods: {
-            login(e) {
-
-                if (this.user.username.length > 0 && this.user.password.length > 0) {
-                    if (this.loading) return;
-                    this.loading = true;
-                    this.error = null;
-                    this.$store.dispatch("login", {username: this.user.username, password: this.user.password})
-                        .then(res => {
-                            this.loading = false;
-                            this.$router.replace("/dashboard/general");
-                            this.$store.dispatch("showModal", false);
-
-                            this.$ga.event({
-                                eventCategory: "account",
-                                eventAction: "login"
-                            });
-                            this.$store.dispatch("TOGGLE_NAV", {data: 'halfSidebar', id: "sidebar"});
-
-                        })
-                        .catch(e => {
-                            this.loading = false;
-                            this.error = e;
-                        });
-                }
+            resetPassword() {
+                if (this.user.new_password !== this.user.repeat_password) return this.error = 'گذرواژه و تکرار گذرواژه شما یکسان نیست'
+                if(this.user.new_password === '' || this.user.repeat_password === '') return this.error = 'گذرواژه نباید خالی باشد'
+                if (this.loading) return
+                this.loading = true
+                this.error = null
+                this.$store.dispatch('resetPassword', this.user).then(response => {
+                    this.loading = false
+                    this.$router.push({path: '/'})
+                    this.message = response.message
+                }).catch(e => {
+                    this.loading = false
+                    this.error = e
+                })
             }
         }
+
     }
 </script>
 
@@ -168,6 +155,7 @@
         @media only screen and (max-width 992px)
             img
                 width 48px
+
             p
                 font-size 1.7em
 
@@ -283,6 +271,7 @@
             margin-right: auto;
             margin-top: 12px;
             justify-content: center
+
             a
                 font-family: iran-yekan;
                 font-size: .9em;
@@ -317,5 +306,16 @@
             margin-top 32px
             margin-right auto
             margin-left auto
+
+    .recovery-error
+        font-size 1.2em
+        font-family iran-yekan
+        width 100%
+        padding-right 16px
+        padding-left 16px
+        text-align center
+        margin-top 16px
+        margin-bottom 16px
+        color #fd3259
 
 </style>

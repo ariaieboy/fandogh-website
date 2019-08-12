@@ -1,21 +1,17 @@
 <template>
     <div style="background-image: linear-gradient(to bottom, #0045ff, #002380); min-height: 1000px">
         <div class="pod-container"></div>
-        <div class="recovery-container">
-            <vrecovery></vrecovery>
+        <div class="forgot-container">
+            <v-forgot-password></v-forgot-password>
         </div>
     </div>
 </template>
 
 <script>
-    import Recovery from '~/components/Auth/Recovery.vue'
-    import Vrecovery from "../../components/Auth/vrecovery";
-
+    import VForgotPassword from "../../components/Auth/vForgotPassword";
     export default {
-        components: {
-            Vrecovery,
-            Recovery
-        }
+        name: "forgot_password",
+        components: {VForgotPassword}
     }
 </script>
 
@@ -33,7 +29,7 @@
             background-size 100%
             height 200px
 
-    .recovery-container
+    .forgot-container
         width: 100%;
         height: 100%;
         min-height: 1000px;

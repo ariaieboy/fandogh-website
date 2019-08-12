@@ -6,39 +6,35 @@
             <p>سکوی ابری فندق</p>
         </div>
 
+        <div v-if="message" style="width: 100%; display: flex; flex-direction: column; margin-top: 48px; border-radius: 5px;
+        padding: 16px; margin-right: auto; margin-left: auto; max-width: 450px;outline: none;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); background-color: #ebefff;">
 
-        <div class="login-dialog-box container-fluid">
-            <p class="login-dialog-title">ورود به حساب کاربری</p>
+            <p style="font-family: iran-yekan; font-size: 1.4em; color: #333333; text-align: center;">{{message}}</p>
+            <button @click="$router.replace('/')" style="width: 300px; height: 45px; color: #fefefe; background: #0045ff;
+text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5px; margin-left: auto; margin-right: auto; margin-top: 32px">باشه</button>
+        </div>
+
+        <div v-else class="login-dialog-box container-fluid">
+            <p class="login-dialog-title">بازیابی گذرواژه</p>
 
             <v-text-field
                     style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
                     color="#0045ff"
                     type="text"
                     dir="ltr"
-                    :prepend-inner-icon="'person'"
-                    v-model="user.username"
-                    :hint="username.hint"
-                    :label="username.label">
+                    :prepend-inner-icon="'email'"
+                    v-model="user.identifier"
+                    :hint="identifier.hint"
+                    :label="identifier.label">
 
             </v-text-field>
 
-            <v-text-field
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
-                    color="#0045ff"
-                    type="text"
-                    dir="ltr"
-                    :type="show_pass ? 'text' : 'password'"
-                    browser-autocomplete="new-password"
-                    :prepend-inner-icon="'lock'"
-                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                    v-model="user.password"
-                    :hint="password.hint"
-                    @click:append="show_pass = !show_pass"
-                    :label="password.label">
+            <p class="forgot-error" v-html="error" v-if="error !== null"
+               :style="{display: error === null ?  'none' : 'unset'}"></p>
 
-            </v-text-field>
 
-            <button @click="login" class="login-dialog-button">ورود</button>
+            <button @click="recovery" class="login-dialog-button">تایید</button>
 
 
             <v-progress-linear
@@ -51,15 +47,14 @@
                 <div class="register-section-line"></div>
                 <div class="register-section-container">
                     <span style="font-family: iran-yekan; font-size: 1.1em; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: left; color: #707070;">
-                        از اینجا
-                        <span @click="$router.replace('/user/register')" style="cursor: pointer; color: #0045ff">ثبت‌نام</span>
-                        کنید
+                        <span @click="$router.replace('/user/register')" style="cursor: pointer; color: #0045ff">ثبت‌نام کنید</span>
+                        یا
+                        <span @click="$router.replace('/user/login')"
+                              style="cursor: pointer; color: #0045ff">وارد شوید</span>
                     </span>
                 </div>
             </div>
         </div>
-
-        <p @click="$router.push('/user/forgot_password')" class="forgot-pass-button">فراموشی گذرواژه</p>
 
         <div class="bottom-info-container">
 
@@ -75,53 +70,35 @@
 </template>
 
 <script>
-    import 'vuetify/dist/vuetify.min.css';
-
     export default {
-        name: "vlogin",
+        name: "vForgotPassword",
         data() {
             return {
                 loading: false,
                 show_pass: false,
                 error: null,
                 user: {
-                    username: '',
-                    password: ''
+                    identifier: ''
                 },
-                username: {
-                    hint: 'نام کاربری را وارد نمایید',
-                    label: 'نام کاربری'
-                },
-                password: {
-                    hint: 'گذرواژه را وارد نمایید',
-                    label: 'گذرواژه'
+                identifier: {
+                    hint: 'آدرس ایمیلی که با آن ثبت‌نام کرده‌اید را وارد کنید',
+                    label: 'آدرس ایمیل'
                 }
             }
         },
         methods: {
-            login(e) {
-
-                if (this.user.username.length > 0 && this.user.password.length > 0) {
+            recovery() {
+                if (this.user.identifier !== '') {
                     if (this.loading) return;
                     this.loading = true;
                     this.error = null;
-                    this.$store.dispatch("login", {username: this.user.username, password: this.user.password})
-                        .then(res => {
-                            this.loading = false;
-                            this.$router.replace("/dashboard/general");
-                            this.$store.dispatch("showModal", false);
-
-                            this.$ga.event({
-                                eventCategory: "account",
-                                eventAction: "login"
-                            });
-                            this.$store.dispatch("TOGGLE_NAV", {data: 'halfSidebar', id: "sidebar"});
-
-                        })
-                        .catch(e => {
-                            this.loading = false;
-                            this.error = e;
-                        });
+                    this.$store.dispatch('recoveryAccount', this.user).then(response => {
+                        this.loading = false
+                        this.message = response.message
+                    }).catch(e => {
+                        this.loading = false
+                        this.error = ErrorReporter(e, this.$data)
+                    })
                 }
             }
         }
@@ -168,6 +145,7 @@
         @media only screen and (max-width 992px)
             img
                 width 48px
+
             p
                 font-size 1.7em
 
@@ -241,21 +219,6 @@
             display flex
             justify-content center
 
-    .forgot-pass-button
-        font-family: iran-yekan;
-        font-size: 1em
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.72;
-        letter-spacing: normal;
-        text-align: center;
-        color: #fefefe;
-        width 100%
-        margin-top 32px
-        padding-left 16px
-        padding-right 16px
-        cursor pointer
 
     .bottom-info-container
         width 100%
@@ -283,6 +246,7 @@
             margin-right: auto;
             margin-top: 12px;
             justify-content: center
+
             a
                 font-family: iran-yekan;
                 font-size: .9em;
@@ -317,5 +281,16 @@
             margin-top 32px
             margin-right auto
             margin-left auto
+
+    .forgot-error
+        font-size 1.2em
+        font-family iran-yekan
+        width 100%
+        padding-right 16px
+        padding-left 16px
+        text-align center
+        margin-top 16px
+        margin-bottom 16px
+        color #fd3259
 
 </style>
