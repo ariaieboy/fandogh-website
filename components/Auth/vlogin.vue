@@ -52,7 +52,7 @@
                 <div class="register-section-container">
                     <span style="font-family: iran-yekan; font-size: 1.1em; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: left; color: #707070;">
                         از اینجا
-                        <span style="cursor: pointer; color: #0045ff">ثبت‌نام</span>
+                        <span @click="$router.replace('/user/register')" style="cursor: pointer; color: #0045ff">ثبت‌نام</span>
                         کنید
                     </span>
                 </div>
@@ -83,6 +83,7 @@
             return {
                 loading: false,
                 show_pass: false,
+                error: null,
                 user: {
                     username: '',
                     password: ''
@@ -295,9 +296,11 @@
                 letter-spacing: normal;
                 text-align: center;
                 color: #8d8d8d;
+                transition all 0.2s ease-in-out
 
             a:hover
-                color #fefefe
+                color #00ffff
+                transition all 0.2s ease-in-out
 
         p.ownership-right
             font-family: iran-yekan;

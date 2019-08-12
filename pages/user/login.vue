@@ -17,7 +17,7 @@
             Login
         },
         mounted() {
-            // this.$store.dispatch('logout')
+            this.$store.dispatch('logout')
         }
     }
 </script>

@@ -18,19 +18,17 @@
                 </div>
 
                 <div v-if="error.statusCode === 404" class="error-action-container">
+
                     <div class="line">
 
                     </div>
+
                     <div class="row" style="display: flex; justify-content: center">
-                        <nuxt-link class="button" to="/">
-                            صفحه اصلی
-                        </nuxt-link>
-                        <a class="button" href="https://docs.fandogh.cloud" target="_self">
-                            مستندات
-                        </a>
-                        <a class="button" href="https://blog.fandogh.cloud" target="_self">
-                            وبلاگ
-                        </a>
+
+                        <nuxt-link class="button" to="/">صفحه اصلی</nuxt-link>
+                        <a class="button" href="https://docs.fandogh.cloud" target="_self">مستندات</a>
+                        <a class="button" href="https://blog.fandogh.cloud" target="_self">وبلاگ</a>
+
                     </div>
 
                 </div>
@@ -139,7 +137,9 @@
         margin-left: 8px;
         margin-right: 8px;
         color: rgba(254, 254, 254, 0.7)
+        transition all 0.2s ease-in-out
 
     .button:hover
-        color #fefefe
+        color #00ffff
+        transition all 0.2s ease-in-out
 </style>
