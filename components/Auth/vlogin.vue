@@ -11,7 +11,7 @@
             <p class="login-dialog-title">ورود به حساب کاربری</p>
 
             <v-text-field
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;"
+                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
                     color="#0045ff"
                     type="text"
                     dir="ltr"
@@ -23,7 +23,7 @@
             </v-text-field>
 
             <v-text-field
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto"
+                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
                     color="#0045ff"
                     type="text"
                     dir="ltr"
@@ -40,6 +40,13 @@
 
             <button @click="login" class="login-dialog-button">ورود</button>
 
+
+            <v-progress-linear
+                    style="margin: 0; height: 5px;"
+                    indeterminate
+                    :active="loading"
+                    color="rgba(0,255,255, 0.7) rgba(0,255,255, 1)"
+            ></v-progress-linear>
             <div class="register-section">
                 <div class="register-section-line"></div>
                 <div class="register-section-container">
@@ -74,6 +81,7 @@
         name: "vlogin",
         data() {
             return {
+                loading: false,
                 show_pass: false,
                 user: {
                     username: '',
@@ -91,14 +99,15 @@
         },
         methods: {
             login(e) {
-                if (this.loading) return;
-                this.loading = true;
-                this.error = null;
+
                 if (this.user.username.length > 0 && this.user.password.length > 0) {
+                    if (this.loading) return;
+                    this.loading = true;
+                    this.error = null;
                     this.$store.dispatch("login", {username: this.user.username, password: this.user.password})
                         .then(res => {
                             this.loading = false;
-                            this.$router.push("/dashboard/general");
+                            this.$router.replace("/dashboard/general");
                             this.$store.dispatch("showModal", false);
 
                             this.$ga.event({
@@ -135,6 +144,8 @@
         flex-direction column
         margin-top 60px
         padding 16px
+        @media only screen and (max-width 992px)
+            margin-top 32px
 
         img
             width 64px
@@ -156,7 +167,6 @@
         @media only screen and (max-width 992px)
             img
                 width 48px
-
             p
                 font-size 1.7em
 
@@ -168,6 +178,8 @@
         background-color #fefefe
         display flex
         flex-direction column
+        @media only screen and (max-width 451px)
+            border-radius 0
 
         p.login-dialog-title
             padding 24px 16px 40px 16px
@@ -190,7 +202,7 @@
             margin-bottom 32px
             margin-left auto
             margin-right auto
-            max-width 340px
+            max-width 375px
             border-radius 5px
             background-color #0045ff
             font-family: iran-yekan
@@ -215,6 +227,8 @@
         background #ebefff
         border-bottom-left-radius 5px
         border-bottom-right-radius 5px
+        @media only screen and (max-width 451px)
+            border-radius 0
 
         div.register-section-line
             width 100%
@@ -247,6 +261,8 @@
         margin-top 80px
         display flex
         flex-direction column
+        @media only screen and (max-width 451px)
+            margin-top 16px
 
         div.info-line
             width 100%
