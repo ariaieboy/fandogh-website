@@ -12,6 +12,7 @@
 
 
             <v-text-field
+                    ref="username"
                     style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
                     color="#0045ff"
                     type="text"
@@ -24,10 +25,11 @@
             </v-text-field>
 
             <v-text-field
+                    ref="password"
                     style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
                     color="#0045ff"
                     type="text"
-                    dir="ltr"
+                    dir="rtl"
                     :type="show_pass ? 'text' : 'password'"
                     browser-autocomplete="new-password"
                     :prepend-inner-icon="'lock'"
@@ -128,6 +130,10 @@
                         });
                 }
             }
+        },
+        mounted() {
+            this.$refs.password.focus()
+            this.$refs.username.focus()
         }
     }
 </script>
@@ -335,6 +341,7 @@
         margin-bottom 16px
         color #fd3259
 </style>
+
 <style lang="stylus">
     .v-label {
         margin-right: 0 !important;
