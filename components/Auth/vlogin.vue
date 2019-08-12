@@ -23,7 +23,7 @@
             </v-text-field>
 
             <v-text-field
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
+                    style="font-family: iran-yekan; width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
                     color="#0045ff"
                     type="text"
                     dir="ltr"
@@ -37,6 +37,9 @@
                     :label="password.label">
 
             </v-text-field>
+
+            <p class="recovery-error" v-html="error" v-if="error !== null"
+               :style="{display: error === null ?  'none' : 'unset'}"></p>
 
             <button @click="login" class="login-dialog-button">ورود</button>
 
@@ -109,8 +112,6 @@
                         .then(res => {
                             this.loading = false;
                             this.$router.replace("/dashboard/general");
-                            this.$store.dispatch("showModal", false);
-
                             this.$ga.event({
                                 eventCategory: "account",
                                 eventAction: "login"
@@ -318,4 +319,14 @@
             margin-right auto
             margin-left auto
 
+    .login-error
+        font-size 1.2em
+        font-family iran-yekan
+        width 100%
+        padding-right 16px
+        padding-left 16px
+        text-align center
+        margin-top 16px
+        margin-bottom 16px
+        color #fd3259
 </style>
