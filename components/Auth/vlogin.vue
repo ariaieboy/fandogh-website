@@ -13,7 +13,7 @@
             <div style="width: 100%; display: flex">
 
                 <v-text-field
-                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
+                        style="font-family: iran-yekan !important;width: 100% !important; font-size: 1em !important; padding-left: 0 !important; max-width: 375px !important; margin-left: auto !important; margin-right: auto !important;"
                         color="#0045ff"
                         type="text"
                         dir="ltr"
