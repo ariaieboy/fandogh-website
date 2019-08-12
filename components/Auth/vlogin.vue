@@ -23,7 +23,6 @@
                                 v-model="user.username"
                                 :hint="username.hint"
                                 :label="username.label">
-
                         </v-text-field>
                     </div>
 
