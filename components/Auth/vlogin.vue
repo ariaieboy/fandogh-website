@@ -336,3 +336,107 @@
         margin-bottom 16px
         color #fd3259
 </style>
+<style lang="stylus">
+    .v-label {
+        margin-right: 0 !important;
+        align-self: start !important;
+        right: auto !important;
+        left: auto !important;
+        background: #fefefe !important;
+        width: fit-content !important;
+        padding: 0 8px !important;
+        float: right !important;
+    }
+
+    .v-text-field__slot
+        align-items: end !important;
+        height: 38px !important;
+
+
+    .v-text-field
+        input
+            flex: 0 1 auto !important;
+            line-height: 38px !important;
+            height: 38px !important;
+            max-height 38px !important
+            padding: 5px 20px !important;
+            text-align left !important
+            cursor revert !important
+            max-width: 100%;
+            min-width: 0;
+            width: 100%
+
+
+    .v-label {
+        vertical-align: middle !important;
+    }
+
+    /*.v-input--is-focused{*/
+    /*left: auto !important;*/
+    /*}*/
+
+    .application--is-rtl .v-text-field .v-label {
+        -webkit-transform-origin: none !important;
+        transform-origin: none !important
+    }
+
+    .v-label {
+        font-size: 16px;
+        line-height: 1 !important;
+        min-height: 8px;
+        transition: .3s cubic-bezier(.25, .8, .5, 1)
+    }
+
+    .application--is-rtl .v-text-field .v-label {
+        -webkit-transform-origin: top right;
+        transform-origin: top right;
+    }
+
+    .application--is-rtl .v-text-field .v-counter {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .application--is-rtl .v-text-field--enclosed .v-input__append-outer {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+
+    .v-text-field > .v-input__control > .v-input__slot:after, .v-text-field > .v-input__control > .v-input__slot:before
+        bottom: -1px;
+        content: "";
+        position: absolute;
+        transition: .3s cubic-bezier(.25, .8, .5, 1) !important;
+        width: 100%
+
+
+    .v-text-field .v-label {
+        max-width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        top: 7px;
+        -webkit-transform-origin: top right !important;
+        transform-origin: top right !important;
+        white-space: nowrap;
+        margin-right 0 !important;
+        pointer-events: none
+    }
+
+    .v-messages {
+        flex: 1 1 auto;
+        font-size: .7em !important;
+        min-height: 12px;
+        vertical-align middle !important;
+        min-width: 1px;
+        line-height 1 !important
+        text-align right || center !important;
+        position: relative
+        margin-top -2px !important
+    }
+
+    .v-counter
+        font-family iran-sans !important
+        direction ltr !important
+        margin-top 2px !important
+</style>
