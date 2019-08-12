@@ -10,17 +10,20 @@
         <div class="login-dialog-box container-fluid">
             <p class="login-dialog-title">ورود به حساب کاربری</p>
 
-            <v-text-field
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
-                    color="#0045ff"
-                    type="text"
-                    dir="ltr"
-                    :prepend-inner-icon="'person'"
-                    v-model="user.username"
-                    :hint="username.hint"
-                    :label="username.label">
+            <div style="width: 100%; display: flex">
 
-            </v-text-field>
+                <v-text-field
+                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
+                        color="#0045ff"
+                        type="text"
+                        dir="ltr"
+                        :prepend-inner-icon="'person'"
+                        v-model="user.username"
+                        :hint="username.hint"
+                        :label="username.label">
+
+                </v-text-field>
+            </div>
 
             <v-text-field
                     style="font-family: iran-yekan; width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
@@ -55,7 +58,8 @@
                 <div class="register-section-container">
                     <span style="font-family: iran-yekan; font-size: 1.1em; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.75; letter-spacing: normal; text-align: left; color: #707070;">
                         از اینجا
-                        <span @click="$router.replace('/user/register')" style="cursor: pointer; color: #0045ff">ثبت‌نام</span>
+                        <span @click="$router.replace('/user/register')"
+                              style="cursor: pointer; color: #0045ff">ثبت‌نام</span>
                         کنید
                     </span>
                 </div>
@@ -169,6 +173,7 @@
         @media only screen and (max-width 992px)
             img
                 width 48px
+
             p
                 font-size 1.7em
 
@@ -284,6 +289,7 @@
             margin-right: auto;
             margin-top: 12px;
             justify-content: center
+
             a
                 font-family: iran-yekan;
                 font-size: .9em;
