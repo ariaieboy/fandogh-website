@@ -10,8 +10,11 @@
 <script>
     import Login from '~/components/Auth/Login.vue'
     import Vlogin from "../../components/Auth/vlogin";
+    import 'vuetify/dist/vuetify.min.css';
+
 
     export default {
+        layout: 'default',
         components: {
             Vlogin,
             Login
