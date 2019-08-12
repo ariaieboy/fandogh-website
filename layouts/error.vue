@@ -30,7 +30,7 @@
 
                 </div>
 
-                <div class="row" style="display: flex; justify-content: center">
+                <div class="row" style="display: flex; justify-content: center; margin-left: 0; margin-right: 0">
 
                     <nuxt-link class="button" to="/">صفحه اصلی</nuxt-link>
                     <a class="button" href="https://docs.fandogh.cloud" target="_self">مستندات</a>
