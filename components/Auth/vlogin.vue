@@ -9,40 +9,35 @@
 
         <div class="login-dialog-box container-fluid">
             <p class="login-dialog-title">ورود به حساب کاربری</p>
-            <div dir="rtl" class="row" style="padding: 0 16px; display: flex; flex-direction: row; box-sizing: padding-box; width: 100%; margin-right: 0; margin-left: 0">
-                <form style="padding: 0;" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                    <div style="width: 100%; display: flex">
 
-                        <v-text-field
-                                style="font-family: iran-yekan !important; font-size: 1em !important; padding-left: 0 !important; margin-left: 32px !important; margin-right: 32px !important;"
-                                color="#0045ff"
-                                type="text"
-                                dir="ltr"
-                                :prepend-inner-icon="'person'"
-                                v-model="user.username"
-                                :hint="username.hint"
-                                :label="username.label">
-                        </v-text-field>
-                    </div>
+            <v-text-field
+                    style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
+                    color="#0045ff"
+                    type="text"
+                    dir="rtl"
+                    :prepend-inner-icon="'person'"
+                    v-model="user.username"
+                    :hint="username.hint"
+                    :label="username.label">
 
-                    <v-text-field
-                            style="font-family: iran-yekan; font-size: 1em; padding-left: 0; margin-left: 32px !important; margin-right: 32px !important;"
-                            color="#0045ff"
-                            type="text"
-                            dir="ltr"
-                            :type="show_pass ? 'text' : 'password'"
-                            browser-autocomplete="new-password"
-                            :prepend-inner-icon="'lock'"
-                            :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                            v-model="user.password"
-                            :hint="password.hint"
-                            @click:append="show_pass = !show_pass"
-                            :label="password.label">
+            </v-text-field>
 
-                    </v-text-field>
-                </form>
-            </div>
+            <v-text-field
+                    style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
+                    color="#0045ff"
+                    type="text"
+                    dir="ltr"
+                    :type="show_pass ? 'text' : 'password'"
+                    browser-autocomplete="new-password"
+                    :prepend-inner-icon="'lock'"
+                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                    v-model="user.password"
+                    :hint="password.hint"
+                    @click:append="show_pass = !show_pass"
+                    :label="password.label">
+
+            </v-text-field>
 
             <p class="recovery-error" v-html="error" v-if="error !== null"
                :style="{display: error === null ?  'none' : 'unset'}"></p>
