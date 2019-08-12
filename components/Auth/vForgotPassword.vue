@@ -23,7 +23,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
                     style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
                     color="#0045ff"
                     type="text"
-                    dir="ltr"
+                    dir="rtl"
                     :prepend-inner-icon="'email'"
                     v-model="user.identifier"
                     :hint="identifier.hint"
