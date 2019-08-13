@@ -4,7 +4,7 @@
             <nav class="header-container" :class="{'no-fixed': noFixed, 'header-dashboard': dashboard}">
                 <div class="right-menu">
                     <div class="menu">
-                        <a href="#">
+                        <a>
                             <img class="nev-button" @click="toggleSideBar('navbar')" alt="hamburger button"
                                  :src="require('../../assets/svg/ic_hamburger.svg')">
                         </a>
@@ -42,15 +42,10 @@
                     </div>
                 </div>
                 <div class="user" v-if="!loggedIn">
-                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none"
-                            @click="$router.push('/user/login')">ورود
-                    </button>
+                    <button class="nav-action-button" @click="$router.push('/user/login')">ورود</button>
                 </div>
                 <div class="user" v-else>
-                    <button @click="$router.push('/dashboard')"
-                            style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none">
-                        داشبورد
-                    </button>
+                    <button @click="$router.push('/dashboard')" class="nav-action-button">داشبورد</button>
                 </div>
                 <!-- <div v-if="loggedIn" class="profile">
                   <a href="#" @click.prevent="toggleMenu(null)">
@@ -61,9 +56,10 @@
 
             <login ref="login"/>
             <register ref="register"/>
+            <sidebar ref="menu"/>
             <message ref="message"/>
         </header>
-        <sidebar ref="menu"/>
+
         <div id="sub_menu" ref="sub_menu" class="sub_menu">
             <div class="menu_section">
                 <p>سرویس‌های مدیریت شده</p>
@@ -182,7 +178,7 @@
                         <div style="width: 100%; display: flex; direction: ltr; height: max-content; flex-direction: column">
                             <div style="display: flex; width: 100%">
                                 <img src="../../assets/svg/services/other_services/developer_tools.svg"
-                                     style="margin-top: 0">
+                                     style="margin-top: 0; filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
                                 <p style="flex: 1; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin-top: auto; margin-bottom: auto; padding-left: 12px;">
                                     Developer Tools</p>
                             </div>
@@ -200,7 +196,7 @@
                         <div style="width: 100%; display: flex; direction: ltr; height: max-content; flex-direction: column">
                             <div style="display: flex; width: 100%">
                                 <img src="../../assets/svg/services/other_services/object-storage.svg"
-                                     style="margin-top: 0">
+                                     style="margin-top: 0; filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
                                 <p style="flex: 1; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin-top: auto; margin-bottom: auto; padding-left: 12px;">
                                     Object Storage</p>
                             </div>
@@ -217,7 +213,7 @@
                         <div style="width: 100%; display: flex; direction: ltr; height: max-content; flex-direction: column">
                             <div style="display: flex; width: 100%">
                                 <img src="../../assets/svg/services/other_services/operation_tools.svg"
-                                     style="margin-top: 0">
+                                     style="margin-top: 0; filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
                                 <p style="flex: 1; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin-top: auto; margin-bottom: auto; padding-left: 12px;">
                                     Operation Tools</p>
                             </div>
@@ -631,5 +627,21 @@
         header
             .user .btn-exit
                 display none
+
+    .nav-action-button
+        padding: 8px 16px
+        color: #fefefe
+        font-size: 1em
+        font-family: iran-yekan
+        border-radius: 15px
+        border: 1px solid #fefefe
+        min-width: 100px
+        outline: none
+        transition all .2s ease-in-out
+
+    .nav-action-button:hover
+        background #fefefe
+        color #0045ff
+        transition all .2s ease-in-out
 </style>
 
