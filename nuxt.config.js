@@ -7,7 +7,7 @@ module.exports = {
      */
 
     loading: {
-        color: "#080295",
+        color: "#0045ff",
         height: "5px"
     },
     env: {
