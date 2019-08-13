@@ -238,15 +238,14 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
             },
             register() {
                 if (this.validateInputs()) {
-                    if (this.loading) return
-                    this.loading = true
-                    this.error = null
-                    console.log(this.user)
+                    if (this.loading) return;
+                    this.loading = true;
+                    this.error = null;
                     this.$store.dispatch('register', this.user).then(response => {
-                        this.loading = false
+                        this.loading = false;
                         this.message = response.message
                     }).catch(error => {
-                        this.loading = false
+                        this.loading = false;
                         this.error = ErrorReporter(error, this.$data)
                     })
                 }

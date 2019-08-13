@@ -1,11 +1,12 @@
 <template>
     <div class="toolbar-container">
-        <header>
+        <header style="display: flex; justify-content: center">
             <nav class="header-container" :class="{'no-fixed': noFixed, 'header-dashboard': dashboard}">
                 <div class="right-menu">
                     <div class="menu">
-                        <a  href="#" >
-                            <img class="nev-button" @click="toggleMenu" alt="hamburger button" :src="require('../../assets/svg/ic_hamburger.svg')">
+                        <a href="#">
+                            <img class="nev-button" @click="toggleSideBar('navbar')" alt="hamburger button"
+                                 :src="require('../../assets/svg/ic_hamburger.svg')">
                         </a>
                     </div>
                     <div class="logo" style="display: flex">
@@ -41,13 +42,15 @@
                     </div>
                 </div>
                 <div class="user" v-if="!loggedIn">
-                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none" @click="$router.push('/user/login')">ورود</button>
-                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none" @click="$router.push('/user/register')">ثبت نام</button>
+                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none"
+                            @click="$router.push('/user/login')">ورود
+                    </button>
                 </div>
                 <div class="user" v-else>
-                    <button style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none" @click="exit">خروج</button>
-                    <!--<f-button @onClick="$router.push('/dashboard/images')" styles="transparent border" > داشبورد </f-button>-->
-                    <button @click="$router.push('/dashboard')" style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none">داشبورد</button>
+                    <button @click="$router.push('/dashboard')"
+                            style="padding: 8px 16px; color: #fefefe; font-size: 1em; font-family: iran-yekan; border-radius: 15px; border: 1px solid #fefefe; min-width: 100px; outline: none">
+                        داشبورد
+                    </button>
                 </div>
                 <!-- <div v-if="loggedIn" class="profile">
                   <a href="#" @click.prevent="toggleMenu(null)">
@@ -55,17 +58,19 @@
                   </a>
                 </div>-->
             </nav>
+
             <login ref="login"/>
             <register ref="register"/>
             <message ref="message"/>
         </header>
-
+        <sidebar ref="menu"/>
         <div id="sub_menu" ref="sub_menu" class="sub_menu">
             <div class="menu_section">
                 <p>سرویس‌های مدیریت شده</p>
                 <div class="horiz_line"></div>
                 <div class="row" style="width: 100%; margin: 0;">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: flex; flex-direction: column; height: 100%">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"
+                         style="display: flex; flex-direction: column; height: 100%">
                         <a class="managed-service"
                            href="https://docs.fandogh.cloud/docs/mysql-managed-service.html" target="_blank">
                             <img src="../../assets/svg/services/managed/managed_service_mysql.svg"
@@ -87,7 +92,8 @@
                         </a>
 
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"  style="display: flex; flex-direction: column; height: 100%">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"
+                         style="display: flex; flex-direction: column; height: 100%">
 
                         <a class="managed-service"
                            href="https://docs.fandogh.cloud/docs/proxy-managed-service.html" target="_blank">
@@ -113,7 +119,8 @@
                     </div>
                 </div>
 
-                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده همه</a>
+                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده
+                    همه</a>
 
             </div>
             <div class="vertical_line"></div>
@@ -122,35 +129,46 @@
                 <div class="horiz_line"></div>
 
                 <div class="row" style="width: 100%;">
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-spring-boot.html" target="_blank">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/java_lang.svg"/>
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-spring-boot.html"
+                       target="_blank">
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
+                             src="../../assets/svg/services/language/java_lang.svg"/>
                         <p>Java</p>
                     </a>
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-django.html" target="_blank">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/python_lang.svg"/>
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-django.html"
+                       target="_blank">
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
+                             src="../../assets/svg/services/language/python_lang.svg"/>
                         <p>Python</p>
                     </a>
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-nodejs.html" target="_blank">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/nodejs_lang.svg"/>
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-nodejs.html"
+                       target="_blank">
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
+                             src="../../assets/svg/services/language/nodejs_lang.svg"/>
                         <p>Node.js</p>
                     </a>
 
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-laravel.html" target="_blank">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/laravel_lang.svg"/>
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-laravel.html"
+                       target="_blank">
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
+                             src="../../assets/svg/services/language/laravel_lang.svg"/>
                         <p>Laravel</p>
                     </a>
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-aspnetcore.html" target="_blank" style="margin-left: auto">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)" src="../../assets/svg/services/language/net_core_lang.svg"/>
+                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-aspnetcore.html"
+                       target="_blank" style="margin-left: auto">
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
+                             src="../../assets/svg/services/language/net_core_lang.svg"/>
                         <p>ASP.Net Core</p>
                     </a>
 
                 </div>
 
-                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده همه</a>
+                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده
+                    همه</a>
 
             </div>
             <div class="vertical_line"></div>
@@ -212,10 +230,13 @@
 
                 </div>
 
-                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده همه</a>
+                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده
+                    همه</a>
 
             </div>
         </div>
+
+
     </div>
 
 </template>
@@ -285,8 +306,11 @@
             }
         },
         methods: {
+            toggleSideBar(type) {
+                this.$store.dispatch("TOGGLE_NAV", {data: type, id: "sidebar"});
+            },
             toggleMenu() {
-                // this.$store.dispatch("TOGGLE_NAV", {data: type, id: "sidebar"});
+
 
                 if (this.$refs.sub_menu.style.visibility === 'hidden') {
                     this.$refs.sub_menu.style.opacity = '100';
@@ -316,7 +340,7 @@
                             eventValue: getValue("username")
                         });
                         this.$store.dispatch("logout");
-                        this.$router.push("/user/login");
+                        this.$router.replace("/");
                     }
                 );
 
@@ -349,6 +373,7 @@
         visibility hidden
         opacity 0
         transition all 0.2s ease-in-out
+
         div.vertical_line
             width 1px
             border solid 1px #e8e8e8
@@ -367,7 +392,6 @@
             box-shadow 0 3px 15px 2px rgba(0, 0, 0, 0.25)
             margin-left auto
             margin-right auto
-
 
 
     .logo-span
@@ -390,12 +414,14 @@
         flex 1
         display flex
         flex-direction column
+
         div.horiz_line
             width 100%
             height 0
             border 1px solid #0045ff
             border-radius 25px
             display none
+
         p
             font-family iran-yekan
             font-size 1.2em
@@ -407,6 +433,7 @@
             color #3c3c3c
             margin-top 12px
             margin-bottom 8px
+
         a.button
             cursor pointer
             width 100%
@@ -423,8 +450,10 @@
         @media only screen and (max-width: 1230px)
             div.horiz_line
                 display unset
+
             p
                 text-align right
+
             a.button
                 text-align left
 
@@ -434,6 +463,7 @@
         flex-direction column
         width 33%
         padding-top 16px
+
         p
             margin-top: 12px;
             font-family: 'Helvetica Neue';
@@ -462,10 +492,12 @@
         display flex
         cursor pointer
         padding-top 16px
+
         img
             display unset
             @media only screen and (max-width: 1230px)
                 display none
+
         p.english_title
             font-family 'Helvetica Neue'
             font-size 1.1em
@@ -495,6 +527,7 @@
     .managed-service:hover
         p.english_title
             color #0045ff
+
         p.english_subtitle
             color #0045ff
 
