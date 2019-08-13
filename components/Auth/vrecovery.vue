@@ -16,6 +16,8 @@
                     color="#0045ff"
                     type="text"
                     dir="rtl"
+                    :rules="[rules.password_required]"
+                    required
                     :type="show_pass ? 'text' : 'password'"
                     browser-autocomplete="new-password"
                     :prepend-inner-icon="'lock'"
@@ -33,6 +35,8 @@
                     color="#0045ff"
                     type="text"
                     dir="rtl"
+                    :rules="[rules.repeat_password_required]"
+                    required
                     :type="show_pass ? 'text' : 'password'"
                     browser-autocomplete="new-password"
                     :prepend-inner-icon="'lock'"
@@ -77,6 +81,11 @@
         name: "vrecovery",
         data() {
             return {
+                rules: {
+                    password_required: value => value !== '' || 'گذرواژه را وارد نکرده‌اید',
+                    repeat_password_required: value => value !== '' || 'تکرار گذرواژه را وارد نکرده‌اید',
+
+                },
                 loading: false,
                 show_pass: false,
                 error: null,
@@ -97,20 +106,34 @@
             }
         },
         methods: {
+            validateInputs() {
+
+                if (this.rules.password_required(this.user.new_password) !== true) {
+                    this.$refs.new_password.focus()
+                    return false
+                } else if (this.rules.repeat_password_required(this.user.repeat_password) !== true) {
+                    this.$refs.repeat_password.focus()
+                    return false
+                } else if (this.user.new_password !== this.user.repeat_password) {
+                    return this.error = 'گذرواژه و تکرار گذرواژه شما یکسان نیست'
+                } else {
+                    return true
+                }
+            },
             resetPassword() {
-                if (this.user.new_password !== this.user.repeat_password) return this.error = 'گذرواژه و تکرار گذرواژه شما یکسان نیست'
-                if(this.user.new_password === '' || this.user.repeat_password === '') return this.error = 'گذرواژه نباید خالی باشد'
-                if (this.loading) return
-                this.loading = true
-                this.error = null
-                this.$store.dispatch('resetPassword', this.user).then(response => {
-                    this.loading = false
-                    this.$router.push({path: '/'})
-                    this.message = response.message
-                }).catch(e => {
-                    this.loading = false
-                    this.error = e
-                })
+                if (this.validateInputs()) {
+                    if (this.loading) return;
+                    this.loading = true
+                    this.error = null
+                    this.$store.dispatch('resetPassword', this.user).then(response => {
+                        this.loading = false
+                        this.$router.push({path: '/'});
+                        this.message = response.message
+                    }).catch(e => {
+                        this.loading = false;
+                        this.error = e
+                    })
+                }
             }
         },
         mounted() {

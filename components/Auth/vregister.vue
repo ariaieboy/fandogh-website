@@ -7,7 +7,9 @@
                 {{message}}
             </p>
             <button @click="$router.replace('/user/login')" style="width: 300px; height: 45px; color: #fefefe; background: #0045ff;
-text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; border-radius: 5px; margin-left: auto; margin-right: auto; margin-top: 32px">باشه</button>
+text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; border-radius: 5px; margin-left: auto; margin-right: auto; margin-top: 32px">
+                باشه
+            </button>
         </div>
 
         <div v-else class="row register-box-inner-container">
@@ -35,7 +37,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                         <p class="register-feature-title">سکویی برای همه زبان‌ها</p>
 
                         <p class="register-feature-description">
-                            فرقی نمی‌کند که دانش داکر داشته باشید، ما تمام زبان‌های محبوب را پشتیبانی میکنیم تا کار شما آسان‌تر شود.
+                            فرقی نمی‌کند که دانش داکر داشته باشید، ما تمام زبان‌های محبوب را پشتیبانی میکنیم تا کار شما
+                            آسان‌تر شود.
                         </p>
 
                         <div></div>
@@ -66,6 +69,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                         color="#0045ff"
                         type="text"
                         dir="rtl"
+                        :rules="[rules.username_required]"
+                        required
                         v-model="user.username"
                         :hint="username.hint"
                         :label="username.label">
@@ -78,6 +83,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                         color="#0045ff"
                         type="text"
                         dir="rtl"
+                        :rules="[rules.password_required]"
+                        required
                         :type="show_pass ? 'text' : 'password'"
                         browser-autocomplete="new-password"
                         :append-icon="show_pass ? 'visibility_off' : 'visibility'"
@@ -94,6 +101,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                         color="#0045ff"
                         type="text"
                         dir="rtl"
+                        :rules="[rules.repeat_password_required]"
+                        required
                         :type="show_pass ? 'text' : 'password'"
                         browser-autocomplete="new-password"
                         :append-icon="show_pass ? 'visibility_off' : 'visibility'"
@@ -110,6 +119,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                         color="#0045ff"
                         type="text"
                         dir="rtl"
+                        :rules="[rules.email_required, rules.email_valid]"
+                        required
                         :type="'email'"
                         v-model="user.email"
                         :hint="email.hint"
@@ -123,6 +134,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                         color="#0045ff"
                         type="text"
                         dir="rtl"
+                        :rules="[rules.namespace_required]"
+                        required
                         :type="'text'"
                         v-model="user.namespace"
                         :hint="namespace.hint"
@@ -130,7 +143,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
 
                 </v-text-field>
 
-                <p class="register-error" v-html="error" v-if="error !== null" :style="{display: error === null ?  'none' : 'unset'}"></p>
+                <p class="register-error" v-html="error" v-if="error !== null"
+                   :style="{display: error === null ?  'none' : 'unset'}"></p>
 
                 <button @click="register" class="register-dialog-button">تایید ثبت‌نام</button>
 
@@ -158,6 +172,14 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
         data() {
             return {
 
+                rules: {
+                    username_required: value => value !== '' || 'نام کاربری نباید خالی باشد',
+                    email_required: value => value !== '' || 'آدرس ایمیل نباید خالی باشد',
+                    password_required: value => value !== '' || 'گذرواژه نباید خالی باشد',
+                    repeat_password: value => value !== '' || 'تکرار گذرواژه نباید خالی باشد',
+                    namespace_required: value => value !== '' || 'نام فضانام نباید خالی باشد',
+                    email_valid: value => Validation.email(value) || 'آدرس ایمیل وارد شده صحیح نیست'
+                },
                 show_pass: false,
                 loading: false,
                 error: null,
@@ -191,30 +213,52 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                 }
             }
         },
-        methods:{
-            register(){
-                if(this.user.password !== this.user.repeat_password) return this.error = 'رمز عبور و تکرار رمز عبور شما یکسان نیست'
-                if(!Validation.email(this.user.email)) return this.error = 'ایمیل وارد شده صحیح نیست'
-                if(this.loading) return
-                this.loading = true
-                this.error = null
-                console.log(this.user)
-                this.$store.dispatch('register', this.user).then( response => {
-                    this.loading = false
-                    this.message = response.message
-                }).catch(error => {
-                    this.loading = false
-                    this.error = ErrorReporter(error, this.$data)
-                })
+        methods: {
+            validateInputs() {
+
+                if (this.rules.username_required(this.user.username) !== true) {
+                    this.$refs.username.focus();
+                    return false
+                } else if (this.rules.password_required(this.user.password) !== true) {
+                    this.$refs.password.focus();
+                    return false
+                } else if (this.rules.repeat_password_required(this.user.repeat_password) !== true) {
+                    this.$refs.repeat_password.focus();
+                    return false
+                } else if (this.rules.email_required(this.user.email) !== true ||
+                    this.rules.email_valid(this.user.email) !== true) {
+                    this.$refs.email.focus();
+                    return false
+                } else if (this.rules.namespace_required(this.user.namespace) !== true) {
+                    this.$refs.namespace.focus();
+                    return false
+                } else {
+                    return true
+                }
+            },
+            register() {
+                if (this.validateInputs()) {
+                    if (this.loading) return
+                    this.loading = true
+                    this.error = null
+                    console.log(this.user)
+                    this.$store.dispatch('register', this.user).then(response => {
+                        this.loading = false
+                        this.message = response.message
+                    }).catch(error => {
+                        this.loading = false
+                        this.error = ErrorReporter(error, this.$data)
+                    })
+                }
             }
         },
         mounted() {
 
-            this.$refs.namespace.focus()
-            this.$refs.email.focus()
-            this.$refs.password.focus()
-            this.$refs.repeat_password.focus()
-            this.$refs.username.focus()
+            this.$refs.namespace.focus();
+            this.$refs.email.focus();
+            this.$refs.password.focus();
+            this.$refs.repeat_password.focus();
+            this.$refs.username.focus();
         }
     }
 </script>

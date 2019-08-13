@@ -12,7 +12,9 @@
 
             <p style="font-family: iran-yekan; font-size: 1.4em; color: #333333; text-align: center;">{{message}}</p>
             <button @click="$router.replace('/')" style="width: 300px; height: 45px; color: #fefefe; background: #0045ff;
-text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5px; margin-left: auto; margin-right: auto; margin-top: 32px">باشه</button>
+text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5px; margin-left: auto; margin-right: auto; margin-top: 32px">
+                باشه
+            </button>
         </div>
 
         <div v-else class="login-dialog-box container-fluid">
@@ -24,6 +26,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
                     color="#0045ff"
                     type="text"
                     dir="rtl"
+                    :rules="[rules.email_required]"
+                    required
                     :prepend-inner-icon="'email'"
                     v-model="user.identifier"
                     :hint="identifier.hint"
@@ -75,6 +79,9 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
         name: "vForgotPassword",
         data() {
             return {
+                rules: {
+                    email_required: value => value !== '' || 'آدرس ایمیل را وارد نکرده‌اید'
+                },
                 loading: false,
                 show_pass: false,
                 error: null,
@@ -89,8 +96,17 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
             }
         },
         methods: {
+            validateInput() {
+
+                if (this.rules.email_required(this.user.identifier) !== true) {
+                    this.$refs.identifier.focus();
+                    return false
+                } else {
+                    return true
+                }
+            },
             recovery() {
-                if (this.user.identifier !== '') {
+                if (this.validateInput()) {
                     if (this.loading) return;
                     this.loading = true;
                     this.error = null;
@@ -104,7 +120,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
                 }
             }
         },
-        mounted(){
+        mounted() {
             this.$refs.identifier.focus()
         }
     }
