@@ -17,6 +17,8 @@
                     color="#0045ff"
                     type="text"
                     dir="rtl"
+                    :rules="[rules.username_required]"
+                    required
                     :prepend-inner-icon="'person'"
                     v-model="user.username"
                     :hint="username.hint"
@@ -30,6 +32,8 @@
                     color="#0045ff"
                     type="text"
                     dir="rtl"
+                    :rules="[rules.password_required]"
+                    required
                     :type="show_pass ? 'text' : 'password'"
                     browser-autocomplete="new-password"
                     :prepend-inner-icon="'lock'"
@@ -89,6 +93,10 @@
         name: "vlogin",
         data() {
             return {
+                rules:{
+                    username_required: value => value !== '' || 'نام کاربری اجباری‌ است',
+                    password_required: value => value !== '' || 'گذروازه اجباری است',
+                },
                 loading: false,
                 show_pass: false,
                 error: null,
@@ -107,9 +115,25 @@
             }
         },
         methods: {
+            validateInputs(){
+
+                console.log(this.user.password)
+                console.log(this.user.username === '')
+
+                if(this.rules.username_required(this.user.username) !== true){
+                    this.$refs.username.focus();
+                    return false
+                } else if(this.rules.password_required(this.user.password) !== true){
+                    this.$refs.password.focus();
+                    return false
+                }else {
+                    return true
+                }
+
+            },
             login(e) {
 
-                if (this.user.username.length > 0 && this.user.password.length > 0) {
+                if (this.validateInputs()) {
                     if (this.loading) return;
                     this.loading = true;
                     this.error = null;
