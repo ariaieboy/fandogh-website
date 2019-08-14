@@ -72,7 +72,7 @@
             }
         }, computed: {
             volumes() {
-                let volumes = this.$store.state.volumes;
+                let volumes = this.$store.state.volumes === null ? [] : this.$store.state.volumes
                 if (volumes) {
                     return volumes.map(
                         ({age, capacity, name, mounted_to}) => {
