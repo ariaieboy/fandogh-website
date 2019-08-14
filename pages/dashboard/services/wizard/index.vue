@@ -26,7 +26,7 @@
                                 ref="name_selector"
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
-                                color="#0093ff"
+                                color="#0045ff"
                                 required
                                 :rules="[rules.counter, rules.required, rules.regex]"
                                 v-model="manifest_model.service.service_name.name"
@@ -44,7 +44,7 @@
 
                     <div style="display: flex; margin-top: 12px">
 
-                        <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px" color="#0093ff"
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px" color="#0045ff"
                                       dir="ltr"
                                       prefix="Mi"
                                       :rules="[rules.default_memory, rules.required]"
@@ -67,7 +67,7 @@
 
                     <div style="display: flex; margin-top: 12px">
                         <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       dir="ltr"
                                       :rules="[rules.required, rules.default_replica]"
                                       type="number"
@@ -94,7 +94,7 @@
                 <form class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding: 0;">
 
                     <div class="image-pull-policy-container">
-                        <span style="height: 35px; display: flex; margin-left: 12px; background-color: #0093ff; border-radius: 25px;">
+                        <span style="height: 35px; display: flex; margin-left: 12px; background-color: #0045ff; border-radius: 25px;">
                             <span style="line-height: 35px; font-size: 1em; margin-right: 12px;color: #fefefe; font-family: iran-yekan">Allow Http</span>
                             <popover class="popover-style" :tooltip="tooltips.allow_http"></popover>
                         </span>
@@ -111,7 +111,7 @@
                     <div style="display: flex;margin-top: 16px">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       v-model="manifest_model.service.path.dir"
@@ -128,7 +128,7 @@
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       :rules="[rules.valid_port]"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="number"
                                       min="1"
                                       dir="ltr"
@@ -351,8 +351,8 @@
     .vs__selected
         display flex !important
         align-items center !important
-        background-color rgba(41, 121, 255, .5) !important
-        border 1px solid #0093ff !important
+        background-color rgba(0, 69, 255, .5) !important
+        border 1px solid #0045ff !important
         border-radius 25px !important
         color #ffffff !important
         font-family iran-yekan !important
@@ -362,7 +362,7 @@
 
 
     .kind-button
-        border 1px solid #0093ff
+        border 1px solid #0045ff
         height 38px
         border-radius 3px
         display inline-flex
@@ -378,8 +378,8 @@
 
         &.is-active
             color #fefefe
-            box-shadow 0 3px 6px 0 rgba(41, 121, 255, 0.5)
-            background-color #0093ff
+            box-shadow 0 3px 6px 0 rgba(0, 69, 255, 0.5)
+            background-color #0045ff
             transition all .3s ease-in-out
 
     .image-pull-policy-container
@@ -425,8 +425,8 @@
     .vs__selected
         display flex !important
         align-items center !important
-        background-color rgba(41, 121, 255, .5) !important
-        border 1px solid #0093ff !important
+        background-color rgba(0, 69, 255, .5) !important
+        border 1px solid #0045ff !important
         border-radius 25px !important
         color #ffffff !important
         font-family iran-yekan !important

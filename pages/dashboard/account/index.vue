@@ -267,6 +267,8 @@
 
 <style lang="stylus" scoped>
 
+    @import '../../../assets/css/variables.styl'
+
     .box-checkbox
         display flex
         @media only screen and (max-width: 768px)
@@ -357,7 +359,7 @@
             display inline-flex
             padding 0
             margin-right -1px
-            background-color #2979ff
+            background-color $colorPrimary
             cursor pointer
 
             p

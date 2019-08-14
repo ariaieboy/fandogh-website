@@ -101,7 +101,7 @@
         font-size .9em
         font-family iran-yekan
         text-align center
-        background #2979FF
+        background #0045ff
         @media only screen and (max-width: 766px)
             font-size .8em
             line-height 28px
@@ -120,8 +120,8 @@
             text-overflow: ellipsis;
             overflow hidden
             white-space: nowrap
-            border-top 1px #0093ff solid
-            border-bottom 1px #0093ff solid
+            border-top 1px #0045ff solid
+            border-bottom 1px #0045ff solid
             font-size .9em
             padding-left 5px
             padding-right 5px
@@ -132,12 +132,12 @@
         td:last-child
             border-top-left-radius 3px
             border-bottom-left-radius 3px
-            border-left 1px #0093ff solid
+            border-left 1px #0045ff solid
 
         td:first-child
             border-top-right-radius 3px
             border-bottom-right-radius 3px
-            border-right 1px #0093ff solid
+            border-right 1px #0045ff solid
 
 
         td.more-button

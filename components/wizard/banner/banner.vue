@@ -23,7 +23,7 @@
     .banner
         margin 0
         border-radius 3px
-        background-color #2979FF
+        background-color #0045ff
         width 100%
         box-shadow 0 3px 6px 0 rgba(41, 121, 255, 0.4)
 

@@ -107,6 +107,8 @@
 
 <style scoped lang="stylus">
 
+    @import '../../../assets/css/variables.styl'
+
     .row-custom
         box-sizing: border-box;
         display: flex;

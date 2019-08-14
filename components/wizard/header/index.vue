@@ -4,10 +4,13 @@
 
     <div class="header-dashboard-logo">
       <router-link to="/">
-        <img src="./icons/fandogh logo.svg" alt="logo">
+        <img src="../../../assets/svg/ic-fandogh-mini.svg" alt="logo">
       </router-link>
     </div>
-    <f-avatar :items="list"/>
+    <div @click="$router.replace('/')" style="cursor: pointer; width: 100%; height: 100%; max-width: 150px; display: flex; background: #fd3259; padding: 0 16px;">
+          <p style="font-size: 1.2em; color: #fefefe; margin-top: auto; margin-bottom: auto;flex: 1; padding-left: 12px; font-weight: bold; text-align: center">انصراف</p>
+          <img src="./icons/turn-off.svg" width="24" height="24" style="filter: invert(100%); margin-top: auto; margin-bottom: auto">
+    </div>
   </div>
 </template>
 
@@ -76,7 +79,9 @@ export default {
   background-color $totalWhite
   font-size 14px
   &-logo
-    padding-right 30px
+    padding-right 24px
+    margin-left auto
     img
       width 24px
+      filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(158%)
 </style>

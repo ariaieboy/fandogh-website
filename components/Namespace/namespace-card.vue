@@ -5,7 +5,7 @@
                 <!--<img style="width: 1.4em; height: 1.4em; vertical-align: middle; justify-self: right"-->
                      <!--alt="delete-namespace"-->
                      <!--src="../../static/icons/ic_delete.svg"/>-->
-                <span style=" padding: 5px 8px; background-color: #2979ff; border-radius: 3px; color: #fefefe">{{(namespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</span>
+                <span style=" padding: 5px 8px; background-color: #0045ff; border-radius: 3px; color: #fefefe">{{(namespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</span>
             </div>
 
             <div class="text-container">
@@ -24,6 +24,8 @@
 </script>
 
 <style scoped lang="stylus">
+
+    @import '../../assets/css/variables.styl'
 
     .box
         display flex

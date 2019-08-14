@@ -10,7 +10,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       :disabled="true"
@@ -25,7 +25,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       :disabled="true"
@@ -41,7 +41,7 @@
 
                         <v-text-field
                                 style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
-                                color="#0093ff"
+                                color="#0045ff"
                                 type="text"
                                 dir="ltr"
                                 :rules="[rules.required]"
@@ -57,7 +57,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       :type="'password'"
@@ -75,7 +75,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       :rules="[rules.required, rules.url_regex]"

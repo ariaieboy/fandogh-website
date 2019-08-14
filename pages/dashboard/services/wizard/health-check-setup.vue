@@ -15,7 +15,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="number"
                                     dir="ltr"
                                     min
@@ -36,7 +36,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="number"
                                     dir="ltr"
                                     :rules="[rules.required, rules.min_value]"
@@ -56,7 +56,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="number"
                                     dir="ltr"
                                     min="1"
@@ -77,7 +77,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="text"
                                     dir="ltr"
                                     :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
@@ -96,7 +96,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="number"
                                     dir="ltr"
                                     :rules="[rules.required, rules.valid_port]"
@@ -127,7 +127,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     dir="ltr"
                                     type="number"
                                     :rules="[rules.required, rules.min_value]"
@@ -147,7 +147,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     dir="ltr"
                                     type="number"
                                     :rules="[rules.required, rules.min_value]"
@@ -168,7 +168,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="number"
                                     dir="ltr"
                                     min="1"
@@ -189,7 +189,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="text"
                                     dir="ltr"
                                     :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
@@ -208,7 +208,7 @@
                             <v-text-field
                                     ref="key"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     dir="ltr"
                                     type="number"
                                     :rules="[rules.required, rules.valid_port]"

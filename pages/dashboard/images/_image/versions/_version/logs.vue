@@ -120,7 +120,7 @@
         height 128px
         margin-top -24px
         margin-left 16px
-        filter invert(41%) sepia(59%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
+        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
         @media only screen and (max-width: 992px)
             width 64px
             height 64px

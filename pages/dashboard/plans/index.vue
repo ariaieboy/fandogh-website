@@ -39,7 +39,7 @@
                          style="display: block; float: right; position: relative;">
 
                         <p class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
-                           style="margin: 0;color: #2979ff; font-size: 0.9em">
+                           style="margin: 0;color: #0045ff; font-size: 0.9em">
                             به ازای هر گیگابایت رم٬ نیم هسته پردازنده به شما تعلق خواهد گرفت
                         </p>
 
@@ -198,7 +198,7 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p v-if="memory > 0.49" style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0">
+                                <p v-if="memory > 0.49" style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     {{memory}} گیگ
                                 </p>
                             </div>
@@ -222,7 +222,7 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p style="font-family: iran-sans; color: #2979ff; text-align: center; line-height: 2; margin: 0">
+                                <p style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     {{dedicatedVolume}} گیگ
                                 </p>
                             </div>
@@ -245,7 +245,7 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:</p>
 
-                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #2979ff; line-height: 2; margin: 0">
+                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #0045ff; line-height: 2; margin: 0">
                                     {{fixedTotal.toLocaleString()}}
                                 </p>
 
@@ -349,10 +349,10 @@
                     order: true,
                     process: true,
                     dotStyle: {backgroundColor: '#24d5d8', boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.17)'},
-                    railStyle: {backgroundColor: 'rgba(173, 173, 173, 0.3)', cursor: 'pointer'},
-                    processStyle: {backgroundImage: 'linear-gradient(to right, #2979ff, #24d5d8)'},
+                    railStyle: {backgroundColor: 'rgba(0, 69, 255, 0.4)', cursor: 'pointer'},
+                    processStyle: {backgroundColor: '#0045ff'},
                     labelStyle: {
-                        color: '#2979ff',
+                        color: '#0045ff',
                         fontFamily: 'iran-yekan',
                         fontWeight: 'bold',
                         letterSpacing: 'normal'
@@ -377,10 +377,10 @@
                     order: true,
                     process: true,
                     dotStyle: {backgroundColor: '#24d5d8', boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.17)'},
-                    railStyle: {backgroundColor: 'rgba(173, 173, 173, 0.3)', cursor: 'pointer'},
-                    processStyle: {backgroundImage: 'linear-gradient(to right, #2979ff, #24d5d8)'},
+                    railStyle: {backgroundColor: 'rgba(0, 69, 255, 0.4)', cursor: 'pointer'},
+                    processStyle: {backgroundColor: '#0045ff'},
                     labelStyle: {
-                        color: '#2979ff',
+                        color: '#0045ff',
                         fontFamily: 'iran-yekan',
                         fontWeight: 'bold',
                         letterSpacing: 'normal'
@@ -583,7 +583,7 @@
         line-height 32px
         margin auto
         letter-spacing normal
-        color #2979ff
+        color #0045ff
 
     .man-button
         border-radius 25px
@@ -612,6 +612,7 @@
         width 100%
         max-height min-content
         top 60px
+        height max-content
         bottom 20px
         margin-top 30px
         transition max-height 0.2s ease
@@ -669,7 +670,7 @@
         height 100%
         vertical-align center
         margin-left 12px
-        filter invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)
+        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 
     .plan-feature-title
         display inline-flex
@@ -693,7 +694,7 @@
         margin-top 26px
         max-height 100px
         height 70%
-        filter invert(60%) sepia(44%) saturate(4202%) hue-rotate(208deg) brightness(102%) contrast(101%)
+        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 
     .free-features-container
         box-sizing border-box
@@ -737,7 +738,7 @@
         margin-bottom 16px
 
         p
-            color #2979ff
+            color #0045ff
             font-family iran-yekan
             font-size 1em
             font-weight bold
@@ -746,7 +747,7 @@
 
     .checkout-section-title
         text-align center
-        background-color #2979ff
+        background-color #0045ff
         margin: 0
         padding-top 10px
         padding-bottom 10px
@@ -764,7 +765,7 @@
             height: 45px;
             width: 45px;
             display inline-flex
-            background-color: #2979ff;
+            background-color: #0045ff;
             border-radius: 25px;
             margin-bottom: -22px;
             cursor pointer
@@ -781,7 +782,7 @@
             box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
             width 100%
             height 1px
-            background-color #2979ff
+            background-color #0045ff
             z-index -1
 
     .collapsed-invoice
@@ -794,7 +795,7 @@
             height: 45px;
             width: 45px;
             display inline-flex
-            background-color: #2979ff;
+            background-color: #0045ff;
             border-radius: 25px;
             margin-bottom: -22px;
             cursor pointer
@@ -811,7 +812,7 @@
             box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
             width 100%
             height 1px
-            background-color #2979ff
+            background-color #0045ff
             z-index -1
 
 
