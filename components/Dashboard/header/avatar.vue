@@ -198,7 +198,7 @@
                 content ''
 
             span
-                color $blueHard
+                color $colorPrimary
                 font-weight bold
                 font-size 1em
 
@@ -221,6 +221,7 @@
 
             img
                 margin-left 15px
+                filter invert(40%)
 
             span
                 display inline-block
@@ -230,7 +231,7 @@
 
             &.nuxt-link-active, &:hover
                 span
-                    color $blueMedium
+                    color $colorPrimary
                 img
-                    filter invert(41%) sepia(29%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 </style>

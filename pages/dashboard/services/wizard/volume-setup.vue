@@ -25,7 +25,7 @@
                                 ref="mount_path_selector"
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
-                                color="#0093ff"
+                                color="#0045ff"
                                 :rules="[rules.is_root_addressed, rules.required, rules.redundant]"
                                 v-model="manifest_model.volumes.volume.mount_path"
                                 :label="volume_obj.mount_path_label"
@@ -44,7 +44,7 @@
                                 ref="sub_path_selector"
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
-                                color="#0093ff"
+                                color="#0045ff"
                                 :rules="[rules.required, rules.no_slash]"
                                 v-model="manifest_model.volumes.volume.sub_path"
                                 :label="volume_obj.sub_path_label"
@@ -63,7 +63,7 @@
                         <v-text-field ref="volume_name_selector"
                                       style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                       dir="ltr"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       :rules="[rules.volume_name_regex, rules.required]"
                                       v-model="manifest_model.volumes.volume.volume_name"
                                       :label="volume_obj.volume_name_label"
@@ -91,7 +91,7 @@
                           :items="manifest_model.volumes.volume_list"
                           :menu="menuList">
                 <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
-border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
+border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 volumeای ذخیره نشده است
                     </span>
             </volume-table>
@@ -361,7 +361,7 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 <style lang="stylus" scoped>
 
     .kind-button
-        border 1px solid #0093ff
+        border 1px solid #0045ff
         height 38px
         min-width 175px
         border-radius 3px
@@ -381,8 +381,8 @@ border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
 
         &.is-active
             color #fefefe
-            box-shadow 0 0 3px 0 rgba(41, 121, 255, 0.2), 0 0 9px 0 rgba(41, 121, 255, 0.5)
-            background-color #0093ff
+            box-shadow 0 0 3px 0 rgba(0, 69, 255, 0.2), 0 0 9px 0 rgba(0, 69, 255, 0.5)
+            background-color #0045ff
             font-weight bolder
             transition all .3s ease-in-out
 

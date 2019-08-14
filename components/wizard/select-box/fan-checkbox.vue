@@ -60,18 +60,18 @@
             transition all .3s ease-in-out
 
         &.selected
-            border-color: #0093ff
+            border-color: #0045ff
             transition all .3s ease-in-out
             span
-                color: #0093ff
+                color: #0045ff
                 transition all .3s ease-in-out
 
             div.circle-border
-                border-color: #0093ff
+                border-color: #0045ff
                 transition all .3s ease-in-out
 
             div.circle-fill
-                background-color #0093ff
+                background-color #0045ff
                 transition all .3s ease-in-out
 
 </style>

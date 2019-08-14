@@ -10,7 +10,7 @@
                     box-sizing: content-box; padding: 0; max-width: 1700px">
 
                 <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" style="width: 100%;height: content-box;
-            background-color: #2979ff;margin: 0; border-top-left-radius: 3px;
+            background-color: #0045ff; margin: 0; border-top-left-radius: 3px;
                     border-top-right-radius: 3px; padding: 16px; display: inline-flex">
 
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
@@ -70,7 +70,7 @@
 
                     <div class="row" style="box-sizing: content-box; margin-top: 32px;">
 
-                        <div style="width:100%; border: 2px solid #4a90e2; border-radius: 3px; position: relative; box-sizing: border-box; overflow-x: scroll">
+                        <div style="width:100%; border: 2px solid #0045ff; border-radius: 3px; position: relative; box-sizing: border-box; overflow-x: scroll">
                             <table style="width: 100%;min-width: 900px; border-collapse: collapse; border: none; margin: 6px 0;">
                                 <tr class="head">
                                     <td width="26%">نام سفارش</td>
@@ -108,13 +108,13 @@
                 <div style="box-sizing: content-box; margin-top: 32px; padding-right: 32px; padding-left: 32px">
 
                     <ul>
-                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #4a90e2; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
+                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #0045ff; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
                             در صورت تایید و ادامه٬ شما با تمام جزئیات مطرح در فاکتور صادر شده موافق بوده و سکوی ابری فندق
                             هیچ گونه مسئولیتی
                             در قبال مشکلات احتمالی ناشی از اشتباه کاربر در بررسی صحت و درستی فاکتور را ندارد.
                         </li>
 
-                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #4a90e2; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
+                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #0045ff; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
                             همچنین شما زودتر از موعد سررسید پلن خود نمی‌توانید پلن انتخاب شده را تنزل داده و از منابع آن کم کنید.
                         </li>
 
@@ -277,7 +277,7 @@
         line-height 20px
         color #4a4a4a
         text-align center
-        border-left 2px solid #4a90e2
+        border-left 2px solid #0045ff
 
     tr.head td:last-child
         border none

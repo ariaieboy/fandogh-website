@@ -59,7 +59,7 @@
                         <v-text-field
                                 style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
                                 :rules="[rules.required]"
-                                color="#0093ff"
+                                color="#0045ff"
                                 type="text"
                                 dir="ltr"
                                 required
@@ -107,7 +107,7 @@
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       :rules="[rules.required]"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       required
@@ -157,7 +157,7 @@
                     </div>
 
                     <div class="image-pull-policy-container">
-                        <span style="height: 35px; display: flex; margin-left: 12px; background-color: #0093ff; border-radius: 25px;">
+                        <span style="height: 35px; display: flex; margin-left: 12px; background-color: #0045ff; border-radius: 25px;">
                             <span style="line-height: 35px; font-size: 1em; margin-right: 12px;color: #fefefe; font-family: iran-yekan">Image Pull Policy</span>
                             <popover class="popover-style" :tooltip="tooltips.image_pull_policy"></popover>
                         </span>
@@ -428,7 +428,7 @@
 <style lang="stylus" scoped>
 
     .kind-button
-        border 1px solid #0093ff
+        border 1px solid #0045ff
         height 38px
         border-radius 3px
         display inline-flex
@@ -445,12 +445,12 @@
         &.is-active
             color #fefefe
             box-shadow 0 3px 6px 0 rgba(41, 121, 255, 0.5)
-            background-color #0093ff
+            background-color #0045ff
             transition all .3s ease-in-out
 
 
     .registry-button
-        border 1px solid #0093ff
+        border 1px solid #0045ff
         height 45px
         border-radius 3px
         display inline-flex
@@ -468,13 +468,13 @@
             height auto
             margin-top auto
             margin-bottom auto
-            filter invert(41%) sepia(29%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
+            filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 
 
         &.is-active
             color #fefefe
             box-shadow 0 3px 6px 0 rgba(41, 121, 255, 0.5)
-            background-color #0093ff
+            background-color #0045ff
             transition all .3s ease-in-out
 
             img

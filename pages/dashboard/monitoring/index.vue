@@ -8,7 +8,7 @@
 
         <div style="margin-bottom: 16px">
             <div class="row"
-                 style="margin: 0; padding: 16px; background-color: #2979ff; box-shadow: 0 3px 6px 0 rgba(41, 121, 255, 0.42); border-radius: 3px;">
+                 style="margin: 0; padding: 16px; background-color: #0045ff; box-shadow: 0 3px 6px 0 rgba(0, 69, 255, 0.42); border-radius: 3px;">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <p class="profile-entity-title">انتخاب سرویس:</p>
                     <v-select

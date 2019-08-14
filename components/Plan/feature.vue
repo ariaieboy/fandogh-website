@@ -22,9 +22,9 @@
     .free-feature-card
         height 250px
         border-radius 3px
-        box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.42)
+        box-shadow 0 2px 6px 0 rgba(0, 69, 255, 0.42)
         margin 1rem 0
-        background-color #2979ff
+        background-color #0045ff
 
         div
             padding 20px

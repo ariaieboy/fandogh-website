@@ -10,7 +10,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       v-model="name"
@@ -26,7 +26,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       :rules="[rules.required, rules.version_counter,rules.version_start_regex, rules.version_regex]"

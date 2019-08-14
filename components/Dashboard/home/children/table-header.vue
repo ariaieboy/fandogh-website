@@ -21,8 +21,10 @@
 
 <style lang="stylus" scoped>
 
+    @import '../../../../assets/css/variables.styl'
+
     .parent-style
-        background-color #2979ff
+        background-color $colorPrimary
         border-top-left-radius 3px
         border-top-right-radius 3px
         margin-top 0

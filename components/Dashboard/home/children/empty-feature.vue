@@ -27,6 +27,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../../assets/css/variables.styl"
+
     .parent
         border-radius 3px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
@@ -40,7 +42,7 @@
         color white
         font-size 0.9em
         font-family iran-yekan
-        background-color #2979ff
+        background-color $colorPrimary
         border-radius 5px
         box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.42)
         margin-left auto
@@ -69,7 +71,7 @@
         img
             display inline-flex
             width 80px
-            filter invert(39%) sepia(98%) saturate(3751%) hue-rotate(207deg) brightness(102%) contrast(102%)
+            filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 
         span
             display inline-flex

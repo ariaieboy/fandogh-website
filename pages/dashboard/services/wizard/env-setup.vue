@@ -18,7 +18,7 @@
                                     ref="key"
                                     :rules="[rules.name_required, rules.regex, rules.no_space, rules.redundant]"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="text"
                                     dir="ltr"
                                     @change="(manifest_model.environment_variable.name = manifest_model.environment_variable.name.trim())"
@@ -38,7 +38,7 @@
                                     ref="value"
                                     :rules="[rules.value_required]"
                                     style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0093ff"
+                                    color="#0045ff"
                                     type="text"
                                     dir="ltr"
                                     v-model="manifest_model.environment_variable.value"
@@ -75,7 +75,7 @@
                        :items="manifest_model.environment_variable.env_list"
                        :menu="menuList">
                 <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
-border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">
+border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 متغیری ذخیره نشده است
                     </span>
             </env-table>

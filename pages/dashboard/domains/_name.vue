@@ -9,7 +9,7 @@
 
                     <v-text-field style="font-family: iran-yekan; font-size: 1em;"
                                   class="v-text-fld"
-                                  color="#0093ff"
+                                  color="#0045ff"
                                   type="text"
                                   dir="ltr"
                                   :disabled="true"
@@ -24,7 +24,7 @@
 
                     <v-text-field style="font-family: iran-yekan; font-size: 1em;"
                                   class="v-text-fld"
-                                  color="#0093ff"
+                                  color="#0045ff"
                                   type="text"
                                   dir="rtl"
                                   :disabled="true"
@@ -42,7 +42,7 @@
 
                     <v-text-field style="font-family: iran-yekan; font-size: 1em;"
                                   class="v-text-fld"
-                                  color="#0093ff"
+                                  color="#0045ff"
                                   type="text"
                                   dir="rtl"
                                   :disabled="true"
@@ -68,7 +68,7 @@
                         <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17);">
                             <div style="border-top-right-radius: 3px; border-top-left-radius: 3px; height: 4px; background-color: #fd3259"></div>
                             <p style="font-size: 1em; padding: 16px">{{cname_description}}</p>
-                            <p style="font-weight: bold; text-align: center; font-size: 1.1em; background-color: #0093ff; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; padding: 8px 16px; color: #fefefe;">
+                            <p style="font-weight: bold; text-align: center; font-size: 1.1em; background-color: #0045ff; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; padding: 8px 16px; color: #fefefe;">
                                 <span style="color: #fefefe; font-weight: normal">CNAME: </span>lb.fandogh.cloud</p>
 
                         </div>

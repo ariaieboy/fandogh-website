@@ -4,7 +4,7 @@
 
     <div class="header-dashboard-logo">
       <router-link to="/">
-        <img src="./icons/fandogh logo.svg" alt="logo">
+        <img src="../../../assets/svg/ic-fandogh-mini.svg" alt="logo">
       </router-link>
     </div>
     <f-avatar :items="list"/>
@@ -80,4 +80,5 @@ export default {
     padding-right 16px
     img
       width 24px
+      filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 </style>
