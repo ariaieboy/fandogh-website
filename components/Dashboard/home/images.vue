@@ -80,6 +80,8 @@
                             };
                         }
                     });
+                }else {
+                    return []
                 }
             }
         }, methods: {

@@ -97,6 +97,8 @@
                             created_at: Moment(created_at).format('jYYYY/jMM/jDD')
                         };
                     });
+                }else {
+                    return []
                 }
             }
         },

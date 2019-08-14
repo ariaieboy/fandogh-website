@@ -109,7 +109,13 @@
                 return this.$store.state.loading;
             },
             domains() {
-                return this.$store.state.domains;
+                let domains = this.$store.state.domains;
+                if(domains){
+                    return domains
+                }else {
+                    return []
+                }
+
             }
         },
         methods: {
