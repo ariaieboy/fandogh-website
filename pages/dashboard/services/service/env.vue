@@ -55,7 +55,7 @@
         padding 14px 0
         width 100%
         border-radius 3px 3px 0 0
-        background-color #2979ff
+        background-color #0045ff
         color #fff
         text-align center
         font-family yekan

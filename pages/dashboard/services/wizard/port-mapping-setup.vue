@@ -11,7 +11,7 @@
                                 ref="port_selector"
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
-                                color="#0093ff"
+                                color="#0045ff"
                                 :rules="[rules.valid_port, rules.redundant]"
                                 type="number"
                                 v-model.number="manifest_model.port_mapping.port_map.port"
@@ -31,7 +31,7 @@
                                 ref="traget_port_selector"
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
-                                color="#0093ff"
+                                color="#0045ff"
                                 :rules="[rules.valid_port]"
                                 type="number"
                                 v-model.number="manifest_model.port_mapping.port_map.target_port"
@@ -46,7 +46,7 @@
                     </div>
 
                     <div class="protocol-container">
-                        <span style="height: 35px; display: flex; margin-left: 12px; background-color: #0093ff; border-radius: 25px;">
+                        <span style="height: 35px; display: flex; margin-left: 12px; background-color: #0045ff; border-radius: 25px;">
                             <span style="line-height: 35px; font-size: 1em; margin-right: 12px;color: #fefefe; font-family: iran-yekan">Protocol</span>
                             <popover class="popover-style" :tooltip="tooltips.protocol"></popover>
                         </span>
@@ -78,7 +78,7 @@
                             :items="manifest_model.port_mapping.port_map_list"
                             :menu="menuList">
                 <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
-                            border-radius: 3px; border: 1px solid #0093FF; color: #3C3C3C">پورتی ذخیره نشده است</span>
+                            border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">پورتی ذخیره نشده است</span>
             </port-map-table>
 
         </div>

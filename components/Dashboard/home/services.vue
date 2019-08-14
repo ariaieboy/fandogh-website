@@ -106,7 +106,7 @@
         },
         computed: {
             services() {
-                let services = this.$store.state.services;
+                let services = this.$store.state.services === null ? [] : this.$store.state.services
                 if (services) {
                     return services.map(
                         ({memory, start_date, name, service_type, state, url, service_restarts}) => {

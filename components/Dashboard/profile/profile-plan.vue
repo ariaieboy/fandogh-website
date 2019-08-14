@@ -61,7 +61,7 @@
         <div class="row " style="width: 100%; margin-top: 40px; margin-right: 0; margin-left: 0">
             <div class="container-fluid navigation-container">
                 <button class="navigation-button"
-                        style="background-color: #2979ff; box-shadow: 0 2px 6px 0 rgba(41, 121, 255, 0.42)"
+                        style="background-color: #0045ff; box-shadow: 0 2px 6px 0 rgba(0, 69, 255, 0.42)"
                         @click="navigateToPlanPage">
                     ساخت پلن جدید
                 </button>
@@ -200,7 +200,7 @@
             height 100%
             margin-top auto
             margin-bottom auto
-            filter invert(41%) sepia(99%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
+            filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 
         p.plan-title
             margin 0
@@ -226,7 +226,7 @@
     .navigation-button
         width 200px
         height 40px
-        background-color #2979ff
+        background-color #0045ff
         outline none
         border none
         position relative

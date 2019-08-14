@@ -115,13 +115,13 @@
                     visibility visible
                     opacity 9
                     font-family iran-yekan
-                    color $blueMedium
+                    color $colorPrimary
                     font-weight bold
                     transform none
 
                 span.step
                     margin-left 1.2em
-                    background-color $blueMedium !important
+                    background-color $colorPrimary !important
                     border-radius 100px
                     color white
                     text-align center
@@ -216,7 +216,7 @@
 
             &.open
                 span.step
-                    background-color #0093FF
+                    background-color #0045ff
                     border-radius 100px
                     color #47494e
 

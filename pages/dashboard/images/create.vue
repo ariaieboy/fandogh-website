@@ -3,7 +3,7 @@
         <div>
             <h2 class="title_header">ساخت ایمیج</h2>
             <div class="fandogh-form-group">
-                <div style="background: #2979ff; width: 100%; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.4)">
+                <div style="background: #0045ff; width: 100%; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.4)">
                     <p style="padding: 32px 16px; text-align: center; color: #fefefe; " v-html="description"></p>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       :rules="[rules.counter, rules.required, rules.service_regex]"
@@ -34,7 +34,7 @@
                     <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0093ff"
+                                      color="#0045ff"
                                       type="text"
                                       dir="ltr"
                                       :rules="[rules.required, rules.version_counter,rules.version_start_regex, rules.version_regex]"

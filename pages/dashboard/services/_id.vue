@@ -333,7 +333,7 @@
                 color #000000
                 @media only screen and (max-width: 766px)
                     min-width 200px
-                    border-left: 1px solid #2979ff
+                    border-left: 1px solid #0045ff
                     border-radius 0
                     box-shadow none
                     font-size 1em
@@ -347,7 +347,7 @@
             padding 0
             cursor pointer
             @media only screen and (max-width: 766px)
-                background-color #2979ff
+                background-color #0045ff
                 margin-right -1px
                 display inline-flex
 
@@ -359,7 +359,7 @@
                 font-family iran-yekan
                 font-weight bold
                 font-size .9em
-                background-color #2979ff
+                background-color #0045ff
                 border-radius 3px
                 box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.2)
                 outline none

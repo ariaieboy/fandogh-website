@@ -54,7 +54,7 @@
             font-weight bold
 
         div.divider
-            background-color #2979ff
+            background-color #0045ff
             height 2px
             margin-top 7px
             border-radius 25px
@@ -69,8 +69,8 @@
 
 
     .box:hover
-        background-color #2979ff
-        box-shadow 0 2px 10px 5px rgba(41, 121, 255, 0.42)
+        background-color #0045ff
+        box-shadow 0 2px 10px 5px rgba(0, 69, 255, 0.42)
         transition 0.3s ease-in-out all
 
         p.title
@@ -94,7 +94,7 @@
         margin-right 12px
         margin-left 0
         padding 0
-        background-color #2979ff
+        background-color #0045ff
         border-radius 100px
 
         img

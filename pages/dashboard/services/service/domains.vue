@@ -36,8 +36,8 @@
     .vs__selected
         display flex !important
         align-items center !important
-        background-color rgba(41, 121, 255, .5) !important
-        border 1px solid #0093ff !important
+        background-color rgba(0, 69, 255, .5) !important
+        border 1px solid #0045ff !important
         border-radius 25px !important
         color #ffffff !important
         font-family iran-yekan !important

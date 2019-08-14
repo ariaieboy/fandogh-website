@@ -98,17 +98,18 @@
                     return false
 
                 let plan = this.$store.state.activePlan;
+
                 if (plan.hasOwnProperty('quota')) {
                     if (plan.quota.expires_at === null)
                         return false;
                     else
-                        return Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear() <= 3;
+                        return Moment(plan.quota.expires_at).diff(Moment(new Date()), 'days') <= 3;
                 } else
                     return false
             }, remainingTime() {
                 let plan = this.$store.state.activePlan;
                 if (plan.hasOwnProperty('quota')) {
-                    return Math.max(Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear(), 0)
+                    return Math.max(Moment(plan.quota.expires_at).diff(Moment(new Date()), 'days'), 0)
                 } else {
                     return 0
                 }

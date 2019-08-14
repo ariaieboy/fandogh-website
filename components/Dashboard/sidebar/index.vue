@@ -102,15 +102,17 @@
             text-align right
             margin-top 16px
             margin-bottom 16px
+            img
+                filter invert(40%)
 
             &.nuxt-link-active, &:hover
                 border-top-left-radius 25px
                 border-bottom-left-radius 25px
                 background-color $blueLight
                 img
-                    filter invert(41%) sepia(59%) saturate(4513%) hue-rotate(185deg) brightness(100%) contrast(108%)
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
                 span
-                    color $blueMedium
+                    color $colorPrimary
 
                 &:after
                     transform none

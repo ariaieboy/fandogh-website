@@ -87,7 +87,7 @@
         },
         computed: {
             secrets() {
-                let secrets = this.$store.state.secrets;
+                let secrets = this.$store.state.secrets === null ? [] : this.$store.state.secrets
                 if (secrets) {
                     return secrets.map(({memory, created_at, name, type, state}) => {
                         return {

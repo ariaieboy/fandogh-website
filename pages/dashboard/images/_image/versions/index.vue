@@ -147,7 +147,7 @@
                     ? `<span style="color: #ff2d55">خطا</span>`
                     : state === "BUILT"
                         ? `<span style="color: #2cac46">ساخته شده</span>`
-                        : `<span style="color: #296bdd">در حال ساخت ...</span>`;
+                        : `<span style="color: #0045ff">در حال ساخت ...</span>`;
             },
             createVersions(index) {
                 this.$router.push(`/dashboard/services/setup`);

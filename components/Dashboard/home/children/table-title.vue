@@ -26,7 +26,7 @@
         img
             width 48px
             height 48px
-            filter invert(39%) sepia(98%) saturate(3751%) hue-rotate(207deg) brightness(102%) contrast(102%);
+            filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
             @media only screen and (max-width: 900px)
                 width 36px
                 height 36px

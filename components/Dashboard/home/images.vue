@@ -63,7 +63,7 @@
         },
         computed: {
             images() {
-                let images = this.$store.state.images;
+                let images = this.$store.state.images === null ? [] : this.$store.state.images;
                 if (images) {
                     return images.map(({created_at, name, last_version}) => {
                         if (last_version) {
