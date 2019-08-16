@@ -178,10 +178,10 @@
                             </div>
                             <div style="flex: 1; flex-direction: column; display: flex; position: relative; padding-left: 20%">
 
-                                <p style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;">
-                                    API</p>
-                                <p style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;">
-                                    CLI</p>
+                                <a style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;" href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml" target="_blank">
+                                    API</a>
+                                <a style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">
+                                    CLI</a>
                             </div>
                         </div>
                     </div>
