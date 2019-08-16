@@ -169,44 +169,16 @@
                 <div class="row"
                      style="width: 100%; margin: 12px 0 0 0; display: flex; justify-items: left; justify-content: left">
 
-                    <div style="width: 50%; flex-direction: column; margin-top: 12px;">
+                    <div v-for="product in other_products" style="width: 50%; flex-direction: column; margin-top: 12px; margin-right: auto">
                         <div class="header-product-parent">
                             <div class="product-category-section">
-                                <img src="../../assets/svg/services/other_services/developer_tools.svg">
-                                <p>Developer Tools</p>
+                                <img :src="require('../../assets/svg/services/other_services/' + product.image + '.svg')" :alt="product.title">
+                                <p>{{product.title}}</p>
                             </div>
                             <div class="product-sub-category-section">
-                                <a href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml"
+                                <a v-for="item in product.items" :href="item.href"
                                    target="_blank">
-                                    API</a>
-                                <a href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">
-                                    CLI</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="width: 50%; flex-direction: column; margin-top: 12px;">
-                        <div class="header-product-parent">
-                            <div class="product-category-section">
-                                <img src="../../assets/svg/services/other_services/object-storage.svg">
-                                <p>Object Storage</p>
-                            </div>
-                            <div class="product-sub-category-section">
-                                <a>Minio</a>
-                                <a>S3 Storage</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="width: 50%; flex-direction: column; margin-top: 12px;margin-right: auto;">
-                        <div class="header-product-parent">
-                            <div class="product-category-section">
-                                <img src="../../assets/svg/services/other_services/operation_tools.svg">
-                                <p>
-                                    Operation Tools</p>
-                            </div>
-                            <div class="product-sub-category-section">
-                                <a>Monitoring</a>
+                                    {{item.title}}</a>
                             </div>
                         </div>
                     </div>
@@ -247,6 +219,47 @@
         data() {
             return {
                 // loggedIn: getToken()
+                other_products:[
+                    {
+                        title: 'Object Storage',
+                        image: 'object-storage',
+                        items:[
+                            {
+                                title: 'Minio',
+                                href: '#'
+                            },
+                            {
+                                title: 'S3 Storage',
+                                href: '#'
+                            },
+                        ]
+                    },
+                    {
+                        title: 'Developer Tools',
+                        image: 'developer_tools',
+                        items:[
+                            {
+                                title: 'API',
+                                href: 'https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml'
+                            },
+                            {
+                                title: 'CLI',
+                                href: 'https://docs.fandogh.cloud/docs/getting-started.html'
+                            },
+                        ]
+                    },
+                    {
+                        title: 'Operation Tools',
+                        image: 'operation_tools',
+                        items:[
+                            {
+                                title: 'Monitoring',
+                                href: '#'
+                            },
+                        ]
+                    },
+
+                ]
             };
         },
         created() {
