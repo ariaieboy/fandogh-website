@@ -30,6 +30,9 @@
                     <li>
                         <a class="footer-col-option" href="https://blog.fandogh.cloud/" target="_blank">وبلاگ</a>
                     </li>
+                    <li>
+                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-cli/tree/master/api-docs" target="_blank">API</a>
+                    </li>
                 </ul>
             </div>
             <div style="width: max-content; padding: 32px 24px;">
