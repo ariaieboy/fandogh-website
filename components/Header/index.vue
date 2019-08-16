@@ -65,53 +65,18 @@
                 <p>سرویس‌های مدیریت شده</p>
                 <div class="horiz_line"></div>
                 <div class="row" style="width: 100%; margin: 0;">
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"
-                         style="display: flex; flex-direction: column; height: 100%">
+                    <div v-for="service in managed_services"
+                         style="display: flex; flex-direction: column; width: 50%; height: max-content; margin-bottom: 12px">
                         <a class="managed-service"
-                           href="https://docs.fandogh.cloud/docs/mysql-managed-service.html" target="_blank">
-                            <img src="../../assets/svg/services/managed/managed_service_mysql.svg"
+                           :href="service.href" target="_blank">
+                            <img :src="require('../../assets/svg/services/managed/' + service.icon + '.svg')"
+                                 :alt="service.icon"
                                  style="max-width: 48px; max-height: 48px"/>
                             <div style="flex: 1; margin-top: 5px">
-                                <p class="english_title">Mysql</p>
-                                <p class="english_subtitle">Database</p>
+                                <p class="english_title">{{service.title}}</p>
+                                <p class="english_subtitle">{{service.caption}}</p>
                             </div>
                         </a>
-
-                        <a class="managed-service"
-                           href="https://docs.fandogh.cloud/docs/postgresql-managed-service.html" target="_blank">
-                            <img src="../../assets/svg/services/managed/managed_service_postgresql.svg"
-                                 style="max-width: 48px; max-height: 48px"/>
-                            <div style="flex: 1; margin-top: 5px">
-                                <p class="english_title">Postgresql</p>
-                                <p class="english_subtitle">Database</p>
-                            </div>
-                        </a>
-
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"
-                         style="display: flex; flex-direction: column; height: 100%">
-
-                        <a class="managed-service"
-                           href="https://docs.fandogh.cloud/docs/proxy-managed-service.html" target="_blank">
-                            <img src="../../assets/svg/services/managed/managed_service_proxy.svg"
-                                 style="max-width: 48px; max-height: 48px"/>
-                            <div style="flex: 1; margin-top: 5px">
-                                <p class="english_title">Proxy</p>
-                                <p class="english_subtitle">Ip Range Limiter</p>
-                            </div>
-                        </a>
-
-
-                        <a class="managed-service"
-                           href="https://docs.fandogh.cloud/docs/redis-managed-service.html" target="_blank">
-                            <img src="../../assets/svg/services/managed/managed_service_redis.svg"
-                                 style="max-width: 48px; max-height: 48px"/>
-                            <div style="flex: 1; margin-top: 5px">
-                                <p class="english_title">Redis</p>
-                                <p class="english_subtitle">In Memory Database Cache</p>
-                            </div>
-                        </a>
-
                     </div>
                 </div>
 
@@ -261,6 +226,32 @@
                         icon: 'c_sharp_lang',
                         href: 'c#',
                     }
+                ],
+                managed_services:[
+                    {
+                        title: 'Mysql',
+                        caption: 'Database',
+                        icon:'managed_service_mysql',
+                        href: 'https://docs.fandogh.cloud/docs/mysql-managed-service.html'
+                    },
+                    {
+                        title: 'Postgresql',
+                        caption: 'Database',
+                        icon:'managed_service_postgresql',
+                        href: 'https://docs.fandogh.cloud/docs/postgresql-managed-service.html'
+                    },
+                    {
+                        title: 'Proxy',
+                        caption: 'IP Range Limiter',
+                        icon:'managed_service_proxy',
+                        href: 'https://docs.fandogh.cloud/docs/proxy-managed-service.html'
+                    },
+                    {
+                        title: 'Redis',
+                        caption: 'In Memory Database Cache',
+                        icon:'managed_service_redis',
+                        href: 'https://docs.fandogh.cloud/docs/redis-managed-service.html'
+                    },
                 ]
             };
         },
