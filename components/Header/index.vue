@@ -125,36 +125,11 @@
                 <div class="horiz_line"></div>
 
                 <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
-                    <a class="language-support" @click="$router.push('languages/java')">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
-                             src="../../assets/svg/services/language/java_lang.svg"/>
-                        <p>Java</p>
-                    </a>
 
-                    <a class="language-support" @click="$router.push('languages/python')">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
-                             src="../../assets/svg/services/language/python_lang.svg"/>
-                        <p>Python</p>
-                    </a>
-
-                    <a class="language-support" @click="$router.push('languages/nodejs')">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
-                             src="../../assets/svg/services/language/nodejs_lang.svg"/>
-                        <p>Node.js</p>
-                    </a>
-
-
-                    <a class="language-support" @click="$router.push('languages/php')">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
-                             src="../../assets/svg/services/language/php_lang.svg"/>
-                        <p>PHP</p>
-                    </a>
-
-                    <a class="language-support" @click="$router.push('languages/c#')"
-                       style="margin-left: auto; display: flex;">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: 8px"
-                             src="../../assets/svg/services/language/c_sharp_lang.svg"/>
-                        <p style="margin-top: auto; direction: ltr;">C#</p>
+                    <a v-for="language in languages" class="language-support" @click="$router.push('languages/' + language.href)">
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: auto; margin-bottom: auto;"
+                             :src="require('../../assets/svg/services/language/' + language.icon +  '.svg')" :alt="language.icon"/>
+                        <p style="direction: ltr">{{language.title}}</p>
                     </a>
 
                 </div>
@@ -259,6 +234,33 @@
                         ]
                     },
 
+                ],
+                languages: [
+                    {
+                        title: 'Java',
+                        icon: 'java_lang',
+                        href: 'java',
+                    },
+                    {
+                        title: 'Python',
+                        icon: 'python_lang',
+                        href: 'python',
+                    },
+                    {
+                        title: 'PHP',
+                        icon: 'php_lang',
+                        href: 'php',
+                    },
+                    {
+                        title: 'Node.js',
+                        icon: 'nodejs_lang',
+                        href: 'nodejs',
+                    },
+                    {
+                        title: 'C#',
+                        icon: 'c_sharp_lang',
+                        href: 'c#',
+                    }
                 ]
             };
         },
