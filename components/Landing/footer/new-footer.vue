@@ -33,7 +33,7 @@
                 </ul>
             </div>
             <div style="width: max-content; padding: 32px 24px;">
-                <p class="footer-col-title">پشتیبانی</p>
+                <p class="footer-col-title">درباره ما</p>
                 <ul>
                     <li>
                         <a class="footer-col-option" @click="$router.push('/about-us')">درباره ما</a>
