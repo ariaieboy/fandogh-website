@@ -2,6 +2,7 @@
     <div class="single-sidebar">
         <ul>
             <li><router-link :to="{path:'about-us'}">درباره ما</router-link></li>
+            <li><router-link :to="{path:'our-values'}">ارزش‌های ما</router-link></li>
             <li><router-link :to="{path:'/contact-us'}">تماس با ما</router-link></li>
             <li><router-link :to="{path:'conditions-of-use'}">شرایط استفاده از خدمات</router-link></li>
         </ul>
