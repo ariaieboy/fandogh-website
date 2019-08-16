@@ -240,8 +240,6 @@
     .parallax-container
         width: 100%;
         height: 375px;
-        -webkit-backdrop-filter: blur(3.5px);
-        backdrop-filter: blur(3.5px);
         background-image: linear-gradient(to bottom, #0045ff, #0135c0 74%, #0230aa);
         @media only screen and (max-width 1230px)
             height 270px
