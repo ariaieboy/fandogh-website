@@ -150,7 +150,8 @@
                         <p>PHP</p>
                     </a>
 
-                    <a class="language-support" @click="$router.push('languages/c#')" style="margin-left: auto; display: flex;">
+                    <a class="language-support" @click="$router.push('languages/c#')"
+                       style="margin-left: auto; display: flex;">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: 8px"
                              src="../../assets/svg/services/language/c_sharp_lang.svg"/>
                         <p style="margin-top: auto; direction: ltr;">C#</p>
@@ -168,60 +169,52 @@
                 <div class="row"
                      style="width: 100%; margin: 12px 0 0 0; display: flex; justify-items: left; justify-content: left">
 
-                    <div style=" width: 50%; flex-direction: column; margin-top: 12px">
-                        <div style="width: 100%; display: flex; direction: ltr; height: max-content; flex-direction: column">
-                            <div style="display: flex; width: 100%">
-                                <img src="../../assets/svg/services/other_services/developer_tools.svg"
-                                     style="margin-top: 0; filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
-                                <p style="flex: 1; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin-top: auto; margin-bottom: auto; padding-left: 12px;">
-                                    Developer Tools</p>
+                    <div style="width: 50%; flex-direction: column; margin-top: 12px;">
+                        <div class="header-product-parent">
+                            <div class="product-category-section">
+                                <img src="../../assets/svg/services/other_services/developer_tools.svg">
+                                <p>Developer Tools</p>
                             </div>
-                            <div style="flex: 1; flex-direction: column; display: flex; position: relative; padding-left: 20%">
-
-                                <a style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;" href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml" target="_blank">
+                            <div class="product-sub-category-section">
+                                <a href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml"
+                                   target="_blank">
                                     API</a>
-                                <a style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">
+                                <a href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">
                                     CLI</a>
                             </div>
                         </div>
                     </div>
 
-                    <div style=" width: 50%; flex-direction: column; margin-top: 12px; margin-right: auto">
-                        <div style="width: 100%; display: flex; direction: ltr; height: max-content; flex-direction: column">
-                            <div style="display: flex; width: 100%">
-                                <img src="../../assets/svg/services/other_services/object-storage.svg"
-                                     style="margin-top: 0; filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
-                                <p style="flex: 1; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin-top: auto; margin-bottom: auto; padding-left: 12px;">
-                                    Object Storage</p>
+                    <div style="width: 50%; flex-direction: column; margin-top: 12px;">
+                        <div class="header-product-parent">
+                            <div class="product-category-section">
+                                <img src="../../assets/svg/services/other_services/object-storage.svg">
+                                <p>Object Storage</p>
                             </div>
-                            <div style="flex: 1; flex-direction: column; display: flex; position: relative; padding-left: 20%">
-                                <p style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;">
-                                    Minio</p>
-                                <p style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;">
-                                    S3 Storage</p>
+                            <div class="product-sub-category-section">
+                                <a>Minio</a>
+                                <a>S3 Storage</a>
                             </div>
                         </div>
                     </div>
 
-                    <div style="width: 50%; flex-direction: column; margin-top: 24px; margin-right: auto">
-                        <div style="width: 100%; display: flex; direction: ltr; height: max-content; flex-direction: column">
-                            <div style="display: flex; width: 100%">
-                                <img src="../../assets/svg/services/other_services/operation_tools.svg"
-                                     style="margin-top: 0; filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
-                                <p style="flex: 1; font-family: 'Helvetica Neue'; font-size: 14px; font-weight: bold; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin-top: auto; margin-bottom: auto; padding-left: 12px;">
+                    <div style="width: 50%; flex-direction: column; margin-top: 12px;margin-right: auto;">
+                        <div class="header-product-parent">
+                            <div class="product-category-section">
+                                <img src="../../assets/svg/services/other_services/operation_tools.svg">
+                                <p>
                                     Operation Tools</p>
                             </div>
-                            <div style="flex: 1; flex-direction: column; display: flex; position: relative; padding-left: 20%">
-                                <p style="font-family: 'Helvetica Neue'; font-size: 14px; font-weight: normal; font-style: normal; font-stretch: normal; line-height: 1.21; letter-spacing: normal; text-align: left; color: #535353; margin: 0 0 8px 0;">
-                                    Monitoring</p>
+                            <div class="product-sub-category-section">
+                                <a>Monitoring</a>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده
-                    همه</a>
+                <!--<a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده-->
+                    <!--همه</a>-->
 
             </div>
         </div>
@@ -637,5 +630,61 @@
         background #fefefe
         color #0045ff
         transition all .2s ease-in-out
+
+
+    .header-product-parent
+        width: 100%;
+        display: flex;
+        direction: ltr;
+        height: max-content;
+        flex-direction: column
+
+        div.product-category-section
+            display: flex;
+            width: 100%
+
+            img
+                margin-top: 0;
+                filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+
+            p
+                flex: 1;
+                font-family: 'Helvetica Neue';
+                font-size: 14px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.21;
+                letter-spacing: normal;
+                text-align: left;
+                color: #535353;
+                margin-top: auto;
+                margin-bottom: auto;
+                padding-left: 12px;
+
+        div.product-sub-category-section
+            flex: 1;
+            flex-direction: column;
+            display: flex;
+            position: relative;
+            padding-left: 20%
+
+            a
+                font-family: 'Helvetica Neue';
+                font-size: 14px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.21;
+                letter-spacing: normal;
+                text-align: left;
+                color: #535353;
+                margin: 0 0 8px 0;
+                transition all .2s ease-in-out
+                cursor pointer
+            a:hover
+                color: #0045ff
+                font-weight bold
+                transition all .3s ease-in-out
 </style>
 
