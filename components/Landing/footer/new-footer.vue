@@ -42,10 +42,10 @@
                         <a class="footer-col-option" @click="$router.push('/our-values')">ارزش‌های ما</a>
                     </li>
                     <li>
-                        <a class="footer-col-option">پشتیبانی</a>
+                        <a class="footer-col-option" @click="$router.push('/conditions-of-use')">قوانین سکو</a>
                     </li>
                     <li>
-                        <a class="footer-col-option">تماس با ما</a>
+                        <a class="footer-col-option" @click="$router.push('/contact-us')">تماس با ما</a>
                     </li>
                 </ul>
             </div>
