@@ -22,13 +22,13 @@
                 <p class="footer-col-title">منابع</p>
                 <ul>
                     <li>
-                        <a class="footer-col-option">مستندات</a>
+                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">مستندات</a>
                     </li>
                     <li>
                         <a class="footer-col-option">آموزش‌ها</a>
                     </li>
                     <li>
-                        <a class="footer-col-option">وبلاگ</a>
+                        <a class="footer-col-option" href="https://blog.fandogh.cloud/" target="_blank">وبلاگ</a>
                     </li>
                 </ul>
             </div>
