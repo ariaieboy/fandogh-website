@@ -39,7 +39,7 @@
                         <a class="footer-col-option">پشتیبانی</a>
                     </li>
                     <li>
-                        <a class="footer-col-option">درباره ما</a>
+                        <a class="footer-col-option" @click="$router.push('/about-us')">درباره ما</a>
                     </li>
                     <li>
                         <a class="footer-col-option">تماس با ما</a>
