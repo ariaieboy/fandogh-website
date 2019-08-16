@@ -124,47 +124,41 @@
                 <p>اجرای مستقیم کدها</p>
                 <div class="horiz_line"></div>
 
-                <div class="row" style="width: 100%;">
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-spring-boot.html"
-                       target="_blank">
+                <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
+                    <a class="language-support" @click="$router.push('languages/java')">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
                              src="../../assets/svg/services/language/java_lang.svg"/>
                         <p>Java</p>
                     </a>
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-django.html"
-                       target="_blank">
+                    <a class="language-support" @click="$router.push('languages/python')">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
                              src="../../assets/svg/services/language/python_lang.svg"/>
                         <p>Python</p>
                     </a>
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-nodejs.html"
-                       target="_blank">
+                    <a class="language-support" @click="$router.push('languages/nodejs')">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
                              src="../../assets/svg/services/language/nodejs_lang.svg"/>
                         <p>Node.js</p>
                     </a>
 
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-laravel.html"
-                       target="_blank">
+                    <a class="language-support" @click="$router.push('languages/php')">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
-                             src="../../assets/svg/services/language/laravel_lang.svg"/>
-                        <p>Laravel</p>
+                             src="../../assets/svg/services/language/php_lang.svg"/>
+                        <p>PHP</p>
                     </a>
 
-                    <a class="language-support" href="https://docs.fandogh.cloud/docs/source-aspnetcore.html"
-                       target="_blank" style="margin-left: auto">
-                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)"
-                             src="../../assets/svg/services/language/net_core_lang.svg"/>
-                        <p>ASP.Net Core</p>
+                    <a class="language-support" @click="$router.push('languages/c#')" style="margin-left: auto; display: flex;">
+                        <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: 8px"
+                             src="../../assets/svg/services/language/c_sharp_lang.svg"/>
+                        <p style="margin-top: auto; direction: ltr;">C#</p>
                     </a>
 
                 </div>
 
-                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده
-                    همه</a>
+                <a class="button" @click="$router.push('languages')">مشاهده همه</a>
 
             </div>
             <div class="vertical_line"></div>
