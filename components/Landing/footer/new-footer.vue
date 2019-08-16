@@ -33,6 +33,9 @@
                     <li>
                         <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml" target="_blank">API</a>
                     </li>
+                    <li>
+                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">CLI</a>
+                    </li>
                 </ul>
             </div>
             <div style="width: max-content; padding: 32px 24px;">
