@@ -206,7 +206,7 @@
             padding-right 12px
             font-weight normal
 
-        @media only screen and (max-width: 1230px)
+        @media only screen and (max-width: 1010px)
             flex-direction row
             top 16px
             display flex
