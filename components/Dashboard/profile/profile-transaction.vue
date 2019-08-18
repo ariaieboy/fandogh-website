@@ -43,7 +43,7 @@
             this.requestTransactions()
 
         },
-        methods:{
+        methods: {
             async requestTransactions() {
 
                 await this.$store.dispatch("getTransactions")
@@ -56,7 +56,7 @@
                                     namespace: this.$store.state.activePlan.name,
                                     description: 'جزئیات تراکنش',
                                     items,
-                                    date:  Moment(paid_at).format('jYYYY/jMM/jDD - HH:mm')
+                                    date: Moment(paid_at).format('jYYYY/jMM/jDD - HH:mm')
                                 };
                             }
                         );
@@ -84,8 +84,8 @@
     ::-webkit-scrollbar
         display none
 
-     -ms-overflow-style none
-     scrollbar-width none
+    -ms-overflow-style none
+    scrollbar-width none
 
     tr.head
         height 25px
