@@ -1,14 +1,15 @@
 <template>
 
-    <div class="row" style="background-color: #fefefe; border-radius: 3px; overflow-x:auto;margin-top: 6px;   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07);">
-        <table style="width: 100%; min-width: 900px; border-collapse: collapse; border: none; margin: 6px 0;">
+    <div class="row"
+         style="background-color: #fefefe; border-radius: 2px; overflow-x:auto; margin-top: 2px; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07);">
+        <table style="width: 100%; min-width: 900px; border-collapse: collapse; margin: 8px 0;">
             <tr class="head">
                 <td class="number" width="8%">{{rowNo}}</td>
-                <td class="number" width="15%">{{celSpec.date}}</td>
-                <td class="number" width="16%" style="direction: ltr">{{celSpec.transactionAmount}}</td>
-                <td width="16%">{{celSpec.namespace}}</td>
-                <td class="number" width="20%">{{celSpec.description}}</td>
-                <td width="25%">{{celSpec.transactionCode}}</td>
+                <td class="number" style="direction: ltr;" width="17%">{{celSpec.date}}</td>
+                <td width="20%">{{celSpec.transactionCode}}</td>
+                <td width="20%">{{celSpec.namespace}}</td>
+                <td class="number" width="20%" style="direction: ltr">{{celSpec.transactionAmount}}</td>
+                <td class="number description-col" width="15%" style="cursor: pointer;">{{celSpec.description}}</td>
             </tr>
         </table>
     </div>
@@ -16,12 +17,15 @@
 
 <script>
     export default {
-        props:['rowNo','celSpec'],
+        props: ['rowNo', 'celSpec'],
         name: "transaction-value-row"
     }
 </script>
 
 <style lang="stylus" scoped>
+
+    *
+        user-select none
 
     tr.head
         height 25px
@@ -30,7 +34,7 @@
 
     tr.head td
         font-family iran-yekan
-        font-size .8em
+        font-size .9em
         line-height 25px
         font-weight normal
         font-style normal
@@ -40,11 +44,20 @@
 
     tr.head td.number
         font-family iran-sans
-        font-size .8em
+        font-size .9em
         line-height 20px
         color #000000
         text-align center
         border-left 1px solid #adadad
+
+    tr.head td.description-col
+        color #0045FF
+        opacity .8
+        transition all .2s ease-in-out
+
+    tr.head td.description-col:hover
+        opacity 1
+        transition all .2s ease-in-out
 
     tr.head td:last-child
         border none

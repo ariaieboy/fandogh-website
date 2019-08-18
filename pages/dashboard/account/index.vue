@@ -83,7 +83,7 @@
             <div class="box-row row">
                 <div @click="sectionClicked('ProfilePlan')"
                      :class="[(activeSectionName === 'ProfilePlan' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #2979ff'}">پلن من</p>
+                    <p :style="{borderLeft: '1px solid #0045FF'}">پلن من</p>
                 </div>
 
                 <!--<div @click="sectionClicked('ProfileWallet')"-->
@@ -93,7 +93,7 @@
 
                 <div @click="sectionClicked('ProfileTransactions')"
                      :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>
+                    <p :style="{borderLeft: '1px solid #0045FF'}">تراکنش‌های مالی</p>
                 </div>
 
                 <!--<div @click="sectionClicked('ProfileMessages')"-->
