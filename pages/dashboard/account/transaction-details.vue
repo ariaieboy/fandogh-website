@@ -130,28 +130,6 @@
             this.$store.commit('SET_DATA', {id: 'transactionDetail', data: {}})
         },
         methods: {
-            print() {
-
-                if (process.browser) {
-                    let pdfName = 'test';
-                    const jsPDF = require('jspdf');
-                    const html2canvas = require('html2canvas');
-
-                    const elementToPrint = document.getElementById('bill');
-
-                    let h2c = new html2canvas();
-                    let pdf = new jsPDF('p', 'mm', 'a4');
-
-                    const filename  = 'ThisIsYourPDFFilename.pdf';
-
-                    html2canvas(document.getElementById('bill'),
-                        {scale: 4}
-                    ).then(canvas => {
-                        pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, 0, 211, 200);
-                        pdf.save(filename);
-                    });
-                }
-            }
         }
     }
 </script>
