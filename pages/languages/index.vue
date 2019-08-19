@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row" style="background: #F8FAFF;">
 
         <div class="row language-header">
             <div class="language-bg">
@@ -10,7 +10,9 @@
 
         <div class="row languages-feature-box">
             <div v-for="item in feature_cards" class="lang-feature-card col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <img :src="require('../../assets/svg/services/managed/' + item.icon + '.svg' )" :alt="item.icon">
+                <span>
+                    <img :src="require('./icons/' + item.icon)" :alt="item.icon">
+                </span>
                 <div>
                     <p class="lang-card-title">{{item.title}}</p>
                     <p class="lang-card-description">{{item.description}}</p>
@@ -18,12 +20,13 @@
             </div>
 
         </div>
-        <div style="width: 100%; height: 0; border: solid 1px #c4c2c2;"></div>
+        <div style="width: 100%; height: 0; border: solid .5px #c4c2c2;"></div>
 
-        <div class="languages-container">
+        <div class="languages-container" style="max-width: 1230px; margin-left: auto; margin-right: auto">
             <p class="languages-title">{{languages_title}}</p>
             <p class="languages-description">{{languages_description}}</p>
-            <div class="col-lg-10 col-sm-12 col-md-10 col-xs-12 container-fluid" style="padding-bottom: 32px">
+            <div class="col-lg-10 col-sm-12 col-md-10 col-xs-12 container-fluid"
+                 style="padding-bottom: 32px; margin-top: 32px">
                 <div class="row">
 
                     <div v-for="item in languages" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 language-card">
@@ -54,49 +57,54 @@
             return {
 
                 title: '< Languages >',
-                description: 'با زبان‌های پشتیبانی شده در فندق فرایند توسعه محصولات خود را با معماری ابری سرعت ببخشید',
+                description: 'با زبان‌های پشتیبانی شده در فندق فرآیند توسعه محصولات خود را با معماری ابری سرعت ببخشید',
                 languages_title: 'گستره‌ای از زبان‌ها با پشتیبانی حرفه‌ای',
-                languages_description: 'با استفاده از زبان‌های پشتیبانی شده فندق، روند توسعه محصولات خود را سرعت ببخشید و  پیچیدگی‌های مدیریت زیرساخت را به ما بسپارید',
+                languages_description: 'با استفاده از زبان‌های برنامه‌نویسی پشتیبانی شده فندق، روند توسعه محصولات خود را سرعت بخشید و پیچیدگی‌های مدیریت زیرساخت را به ما بسپارید و خیالتان راحت باشد، چرا که این زبان‌ها با اولویت بسیار بالایی پیوسته بهینه‌سازی و بروز می‌شوند',
                 feature_cards: [
                     {
                         title: 'پشتیبانی کامل از زبان‌ها',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'managed_service_mysql'
+                        description: 'تمام تلاشمان را میکنیم تا با کمک توسعه‌دهندگان و استفاده از تجربیات دیگران زبان‌های معروف و پر کاربرد را پیوسته منطبق با معماری ابری ارائه کنیم تا شما تمام تمرکز خود را همیشه بر روی توسعه محصولات خود معطوف کنید.',
+                        icon: 'code.png'
                     },
                     {
                         title: 'آزادی انتخاب فریم‌ورک',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'managed_service_mysql'
+                        description: 'محدودیت در سکوی ابری فندق به وسعت آسمان و تنوع فریم‌ورک‌ها به تعداد ابرهای این آسمان‌ است تا شما بتوانید تکنولوژی دلخواه خود را به راحتی هرچه تمام‌تر بر روی این سکو مستقر کنید.',
+                        icon: 'framework.svg'
+                    },
+                    {
+                        title: 'اجرای مستقیم کدها',
+                        description: 'کدهای خود را به هر زبانی که هستند به راحتی و به صورت مستقیم ظرف چند دقیقه بر روی سکوی ابری فندق مستقر کنید بی‌آنکه نیاز باشد دانشی در مورد docker داشته باشید.',
+                        icon: 'source_deploy.svg'
                     },
                 ],
                 languages: [
                     {
                         title: 'Java',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                        description: 'اگر شما هم از طرفداران پروپاقرص جاوا هستید، می‌توانید سرویس‌های جاوایی خود را با فریم‌ورک‌ قدرتمند Spring Boot و گستره‌ای از Build Tools‌ها و JDK‌های پشتیبانی شده بر روی سکوی ابری فندق مستقر کنید.',
                         icon: 'java_lang',
                         href: 'java'
                     },
                     {
                         title: 'Python',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                        description: 'زبانی محبوب با ساختاری قدرتمند برای توسعه‌دهندگانی که سرعت در توسعه برای آن‌ها اهمیت دارد؛ حال می‌توانند سرویس‌های پایتونی خود را با پشتیبانی حرفه‌ای از فریم‌ورک جذاب Django Project بسازند.',
                         icon: 'python_lang',
                         href: 'python'
                     },
                     {
                         title: 'PHP',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                        description: 'پلتفرمی جذاب به همراه پشتیبانی قوی برای آن دسته از توسعه‌دهندگانی که در دنیای Laravel به سر می‌برند می‌توانند از فریم‌ورک‌های بهینه شده برای ساختار ابری خود استفاده کنند.',
                         icon: 'php_lang',
                         href: 'php'
                     },
                     {
-                        title: 'Node.js',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                        title: 'Java Script',
+                        description: 'به وسعت دنیای وب؛ زبانی محبوب برای برنامه‌نویسان front با گستره‌ای از فریم‌ورک‌های جذابی همچون Vue.js، Angular.js و React.js و Node.js همه و همه برای سرویس‌های ابری شما فراهم شده‌اند.',
                         icon: 'nodejs_lang',
-                        href: 'php'
+                        href: 'java_script'
                     },
                     {
                         title: 'C#',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                        description: 'زبانی به قدمت دو دهه ولی بهبود یافته و همپا با ساختارهای جدید تا شما بتوانید سرویس‌های net core. را به راحتی در دنیای ابرها مستقر کنید و از سرعت و قدرت و مزایای سکوهای ابری در پروژه‌های خود بهره‌مند شوید.',
                         icon: 'c_sharp_lang',
                         href: 'c_sharp'
                     }
@@ -116,9 +124,9 @@
         width 100%
         height auto
         padding-top 60px
-        -webkit-backdrop-filter  blur(3.5px)
-        backdrop-filter  blur(3.5px)
-        background-image  linear-gradient(to bottom, #0045ff, #0135c0 74%, #0230aa)
+        -webkit-backdrop-filter blur(3.5px)
+        backdrop-filter blur(3.5px)
+        background-image linear-gradient(to bottom, #0045ff, #0135c0 74%, #0230aa)
 
     .language-bg
         width 100%
@@ -127,38 +135,38 @@
         padding-bottom 100px
         background-size cover
         background url("../../assets/svg/language_bg.svg") no-repeat top
-        @media only screen and (max-width  992px)
+        @media only screen and (max-width 992px)
             padding-bottom 50px
 
         p.banner-title
-            font-family  'Helvetica Neue'
-            font-size  3.5em
-            font-weight  bold
-            font-style  normal
-            font-stretch  normal
-            line-height  1.24
+            font-family 'Helvetica Neue'
+            font-size 3.5em
+            font-weight bold
+            font-style normal
+            font-stretch normal
+            line-height 1.24
             margin-top 48px
-            letter-spacing  normal
-            text-align  center
-            color  #f8f8f8
-            @media only screen and (max-width  992px)
+            letter-spacing normal
+            text-align center
+            color #f8f8f8
+            @media only screen and (max-width 992px)
                 font-size 2.4em
                 margin-top 0
 
         p.banner-description
-            font-family  iran-yekan
-            font-size  2em
-            font-weight  normal
-            font-style  normal
-            font-stretch  normal
-            line-height  1.71
+            font-family iran-yekan
+            font-size 2em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.71
             margin-top 32px
             padding-right 20%
             padding-left 20%
-            letter-spacing  normal
-            text-align  center
-            color  #f8f8f8
-            @media only screen and (max-width  992px)
+            letter-spacing normal
+            text-align center
+            color #f8f8f8
+            @media only screen and (max-width 992px)
                 font-size 1.3em
                 padding-left 16px
                 padding-right 16px
@@ -166,21 +174,29 @@
     .languages-feature-box
         width 100%
         padding 32px 16px
+        display flex
+        justify-content center
         background #fefefe
 
     .lang-feature-card
         width 100%
+        max-width 600px
         display flex
         padding-left 16px
         padding-right 16px
-        @media only screen and (max-width  992px)
+        @media only screen and (max-width 992px)
             margin-bottom 16px
 
-        img
-            margin-top 0
-            height max-content
-            @media only screen and (max-width  992px)
-                width 58px
+        span
+            width 60px
+            height 60px
+            display flex
+            border-radius 50%
+            background #0045ff
+            img
+                width 32px
+                height auto
+                margin auto
 
         div
             width 100%
@@ -189,29 +205,29 @@
             padding-right 16px
 
             p.lang-card-title
-                font-family  iran-yekan
-                font-size  1.4em
-                font-weight  bold
-                font-style  normal
-                font-stretch  normal
-                line-height  1.71
-                letter-spacing  normal
-                text-align  right
-                color  #0045ff
-                @media only screen and (max-width  992px)
+                font-family iran-yekan
+                font-size 1.4em
+                font-weight bold
+                font-style normal
+                font-stretch normal
+                line-height 1.71
+                letter-spacing normal
+                text-align right
+                color #0045ff
+                @media only screen and (max-width 992px)
                     font-size 1.2em
 
             p.lang-card-description
-                font-family  iran-yekan
-                font-size  1.2em
-                font-weight  normal
-                font-style  normal
-                font-stretch  normal
-                line-height  1.75
-                letter-spacing  normal
-                text-align  right
-                color  #535353
-                @media only screen and (max-width  992px)
+                font-family iran-yekan
+                font-size 1.2em
+                font-weight normal
+                font-style normal
+                font-stretch normal
+                line-height 1.75
+                letter-spacing normal
+                text-align right
+                color #535353
+                @media only screen and (max-width 992px)
                     font-size 1em
 
     .languages-container
@@ -220,33 +236,33 @@
         margin-bottom 16px
 
         p.languages-title
-            font-family  iran-yekan
-            font-size  2.2em
-            font-weight  bold
-            font-style  normal
-            font-stretch  normal
-            line-height  1.24
+            font-family iran-yekan
+            font-size 2em
+            font-weight bold
+            font-style normal
+            font-stretch normal
+            line-height 1.24
             margin-top 48px
-            letter-spacing  normal
-            text-align  center
-            color  #0045ff
-            @media only screen and (max-width  992px)
-                font-size 1.5em
+            letter-spacing normal
+            text-align center
+            color #0045ff
+            @media only screen and (max-width 992px)
+                font-size 1.4em
                 margin-top 16px
 
         p.languages-description
-            font-family  iran-yekan
-            font-size  1.6em
-            font-weight  normal
-            font-style  normal
-            font-stretch  normal
-            line-height  1.71
-            padding-right 20%
-            padding-left 20%
-            letter-spacing  normal
-            text-align  center
-            color  #535353
-            @media only screen and (max-width  992px)
+            font-family iran-yekan
+            font-size 1.4em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.71
+            padding-right 10%
+            padding-left 10%
+            letter-spacing normal
+            text-align center
+            color #535353
+            @media only screen and (max-width 992px)
                 font-size 1.2em
                 padding-left 16px
                 padding-right 16px
@@ -261,11 +277,11 @@
         margin-top 64px
 
         img
-            width  58px
+            width 58px
             margin-top 8px
             height max-content
             filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
-            @media only screen and (max-width  992px)
+            @media only screen and (max-width 992px)
                 width 48px
 
         div
@@ -275,38 +291,38 @@
             padding-right 16px
 
             p.language-title
-                font-family  iran-yekan
-                font-size  1.4em
-                font-weight  bold
-                font-style  normal
+                font-family 'Helvetica Neue'
+                font-size 1.3em
+                font-weight bold
+                font-style normal
                 direction ltr
-                font-stretch  normal
-                line-height  1.71
-                letter-spacing  normal
-                text-align  right
-                color  #0045ff
+                font-stretch normal
+                line-height 1.71
+                letter-spacing normal
+                text-align right
+                color #0045ff
 
             p.language-description
-                font-family  iran-yekan
-                font-size  1.2em
-                font-weight  normal
-                font-style  normal
-                font-stretch  normal
-                line-height  1.75
-                letter-spacing  normal
-                text-align  right
-                color  #535353
+                font-family iran-yekan
+                font-size 1.1em
+                font-weight normal
+                font-style normal
+                font-stretch normal
+                line-height 1.75
+                letter-spacing normal
+                text-align right
+                color #535353
 
             p.language-link
-                font-family  iran-yekan
-                font-size  .9em
-                font-weight  normal
-                font-style  normal
-                font-stretch  normal
-                line-height  1.79
-                letter-spacing  normal
-                text-align  right
-                color  #2979ff
+                font-family iran-yekan
+                font-size .9em
+                font-weight normal
+                font-style normal
+                font-stretch normal
+                line-height 1.79
+                letter-spacing normal
+                text-align right
+                color #2979ff
                 cursor pointer
 
 </style>
