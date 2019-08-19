@@ -45,7 +45,8 @@
                                 v-model="activatedNamespace"
                                 placeholder="نام فضانام را انتخاب کنید">
                         </v-select>
-                        <img @click="$router.push('/dashboard/account/namespaces')" src="../../../assets/svg/circular-add.svg" alt="add-namespace" class="create-namespace">
+                        <img @click="$router.push('/dashboard/account/namespaces')"
+                             src="../../../assets/svg/circular-add.svg" alt="add-namespace" class="create-namespace">
                     </div>
 
                 </div>
@@ -82,7 +83,7 @@
             <div class="box-row row">
                 <div @click="sectionClicked('ProfilePlan')"
                      :class="[(activeSectionName === 'ProfilePlan' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #2979ff'}">پلن من</p>
+                    <p :style="{borderLeft: '1px solid #0045FF'}">پلن من</p>
                 </div>
 
                 <!--<div @click="sectionClicked('ProfileWallet')"-->
@@ -90,10 +91,10 @@
                 <!--<p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>-->
                 <!--</div>-->
 
-                <!--<div @click="sectionClicked('ProfileTransactions')"-->
-                <!--:class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">-->
-                <!--<p :style="{borderLeft: '1px solid #2979ff'}">تراکنش‌های مالی</p>-->
-                <!--</div>-->
+                <div @click="sectionClicked('ProfileTransactions')"
+                     :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
+                    <p :style="{borderLeft: '1px solid #0045FF'}">تراکنش‌های مالی</p>
+                </div>
 
                 <!--<div @click="sectionClicked('ProfileMessages')"-->
                 <!--:class="[(activeSectionName === 'ProfileMessages' ? 'enabled' : 'disabled')]">-->

@@ -3,7 +3,7 @@
 
         <TitleRow v-bind:celSpec="titleRow"/>
 
-        <TransactionValue v-for="(item, index) in valueRows"
+        <TransactionValue v-for="(item, index) in transactions"
                           :key="index"
                           v-bind:rowNo="++index"
                           v-bind:celSpec="item"/>
@@ -14,81 +14,67 @@
 <script>
     import TransactionValue from "~/components/Dashboard/profile/transaction-value-row";
     import TitleRow from "~/components/Dashboard/profile/title-row";
+    import ErrorReporter from "../../../utils/ErrorReporter";
+    import Moment from 'moment-jalaali'
 
     export default {
         name: "profile-transaction",
         components: {
             TransactionValue,
             TitleRow,
+            Moment
+
         }, data() {
             return {
+                transactions: [],
                 titleRow: [
                     {title: 'ردیف', width: '8%'},
-                    {title: 'تاریخ', width: '15%'},
-                    {title: 'مقدار تراکنش (تومان)', width: '16%'},
-                    {title: 'نام فضانام', width: '16%'},
-                    {title: 'شرح تراکنش', width: '20%'},
-                    {title: 'کد تراکنش', width: '25%'}
+                    {title: 'تاریخ', width: '17%'},
+                    {title: 'کد تراکنش', width: '20%'},
+                    {title: 'نام فضانام', width: '20%'},
+                    {title: 'مقدار تراکنش (تومان)', width: '20%'},
+                    {title: 'شرح تراکنش', width: '15%'}
+
                 ],
-                valueRows: [
-                    {
-                        date: '۱۳۹۷/۰۱/۱۲',
-                        transactionAmount: '۱۰۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1201'
-                    },
-                    {
-                        date: '۱۳۹۷/۰۱/۱۳',
-                        transactionAmount: '۸۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1202'
-                    },
-                    {
-                        date: '۱۳۹۷/۰۱/۱۴',
-                        transactionAmount: '۱۰۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1203'
-                    },
-                    {
-                        date: '۱۳۹۷/۰۱/۱۵',
-                        transactionAmount: '۱۲۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1204'
-                    },
-                    {
-                        date: '۱۳۹۷/۰۱/۱۶',
-                        transactionAmount: '۲۰۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1205'
-                    },
-                    {
-                        date: '۱۳۹۷/۰۱/۱۷',
-                        transactionAmount: '۱۰۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1206'
-                    },
-                    {
-                        date: '۱۳۹۷/۰۱/۱۸',
-                        transactionAmount: '۴۰۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1207'
-                    },
-                    {
-                        date: '۱۳۹۷/۰۱/۱۹',
-                        transactionAmount: '۱۰۰٬۰۰۰',
-                        namespace: 'sorena-namespace',
-                        description: 'خرید پلن',
-                        transactionCode: 'FP1-greB-deff-sasd-1208'
-                    }
-                ]
             }
+        },
+        created() {
+
+            this.requestTransactions()
+
+        },
+        methods: {
+            async requestTransactions() {
+
+                await this.$store.dispatch("getTransactions")
+                    .then(transactionResponse => {
+                        this.transactions = transactionResponse.map(
+                            ({id, paid_at, total, items}) => {
+                                return {
+                                    transactionCode: id,
+                                    transactionAmount: total,
+                                    namespace: this.$store.state.activePlan.name,
+                                    description: 'جزئیات تراکنش',
+                                    items,
+                                    date: Moment(paid_at).format('jYYYY/jMM/jDD - HH:mm')
+                                };
+                            }
+                        );
+                    }).catch(e => {
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    });
+
+            },
         }
     }
 </script>
@@ -98,8 +84,8 @@
     ::-webkit-scrollbar
         display none
 
-     -ms-overflow-style none
-     scrollbar-width none
+    -ms-overflow-style none
+    scrollbar-width none
 
     tr.head
         height 25px

@@ -2,15 +2,15 @@
     <div class="wrapper">
         <f-loading :isFull="true" v-if="loading"/>
         <no-ssr>
-            <f-d-header/>
-            <div :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
+            <f-d-header v-if="!isFullPage" />
+            <div :style="{width: isFullPage ? '100%': 'unset'}" :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
                 <div v-if="isMenuAvailable" :class="['wrapper-sidebar', {'open':openSidebar}]">
                     <admin-sidebar/>
                 </div>
                 <div :class="['wrapper-main',{'open':openSidebar}]"
                      :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
-                    <div class="dash-container">
-                        <div :class="[(isMobile ? '' : 'container-fluid')]">
+                    <div :style="{marginTop: isFullPage ? '0' : null}" class="dash-container">
+                        <div :class="[(isMobile || isFullPage ? '' : 'container-fluid')]">
 
                             <div v-if="accountExpired" class="box-row" style="margin-bottom: 16px">
 
@@ -85,6 +85,13 @@
             },
             openSidebar() {
                 return this.$store.state.sideMunu
+            },
+            isFullPage() {
+                if (this.$route.path.indexOf('transaction-details') !== -1) {
+                    return true
+                } else {
+                    return false
+                }
             },
             isMobile() {
                 return this.$store.state.windowWidth <= 992;
