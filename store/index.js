@@ -38,6 +38,7 @@ const createStore = () => {
         manifest: {},
         account: {},
         activePlan: {},
+        transactionDetail: {}
       };
     },
     actions: actions,

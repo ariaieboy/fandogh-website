@@ -220,6 +220,16 @@ export const dumpServiceManifest = async ({commit, state}, service_name) => {
     }
 };
 
+export const getTransactions = async ({commit, state}) => {
+
+    try{
+        return await Request().get('api/billing')
+    }catch (e) {
+        return Promise.reject(e)
+    }
+
+};
+
 export const getDomains = async ({commit, state}, query) => {
     try {
         let domains = await Request(query).get(`/api/domains`);

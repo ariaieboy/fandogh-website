@@ -1,7 +1,7 @@
 <template>
 
-    <div class="row" style="background-color: #2979ff; border-radius: 3px; overflow-x:auto; box-shadow: 0 3px 3px 0 rgba(41, 121, 255, 0.42);">
-        <table style="width: 100%; min-width: 900px; border-collapse: collapse; border: none; margin: 6px 0;">
+    <div class="row" style="background-color: #0045FF; border-radius: 2px; overflow-x:auto;">
+        <table style="width: 100%; min-width: 900px; border-collapse: collapse; border: none; margin: 8px 0;">
             <tr class="head">
                 <td v-for="item in celSpec" v-bind:style="{width:item.width}">
                     {{item.title}}
@@ -9,7 +9,7 @@
             </tr>
         </table>
     </div>
-    
+
 </template>
 
 <script>
@@ -27,6 +27,7 @@
     *
         -ms-overflow-style none
         scrollbar-width none
+        user-select none
 
     tr.head
         height 25px
@@ -35,7 +36,7 @@
 
     tr.head td
         font-family yekan-bold
-        font-size .8em
+        font-size .9em
         line-height 25px
         color #fff
         text-align center
