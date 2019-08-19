@@ -3,7 +3,7 @@
         <f-loading :isFull="true" v-if="loading"/>
         <no-ssr>
             <f-d-header v-if="!isFullPage" />
-            <div :style="{width: isFullPage ? '100%': 'unset'}" :class=" ['wrapper-content', (isMobile || isFullPage ? '' : 'container-fluid'),{'is-small':openSidebar}]">
+            <div :style="{width: isFullPage ? '100%': 'unset'}" :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
                 <div v-if="isMenuAvailable" :class="['wrapper-sidebar', {'open':openSidebar}]">
                     <admin-sidebar/>
                 </div>

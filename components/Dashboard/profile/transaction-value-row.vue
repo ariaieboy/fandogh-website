@@ -9,7 +9,11 @@
                 <td width="20%">{{celSpec.transactionCode}}</td>
                 <td width="20%">{{celSpec.namespace}}</td>
                 <td class="number" width="20%" style="direction: ltr">{{celSpec.transactionAmount}}</td>
-                <td class="number description-col" width="15%" @click="showTransactionDetail" style="cursor: pointer;">{{celSpec.description}}</td>
+                <td class="number description-col" width="15%" @click="showTransactionDetail" style="cursor: pointer;">
+                    <a href="http://localhost:4000/dashboard/account/transaction-details" target="_blank">
+                        {{celSpec.description}}
+                    </a>
+                </td>
             </tr>
         </table>
     </div>
@@ -19,10 +23,9 @@
     export default {
         props: ['rowNo', 'celSpec'],
         name: "transaction-value-row",
-        methods:{
-            showTransactionDetail(){
+        methods: {
+            showTransactionDetail() {
                 this.$store.commit("SET_DATA", {id: "transactionDetail", data: this.celSpec});
-                this.$router.push('account/transaction-details')
             }
         }
     }
@@ -56,12 +59,12 @@
         text-align center
         border-left 1px solid #adadad
 
-    tr.head td.description-col
+    tr.head td.description-col a
         color #0045FF
         opacity .8
         transition all .2s ease-in-out
 
-    tr.head td.description-col:hover
+    tr.head td.description-col a:hover
         opacity 1
         transition all .2s ease-in-out
 
