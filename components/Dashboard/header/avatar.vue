@@ -234,5 +234,4 @@
                     color $colorPrimary
                 img
                     filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
-
 </style>
