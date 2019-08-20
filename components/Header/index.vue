@@ -79,8 +79,7 @@
                     </div>
                 </div>
 
-                <a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده
-                    همه</a>
+                <a class="button" @click="$router.push('/managed-services')">مشاهده همه</a>
 
             </div>
             <div class="vertical_line"></div>
