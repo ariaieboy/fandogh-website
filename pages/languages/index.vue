@@ -173,7 +173,7 @@
 
     .languages-feature-box
         width 100%
-        padding 32px 16px
+        padding 32px 16px 0 16px
         display flex
         justify-content center
         background #fefefe
@@ -184,6 +184,8 @@
         display flex
         padding-left 16px
         padding-right 16px
+        margin-top 32px
+        margin-bottom 32px
         @media only screen and (max-width 992px)
             margin-bottom 16px
 
@@ -207,7 +209,7 @@
             p.lang-card-title
                 font-family iran-yekan
                 font-size 1.4em
-                font-weight bold
+                font-weight normal
                 font-style normal
                 font-stretch normal
                 line-height 1.71
@@ -238,7 +240,7 @@
         p.languages-title
             font-family iran-yekan
             font-size 2em
-            font-weight bold
+            font-weight normal
             font-style normal
             font-stretch normal
             line-height 1.24
@@ -261,6 +263,7 @@
             padding-left 10%
             letter-spacing normal
             text-align center
+            margin-top 32px
             color #535353
             @media only screen and (max-width 992px)
                 font-size 1.2em
