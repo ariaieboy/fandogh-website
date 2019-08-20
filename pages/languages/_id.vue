@@ -6,16 +6,16 @@
             </div>
         </div>
         <div class="lang-logo-container">
-            <p>< Java ></p>
+            <p>{{ '< ' + language_model[language_id].title_en + ' >' }}</p>
             <div>
                 <div>
-                    <img src="../../assets/svg/services/language/java_lang.svg" alt="java"/>
+                    <img :src="require('../../assets/svg/services/language/' + language_model[language_id].logo + '.svg')" :alt="language_id"/>
                 </div>
 
             </div>
         </div>
 
-        <p class="lang-detail-desc-title">{{lang_detail_slogan}}</p>
+        <p class="lang-detail-desc-title">{{language_model[language_id].slogan}}</p>
 
         <div class="row features-box">
             <div v-for="item in features" class="feature-card col-lg-5 col-md-5 col-sm-12 col-xs-12 container-fluid">
@@ -109,6 +109,40 @@
         data() {
             return {
                 language_id: this.$route.params.id,
+                language_model: {
+
+                    python: {
+                        title_en: 'Python',
+                        title_fa: 'پایتون',
+                        slogan: 'دنیای بی‌کران پایتون بر روی سکوی ابری فندق',
+                        logo: 'python_lang'
+                    },
+                    java: {
+                        title_en: 'Java',
+                        title_fa: 'جاوا',
+                        slogan: 'دنیای بی‌کران جاوا بر روی سکوی ابری فندق',
+                        logo: 'java_lang'
+                    },
+                    php: {
+                        title_en: 'PHP',
+                        title_fa: 'پی‌اچ‌پی',
+                        slogan: 'دنیای بی‌کران پی‌اچ‌پی بر روی سکوی ابری فندق',
+                        logo: 'php_lang'
+                    },
+                    java_script: {
+                        title_en: 'Java Script',
+                        title_fa: 'جاوا اسکریپت',
+                        slogan: 'دنیای بی‌کران جاوا اسکریپت بر روی سکوی ابری فندق',
+                        logo: 'nodejs_lang'
+                    },
+                    c_sharp: {
+                        title_en: 'C#',
+                        title_fa: 'سی شارپ',
+                        slogan: 'دنیای بی‌کران سی شارپ بر روی سکوی ابری فندق',
+                        logo: 'c_sharp_lang'
+                    }
+
+                },
                 lang_detail_slogan: 'دنیای بی‌کران جاوا بر روی سکوی ابری فندق',
                 menu_item: {
                     title: 'init کردن پروژه',
@@ -271,6 +305,7 @@
             line-height: 1.24;
             letter-spacing: normal;
             text-align: center;
+            direction ltr
             color: #f8f8f8;
             @media only screen and (max-width 1230px)
                 font-size 3em
