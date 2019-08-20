@@ -8,6 +8,12 @@
             </div>
         </div>
 
+        <div class="managed-services-feature-container">
+            <h2>{{feature_model.title}}</h2>
+            <h4>{{feature_model.description}}</h4>
+
+        </div>
+
 
 
     </div>
@@ -21,7 +27,14 @@
             return{
                 title: 'سرویس‌های مدیریت شده',
                 description: 'فقط چند کلیک فاصله میان شما و محبوب‌ترین و پر‌ استفاده‌ترین تکنولوژی‌ها وجود دارد',
-                features:[],
+                feature_model:{
+                    title: 'قدرتمند، ایمن و مقیاس‌پذیر',
+                    description: 'به راحتی سرویس مورد نیاز خود را بسازید و دیگر نگران مقیاس‌پذیری و تنظیمات‌ پیچیده و پشتیبانی آن نباشید',
+                    features: [
+
+                    ]
+
+                },
                 managed_services:{
                     title: '',
                     description: '',
@@ -97,5 +110,34 @@
                 font-size 1.3em
                 padding-left 16px
                 padding-right 16px
+
+
+    .managed-services-feature-container
+        background #fefefe
+        padding 32px 24px
+        width 100%
+        h2
+            font-family iran-yekan
+            font-size  2.2em
+            font-weight  normal
+            font-style  normal
+            font-stretch  normal
+            line-height  1.73
+            letter-spacing  normal
+            text-align  center
+            color  #3c3c3c
+        h4
+            font-family  iran-yekan
+            font-size  1.4em
+            font-weight  normal
+            font-style  normal
+            font-stretch  normal
+            line-height  1.71
+            margin-top 16px
+            letter-spacing  normal
+            text-align  center
+            padding-left 10%
+            padding-right 10%
+            color  #535353
 
 </style>
