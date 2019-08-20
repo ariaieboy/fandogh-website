@@ -339,31 +339,31 @@
         transition all .3s ease-in-out
 
         h5
-            font-family: 'Helvetica Neue';
-            font-size: 1.7em;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.75;
+            font-family  'Helvetica Neue'
+            font-size  1.7em
+            font-weight  normal
+            font-style  normal
+            font-stretch  normal
+            line-height  1.75
             margin-top 16px
             margin-bottom 12px
-            letter-spacing: normal;
-            text-align: center;
-            color: #3c3c3c;
+            letter-spacing  normal
+            text-align  center
+            color  #3c3c3c
 
         p
-            font-family: 'Helvetica Neue';
-            font-size: 1.5em;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.75;
-            letter-spacing: normal;
+            font-family  'Helvetica Neue'
+            font-size  1.5em
+            font-weight  normal
+            font-style  normal
+            font-stretch  normal
+            line-height  1.75
+            letter-spacing  normal
             margin-top 16px
-            text-align: center;
-            color: #0045ff;
+            text-align  center
+            color  #0045ff
 
-    .managed-service-card:hover
+    .managed-service-card hover
         transition all .3s ease-in-out
         box-shadow 0 3px 26px 0 rgba(0, 0, 0, 0.16)
 
@@ -376,15 +376,15 @@
         flex-direction column
 
         h3
-            font-family: iran-yekan;
-            font-size: 2em;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.72;
-            letter-spacing: normal;
-            text-align: center;
-            color: #fefefe;
+            font-family  iran-yekan
+            font-size  2em
+            font-weight  normal
+            font-style  normal
+            font-stretch  normal
+            line-height  1.72
+            letter-spacing  normal
+            text-align  center
+            color  #fefefe
             padding-right 10%
             padding-left 10%
             margin-bottom 32px
@@ -396,15 +396,15 @@
             height 45px
             border-radius 5px
             background-color #fefefe
-            font-family: iran-yekan;
-            font-size: 1.2em;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.75;
-            letter-spacing: normal;
-            text-align: center;
-            color: #3c3c3c;
+            font-family  iran-yekan
+            font-size  1.2em
+            font-weight  normal
+            font-style  normal
+            font-stretch  normal
+            line-height  1.75
+            letter-spacing  normal
+            text-align  center
+            color  #3c3c3c
             margin-top 32px
             margin-left auto
             margin-right auto
