@@ -292,8 +292,8 @@
 
             p.language-title
                 font-family 'Helvetica Neue'
-                font-size 1.3em
-                font-weight bold
+                font-size 1.4em
+                font-weight normal
                 font-style normal
                 direction ltr
                 font-stretch normal
