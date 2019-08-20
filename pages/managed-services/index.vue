@@ -52,6 +52,12 @@
 
         </div>
 
+        <div class="managed-services-register-container">
+            <h3>{{register.title}}</h3>
+            <button @click="$router.push('/user/register')">ثبت‌نام</button>
+
+        </div>
+
 
     </div>
 
@@ -139,7 +145,7 @@
                     video: ''
                 },
                 register: {
-                    title: ''
+                    title: 'همین حالا ثبت‌نام کنید و سرویس‌ مدیریت‌ شده خود را ظرف چند ثانیه بسازید و در پروژه خود استفاده کنید'
                 }
 
             }
@@ -360,4 +366,48 @@
     .managed-service-card:hover
         transition all .3s ease-in-out
         box-shadow 0 3px 26px 0 rgba(0, 0, 0, 0.16)
+
+
+    .managed-services-register-container
+        width 100%
+        padding 32px 16px
+        background-color #0045ff
+        display flex
+        flex-direction column
+
+        h3
+            font-family: iran-yekan;
+            font-size: 2em;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.72;
+            letter-spacing: normal;
+            text-align: center;
+            color: #fefefe;
+            padding-right 10%
+            padding-left 10%
+            margin-bottom 32px
+            @media only screen and (max-width 992px)
+                font-size 1.5em
+
+        button
+            width 300px
+            height 45px
+            border-radius 5px
+            background-color #fefefe
+            font-family: iran-yekan;
+            font-size: 1.2em;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.75;
+            letter-spacing: normal;
+            text-align: center;
+            color: #3c3c3c;
+            margin-top 32px
+            margin-left auto
+            margin-right auto
+            box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.3)
+
 </style>
