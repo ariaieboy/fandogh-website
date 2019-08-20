@@ -48,7 +48,7 @@
                         <p class="menu-item-title">{{menu.title}}</p>
                     </div>
 
-                    <button class="menu-button">ثبت‌نام</button>
+                    <button @click="$router.push('/user/register')" class="menu-button">ثبت‌نام</button>
                 </div>
 
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
@@ -598,6 +598,7 @@
                 letter-spacing normal
                 text-align right
                 color #3c3c3c
+                margin-bottom 5px
                 @media only screen and (max-width 992px)
                     font-size 1.2em
 
