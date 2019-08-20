@@ -2,7 +2,7 @@
   <defs>
     <style>
       .cls-1 {
-        fill: #0045ff;
+        fill: #fefefe;
       }
 
       .cls-2, .cls-3 {
@@ -13,11 +13,11 @@
       }
 
       .cls-2 {
-        stroke: #0045ff;
+        stroke: #fefefe;
       }
 
       .cls-3 {
-        stroke: rgba(0,69,255,0.4);
+        stroke: rgba(255,255,255,0.4);
       }
 
       .cls-4 {
