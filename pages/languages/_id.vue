@@ -6,20 +6,24 @@
             </div>
         </div>
         <div class="lang-logo-container">
-            <p>< Java ></p>
+            <p>{{ '< ' + language_model[language_id].title_en + ' >' }}</p>
             <div>
                 <div>
-                    <img src="../../assets/svg/services/language/java_lang.svg" alt="java"/>
+                    <img :src="require('../../assets/svg/services/language/' + language_model[language_id].logo + '.svg')"
+                         :alt="language_id"/>
                 </div>
 
             </div>
         </div>
 
-        <p class="lang-detail-desc-title">{{lang_detail_slogan}}</p>
+        <p class="lang-detail-desc-title">{{language_model[language_id].slogan}}</p>
 
         <div class="row features-box">
-            <div v-for="item in features" class="feature-card col-lg-5 col-md-5 col-sm-12 col-xs-12 container-fluid">
-                <img :src="require('../../assets/svg/services/managed/' + item.icon + '.svg' )" :alt="item.icon">
+            <div v-for="item in language_feature_model[language_id]"
+                 class="feature-card col-lg-5 col-md-5 col-sm-12 col-xs-12 container-fluid">
+                <span>
+                    <img :src="require('./icons/' + item.icon)" :alt="item.icon">
+                </span>
                 <div>
                     <p class="feature-card-title">{{item.title}}</p>
                     <p class="feature-card-description">{{item.description}}</p>
@@ -35,7 +39,9 @@
 
                     <p class="menu-title">آموزش مرحله به مرحله</p>
 
-                    <div v-for="(menu, index) in language_menu" class="lang-menu-item"
+                    <div v-for="(menu, index) in language_tutorials_model[language_id]"
+                         :key="menu.title"
+                         class="lang-menu-item"
                          :class="[menu.selected ? 'selected' : '']"
                          @click="menuItemSelected(index)">
                         <p class="menu-item-number">{{index + 1}}</p>
@@ -61,24 +67,24 @@
 
         </div>
 
-        <div class="lang-detail-desc-container row">
-            <p>چرا پروژه جاوایی خود را روی سکوی ابری فندق مستقر کنید</p>
-            <div v-for="item in java_lang_features"
-                 class="col-lg-5 col-md-5 col-sm-12 col-xs-12 lang-detail-spec-card container-fluid">
-                <img :src="require('../../assets/svg/' + item.icon + '.svg' )" :alt="item.icon">
-                <div>
-                    <p class="lang-detail-spec-card-title">{{item.title}}</p>
-                    <p class="lang-detail-spec-card-description">{{item.description}}</p>
-                </div>
-            </div>
+        <!--<div class="lang-detail-desc-container row">-->
+            <!--<p>چرا پروژه جاوایی خود را روی سکوی ابری فندق مستقر کنید</p>-->
+            <!--<div v-for="item in java_lang_features"-->
+                 <!--class="col-lg-5 col-md-5 col-sm-12 col-xs-12 lang-detail-spec-card container-fluid">-->
+                <!--<img :src="require('../../assets/svg/' + item.icon + '.svg' )" :alt="item.icon">-->
+                <!--<div>-->
+                    <!--<p class="lang-detail-spec-card-title">{{item.title}}</p>-->
+                    <!--<p class="lang-detail-spec-card-description">{{item.description}}</p>-->
+                <!--</div>-->
+            <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
         <div class="framework-container row">
             <p class="framework-title">فریم‌ورک‌های پشتیبانی شده</p>
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 feature-sec-menu">
-                <div @click="frameworkItemSelected(index)" v-for="(item, index) in frameworks" :style=""
+                <div @click="frameworkItemSelected(index)" v-for="(item, index) in frameworks_model[language_id]" :style=""
                      :class="[item.selected ? 'feature-selected' : 'feature-unselected']">{{item.title}}
                 </div>
             </div>
@@ -108,7 +114,265 @@
         layout: 'default',
         data() {
             return {
-                lang_detail_slogan: 'دنیای بی‌کران جاوا بر روی سکوی ابری فندق',
+                language_id: this.$route.params.id,
+                language_model: {
+
+                    python: {
+                        title_en: 'Python',
+                        title_fa: 'پایتون',
+                        slogan: 'دنیای بی‌کران پایتون بر روی سکوی ابری فندق',
+                        logo: 'python_lang'
+                    },
+                    java: {
+                        title_en: 'Java',
+                        title_fa: 'جاوا',
+                        slogan: 'دنیای بی‌کران جاوا بر روی سکوی ابری فندق',
+                        logo: 'java_lang'
+                    },
+                    php: {
+                        title_en: 'PHP',
+                        title_fa: 'پی‌اچ‌پی',
+                        slogan: 'دنیای بی‌کران پی‌اچ‌پی بر روی سکوی ابری فندق',
+                        logo: 'php_lang'
+                    },
+                    java_script: {
+                        title_en: 'Java Script',
+                        title_fa: 'جاوا اسکریپت',
+                        slogan: 'دنیای بی‌کران جاوا اسکریپت بر روی سکوی ابری فندق',
+                        logo: 'nodejs_lang'
+                    },
+                    c_sharp: {
+                        title_en: 'C#',
+                        title_fa: 'سی شارپ',
+                        slogan: 'دنیای بی‌کران سی شارپ بر روی سکوی ابری فندق',
+                        logo: 'c_sharp_lang'
+                    }
+
+                },
+                language_feature_model: {
+                    java: [
+                        {
+                            title: 'پشتیبانی کامل از زبان‌ها',
+                            description: 'تمام تلاشمان را میکنیم تا با کمک توسعه‌دهندگان و استفاده از تجربیات دیگران زبان‌های معروف و پر کاربرد را پیوسته منطبق با معماری ابری ارائه کنیم تا شما تمام تمرکز خود را همیشه بر روی توسعه محصولات خود معطوف کنید.',
+                            icon: 'code.png'
+                        },
+                        {
+                            title: 'آزادی انتخاب فریم‌ورک',
+                            description: 'محدودیت در سکوی ابری فندق به وسعت آسمان و تنوع فریم‌ورک‌ها به تعداد ابرهای این آسمان‌ است تا شما بتوانید تکنولوژی دلخواه خود را به راحتی هرچه تمام‌تر بر روی این سکو مستقر کنید.',
+                            icon: 'framework.svg'
+                        },
+                        {
+                            title: 'اجرای مستقیم کد‌ها',
+                            description: 'کدهای خود را به هر زبانی که هستند به راحتی و به صورت مستقیم ظرف چند دقیقه بر روی سکوی ابری فندق مستقر کنید بی‌آنکه نیاز باشد دانشی در مورد docker داشته باشید.',
+                            icon: 'source_deploy.svg'
+                        },
+                        {
+                            title: 'منطبق با معماری ابری',
+                            description: '',
+                            icon: 'framework.svg'
+                        },
+                    ],
+                    python: [
+                        {
+                            title: 'پشتیبانی کامل از زبان‌ها',
+                            description: 'تمام تلاشمان را میکنیم تا با کمک توسعه‌دهندگان و استفاده از تجربیات دیگران زبان‌های معروف و پر کاربرد را پیوسته منطبق با معماری ابری ارائه کنیم تا شما تمام تمرکز خود را همیشه بر روی توسعه محصولات خود معطوف کنید.',
+                            icon: 'code.png'
+                        },
+                        {
+                            title: 'آزادی انتخاب فریم‌ورک',
+                            description: 'محدودیت در سکوی ابری فندق به وسعت آسمان و تنوع فریم‌ورک‌ها به تعداد ابرهای این آسمان‌ است تا شما بتوانید تکنولوژی دلخواه خود را به راحتی هرچه تمام‌تر بر روی این سکو مستقر کنید.',
+                            icon: 'framework.svg'
+                        },
+                        {
+                            title: 'اجرای مستقیم کد‌ها',
+                            description: 'کدهای خود را به هر زبانی که هستند به راحتی و به صورت مستقیم ظرف چند دقیقه بر روی سکوی ابری فندق مستقر کنید بی‌آنکه نیاز باشد دانشی در مورد docker داشته باشید.',
+                            icon: 'source_deploy.svg'
+                        },
+                        {
+                            title: 'منطبق با معماری ابری',
+                            description: '',
+                            icon: 'framework.svg'
+                        },
+                    ],
+                    php: [
+                        {
+                            title: 'پشتیبانی کامل از زبان‌ها',
+                            description: 'تمام تلاشمان را میکنیم تا با کمک توسعه‌دهندگان و استفاده از تجربیات دیگران زبان‌های معروف و پر کاربرد را پیوسته منطبق با معماری ابری ارائه کنیم تا شما تمام تمرکز خود را همیشه بر روی توسعه محصولات خود معطوف کنید.',
+                            icon: 'code.png'
+                        },
+                        {
+                            title: 'آزادی انتخاب فریم‌ورک',
+                            description: 'محدودیت در سکوی ابری فندق به وسعت آسمان و تنوع فریم‌ورک‌ها به تعداد ابرهای این آسمان‌ است تا شما بتوانید تکنولوژی دلخواه خود را به راحتی هرچه تمام‌تر بر روی این سکو مستقر کنید.',
+                            icon: 'framework.svg'
+                        },
+                        {
+                            title: 'اجرای مستقیم کد‌ها',
+                            description: 'کدهای خود را به هر زبانی که هستند به راحتی و به صورت مستقیم ظرف چند دقیقه بر روی سکوی ابری فندق مستقر کنید بی‌آنکه نیاز باشد دانشی در مورد docker داشته باشید.',
+                            icon: 'source_deploy.svg'
+                        },
+                        {
+                            title: 'منطبق با معماری ابری',
+                            description: '',
+                            icon: 'framework.svg'
+                        },
+                    ],
+                    c_sharp: [
+                        {
+                            title: 'پشتیبانی کامل از زبان‌ها',
+                            description: 'تمام تلاشمان را میکنیم تا با کمک توسعه‌دهندگان و استفاده از تجربیات دیگران زبان‌های معروف و پر کاربرد را پیوسته منطبق با معماری ابری ارائه کنیم تا شما تمام تمرکز خود را همیشه بر روی توسعه محصولات خود معطوف کنید.',
+                            icon: 'code.png'
+                        },
+                        {
+                            title: 'آزادی انتخاب فریم‌ورک',
+                            description: 'محدودیت در سکوی ابری فندق به وسعت آسمان و تنوع فریم‌ورک‌ها به تعداد ابرهای این آسمان‌ است تا شما بتوانید تکنولوژی دلخواه خود را به راحتی هرچه تمام‌تر بر روی این سکو مستقر کنید.',
+                            icon: 'framework.svg'
+                        },
+                        {
+                            title: 'اجرای مستقیم کد‌ها',
+                            description: 'کدهای خود را به هر زبانی که هستند به راحتی و به صورت مستقیم ظرف چند دقیقه بر روی سکوی ابری فندق مستقر کنید بی‌آنکه نیاز باشد دانشی در مورد docker داشته باشید.',
+                            icon: 'source_deploy.svg'
+                        },
+                        {
+                            title: 'منطبق با معماری ابری',
+                            description: '',
+                            icon: 'framework.svg'
+                        },
+                    ],
+                    java_script: [
+                        {
+                            title: 'پشتیبانی کامل از زبان‌ها',
+                            description: 'تمام تلاشمان را میکنیم تا با کمک توسعه‌دهندگان و استفاده از تجربیات دیگران زبان‌های معروف و پر کاربرد را پیوسته منطبق با معماری ابری ارائه کنیم تا شما تمام تمرکز خود را همیشه بر روی توسعه محصولات خود معطوف کنید.',
+                            icon: 'code.png'
+                        },
+                        {
+                            title: 'آزادی انتخاب فریم‌ورک',
+                            description: 'محدودیت در سکوی ابری فندق به وسعت آسمان و تنوع فریم‌ورک‌ها به تعداد ابرهای این آسمان‌ است تا شما بتوانید تکنولوژی دلخواه خود را به راحتی هرچه تمام‌تر بر روی این سکو مستقر کنید.',
+                            icon: 'framework.svg'
+                        },
+                        {
+                            title: 'اجرای مستقیم کد‌ها',
+                            description: 'کدهای خود را به هر زبانی که هستند به راحتی و به صورت مستقیم ظرف چند دقیقه بر روی سکوی ابری فندق مستقر کنید بی‌آنکه نیاز باشد دانشی در مورد docker داشته باشید.',
+                            icon: 'source_deploy.svg'
+                        },
+                        {
+                            title: 'منطبق با معماری ابری',
+                            description: '',
+                            icon: 'framework.svg'
+                        },
+                    ]
+                },
+                language_tutorials_model: {
+                    java:[
+                        {
+                            title: 'init کردن پروژه',
+                            selected: true,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب context',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب Build Tools',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'Deploy کردن پروژه',
+                            selected: false,
+                            video: 'sample'
+                        }
+                    ],
+                    python:[
+                        {
+                            title: 'init کردن پروژه',
+                            selected: true,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب context',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب Build Tools',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'Deploy کردن پروژه',
+                            selected: false,
+                            video: 'sample'
+                        }
+                    ],
+                    nodejs:[
+                        {
+                            title: 'init کردن پروژه',
+                            selected: true,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب context',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب Build Tools',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'Deploy کردن پروژه',
+                            selected: false,
+                            video: 'sample'
+                        }
+                    ],
+                    php:[
+                        {
+                            title: 'init کردن پروژه',
+                            selected: true,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب context',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب Build Tools',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'Deploy کردن پروژه',
+                            selected: false,
+                            video: 'sample'
+                        }
+                    ],
+                    c_sharp:[
+                        {
+                            title: 'init کردن پروژه',
+                            selected: true,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب context',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'انتخاب Build Tools',
+                            selected: false,
+                            video: 'sample'
+                        },
+                        {
+                            title: 'Deploy کردن پروژه',
+                            selected: false,
+                            video: 'sample'
+                        }
+                    ]
+                },
                 menu_item: {
                     title: 'init کردن پروژه',
                     selected: true,
@@ -119,114 +383,61 @@
                     description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
                     image: 'spring_boot_framework',
                 },
-                frameworks: [
-                    {
-                        title: 'Spring Boot',
-                        selected: true,
-                        card: {
+                frameworks_model:{
+                    java:[
+                        {
                             title: 'Spring Boot',
-                            description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                            image: 'spring_boot_framework',
-                        }
-                    },
-                    {
-                        title: 'Hibernate',
-                        selected: false,
-                        card: {
+                            selected: true,
+                            card: {
+                                title: 'Spring Boot',
+                                description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                                image: 'spring_boot_framework',
+                            }
+                        },
+                        {
                             title: 'Hibernate',
-                            description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                            image: 'spring_boot_framework',
-                        }
-                    },
-                    {
-                        title: 'Tomcat',
-                        selected: false,
-                        card: {
+                            selected: false,
+                            card: {
+                                title: 'Hibernate',
+                                description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                                image: 'spring_boot_framework',
+                            }
+                        },
+                        {
                             title: 'Tomcat',
-                            description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                            image: 'spring_boot_framework',
-                        }
-                    },
+                            selected: false,
+                            card: {
+                                title: 'Tomcat',
+                                description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
+                                image: 'spring_boot_framework',
+                            }
+                        },
 
 
-                ],
-                features: [
-                    {
-                        title: 'پشتیبانی کامل از زبان‌ها',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'managed_service_mysql'
-                    },
-                    {
-                        title: 'آزادی انتخاب فریم‌ورک',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'managed_service_mysql'
-                    }, {
-                        title: 'پشتیبانی کامل از زبان‌ها',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'managed_service_mysql'
-                    },
-                    {
-                        title: 'آزادی انتخاب فریم‌ورک',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'managed_service_mysql'
-                    },
-                ],
-                language_menu: [
-                    {
-                        title: 'init کردن پروژه',
-                        selected: true,
-                        video: 'sample'
-                    },
-                    {
-                        title: 'انتخاب context',
-                        selected: false,
-                        video: 'sample'
-                    },
-                    {
-                        title: 'انتخاب Build Tools',
-                        selected: false,
-                        video: 'sample'
-                    },
-                    {
-                        title: 'Deploy کردن پروژه',
-                        selected: false,
-                        video: 'sample'
-                    }
-                ],
-                java_lang_features: [
-                    {
-                        title: 'راحتی اتخاب فریم‌ورک',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'framework_icon'
-                    },
-                    {
-                        title: 'مقیاس‌پذیری آسان',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'scale_icon'
-                    },
-                    {
-                        title: 'اجرای مستقیم',
-                        description: 'در کمترین زمان و با اتکا به پشتیبانی حرفه‌ای فندق، بدون نیاز به دانش داکر پروژه خود را به راحتی بر روی بستر ابری مستقر کنید و از مزایای معماری ابری بهره‌مند شوید.',
-                        icon: 'source_deployment_icon'
-                    },
-                ]
+                    ],
+                    python:[],
+                    php: [],
+                    c_sharp: [],
+                    java_script: []
+                } ,
             }
         },
         methods: {
             menuItemSelected(index) {
-                this.language_menu.forEach(menu => {
+                this.language_tutorials_model[this.language_id].forEach(menu => {
                     menu.selected = false
                 });
-                this.language_menu[index].selected = true;
-                this.menu_item = this.language_menu[index];
+
+                this.language_tutorials_model[this.language_id][index].selected = true;
+                this.menu_item = this.language_tutorials_model[this.language_id][index];
             },
             frameworkItemSelected(index) {
-                this.frameworks.forEach(framework => {
+                this.frameworks_model[this.language_id].forEach(framework => {
                     framework.selected = false
                 });
 
-                this.frameworks[index].selected = true
-                this.framework = this.frameworks[index].card
+                this.frameworks_model[this.language_id][index].selected = true
+                this.framework = this.frameworks_model[this.language_id][index].card
             }
         }
     }
@@ -270,6 +481,7 @@
             line-height: 1.24;
             letter-spacing: normal;
             text-align: center;
+            direction ltr
             color: #f8f8f8;
             @media only screen and (max-width 1230px)
                 font-size 3em
@@ -308,14 +520,15 @@
     .lang-detail-desc-title
         font-family: iran-yekan;
         font-size: 2.3em
-        font-weight: bold;
+        font-weight: normal;
         font-style: normal;
         font-stretch: normal;
         line-height: 1.72;
         letter-spacing: normal;
         text-align: center;
         color: #0045ff;
-        margin-top 32px
+        margin-top 48px
+        margin-bottom 48px
         @media only screen and (max-width 1230px)
             font-size 1.7em
 
@@ -329,13 +542,20 @@
         display flex
         padding-left 16px
         padding-right 16px
-        margin-bottom 16px
+        margin-bottom 24px
+        margin-top 24px
 
-        img
-            margin-top 0
-            height max-content
-            @media only screen and (max-width 992px)
-                width 58px
+        span
+            width 60px
+            height 60px
+            display flex
+            border-radius 50%
+            background #0045ff
+
+            img
+                width 32px
+                height auto
+                margin auto
 
         div
             width 100%
@@ -346,13 +566,13 @@
             p.feature-card-title
                 font-family iran-yekan
                 font-size 1.4em
-                font-weight bold
+                font-weight normal
                 font-style normal
                 font-stretch normal
                 line-height 1.71
                 letter-spacing normal
                 text-align right
-                color #0045ff
+                color #3c3c3c
                 @media only screen and (max-width 992px)
                     font-size 1.2em
 
@@ -558,7 +778,7 @@
         p.framework-title
             font-family: iran-yekan;
             font-size: 2.2em
-            font-weight: bold;
+            font-weight: normal;
             font-style: normal;
             width 100%
             font-stretch: normal;
@@ -608,7 +828,7 @@
             padding-right 12px
             font-weight normal
 
-        @media only screen and (max-width: 1230px)
+        @media only screen and (max-width: 992px)
             flex-direction row
             top 16px
             display flex
