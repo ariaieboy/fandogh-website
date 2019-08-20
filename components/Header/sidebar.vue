@@ -19,19 +19,19 @@
         <div class="products">
             <ul class="row">
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="http://localhost:4000/languages">اجرای مستقیم کدها</a>
+                    <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="http://fandogh-staging123123.fandogh.cloud/languages" target="_blank">اجرای مستقیم کدها</a>
                 </li>
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="http://localhost:4000/languages">سرویس‌های مدیریت شده</a>
+                    <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="http://fandogh-staging123123.fandogh.cloud/managed-services" target="_blank">سرویس‌های مدیریت شده</a>
                 </li>
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/services/other_services/developer_tools.svg" alt="lang"><a href="http://localhost:4000/languages">Developer Tools</a>
+                    <img src="../../assets/svg/services/other_services/developer_tools.svg" alt="lang"><a href="#">Developer Tools</a>
                 </li>
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/services/other_services/object-storage.svg" alt="lang"><a href="http://localhost:4000/languages">Object Storage</a>
+                    <img src="../../assets/svg/services/other_services/object-storage.svg" alt="lang"><a href="#">Object Storage</a>
                 </li>
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/services/other_services/operation_tools.svg" alt="lang"><a href="http://localhost:4000/languages">Operation Tools</a>
+                    <img src="../../assets/svg/services/other_services/operation_tools.svg" alt="lang"><a href="#">Operation Tools</a>
                 </li>
 
             </ul>
