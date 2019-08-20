@@ -59,7 +59,6 @@
             <sidebar ref="menu"/>
             <message ref="message"/>
         </header>
-
         <div id="sub_menu" ref="sub_menu" class="sub_menu">
             <div class="menu_section">
                 <p>سرویس‌های مدیریت شده</p>
@@ -126,12 +125,10 @@
                 </div>
 
                 <!--<a class="button" href="https://docs.fandogh.cloud/docs/managed-services-intro.html" target="_blank">مشاهده-->
-                    <!--همه</a>-->
+                <!--همه</a>-->
 
             </div>
         </div>
-
-
     </div>
 
 </template>
@@ -354,7 +351,7 @@
         width 100%
         box-shadow 0 3px 15px 12px rgba(0, 0, 0, 0.16)
         top 60px
-        position absolute
+        position fixed
         background-color #ffffff
         padding 16px
         z-index 990
@@ -362,6 +359,8 @@
         visibility hidden
         opacity 0
         transition all 0.2s ease-in-out
+        @media only screen and (max-width: 1230px)
+            position absolute
 
         div.vertical_line
             width 1px
