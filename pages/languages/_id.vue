@@ -108,6 +108,7 @@
         layout: 'default',
         data() {
             return {
+                language_id: this.$route.params.id,
                 lang_detail_slogan: 'دنیای بی‌کران جاوا بر روی سکوی ابری فندق',
                 menu_item: {
                     title: 'init کردن پروژه',

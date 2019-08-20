@@ -325,4 +325,7 @@
                 color #2979ff
                 cursor pointer
 
+            p.language-link:hover
+                color #0045ff
+
 </style>
