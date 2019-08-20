@@ -12,9 +12,11 @@
             <h2>{{feature_model.title}}</h2>
             <h4>{{feature_model.description}}</h4>
 
-            <div class="row" style="width: 100%; margin-top: 48px; max-width: 1370px; margin-left: auto; margin-right: auto">
+            <div class="row"
+                 style="width: 100%; margin-top: 48px; max-width: 1370px; margin-left: auto; margin-right: auto">
 
-                <div v-for="feature in feature_model.features" class="managed-service-feature-card col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                <div v-for="feature in feature_model.features"
+                     class="managed-service-feature-card col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <span>
                         <img :src="require('./img/icons/' + feature.icon)" :alt="feature.icon">
                     </span>
@@ -25,8 +27,27 @@
 
                 </div>
 
-                <div style="  height: 0; border: solid .5px #c4c2c2;"></div>
+            </div>
 
+            <div style="  height: 0; border: solid .5px #c4c2c2;"></div>
+
+        </div>
+
+        <div class="managed-services-container">
+            <h2>{{managed_services.title}}</h2>
+            <h4>{{managed_services.description}}</h4>
+
+            <div class="row" style="width: 100%; margin-top: 48px; max-width: 1370px; margin-left: auto; margin-right: auto">
+                <div v-for="service in managed_services.services" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="padding: 16px">
+                    <a :href="service.href" target="_blank" class="managed-service-card">
+                        <img :src="require('../../assets/svg/services/managed/' + service.icon + '.svg')"/>
+                        <h5>{{service.title}}</h5>
+                        <div style=" width: 100%; padding-left: 10%; padding-right: 10%;  height: 1px; border-radius: 25px; background-image: linear-gradient(to right, rgba(0, 69, 255, 0.2), #c1c1c1 49%, rgba(0, 69, 255, 0.2));"></div>
+                        <p>{{service.description}}</p>
+
+                    </a>
+
+                </div>
             </div>
 
         </div>
@@ -83,9 +104,34 @@
 
                 },
                 managed_services: {
-                    title: '',
-                    description: '',
-                    services: []
+                    title: 'همین‌ حالا سرویس خود را بسازید',
+                    description: 'تمرکز و منابع خود را صرف توسعه محصولتان کنید و آسان کردن مدیریت و مقیاس پذیری آن را به ما بسپارید',
+                    services: [
+                        {
+                            title: 'PostgreSQL',
+                            description: 'SQL Database',
+                            icon: 'managed_service_postgresql',
+                            href: 'https://docs.fandogh.cloud/docs/postgresql-managed-service.html'
+                        },
+                        {
+                            title: 'MySQL',
+                            description: 'SQL Database',
+                            icon: 'managed_service_mysql',
+                            href: 'https://docs.fandogh.cloud/docs/mysql-managed-service.html'
+                        },
+                        {
+                            title: 'Redis',
+                            description: 'In Memory Cache Database',
+                            icon: 'managed_service_redis',
+                            href: 'https://docs.fandogh.cloud/docs/redis-managed-service.html'
+                        },
+                        {
+                            title: 'Proxy',
+                            description: 'IP Range Limiter',
+                            icon: 'managed_service_proxy',
+                            href: 'https://docs.fandogh.cloud/docs/proxy-managed-service.html'
+                        },
+                    ]
                 },
                 tutorial: {
                     title: '',
@@ -161,12 +207,92 @@
 
     .managed-services-feature-container
         background #fefefe
-        padding 32px 24px
         width 100%
 
         h2
             font-family iran-yekan
-            font-size 2.2em
+            font-size 2.4em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.73
+            letter-spacing normal
+            text-align center
+            color #3c3c3c
+            margin-top 48px
+            @media only screen and (max-width 992px)
+                font-size 1.8em
+
+        h4
+            font-family iran-yekan
+            font-size 1.4em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.71
+            margin-top 16px
+            letter-spacing normal
+            text-align center
+            padding-left 10%
+            padding-right 10%
+            color #535353
+            @media only screen and (max-width 992px)
+                font-size 1.2em
+
+    .managed-service-feature-card
+        display flex
+        width 100%
+        margin-top 32px
+        margin-bottom 32px
+
+        span
+            width 52px
+            height 52px
+            border-radius 5px
+            background-color rgba(0, 69, 255, 0.2)
+            display flex
+
+            img
+                width 36px
+                height 36px
+                margin auto
+
+        div
+            display flex
+            flex-direction column
+            flex 1
+            padding-right 16px
+
+            h5
+                font-family: iran-yekan;
+                font-size: 1.4em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.75;
+                letter-spacing: normal;
+                text-align: right;
+                color: #3c3c3c;
+
+            p
+                font-family: iran-yekan;
+                font-size: 1.2em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.75;
+                letter-spacing: normal;
+                margin-top 8px
+                text-align: right;
+                color: #535353;
+
+    .managed-services-container
+        width 100%
+        padding 64px 16px
+
+        h2
+            font-family iran-yekan
+            font-size 2.4em
             font-weight normal
             font-style normal
             font-stretch normal
@@ -193,46 +319,45 @@
             @media only screen and (max-width 992px)
                 font-size 1.2em
 
-    .managed-service-feature-card
-        display flex
-        width 100%
-        margin-top 32px
-        margin-bottom 32px
-        span
-            width 52px
-            height 52px
-            border-radius 5px
-            background-color rgba(0, 69, 255, 0.2)
-            display flex
-            img
-                width 36px
-                height 36px
-                margin auto
-        div
-            display flex
-            flex-direction column
-            flex 1
-            padding-right 16px
-            h5
-                font-family: iran-yekan;
-                font-size: 1.4em;
-                font-weight: normal;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: 1.75;
-                letter-spacing: normal;
-                text-align: right;
-                color: #3c3c3c;
-            p
-                font-family: iran-yekan;
-                font-size: 1.2em;
-                font-weight: normal;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: 1.75;
-                letter-spacing: normal;
-                margin-top 8px
-                text-align: right;
-                color: #535353;
 
+    .managed-service-card
+        display flex
+        padding 16px
+        height 250px
+        border-radius 5px
+        width 100%
+        flex-direction column
+        box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.16)
+        background-color #ffffff
+        cursor pointer
+        transition all .3s ease-in-out
+
+        h5
+            font-family: 'Helvetica Neue';
+            font-size: 1.7em;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.75;
+            margin-top 16px
+            margin-bottom 12px
+            letter-spacing: normal;
+            text-align: center;
+            color: #3c3c3c;
+
+        p
+            font-family: 'Helvetica Neue';
+            font-size: 1.5em;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.75;
+            letter-spacing: normal;
+            margin-top 16px
+            text-align: center;
+            color: #0045ff;
+
+    .managed-service-card:hover
+        transition all .3s ease-in-out
+        box-shadow 0 3px 26px 0 rgba(0, 0, 0, 0.16)
 </style>
