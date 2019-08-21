@@ -11,6 +11,10 @@
             </div>
         </div>
 
+        <div class="audience-toolbar">
+
+        </div>
+
     </div>
 
 </template>
@@ -129,5 +133,15 @@
                 font-size 1.3em
                 padding-left 16px
                 padding-right 16px
+
+
+    .audience-toolbar
+        width 100%
+        height 55px
+        background-color #080295
+        display flex
+        overflow-x scroll
+        overflow-y hidden
+        justify-content center
 
 </style>
