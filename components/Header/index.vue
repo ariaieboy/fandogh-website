@@ -360,7 +360,6 @@
         transition all 0.2s ease-in-out
         @media only screen and (max-width: 1230px)
             position absolute
-        @media only screen and (max-width: 1230px)
             display none
 
         div.vertical_line
