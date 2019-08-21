@@ -4,15 +4,20 @@
         <div class="row audience-header">
             <div class="audience-bg">
                 <span>
-                    <img :src="require('../../assets/svg/targets/' + audience_model[audience].icon)" :alt="audience_model[audience].icon">
+                    <img :src="require('../../assets/svg/targets/' + audience_model[audience].icon)"
+                         :alt="audience_model[audience].icon">
                 </span>
                 <p class="banner-title">{{audience_model[audience].title}}</p>
                 <p class="banner-description">{{audience_model[audience].description}}</p>
             </div>
         </div>
 
-        <div class="audience-toolbar">
-
+        <div class="row" style="margin-left: 0; margin-right: 0; width: 100%">
+            <div class="audience-toolbar">
+                <p @click="$router.replace('/audience/' + item.name)" v-for="item in audience_model"
+                   :class="['toolbar-option', {'selected': item.title === audience_model[audience].title}]">
+                    {{item.title}}</p>
+            </div>
         </div>
 
     </div>
@@ -22,45 +27,52 @@
 <script>
     export default {
         name: "_id",
-        data(){
-            return{
+        data() {
+            return {
 
                 audience: this.$route.params.id,
-                audience_model:{
+                audience_model: {
                     students: {
                         title: 'دانشجویان',
                         description: 'برای دانشجویان با ایده‌های ناب و بودجه محدود',
-                        icon: 'students.svg'
+                        icon: 'students.svg',
+                        name: 'students'
                     },
                     startups: {
                         title: 'استارتاپ‌ها',
                         description: 'سکویی برای توسعه، مدیریت و مقیاس‌پذیری پروژه‌های شما',
-                        icon: 'startups.svg'
+                        icon: 'startups.svg',
+                        name: 'startups'
                     },
                     innovators: {
                         title: 'نوآوران',
                         description: 'ایده خود را به سرعت تبدیل به محصول کنید و در اختیار میلیون‌ها کاربر بگذارید',
-                        icon: 'innovators.svg'
+                        icon: 'innovators.svg',
+                        name: 'innovators'
                     },
                     teams: {
                         title: 'تیم‌ها',
                         description: 'سهولت در توسعه و سادگی در مدیریت',
-                        icon: 'teams.svg'
+                        icon: 'teams.svg',
+                        name: 'teams'
                     },
                     companies: {
                         title: 'شرکت‌ها',
                         description: 'راه‌حل‌های Enterprise در برابر هزینه‌های پایین و مزایای بی‌شمار',
-                        icon: 'developers.svg'
+                        icon: 'developers.svg',
+                        name: 'companies'
                     },
                     freelancers: {
                         title: 'Freelancers',
                         description: 'برای Freelancer هایی که نیاز به میزبانی یکپارچه و تطبیق‌پذیر دارند',
-                        icon: 'freelancers.svg'
+                        icon: 'freelancers.svg',
+                        name: 'freelancers'
                     },
                     developers: {
                         title: 'برنامه‌نویسان',
                         description: 'هزینه کم، قابلیت‌های نامحدود و هزینه پایین',
-                        icon: 'developers.svg'
+                        icon: 'developers.svg',
+                        name: 'developers'
                     },
                 }
             }
@@ -69,6 +81,10 @@
 </script>
 
 <style lang="stylus" scoped>
+
+    .row
+        margin-left 0
+        margin-right 0
 
     .audience-header
         width 100%
@@ -95,26 +111,33 @@
             display flex
             margin-left auto
             margin-right auto
+            @media only screen and (max-width 992px)
+                width 125px
+                height 125px
+
             img
-                width 150px
-                height 150px
+                width 123px
+                height 123px
                 margin auto
+                @media only screen and (max-width 992px)
+                    width 80px
+                    height 80px
 
 
         p.banner-title
             font-family iran-yekan
-            font-size 3.5em
+            font-size 3em
             font-weight normal
             font-style normal
             font-stretch normal
             line-height 1.24
-            margin-top 48px
+            margin-top 32px
             letter-spacing normal
             text-align center
+            margin-bottom 0
             color #f8f8f8
             @media only screen and (max-width 992px)
                 font-size 2.4em
-                margin-top 0
 
         p.banner-description
             font-family iran-yekan
@@ -123,12 +146,13 @@
             font-style normal
             font-stretch normal
             line-height 1.71
-            margin-top 32px
+            margin-top 16px
             padding-right 20%
             padding-left 20%
             letter-spacing normal
             text-align center
-            color #f8f8f8
+            margin-bottom 48px
+            color #dedede
             @media only screen and (max-width 992px)
                 font-size 1.3em
                 padding-left 16px
@@ -137,11 +161,37 @@
 
     .audience-toolbar
         width 100%
-        height 55px
+        height 65px
         background-color #080295
         display flex
-        overflow-x scroll
-        overflow-y hidden
+        flex-direction row
+        padding-left 16px
         justify-content center
+        padding-right 16px
+        position sticky
+        @media only screen and (max-width 992px)
+            white-space nowrap
+            flex-direction row
+            justify-content unset
+            overflow-x scroll
+            overflow-y hidden
+
+        p.toolbar-option
+            font-family: iran-yekan;
+            font-size: 1.3em;
+            font-weight normal
+            font-style: normal
+            font-stretch: normal;
+            line-height: 1.73;
+            width unset
+            letter-spacing: normal;
+            text-align: center;
+            color: #9c9c9c;
+            margin auto 12px
+            cursor pointer
+
+            &.selected
+                font-size 1.4em
+                color #fefefe
 
 </style>
