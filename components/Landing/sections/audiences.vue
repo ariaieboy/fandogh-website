@@ -13,7 +13,9 @@
             <div class="audience-rail row">
 
                 <div v-for="item in audiences" class="aud-item">
-                    <img :src="require('../../../assets/svg/targets/' + item.image + '.svg')" :alt="item.image">
+                    <span>
+                        <img :src="require('../../../assets/svg/targets/' + item.image + '.svg')" :alt="item.image">
+                    </span>
                     <div style="width: 100%; padding-left: 12px; padding-right: 12px; display: flex; flex-direction: column">
                         <p>{{item.title}}</p>
                         <div class="divider"></div>
@@ -56,6 +58,16 @@
                     {
                         image: 'developers',
                         title: 'برنامه‌نویسان',
+                        href: ''
+                    },
+                    {
+                        image: 'students',
+                        title: 'دانشجویان',
+                        href: ''
+                    },
+                    {
+                        image: 'freelancers',
+                        title: 'freelancers',
                         href: ''
                     }
                 ]
@@ -107,11 +119,11 @@
         div.horizontal-line
             width 450px
             height 0
-            border solid 2px #0045ff
+            border solid 1px #0045ff
             margin-left auto
             margin-right auto
             border-radius 25px
-            margin-top 8px
+            margin-top 2px
             @media only screen and (max-width: 992px)
                 width 350px
 
@@ -133,9 +145,16 @@
             @media only screen and (max-width: 992px)
                 margin-top 16px
 
-            img
+            span
+                display flex
+                width 100px
+                height 100px
                 margin-left 24px
                 margin-right 24px
+                img
+                    margin auto
+                    width 90px
+                    height 90px
 
             div
                 p
@@ -166,7 +185,7 @@
             div
                 p
                     color #0045ff
-                    font-weight bold
+
                 div.divider
                     display unset
 
@@ -190,7 +209,6 @@
         @media only screen and (max-width: 992px)
             font-size 1.1em
             margin-top 32px
-
 
 
 </style>
