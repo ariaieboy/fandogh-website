@@ -20,6 +20,26 @@
             </div>
         </div>
 
+        <div class="row" style="margin-top: 32px; width: 100%; margin-left: 0; margin-right: 0;">
+
+            <div class="descriptions">
+
+                <h3>{{descriptions[audience].title}}</h3>
+                <p v-html="descriptions[audience].description"></p>
+
+                <div v-for="item in descriptions[audience].others" class="other-descriptions">
+
+                    <h4>{{item.title}}</h4>
+                    <p v-html="item.description"></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="section-divider"></div>
+
         <div class="platform-feature-container">
             <h2>{{features[audience].title}}</h2>
             <h4>{{features[audience].description}}</h4>
@@ -95,6 +115,23 @@
                         icon: 'developers.svg',
                         name: 'developers'
                     },
+                },
+                descriptions:{
+                  students:{
+                      title: 'ایده خود را بر روی سکوی ابری فندق عملی کنید',
+                      description: 'دانشجویان و دانش‌آموزان منابع بی کرانی از ایده دارند که متاسفانه به دلیل نبود برخی ابزارهای مورد نیاز و یا محدودیت‌های مالی، آن‌ها را به فراموشی میسپارند.<br>\n' +
+                          'ما در سکوی ابری فندق به عنوان اولین ارائه کننده سکوی ابری در ایران، پیش‌قدم شدیم تا دانشجویان و دانش‌آموزان ایده‌های خود را بر روی بستر ابری بدون محدودیت و به صورت رایگان مستقر کنند و بازخورد‌های محصول خود را دریافت کنند تا در شادی و موفقیت شما عزیزان شریک شویم.<br>\n',
+                      others: [
+                          {
+                              title: 'پشتیبانی و ویژگی های منحصر به فرد',
+                              description: 'ما در سکوی ابری فندق همه چیز را تا حد ممکن برای شما ساده‌سازی کرده‌ایم تا شما درگیری و مشغولیت ذهنی بابت تطبیق ایده‌های خود با ساختار و معماری ابری نداشته باشید.<br><br>مزایایی مانند مستندات کامل و پیوسته در حال توسعه، زبان‌های پشتیبانی شده و فریم‌ورک‌های مورد محبوب و مورد نیاز شما ، رابط‌های مدیریتی متعدد و … همه و همه برای این به وجود آمده‌اند تا شما با خیال راحت ایده‌های خود را عملیاتی کنید.<br>'
+                          },
+                          {
+                              title: 'پیشینه سرویس‌های رایگان',
+                              description: 'تعداد خیلی زیادی از کاربران طی این سال‌ها از سرویس‌های رایگان سکوی ابری فندق استفاده کرده‌اند که درصد چشم‌گیری از آن‌ها در حال حاضر سرویس‌های خود را گسترش داده و ایده خود را از حالت MVP به یک محصول قابل ارائه و تجاری تبدیل کرده‌اند؛ حال شاید کسب‌و‌کار بعدی که تبدیل به یک استارتاپ موفق خواهد شد برای شما باشد.'
+                          }
+                      ]
+                  }
                 },
                 features: {
 
@@ -256,7 +293,6 @@
 
 
     .platform-feature-container
-        background #fefefe
         width 100%
 
         h2
@@ -266,16 +302,20 @@
             font-style normal
             font-stretch normal
             line-height 1.73
+            max-width 1230px
             letter-spacing normal
             text-align center
             color #3c3c3c
-            margin-top 48px
+            margin-top 32px
+            margin-left auto
+            margin-right auto
             @media only screen and (max-width 992px)
                 font-size 1.8em
 
         h4
             font-family iran-yekan
             font-size 1.4em
+            max-width 1230px
             font-weight normal
             font-style normal
             font-stretch normal
@@ -283,6 +323,8 @@
             margin-top 16px
             letter-spacing normal
             text-align center
+            margin-left auto
+            margin-right auto
             padding-left 10%
             padding-right 10%
             color #535353
@@ -336,5 +378,83 @@
                 margin-top 8px
                 text-align: right;
                 color: #535353;
+
+
+    .section-divider
+        width 100%
+        height 1px
+        margin-top 48px
+        margin-left 10%
+        margin-right 10%
+        margin-bottom 32px
+        background-image: linear-gradient(to right, rgba(193, 193, 193, 0.1), #c1c1c1 60%, rgba(193, 193, 193, 0.1));
+
+
+    .descriptions
+        width 100%
+        display flex
+        flex-direction column
+        padding-right 10%
+        padding-left 10%
+        margin-top 32px
+        h3
+            font-family: iran-yekan;
+            font-size: 2.2em;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.73;
+            letter-spacing: normal;
+            text-align: center;
+            color: #0045ff;
+            @media only screen and (max-width: 992px)
+                font-size 1.8em
+        p
+            font-family: iran-yekan;
+            font-size: 1.5em;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            margin-top 32px
+            line-height: 1.71;
+            letter-spacing: normal;
+            text-align: right;
+            color: #5c5c5c;
+            @media only screen and (max-width: 992px)
+                font-size 1.2em
+
+        div.other-descriptions
+            width 100%
+            display flex
+            margin-top 48px
+            flex-direction column
+
+            h4
+                font-family: iran-yekan;
+                font-size: 2em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.73;
+                letter-spacing: normal;
+                text-align: center;
+                color: #0045ff;
+                @media only screen and (max-width: 992px)
+                    font-size 1.6em
+            p
+                font-family: iran-yekan;
+                font-size: 1.5em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.71;
+                letter-spacing: normal;
+                text-align: right;
+                margin-top 32px
+                color: #5c5c5c;
+                @media only screen and (max-width: 992px)
+                    font-size 1.2em
+
+
 
 </style>
