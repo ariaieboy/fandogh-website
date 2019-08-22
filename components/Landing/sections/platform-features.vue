@@ -14,7 +14,8 @@
                 <div class="row container-fluid" style="width: 100%">
 
                     <div v-for="item in cards" class="col-lg-6 col-md-6 col-sm-12 col-xs-12 feature-sec-card">
-                        <img :src="require('../../../assets/svg/services/managed/' + item.image + '.svg')" :alt="item.image"
+                        <img :src="require('../../../assets/svg/services/' + item.image + '.svg')" :alt="item.image"
+                             :style="{filter: item.image.indexOf('managed') === -1 ? 'invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)' : 'unset'}"
                              class="col-2"/>
                         <div  class="col-10 card-container">
                             <p class="card-title">{{item.title}}</p>
@@ -53,7 +54,7 @@
                                 description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
                                     '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
                                     '                                کاربران ارائه کند.',
-                                image: 'managed_service_mysql',
+                                image: 'managed/managed_service_mysql',
                                 href: ''
                             },
                             {
@@ -62,7 +63,7 @@
                                 description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
                                     '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
                                     '                                کاربران ارائه کند.',
-                                image: 'managed_service_postgresql',
+                                image: 'managed/managed_service_postgresql',
                                 href: ''
                             },
                             {
@@ -71,7 +72,7 @@
                                 description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
                                     '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
                                     '                                کاربران ارائه کند.',
-                                image: 'managed_service_redis',
+                                image: 'managed/managed_service_redis',
                                 href: ''
                             },
                             {
@@ -80,7 +81,7 @@
                                 description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
                                     '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
                                     '                                کاربران ارائه کند.',
-                                image: 'managed_service_proxy',
+                                image: 'managed/managed_service_proxy',
                                 href: ''
                             }
                         ]
@@ -88,7 +89,43 @@
                     {
                         title: 'اجرای مستقیم کدها',
                         selected: false,
-                        cards:[]
+                        cards:[
+                            {
+                                title: 'Java',
+                                sub_title: 'Programming Language',
+                                description: 'اگر شما هم از طرفداران پروپاقرص جاوا هستید، می‌توانید سرویس‌های جاوایی خود را با فریم‌ورک‌ قدرتمند Spring Boot و گستره‌ای از Build Tools‌ها و JDK‌های پشتیبانی شده بر روی سکوی ابری فندق مستقر کنید.',
+                                image: 'language/java_lang',
+                                href: ''
+                            },
+                            {
+                                title: 'Python',
+                                sub_title: 'Programming Language',
+                                description: 'زبانی محبوب با ساختاری قدرتمند برای توسعه‌دهندگانی که سرعت در توسعه برای آن‌ها اهمیت دارد؛ حال می‌توانند سرویس‌های پایتونی خود را با پشتیبانی حرفه‌ای از فریم‌ورک جذاب Django Project بسازند.',
+                                image: 'language/python_lang',
+                                href: ''
+                            },
+                            {
+                                title: 'Java Script',
+                                sub_title: 'Programming Language',
+                                description: 'به وسعت دنیای وب؛ زبانی محبوب برای برنامه‌نویسان front با گستره‌ای از فریم‌ورک‌های جذابی همچون Vue.js، Angular.js و React.js و Node.js همه و همه برای سرویس‌های ابری شما فراهم شده‌اند.',
+                                image: 'language/nodejs_lang',
+                                href: ''
+                            },
+                            {
+                                title: 'C#',
+                                sub_title: 'Programming Language',
+                                description: 'زبانی به قدمت دو دهه ولی بهبود یافته و همپا با ساختارهای جدید تا شما بتوانید سرویس‌های net core. را به راحتی در دنیای ابرها مستقر کنید و از سرعت و قدرت و مزایای سکوهای ابری در پروژه‌های خود بهره‌مند شوید.',
+                                image: 'language/c_sharp_lang',
+                                href: ''
+                            },
+                            {
+                                title: 'PHP',
+                                sub_title: 'Programming Language',
+                                description: 'پلتفرمی جذاب به همراه پشتیبانی قوی برای آن دسته از توسعه‌دهندگانی که در دنیای Laravel به سر می‌برند می‌توانند از فریم‌ورک‌های بهینه شده برای ساختار ابری خود استفاده کنند.',
+                                image: 'language/php_lang',
+                                href: ''
+                            },
+                        ]
                     },
                     {
                         title: 'داکر',
@@ -247,6 +284,7 @@
             margin-top 0
             top 0
             height max-content
+            width available
             @media only screen and (max-width: 1230px)
                 width 54px
                 margin-bottom auto
@@ -256,17 +294,18 @@
             width 100%
             display flex
             flex-direction column
-            padding-right 12px
+            padding-right 16px
             p.card-title
                 font-family 'Helvetica Neue'
                 font-size 1.5em
-                font-weight bold
+                font-weight normal
                 font-style normal
                 font-stretch normal
                 line-height 1.25
                 letter-spacing normal
                 text-align right
                 color #0045ff
+                direction ltr
                 margin-bottom 6px
                 @media only screen and (max-width: 1230px)
                     font-size 1.2em
@@ -282,7 +321,7 @@
             p.card-subtitle
                 font-family 'Helvetica Neue'
                 font-size 1.2em
-                font-weight bold
+                font-weight normal
                 font-style normal
                 font-stretch normal
                 line-height 1.25
