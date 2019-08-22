@@ -71,7 +71,7 @@ module.exports = {
         "~/plugins/progress-hover",
         {src: "~/plugins/google-map", ssr: false},
         {src: "~/plugins/vue-select", ssr: false},
-        {src: "~/plugins/vuetify", ssr: false},
+        {src: "~/plugins/vuetify.js", ssr: false},
         {src: "~/plugins/vue-bar", ssr: false},
         {src: "~/plugins/tooltip", ssr: false},
         {src: "~/plugins/input", ssr: false},

@@ -6,16 +6,17 @@
                 <p class="footer-col-title">محصولات</p>
                 <ul>
                     <li>
-                        <a class="footer-col-option">سرویس‌های مدیریت شده</a>
+                        <a class="footer-col-option" href="https://fandogh-staging123123.fandogh.cloud/managed-services" target="_blank">سرویس‌های مدیریت شده</a>
                     </li>
 
                     <li>
-                        <a class="footer-col-option">سرویس‌های مستقیم</a>
+                        <a class="footer-col-option" href="https://fandogh-staging123123.fandogh.cloud/languages" target="_blank">سرویس‌های مستقیم</a>
                     </li>
 
-                    <li>
-                        <a class="footer-col-option">ذخیره سازی</a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a class="footer-col-option">ذخیره سازی</a>-->
+                    <!--</li>-->
+
                 </ul>
             </div>
             <div style="width: max-content; padding: 32px 12px;">

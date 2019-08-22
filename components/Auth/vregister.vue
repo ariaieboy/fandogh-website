@@ -63,85 +63,88 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 register-input-box">
                 <p class="register-dialog-title">ثبت‌نام رایگان</p>
 
-                <v-text-field
-                        ref="username"
-                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
-                        color="#0045ff"
-                        type="text"
-                        dir="rtl"
-                        :rules="[rules.username_required]"
-                        required
-                        v-model="user.username"
-                        :hint="username.hint"
-                        :label="username.label">
+                <v-form>
 
-                </v-text-field>
+                    <v-text-field
+                            ref="username"
+                            style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
+                            color="#0045ff"
+                            type="text"
+                            dir="rtl"
+                            :rules="[rules.username_required]"
+                            required
+                            v-model="user.username"
+                            :hint="username.hint"
+                            :label="username.label">
 
-                <v-text-field
-                        ref="password"
-                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
-                        color="#0045ff"
-                        type="text"
-                        dir="rtl"
-                        :rules="[rules.password_required]"
-                        required
-                        :type="show_pass ? 'text' : 'password'"
-                        browser-autocomplete="new-password"
-                        :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                        v-model="user.password"
-                        :hint="password.hint"
-                        @click:append="show_pass = !show_pass"
-                        :label="password.label">
+                    </v-text-field>
 
-                </v-text-field>
+                    <v-text-field
+                            ref="password"
+                            style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
+                            color="#0045ff"
+                            type="text"
+                            dir="rtl"
+                            :rules="[rules.password_required]"
+                            required
+                            :type="show_pass ? 'text' : 'password'"
+                            browser-autocomplete="new-password"
+                            :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                            v-model="user.password"
+                            :hint="password.hint"
+                            @click:append="show_pass = !show_pass"
+                            :label="password.label">
 
-                <v-text-field
-                        ref="repeat_password"
-                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
-                        color="#0045ff"
-                        type="text"
-                        dir="rtl"
-                        :rules="[rules.repeat_password_required]"
-                        required
-                        :type="show_pass ? 'text' : 'password'"
-                        browser-autocomplete="new-password"
-                        :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                        v-model="user.repeat_password"
-                        :hint="repeat_password.hint"
-                        @click:append="show_pass = !show_pass"
-                        :label="repeat_password.label">
+                    </v-text-field>
 
-                </v-text-field>
+                    <v-text-field
+                            ref="repeat_password"
+                            style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto;max-height: 70px"
+                            color="#0045ff"
+                            type="text"
+                            dir="rtl"
+                            :rules="[rules.repeat_password_required]"
+                            required
+                            :type="show_pass ? 'text' : 'password'"
+                            browser-autocomplete="new-password"
+                            :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                            v-model="user.repeat_password"
+                            :hint="repeat_password.hint"
+                            @click:append="show_pass = !show_pass"
+                            :label="repeat_password.label">
 
-                <v-text-field
-                        ref="email"
-                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto; max-height: 70px"
-                        color="#0045ff"
-                        type="text"
-                        dir="rtl"
-                        :rules="[rules.email_required, rules.email_valid]"
-                        required
-                        :type="'email'"
-                        v-model="user.email"
-                        :hint="email.hint"
-                        :label="email.label">
+                    </v-text-field>
 
-                </v-text-field>
+                    <v-text-field
+                            ref="email"
+                            style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto; max-height: 70px"
+                            color="#0045ff"
+                            type="text"
+                            dir="rtl"
+                            :rules="[rules.email_required, rules.email_valid]"
+                            required
+                            :type="'email'"
+                            v-model="user.email"
+                            :hint="email.hint"
+                            :label="email.label">
 
-                <v-text-field
-                        ref="namespace"
-                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto; max-height: 70px"
-                        color="#0045ff"
-                        type="text"
-                        dir="rtl"
-                        :rules="[rules.namespace_required]"
-                        required
-                        :type="'text'"
-                        v-model="user.namespace"
-                        :hint="namespace.hint"
-                        :label="namespace.label">
+                    </v-text-field>
 
-                </v-text-field>
+                    <v-text-field
+                            ref="namespace"
+                            style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 350px; margin-left: auto; margin-right: auto; max-height: 70px"
+                            color="#0045ff"
+                            type="text"
+                            dir="rtl"
+                            :rules="[rules.namespace_required]"
+                            required
+                            :type="'text'"
+                            v-model="user.namespace"
+                            :hint="namespace.hint"
+                            :label="namespace.label">
+
+                    </v-text-field>
+                </v-form>
 
                 <p class="register-error" v-html="error" v-if="error !== null"
                    :style="{display: error === null ?  'none' : 'unset'}"></p>

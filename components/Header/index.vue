@@ -89,9 +89,11 @@
 
                 <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
 
-                    <a v-for="language in languages" class="language-support" @click="$router.push('languages/' + language.href)">
+                    <a v-for="language in languages" class="language-support"
+                       @click="$router.push('languages/' + language.href)">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: auto; margin-bottom: auto;"
-                             :src="require('../../assets/svg/services/language/' + language.icon +  '.svg')" :alt="language.icon"/>
+                             :src="require('../../assets/svg/services/language/' + language.icon +  '.svg')"
+                             :alt="language.icon"/>
                         <p style="direction: ltr">{{language.title}}</p>
                     </a>
 
@@ -107,10 +109,12 @@
                 <div class="row"
                      style="width: 100%; margin: 12px 0 0 0; display: flex; justify-items: left; justify-content: left">
 
-                    <div v-for="product in other_products" style="width: 50%; flex-direction: column; margin-top: 12px; margin-right: auto">
+                    <div v-for="product in other_products"
+                         style="width: 50%; flex-direction: column; margin-top: 12px; margin-right: auto">
                         <div class="header-product-parent">
                             <div class="product-category-section">
-                                <img :src="require('../../assets/svg/services/other_services/' + product.image + '.svg')" :alt="product.title">
+                                <img :src="require('../../assets/svg/services/other_services/' + product.image + '.svg')"
+                                     :alt="product.title">
                                 <p>{{product.title}}</p>
                             </div>
                             <div class="product-sub-category-section">
@@ -155,25 +159,25 @@
         data() {
             return {
                 // loggedIn: getToken()
-                other_products:[
-                    {
-                        title: 'Object Storage',
-                        image: 'object-storage',
-                        items:[
-                            {
-                                title: 'Minio',
-                                href: '#'
-                            },
-                            {
-                                title: 'S3 Storage',
-                                href: '#'
-                            },
-                        ]
-                    },
+                other_products: [
+                    // {
+                    //     title: 'Object Storage',
+                    //     image: 'object-storage',
+                    //     items: [
+                    //         {
+                    //             title: 'Minio',
+                    //             href: '#'
+                    //         },
+                    //         {
+                    //             title: 'S3 Storage',
+                    //             href: '#'
+                    //         },
+                    //     ]
+                    // },
                     {
                         title: 'Developer Tools',
                         image: 'developer_tools',
-                        items:[
+                        items: [
                             {
                                 title: 'API',
                                 href: 'https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml'
@@ -184,16 +188,16 @@
                             },
                         ]
                     },
-                    {
-                        title: 'Operation Tools',
-                        image: 'operation_tools',
-                        items:[
-                            {
-                                title: 'Monitoring',
-                                href: '#'
-                            },
-                        ]
-                    },
+                    // {
+                    //     title: 'Operation Tools',
+                    //     image: 'operation_tools',
+                    //     items: [
+                    //         {
+                    //             title: 'Monitoring',
+                    //             href: '#'
+                    //         },
+                    //     ]
+                    // },
 
                 ],
                 languages: [
@@ -223,29 +227,29 @@
                         href: 'c#',
                     }
                 ],
-                managed_services:[
+                managed_services: [
                     {
-                        title: 'Mysql',
+                        title: 'MySQL',
                         caption: 'Database',
-                        icon:'managed_service_mysql',
+                        icon: 'managed_service_mysql',
                         href: 'https://docs.fandogh.cloud/docs/mysql-managed-service.html'
                     },
                     {
-                        title: 'Postgresql',
+                        title: 'PostgreSQL',
                         caption: 'Database',
-                        icon:'managed_service_postgresql',
+                        icon: 'managed_service_postgresql',
                         href: 'https://docs.fandogh.cloud/docs/postgresql-managed-service.html'
                     },
                     {
                         title: 'Proxy',
                         caption: 'IP Range Limiter',
-                        icon:'managed_service_proxy',
+                        icon: 'managed_service_proxy',
                         href: 'https://docs.fandogh.cloud/docs/proxy-managed-service.html'
                     },
                     {
                         title: 'Redis',
                         caption: 'In Memory Database Cache',
-                        icon:'managed_service_redis',
+                        icon: 'managed_service_redis',
                         href: 'https://docs.fandogh.cloud/docs/redis-managed-service.html'
                     },
                 ]
@@ -270,9 +274,11 @@
             window.onclick = function (event) {
                 console.log(event.target.matches('.nev-button'))
                 if (!event.target.matches('.nev-button')) {
-                    if (document.getElementById("sub_menu").style.visibility === 'visible') {
-                        document.getElementById("sub_menu").style.visibility = 'hidden'
-                        document.getElementById("sub_menu").style.opacity = '0'
+                    if (document.getElementById('sub_menu').style) {
+                        if (document.getElementById("sub_menu").style.visibility === 'visible') {
+                            document.getElementById("sub_menu").style.visibility = 'hidden'
+                            document.getElementById("sub_menu").style.opacity = '0'
+                        }
                     }
                 }
 
@@ -687,6 +693,7 @@
                 margin: 0 0 8px 0;
                 transition all .2s ease-in-out
                 cursor pointer
+
             a:hover
                 color: #0045ff
                 font-weight bold

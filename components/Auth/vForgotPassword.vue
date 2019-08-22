@@ -20,20 +20,22 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
         <div v-else class="login-dialog-box container-fluid">
             <p class="login-dialog-title">بازیابی گذرواژه</p>
 
-            <v-text-field
-                    ref="identifier"
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
-                    color="#0045ff"
-                    type="text"
-                    dir="rtl"
-                    :rules="[rules.email_required]"
-                    required
-                    :prepend-inner-icon="'email'"
-                    v-model="user.identifier"
-                    :hint="identifier.hint"
-                    :label="identifier.label">
+            <v-form>
+                <v-text-field
+                        ref="identifier"
+                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto;"
+                        color="#0045ff"
+                        type="text"
+                        dir="rtl"
+                        :rules="[rules.email_required]"
+                        required
+                        :prepend-inner-icon="'email'"
+                        v-model="user.identifier"
+                        :hint="identifier.hint"
+                        :label="identifier.label">
 
-            </v-text-field>
+                </v-text-field>
+            </v-form>
 
             <p class="forgot-error" v-html="error" v-if="error !== null"
                :style="{display: error === null ?  'none' : 'unset'}"></p>
@@ -75,6 +77,8 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
 </template>
 
 <script>
+    import ErrorReporter from "../../utils/ErrorReporter";
+
     export default {
         name: "vForgotPassword",
         data() {

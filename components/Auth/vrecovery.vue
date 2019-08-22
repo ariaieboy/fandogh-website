@@ -10,43 +10,45 @@
         <div class="login-dialog-box container-fluid">
             <p class="login-dialog-title">تغییر گذرواژه</p>
 
-            <v-text-field
-                    ref="new_password"
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
-                    color="#0045ff"
-                    type="text"
-                    dir="rtl"
-                    :rules="[rules.password_required]"
-                    required
-                    :type="show_pass ? 'text' : 'password'"
-                    browser-autocomplete="new-password"
-                    :prepend-inner-icon="'lock'"
-                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                    v-model="user.new_password"
-                    :hint="new_password.hint"
-                    @click:append="show_pass = !show_pass"
-                    :label="new_password.label">
+            <v-form>
+                <v-text-field
+                        ref="new_password"
+                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
+                        color="#0045ff"
+                        type="text"
+                        dir="rtl"
+                        :rules="[rules.password_required]"
+                        required
+                        :type="show_pass ? 'text' : 'password'"
+                        browser-autocomplete="new-password"
+                        :prepend-inner-icon="'lock'"
+                        :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                        v-model="user.new_password"
+                        :hint="new_password.hint"
+                        @click:append="show_pass = !show_pass"
+                        :label="new_password.label">
 
-            </v-text-field>
+                </v-text-field>
 
-            <v-text-field
-                    ref="repeat_password"
-                    style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
-                    color="#0045ff"
-                    type="text"
-                    dir="rtl"
-                    :rules="[rules.repeat_password_required]"
-                    required
-                    :type="show_pass ? 'text' : 'password'"
-                    browser-autocomplete="new-password"
-                    :prepend-inner-icon="'lock'"
-                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                    v-model="user.repeat_password"
-                    :hint="repeat_password.hint"
-                    @click:append="show_pass = !show_pass"
-                    :label="repeat_password.label">
+                <v-text-field
+                        ref="repeat_password"
+                        style="font-family: iran-yekan;width: 100%; font-size: 1em; padding-left: 0; max-width: 375px; margin-left: auto; margin-right: auto"
+                        color="#0045ff"
+                        type="text"
+                        dir="rtl"
+                        :rules="[rules.repeat_password_required]"
+                        required
+                        :type="show_pass ? 'text' : 'password'"
+                        browser-autocomplete="new-password"
+                        :prepend-inner-icon="'lock'"
+                        :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                        v-model="user.repeat_password"
+                        :hint="repeat_password.hint"
+                        @click:append="show_pass = !show_pass"
+                        :label="repeat_password.label">
 
-            </v-text-field>
+                </v-text-field>
+            </v-form>
 
 
             <p class="recovery-error" v-html="error" v-if="error !== null"

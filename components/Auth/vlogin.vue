@@ -10,42 +10,45 @@
         <div class="login-dialog-box container-fluid">
             <p class="login-dialog-title">ورود به حساب کاربری</p>
 
+            <v-form>
 
-            <v-text-field
-                    ref="username"
-                    style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
-                    color="#0045ff"
-                    type="text"
-                    dir="rtl"
-                    :rules="[rules.username_required]"
-                    required
-                    :prepend-inner-icon="'person'"
-                    v-model="user.username"
-                    :hint="username.hint"
-                    :label="username.label">
+                <v-text-field
+                        ref="username"
+                        style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
+                        color="#0045ff"
+                        type="text"
+                        dir="rtl"
+                        :rules="[rules.username_required]"
+                        required
+                        :prepend-inner-icon="'person'"
+                        v-model="user.username"
+                        :hint="username.hint"
+                        :label="username.label">
 
-            </v-text-field>
+                </v-text-field>
 
-            <v-text-field
-                    ref="password"
-                    style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
-                    color="#0045ff"
-                    type="text"
-                    dir="rtl"
-                    :rules="[rules.password_required]"
-                    required
-                    :type="show_pass ? 'text' : 'password'"
-                    browser-autocomplete="new-password"
-                    :prepend-inner-icon="'lock'"
-                    :append-icon="show_pass ? 'visibility_off' : 'visibility'"
-                    v-model="user.password"
-                    :hint="password.hint"
-                    @click:append="show_pass = !show_pass"
-                    :label="password.label">
+                <v-text-field
+                        ref="password"
+                        style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
+                        color="#0045ff"
+                        type="text"
+                        dir="rtl"
+                        :rules="[rules.password_required]"
+                        required
+                        :type="show_pass ? 'text' : 'password'"
+                        browser-autocomplete="new-password"
+                        :prepend-inner-icon="'lock'"
+                        :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                        v-model="user.password"
+                        :hint="password.hint"
+                        @click:append="show_pass = !show_pass"
+                        :label="password.label">
 
-            </v-text-field>
+                </v-text-field>
 
-            <p class="recovery-error" v-html="error" v-if="error !== null"
+            </v-form>
+
+            <p class="login-error" v-html="error" v-if="error !== null"
                :style="{display: error === null ?  'none' : 'unset'}"></p>
 
             <button @click="login" class="login-dialog-button">ورود</button>
@@ -86,14 +89,13 @@
 </template>
 
 <script>
-    import 'vuetify/dist/vuetify.min.css';
 
 
     export default {
         name: "vlogin",
         data() {
             return {
-                rules:{
+                rules: {
                     username_required: value => value !== '' || 'نام کاربری اجباری‌ است',
                     password_required: value => value !== '' || 'گذروازه اجباری است',
                 },
@@ -115,18 +117,15 @@
             }
         },
         methods: {
-            validateInputs(){
+            validateInputs() {
 
-                console.log(this.user.password)
-                console.log(this.user.username === '')
-
-                if(this.rules.username_required(this.user.username) !== true){
+                if (this.rules.username_required(this.user.username) !== true) {
                     this.$refs.username.focus();
                     return false
-                } else if(this.rules.password_required(this.user.password) !== true){
+                } else if (this.rules.password_required(this.user.password) !== true) {
                     this.$refs.password.focus();
                     return false
-                }else {
+                } else {
                     return true
                 }
 
@@ -162,8 +161,18 @@
     }
 </script>
 
+<style lang="css">
+    input, input:before, input:after {
+        -webkit-user-select: initial !important;
+        -moz-user-select: initial !important;
+        -ms-user-select: initial !important;
+        user-select: initial !important;
+    }
+</style>
+
 <style lang="stylus" scoped>
     @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons")
+
 
     .row
         margin-left 0

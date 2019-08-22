@@ -22,36 +22,45 @@
                     <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="http://fandogh-staging123123.fandogh.cloud/languages" target="_blank">اجرای مستقیم کدها</a>
                 </li>
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="http://fandogh-staging123123.fandogh.cloud/managed-services" target="_blank">سرویس‌های مدیریت شده</a>
+                    <img src="../../assets/svg/ic-managed-services.svg" alt="lang"><a href="http://fandogh-staging123123.fandogh.cloud/managed-services" target="_blank">سرویس‌های مدیریت شده</a>
                 </li>
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/services/other_services/developer_tools.svg" alt="lang"><a href="#">Developer Tools</a>
-                </li>
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/services/other_services/object-storage.svg" alt="lang"><a href="#">Object Storage</a>
-                </li>
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/services/other_services/operation_tools.svg" alt="lang"><a href="#">Operation Tools</a>
-                </li>
+                <!--<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
+                    <!--<img src="../../assets/svg/services/other_services/developer_tools.svg" alt="lang"><a href="#">Developer Tools</a>-->
+                <!--</li>-->
+                <!--<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
+                    <!--<img src="../../assets/svg/services/other_services/object-storage.svg" alt="lang"><a href="#">Object Storage</a>-->
+                <!--</li>-->
+                <!--<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
+                    <!--<img src="../../assets/svg/services/other_services/operation_tools.svg" alt="lang"><a href="#">Operation Tools</a>-->
+                <!--</li>-->
 
             </ul>
         </div>
         <div class="navs">
             <ul class="row">
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <a href="/">صفحه اصلی</a>
                 </li>
                 <!--<li>-->
                 <!--<a @click="toggleMenu" href="#prices">سرویس ها</a>-->
                 <!--</li>-->
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <a rel="noopener" target="_blank" href="https://docs.fandogh.cloud">مستندات</a>
                 </li>
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <a rel="noopener" target="_blank" href="http://blog.fandogh.cloud/">وبلاگ</a>
                 </li>
-                <li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <router-link :to="{path:'/about-us'}">درباره ما</router-link>
+                </li>
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <router-link :to="{path:'/our-values'}">ارزش‌های ما</router-link>
+                </li>
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <router-link :to="{path:'/conditions-of-use'}">قوانین سکو</router-link>
+                </li>
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <router-link :to="{path:'/contact-us'}">تماس با ما</router-link>
                 </li>
             </ul>
         </div>
@@ -201,25 +210,26 @@
             margin 16px 0
             padding 0
 
-        li
-            margin 6px 0
-            display flex
+            li
+                margin 6px 0
+                display flex
+                max-height 40px
 
-            img
-                filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
-                width 24px
+                img
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+                    width 24px
 
-            a
-                display block
-                padding 10px
-                font-size 1.3em
-                color #3c3c3c
-                margin-top auto
-                margin-bottom auto
-                font-weight bold
-                font-family iran-yekan
-                @media only screen and (max-width 992px)
-                    font-size 1.2em
+                a
+                    display block
+                    padding 10px
+                    font-size 1.3em
+                    color #3c3c3c
+                    margin-top auto
+                    margin-bottom auto
+                    font-weight normal
+                    font-family iran-yekan
+                    @media only screen and (max-width 992px)
+                        font-size 1.2em
 
     .navs
         text-align right

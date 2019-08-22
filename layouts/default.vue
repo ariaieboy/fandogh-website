@@ -118,6 +118,9 @@
         font-size: 16px;
         line-height: 1 !important;
         min-height: 8px;
+        width max-content !important
+        min-width 100px !important
+        text-align right !important
         transition: .3s cubic-bezier(.25, .8, .5, 1)
     }
 
