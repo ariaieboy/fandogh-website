@@ -73,6 +73,13 @@
 
                 audience: this.$route.params.id,
                 audience_model: {
+
+                    freelancers: {
+                        title: 'Freelancers',
+                        description: 'برای Freelancer هایی که نیاز به میزبانی یکپارچه و تطبیق‌پذیر دارند',
+                        icon: 'freelancers.svg',
+                        name: 'freelancers'
+                    },
                     students: {
                         title: 'دانشجویان',
                         description: 'برای دانشجویان با ایده‌های ناب و بودجه محدود',
@@ -96,12 +103,6 @@
                         description: 'راه‌حل‌های Enterprise در برابر هزینه‌های پایین و مزایای بی‌شمار',
                         icon: 'companies.svg',
                         name: 'companies'
-                    },
-                    freelancers: {
-                        title: 'Freelancers',
-                        description: 'برای Freelancer هایی که نیاز به میزبانی یکپارچه و تطبیق‌پذیر دارند',
-                        icon: 'freelancers.svg',
-                        name: 'freelancers'
                     }
                 },
                 descriptions: {

@@ -41,6 +41,21 @@
                     '                از نیاز‌های شما، یک راه حل دارد.',
                 audiences: [
                     {
+                        image: 'freelancers',
+                        title: 'Freelancers',
+                        href: '/audience/freelancers'
+                    },
+                    {
+                        image: 'students',
+                        title: 'دانشجویان',
+                        href: '/audience/students'
+                    },
+                    {
+                        image: 'startups',
+                        title: 'استارتاپ‌ها',
+                        href: '/audience/startups'
+                    },
+                    {
                         image: 'teams',
                         title: 'تیم‌ها',
                         href: '/audience/teams'
@@ -49,21 +64,6 @@
                         image: 'companies',
                         title: 'شرکت‌ها',
                         href: '/audience/companies'
-                    },
-                    {
-                        image: 'startups',
-                        title: 'استارتاپ‌ها',
-                        href: '/audience/startups'
-                    },
-                    {
-                        image: 'students',
-                        title: 'دانشجویان',
-                        href: '/audience/students'
-                    },
-                    {
-                        image: 'freelancers',
-                        title: 'Freelancers',
-                        href: '/audience/freelancers'
                     }
                 ]
             }
