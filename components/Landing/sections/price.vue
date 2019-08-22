@@ -551,8 +551,8 @@
 
         div
             height 0
-            border solid 2px #0045ff
-            margin 0 30%
+            border solid 1px #0045ff
+            margin 0 20%
             border-radius 25px
             @media only screen and (max-width: 992px)
                 border solid 1px #0045ff
