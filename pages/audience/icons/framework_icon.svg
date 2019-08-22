@@ -9,11 +9,11 @@
       }
 
       .cls-1 {
-        stroke: #fdfdfd;
+        stroke: #fefefe;
       }
 
       .cls-2 {
-        stroke: rgba(253,253,253,0.4);
+        stroke: rgba(255,255,255,0.4);
       }
     </style>
   </defs>

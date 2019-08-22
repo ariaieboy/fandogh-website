@@ -20,6 +20,27 @@
             </div>
         </div>
 
+        <div class="platform-feature-container">
+            <h2>{{features[audience].title}}</h2>
+            <h4>{{features[audience].description}}</h4>
+
+            <div class="row"
+                 style="width: 100%; margin-top: 48px; max-width: 1370px; margin-left: auto; margin-right: auto">
+
+                <div v-for="feature in features[audience].cards"
+                     class="platform-feature-card col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <span>
+                        <img :src="require('./icons/' + feature.icon)" :alt="feature.icon">
+                    </span>
+                    <div>
+                        <h5>{{feature.title}}</h5>
+                        <p>{{feature.description}}</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 
 </template>
@@ -75,41 +96,44 @@
                         name: 'developers'
                     },
                 },
-                features:{
+                features: {
 
-                    students:[
-                        {
-                            title: 'ساخت و استقرار آسان',
-                            description: 'به راحتی سرویس‌های خود را بدون نیاز به دانش پیچیده ابری ظرف مدت کمتر از ۱ دقیقه بر روی سکوی ابری مستقر کنید.',
-                            icon: 'source_deployment_icon.svg'
-                        },
-                        {
-                            title: 'گستره زبان متنوع',
-                            description: 'از زبان‌های پشتیبانی‌ شده سکوی ابری فندی استفاده کنید تا به صورت مستقیم پروژه‌های خود را به صورت کاملا داکرایز شده بر روی سکو مستقر کنید.',
-                            icon: 'code.png'
-                        },
-                        {
-                            title: 'گستره فریم‌ورک متنوع',
-                            description: 'هر زبان برنامه‌نویسی فریم‌ورک‌های متنوعی دارد. ما هم در فندق این فریم‌ورک‌ها را به صورت شخصی‌سازی شده در اختیار شما قرار داده‌ایم تا برای راحتی کار و سرعت بخشیدن به روند توسعه از آن‌ها استفاده کنید.',
-                            icon: 'framework_icon.svg'
-                        },
-                        {
-                            title: 'پشتیبانی حرفه‌ای',
-                            description: 'چه کاربر رایگان باشید و چه یک شرکت بزرگ چند هزار نفری فرقی ندارد، ما برای پشتیبانی شما از بهترین افراد و توسعه‌دهندگان سکوی ابری فندق کمک می‌گیریم تا بهترین تجربه را از پشتیبانی داشته باشید.',
-                            icon: 'technical-support.svg'
-                        },
-                        {
-                            title: 'مدیریت آسان',
-                            description: 'به راحتی عملیات DevOps را بر روی سکو با رویکردی ساده شده و جدید تجربه کنید و مطمئن باشید تمام پیچیدگی‌ها را ما برای شما مدیریت می‌کنیم.',
-                            icon: 'operation_tools.svg'
-                        },
-                        {
-                            title: 'ساخت سرویس رایگان',
-                            description: 'به صورت رایگان و بدون پرداخت هزینه منابع آزمایشی خود را دریافت کنید و ایده‌های خود را به صورت سرویس بر روی سکو مستقر کنید.',
-                            icon: 'ic-service.svg'
-                        },
-                    ]
-
+                    students: {
+                        title: 'سکوی ابری فندق چه ویژگی‌هایی را به شما پیشنهاد می‌دهد؟',
+                        description:'برای آنکه بدانید در صورت استفاده از زیرساخت ابری فندق چه امتیازاتی را بدست ‌می‌آورید، ما برای شما بارزترین ‌آن‌ها را لیست کرده‌ایم تا یک بینش از پیش آماده نسبت به آینده سرویس‌ها داشته باشید.',
+                        cards: [
+                            {
+                                title: 'ساخت و استقرار آسان',
+                                description: 'به راحتی سرویس‌های خود را بدون نیاز به دانش پیچیده ابری ظرف مدت کمتر از ۱ دقیقه بر روی سکوی ابری مستقر کنید.',
+                                icon: 'source_deployment_icon.svg'
+                            },
+                            {
+                                title: 'گستره زبان متنوع',
+                                description: 'از زبان‌های پشتیبانی‌ شده سکوی ابری فندی استفاده کنید تا به صورت مستقیم پروژه‌های خود را به صورت کاملا داکرایز شده بر روی سکو مستقر کنید.',
+                                icon: 'code.png'
+                            },
+                            {
+                                title: 'گستره فریم‌ورک متنوع',
+                                description: 'هر زبان برنامه‌نویسی فریم‌ورک‌های متنوعی دارد. ما هم در فندق این فریم‌ورک‌ها را به صورت شخصی‌سازی شده در اختیار شما قرار داده‌ایم تا برای راحتی کار و سرعت بخشیدن به روند توسعه از آن‌ها استفاده کنید.',
+                                icon: 'framework_icon.svg'
+                            },
+                            {
+                                title: 'پشتیبانی حرفه‌ای',
+                                description: 'چه کاربر رایگان باشید و چه یک شرکت بزرگ چند هزار نفری فرقی ندارد، ما برای پشتیبانی شما از بهترین افراد و توسعه‌دهندگان سکوی ابری فندق کمک می‌گیریم تا بهترین تجربه را از پشتیبانی داشته باشید.',
+                                icon: 'technical-support.svg'
+                            },
+                            {
+                                title: 'مدیریت آسان',
+                                description: 'به راحتی عملیات DevOps را بر روی سکو با رویکردی ساده شده و جدید تجربه کنید و مطمئن باشید تمام پیچیدگی‌ها را ما برای شما مدیریت می‌کنیم.',
+                                icon: 'operation_tools.svg'
+                            },
+                            {
+                                title: 'ساخت سرویس رایگان',
+                                description: 'به صورت رایگان و بدون پرداخت هزینه منابع آزمایشی خود را دریافت کنید و ایده‌های خود را به صورت سرویس بر روی سکو مستقر کنید.',
+                                icon: 'ic-service.svg'
+                            },
+                        ]
+                    }
                 }
             }
         }
@@ -229,5 +253,88 @@
             &.selected
                 font-size 1.4em
                 color #fefefe
+
+
+    .platform-feature-container
+        background #fefefe
+        width 100%
+
+        h2
+            font-family iran-yekan
+            font-size 2.4em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.73
+            letter-spacing normal
+            text-align center
+            color #3c3c3c
+            margin-top 48px
+            @media only screen and (max-width 992px)
+                font-size 1.8em
+
+        h4
+            font-family iran-yekan
+            font-size 1.4em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.71
+            margin-top 16px
+            letter-spacing normal
+            text-align center
+            padding-left 10%
+            padding-right 10%
+            color #535353
+            @media only screen and (max-width 992px)
+                font-size 1.2em
+
+    .platform-feature-card
+        display flex
+        width 100%
+        margin-top 32px
+        margin-bottom 32px
+
+        span
+            width 52px
+            height 52px
+            border-radius 5px
+            background-color rgba(0, 69, 255, 0.2)
+            display flex
+
+            img
+                width 36px
+                height 36px
+                margin auto
+                filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+
+        div
+            display flex
+            flex-direction column
+            flex 1
+            padding-right 16px
+
+            h5
+                font-family: iran-yekan;
+                font-size: 1.4em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.75;
+                letter-spacing: normal;
+                text-align: right;
+                color: #3c3c3c;
+
+            p
+                font-family: iran-yekan;
+                font-size: 1.2em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.75;
+                letter-spacing: normal;
+                margin-top 8px
+                text-align: right;
+                color: #535353;
 
 </style>
