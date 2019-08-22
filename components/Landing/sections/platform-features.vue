@@ -49,38 +49,30 @@
                         selected: true,
                         cards:[
                             {
-                                title: 'Mysql',
+                                title: 'MySQL',
                                 sub_title: 'Database',
-                                description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
-                                    '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
-                                    '                                کاربران ارائه کند.',
+                                description: 'پایگاه داده رابطه‌ای محبوب و پر استفاده MySQL شرکت Oracle به همراه رابط ادمین PhpMyAdmin به صورت مدیریت شده بر روی سکوی ابری فندق در اختیار شماست تا با چند کلیک ظرف مدت کمتر از ۱ دقیقه سرویس آن را ساخته و به سرویس‌های فضانام خود اضافه کنید.',
                                 image: 'managed/managed_service_mysql',
                                 href: ''
                             },
                             {
-                                title: 'Postgresql',
+                                title: 'PostgreSQL',
                                 sub_title: 'Database',
-                                description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
-                                    '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
-                                    '                                کاربران ارائه کند.',
+                                description: 'PostgreSQL یکی از محبوب‌ترین سیستم‌های مدیریت پایگاه‌داده است. میلیون ها توسعه و شرکت‌های زیادی به PostgreSQL به عنوان یک منبع قابل اعتماد برای تراکنش‌ها اعتماد کرده‌اند. حال این سرویس پر استفاده و محبوب به صورت مدیریت شده به همراه رابط ادمین Adminer بر روی سکوی ابری فندق قابل استفاده است.',
                                 image: 'managed/managed_service_postgresql',
                                 href: ''
                             },
                             {
                                 title: 'Redis',
                                 sub_title: 'In Memory Cache Database',
-                                description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
-                                    '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
-                                    '                                کاربران ارائه کند.',
+                                description: 'Redis به عنوان یک پایگاه داده key-value با سرعت فوق‌العاده در بین توسعه‌دهندگان از شهرت و محبوبیت بالایی برخوردار است. حال این سرویس In Memory Cache Database به صورت مدیریت شده بر روی سکو قابل دسترسی‌ است تا سرعت توسعه محصولات شما دو چندان شود.',
                                 image: 'managed/managed_service_redis',
                                 href: ''
                             },
                             {
                                 title: 'Proxy',
-                                sub_title: 'Ip Range Limiter',
-                                description: '  سکوی ابری فندق پیشگام در ساده‌سازی مدیریت زیرساخت، سعی بر این دارد تا با استفاده\n' +
-                                    '                                از بهترین روش‌ها و معماری‌ها تجربه ای جدید را در قالب ویژگی‌های جذاب و ارزان به\n' +
-                                    '                                کاربران ارائه کند.',
+                                sub_title: 'IP Range Limiter',
+                                description: 'اگر نیاز دارید به هر دلیلی IP خروجی محدودی را بر روی سرویس‌های خود اعمال کنید با استفاده از سرویس مدیریت شده Proxy این کار امکان‌پذیر است.کافی است با چند کلیک‌ آن را اجرا کنید.',
                                 image: 'managed/managed_service_proxy',
                                 href: ''
                             }
@@ -128,20 +120,71 @@
                         ]
                     },
                     {
-                        title: 'داکر',
+                        title: 'ایمیج دلخواه',
                         selected: false,
-                        cards:[]
+                        cards:[
+                            {
+                                title: 'Fandogh Registry',
+                                sub_title: 'Image Registry',
+                                description: 'شما می‌توانید بدون محدودیت از پروژه‌های خود ایمیج تهیه کنید و در رجیستری سکوی ابری فندق آپلود کنید و هر موقع نیاز بود از هر نسخه از هر ایمیجی که پیش ما دارید هر تعداد سرویس که نیاز دارید بسازید.',
+                                image: 'registry/ic-fandogh-mini-fill',
+                                href: ''
+                            },
+                            {
+                                title: 'Docker Hub',
+                                sub_title: 'Image Registry',
+                                description: 'شما می‌توانید ایمیج‌های محبوب خود را از روی داکرهاب انتخاب کنید و سرویس مورد نیاز خود را از روی آن بدون هیچ محدودیتی بسازید.',
+                                image: 'registry/ic_docker',
+                                href: ''
+                            },
+                            {
+                                title: 'Gitlab',
+                                sub_title: 'Image Registry',
+                                description: 'اگر از آن دسته توسعه دهندگانی هستید که از رجیستری Gitlab استفاده می‌کنید، محدودیتی برای سکوی ابری فندق وجود ندارد. همین حالا آدرس ایمیج را وارد کنید و سرویس خود را بسازید.',
+                                image: 'registry/ic-gitlab',
+                                href: ''
+                            },
+                            {
+                                title: 'Github',
+                                sub_title: 'Image Registry',
+                                description: 'شاید به تازگی از رجیستری Github استفاده می‌کنید؛ خبر خوب این است که این رجیستری هم تحت پوشش سکوی ابری فندق قرار دارد.',
+                                image: 'registry/ic-github',
+                                href: 'registry'
+                            },
+                            {
+                                title: 'Private Registry',
+                                sub_title: 'Image Registry',
+                                description: 'و در نهایت هر رجیستری که وجود داشته باشد محدودیتی برای آنکه ما به شما سرویس بدهیم بوجود نمی‌آورد، کافی است Secret مورد نیاز را بسازید و سرویس خود را از روی ایمیج مورد نظر بسازید.',
+                                image: 'registry/ic-registry',
+                                href: ''
+                            },
+                        ]
                     },
                     {
                         title: 'Storage',
                         selected: false,
-                        cards:[]
+                        cards:[
+                            {
+                                title: 'Shared Storage',
+                                sub_title: 'Storage',
+                                description: 'اگر نیاز دارید در هر زمان سرویس‌های فضانام شما به اطلاعاتی به صورتی اشتراکی دسترسی داشته باشند Shared Storage برای همین منظور در اختیار شماست.',
+                                image: 'storage/shared-storage',
+                                href: ''
+                            },
+                            {
+                                title: 'Dedicated Storage',
+                                sub_title: 'Storage',
+                                description: 'با استفاده از dedicated storage‌ها داده‌های سرویس‌های خود را با سرعت و کیفیت بالاتری بر روی هاردهای SSD نوشته و فراخوانی کنید.',
+                                image: 'storage/dedicated-storage',
+                                href: ''
+                            },
+                        ]
                     },
-                    {
-                        title: 'Backup',
-                        selected: false,
-                        cards:[]
-                    },
+                    // {
+                    //     title: 'Backup',
+                    //     selected: false,
+                    //     cards:[]
+                    // },
 
                 ]
 
