@@ -237,7 +237,6 @@
 
                         </div>
 
-
                         <div style="width: 100%; margin-top: 64px">
 
                             <div class="payg-parent-container container-fluid" style="max-width: 2100px">
@@ -263,12 +262,12 @@
 
                                                     <div style="display: flex; width: 100%">
                                                         <span class="card-plan-config-title">رم (حافظه تصادفی)</span>
-                                                        <span class="card-plan-config-description">۴۰۰ مگابایت</span>
+                                                        <span class="card-plan-config-description">نامحدود</span>
                                                     </div>
 
                                                     <div style="display: flex; width: 100%; margin-top: 16px;">
                                                         <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
-                                                        <span class="card-plan-config-description">۲.۵ گیگابایت</span>
+                                                        <span class="card-plan-config-description">سفارشی</span>
                                                     </div>
 
                                                     <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -286,12 +285,12 @@
                                                      style="display: flex; flex-direction: column">
                                                     <div style="display: flex; width: 100%">
                                                         <span class="card-plan-config-title">پردازنده</span>
-                                                        <span class="card-plan-config-description">۰.۵ هسته</span>
+                                                        <span class="card-plan-config-description">نامحدود</span>
                                                     </div>
 
                                                     <div style="display: flex; width: 100%; margin-top: 16px;">
                                                         <span class="card-plan-config-title">Dedicated Volume</span>
-                                                        <span class="card-plan-config-description">ندارد</span>
+                                                        <span class="card-plan-config-description">سفارشی</span>
                                                     </div>
 
                                                     <div style="display: flex; width: 100%; margin-top: 16px;">
