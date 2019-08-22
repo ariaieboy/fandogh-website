@@ -363,7 +363,7 @@
             text-align  center
             color  #0045ff
 
-    .managed-service-card hover
+    .managed-service-card:hover
         transition all .3s ease-in-out
         box-shadow 0 3px 26px 0 rgba(0, 0, 0, 0.16)
 
