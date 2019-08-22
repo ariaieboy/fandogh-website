@@ -729,5 +729,4 @@
                 @media only screen and (max-width: 992px)
                     font-size 1.2em
 
-
 </style>
