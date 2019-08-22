@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                                 <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
-                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none">
+                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none" @click="$router.push(item.action_href)">
                                         {{item.action}}
                                     </button>
                                 </div>
@@ -105,7 +105,7 @@
                                             <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
                                                    style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
                                                 رم (حافظه تصادفی)
-                                                <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
+                                                <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none; font-family: iran-sans"
                                                        type="number"
                                                        min="0.5"
                                                        step="0.5"
@@ -133,7 +133,7 @@
                                             <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
                                                    style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
                                                 Dedicated Volume
-                                                <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
+                                                <input style="font-family: iran-sans; border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
                                                        type="number"
                                                        min="0"
                                                        step="1"
@@ -226,8 +226,8 @@
                                     </div>
 
                                     <div style="width: 100%; margin-top: 16px; display: flex; justify-content: center;">
-                                        <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;">
-                                            خرید پلن
+                                        <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;" @click="$router.push('/user/login')">
+                                            سفارش پلن
                                         </button>
                                     </div>
 
@@ -353,7 +353,7 @@
                         icon: 'free_plan',
                         config: {
                             memory: '۴۰۰ مگابایت',
-                            cpu: '0.5 هسته',
+                            cpu: '۰.۵ هسته',
                             shared_storage: '۲.۵ گیگابایت',
                             dedicated_storage: 'ندارد',
                             load_balancer: 'رایگان',
@@ -363,15 +363,15 @@
 
                         },
                         action: 'ثبت‌نام',
-                        action_href: ''
+                        action_href: '/user/register'
                     },
                     {
-                        title: 'پلن رایگان',
-                        price: 'رایگان',
-                        icon: 'free_plan',
+                        title: 'پلن پایه',
+                        price: 'ماهیانه ۳۰,۰۰۰ تومان',
+                        icon: 'basic-plan',
                         config: {
-                            memory: '۴۰۰ مگابایت',
-                            cpu: '0.5 هسته',
+                            memory: '۵۰۰ مگابایت',
+                            cpu: '۰.۵ هسته',
                             shared_storage: '۲.۵ گیگابایت',
                             dedicated_storage: 'ندارد',
                             load_balancer: 'رایگان',
@@ -381,17 +381,17 @@
 
                         },
                         action: 'ثبت‌نام',
-                        action_href: ''
+                        action_href: '/user/register'
                     },
                     {
-                        title: 'پلن رایگان',
-                        price: 'رایگان',
-                        icon: 'free_plan',
+                        title: 'پلن اقتصادی',
+                        price: 'ماهیانه ۷۲,۰۰۰ هزار تومان',
+                        icon: 'base-plan',
                         config: {
-                            memory: '۴۰۰ مگابایت',
-                            cpu: '0.5 هسته',
+                            memory: '۱ گیگابایت',
+                            cpu: '۰.۵ هسته',
                             shared_storage: '۲.۵ گیگابایت',
-                            dedicated_storage: 'ندارد',
+                            dedicated_storage: '۱۰ گیگابایت',
                             load_balancer: 'رایگان',
                             image_registry: 'نامحدود',
                             monitoring: 'رایگان',
@@ -399,17 +399,17 @@
 
                         },
                         action: 'ثبت‌نام',
-                        action_href: ''
+                        action_href: '/user/register'
                     },
                     {
-                        title: 'پلن رایگان',
-                        price: 'رایگان',
-                        icon: 'free_plan',
+                        title: 'پلن استارتاپی',
+                        price: 'ماهیانه ۱۸۰,۰۰۰ تومان',
+                        icon: 'economy-plan',
                         config: {
-                            memory: '۴۰۰ مگابایت',
-                            cpu: '0.5 هسته',
+                            memory: '۲ گیگابایت',
+                            cpu: '۱ هسته',
                             shared_storage: '۲.۵ گیگابایت',
-                            dedicated_storage: 'ندارد',
+                            dedicated_storage: '۵۰ گیگابایت',
                             load_balancer: 'رایگان',
                             image_registry: 'نامحدود',
                             monitoring: 'رایگان',
@@ -417,7 +417,7 @@
 
                         },
                         action: 'ثبت‌نام',
-                        action_href: ''
+                        action_href: '/user/register'
                     },
                 ],
                 planData: {
@@ -621,6 +621,7 @@
 
             img
                 width 140px
+                filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
                 @media only screen and (max-width: 992px)
                     width 90px
 
