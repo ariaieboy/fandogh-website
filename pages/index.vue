@@ -6,10 +6,10 @@
             <slider/>
             <languages/>
             <audiences/>
-            <language-tutorials/>
+            <!--<language-tutorials/>-->
             <platform-features/>
-            <business-solution/>
-            <success-story/>
+            <!--<business-solution/>-->
+            <!--<success-story/>-->
             <price/>
 
 
