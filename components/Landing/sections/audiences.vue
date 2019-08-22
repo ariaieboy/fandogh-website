@@ -41,23 +41,18 @@
                     '                از نیاز‌های شما، یک راه حل دارد.',
                 audiences: [
                     {
-                        image: 'innovators',
-                        title: 'نو‌آوران',
-                        href: ''
-                    },
-                    {
                         image: 'teams',
                         title: 'تیم‌ها',
                         href: ''
                     },
                     {
-                        image: 'startups',
-                        title: 'استارتاپ‌ها',
+                        image: 'companies',
+                        title: 'شرکت‌ها',
                         href: ''
                     },
                     {
-                        image: 'developers',
-                        title: 'برنامه‌نویسان',
+                        image: 'startups',
+                        title: 'استارتاپ‌ها',
                         href: ''
                     },
                     {
@@ -67,7 +62,7 @@
                     },
                     {
                         image: 'freelancers',
-                        title: 'freelancers',
+                        title: 'Freelancers',
                         href: ''
                     }
                 ]
