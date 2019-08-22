@@ -12,7 +12,7 @@
 
             <div class="audience-rail row">
 
-                <div v-for="item in audiences" class="aud-item">
+                <div v-for="item in audiences" class="aud-item" @click="$router.push(item.href)">
                     <span>
                         <img :src="require('../../../assets/svg/targets/' + item.image + '.svg')" :alt="item.image">
                     </span>
@@ -43,27 +43,27 @@
                     {
                         image: 'teams',
                         title: 'تیم‌ها',
-                        href: ''
+                        href: '/audience/teams'
                     },
                     {
                         image: 'companies',
                         title: 'شرکت‌ها',
-                        href: ''
+                        href: '/audience/companies'
                     },
                     {
                         image: 'startups',
                         title: 'استارتاپ‌ها',
-                        href: ''
+                        href: '/audience/startups'
                     },
                     {
                         image: 'students',
                         title: 'دانشجویان',
-                        href: ''
+                        href: '/audience/students'
                     },
                     {
                         image: 'freelancers',
                         title: 'Freelancers',
-                        href: ''
+                        href: '/audience/freelancers'
                     }
                 ]
             }
