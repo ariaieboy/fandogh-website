@@ -20,8 +20,8 @@
 
             <div style="width: 100%; box-sizing: border-box; clear: both; height: max-content; display: flex; flex-direction: column; position: relative">
 
-                <div class="row bg-test" style="width: 100%; display: flex; justify-content: center">
-                    <div class="row card-plan-container container-fluid" style="max-width: 2200px">
+                <div class="row bg-test" style="width: 100%; display: flex; justify-content: center; margin-right: auto; margin-left: auto">
+                    <div class="row card-plan-container container-fluid" style="max-width: 2200px;">
 
                         <div v-for="item in plans" style="padding: 16px; max-width: 820px"
                              class="col-auto col-md-6 col-xs-12 col-sm-12 container-fluid">
