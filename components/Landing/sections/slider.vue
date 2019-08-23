@@ -81,6 +81,8 @@
         methods: {
 
             bulletClicked(index) {
+                console.log('index')
+                console.log(index)
                 this.slider_data.forEach(slide => {
                     slide.selected = false
                 });

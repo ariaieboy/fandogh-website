@@ -322,7 +322,7 @@
         box-sizing padding-box
         padding 16px
         display flex
-        height 300px
+        min-height 300px
         img
             margin-top 0
             top 0
