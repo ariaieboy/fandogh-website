@@ -5,7 +5,7 @@
         </div>
         <nuxt/>
         <div v-if="isMenuAvailable">
-            <footer/>
+            <new-footer/>
         </div>
         <alert/>
     </div>
@@ -15,12 +15,12 @@
     import FHeader from '~/components/Header'
     import Alert from "~/components/Dashboard/alert";
     import 'normalize.css'
-    import Footer from "../components/Landing/Footer/Footer";
+    import NewFooter from "../components/Landing/footer/new-footer";
     import 'vuetify/dist/vuetify.min.css';
 
     export default {
         components: {
-            Footer,
+            NewFooter,
             FHeader,
             Alert
         },
