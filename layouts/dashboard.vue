@@ -55,7 +55,6 @@
 
 <script>
     import FDHeader from "~/components/Dashboard/header";
-    import FFooter from "~/components/Footer";
     import AdminSidebar from "~/components/Dashboard/sidebar";
     import "normalize.css";
     import Notification from "~/components/Dashboard/notification";
@@ -70,7 +69,6 @@
         components: {
             FDHeader,
             FLoading,
-            FFooter,
             AdminSidebar,
             Notification,
             Alert,

@@ -8,7 +8,7 @@
             <audiences/>
             <!--<language-tutorials/>-->
             <platform-features/>
-            <!--<business-solution/>-->
+            <business-solution/>
             <!--<success-story/>-->
             <price/>
 

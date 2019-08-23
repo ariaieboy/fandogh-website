@@ -97,7 +97,7 @@
 
 <script>
     export default {
-        name: "new-footer"
+        name: "Footer"
     }
 </script>
 
