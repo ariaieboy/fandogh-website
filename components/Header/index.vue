@@ -10,10 +10,10 @@
                         </a>
                     </div>
                     <div class="logo" style="display: flex">
-                        <router-link title="fandogh logo" :to="{path:'/'}">
+                        <router-link  title="fandogh logo" :to="{path:'/'}">
                             <logo/>
                         </router-link>
-                        <span class="logo-span"> سکوی ابری فندق</span>
+                        <span class="logo-span" @click="$router.push('/')"> سکوی ابری فندق</span>
                     </div>
                     <div class="navbar">
                         <ul style="padding-left: 32px; padding-right: 32px;">
@@ -401,6 +401,7 @@
         letter-spacing: normal;
         text-align: left;
         color: #fefefe;
+        cursor pointer
         @media only screen and (max-width: 1230px)
             display none
 

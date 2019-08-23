@@ -6,8 +6,14 @@
 
                 <div v-for="item in slider_data" class="row" style="height: 100%; margin-left: 0; margin-right: 0;display: flex">
 
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container-fluid fade"
-                         style="height: 100%; padding: 32px;max-width: 1700px;" :style="{display: item.selected? 'block' : 'none'}">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 container-fluid fade slider-inner-container"
+                         style="height: 100%; padding: 32px;max-width: 1700px; order: 0" :style="{display: item.selected? 'flex' : 'none'}">
+
+
+                        <div class="slide-banner fade"
+                             :style="{display: item.selected? 'flex' : 'none'}">
+                            <img :src="require('../../../assets/svg/' + item.banner + '.svg')" :alt="item.banner">
+                        </div>
 
                         <div class="slider-main">
 
@@ -15,14 +21,10 @@
 
                             <div class="main-description">{{item.description}}</div>
 
-                            <button class="main-button">{{item.button_text}}</button>
+                            <button @click="$router.push(item.button_link)" class="main-button">{{item.button_text}}</button>
 
                         </div>
-                    </div>
 
-                    <div class="col-lg-6 col-md-6 col-sm-10 col-xs-10 container-fluid slide-banner fade"
-                         :style="{display: item.selected? 'flex' : 'none'}">
-                        <img src="../../../assets/svg/banner_one.svg">
                     </div>
 
                 </div>
@@ -50,22 +52,19 @@
                 intervalId: null,
                 slider_data: [
                     {
-                        title: "برای هر زبانی راه حلی داریم…",
-                        description: "فندق یه PaaS است که به شما این امکان رو میده که سرویس‌های خودتون رو بر روی سرورهای\n" +
-                            "                            ابری\n" +
-                            "                            مستقر کنید و نگران مدیریت سرورها و سرویس‌هایی که نیاز دارید نباشید.",
-                        button_text: "ثبت‌نام رایگان",
-                        button_link: "",
-                        banner: "../../../assets/svg/banner_one.svg",
+                        title: "سکوی ابری فندق چیست؟",
+                        description: 'فندق اولین سکوی ابری ایران است که تکنولوژی زیرساختی PaaS را در قالبی کاملا ساده و با معماری مخصوص به خود پیاده سازی کرده و سعی بر آن دارد تا با کمک بهترین متخصصین و برنامه‌نویسان سرتاسر جهان به به صنعت ابری و زیرساختی ایران کمک کند.',
+                        button_text: "مطالعه بیشتر",
+                        button_link: "/about-us",
+                        banner: "banner_fandogh",
                         selected: true
                     },
                     {
-                        title: "برای هر زبانی راه حلی داریم…1",
-                        description: "فندق یه PaaS است که به شما این امکان رو میده که سرویس‌های خودتون رو بر روی سرورهای\n" +
-                            "                            ابری\n",
+                        title: "برای هر زبانی راه حلی داریم…",
+                        description: 'برای آنکه توسعه برای شما ساده‌تر شود، ما زبان‌های برنامه‌نویسی محبوب و پر استفاده را در قالب اجرای مستقیم کد با ساختاری منطبق با معماری ابری و پوشش گستره بزرگی از فریم‌ورک‌های محبوب فراهم آورده‌ایم. با این ویژگی دیگر نیاز نیست شما دانش داکر داشته باشید یا درگیر پیچیدگی‌های یادگیری تکنولوژی‌های جدید شوید، در عوض شما می‌توانید تمام تمرکز و منابع خود را صرف توسعه پروژه‌هایتان کنید.',
                         button_text: "ثبت‌نام رایگان",
-                        button_link: "",
-                        banner: "../../../assets/svg/banner_one.svg",
+                        button_link: '/user/register',
+                        banner: "banner_one",
                         selected: false
                     }
                 ],
@@ -143,22 +142,36 @@
         margin 4px
         transition background-color .5s ease-in-out
 
+
+    .slider-inner-container
+        flex-direction row
+        @media only screen and (max-width: 1050px)
+            flex-direction column
+
     .slide-banner
         height 100%
         padding 32px
-
+        flex 50%
         img
             max-width 100%
+            margin-right auto
+            margin-left 10%
+            @media only screen and (max-width: 1050px)
+                margin-right auto
+                margin-left auto
 
     .slider-main
         width 100%
-        float left
         max-width 800px
         display flex
         flex-direction column
-        margin-top 16px
-        padding-right 20%
-        @media only screen and (max-width: 992px)
+        margin-top auto
+        margin-bottom auto
+        padding-left 10%
+        padding-right 5%
+        flex 50%
+        @media only screen and (max-width: 1050px)
+            margin-top 48px
             padding-right 16px
             padding-left 16px
 
@@ -168,8 +181,10 @@
             font-family: iran-yekan
             font-weight: bold
             color: #0045ff
-            @media only screen and (max-width: 992px)
-                font-size 1.5em
+            @media only screen and (max-width: 1050px)
+                text-align center
+                font-weight normal
+                font-size 1.6em
 
         div.main-description
             margin-top 32px
@@ -182,6 +197,8 @@
             letter-spacing normal
             text-align right
             color #1d1d1d
+            @media only screen and (max-width: 1050px)
+                text-align center
             @media only screen and (max-width: 992px)
                 font-size 1em
 

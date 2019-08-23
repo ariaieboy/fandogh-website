@@ -60,6 +60,12 @@
 
 <style lang="stylus">
 
+    *
+        user-select text
+        -moz-user-select text
+        -ms-user-select text
+        -webkit-user-select text
+
     row
         margin-left 0 !important
         margin-right 0 !important
