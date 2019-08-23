@@ -2,7 +2,7 @@
     <div class="row footer-container">
 
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="display: flex; box-sizing: padding-box">
-            <div style=" padding: 32px 24px; width: max-content">
+            <div style=" padding: 32px 12px; width: max-content">
                 <p class="footer-col-title">محصولات</p>
                 <ul>
                     <li>
@@ -39,7 +39,7 @@
                     </li>
                 </ul>
             </div>
-            <div style="width: max-content; padding: 32px 24px;">
+            <div style="width: max-content; padding: 32px 12px;">
                 <p class="footer-col-title">درباره ما</p>
                 <ul>
                     <li>
