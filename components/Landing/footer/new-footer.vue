@@ -61,13 +61,13 @@
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 left-footer-container">
 
 
-            <p class="subscription-title">ثبت‌نام در خبرنامه قندق</p>
-            <div class="subscription-container">
-                <button class="subscription-button">تایید</button>
-                <input class="subscription-input"
-                       type="email"
-                       placeholder="آدرس ایمیل شما"/>
-            </div>
+            <!--<p class="subscription-title">ثبت‌نام در خبرنامه فندق</p>-->
+            <!--<div class="subscription-container">-->
+                <!--<button class="subscription-button">تایید</button>-->
+                <!--<input class="subscription-input"-->
+                       <!--type="email"-->
+                       <!--placeholder="آدرس ایمیل شما"/>-->
+            <!--</div>-->
 
             <div class="footer-social-container">
 
@@ -75,7 +75,7 @@
                         src="../../../assets/svg/social/github.svg"/></a>
                 <a rel="noopener" target="_blank" href="https://twitter.com/fandoghpaas"><img
                         src="../../../assets/svg/social/twitter.svg"/></a>
-                <a rel="noopener" target="_blank" href="mailto:info@fandogh.cloud"><img
+                <a rel="noopener" target="_blank" href="mailto:support@fandogh.cloud"><img
                         src="../../../assets/svg/social/email.svg"/></a>
 
             </div>
