@@ -181,6 +181,7 @@
             font-family: iran-yekan
             font-weight: bold
             color: #0045ff
+
             @media only screen and (max-width: 1050px)
                 text-align center
                 font-weight normal
