@@ -1,4 +1,5 @@
 <template>
+
     <div class="wrapper-default">
         <div v-if="isMenuAvailable">
             <f-header/>
@@ -9,6 +10,7 @@
         </div>
         <alert/>
     </div>
+
 </template>
 
 <script>
