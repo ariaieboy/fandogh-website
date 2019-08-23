@@ -18,7 +18,7 @@
                     <div class="navbar">
                         <ul style="padding-left: 32px; padding-right: 32px;">
                             <li class="nev-button"
-                                style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px"
+                                style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px;"
                                 @click="toggleMenu">
                                 محصولات
                             </li>
@@ -59,7 +59,7 @@
             <sidebar ref="menu"/>
             <message ref="message"/>
         </header>
-        <div id="sub_menu" ref="sub_menu" class="sub_menu">
+        <div id="sub_menu" ref="sub_menu" class="sub_menu" style="opacity: 0; visibility: hidden;">
             <div class="menu_section">
                 <p>سرویس‌های مدیریت شده</p>
                 <div class="horiz_line"></div>
@@ -302,7 +302,7 @@
             },
             toggleMenu() {
 
-
+                console.log(this.$refs.sub_menu)
                 if (this.$refs.sub_menu.style.visibility === 'hidden') {
                     this.$refs.sub_menu.style.opacity = '100';
                     this.$refs.sub_menu.style.visibility = 'visible'
