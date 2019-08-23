@@ -20,7 +20,7 @@
 
 <style lang="stylus" scoped>
     .single
-        padding-top 200px
+        padding-top 100px
         display flex
         flex-flow wrap row-reverse
         align-items flex-start

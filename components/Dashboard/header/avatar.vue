@@ -84,7 +84,7 @@
                             eventValue: getValue("username")
                         });
                         this.$store.dispatch("logout");
-                        this.$router.push("/user/login");
+                        this.$router.replace("/");
                     }
                 );
 

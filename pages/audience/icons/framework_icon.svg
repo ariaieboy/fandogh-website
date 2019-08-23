@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="65.298" height="72.486" viewBox="0 0 65.298 72.486">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: bevel;
+        stroke-width: 4px;
+      }
+
+      .cls-1 {
+        stroke: #fefefe;
+      }
+
+      .cls-2 {
+        stroke: rgba(255,255,255,0.4);
+      }
+    </style>
+  </defs>
+  <g id="Group_3349" data-name="Group 3349" transform="translate(-0.601 106.299)">
+    <g id="Group_3347" data-name="Group 3347" transform="translate(2.101 -105)">
+      <path id="Path_1924" data-name="Path 1924" class="cls-1" d="M3.894,15.736l3.894-2.248,7.787-4.5L31.149,0h0L46.723,8.992l7.787,4.5L58.4,15.736M62.3,22.48V53.952L46.723,62.944l-7.787,4.5-3.894,2.248m-7.787,0L23.362,67.44l-7.787-4.5L0,53.952V22.48"/>
+    </g>
+    <g id="Group_3348" data-name="Group 3348" transform="translate(8.461 -97.535)">
+      <path id="Path_1925" data-name="Path 1925" class="cls-2" d="M3.226,12.258l3.088-1.751L12.488,7l12.35-7h0l12.35,7,6.175,3.5,3.088,1.751m3.226,5.161V42.366L37.143,49.493l-6.267,3.564-3.134,1.782m-5.806,0L18.8,53.057l-6.267-3.564L0,42.366V17.419"/>
+    </g>
+  </g>
+</svg>

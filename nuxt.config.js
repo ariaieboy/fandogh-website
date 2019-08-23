@@ -7,7 +7,7 @@ module.exports = {
      */
 
     loading: {
-        color: "#ff628f",
+        color: "#0045ff",
         height: "5px"
     },
     env: {
@@ -20,7 +20,8 @@ module.exports = {
     css: [
         "flexboxgrid/css/flexboxgrid.css",
         "@/assets/css/balloon.css",
-        "@/assets/css/main.styl"
+        "@/assets/css/main.styl",
+        'vue-plyr/dist/vue-plyr.css'
     ],
     head: {
         title: "سرویس های ابری فندق",
@@ -36,7 +37,7 @@ module.exports = {
         link: [{rel: "iScon", type: "image/x-icon", href: "/favicon.ico"}]
     },
 
-    modules: ["@nuxtjs/pwa", "@nuxtjs/google-analytics"],
+    modules: ["@nuxtjs/pwa", "@nuxtjs/google-analytics", 'vue-scrollto/nuxt',],
     "google-analytics": {
         id: "UA-120059029-1"
     },
@@ -70,10 +71,12 @@ module.exports = {
         "~/plugins/progress-hover",
         {src: "~/plugins/google-map", ssr: false},
         {src: "~/plugins/vue-select", ssr: false},
-        {src: "~/plugins/vuetify", ssr: false},
+        {src: "~/plugins/vuetify.js", ssr: false},
         {src: "~/plugins/vue-bar", ssr: false},
         {src: "~/plugins/tooltip", ssr: false},
         {src: "~/plugins/input", ssr: false},
+        {src: "~/plugins/vue-plyr", ssr: false, mode: 'spa'},
+        {src: "~/plugins/vue-scroll-to", ssr: false},
         {src: '~/plugins/localStorage.js', ssr: false, mode: 'spa'},
         "~/plugins/mixins",
         "~/plugins/validation",

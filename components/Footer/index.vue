@@ -23,7 +23,7 @@
                 </ul>
             </div>
         </div>
-            
+
     </div>
 </template>
 
@@ -31,8 +31,8 @@
     .footer
         .top-footer
             padding 0 90px
-            background: #3f10ae
-            height 90px
+            background: #001069
+            height 400px
             display flex
             justify-content space-between
             .footer--menu, .footer--icons

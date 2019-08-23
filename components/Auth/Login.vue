@@ -5,12 +5,11 @@
       :message="error"
       ref="modal"
       :disableOverlay="disableOverlay"
-      v-show="force || show"
-    >
-      <h2>وارد شوید</h2>
+      v-show="force || show">
+      <h2 style="margin-bottom: 32px">وارد شوید</h2>
       <!-- @submit.prevent -->
       <form>
-        <div class="fandogh-form-group center margin-10">
+        <div class="fandogh-form-group" style="margin-bottom: 8px">
           <f-input
             name="username"
             v-model="username"
@@ -19,7 +18,7 @@
             placeholder="نام کاربری یا ایمیل"
           />
         </div>
-        <div class="fandogh-form-group center margin-10">
+        <div class="fandogh-form-group" style="margin-bottom: 8px">
           <f-input
             name="password"
             v-model="password"
@@ -36,7 +35,7 @@
           />
         </div>-->
         <div class="fandogh-form-group center margin-20">
-          <f-button @onClick="login" styles="red block 80">{{title}}</f-button>
+          <f-button @onClick="login" styles="green block 80">{{title}}</f-button>
         </div>
 
         <div class="fandogh-form-group center margin-20">
@@ -116,3 +115,8 @@ export default {
   }
 };
 </script>
+<style lang="stylus">
+  .raw
+    margin-left unset !important
+    margin-right unset !important
+</style>

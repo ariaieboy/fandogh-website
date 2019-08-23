@@ -9,14 +9,14 @@
             </p>
         </div>
         <div class="registration">
-            
+
             <f-button v-if="!loggedIn" path="/user/login" styles="red small login" > ورود </f-button>
             <f-button v-if="!loggedIn" path="/user/register" styles="blue small" > ثبت نام </f-button>
 
             <f-button v-if="loggedIn" @onClick="logout" styles="red small login">خروج</f-button>
             <f-button v-if="loggedIn" path="/dashboard/images" styles="blue small">داشبورد</f-button>
         </div>
-    
+
     </section>
 </template>
 
@@ -32,7 +32,7 @@ export default{
     },
     logout() {
       this.$store.dispatch("logout");
-      this.$router.push("/user/login");
+      this.$router.replace("/");
     }
   },
   computed:{
