@@ -33,40 +33,40 @@
         </div>
 
 
-        <div style="width: 100%; display: flex; background: #0045ff; padding: 16px">
-            <div class="row lang-detail-media-container">
+        <!--<div style="width: 100%; display: flex; background: #0045ff; padding: 16px">-->
+            <!--<div class="row lang-detail-media-container">-->
 
-                <div class="col-lg-3 col-md-3 col-xs-12 col-md-12 lang-menu-container">
+                <!--<div class="col-lg-3 col-md-3 col-xs-12 col-md-12 lang-menu-container">-->
 
-                    <p class="menu-title">آموزش مرحله به مرحله</p>
+                    <!--<p class="menu-title">آموزش مرحله به مرحله</p>-->
 
-                    <div v-for="(menu, index) in language_tutorials_model[language_id]"
-                         :key="menu.title"
-                         class="lang-menu-item"
-                         :class="[menu.selected ? 'selected' : '']"
-                         @click="menuItemSelected(index)">
-                        <p class="menu-item-number">{{index + 1}}</p>
-                        <p class="menu-item-title">{{menu.title}}</p>
-                    </div>
+                    <!--<div v-for="(menu, index) in language_tutorials_model[language_id]"-->
+                         <!--:key="menu.title"-->
+                         <!--class="lang-menu-item"-->
+                         <!--:class="[menu.selected ? 'selected' : '']"-->
+                         <!--@click="menuItemSelected(index)">-->
+                        <!--<p class="menu-item-number">{{index + 1}}</p>-->
+                        <!--<p class="menu-item-title">{{menu.title}}</p>-->
+                    <!--</div>-->
 
-                    <button @click="$router.push('/user/register')" class="menu-button">ثبت‌نام</button>
-                </div>
+                    <!--<button @click="$router.push('/user/register')" class="menu-button">ثبت‌نام</button>-->
+                <!--</div>-->
 
-                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                <!--<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">-->
 
-                    <vue-plyr class="tut_player" :key="menu_item.video"
-                              :options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume' ,'current-time','fullscreen', 'download']}">
-                        <video style="width: 100%">
-                            <source style="width: 100%" :src="require('../../assets/media/' + menu_item.video + '.mp4')"
-                                    type="video/mp4"/>
-                        </video>
-                    </vue-plyr>
+                    <!--<vue-plyr class="tut_player" :key="menu_item.video"-->
+                              <!--:options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume' ,'current-time','fullscreen', 'download']}">-->
+                        <!--<video style="width: 100%">-->
+                            <!--<source style="width: 100%" :src="require('../../assets/media/' + menu_item.video + '.mp4')"-->
+                                    <!--type="video/mp4"/>-->
+                        <!--</video>-->
+                    <!--</vue-plyr>-->
 
-                </div>
+                <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
         <!--<div class="lang-detail-desc-container row">-->
         <!--<p>چرا پروژه جاوایی خود را روی سکوی ابری فندق مستقر کنید</p>-->

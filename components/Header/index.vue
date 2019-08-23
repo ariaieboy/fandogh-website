@@ -217,9 +217,9 @@
                         href: 'php',
                     },
                     {
-                        title: 'Node.js',
+                        title: 'Java Script',
                         icon: 'nodejs_lang',
-                        href: 'nodejs',
+                        href: 'java_script',
                     },
                     {
                         title: 'C#',
