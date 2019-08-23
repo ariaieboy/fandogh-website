@@ -2,7 +2,7 @@
     <div style="width: 100%; background: #F4F6FF">
 
         <div class="parallax-container">
-            <div class="lang-detail-parent-container">
+            <div class="lang-detail-parent-container" :style="{backgroundImage: 'url(' + require('../../assets/svg/' + language_model[language_id].banner)  + ')', backgroundPosition: 'top', backgroundRepeat: 'no-repeat', backgroundAttachment: 'fixed'}">
             </div>
         </div>
         <div class="lang-logo-container">
@@ -121,31 +121,36 @@
                         title_en: 'Python',
                         title_fa: 'پایتون',
                         slogan: 'دنیای بی‌کران پایتون بر روی سکوی ابری فندق',
-                        logo: 'python_lang'
+                        logo: 'python_lang',
+                        banner: 'python_bg.svg'
                     },
                     java: {
                         title_en: 'Java',
                         title_fa: 'جاوا',
                         slogan: 'دنیای بی‌کران جاوا بر روی سکوی ابری فندق',
-                        logo: 'java_lang'
+                        logo: 'java_lang',
+                        banner: 'java_bg.svg'
                     },
                     php: {
                         title_en: 'PHP',
                         title_fa: 'پی‌اچ‌پی',
                         slogan: 'دنیای بی‌کران پی‌اچ‌پی بر روی سکوی ابری فندق',
-                        logo: 'php_lang'
+                        logo: 'php_lang',
+                        banner: 'php_bg.svg'
                     },
                     java_script: {
                         title_en: 'Java Script',
                         title_fa: 'جاوا اسکریپت',
                         slogan: 'دنیای بی‌کران جاوا اسکریپت بر روی سکوی ابری فندق',
-                        logo: 'nodejs_lang'
+                        logo: 'nodejs_lang',
+                        banner: 'java_script_bg.svg'
                     },
                     c_sharp: {
                         title_en: 'C#',
                         title_fa: 'سی شارپ',
                         slogan: 'دنیای بی‌کران سی شارپ بر روی سکوی ابری فندق',
-                        logo: 'c_sharp_lang'
+                        logo: 'c_sharp_lang',
+                        banner: 'c_sharp_bg.svg'
                     }
 
                 },
@@ -480,10 +485,8 @@
         @media only screen and (max-width 1230px)
             height 270px
 
-        div
-            background url("../../assets/svg/java_bg.svg") no-repeat top
+        div.lang-detail-parent-container
             background-size 60%
-            background-attachment: fixed
             width 100%
             height 100%
             @media only screen and (max-width 1230px)
