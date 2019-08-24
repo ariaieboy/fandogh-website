@@ -1,8 +1,6 @@
 kind: ExternalService
 name: start
 spec:
-  domains:
-   - name: start.fandogh.cloud
   env: []
   image: start:${IMAGE_VERSION}
   image_pull_policy: IfNotPresent
