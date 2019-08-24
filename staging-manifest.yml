@@ -2,7 +2,7 @@ kind: ExternalService
 name: fandogh-staging123123
 spec:
   env: []
-  image: fandogh-staging123123:${IMAGE_VERSION}
+  image: start:${IMAGE_VERSION}
   image_pull_policy: IfNotPresent
   port: 80
   replicas: 2
