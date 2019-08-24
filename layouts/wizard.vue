@@ -149,7 +149,6 @@
 
 <script>
     import FDHeader from "~/components/wizard/header";
-    import FFooter from "~/components/Footer";
     import AdminSidebar from "~/components/wizard/sidebar";
     import "normalize.css";
     import Notification from "~/components/Dashboard/notification";
@@ -172,7 +171,6 @@
         components: {
             FDHeader,
             FLoading,
-            FFooter,
             AdminSidebar,
             Notification,
             Alert,

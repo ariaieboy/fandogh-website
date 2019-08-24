@@ -24,6 +24,7 @@
       </section>
     </single>
   </div>
+
 </template>
 
 <script>

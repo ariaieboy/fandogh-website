@@ -85,7 +85,7 @@
                         <div class="row">
                             <p class="col-xs-12 col-md-12 col-sm-12 col-lg-12"
                                style="text-align: center; font-size: 0.9em; color: #000;display: inline-block; margin-top: 32px">
-                                مبلغ قابل پرداخت: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{Number(transaction.transactionAmount).toLocaleString()}} تومان</span>
+                                مبلغ پرداخت شده: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{Number(transaction.transactionAmount).toLocaleString()}} تومان</span>
                             </p>
                         </div>
 

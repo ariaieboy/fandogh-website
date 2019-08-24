@@ -104,9 +104,9 @@
 <style lang="stylus" scoped>
 
     .footer-container
-        width 100%
+        width 100% !important
         background-color #000f50
-        height max-content
+        height max-content !important
         position relative
         display flex
         margin-left 0

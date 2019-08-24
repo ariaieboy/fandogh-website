@@ -13,7 +13,6 @@
 
 <script>
     import FHeader from '~/components/Header'
-    import FFooter from '~/components/Footer'
     import Alert from "~/components/Dashboard/alert";
     import 'normalize.css'
     import NewFooter from "../components/Landing/footer/new-footer";
@@ -23,7 +22,6 @@
         components: {
             NewFooter,
             FHeader,
-            FFooter,
             Alert
         },
         computed: {

@@ -1,0 +1,10 @@
+kind: ExternalService
+name: start
+spec:
+  env: []
+  image: start:${IMAGE_VERSION}
+  image_pull_policy: IfNotPresent
+  port: 80
+  replicas: 2
+  resources:
+    memory: 400Mi
