@@ -179,7 +179,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                     username_required: value => value !== '' || 'نام کاربری نباید خالی باشد',
                     email_required: value => value !== '' || 'آدرس ایمیل نباید خالی باشد',
                     password_required: value => value !== '' || 'گذرواژه نباید خالی باشد',
-                    repeat_password: value => value !== '' || 'تکرار گذرواژه نباید خالی باشد',
+                    repeat_password_required: value => value !== '' || 'تکرار گذرواژه را وارد نکرده‌اید',
                     namespace_required: value => value !== '' || 'نام فضانام نباید خالی باشد',
                     email_valid: value => Validation.email(value) || 'آدرس ایمیل وارد شده صحیح نیست'
                 },

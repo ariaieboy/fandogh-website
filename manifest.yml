@@ -1,0 +1,12 @@
+kind: ExternalService
+name: start
+spec:
+  domains:
+   - name: start.fandogh.cloud
+  env: []
+  image: start:${IMAGE_VRSION}
+  image_pull_policy: IfNotPresent
+  port: 80
+  replicas: 2
+  resources:
+    memory: 400Mi
