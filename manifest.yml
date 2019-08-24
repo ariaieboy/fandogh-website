@@ -4,7 +4,7 @@ spec:
   domains:
    - name: start.fandogh.cloud
   env: []
-  image: start:${IMAGE_VRSION}
+  image: start:${IMAGE_VERSION}
   image_pull_policy: IfNotPresent
   port: 80
   replicas: 2

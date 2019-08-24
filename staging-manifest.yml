@@ -4,7 +4,7 @@ spec:
   domains:
     - name: fandogh-staging123123.fandogh.cloud
   env: []
-  image: fandogh-staging123123:${IMAGE_VRSION}
+  image: fandogh-staging123123:${IMAGE_VERSION}
   image_pull_policy: IfNotPresent
   port: 80
   replicas: 2
