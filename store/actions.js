@@ -197,6 +197,18 @@ export const deleteService = async ({commit, state}, name) => {
     }
 };
 
+export const requestServiceHistory = async ({commit, state}, service_name)=>{
+
+    try{
+        return await Request().get(`/api/services/${service_name}/history`);
+    }catch (e) {
+        return Promise.reject(e)
+
+    }
+
+};
+
+
 export const createServiceManifest = async ({commit, state}) => {
     try {
         return await Request().post("/api/services/manifests", state.manifest);

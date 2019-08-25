@@ -34,6 +34,7 @@
         padding 16px
         transition all .3s ease-in-out
         display flex
+        cursor pointer
         @media only screen and (max-width 992px)
             height 80px
 
@@ -45,7 +46,6 @@
             border-radius 50%
             border 1px solid $colorPrimary
             display flex
-            cursor pointer
 
             img
                 margin auto
