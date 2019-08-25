@@ -42,7 +42,7 @@
 
     .languages-container
         width 100%
-        background-color #0045FF
+        background-color #1757FF
         height max-content
         display flex
         justify-content center
