@@ -73,6 +73,11 @@
                      :class="[(activeSectionName === 'logs' ? 'enabled' : 'disabled')]">
                     <p>لاگ‌ها</p>
                 </div>
+
+                <div @click="sectionClicked('rollback')"
+                     :class="[(activeSectionName === 'rollback' ? 'enabled' : 'disabled')]">
+                    <p>کپسول زمان</p>
+                </div>
             </div>
 
             <keep-alive>
