@@ -197,7 +197,7 @@
         margin-left auto
         margin-right auto
         text-align center
-        color #3c3c3c
+        color $fontGray
         max-width 700px
         margin-top 64px
         margin-bottom 32px

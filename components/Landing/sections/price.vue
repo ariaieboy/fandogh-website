@@ -600,7 +600,7 @@
         line-height 1.73
         letter-spacing normal
         text-align center
-        color: #707070
+        color: $fontGray
         margin-top 32px
         @media only screen and (max-width: 992px)
             font-size 1.1em
