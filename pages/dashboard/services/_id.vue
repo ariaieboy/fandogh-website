@@ -108,6 +108,7 @@
     import env from "./service/env"
     import domains from "./service/domains"
     import logs from "./service/logs"
+    import rollback from "./service/rollback"
 
     export default {
         layout: "dashboard",
@@ -125,7 +126,8 @@
             monitor,
             env,
             domains,
-            logs
+            logs,
+            rollback
         },
         data() {
             return {
