@@ -209,6 +209,20 @@ export const requestServiceHistory = async ({commit, state}, service_name)=>{
 };
 
 
+export const requestServiceRollback = async ({commit, state}, {service_name, history_id}) => {
+
+    try {
+
+        return await Request().post(`/api/services/rollback`, {
+            service_name: service_name,
+            history_id: history_id
+        })
+
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const createServiceManifest = async ({commit, state}) => {
     try {
         return await Request().post("/api/services/manifests", state.manifest);
