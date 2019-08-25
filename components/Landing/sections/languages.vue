@@ -40,9 +40,11 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     .languages-container
         width 100%
-        background-color #1757FF
+        background-color $colorBlueArea
         height max-content
         display flex
         justify-content center

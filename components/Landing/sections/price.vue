@@ -495,6 +495,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
 
     .price-parent-container
         width 100%
@@ -551,11 +553,11 @@
 
         div
             height 0
-            border solid 1px #0045ff
-            margin 0 20%
+            border solid 1px $grayMedium
+            margin 0 25%
             border-radius 25px
             @media only screen and (max-width: 992px)
-                border solid 1px #0045ff
+                border solid 1px $grayMedium
 
     .resource-description
         padding 0 20%
@@ -576,13 +578,13 @@
         margin-top 64px
         font-family iran-yekan
         font-size 2.4em
-        font-weight bold
+        font-weight normal
         font-style normal
         font-stretch normal
         line-height 1.73
         letter-spacing normal
         text-align center
-        color #0045ff
+        color $silverDark
         @media only screen and (max-width: 992px)
             font-size 1.7em
             margin-top 32px
@@ -590,7 +592,6 @@
 
     .ready-plan-description
         padding 0 10%
-        margin-top 16px
         font-family iran-yekan
         font-size 1.4em
         font-weight normal
@@ -600,6 +601,7 @@
         letter-spacing normal
         text-align center
         color: #707070
+        margin-top 32px
         @media only screen and (max-width: 992px)
             font-size 1.1em
 
@@ -628,13 +630,13 @@
     .card-plan-title
         font-family iran-yekan
         font-size 2em
-        font-weight bold
+        font-weight normal
         font-style normal
         font-stretch normal
         line-height 1.7
         letter-spacing normal
         text-align right
-        color #0045ff
+        color $colorPrimary
         padding-right 16px
         margin-bottom 5px
         margin-top 8px
@@ -712,7 +714,7 @@
         line-height 1.73
         letter-spacing normal
         text-align center
-        color #0045ff
+        color $colorPrimary
         @media only screen and (max-width: 992px)
             font-size 1.7em
 

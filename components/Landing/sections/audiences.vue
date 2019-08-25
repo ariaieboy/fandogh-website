@@ -73,6 +73,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     .audience-container
         width 100%
         min-height 500px
@@ -100,13 +102,13 @@
             margin-right auto
             font-family iran-yekan
             font-size 2.4em
-            font-weight bold
+            font-weight normal
             font-style normal
             font-stretch normal
             line-height 1.71
             letter-spacing normal
             text-align left
-            color #0045ff
+            color $silverDark
             @media only screen and (max-width: 992px)
                 font-size 1.8em
 
@@ -114,7 +116,7 @@
         div.horizontal-line
             width 450px
             height 0
-            border solid 1px #0045ff
+            border solid 1px $grayMedium
             margin-left auto
             margin-right auto
             border-radius 25px
@@ -162,7 +164,7 @@
                     letter-spacing normal
                     text-align center
                     margin-bottom 5px
-                    color #2979ff
+                    color $colorBlueArea
                     margin-top 12px
                     @media only screen and (max-width: 992px)
                         font-size 1.1em
@@ -174,12 +176,12 @@
                     border-radius 25px
                     margin-top 0
                     display none
-                    border 1px solid #0045ff
+                    border 1px solid $colorPrimary
 
         div.aud-item:hover
             div
                 p
-                    color #0045ff
+                    color $colorPrimary
 
                 div.divider
                     display unset

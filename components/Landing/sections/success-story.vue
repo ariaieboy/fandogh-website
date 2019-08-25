@@ -161,6 +161,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     .container-fluid
         padding-left 0
         padding-right 0

@@ -78,6 +78,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     .business-image-header
         display flex
         width 100%

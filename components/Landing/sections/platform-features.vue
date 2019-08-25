@@ -209,6 +209,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     .features-container
         width 100%
         min-height 700px
@@ -223,13 +225,13 @@
     .feature-sec-title
         font-family iran-yekan
         font-size 2.5em
-        font-weight bold
+        font-weight normal
         font-style normal
         font-stretch normal
         line-height 1.71
         letter-spacing normal
         text-align center
-        color #0045ff
+        color $silverDark
         @media only screen and (max-width: 992px)
             font-size 1.8em
 
@@ -264,10 +266,10 @@
             line-height 40px
             font-size 1.2em
             font-family iran-yekan
-            color #0045ff
+            color $colorPrimary
             display flex
             width unset
-            border-right 2px solid #0045ff
+            border-right 2px solid $colorPrimary
             text-align center
             padding-right 12px
             font-weight bold
@@ -297,7 +299,7 @@
             padding-right 0
             scrollbar-width: none
             scrollbar-height: none
-            background-color #0045ff
+            background-color $colorBlueArea
             white-space nowrap
             margin-bottom 16px
             box-shadow 0 0 6px 0 rgba(0, 69, 255, 0.4)
@@ -347,7 +349,7 @@
                 line-height 1.25
                 letter-spacing normal
                 text-align right
-                color #0045ff
+                color $colorPrimary
                 direction ltr
                 margin-bottom 6px
                 @media only screen and (max-width: 1230px)
