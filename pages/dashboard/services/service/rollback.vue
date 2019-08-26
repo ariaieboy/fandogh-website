@@ -22,7 +22,7 @@
                     <span class="rollback-icon">
                         <img src="../../../../assets/svg/ic-rollback.svg" alt="rollback"/>
                     </span>
-                    <div class="rollback-spec-container">
+                    <div class="rollback-spec-container" @click="forceRollback">
                         <span class="history-version">بازگشت به نسخه سرویس: <span>{{history.history_id}}</span></span>
                         <span class="history-date">تاریخ ساخت: <span>{{history.date}}</span></span>
                     </div>
@@ -73,6 +73,60 @@
 
         },
         methods: {
+            async forceRollback() {
+
+                this.$ga.event({
+                    eventCategory: "Rollback Service",
+                    eventAction: "click btn to rollback service",
+                    eventLabel: "rollback service",
+                    eventValue: `${this.service.name}`
+                });
+                this.$alertify(
+                    {
+                        title: `Rollback Service`,
+                        description: `توجه داشته باشید Rollback یک راه حل فوری ولی موقت است و شما باید از درست بودن نسخه‌ای که به آن Rollback می‌کنید مطمئن باشید!`,
+                        label: 'Rollback',
+                        img: require("../../../../components/Dashboard/alert/images/ic_rollback.svg")
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store.dispatch('requestServiceRollback', {
+                                service_name: this.service.name,
+                                history_id: this.history.history_id
+                            })
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "Rollback Service",
+                                        eventAction: "click btn to rollback service",
+                                        eventLabel: "rollback service",
+                                        eventValue: `${this.service.name}`
+                                    });
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                    location.reload()
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "Rollback Service",
+                                        eventAction: "failed rollback service history",
+                                        eventLabel: "rollback service",
+                                        eventValue: `${this.service.name}`
+                                    });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                });
+                        }
+                    }
+                );
+
+            },
             removeHistory() {
                 this.$ga.event({
                     eventCategory: "Rollback History",
@@ -88,6 +142,7 @@
                     status => {
                         if (status) {
                             this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            console.log(this.history.history_id)
                             this.$store.dispatch("deleteServiceHistory", {
                                 service_name: this.service.name,
                                 history_id: this.history.history_id
@@ -127,12 +182,16 @@
                 this.history = null
             },
             JSONstringify(json) {
+
                 if (typeof json != 'string') {
                     json = JSON.stringify(json, undefined, 2);
                 }
+
                 json = json.replace(/(}|{|,|")?/g, '');
                 json = json.replace(/^\s*$(?:\r\n?|\n)/gm, '');
+
                 return json
+
             },
             historySelected(index) {
                 this.history = this.service_history[index]

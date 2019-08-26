@@ -228,9 +228,7 @@ export const deleteServiceHistory = async ({commit, state}, {service_name, histo
 
     try {
 
-        return await Request().delete(`/api/services/${service_name}/history`,{
-            history_id: history_id
-        })
+        return await Request().delete(`/api/services/${service_name}/history/${history_id}`)
 
     }catch (e) {
         return Promise.reject(e)
