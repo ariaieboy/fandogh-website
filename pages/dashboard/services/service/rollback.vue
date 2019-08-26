@@ -27,7 +27,7 @@
                         <span class="history-date">تاریخ ساخت: <span>{{history.date}}</span></span>
                     </div>
                 </div>
-                <div class="rollback-parent-container">
+                <div class="rollback-parent-container" @click="removeHistory">
                     <span class="action-icon">
                         <img src="../../../../static/icons/ic_delete.svg" alt="rollback"/>
                     </span>
@@ -37,7 +37,8 @@
                 </div>
                 <div class="rollback-parent-container" @click="cancelRollback">
                     <span class="action-icon">
-                        <img src="../../../../assets/svg/ic-back.svg" alt="rollback" style="transform: rotate(180deg); padding: 9px;"/>
+                        <img src="../../../../assets/svg/ic-back.svg" alt="rollback"
+                             style="transform: rotate(180deg); padding: 9px;"/>
                     </span>
                     <div class="rollback-spec-container">
                         <span class="history-version">بازگشت</span>
@@ -72,8 +73,58 @@
 
         },
         methods: {
-            cancelRollback(){
-              this.history = null
+            removeHistory() {
+                this.$ga.event({
+                    eventCategory: "Rollback History",
+                    eventAction: "click btn remove rollback history",
+                    eventLabel: "rollback history name",
+                    eventValue: `${this.service.name}:${this.history.history_id}`
+                });
+                this.$alertify(
+                    {
+                        title: `حذف Rollback History`,
+                        description: `آیا از حذف rollback ${this.history.history_id}  مطمئن هستید؟`
+                    },
+                    status => {
+                        if (status) {
+                            // this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.removing = true
+                            this.$store.dispatch("deleteServiceHistory", {
+                                service_name: this.service.name,
+                                history_id: this.history.history_id
+                            })
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "Rollback History",
+                                        eventAction: "remove service history",
+                                        eventLabel: "rollback history name",
+                                        eventValue: `${this.service.name}:${this.history.history_id}`
+                                    });
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "Rollback History",
+                                        eventAction: "fail remove service history item",
+                                        eventLabel: "rollback history name",
+                                        eventValue: `${this.service.name}:${this.history.history_id}`
+                                    });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                });
+                        }
+                    }
+                );
+            },
+            cancelRollback() {
+                this.history = null
             },
             JSONstringify(json) {
                 if (typeof json != 'string') {
