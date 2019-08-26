@@ -105,6 +105,7 @@
                                         title: res.message,
                                         type: "success"
                                     });
+                                    this.requestServiceHistory(this.service.name)
                                 })
                                 .catch(e => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
