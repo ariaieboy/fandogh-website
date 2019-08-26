@@ -87,8 +87,7 @@
                     },
                     status => {
                         if (status) {
-                            // this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                            this.removing = true
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
                             this.$store.dispatch("deleteServiceHistory", {
                                 service_name: this.service.name,
                                 history_id: this.history.history_id
