@@ -1,8 +1,8 @@
 <template>
-    <div v-if="history === null" class="row" style="margin-left: 0; margin-right: 0; width: 100%;">
+    <div v-if="history === null" class="row" style="margin-left: 0; margin-right: 0; width: 100%; height: max-content">
         <div v-for="(item, index) in service_history"
              class="col-lg-6 col-md-6 col-xs-12 col-sm-12"
-             style="padding-left: 8px; padding-right: 8px">
+             style="padding-left: 8px; padding-right: 8px; height: max-content">
             <div class="rollback-parent-container" @click="historySelected(index)">
                 <span class="rollback-icon">
                     <img src="../../../../assets/svg/ic-rollback.svg" alt="rollback"/>
@@ -14,6 +14,8 @@
             </div>
         </div>
     </div>
+
+
     <div v-else class="row" style="margin-right: 0; margin-left: 0">
         <div class="rollback-manifest-container">
             <div class="rollback-action-container">
@@ -238,10 +240,10 @@
         width 100%
         height 80px
         border-radius 5px
-        margin-bottom 12px
         box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
         background $totalWhite
         padding 12px 16px
+        margin-bottom 12px
         transition all .3s ease-in-out
         display flex
         cursor pointer
