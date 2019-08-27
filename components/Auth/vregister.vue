@@ -60,6 +60,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
 
             </div>
 
+
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 register-input-box">
                 <p class="register-dialog-title">ثبت‌نام رایگان</p>
 
