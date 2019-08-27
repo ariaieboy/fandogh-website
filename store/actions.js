@@ -197,6 +197,45 @@ export const deleteService = async ({commit, state}, name) => {
     }
 };
 
+export const requestServiceHistory = async ({commit, state}, service_name) => {
+
+    try {
+        return await Request().get(`/api/services/${service_name}/history`);
+    } catch (e) {
+        return Promise.reject(e)
+
+    }
+
+};
+
+
+export const requestServiceRollback = async ({commit, state}, {service_name, history_id}) => {
+
+    try {
+
+        return await Request().post(`/api/services/rollbacks`, {
+            service_name: service_name,
+            history_id: history_id
+        })
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+
+export const deleteServiceHistory = async ({commit, state}, {service_name, history_id}) => {
+
+    try {
+
+        return await Request().delete(`/api/services/${service_name}/history/${history_id}`)
+
+    }catch (e) {
+        return Promise.reject(e)
+    }
+
+};
+
 export const createServiceManifest = async ({commit, state}) => {
     try {
         return await Request().post("/api/services/manifests", state.manifest);
@@ -207,7 +246,7 @@ export const createServiceManifest = async ({commit, state}) => {
 
 export const dumpServiceManifest = async ({commit, state}, service_name) => {
     try {
-        const manifest =  await Request().get('api/services/manifests', {
+        const manifest = await Request().get('api/services/manifests', {
             params: {
                 service_name: service_name
             }
@@ -222,9 +261,9 @@ export const dumpServiceManifest = async ({commit, state}, service_name) => {
 
 export const getTransactions = async ({commit, state}) => {
 
-    try{
+    try {
         return await Request().get('api/billing')
-    }catch (e) {
+    } catch (e) {
         return Promise.reject(e)
     }
 
