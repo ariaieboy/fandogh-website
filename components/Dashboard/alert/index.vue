@@ -125,7 +125,7 @@ export default {
     text-align center
     h6
       color #000
-      margin-top 12px
+      margin-top 24px
       text-align center
       font-weight normal
       font-size 1.1em

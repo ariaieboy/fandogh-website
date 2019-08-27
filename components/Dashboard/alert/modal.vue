@@ -92,7 +92,7 @@ export default {
   },
   data() {
     return {
-      width: this.defaultWidth || "80%",
+      width: "80%",
       open: false,
       isOpen: false,
       isShowCloseButton: true,
@@ -124,7 +124,6 @@ export default {
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.getWindowWidth);
     window.removeEventListener("resize", this.getWindowHeight);
   },
   destroyed() {
@@ -138,28 +137,13 @@ export default {
   },
   mounted() {
     this.$nextTick(function () {
-      window.addEventListener("resize", this.getWindowWidth);
       window.addEventListener("resize", this.getWindowHeight);
-      this.getWindowWidth();
       this.getWindowHeight();
     });
   },
   methods: {
     getWindowHeight(event) {
       this.windowHeight = document.documentElement.clientHeight;
-    },
-    getWindowWidth(event) {
-      if (this.resizeWidth && Object.keys(this.resizeWidth).length > 0) {
-        this.windowWidth = document.documentElement.clientWidth;
-        var filter = Object.keys(this.resizeWidth).find(
-          f => f >= this.windowWidth
-        );
-        if (filter) {
-          this.width = this.resizeWidth[filter];
-        } else {
-          this.width = this.defaultWidth;
-        }
-      }
     },
     _lockBody() {
       this.backups.body.height = document.body.style.height;
@@ -235,6 +219,7 @@ export default {
     top 50%
     right 0
     left 0
+    max-width 450px
     z-index 999
     overflow-y auto
     box-sizing border-box
