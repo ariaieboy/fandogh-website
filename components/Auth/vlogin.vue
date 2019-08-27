@@ -18,6 +18,7 @@
                         color="#0045ff"
                         type="text"
                         dir="rtl"
+                        @keyup.enter="login"
                         :rules="[rules.username_required]"
                         required
                         :prepend-inner-icon="'person'"
@@ -33,6 +34,7 @@
                         color="#0045ff"
                         type="text"
                         dir="rtl"
+                        @keyup.enter="login"
                         :rules="[rules.password_required]"
                         required
                         :type="show_pass ? 'text' : 'password'"
