@@ -213,7 +213,7 @@ export const requestServiceRollback = async ({commit, state}, {service_name, his
 
     try {
 
-        return await Request().post(`/api/services/rollback`, {
+        return await Request().post(`/api/services/rollbacks`, {
             service_name: service_name,
             history_id: history_id
         })
