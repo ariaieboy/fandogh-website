@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="76.875" height="76.875" viewBox="0 0 76.875 76.875">
     <defs>
         <style>
-            .cls-1,.cls-7{fill:none}.cls-1{clip-rule:evenodd}.cls-2{fill:#0045ff;stroke:#0045ff;stroke-width:2px}.cls-3{clip-path:url(#clip-path)}.cls-4{fill:#fdfdfd}.cls-5{clip-path:url(#clip-path-2)}.cls-6{stroke:none}
+            .cls-1,.cls-7{fill:none}.cls-1{clip-rule:evenodd}.cls-2{fill:#1757FF;stroke:#1757FF;stroke-width:2px}.cls-3{clip-path:url(#clip-path)}.cls-4{fill:#fdfdfd}.cls-5{clip-path:url(#clip-path-2)}.cls-6{stroke:none}
         </style>
         <clipPath id="clip-path">
             <path id="Path_1730" d="M16.067-203.521h20.146a.568.568 0 0 1 .568.568v8.387a.568.568 0 0 1-.568.568H16.067v3.46a.568.568 0 0 1-.568.568.567.567 0 0 1-.286-.077L1.072-198.3a.568.568 0 0 1-.2-.776.568.568 0 0 1 .2-.2l14.141-8.252a.568.568 0 0 1 .776.2.568.568 0 0 1 .077.286z" class="cls-1" data-name="Path 1730" transform="translate(-.79 207.61)"/>

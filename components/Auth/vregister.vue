@@ -73,6 +73,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                             dir="rtl"
                             :rules="[rules.username_required]"
                             required
+                            @keyup.enter="register"
                             v-model="user.username"
                             :hint="username.hint"
                             :label="username.label">
@@ -87,6 +88,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                             dir="rtl"
                             :rules="[rules.password_required]"
                             required
+                            @keyup.enter="register"
                             :type="show_pass ? 'text' : 'password'"
                             browser-autocomplete="new-password"
                             :append-icon="show_pass ? 'visibility_off' : 'visibility'"
@@ -121,6 +123,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                             color="#0045ff"
                             type="text"
                             dir="rtl"
+                            @keyup.enter="register"
                             :rules="[rules.email_required, rules.email_valid]"
                             required
                             :type="'email'"
@@ -136,6 +139,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                             color="#0045ff"
                             type="text"
                             dir="rtl"
+                            @keyup.enter="register"
                             :rules="[rules.namespace_required]"
                             required
                             :type="'text'"

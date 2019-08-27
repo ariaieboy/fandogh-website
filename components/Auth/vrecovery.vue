@@ -25,6 +25,7 @@
                         :append-icon="show_pass ? 'visibility_off' : 'visibility'"
                         v-model="user.new_password"
                         :hint="new_password.hint"
+                        @keyup.enter="resetPassword"
                         @click:append="show_pass = !show_pass"
                         :label="new_password.label">
 
@@ -38,6 +39,7 @@
                         dir="rtl"
                         :rules="[rules.repeat_password_required]"
                         required
+                        @keyup.enter="resetPassword"
                         :type="show_pass ? 'text' : 'password'"
                         browser-autocomplete="new-password"
                         :prepend-inner-icon="'lock'"

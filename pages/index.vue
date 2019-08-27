@@ -1,6 +1,5 @@
 <template>
     <section style="background: #fefefe; width: 100%;">
-
         <div class="row" style="width: 100%">
 
             <slider/>
@@ -11,8 +10,6 @@
             <!--<business-solution/>-->
             <!--<success-story/>-->
             <price/>
-
-
 
         </div>
     </section>

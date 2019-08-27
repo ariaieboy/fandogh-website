@@ -82,6 +82,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     .tutorial-container
         width 100%
         min-height 300px

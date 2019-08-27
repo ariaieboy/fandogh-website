@@ -117,7 +117,7 @@ export default {
       color #000
       text-align center
       font-weight 900
-      font-size 18px
+      font-size 1.2em
       @media (max-width: 593px)
         font-size 14px
   &-content
@@ -125,9 +125,10 @@ export default {
     text-align center
     h6
       color #000
+      margin-top 24px
       text-align center
-      font-weight 900
-      font-size 18px
+      font-weight normal
+      font-size 1.1em
       @media (max-width: 593px)
         font-size 12px
 </style>

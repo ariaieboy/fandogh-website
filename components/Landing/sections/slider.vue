@@ -118,6 +118,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     .slider-container
         width 100%
         padding-top 60px

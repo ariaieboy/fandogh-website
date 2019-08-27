@@ -29,6 +29,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
                         dir="rtl"
                         :rules="[rules.email_required]"
                         required
+                        @keyup.enter="recovery"
                         :prepend-inner-icon="'email'"
                         v-model="user.identifier"
                         :hint="identifier.hint"
