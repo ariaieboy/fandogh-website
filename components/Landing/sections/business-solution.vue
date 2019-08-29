@@ -33,7 +33,7 @@
         </div>
 
         <div style="width: 100%; display: flex">
-            <button class="business-solution-button">درخواست سرویس</button>
+            <a href="mailto:support@fandogh.cloud" class="business-solution-button">درخواست مشاوره</a>
         </div>
 
     </div>
@@ -218,7 +218,7 @@
         font-weight normal
         font-style normal
         font-stretch normal
-        line-height 1.75
+        line-height 45px
         letter-spacing normal
         text-align center
         color #fefefe
