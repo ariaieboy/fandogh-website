@@ -20,7 +20,6 @@
             </div>
         </div>
 
-
         <div class="row" style="margin-top: 32px; width: 100%; margin-left: 0; margin-right: 0;">
 
             <div class="descriptions">
