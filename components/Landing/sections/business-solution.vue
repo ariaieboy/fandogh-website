@@ -25,9 +25,7 @@
                     <p class="solution-card-description">
                         {{item.description}}
                     </p>
-
                 </div>
-
             </div>
         </div>
 
