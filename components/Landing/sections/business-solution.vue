@@ -32,6 +32,7 @@
         <div style="width: 100%; display: flex">
             <a href="mailto:support@fandogh.cloud" class="business-solution-button">درخواست مشاوره</a>
         </div>
+
     </div>
 
 </template>
