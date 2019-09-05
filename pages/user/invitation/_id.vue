@@ -47,7 +47,7 @@
     .invitation-container
         width: 100%;
         height: 100%;
-        min-height: 1000px;
+        min-height: 1100px;
         background-image: linear-gradient(to bottom, rgba(0, 69, 255, 0.7), #0045ff 17%, #002380);
         position: absolute
         @media only screen and (max-width 992px)

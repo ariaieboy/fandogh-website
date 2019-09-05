@@ -2,7 +2,7 @@
     <div class="row" style="width: 100%; display: flex; flex-direction: column">
 
         <div class="invitation-logo">
-            <img src="../../assets/svg/ic-fandogh-mini.svg" :alt="'fandogh'">
+            <img src="../../assets/svg/ic-fandogh-mini.svg" alt="fandogh"/>
             <p>سکوی ابری فندق</p>
         </div>
 
@@ -10,18 +10,27 @@
         <div class="invitation-dialog-box container-fluid">
             <p class="invitation-dialog-title">پیوستن به تیم</p>
 
-            <img
-                    style="margin-top: 16px"
-                    src="../../assets/svg/invitation.svg"
-                    alt="invitation">
+            <img style="margin-top: 16px"
+                 src="../../assets/svg/invitation.svg"
+                 alt="invitation"/>
 
-            <p class="invitation-text">
-                این دعوت‌نامه برای شما فرستاده شده است تا به تیم namespace بپوندید و آن‌ها در مسیر توسعه محصولی با کیفیت و برتر همراهی کنید.
-                از اینکه شما را در کنار خودمان داریم مفتخریم و امیدواریم تجربه خوبی را بر روی سکوی ابری فندق داشته باشید.
+            <div v-if="token_error === null && invitation_details !== null"
+                 style="width: 100%; display: flex; flex-direction: column">
+                <p class="invitation-text">
+                    این دعوت‌نامه توسط {{invitation_details.owner}} در تاریخ {{date}} برای شما
+                    فرستاده شده است تا به تیم {{invitation_details.namespace}} بپوندید و آن‌ها در مسیر توسعه محصولی با
+                    کیفیت و برتر همراهی کنید.
+                    از اینکه شما را در کنار خودمان داریم مفتخریم و امیدواریم تجربه خوبی را بر روی سکوی ابری فندق داشته
+                    باشید.
+                </p>
+            </div>
 
-            </p>
-            <p class="invitation-error" v-html="error" v-if="error !== null"
-               :style="{display: error === null ?  'none' : 'unset'}"></p>
+            <div v-else style="width: 100%; display: flex; flex-direction: column">
+                <p class="login-required-text">
+                    ابتدا با فشردن دکمه زیر وارد حساب کاربری خود شوید سپس به همین صفحه بازگشته و دعوت‌نامه را تایید
+                    نمایید
+                </p>
+            </div>
 
 
             <v-progress-linear
@@ -30,10 +39,13 @@
                     :active="loading"
                     color="rgba(0,255,255, 0.7) rgba(0,255,255, 1)"
             ></v-progress-linear>
+
             <div class="register-section">
                 <div class="register-section-line"></div>
                 <div class="register-section-container">
-                    <button @click="invitation" class="invitation-dialog-button">تایید دعوت‌نامه</button>
+                    <button v-if="token_error === null" class="invitation-dialog-button">تایید دعوت‌نامه</button>
+                    <a v-else href="http://localhost:4000/user/login" target="_blank" class="invitation-dialog-button">ورود
+                        به حساب کاربری</a>
                 </div>
             </div>
         </div>
@@ -52,14 +64,44 @@
 </template>
 
 <script>
+    import Moment from 'moment-jalaali'
+
     export default {
         name: "vinvitation",
+        components: {
+            Moment,
+        },
         data() {
             return {
                 loading: false,
                 show_pass: false,
-                error: null,
+                token_error: null,
+                invitation_token: this.$route.params.id,
+                invitation_details: null,
             }
+        },
+        methods: {
+            async getInvitationDetails() {
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.invitation_details = await this.$store.dispatch("getInvitationDetail", this.invitation_token);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    if (e.status === 401) {
+                        this.token_error = 'login required'
+                    }
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+            },
+        },
+        computed:{
+          date(){
+              if(this.invitation_details !== null)
+                  return Moment(this.invitation_details.created_at).format('jYYYY/jMM/jDD')
+          }
+        },
+        created() {
+            this.getInvitationDetails()
         }
     }
 </script>
@@ -279,5 +321,17 @@
         letter-spacing: normal
         text-align: center
         color: #3c3c3c
+
+    .login-required-text
+        font-family: iran-yekan
+        font-size: 1.2em
+        font-weight: normal
+        font-style: normal
+        font-stretch: normal
+        line-height: 1.69
+        padding 32px
+        letter-spacing: normal
+        text-align: center
+        color #fd3259
 
 </style>
