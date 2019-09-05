@@ -8,6 +8,7 @@
             <new-footer/>
         </div>
         <alert/>
+        <notification/>
     </div>
 </template>
 
@@ -15,6 +16,7 @@
     import FHeader from '~/components/Header'
     import Alert from "~/components/Dashboard/alert";
     import 'normalize.css'
+    import Notification from "~/components/Dashboard/notification";
     import NewFooter from "../components/Landing/footer/new-footer";
     import 'vuetify/dist/vuetify.min.css';
 
@@ -22,7 +24,8 @@
         components: {
             NewFooter,
             FHeader,
-            Alert
+            Alert,
+            Notification
         },
         computed: {
             message() {
