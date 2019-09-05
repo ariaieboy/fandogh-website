@@ -1,9 +1,9 @@
 <template>
-    <div class="row" style="margin-right: 0; margin-left: 0;width: 100%; height: max-content">
+    <div class="row" style="width: 100%; height: max-content">
 
 
         <div class="member-invite-container">
-            <input v-model="new_member_email" dir="rtl" type="email" placeholder="ایمیل عضو هم‌تیمی جدید را وارد کنید"
+            <input v-model="new_member_email" dir="rtl" type="email" placeholder="ایمیل هم‌تیمی جدید را وارد کنید"
                    style="flex: 0.9 0 auto; padding: 0 16px; border: none; outline: none;border-radius: 3px;font-family: iran-yekan">
             <button style="color: #fefefe; flex: 0.1 0 auto; border: none; outline: none; background-color: #24D5D8;font-family: iran-yekan; border-top-left-radius: 3px; border-bottom-left-radius: 3px; cursor: pointer; font-size: 1.1em"
                     @click="inviteMember(new_member_email)">
@@ -38,9 +38,130 @@
 
                 </div>
 
-                <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                <div class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
 
-                <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                <p class="member-name">sorena.sarabadani@gmail.com</p>
+
+            </div>
+
+
+            <div class="member-container">
+
+                <div class="member-access-level-container">
+
+                    <p class="access-level-label-enabled">Operator</p>
+                    <p class="access-level-label-disabled">DevOps</p>
+                    <p class="access-level-label-disabled">Admin</p>
+
+                </div>
+
+                <div class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
+
+                <p class="member-name">sorena.sarabadani@gmail.com</p>
+
+            </div>
+
+
+            <div class="member-container">
+
+                <div class="member-access-level-container">
+
+                    <p class="access-level-label-disabled">Operator</p>
+                    <p class="access-level-label-enabled">DevOps</p>
+                    <p class="access-level-label-disabled">Admin</p>
+
+                </div>
+
+                <div class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
+
+                <p class="member-name">sorena.sarabadani@gmail.com</p>
+
+            </div>
+
+
+            <div class="member-container">
+
+                <div class="member-access-level-container">
+
+                    <p class="access-level-label-disabled">Operator</p>
+                    <p class="access-level-label-enabled">DevOps</p>
+                    <p class="access-level-label-disabled">Admin</p>
+
+                </div>
+
+                <div class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
+
+                <p class="member-name">sorena.sarabadani@gmail.com</p>
+
+            </div>
+
+
+            <div class="member-container">
+
+                <div class="member-access-level-container">
+
+                    <p class="access-level-label-disabled">Operator</p>
+                    <p class="access-level-label-disabled">DevOps</p>
+                    <p class="access-level-label-enabled">Admin</p>
+
+                </div>
+
+                <div class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
+
+                <p class="member-name">sorena.sarabadani@gmail.com</p>
+
+            </div>
+
+
+            <div class="member-container">
+
+                <div class="member-access-level-container">
+
+                    <p class="access-level-label-enabled">Operator</p>
+                    <p class="access-level-label-disabled">DevOps</p>
+                    <p class="access-level-label-disabled">Admin</p>
+
+                </div>
+
+                <div class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
+
+                <p class="member-name">sorena.sarabadani@gmail.com</p>
+
+            </div>
+
+
+            <div class="member-container">
+
+                <div class="member-access-level-container">
+
+                    <p class="access-level-label-enabled">Operator</p>
+                    <p class="access-level-label-disabled">DevOps</p>
+                    <p class="access-level-label-disabled">Admin</p>
+
+                </div>
+
+                <div class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
 
                 <p class="member-name">sorena.sarabadani@gmail.com</p>
 
@@ -130,7 +251,7 @@
         border-radius 3px
         box-shadow 0 2px 6px rgba(0, 0, 0, 0.09)
         width 50%
-        min-width 450px
+        min-width 350px
         height 50px
         background-color #fefefe
         margin-top 24px
@@ -140,9 +261,9 @@
 
     .pending-invitations-container
         width 100%
+        margin-bottom 48px
 
         div.pending-invitation-card
-            border-radius 3px
             background #fefefe
             box-shadow 0 2px 6px rgba(0, 0, 0, 0.17)
             height 54px
@@ -151,6 +272,9 @@
             display flex
             margin-left 12px
             margin-bottom 12px
+            @media only screen and (max-width 1030px)
+                margin-bottom 1px
+                margin-left 0
             img
                 width 20px
                 height 20px
@@ -175,24 +299,42 @@
         display flex
         height 52px
         background $totalWhite
-        border 3px
         box-shadow 0 2px 6px rgba(0, 0, 0, 0.17)
         margin-top 1px
+        @media only screen and (max-width 1030px)
+            flex-direction column
+            height max-content
+            justify-items center
 
-        img.edit-member
-            width 22px
-            height 22px
-            margin-top auto
-            margin-bottom auto
-            cursor pointer
+        div.member-action-container
+            display flex
+            @media only screen and (max-width 1030px)
+                margin-left auto
+                margin-right auto
+                order 1
+                margin-top 12px
+                margin-bottom 12px
 
-        img.remove-member
-            width 22px
-            height 22px
-            margin-top auto
-            margin-bottom auto
-            cursor pointer
-            margin-left 16px
+            img.edit-member
+                width 22px
+                height 22px
+                margin-top auto
+                margin-bottom auto
+                cursor pointer
+                @media only screen and (max-width 1030px)
+                    width 18px
+                    height 18px
+
+            img.remove-member
+                width 22px
+                height 22px
+                margin-top auto
+                margin-bottom auto
+                cursor pointer
+                margin-left 16px
+                @media only screen and (max-width 1030px)
+                    width 18px
+                    height 18px
 
         p.member-name
             padding-left 16px
@@ -201,11 +343,23 @@
             font-size 1em
             width max-content
             line-height 52px
+            @media only screen and (max-width 1030px)
+                height max-content
+                line-height 26px
+                margin-bottom 0
+                margin-top 8px
+                font-size 1.2em
+                margin-left auto
+                margin-right auto
 
         div.member-access-level-container
             display flex
             margin-left auto
             margin-right 16px
+            @media only screen and (max-width 1030px)
+                order 3
+                margin-right auto
+                margin-bottom 16px
 
             p.access-level-label-disabled
                 border-radius 25px
@@ -219,6 +373,10 @@
                 color $fontBlack
                 font-size 1em
                 cursor pointer
+                @media only screen and (max-width 1030px)
+                    height 30px
+                    line-height 30px
+                    width 100px
 
             p.access-level-label-enabled
                 border-radius 25px
@@ -231,6 +389,9 @@
                 font-family "Helvetica Neue"
                 color $totalWhite
                 margin auto auto auto 12px
-
+                @media only screen and (max-width 1030px)
+                    height 30px
+                    line-height 30px
+                    width 100px
 
 </style>
