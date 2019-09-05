@@ -1,5 +1,5 @@
 <template>
-    <div class="row" style="width: 100%; height: max-content">
+    <div class="row" style="width: 100%; height: max-content; padding-right: 6px; padding-left: 6px">
 
 
         <div class="member-invite-container">
@@ -13,10 +13,10 @@
         </div>
 
         <div v-if="pending_invitations.length > 0" class="pending-invitations-container">
-            <p>دعوت‌های در انتظار</p>
+            <p class="section-title">دعوت‌های در انتظار</p>
 
             <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
-                <div v-for="item in pending_invitations" class="col-lg-5 col-md-5 col-xs-12 col-sm-12 pending-invitation-card">
+                <div v-for="item in pending_invitations" class="col-lg-3 col-md-3 col-xs-12 col-sm-12 pending-invitation-card">
                     <img src="../../../static/icons/ic_delete.svg" alt="delete">
                     <p>{{item.receiver}}</p>
                 </div>
@@ -26,7 +26,7 @@
 
         <div class="team-list-container">
 
-            <p>اعضای تیم فضانام</p>
+            <p class="section-title">اعضای تیم فضانام</p>
 
             <div class="member-container">
 
@@ -270,7 +270,7 @@
             padding-right 16px
             padding-left 16px
             display flex
-            margin-left 12px
+            margin-left 6px
             margin-bottom 12px
             @media only screen and (max-width 1030px)
                 margin-bottom 1px
@@ -394,4 +394,8 @@
                     line-height 30px
                     width 100px
 
+    .section-title
+        font-size 1.3em
+        color $fontGray
+        font-family iran-yekan
 </style>
