@@ -1,5 +1,5 @@
 <template>
-    <div class="row" style="width: 100%; height: max-content; padding-right: 6px; padding-left: 6px">
+    <div class="row" style="width: 100%; height: max-content; padding-right: 6px; padding-left: 6px; margin-left: 0">
 
 
         <div class="member-invite-container">
@@ -16,7 +16,7 @@
             <p class="section-title">دعوت‌های در انتظار</p>
 
             <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
-                <div v-for="item in pending_invitations" class="col-lg-3 col-md-3 col-xs-12 col-sm-12 pending-invitation-card">
+                <div v-for="item in pending_invitations" class="col-lg-3 col-md-5 col-xs-12 col-sm-12 pending-invitation-card">
                     <img src="../../../static/icons/ic_delete.svg" alt="delete">
                     <p>{{item.receiver}}</p>
                 </div>
@@ -262,6 +262,8 @@
     .pending-invitations-container
         width 100%
         margin-bottom 48px
+        @media only screen and (max-width 1030px)
+            margin-bottom 32px
 
         div.pending-invitation-card
             background #fefefe
@@ -274,6 +276,8 @@
             margin-bottom 12px
             @media only screen and (max-width 1030px)
                 margin-bottom 1px
+                margin-left 12px
+            @media only screen and (max-width 992px)
                 margin-left 0
             img
                 width 20px
@@ -293,6 +297,8 @@
         display flex
         padding-bottom 32px
         flex-direction column
+        @media only screen and (max-width 1030px)
+            margin-top 16px
 
     .member-container
         width 100%
@@ -389,6 +395,7 @@
                 font-family "Helvetica Neue"
                 color $totalWhite
                 margin auto auto auto 12px
+                cursor pointer
                 @media only screen and (max-width 1030px)
                     height 30px
                     line-height 30px
