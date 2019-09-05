@@ -94,6 +94,14 @@ export const requestUserInvitation = async ({commit, state}, email) => {
     }
 };
 
+export const requestPendingInvitations = async ({commit, state}) => {
+    try {
+        return await Request().get('/api/users/invitations/list')
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const recoveryAccount = async ({commit, state}, {identifier}) => {
     try {
         return await Request().post("/api/users/recovery-tokens", {identifier});
