@@ -12,7 +12,7 @@
 
         </div>
 
-        <div v-if="pending_invitations" class="pending-invitations-container">
+        <div v-if="pending_invitations.length > 0" class="pending-invitations-container">
             <p>دعوت‌های در انتظار</p>
 
             <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
@@ -62,12 +62,35 @@
             return {
 
                 new_member_email: '',
-                pending_invitations: null
+                pending_invitations: []
 
             }
         },
+        created(){
+            this.getPendingInvitations()
+        },
         methods: {
 
+            async getPendingInvitations(){
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.pending_invitations = await this.$store.dispatch("requestPendingInvitations");
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    if (e.status === 401) {
+                        this.$router.replace('/user/login')
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+                    }
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+            },
             async inviteMember(email) {
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
@@ -79,6 +102,7 @@
                     });
                     this.new_member_email = '';
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    this.getPendingInvitations()
                 } catch (e) {
                     if (e.status === 401) {
                         this.$router.replace('/user/login')
