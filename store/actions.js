@@ -69,7 +69,16 @@ export const getInvitationDetail = async ({commit, state}, token) => {
     try {
 
         return await Request().get(`/api/users/invitations/details/${token}`)
-    }catch (e) {
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const confirmTeamInvitation = async ({commit, state}, token) => {
+
+    try {
+        return await Request().get(`/api/users/invitations/${token}`)
+    } catch (e) {
         return Promise.reject(e)
     }
 };
@@ -240,7 +249,7 @@ export const deleteServiceHistory = async ({commit, state}, {service_name, histo
 
         return await Request().delete(`/api/services/${service_name}/history/${history_id}`)
 
-    }catch (e) {
+    } catch (e) {
         return Promise.reject(e)
     }
 

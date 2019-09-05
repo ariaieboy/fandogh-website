@@ -17,7 +17,7 @@
             <div v-if="token_error === null && invitation_details !== null"
                  style="width: 100%; display: flex; flex-direction: column">
                 <p class="invitation-text">
-                    این دعوت‌نامه توسط {{invitation_details.owner}} در تاریخ {{date}} برای شما
+                    این دعوت‌نامه توسط {{invitation_details.owner}} در تاریخ {{create_date}} برای شما
                     فرستاده شده است تا به تیم {{invitation_details.namespace}} بپوندید و آن‌ها در مسیر توسعه محصولی با
                     کیفیت و برتر همراهی کنید.
                     از اینکه شما را در کنار خودمان داریم مفتخریم و امیدواریم تجربه خوبی را بر روی سکوی ابری فندق داشته
@@ -43,7 +43,9 @@
             <div class="register-section">
                 <div class="register-section-line"></div>
                 <div class="register-section-container">
-                    <button v-if="token_error === null" class="invitation-dialog-button">تایید دعوت‌نامه</button>
+                    <button @click="confirmInvitation" v-if="token_error === null" class="invitation-dialog-button">
+                        تایید دعوت‌نامه
+                    </button>
                     <a v-else href="http://localhost:4000/user/login" target="_blank" class="invitation-dialog-button">ورود
                         به حساب کاربری</a>
                 </div>
@@ -78,6 +80,7 @@
                 token_error: null,
                 invitation_token: this.$route.params.id,
                 invitation_details: null,
+                success_message: ''
             }
         },
         methods: {
@@ -93,12 +96,33 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }
             },
+            async confirmInvitation() {
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.success_message = await this.$store.dispatch("confirmTeamInvitation", this.invitation_token);
+                    console.log(this.success_message)
+                    this.$notify({
+                        title: this.success_message.message,
+                        time: 4000,
+                        type: "success"
+                    });
+                    this.$router.replace("/dashboard/general");
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    this.$notify({
+                        title: e.data.message,
+                        time: 4000,
+                        type: "error"
+                    });
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+            }
         },
-        computed:{
-          date(){
-              if(this.invitation_details !== null)
-                  return Moment(this.invitation_details.created_at).format('jYYYY/jMM/jDD')
-          }
+        computed: {
+            create_date() {
+                if (this.invitation_details !== null)
+                    return Moment(this.invitation_details.created_at).format('jYYYY/jMM/jDD')
+            }
         },
         created() {
             this.getInvitationDetails()
