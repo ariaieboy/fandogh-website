@@ -83,6 +83,17 @@ export const confirmTeamInvitation = async ({commit, state}, token) => {
     }
 };
 
+export const requestUserInvitation = async ({commit, state}, email) => {
+
+    try {
+        return await Request().post('/api/users/invitations',{
+            email: email
+        })
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const recoveryAccount = async ({commit, state}, {identifier}) => {
     try {
         return await Request().post("/api/users/recovery-tokens", {identifier});
