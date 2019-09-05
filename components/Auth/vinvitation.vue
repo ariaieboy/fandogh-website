@@ -46,7 +46,7 @@
                     <button @click="confirmInvitation" v-if="token_error === null" class="invitation-dialog-button">
                         تایید دعوت‌نامه
                     </button>
-                    <a v-else href="http://localhost:4000/user/login" target="_blank" class="invitation-dialog-button">ورود
+                    <a v-else href="https://fandogh-staging123123/user/login" target="_blank" class="invitation-dialog-button">ورود
                         به حساب کاربری</a>
                 </div>
             </div>
