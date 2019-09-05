@@ -64,6 +64,16 @@ export const activation = async ({commit, state}, {code, id}) => {
     }
 };
 
+export const getInvitationDetail = async ({commit, state}, token) => {
+
+    try {
+
+        return await Request().get(`/api/users/invitations/details/${token}`)
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const recoveryAccount = async ({commit, state}, {identifier}) => {
     try {
         return await Request().post("/api/users/recovery-tokens", {identifier});
