@@ -116,6 +116,7 @@
     import ProfilePlan from "~/components/Dashboard/profile/profile-plan";
     import ProfileWallet from "~/components/Dashboard/profile/profile-wallet";
     import ProfileTransactions from "~/components/Dashboard/profile/profile-transaction";
+    import TeamManagement from "~/components/Dashboard/profile/team-management";
     import File from "~/components/elements/file";
     import {formData} from "~/utils/formData";
     import ProgressBar from "~/components/Dashboard/progress-bar";
@@ -139,6 +140,7 @@
             ProfilePlan,
             ProfileWallet,
             ProfileTransactions,
+            TeamManagement,
             Moment
         },
         data() {
