@@ -100,7 +100,6 @@
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.success_message = await this.$store.dispatch("confirmTeamInvitation", this.invitation_token);
-                    console.log(this.success_message)
                     this.$notify({
                         title: this.success_message.message,
                         time: 4000,

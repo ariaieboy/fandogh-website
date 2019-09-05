@@ -109,6 +109,7 @@
     import domains from "./service/domains"
     import logs from "./service/logs"
     import rollback from "./service/rollback"
+    import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
         layout: "dashboard",

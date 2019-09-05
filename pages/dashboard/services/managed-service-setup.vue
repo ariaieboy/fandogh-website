@@ -68,6 +68,7 @@
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
     import Proxy from "../../../components/managed-services/proxy";
+    import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
         name: "managed-service-setup",
