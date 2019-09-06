@@ -77,7 +77,7 @@ export const getInvitationDetail = async ({commit, state}, token) => {
 export const confirmTeamInvitation = async ({commit, state}, token) => {
 
     try {
-        return await Request().get(`/api/users/invitations/${token}`)
+        return await Request().post(`/api/users/invitation-answers/${token}`)
     } catch (e) {
         return Promise.reject(e)
     }
@@ -96,13 +96,13 @@ export const requestUserInvitation = async ({commit, state}, email) => {
 
 export const requestPendingInvitations = async ({commit, state}) => {
     try {
-        return await Request().get('/api/users/invitations/list')
+        return await Request().get('/api/users/invitations')
     }catch (e) {
         return Promise.reject(e)
     }
 };
 
-export const provokePendingInvitation = async ({commit, state}, token) => {
+export const revokePendingInvitation = async ({commit, state}, token) => {
 
     try {
         return await Request().delete(`/api/users/invitations/${token}`)

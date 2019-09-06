@@ -208,7 +208,7 @@
                         if (status) {
                             this.$store.commit("SET_DATA", {data: true, id: "loading"});
                             this.$store
-                                .dispatch("provokePendingInvitation", token)
+                                .dispatch("revokePendingInvitation", token)
                                 .then(res => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                                     this.getPendingInvitations()
