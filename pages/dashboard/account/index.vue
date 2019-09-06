@@ -438,8 +438,16 @@
         font-family iran-yekan !important
         color: #000000 !important
         font-size .9em !important
+        padding-right 5px !important
         font-weight normal !important
         font-style normal !important
+
+    span.vs__selected
+        padding-right 8px !important
+
+    div.vs__actions
+        margin-left 3px !important
+        margin-top 3px !important
 
 
 </style>
