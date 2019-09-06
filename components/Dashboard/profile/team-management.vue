@@ -63,15 +63,37 @@
             return {
 
                 new_member_email: '',
-                pending_invitations: []
+                pending_invitations: [],
+                members: []
 
             }
         },
         created(){
-            this.getPendingInvitations()
+            this.getPendingInvitations();
+            this.getNamespaceMembers();
         },
         methods: {
 
+            async getNamespaceMembers(){
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.members = await this.$store.dispatch("requestNamespaceMembers");
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    if (e.status === 401) {
+                        this.$router.replace('/user/login')
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+                    }
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+            },
             provokeInvitation(token, email){
                 this.$ga.event({
                     eventCategory: "invitation",
