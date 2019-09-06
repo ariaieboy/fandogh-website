@@ -102,6 +102,16 @@ export const requestPendingInvitations = async ({commit, state}) => {
     }
 };
 
+export const provokePendingInvitation = async ({commit, state}, token) => {
+
+    try {
+        return await Request().delete(`/api/users/invitations/${token}`)
+    }catch (e) {
+        return Promise.reject(e)
+    }
+
+};
+
 export const recoveryAccount = async ({commit, state}, {identifier}) => {
     try {
         return await Request().post("/api/users/recovery-tokens", {identifier});
