@@ -68,7 +68,7 @@ export const getInvitationDetail = async ({commit, state}, token) => {
 
     try {
 
-        return await Request().get(`/api/users/invitations/details/${token}`)
+        return await Request().get(`/api/users/invitations/${token}`)
     } catch (e) {
         return Promise.reject(e)
     }
@@ -77,10 +77,39 @@ export const getInvitationDetail = async ({commit, state}, token) => {
 export const confirmTeamInvitation = async ({commit, state}, token) => {
 
     try {
-        return await Request().get(`/api/users/invitations/${token}`)
+        return await Request().post(`/api/users/invitation-answers/${token}`)
     } catch (e) {
         return Promise.reject(e)
     }
+};
+
+export const requestUserInvitation = async ({commit, state}, email) => {
+
+    try {
+        return await Request().post('/api/users/invitations',{
+            email: email
+        })
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const requestPendingInvitations = async ({commit, state}) => {
+    try {
+        return await Request().get('/api/users/invitations')
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const revokePendingInvitation = async ({commit, state}, token) => {
+
+    try {
+        return await Request().delete(`/api/users/invitations/${token}`)
+    }catch (e) {
+        return Promise.reject(e)
+    }
+
 };
 
 export const recoveryAccount = async ({commit, state}, {identifier}) => {

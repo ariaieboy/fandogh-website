@@ -83,17 +83,22 @@
             <div class="box-row row">
                 <div @click="sectionClicked('ProfilePlan')"
                      :class="[(activeSectionName === 'ProfilePlan' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #0045FF'}">پلن من</p>
+                    <p :style="{borderLeft: '1px solid #1757FF'}">پلن من</p>
                 </div>
 
                 <!--<div @click="sectionClicked('ProfileWallet')"-->
                 <!--:class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">-->
-                <!--<p :style="{borderLeft: '1px solid #2979ff'}">کیف پول</p>-->
+                <!--<p :style="{borderLeft: '1px solid #1757FF'}">کیف پول</p>-->
                 <!--</div>-->
 
                 <div @click="sectionClicked('ProfileTransactions')"
                      :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
-                    <p :style="{borderLeft: '1px solid #0045FF'}">تراکنش‌های مالی</p>
+                    <p :style="{borderLeft: '1px solid #1757FF'}">تراکنش‌های مالی</p>
+                </div>
+
+                <div @click="sectionClicked('TeamManagement')"
+                     :class="[(activeSectionName === 'TeamManagement' ? 'enabled' : 'disabled')]">
+                    <p :style="{borderLeft: '1px solid #1757FF'}">مدیریت تیم</p>
                 </div>
 
                 <!--<div @click="sectionClicked('ProfileMessages')"-->
@@ -116,6 +121,7 @@
     import ProfilePlan from "~/components/Dashboard/profile/profile-plan";
     import ProfileWallet from "~/components/Dashboard/profile/profile-wallet";
     import ProfileTransactions from "~/components/Dashboard/profile/profile-transaction";
+    import TeamManagement from "~/components/Dashboard/profile/team-management";
     import File from "~/components/elements/file";
     import {formData} from "~/utils/formData";
     import ProgressBar from "~/components/Dashboard/progress-bar";
@@ -139,6 +145,7 @@
             ProfilePlan,
             ProfileWallet,
             ProfileTransactions,
+            TeamManagement,
             Moment
         },
         data() {
@@ -327,13 +334,16 @@
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         background-color #ffffff
         margin-top 5px
-        display block
+        display flex
         margin-bottom 5px
         white-space nowrap
         overflow-x scroll
         overflow-y hidden
         -ms-overflow-style none
         scrollbar-width none
+        @media only screen and (max-width 992px)
+            display block
+            border-radius 0
 
         div.disabled
             display inline-flex
@@ -360,7 +370,7 @@
             display inline-flex
             padding 0
             margin-right -1px
-            background-color $colorPrimary
+            background-color $colorBlueArea
             cursor pointer
 
             p
@@ -368,8 +378,8 @@
                 font-stretch normal
                 min-width 200px
                 line-height 24px
-                margin-top 8px
                 text-align center
+                margin-top 8px
                 font-family yekan-bold
                 font-size .9em
                 outline none
@@ -428,8 +438,16 @@
         font-family iran-yekan !important
         color: #000000 !important
         font-size .9em !important
+        padding-right 5px !important
         font-weight normal !important
         font-style normal !important
+
+    span.vs__selected
+        padding-right 8px !important
+
+    div.vs__actions
+        margin-left 3px !important
+        margin-top 3px !important
 
 
 </style>

@@ -165,6 +165,7 @@
     import HealthCheckSetup from "../pages/dashboard/services/wizard/health-check-setup";
     import Banner from "../components/wizard/banner/banner";
     import 'vuetify/dist/vuetify.min.css';
+    import ErrorReporter from "../utils/ErrorReporter";
 
     export default {
         name: "wizard",

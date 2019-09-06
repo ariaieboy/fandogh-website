@@ -14,7 +14,7 @@
                  src="../../assets/svg/invitation.svg"
                  alt="invitation"/>
 
-            <div v-if="token_error === null && invitation_details !== null"
+            <div v-if="token_error === null && invitation_details !== null && error === null"
                  style="width: 100%; display: flex; flex-direction: column">
                 <p class="invitation-text">
                     این دعوت‌نامه توسط {{invitation_details.owner}} در تاریخ {{create_date}} برای شما
@@ -26,9 +26,12 @@
             </div>
 
             <div v-else style="width: 100%; display: flex; flex-direction: column">
-                <p class="login-required-text">
+                <p v-if="token_error" class="login-required-text">
                     ابتدا با فشردن دکمه زیر وارد حساب کاربری خود شوید سپس به همین صفحه بازگشته و دعوت‌نامه را تایید
                     نمایید
+                </p>
+                <p v-else class="login-required-text">
+                    {{error}}
                 </p>
             </div>
 
@@ -43,10 +46,12 @@
             <div class="register-section">
                 <div class="register-section-line"></div>
                 <div class="register-section-container">
-                    <button @click="confirmInvitation" v-if="token_error === null" class="invitation-dialog-button">
+                    <button @click="confirmInvitation" v-if="token_error === null && error === null"
+                            class="invitation-dialog-button">
                         تایید دعوت‌نامه
                     </button>
-                    <a v-else href="https://fandogh-staging123123.fandogh.cloud/user/login" target="_blank" class="invitation-dialog-button">ورود
+                    <a v-else-if="error === null" href="https://fandogh-staging123123.fandogh.cloud/user/login"
+                       target="_blank" class="invitation-dialog-button">ورود
                         به حساب کاربری</a>
                 </div>
             </div>
@@ -80,7 +85,8 @@
                 token_error: null,
                 invitation_token: this.$route.params.id,
                 invitation_details: null,
-                success_message: ''
+                success_message: '',
+                error: null
             }
         },
         methods: {
@@ -92,6 +98,8 @@
                 } catch (e) {
                     if (e.status === 401) {
                         this.token_error = 'login required'
+                    } else {
+                        this.error = e.data.message
                     }
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }
@@ -100,7 +108,6 @@
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.success_message = await this.$store.dispatch("confirmTeamInvitation", this.invitation_token);
-                    console.log(this.success_message)
                     this.$notify({
                         title: this.success_message.message,
                         time: 4000,
@@ -200,30 +207,6 @@
             background url("../../assets/svg/half-circle.svg") no-repeat top
             background-size contain
 
-        button.invitation-dialog-button
-            width 100%
-            height 45px
-            margin-top 16px
-            margin-bottom 16px
-            margin-left auto
-            margin-right auto
-            max-width 375px
-            border-radius 5px
-            background-color #0045ff
-            font-family: iran-yekan
-            font-size: 1.4em
-            font-weight: normal
-            font-style: normal
-            font-stretch: normal
-            line-height: 45px
-            opacity 0.9
-            letter-spacing: normal
-            text-align: center
-            color: #fafafa
-            outline none
-
-        button.invitation-dialog-button:hover
-            opacity 1
 
     .register-section
         width 100%
@@ -357,5 +340,31 @@
         letter-spacing: normal
         text-align: center
         color #fd3259
+
+
+    .invitation-dialog-button
+        width 100%
+        height 45px
+        margin-top 16px
+        margin-bottom 16px
+        margin-left auto
+        margin-right auto
+        max-width 375px
+        border-radius 5px
+        background-color #0045ff
+        font-family: iran-yekan
+        font-size: 1.4em
+        font-weight: normal
+        font-style: normal
+        font-stretch: normal
+        line-height: 45px
+        opacity 0.9
+        letter-spacing: normal
+        text-align: center
+        color: #fafafa
+        outline none
+
+    .invitation-dialog-button:hover
+        opacity 1
 
 </style>

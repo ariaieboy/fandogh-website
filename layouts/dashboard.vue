@@ -64,6 +64,7 @@
     import FLoading from "~/components/Loading";
     import Moment from 'moment-jalaali';
     import {removeValue, setValue, getValue} from "../utils/cookie";
+    import ErrorReporter from "../utils/ErrorReporter";
 
     export default {
         components: {

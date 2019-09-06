@@ -193,6 +193,7 @@
     import FDate from "~/utils/date";
     import FCollaps from "~/components/elements/collaps";
     import Popover from "../../../components/wizard/tooltip/popover";
+    import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
         layout: "dashboard",
