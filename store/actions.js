@@ -68,7 +68,7 @@ export const getInvitationDetail = async ({commit, state}, token) => {
 
     try {
 
-        return await Request().get(`/api/users/invitations/details/${token}`)
+        return await Request().get(`/api/users/invitations/${token}`)
     } catch (e) {
         return Promise.reject(e)
     }
