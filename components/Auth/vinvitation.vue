@@ -18,7 +18,7 @@
                  style="width: 100%; display: flex; flex-direction: column">
                 <p class="invitation-text">
                     این دعوت‌نامه توسط {{invitation_details.owner}} در تاریخ {{create_date}} برای شما
-                    فرستاده شده است تا به تیم {{invitation_details.namespace}} بپوندید و آن‌ها در مسیر توسعه محصولی با
+                    فرستاده شده است تا به فضانام {{invitation_details.namespace}} بپوندید و آن‌ها را در مسیر توسعه محصولی با
                     کیفیت و برتر همراهی کنید.
                     از اینکه شما را در کنار خودمان داریم مفتخریم و امیدواریم تجربه خوبی را بر روی سکوی ابری فندق داشته
                     باشید.
