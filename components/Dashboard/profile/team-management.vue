@@ -17,7 +17,7 @@
 
             <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
                 <div v-for="item in pending_invitations" class="col-lg-3 col-md-5 col-xs-12 col-sm-12 pending-invitation-card">
-                    <img src="../../../static/icons/ic_delete.svg" alt="delete">
+                    <img @click="provokeInvitation(item.token, item.receiver)" src="../../../static/icons/ic_delete.svg" alt="delete">
                     <p>{{item.receiver}}</p>
                 </div>
             </div>
@@ -192,6 +192,54 @@
         },
         methods: {
 
+            provokeInvitation(token, email){
+                this.$ga.event({
+                    eventCategory: "invitation",
+                    eventAction: "removing pending invitation"
+                    // eventLabel:'user',
+                    // eventValue:'userId'
+                });
+                this.$alertify(
+                    {
+                        title: "حذف دعوت‌نامه",
+                        description: `آیا از حذف دعوت‌نامه ${email} مطمئن هستید؟`
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store
+                                .dispatch("provokePendingInvitation", token)
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.getPendingInvitations()
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "invitation",
+                                        eventAction: "removing pending invitation"
+                                        // eventLabel:'user',
+                                        // eventValue:'userId'
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "invitation",
+                                        eventAction: "canceled removing pending invitation"
+                                        // eventLabel:'user',
+                                        // eventValue:'userId'
+                                    });
+                                });
+                        }
+                    }
+                );
+            },
             async getPendingInvitations(){
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
