@@ -112,6 +112,15 @@ export const revokePendingInvitation = async ({commit, state}, token) => {
 
 };
 
+export const requestNamespaceMembers = async ({commit, state}) =>{
+
+    try {
+        return await Request().get('/api/users/namespaces/members')
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const recoveryAccount = async ({commit, state}, {identifier}) => {
     try {
         return await Request().post("/api/users/recovery-tokens", {identifier});
