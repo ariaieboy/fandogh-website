@@ -28,13 +28,13 @@
 
             <p class="section-title">اعضای تیم فضانام</p>
 
-            <div class="member-container">
+            <div v-for="member in members" class="member-container">
 
                 <div class="member-access-level-container">
 
-                    <p class="access-level-label-disabled">Operator</p>
-                    <p class="access-level-label-disabled">DevOps</p>
-                    <p class="access-level-label-enabled">Admin</p>
+                    <p :class="[member.role === 2 ? 'access-level-label-enabled' : 'access-level-label-disabled']">Operator</p>
+                    <p :class="[member.role === 1 ? 'access-level-label-enabled' : 'access-level-label-disabled']">DevOps</p>
+                    <p :class="[member.role === 0 ? 'access-level-label-enabled' : 'access-level-label-disabled']">Admin</p>
 
                 </div>
 
@@ -43,7 +43,7 @@
                     <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
                 </div>
 
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
+                <p class="member-name">{{member.email}}</p>
 
             </div>
 
@@ -297,13 +297,15 @@
             padding-right 32px
             font-family "Helvetica Neue"
             font-size 1em
-            width max-content
+            min-width 290px
+            text-align left
             line-height 52px
             @media only screen and (max-width 1030px)
                 height max-content
                 line-height 26px
                 margin-bottom 0
                 margin-top 8px
+                text-align center
                 font-size 1.2em
                 margin-left auto
                 margin-right auto
