@@ -33,7 +33,7 @@
             <div v-for="(member, index ) in members" class="member-container">
 
                 <div v-if="member.is_owner" class="member-action-container">
-                <p style="margin-top: auto; margin-bottom: auto; line-height: 54px">Owner</p>
+                    <span class="owner-label">Owner</span>
                 </div>
                 <div v-else-if="editing === member.id" class="member-action-container">
                     <img @click="cancelRoleEditing" class="cancel-editing"
@@ -129,7 +129,7 @@
                                 .then(res => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                                     this.members.forEach((item, position) => {
-                                        if(index === position){
+                                        if (index === position) {
                                             item.role = res.role
                                         }
                                     });
@@ -159,7 +159,7 @@
                                         eventValue: `${email}`
                                     });
                                 });
-                        }else {
+                        } else {
                             this.cancelRoleEditing()
                         }
                     }
@@ -519,4 +519,14 @@
         font-size 1.3em
         color $fontGray
         font-family iran-yekan
+
+    .owner-label
+        font-family "Helvetica Neue"
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 8px 16px;
+        line-height 1
+        background: $green
+        border-radius: 5px;
+        color: white
 </style>
