@@ -49,7 +49,7 @@
                 </div>
 
 
-                <div class="member-access-level-container">
+                <div v-if="!member.is_owner" class="member-access-level-container">
 
                     <p @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, 2, member.email) : null"
                        :class="['access-level-label', {'enabled': member.role === 2 }, {'editing': editing !== null && editing === member.id}]">
@@ -471,6 +471,7 @@
             font-size 1em
             width max-content
             text-align left
+            margin-right auto
             line-height 52px
             @media only screen and (max-width 1030px)
                 height max-content
