@@ -30,17 +30,17 @@
 
             <div v-for="member in members" class="member-container">
 
+                <div v-if="!member.is_owner" class="member-action-container">
+                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                </div>
+
                 <div class="member-access-level-container">
 
                     <p :class="[member.role === 2 ? 'access-level-label-enabled' : 'access-level-label-disabled']">Operator</p>
                     <p :class="[member.role === 1 ? 'access-level-label-enabled' : 'access-level-label-disabled']">DevOps</p>
                     <p :class="[member.role === 0 ? 'access-level-label-enabled' : 'access-level-label-disabled']">Admin</p>
 
-                </div>
-
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
                 </div>
 
                 <p class="member-name">{{member.email}}</p>
@@ -264,6 +264,7 @@
 
         div.member-action-container
             display flex
+            margin-right 16px
             @media only screen and (max-width 1030px)
                 margin-left auto
                 margin-right auto
@@ -297,7 +298,7 @@
             padding-right 32px
             font-family "Helvetica Neue"
             font-size 1em
-            min-width 290px
+            width max-content
             text-align left
             line-height 52px
             @media only screen and (max-width 1030px)
@@ -316,6 +317,7 @@
             margin-right 16px
             @media only screen and (max-width 1030px)
                 order 3
+                margin-left auto
                 margin-right auto
                 margin-bottom 16px
 
