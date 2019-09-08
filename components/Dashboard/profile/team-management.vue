@@ -16,8 +16,10 @@
             <p class="section-title">دعوت‌های در انتظار</p>
 
             <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
-                <div v-for="item in pending_invitations" class="col-lg-3 col-md-5 col-xs-12 col-sm-12 pending-invitation-card">
-                    <img @click="provokeInvitation(item.token, item.receiver)" src="../../../static/icons/ic_delete.svg" alt="delete">
+                <div v-for="item in pending_invitations"
+                     class="col-lg-3 col-md-5 col-xs-12 col-sm-12 pending-invitation-card">
+                    <img @click="provokeInvitation(item.token, item.receiver)" src="../../../static/icons/ic_delete.svg"
+                         alt="delete">
                     <p>{{item.receiver}}</p>
                 </div>
             </div>
@@ -28,18 +30,36 @@
 
             <p class="section-title">اعضای تیم فضانام</p>
 
-            <div v-for="member in members" class="member-container">
+            <div v-for="(member, index ) in members" class="member-container">
 
-                <div v-if="!member.is_owner" class="member-action-container">
-                    <img @click="removeMember(member.email, member.id)" class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
+                <div v-if="member.is_owner" class="member-action-container">
+                <p style="margin-top: auto; margin-bottom: auto; line-height: 54px">Owner</p>
                 </div>
+                <div v-else-if="editing === member.id" class="member-action-container">
+                    <img @click="cancelRoleEditing" class="cancel-editing"
+                         src="../../../assets/svg/ic_close.svg" alt="cancel">
+                </div>
+
+                <div v-else class="member-action-container">
+                    <img @click="removeMember(member.email, member.id)" class="remove-member"
+                         src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img @click="editMemberRole(member.role, member.id)" class="edit-member"
+                         src="../../../assets/svg/edit.svg"
+                         alt="edit">
+                </div>
+
 
                 <div class="member-access-level-container">
 
-                    <p :class="[member.role === 2 ? 'access-level-label-enabled' : 'access-level-label-disabled']">Operator</p>
-                    <p :class="[member.role === 1 ? 'access-level-label-enabled' : 'access-level-label-disabled']">DevOps</p>
-                    <p :class="[member.role === 0 ? 'access-level-label-enabled' : 'access-level-label-disabled']">Admin</p>
+                    <p @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, 2, member.email) : null"
+                       :class="['access-level-label', {'enabled': member.role === 2 }, {'editing': editing !== null && editing === member.id}]">
+                        Operator</p>
+                    <p @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, 1, member.email) : null"
+                       :class="['access-level-label', {'enabled': member.role === 1 }, {'editing': editing !== null && editing === member.id}]">
+                        DevOps</p>
+                    <p @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, 0, member.email) : null"
+                       :class="['access-level-label', {'enabled': member.role === 0 }, {'editing': editing !== null && editing === member.id}]">
+                        Admin</p>
 
                 </div>
 
@@ -64,22 +84,109 @@
 
                 new_member_email: '',
                 pending_invitations: [],
-                members: []
+                members: [],
+                editing: null,
+                current_role: null,
+                new_role: null,
 
             }
         },
-        created(){
+        created() {
             this.getPendingInvitations();
             this.getNamespaceMembers();
         },
         methods: {
 
-            async removeMember(email, id){
+            async changeMemberRole(index, id, new_role, email) {
+
+                if (new_role === this.current_role) {
+                    this.cancelRoleEditing()
+                    return;
+                }
+
+                this.$ga.event({
+                    eventCategory: "membership role",
+                    eventAction: "editing member role",
+                    eventLabel: new_role < this.current_role ? 'promotion' : 'downgrade',
+                    eventValue: `${email}`
+                });
+                this.$alertify(
+                    {
+                        title: new_role < this.current_role ? 'ارتقا دسترسی' : 'تنزل دسترسی',
+                        description: new_role < this.current_role ?
+                            `آیا از ارتقا دسترسی ${email} مطمئن هستید؟` :
+                            `آیا از تنزل دسترسی ${email} مطمئن هستید؟`,
+                        label: new_role < this.current_role ? 'ارتقا دسترسی' : 'تنزل دسترسی',
+                        img: new_role === 0 ? require('../../../components/Dashboard/alert/images/ic_role_admin.svg') :
+                            new_role === 1 ? require('../../../components/Dashboard/alert/images/ic_role_devops_engineer.svg') :
+                                require('../../../components/Dashboard/alert/images/ic_role_operator.svg')
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store
+                                .dispatch("changeMemberRole", {member_id: id, new_role: new_role})
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.members.forEach((item, position) => {
+                                        if(index === position){
+                                            item.role = res.role
+                                        }
+                                    });
+                                    this.cancelRoleEditing();
+
+                                    this.$notify({
+                                        title: 'تغییر در سطح دسترسی با موفقیت انجام شد',
+                                        type: "success"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "membership role",
+                                        eventAction: "editing member role",
+                                        eventLabel: 'role edit successful',
+                                        eventValue: `${email}`
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "membership role",
+                                        eventAction: "editing member role",
+                                        eventLabel: 'role edit canceled',
+                                        eventValue: `${email}`
+                                    });
+                                });
+                        }else {
+                            this.cancelRoleEditing()
+                        }
+                    }
+                );
+
+            },
+            cancelRoleEditing() {
+                this.editing = null;
+                this.current_role = null;
+            },
+
+            editMemberRole(current_role, id) {
+
+                this.editing = id;
+                this.current_role = current_role;
+
+            },
+
+            async removeMember(email, id) {
+
+                this.editing = null;
+                this.current_role = null;
 
                 this.$ga.event({
                     eventCategory: "membership",
                     eventAction: "editing member",
-                    eventLabel:'remove',
+                    eventLabel: 'remove',
                     eventValue: `${email}`
                 });
                 this.$alertify(
@@ -102,7 +209,7 @@
                                     this.$ga.event({
                                         eventCategory: "membership",
                                         eventAction: "editing member",
-                                        eventLabel:'remove successful',
+                                        eventLabel: 'remove successful',
                                         eventValue: `${email}`
                                     });
                                 })
@@ -115,8 +222,8 @@
                                     this.$ga.event({
                                         eventCategory: "membership",
                                         eventAction: "editing member",
-                                        eventLabel:'remove canceled',
-                                        eventValue:`${id}`
+                                        eventLabel: 'remove canceled',
+                                        eventValue: `${email}`
                                     });
                                 });
                         }
@@ -124,7 +231,7 @@
                 );
 
             },
-            async getNamespaceMembers(){
+            async getNamespaceMembers() {
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.members = await this.$store.dispatch("requestNamespaceMembers");
@@ -144,7 +251,7 @@
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }
             },
-            provokeInvitation(token, email){
+            provokeInvitation(token, email) {
                 this.$ga.event({
                     eventCategory: "invitation",
                     eventAction: "removing pending invitation"
@@ -192,7 +299,7 @@
                     }
                 );
             },
-            async getPendingInvitations(){
+            async getPendingInvitations() {
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.pending_invitations = await this.$store.dispatch("requestPendingInvitations");
@@ -279,12 +386,14 @@
                 margin-left 12px
             @media only screen and (max-width 992px)
                 margin-left 0
+
             img
                 width 20px
                 height 20px
                 margin-top auto
                 margin-bottom auto
                 cursor pointer
+
             p
                 flex 1
                 line-height 54px
@@ -343,6 +452,18 @@
                     width 18px
                     height 18px
 
+            img.cancel-editing
+                width 18px
+                height 18px
+                margin-top auto
+                margin-bottom auto
+                cursor pointer
+                margin-left 16px
+                filter invert(29%) sepia(55%) saturate(3230%) hue-rotate(331deg) brightness(101%) contrast(99%)
+                @media only screen and (max-width 1030px)
+                    width 16px
+                    height 16px
+
         p.member-name
             padding-left 16px
             padding-right 32px
@@ -371,39 +492,28 @@
                 margin-right auto
                 margin-bottom 16px
 
-            p.access-level-label-disabled
+            p.access-level-label
                 border-radius 25px
-                border 1px solid $colorBlueArea
                 height 35px
                 width 150px
                 text-align center
                 line-height 35px
+                border 1px solid $colorBlueArea
+                color $fontBlack
                 font-family "Helvetica Neue"
                 margin auto auto auto 12px
-                color $fontBlack
                 font-size 1em
-                cursor pointer
                 @media only screen and (max-width 1030px)
                     height 30px
                     line-height 30px
                     width 100px
 
-            p.access-level-label-enabled
-                border-radius 25px
-                background $colorBlueArea
-                height 35px
-                width 150px
-                text-align center
-                line-height 35px
-                font-size 1em
-                font-family "Helvetica Neue"
-                color $totalWhite
-                margin auto auto auto 12px
-                cursor pointer
-                @media only screen and (max-width 1030px)
-                    height 30px
-                    line-height 30px
-                    width 100px
+                &.enabled
+                    background $colorBlueArea
+                    color $totalWhite
+
+                &.editing
+                    cursor pointer
 
     .section-title
         font-size 1.3em

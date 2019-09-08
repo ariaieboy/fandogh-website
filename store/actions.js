@@ -129,6 +129,16 @@ export const removeMemberFromNamespace = async ({commit, state}, member_id) => {
     }
 };
 
+export const changeMemberRole = async ({commit, state}, {member_id, new_role}) => {
+    try {
+        return await Request().patch(`/api/users/namespaces/members/${member_id}`,{
+            role: new_role
+        })
+    }catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const recoveryAccount = async ({commit, state}, {identifier}) => {
     try {
         return await Request().post("/api/users/recovery-tokens", {identifier});
