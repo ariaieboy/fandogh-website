@@ -31,7 +31,7 @@
             <div v-for="member in members" class="member-container">
 
                 <div v-if="!member.is_owner" class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img @click="removeMember(member.email, member.id)" class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
                     <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
                 </div>
 
@@ -74,6 +74,56 @@
         },
         methods: {
 
+            async removeMember(email, id){
+
+                this.$ga.event({
+                    eventCategory: "membership",
+                    eventAction: "editing member",
+                    eventLabel:'remove',
+                    eventValue: `${email}`
+                });
+                this.$alertify(
+                    {
+                        title: "حذف از فضانام",
+                        description: `آیا از حذف ${email} از فضانام خود مطمئن هستید؟`
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store
+                                .dispatch("removeMemberFromNamespace", id)
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.getNamespaceMembers()
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "membership",
+                                        eventAction: "editing member",
+                                        eventLabel:'remove successful',
+                                        eventValue: `${email}`
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "membership",
+                                        eventAction: "editing member",
+                                        eventLabel:'remove canceled',
+                                        eventValue:`${id}`
+                                    });
+                                });
+                        }
+                    }
+                );
+
+            },
             async getNamespaceMembers(){
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
