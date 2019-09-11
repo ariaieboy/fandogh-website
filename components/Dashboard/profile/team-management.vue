@@ -51,7 +51,7 @@
 
                 <div v-if="!member.is_owner" class="member-access-level-container">
 
-                    <p v-for="role in member.roles.sort().reverse()" @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, role, member.email) : null"
+                    <p v-for="role in member.roles" @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, role, member.email) : null"
                        :class="['access-level-label', {'enabled': member.role === role }, {'editing': editing !== null && editing === member.id}]">
                         {{role.toString().charAt(0).toUpperCase() + role.toString().toLowerCase().slice(1)}}</p>
 
@@ -231,7 +231,19 @@
             async getNamespaceMembers() {
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                    this.members = await this.$store.dispatch("requestNamespaceMembers");
+                    let response = await this.$store.dispatch("requestNamespaceMembers");
+                    this.members  = response.map(
+                        ({id, username, email, role, roles, is_owner}) => {
+                            return {
+                                id,
+                                username,
+                                email,
+                                role,
+                                roles: roles.sort().reverse(),
+                                is_owner
+                            }
+                        }
+                    );
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
                     if (e.status === 401) {
