@@ -51,15 +51,9 @@
 
                 <div v-if="!member.is_owner" class="member-access-level-container">
 
-                    <p @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, 2, member.email) : null"
-                       :class="['access-level-label', {'enabled': member.role === 2 }, {'editing': editing !== null && editing === member.id}]">
-                        Operator</p>
-                    <p @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, 1, member.email) : null"
-                       :class="['access-level-label', {'enabled': member.role === 1 }, {'editing': editing !== null && editing === member.id}]">
-                        DevOps</p>
-                    <p @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, 0, member.email) : null"
-                       :class="['access-level-label', {'enabled': member.role === 0 }, {'editing': editing !== null && editing === member.id}]">
-                        Admin</p>
+                    <p v-for="role in member.roles.sort().reverse()" @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, role, member.email) : null"
+                       :class="['access-level-label', {'enabled': member.role === role }, {'editing': editing !== null && editing === member.id}]">
+                        {{role.toString().charAt(0).toUpperCase() + role.toString().toLowerCase().slice(1)}}</p>
 
                 </div>
 
@@ -88,6 +82,7 @@
                 editing: null,
                 current_role: null,
                 new_role: null,
+                role: null
 
             }
         },
@@ -112,13 +107,11 @@
                 });
                 this.$alertify(
                     {
-                        title: new_role < this.current_role ? 'ارتقا دسترسی' : 'تنزل دسترسی',
-                        description: new_role < this.current_role ?
-                            `آیا از ارتقا دسترسی ${email} مطمئن هستید؟` :
-                            `آیا از تنزل دسترسی ${email} مطمئن هستید؟`,
-                        label: new_role < this.current_role ? 'ارتقا دسترسی' : 'تنزل دسترسی',
-                        img: new_role === 0 ? require('../../../components/Dashboard/alert/images/ic_role_admin.svg') :
-                            new_role === 1 ? require('../../../components/Dashboard/alert/images/ic_role_devops_engineer.svg') :
+                        title: 'تغییر دسترسی',
+                        description: `آیا از تغییر دسترسی ${email} مطمئن هستید؟`,
+                        label: 'تایید دسترسی',
+                        img: new_role === 'ADMIN' ? require('../../../components/Dashboard/alert/images/ic_role_admin.svg') :
+                            new_role === 'DEVELOPER' ? require('../../../components/Dashboard/alert/images/ic_role_devops_engineer.svg') :
                                 require('../../../components/Dashboard/alert/images/ic_role_operator.svg')
                     },
                     status => {
@@ -148,10 +141,14 @@
                                 })
                                 .catch(e => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                                    this.$notify({
-                                        title: e.data.message,
-                                        type: "error"
+                                    ErrorReporter(e.data, this.$data, true).forEach(error => {
+                                        this.$notify({
+                                            title: error,
+                                            time: 4000,
+                                            type: "error"
+                                        });
                                     });
+                                    this.cancelRoleEditing()
                                     this.$ga.event({
                                         eventCategory: "membership role",
                                         eventAction: "editing member role",
