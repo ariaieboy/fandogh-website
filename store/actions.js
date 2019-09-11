@@ -86,10 +86,10 @@ export const confirmTeamInvitation = async ({commit, state}, token) => {
 export const requestUserInvitation = async ({commit, state}, email) => {
 
     try {
-        return await Request().post('/api/users/invitations',{
+        return await Request().post('/api/users/invitations', {
             email: email
         })
-    }catch (e) {
+    } catch (e) {
         return Promise.reject(e)
     }
 };
@@ -97,7 +97,7 @@ export const requestUserInvitation = async ({commit, state}, email) => {
 export const requestPendingInvitations = async ({commit, state}) => {
     try {
         return await Request().get('/api/users/invitations')
-    }catch (e) {
+    } catch (e) {
         return Promise.reject(e)
     }
 };
@@ -106,10 +106,37 @@ export const revokePendingInvitation = async ({commit, state}, token) => {
 
     try {
         return await Request().delete(`/api/users/invitations/${token}`)
-    }catch (e) {
+    } catch (e) {
         return Promise.reject(e)
     }
 
+};
+
+export const requestNamespaceMembers = async ({commit, state}) => {
+
+    try {
+        return await Request().get('/api/users/namespaces/members')
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const removeMemberFromNamespace = async ({commit, state}, member_id) => {
+    try {
+        return await Request().delete(`/api/users/namespaces/members/${member_id}`)
+    } catch (e) {
+      return Promise.reject(e)
+    }
+};
+
+export const changeMemberRole = async ({commit, state}, {member_id, new_role}) => {
+    try {
+        return await Request().patch(`/api/users/namespaces/members/${member_id}`,{
+            role: new_role
+        })
+    }catch (e) {
+        return Promise.reject(e)
+    }
 };
 
 export const recoveryAccount = async ({commit, state}, {identifier}) => {

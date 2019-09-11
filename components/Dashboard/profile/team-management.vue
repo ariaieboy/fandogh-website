@@ -16,8 +16,10 @@
             <p class="section-title">دعوت‌های در انتظار</p>
 
             <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
-                <div v-for="item in pending_invitations" class="col-lg-3 col-md-5 col-xs-12 col-sm-12 pending-invitation-card">
-                    <img @click="provokeInvitation(item.token, item.receiver)" src="../../../static/icons/ic_delete.svg" alt="delete">
+                <div v-for="item in pending_invitations"
+                     class="col-lg-3 col-md-5 col-xs-12 col-sm-12 pending-invitation-card">
+                    <img @click="provokeInvitation(item.token, item.receiver)" src="../../../static/icons/ic_delete.svg"
+                         alt="delete">
                     <p>{{item.receiver}}</p>
                 </div>
             </div>
@@ -28,142 +30,34 @@
 
             <p class="section-title">اعضای تیم فضانام</p>
 
-            <div class="member-container">
+            <div v-for="(member, index ) in members" class="member-container">
 
-                <div class="member-access-level-container">
+                <div v-if="member.is_owner" class="member-action-container">
+                    <span class="owner-label">Owner</span>
+                </div>
+                <div v-else-if="editing === member.id" class="member-action-container">
+                    <img @click="cancelRoleEditing" class="cancel-editing"
+                         src="../../../assets/svg/ic_close.svg" alt="cancel">
+                </div>
 
-                    <p class="access-level-label-disabled">Operator</p>
-                    <p class="access-level-label-disabled">DevOps</p>
-                    <p class="access-level-label-enabled">Admin</p>
+                <div v-else class="member-action-container">
+                    <img @click="removeMember(member.email, member.id)" class="remove-member"
+                         src="../../../static/icons/ic_delete.svg" alt="remove">
+                    <img @click="editMemberRole(member.role, member.id)" class="edit-member"
+                         src="../../../assets/svg/edit.svg"
+                         alt="edit">
+                </div>
+
+
+                <div v-if="!member.is_owner" class="member-access-level-container">
+
+                    <p v-for="role in member.roles.sort().reverse()" @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, role, member.email) : null"
+                       :class="['access-level-label', {'enabled': member.role === role }, {'editing': editing !== null && editing === member.id}]">
+                        {{role.toString().charAt(0).toUpperCase() + role.toString().toLowerCase().slice(1)}}</p>
 
                 </div>
 
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
-                </div>
-
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
-
-            </div>
-
-
-            <div class="member-container">
-
-                <div class="member-access-level-container">
-
-                    <p class="access-level-label-enabled">Operator</p>
-                    <p class="access-level-label-disabled">DevOps</p>
-                    <p class="access-level-label-disabled">Admin</p>
-
-                </div>
-
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
-                </div>
-
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
-
-            </div>
-
-
-            <div class="member-container">
-
-                <div class="member-access-level-container">
-
-                    <p class="access-level-label-disabled">Operator</p>
-                    <p class="access-level-label-enabled">DevOps</p>
-                    <p class="access-level-label-disabled">Admin</p>
-
-                </div>
-
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
-                </div>
-
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
-
-            </div>
-
-
-            <div class="member-container">
-
-                <div class="member-access-level-container">
-
-                    <p class="access-level-label-disabled">Operator</p>
-                    <p class="access-level-label-enabled">DevOps</p>
-                    <p class="access-level-label-disabled">Admin</p>
-
-                </div>
-
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
-                </div>
-
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
-
-            </div>
-
-
-            <div class="member-container">
-
-                <div class="member-access-level-container">
-
-                    <p class="access-level-label-disabled">Operator</p>
-                    <p class="access-level-label-disabled">DevOps</p>
-                    <p class="access-level-label-enabled">Admin</p>
-
-                </div>
-
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
-                </div>
-
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
-
-            </div>
-
-
-            <div class="member-container">
-
-                <div class="member-access-level-container">
-
-                    <p class="access-level-label-enabled">Operator</p>
-                    <p class="access-level-label-disabled">DevOps</p>
-                    <p class="access-level-label-disabled">Admin</p>
-
-                </div>
-
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
-                </div>
-
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
-
-            </div>
-
-
-            <div class="member-container">
-
-                <div class="member-access-level-container">
-
-                    <p class="access-level-label-enabled">Operator</p>
-                    <p class="access-level-label-disabled">DevOps</p>
-                    <p class="access-level-label-disabled">Admin</p>
-
-                </div>
-
-                <div class="member-action-container">
-                    <img class="remove-member" src="../../../static/icons/ic_delete.svg" alt="remove">
-                    <img class="edit-member" src="../../../assets/svg/edit.svg" alt="edit">
-                </div>
-
-                <p class="member-name">sorena.sarabadani@gmail.com</p>
+                <p class="member-name">{{member.email}}</p>
 
             </div>
 
@@ -183,16 +77,178 @@
             return {
 
                 new_member_email: '',
-                pending_invitations: []
+                pending_invitations: [],
+                members: [],
+                editing: null,
+                current_role: null,
+                new_role: null,
+                role: null
 
             }
         },
-        created(){
-            this.getPendingInvitations()
+        created() {
+            this.getPendingInvitations();
+            this.getNamespaceMembers();
         },
         methods: {
 
-            provokeInvitation(token, email){
+            async changeMemberRole(index, id, new_role, email) {
+
+                if (new_role === this.current_role) {
+                    this.cancelRoleEditing()
+                    return;
+                }
+
+                this.$ga.event({
+                    eventCategory: "membership role",
+                    eventAction: "editing member role",
+                    eventLabel: new_role < this.current_role ? 'promotion' : 'downgrade',
+                    eventValue: `${email}`
+                });
+                this.$alertify(
+                    {
+                        title: 'تغییر دسترسی',
+                        description: `آیا از تغییر دسترسی ${email} مطمئن هستید؟`,
+                        label: 'تایید دسترسی',
+                        img: new_role === 'ADMIN' ? require('../../../components/Dashboard/alert/images/ic_role_admin.svg') :
+                            new_role === 'DEVELOPER' ? require('../../../components/Dashboard/alert/images/ic_role_devops_engineer.svg') :
+                                require('../../../components/Dashboard/alert/images/ic_role_operator.svg')
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store
+                                .dispatch("changeMemberRole", {member_id: id, new_role: new_role})
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.members.forEach((item, position) => {
+                                        if (index === position) {
+                                            item.role = res.role
+                                        }
+                                    });
+                                    this.cancelRoleEditing();
+
+                                    this.$notify({
+                                        title: 'تغییر در سطح دسترسی با موفقیت انجام شد',
+                                        type: "success"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "membership role",
+                                        eventAction: "editing member role",
+                                        eventLabel: 'role edit successful',
+                                        eventValue: `${email}`
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    ErrorReporter(e.data, this.$data, true).forEach(error => {
+                                        this.$notify({
+                                            title: error,
+                                            time: 4000,
+                                            type: "error"
+                                        });
+                                    });
+                                    this.cancelRoleEditing()
+                                    this.$ga.event({
+                                        eventCategory: "membership role",
+                                        eventAction: "editing member role",
+                                        eventLabel: 'role edit canceled',
+                                        eventValue: `${email}`
+                                    });
+                                });
+                        } else {
+                            this.cancelRoleEditing()
+                        }
+                    }
+                );
+
+            },
+            cancelRoleEditing() {
+                this.editing = null;
+                this.current_role = null;
+            },
+
+            editMemberRole(current_role, id) {
+
+                this.editing = id;
+                this.current_role = current_role;
+
+            },
+
+            async removeMember(email, id) {
+
+                this.editing = null;
+                this.current_role = null;
+
+                this.$ga.event({
+                    eventCategory: "membership",
+                    eventAction: "editing member",
+                    eventLabel: 'remove',
+                    eventValue: `${email}`
+                });
+                this.$alertify(
+                    {
+                        title: "حذف از فضانام",
+                        description: `آیا از حذف ${email} از فضانام خود مطمئن هستید؟`
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store
+                                .dispatch("removeMemberFromNamespace", id)
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.getNamespaceMembers()
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "membership",
+                                        eventAction: "editing member",
+                                        eventLabel: 'remove successful',
+                                        eventValue: `${email}`
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "membership",
+                                        eventAction: "editing member",
+                                        eventLabel: 'remove canceled',
+                                        eventValue: `${email}`
+                                    });
+                                });
+                        }
+                    }
+                );
+
+            },
+            async getNamespaceMembers() {
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    this.members = await this.$store.dispatch("requestNamespaceMembers");
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    if (e.status === 401) {
+                        this.$router.replace('/user/login')
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+                    }
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+            },
+            provokeInvitation(token, email) {
                 this.$ga.event({
                     eventCategory: "invitation",
                     eventAction: "removing pending invitation"
@@ -240,7 +296,7 @@
                     }
                 );
             },
-            async getPendingInvitations(){
+            async getPendingInvitations() {
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.pending_invitations = await this.$store.dispatch("requestPendingInvitations");
@@ -327,12 +383,14 @@
                 margin-left 12px
             @media only screen and (max-width 992px)
                 margin-left 0
+
             img
                 width 20px
                 height 20px
                 margin-top auto
                 margin-bottom auto
                 cursor pointer
+
             p
                 flex 1
                 line-height 54px
@@ -362,6 +420,7 @@
 
         div.member-action-container
             display flex
+            margin-right 16px
             @media only screen and (max-width 1030px)
                 margin-left auto
                 margin-right auto
@@ -390,18 +449,33 @@
                     width 18px
                     height 18px
 
+            img.cancel-editing
+                width 18px
+                height 18px
+                margin-top auto
+                margin-bottom auto
+                cursor pointer
+                margin-left 16px
+                filter invert(29%) sepia(55%) saturate(3230%) hue-rotate(331deg) brightness(101%) contrast(99%)
+                @media only screen and (max-width 1030px)
+                    width 16px
+                    height 16px
+
         p.member-name
             padding-left 16px
             padding-right 32px
             font-family "Helvetica Neue"
             font-size 1em
             width max-content
+            text-align left
+            margin-right auto
             line-height 52px
             @media only screen and (max-width 1030px)
                 height max-content
                 line-height 26px
                 margin-bottom 0
                 margin-top 8px
+                text-align center
                 font-size 1.2em
                 margin-left auto
                 margin-right auto
@@ -412,45 +486,45 @@
             margin-right 16px
             @media only screen and (max-width 1030px)
                 order 3
+                margin-left auto
                 margin-right auto
                 margin-bottom 16px
 
-            p.access-level-label-disabled
+            p.access-level-label
                 border-radius 25px
-                border 1px solid $colorBlueArea
                 height 35px
                 width 150px
                 text-align center
                 line-height 35px
+                border 1px solid $colorBlueArea
+                color $fontBlack
                 font-family "Helvetica Neue"
                 margin auto auto auto 12px
-                color $fontBlack
                 font-size 1em
-                cursor pointer
                 @media only screen and (max-width 1030px)
                     height 30px
                     line-height 30px
                     width 100px
 
-            p.access-level-label-enabled
-                border-radius 25px
-                background $colorBlueArea
-                height 35px
-                width 150px
-                text-align center
-                line-height 35px
-                font-size 1em
-                font-family "Helvetica Neue"
-                color $totalWhite
-                margin auto auto auto 12px
-                cursor pointer
-                @media only screen and (max-width 1030px)
-                    height 30px
-                    line-height 30px
-                    width 100px
+                &.enabled
+                    background $colorBlueArea
+                    color $totalWhite
+
+                &.editing
+                    cursor pointer
 
     .section-title
         font-size 1.3em
         color $fontGray
         font-family iran-yekan
+
+    .owner-label
+        font-family "Helvetica Neue"
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 8px 16px;
+        line-height 1
+        background: $green
+        border-radius: 5px;
+        color: white
 </style>
