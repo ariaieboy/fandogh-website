@@ -166,6 +166,7 @@
                     if (namespace.hasOwnProperty('name')) {
                         if (getValue('namespace') !== namespace.name) {
                             setValue({key: 'namespace', value: namespace.name});
+                            setValue({key: 'user_role', value: namespace.user_role})
                             window.location.reload();
                         }
                     }
