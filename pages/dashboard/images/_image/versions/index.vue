@@ -2,6 +2,7 @@
     <div class="wrapper-image" v-if="!loading">
         <f-empty v-if="!versions || !versions.length" title="هنوز ورژنی اضافه نشده !">
             <f-button
+                    v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
                     styles="red"
                     @onClick="$router.push(`/dashboard/images/${image}/versions/create`)"
             >افزودن ورژن
@@ -65,6 +66,7 @@
     import FEmpty from "~/components/Dashboard/empty";
     import BoxTable from "../../../../../components/Dashboard/table/box-table";
     import Moment from 'moment-jalaali'
+    import RoleAccessHandler from "../../../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -77,7 +79,6 @@
                     {title: 'وضعیت', width: '20%', name: 'state', class: {}},
                 ],
                 menuList: [
-                    {method: this.createVersions, icon: 'ic-add.svg', title: 'ایجاد سرویس', style: {}},
                     {method: this.logs, icon: 'file.svg', title: 'مشاهده لاگ', style: {}},
                 ]
             };
@@ -118,6 +119,9 @@
             this.$store.commit("SET_DATA", {data: null, id: "versions"});
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async getData() {
                 try {
                     await this.$store.dispatch(
