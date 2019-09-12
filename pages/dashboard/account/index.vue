@@ -91,7 +91,7 @@
                 <!--<p :style="{borderLeft: '1px solid #1757FF'}">کیف پول</p>-->
                 <!--</div>-->
 
-                <div @click="sectionClicked('ProfileTransactions')"
+                <div v-if="verifyUserAccess({ADMIN:'ADMIN'})" @click="sectionClicked('ProfileTransactions')"
                      :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
                     <p :style="{borderLeft: '1px solid #1757FF'}">تراکنش‌های مالی</p>
                 </div>
@@ -131,6 +131,7 @@
     import FCheckbox from "~/components/elements/checkbox";
     import {removeValue, setValue, getValue} from "../../../utils/cookie";
     import Moment from 'moment-jalaali';
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -206,6 +207,9 @@
             this.fetchUserNamespaces()
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async fetchUserNamespaces() {
                 this.namespaces.length = 0;
                 try {

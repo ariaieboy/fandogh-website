@@ -1,5 +1,7 @@
-const RoleAccessHandler = (user_role, permitted_roles) => {
-    return user_role in permitted_roles;
+import {getValue} from "./cookie";
+
+const RoleAccessHandler = ( permitted_roles) => {
+    return getValue('user_role') in permitted_roles;
 
 };
 

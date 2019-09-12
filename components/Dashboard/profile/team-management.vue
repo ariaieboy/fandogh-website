@@ -2,7 +2,7 @@
     <div class="row" style="width: 100%; height: max-content; padding-right: 6px; padding-left: 6px; margin-left: 0">
 
 
-        <div class="member-invite-container">
+        <div v-if="verifyUserAccess({ADMIN:'ADMIN'})" class="member-invite-container">
             <input v-model="new_member_email" dir="rtl" type="email" placeholder="ایمیل هم‌تیمی جدید را وارد کنید"
                    style="flex: 0.9 0 auto; padding: 0 16px; border: none; outline: none;border-radius: 3px;font-family: iran-yekan">
             <button style="color: #fefefe; flex: 0.1 0 auto; border: none; outline: none; background-color: #24D5D8;font-family: iran-yekan; border-top-left-radius: 3px; border-bottom-left-radius: 3px; cursor: pointer; font-size: 1.1em"
@@ -40,7 +40,7 @@
                          src="../../../assets/svg/ic_close.svg" alt="cancel">
                 </div>
 
-                <div v-else class="member-action-container">
+                <div v-else-if="verifyUserAccess({ADMIN:'ADMIN'})" class="member-action-container">
                     <img @click="removeMember(member.email, member.id)" class="remove-member"
                          src="../../../static/icons/ic_delete.svg" alt="remove">
                     <img @click="editMemberRole(member.role, member.id)" class="edit-member"
@@ -69,6 +69,8 @@
 
 <script>
     import ErrorReporter from "../../../utils/ErrorReporter";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
+    import {getValue} from "../../../utils/cookie";
 
     export default {
         name: "team-management",
@@ -87,11 +89,15 @@
             }
         },
         created() {
-            this.getPendingInvitations();
+            if(this.verifyUserAccess({ADMIN:'ADMIN'}))
+                this.getPendingInvitations();
+
             this.getNamespaceMembers();
         },
         methods: {
-
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async changeMemberRole(index, id, new_role, email) {
 
                 if (new_role === this.current_role) {
