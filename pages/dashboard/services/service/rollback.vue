@@ -1,6 +1,6 @@
 <template>
     <div v-if="history === null" class="row" style="margin-left: 0; margin-right: 0; width: 100%; height: max-content">
-        <div v-for="(item, index) in service_history"
+        <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" v-for="(item, index) in service_history"
              class="col-lg-6 col-md-6 col-xs-12 col-sm-12"
              style="padding-left: 8px; padding-right: 8px; height: max-content">
             <div class="rollback-parent-container" @click="historySelected(index)">
@@ -17,7 +17,7 @@
 
 
     <div v-else class="row" style="margin-right: 0; margin-left: 0">
-        <div class="rollback-manifest-container">
+        <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" class="rollback-manifest-container">
             <div class="rollback-action-container">
 
                 <div class="rollback-parent-container">
@@ -59,6 +59,7 @@
 <script>
     import ErrorReporter from "../../../../utils/ErrorReporter";
     import Moment from 'moment-jalaali'
+    import RoleAccessHandler from "../../../../utils/RoleAccessHandler";
 
     export default {
         name: "rollback",
@@ -75,6 +76,9 @@
 
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async forceRollback() {
 
                 this.$ga.event({
