@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})" class="row">
         <h2 class="title_header">افزودن دامنه</h2>
 
         <div class="row" style="width: 100%">
@@ -22,6 +22,7 @@
     import FButton from "~/components/elements/button";
     import ErrorReporter from "~/utils/ErrorReporter";
     import FormValidator from "~/utils/formValidator";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -45,6 +46,9 @@
         destroyed() {
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             createDomain() {
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 this.$store
