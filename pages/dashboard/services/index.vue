@@ -42,7 +42,10 @@
 
 
             <f-empty v-if="!services || !services.length" title="هنوز سرویسی اضافه نشده !"></f-empty>
-            <box-table v-else :titles="titleRow" :items="services" :func="details" :menu="menuList"></box-table>
+            <box-table v-else :titles="titleRow"
+                       :items="services"
+                       :func="details"
+                       :menu="verifyUserAccess({ADMIN: 'ADMIN',DEVELOPER: 'DEVELOPER'}) ? menuListComplete: menuList"></box-table>
 
         </div>
     </div>
@@ -78,6 +81,10 @@
                     {title: 'وضعیت', width: '10%', name: 'state'}
                 ],
                 menuList:[
+                    {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
+                    {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
+                ],
+                menuListComplete:[
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
                     {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سرویس', style: {color: '#fd3259'}},
