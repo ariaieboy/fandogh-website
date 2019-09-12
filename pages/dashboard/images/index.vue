@@ -6,7 +6,7 @@
 
             <div style="overflow: hidden; margin-bottom: 32px">
                 <div class="right" style="float: right;"><p class="title_header"> لیست ایمیج‌ها</p></div>
-                <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})" class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      @click="$router.push('/dashboard/images/create')">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
@@ -73,6 +73,7 @@
     import FEmpty from "~/components/Dashboard/empty";
     import BoxTable from "../../../components/Dashboard/table/box-table";
     import Moment from 'moment-jalaali'
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -134,6 +135,9 @@
             this.getData();
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async getData() {
                 try {
                     await this.$store.dispatch("getImages");
