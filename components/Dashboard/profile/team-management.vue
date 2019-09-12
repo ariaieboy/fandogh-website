@@ -141,12 +141,10 @@
                                 })
                                 .catch(e => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                                    ErrorReporter(e.data, this.$data, true).forEach(error => {
-                                        this.$notify({
-                                            title: error,
-                                            time: 4000,
-                                            type: "error"
-                                        });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        time: 4000,
+                                        type: "error"
                                     });
                                     this.cancelRoleEditing()
                                     this.$ga.event({
