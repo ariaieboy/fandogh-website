@@ -11,8 +11,8 @@
 
         <div style="height: 1px; margin: 20px 60px 0 60px; background-color: #2979ff"></div>
 
-        <div style="display: flex; margin-top: 16px">
-            <button class="create-button" @click="url">ساخت {{title}} جدید</button>
+        <div v-if="privileged" style="display: flex; margin-top: 16px">
+            <button  class="create-button" @click="url">ساخت {{title}} جدید</button>
         </div>
 
     </div>
@@ -21,7 +21,7 @@
 <script>
     export default {
         name: "empty-feature",
-        props:['title', 'url', 'icon'],
+        props:['title', 'url', 'icon', 'privileged'],
     }
 </script>
 
