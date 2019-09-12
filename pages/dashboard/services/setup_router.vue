@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})">
         <p class="router-title">انتخاب نحوه ساخت</p>
 
         <div style="margin-top: 32px">
@@ -36,6 +36,7 @@
 <script>
     import ManagedServiceCard from "../../../components/Dashboard/service/managed-service-card";
     import ServiceCard from "../../../components/Dashboard/service/service-card";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         name: "router",
@@ -60,6 +61,9 @@
         },
         computed: {},
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             onSelected(path) {
                 this.$router.replace('/dashboard/services/' + path)
             },
