@@ -22,6 +22,7 @@ export const SET_USER = (state, {token, namespaces, username, email}) => {
         setToken(token)
         if (namespaces) setValue({key: 'namespace', value: namespaces[0]})
         setValue({key: 'username', value: username})
+        setValue({key: 'user_role', value: 'ADMIN'})
         setValue({key: 'email', value: email})
     }
 }

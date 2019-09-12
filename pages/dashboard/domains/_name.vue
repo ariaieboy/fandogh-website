@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                             <div slot="collapse-footer">
-                                <div style="margin-top: 12px">
+                                <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})" style="margin-top: 12px">
                                     <button @click="verify"
                                             style="color: #1d1d1d; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0">
                                         بررسی تأیید دامنه
@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                         </f-collaps>
-                        <div style="margin-top: 12px">
+                        <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})" style="margin-top: 12px">
                             <button style="color: #fefefe; font-family: iran-yekan; outline: none; width: 100%; background-color: #9c9c9c; box-shadow: 0 2px 6px rgba(156, 156, 156, 0.4); border-radius: 3px; padding: 12px 0">برای درخواست SSL دامنه خود را تایید کنید</button>
                         </div>
                     </div>
@@ -132,8 +132,8 @@
                                 </div>
                             </div>
                         </f-collaps>
-                        <div style="margin-top: 12px">
-                            <button @click="certificateDomain"
+                        <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})" style="margin-top: 12px">
+                            <button  @click="certificateDomain"
                                     style="color: #1d1d1d; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0">درخواست SSL</button>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                                 </div>
                             </div>
                         </f-collaps>
-                        <div style="margin-top: 12px">
+                        <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})" style="margin-top: 12px">
                             <button
                                     style="color: #fefefe; font-family: iran-yekan; outline: none; width: 100%; background-color: #fd3259; box-shadow: 0 2px 6px rgba(253, 50, 89, 0.4); border-radius: 3px; padding: 12px 0"
                                     @click="removeCertificateDomain">لغو گواهینامه SSL
@@ -194,6 +194,7 @@
     import FCollaps from "~/components/elements/collaps";
     import Popover from "../../../components/wizard/tooltip/popover";
     import ErrorReporter from "../../../utils/ErrorReporter";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -287,6 +288,9 @@
         destroyed() {
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async getData() {
                 try {
                     await this.$store.dispatch("getDomain", {

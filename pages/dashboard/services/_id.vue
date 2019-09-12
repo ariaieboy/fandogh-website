@@ -29,7 +29,7 @@
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
                 </span>
 
-                <div v-if="!removing" class="service-edit-container">
+                <div v-if="!removing && verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" class="service-edit-container">
                     <span class="service-edit"
                           @click="editService">
                         ویرایش سرویس
@@ -74,7 +74,7 @@
                     <p>لاگ‌ها</p>
                 </div>
 
-                <div @click="sectionClicked('rollback')"
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" @click="sectionClicked('rollback')"
                      :class="[(activeSectionName === 'rollback' ? 'enabled' : 'disabled')]">
                     <p>کپسول زمان</p>
                 </div>
@@ -110,6 +110,7 @@
     import logs from "./service/logs"
     import rollback from "./service/rollback"
     import ErrorReporter from "../../../utils/ErrorReporter";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -145,6 +146,9 @@
             this.getData();
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             editService() {
                 if (this.service.service_type === 'managed') {
                     this.dumpManifest(this.service.name)

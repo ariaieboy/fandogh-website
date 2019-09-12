@@ -4,7 +4,9 @@
         <div class="images">
             <div style="overflow: hidden; margin-bottom: 32px">
                 <div class="right" style="float: right;"><p class="title_header"> لیست سرویس‌ها</p></div>
-                <div class="left" style="float: left; cursor: pointer; margin-top: 8px" @click="newService">
+                <div class="left"
+                     v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
+                     style="float: left; cursor: pointer; margin-top: 8px" @click="newService">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <filter x="-6.0%" y="-21.8%" width="112.0%" height="143.6%" filterUnits="objectBoundingBox" id="filter-1">
@@ -40,7 +42,10 @@
 
 
             <f-empty v-if="!services || !services.length" title="هنوز سرویسی اضافه نشده !"></f-empty>
-            <box-table v-else :titles="titleRow" :items="services" :func="details" :menu="menuList"></box-table>
+            <box-table v-else :titles="titleRow"
+                       :items="services"
+                       :func="details"
+                       :menu="verifyUserAccess({ADMIN: 'ADMIN',DEVELOPER: 'DEVELOPER'}) ? menuListComplete: menuList"></box-table>
 
         </div>
     </div>
@@ -54,6 +59,7 @@
     import FLoading from "~/components/Loading";
     import BoxTable from "../../../components/Dashboard/table/box-table";
     import Moment from 'moment-jalaali'
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -75,6 +81,10 @@
                     {title: 'وضعیت', width: '10%', name: 'state'}
                 ],
                 menuList:[
+                    {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
+                    {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
+                ],
+                menuListComplete:[
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
                     {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سرویس', style: {color: '#fd3259'}},
@@ -123,6 +133,9 @@
             }
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async getData() {
                 try {
                     await this.$store.dispatch("getServices");

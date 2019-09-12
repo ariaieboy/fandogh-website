@@ -58,7 +58,7 @@
 
         </div>
 
-        <div class="row " style="width: 100%; margin-top: 40px; margin-right: 0; margin-left: 0">
+        <div v-if="verifyUserAccess({ADMIN:'ADMIN'})" class="row " style="width: 100%; margin-top: 40px; margin-right: 0; margin-left: 0">
             <div class="container-fluid navigation-container">
                 <button class="navigation-button"
                         style="background-color: #0045ff; box-shadow: 0 2px 6px 0 rgba(0, 69, 255, 0.42)"
@@ -81,6 +81,7 @@
     import {getValue} from "../../../utils/cookie";
     import Moment from 'moment-jalaali';
     import ErrorReporter from "~/utils/ErrorReporter";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         props: ['cpu', 'memory', 'dedicatedVolume'],
@@ -112,6 +113,9 @@
             }
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async requestUserPlan() {
                 try {
                     let plan = await this.$store.dispatch('getNameSpace', this.namespace);
