@@ -7,6 +7,7 @@
 
                 <div class="right" style="float: right;"><p class="title_header"> لیست سکرت‌ها</p></div>
                 <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
+                     v-if="verifyUserAccess({ADMIN: 'ADMIN'})"
                      @click="$router.push('/dashboard/secret/create')">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
@@ -43,7 +44,11 @@
 
             <f-empty v-if="!secrets || !secrets.length" title="هنوز سکرتی اضافه نشده است !"></f-empty>
 
-            <box-table v-else :titles="titleRow" :items="secrets" :func="edit" :menu="menuList"></box-table>
+            <box-table v-else :titles="titleRow"
+                       :items="secrets"
+                       :func="edit"
+                       :menu="verifyUserAccess({ADMIN: 'ADMIN'}) ? menuListComplete: menuList">
+            </box-table>
 
         </div>
     </div>
@@ -57,6 +62,7 @@
     import FLoading from "~/components/Loading";
     import BoxTable from "../../../components/Dashboard/table/box-table";
     import Moment from 'moment-jalaali'
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -77,6 +83,8 @@
                     {title: 'نوع سکرت', width: '39%', name: 'type', class: {}},
                 ],
                 menuList: [
+                ],
+                menuListComplete: [
                     {method: this.edit, icon: 'edit.svg', title: 'ویرایش سکرت', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سکرت', style: {color: '#fd3259'}},
                 ]
@@ -105,6 +113,9 @@
             this.getData();
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async getData() {
                 try {
                     await this.$store.dispatch("getSecret");
