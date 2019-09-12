@@ -58,7 +58,7 @@
 
             <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !"></f-empty>
 
-            <box-table v-else :titles="titleRow" :items="images" :func="versions" :menu="menuList"></box-table>
+            <box-table v-else :titles="titleRow" :items="images" :func="versions" :menu="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER'})? menuListComplete : menuList"></box-table>
 
         </div>
     </div>
@@ -87,6 +87,10 @@
                     {title: 'آخرین ورژن', width: '27%', name: 'version'},
                 ],
                 menuList: [
+                    {method: this.versions, icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
+                    {method: this.createVersion, icon: 'ic-upload.svg', title: 'آپلود نسخه جدید', style: {}},
+                ],
+                menuListComplete:[
                     {method: this.versions, icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
                     {method: this.createVersion, icon: 'ic-upload.svg', title: 'آپلود نسخه جدید', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف ایمیج', style: {color: '#fd3259'}},
