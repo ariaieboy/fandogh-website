@@ -1,5 +1,5 @@
 <template>
-    <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})" class="row">
+    <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" class="row">
         <h2 class="title_header">افزودن دامنه</h2>
 
         <div class="row" style="width: 100%">

@@ -272,7 +272,7 @@
             }
 
             window.onclick = function (event) {
-                console.log(event.target.matches('.nev-button'))
+
                 if (!event.target.matches('.nev-button')) {
                     if (document.getElementById('sub_menu').style) {
                         if (document.getElementById("sub_menu").style.visibility === 'visible') {
@@ -301,8 +301,7 @@
                 this.$store.dispatch("TOGGLE_NAV", {data: type, id: "sidebar"});
             },
             toggleMenu() {
-
-                console.log(this.$refs.sub_menu)
+                
                 if (this.$refs.sub_menu.style.visibility === 'hidden') {
                     this.$refs.sub_menu.style.opacity = '100';
                     this.$refs.sub_menu.style.visibility = 'visible'

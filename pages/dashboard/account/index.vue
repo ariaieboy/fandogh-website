@@ -217,6 +217,7 @@
                     for (let i = 0; i < this.namespaces.length; i++) {
                         if (this.namespaces[i].name === this.namespace) {
                             this.activeNamespace = this.namespaces[i];
+                            setValue({key: 'user_role', value: this.namespaces[i].user_role})
                             break;
                         }
                     }

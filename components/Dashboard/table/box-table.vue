@@ -14,7 +14,7 @@
                     {{item[title.name]}}
                 </td>
 
-                <td class="more-button">
+                <td v-if="menu.length > 0" class="more-button">
                     <div class="dropdown dropbtn" @click="notify(index)" style="margin: auto; display: flex">
                         <img style="margin: auto; align-self: center" src="../../../assets/svg/more.svg"
                              class="dropbtn" alt="more" @click="notify(index)">

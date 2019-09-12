@@ -44,9 +44,10 @@
 
             <f-empty v-if="!secrets || !secrets.length" title="هنوز سکرتی اضافه نشده است !"></f-empty>
 
-            <box-table v-else :titles="titleRow"
+            <box-table v-else
+                       :titles="titleRow"
                        :items="secrets"
-                       :func="edit"
+                       :func="verifyUserAccess({ADMIN: 'ADMIN'}) ? edit : null"
                        :menu="verifyUserAccess({ADMIN: 'ADMIN'}) ? menuListComplete: menuList">
             </box-table>
 
@@ -82,8 +83,7 @@
                     {title: 'تاریخ ساخت', width: '19%', name: 'created_at', class: {}},
                     {title: 'نوع سکرت', width: '39%', name: 'type', class: {}},
                 ],
-                menuList: [
-                ],
+                menuList: [],
                 menuListComplete: [
                     {method: this.edit, icon: 'edit.svg', title: 'ویرایش سکرت', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سکرت', style: {color: '#fd3259'}},

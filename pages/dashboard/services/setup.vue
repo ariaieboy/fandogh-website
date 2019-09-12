@@ -186,8 +186,6 @@
         },
         mounted() {
 
-            console.log('biaaaaaaaaa')
-            console.log(JSON.parse(localStorage.getItem('vuex')).manifest.name)
             this.name = JSON.parse(localStorage.getItem('vuex')).manifest.name;
             this.kind = JSON.parse(localStorage.getItem('vuex')).manifest.kind;
 

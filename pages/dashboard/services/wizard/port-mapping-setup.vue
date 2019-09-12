@@ -253,7 +253,6 @@
                     return;
                 }
 
-                console.log(this.rules.redundant(this.manifest_model.port_mapping.port_map.port))
                 if(this.rules.redundant(this.manifest_model.port_mapping.port_map.port) !== true){
                     this.$refs.port_selector.focus();
                     return;

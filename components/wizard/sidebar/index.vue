@@ -41,7 +41,7 @@
                 this.$emit('update:edited', this.items[index].edited);
                 this.$emit('update:page', this.items[index].page);
 
-                console.log(this.items)
+
 
             }
         }
