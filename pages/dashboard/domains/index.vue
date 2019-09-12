@@ -4,7 +4,8 @@
         <div class="images">
             <div style="overflow: hidden; margin-bottom: 32px">
                 <div class="right" style="float: right;"><p class="title_header"> لیست دامنه‌ها</p></div>
-                <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN'})"
+                     class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      @click="$router.push('/dashboard/domains/create')">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -35,7 +36,7 @@
 
             <f-empty v-if="!domains || !domains.length" title="هنوز دامنه‌ای اضافه نشده !"></f-empty>
 
-            <box-table v-else :titles="titleRow" :items="domains" :func="details" :menu="menuList"></box-table>
+            <box-table v-else :titles="titleRow" :items="domains" :func="details" :menu="verifyUserAccess({ADMIN: 'ADMIN'}) ? menuListComplete : menuList"></box-table>
 
         </div>
     </div>
@@ -54,6 +55,7 @@
     import FLoading from "~/components/Loading";
     import BoxTable from "../../../components/Dashboard/table/box-table";
     import Moment from 'moment-jalaali'
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -78,6 +80,9 @@
                     {title: 'وضعیت ssl', width: '12%', name: 'certificate'},
                 ],
                 menuList: [
+                    {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات دامنه', style: {}},
+                ],
+                menuListComplete: [
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات دامنه', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف دامنه', style: {color: '#fd3259'}},
                 ]
@@ -130,6 +135,9 @@
         },
 
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async getData() {
                 try {
                     await this.$store.dispatch("getDomains");
