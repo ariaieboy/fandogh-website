@@ -37,7 +37,7 @@
                 </div>
                 <div v-else-if="editing === member.id" class="member-action-container">
                     <img @click="cancelRoleEditing" class="cancel-editing"
-                         src="../../../assets/svg/ic_close.svg" alt="cancel">
+                         src="../../../assets/svg/ic_close_red.svg" alt="cancel">
                 </div>
 
                 <div v-else-if="verifyUserAccess({ADMIN:'ADMIN'})" class="member-action-container">
@@ -53,7 +53,7 @@
 
                     <p v-for="role in member.roles" @click="editing !== null && editing === member.id ? changeMemberRole(index, member.id, role, member.email) : null"
                        :class="['access-level-label', {'enabled': member.role === role }, {'editing': editing !== null && editing === member.id}]">
-                        {{role.toString().charAt(0).toUpperCase() + role.toString().toLowerCase().slice(1)}}</p>
+                        {{role.toString().charAt(0) + role.toString().toLowerCase().slice(1)}}</p>
 
                 </div>
 
@@ -108,7 +108,7 @@
                 this.$ga.event({
                     eventCategory: "membership role",
                     eventAction: "editing member role",
-                    eventLabel: new_role < this.current_role ? 'promotion' : 'downgrade',
+                    eventLabel: '',
                     eventValue: `${email}`
                 });
                 this.$alertify(
@@ -415,7 +415,7 @@
 
     .team-list-container
         width 100%
-        margin-top 32px
+        margin-top 16px
         display flex
         padding-bottom 32px
         flex-direction column
@@ -426,9 +426,7 @@
         width 100%
         display flex
         height 52px
-        background $totalWhite
-        box-shadow 0 2px 6px rgba(0, 0, 0, 0.17)
-        margin-top 1px
+        margin-bottom 3px
         @media only screen and (max-width 1030px)
             flex-direction column
             height max-content
@@ -436,97 +434,140 @@
 
         div.member-action-container
             display flex
-            margin-right 16px
             @media only screen and (max-width 1030px)
                 margin-left auto
                 margin-right auto
                 order 1
-                margin-top 12px
-                margin-bottom 12px
+                justify-content center
+                justify-items center
+                background $totalWhite
+                box-shadow 0 4px 6px rgba(0, 0, 0, 0.07)
+                width 100%
+                padding-top 12px
+                padding-bottom 12px
 
             img.edit-member
-                width 22px
-                height 22px
+                width 52px
+                height 52px
                 margin-top auto
                 margin-bottom auto
                 cursor pointer
+                padding 16px
+                background $totalWhite
+                box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 @media only screen and (max-width 1030px)
                     width 18px
                     height 18px
+                    padding unset
+                    margin-right 6px
+                    box-shadow unset
+                    background unset
 
             img.remove-member
-                width 22px
-                height 22px
+                width 52px
+                height 52px
                 margin-top auto
                 margin-bottom auto
+                padding 16px
                 cursor pointer
-                margin-left 16px
+                margin-left 3px
+                background $totalWhite
+                box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 @media only screen and (max-width 1030px)
                     width 18px
                     height 18px
+                    padding unset
+                    margin-left 6px
+                    box-shadow unset
+                    background unset
 
             img.cancel-editing
-                width 18px
-                height 18px
+                width 52px
+                height 52px
                 margin-top auto
                 margin-bottom auto
                 cursor pointer
-                margin-left 16px
-                filter invert(29%) sepia(55%) saturate(3230%) hue-rotate(331deg) brightness(101%) contrast(99%)
+                padding 18px
+                background-color $totalWhite
+                box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 @media only screen and (max-width 1030px)
                     width 16px
                     height 16px
+                    padding 1px
+                    box-shadow unset
+                    background unset
 
         p.member-name
             padding-left 16px
             padding-right 32px
             font-family "Helvetica Neue"
             font-size 1em
+            flex 1
+            height 52px
             width max-content
             text-align left
             margin-right auto
             line-height 52px
+            background $totalWhite
+            box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
             @media only screen and (max-width 1030px)
                 height max-content
                 line-height 26px
                 margin-bottom 0
                 margin-top 8px
                 text-align center
+                width 100%
                 font-size 1.2em
                 margin-left auto
                 margin-right auto
+                box-shadow unset
+                    background unset
 
         div.member-access-level-container
             display flex
             margin-left auto
-            margin-right 16px
+            margin-right 3px
             @media only screen and (max-width 1030px)
                 order 3
-                margin-left auto
-                margin-right auto
+                width 100%
+                margin-right unset
+                margin-left unset
                 margin-bottom 16px
+                margin-top 3px
 
             p.access-level-label
-                border-radius 25px
-                height 35px
+                height 52px
                 width 150px
                 text-align center
-                line-height 35px
-                border 1px solid $colorBlueArea
+                line-height 52px
                 color $fontBlack
                 font-family "Helvetica Neue"
-                margin auto auto auto 12px
+                margin auto auto auto 3px
                 font-size 1em
+                background $totalWhite
+                box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 @media only screen and (max-width 1030px)
-                    height 30px
-                    line-height 30px
-                    width 100px
+                    height 32px
+                    line-height 32px
+                    margin-left 1.5px
+                    margin-right 1.5px
+                    font-size 1.1em
+                    flex 1
 
                 &.enabled
                     background $colorBlueArea
                     color $totalWhite
 
+                &.enabled:hover
+                    background $colorBlueArea !important
+                    color $totalWhite !important
+
                 &.editing
+                    cursor pointer
+
+                &.editing:hover
+                    background $blueHard
+                    color $totalWhite
                     cursor pointer
 
     .section-title
@@ -536,11 +577,17 @@
 
     .owner-label
         font-family "Helvetica Neue"
-        margin-top: auto;
-        margin-bottom: auto;
-        padding: 8px 16px;
-        line-height 1
-        background: $green
-        border-radius: 5px;
-        color: white
+        margin-top auto
+        margin-bottom auto
+        font-weight bold
+        padding 0 30px
+        line-height 52px
+        text-align center
+        height 52px
+        margin-left 3px
+        background $green
+        color white
+        @media only screen and (max-width 1030px)
+            height 42px
+            line-height 42px
 </style>
