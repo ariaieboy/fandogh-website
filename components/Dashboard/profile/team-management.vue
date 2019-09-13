@@ -580,14 +580,16 @@
         margin-top auto
         margin-bottom auto
         font-weight bold
-        padding 0 30px
+        padding 0 28px
         line-height 52px
         text-align center
         height 52px
         margin-left 3px
         background $green
         color white
+        box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
         @media only screen and (max-width 1030px)
             height 42px
             line-height 42px
+            box-shadow unset
 </style>
