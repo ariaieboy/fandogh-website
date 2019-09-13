@@ -171,11 +171,10 @@
                     status => {
                         if (status) {
                             // this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                            this.removing = true
-                            this.getData()
                             this.$store.dispatch("deleteService", this.service_name)
                                 .then(res => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$router.replace('/dashboard/services');
                                     this.$ga.event({
                                         eventCategory: "service",
                                         eventAction: "remove service",
@@ -200,6 +199,8 @@
                                         type: "error"
                                     });
                                 });
+                            this.removing = true;
+                            this.getData()
                         }
                     }
                 );
