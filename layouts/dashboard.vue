@@ -171,6 +171,7 @@
         methods: {
             fetchUserNamespace() {
                 this.$store.commit('SET_DATA', {data: true, id: 'loading'})
+                if(getValue(('namespace'))){
                 this.$store.dispatch('getNameSpace', getValue('namespace'))
                     .then(response => {
                         this.namespace = response
@@ -197,6 +198,7 @@
                             });
                         }
                     });
+                }
             },
             async redeemPlan() {
 
