@@ -36,8 +36,7 @@
                     <span class="owner-label">Owner</span>
                 </div>
                 <div v-else-if="editing === member.id" class="member-action-container">
-                    <img @click="cancelRoleEditing" class="cancel-editing"
-                         src="../../../assets/svg/ic_close_red.svg" alt="cancel">
+                    <span @click="cancelRoleEditing" class="cancel-editing">انصراف</span>
                 </div>
 
                 <div v-else-if="verifyUserAccess({ADMIN:'ADMIN'})" class="member-action-container">
@@ -481,21 +480,23 @@
                     box-shadow unset
                     background unset
 
-            img.cancel-editing
-                width 52px
-                height 52px
+            span.cancel-editing
+                font-family iran-yekan
                 margin-top auto
                 margin-bottom auto
+                font-weight normal
+                padding 0 30px
+                line-height 52px
+                text-align center
+                height 52px
+                background $red
+                color white
                 cursor pointer
-                padding 18px
-                background-color $totalWhite
                 box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 @media only screen and (max-width 1030px)
-                    width 16px
-                    height 16px
-                    padding 1px
+                    height 42px
+                    line-height 42px
                     box-shadow unset
-                    background unset
 
         p.member-name
             padding-left 16px
