@@ -452,12 +452,14 @@
                 margin-bottom auto
                 cursor pointer
                 padding 16px
+                margin-left 3px
                 background $totalWhite
                 box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 @media only screen and (max-width 1030px)
                     width 18px
                     height 18px
                     padding unset
+                    margin-left 0
                     margin-right 6px
                     box-shadow unset
                     background unset
@@ -487,6 +489,7 @@
                 font-weight normal
                 padding 0 30px
                 line-height 52px
+                margin-left 3px
                 text-align center
                 height 52px
                 background $red
@@ -496,6 +499,7 @@
                 @media only screen and (max-width 1030px)
                     height 42px
                     line-height 42px
+                    margin-left 0
                     box-shadow unset
 
         p.member-name
@@ -527,7 +531,7 @@
         div.member-access-level-container
             display flex
             margin-left auto
-            margin-right 3px
+            margin-right 0
             @media only screen and (max-width 1030px)
                 order 3
                 width 100%
