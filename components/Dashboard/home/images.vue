@@ -4,7 +4,7 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <empty-feature v-if="images.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="createImage">
+        <empty-feature v-if="images.length === 0" :privileged="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER'})" :title="emptySection.title" :icon="emptySection.icon" :url="createImage">
 
         </empty-feature>
 
@@ -37,6 +37,7 @@
     import TableNavigation from "./children/table-navigation";
     import Moment from 'moment-jalaali'
     import EmptyFeature from "./children/empty-feature";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         components: {EmptyFeature, TableNavigation, TableTitle, TableHeader, Moment},
@@ -83,6 +84,9 @@
                 }
             }
         }, methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             goToImages() {
                 this.$router.push('/dashboard/images/')
             },

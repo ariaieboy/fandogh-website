@@ -475,7 +475,7 @@
                     this.planData.dedicatedVolume -= 1;
             }, makeBill() {
                 this.finalBill.memory = this.planData.memory;
-                console.log(this.finalBill.memory)
+
                 if (this.planData.dedicatedVolume >= 10) {
                     this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
                 }
@@ -488,7 +488,7 @@
                     }
                 }
 
-                console.log(this.finalBill)
+
                 return this.finalBill;
             },
             async pushUrl() {

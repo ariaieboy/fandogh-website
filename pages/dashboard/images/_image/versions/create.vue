@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER'})">
         <div>
             <h2 class="title_header">آپلود ورژن</h2>
 
@@ -78,6 +78,7 @@
     import ErrorReporter from "~/utils/ErrorReporter";
     import FormValidator from "~/utils/formValidator";
     import Popover from "../../../../../components/wizard/tooltip/popover";
+    import RoleAccessHandler from "../../../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -157,6 +158,9 @@
             Popover
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             createImageVersion() {
 
                 if(this.rules.required(this.image.version.value) !== true){

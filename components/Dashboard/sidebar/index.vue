@@ -5,7 +5,7 @@
                     :title="item.text"
                     :to="item.link"
                     :class="['sidebar-dashboard-item' , {'is-border':item.isBorder,open}]"
-                    v-for="(item,index) in items"
+                    v-for="(item,index) in (verifyUserAccess({ADMIN: 'ADMIN'}) ? all_items: items)"
                     :key="index">
                 <img :src="require('./icons/'+item.icon+'.svg')">
                 <span>{{item.text}}</span>
@@ -18,12 +18,14 @@
 </template>
 
 <script>
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
+
     export default {
         name: 'sidebar-dashboard',
 
         data() {
             return {
-                items: [
+                all_items: [
                     {icon: 'ic-home', isBorder: true, text: 'داشبورد', link: '/dashboard/general'},
                     {icon: 'ic-image', text: 'ایمیج‌ها', link: '/dashboard/images'},
                     {icon: 'ic-service', text: 'سرویس‌ها', link: '/dashboard/services'},
@@ -31,6 +33,14 @@
                     {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
                     {icon: 'ic-monitoring', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
                     {icon: 'ic-plans', text: 'پلن‌های فندق', link: '/dashboard/plans'},
+                ],
+                items:[
+                    {icon: 'ic-home', isBorder: true, text: 'داشبورد', link: '/dashboard/general'},
+                    {icon: 'ic-image', text: 'ایمیج‌ها', link: '/dashboard/images'},
+                    {icon: 'ic-service', text: 'سرویس‌ها', link: '/dashboard/services'},
+                    {icon: 'ic-domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
+                    {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
+                    {icon: 'ic-monitoring', isBorder: false, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
                 ]
             }
         },
@@ -42,7 +52,10 @@
         methods: {
             toggleSidebar() {
                 this.$store.commit("SET_DATA", {data: !this.open, id: "sideMunu"});
-            }
+            },
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
         }
 
     }

@@ -2,8 +2,9 @@
     <div class="wrapper">
         <f-loading :isFull="true" v-if="loading"/>
         <no-ssr>
-            <f-d-header v-if="!isFullPage" />
-            <div :style="{width: isFullPage ? '100%': 'unset'}" :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
+            <f-d-header v-if="!isFullPage"/>
+            <div :style="{width: isFullPage ? '100%': 'unset'}"
+                 :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
                 <div v-if="isMenuAvailable" :class="['wrapper-sidebar', {'open':openSidebar}]">
                     <admin-sidebar/>
                 </div>
@@ -20,15 +21,18 @@
                                         <img src="../assets/svg/warning.svg" alt="warning"
                                              style="width: 64px; height: auto; margin-top: auto; margin-bottom: auto; display: inline-flex;
                                                     filter: invert(23%) sepia(92%) saturate(7318%) hue-rotate(347deg) brightness(78%) contrast(122%);">
-                                        <p v-if="remainingTime !== 0" style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: #D8000C">
+                                        <p v-if="remainingTime !== 0"
+                                           style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: #D8000C">
                                             تنها
                                             <span style="font-family: iran-sans; color: #D8000C">{{remainingTime}}</span>
                                             روز دیگر از پلن شما باقی مانده است. جهت تمدید، لطفا نسبت به تمدید پلن خو
                                             اقدام فرمایید، در غیر این صورت بعد از این تاریخ سرویس‌های شما از دسترس خارج
                                             خواهند شد.
                                         </p>
-                                        <p v-else style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: #D8000C">
-                                            مدت اعتبار پلن شما به پایان رسیده است! لطفا برای جلوگیری از خاموش شدن سرویس‌هایتان پلن خود را تمدید نمایید.
+                                        <p v-else
+                                           style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: #D8000C">
+                                            مدت اعتبار پلن شما به پایان رسیده است! لطفا برای جلوگیری از خاموش شدن
+                                            سرویس‌هایتان پلن خود را تمدید نمایید.
                                         </p>
                                     </div>
                                     <div style="width: 100%; display: flex;">
@@ -64,6 +68,7 @@
     import FLoading from "~/components/Loading";
     import Moment from 'moment-jalaali';
     import {removeValue, setValue, getValue} from "../utils/cookie";
+    import ErrorReporter from "../utils/ErrorReporter";
 
     export default {
         components: {
@@ -73,6 +78,13 @@
             Notification,
             Alert,
             Moment
+        },
+        data() {
+            return {
+
+                namespace: null
+
+            }
         },
         computed: {
             loading() {
@@ -99,7 +111,7 @@
                     return false;
                 } else return this.$route.path.indexOf('bill') === -1;
             }, accountExpired() {
-                if(this.$route.path.indexOf('bill') !== -1)
+                if (this.$route.path.indexOf('bill') !== -1)
                     return false
 
                 let plan = this.$store.state.activePlan;
@@ -153,29 +165,39 @@
             }
             this.handelRyChat()
         },
-        created(){
-          this.fetchUserNamespace()
+        created() {
+            this.fetchUserNamespace()
         },
         methods: {
-            async fetchUserNamespace() {
+            fetchUserNamespace() {
                 this.$store.commit('SET_DATA', {data: true, id: 'loading'})
-                try {
-                    await this.$store.dispatch('getNameSpace', getValue('namespace'));
-                    this.$store.commit('SET_DATA', {data: false, id: 'loading'})
-                } catch (e) {
-                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                    if (e.status === 401) {
-                        this.$router.push("/user/login");
-                    } else {
-                        ErrorReporter(e, this.$data, true).forEach(error => {
-                            this.$notify({
-                                title: error,
-                                time: 4000,
-                                type: "error"
+                if(getValue(('namespace'))){
+                this.$store.dispatch('getNameSpace', getValue('namespace'))
+                    .then(response => {
+                        this.namespace = response
+                        let old_role = getValue(('user_role'));
+                        this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                        if(old_role !== this.namespace.user_role){
+                            setValue({key: 'user_role', value: this.namespace.user_role});
+                            window.location.reload();
+                        }
+                    })
+                    .catch(e => {
+                        console.log('error')
+                        console.log(e)
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
                             });
-                        });
-
-                    }
+                        }
+                    });
                 }
             },
             async redeemPlan() {
@@ -214,9 +236,9 @@
 
             },
             makeBill(quota) {
-                let finalBill =  {
+                let finalBill = {
                     memory: 0.0,
-                        dedicatedVolume: 0,
+                    dedicatedVolume: 0,
                 }
                 if (quota) {
                     finalBill.memory = parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1));

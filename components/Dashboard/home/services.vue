@@ -4,7 +4,10 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <empty-feature v-if="services.length === 0" :title="emptySection.title" :icon="emptySection.icon"
+        <empty-feature v-if="services.length === 0"
+                       :title="emptySection.title"
+                       :icon="emptySection.icon"
+                       :privileged="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
                        :url="createService">
         </empty-feature>
 
@@ -52,6 +55,7 @@
     import Moment from 'moment-jalaali'
     import StatusContainer from "./children/status-container";
     import EmptyFeature from "./children/empty-feature";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -126,6 +130,9 @@
             }
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             stateColor(state) {
                 if (!state) return "";
                 let val = state.toLowerCase();

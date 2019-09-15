@@ -6,7 +6,7 @@
 
             <div style="overflow: hidden; margin-bottom: 32px">
                 <div class="right" style="float: right;"><p class="title_header"> لیست ایمیج‌ها</p></div>
-                <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      @click="$router.push('/dashboard/images/create')">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@
 
             <f-empty v-if="!images || !images.length" title="هنوز ایمیجی اضافه نشده !"></f-empty>
 
-            <box-table v-else :titles="titleRow" :items="images" :func="versions" :menu="menuList"></box-table>
+            <box-table v-else :titles="titleRow" :items="images" :func="versions" :menu="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER'})? menuListComplete : menuList"></box-table>
 
         </div>
     </div>
@@ -73,6 +73,7 @@
     import FEmpty from "~/components/Dashboard/empty";
     import BoxTable from "../../../components/Dashboard/table/box-table";
     import Moment from 'moment-jalaali'
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -86,6 +87,10 @@
                     {title: 'آخرین ورژن', width: '27%', name: 'version'},
                 ],
                 menuList: [
+                    {method: this.versions, icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
+                    {method: this.createVersion, icon: 'ic-upload.svg', title: 'آپلود نسخه جدید', style: {}},
+                ],
+                menuListComplete:[
                     {method: this.versions, icon: 'ic-logs.svg', title: 'ورژن‌های ایمیج', style: {}},
                     {method: this.createVersion, icon: 'ic-upload.svg', title: 'آپلود نسخه جدید', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف ایمیج', style: {color: '#fd3259'}},
@@ -134,6 +139,9 @@
             this.getData();
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             async getData() {
                 try {
                     await this.$store.dispatch("getImages");

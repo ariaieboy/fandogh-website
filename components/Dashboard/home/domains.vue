@@ -4,7 +4,11 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <empty-feature v-if="domains.length === 0" :title="emptySection.title" :icon="emptySection.icon" :url="createDomain">
+        <empty-feature v-if="domains.length === 0"
+                       :title="emptySection.title"
+                       :icon="emptySection.icon"
+                       :privileged="verifyUserAccess({ADMIN: 'ADMIN'})"
+                       :url="createDomain">
         </empty-feature>
 
         <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
@@ -59,6 +63,7 @@
     import StatusContainer from "./children/status-container";
     import Moment from 'moment-jalaali';
     import EmptyFeature from "./children/empty-feature";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         layout: "dashboard",
@@ -114,6 +119,9 @@
             }
         },
         methods: {
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
+            },
             getDate(date) {
                 return FFromDate(date);
             },
