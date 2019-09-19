@@ -4,20 +4,19 @@
         <div class="row" style="width: 100%">
             <div class="wallet-remaining-container">
                 <p class="wallet-title">موجودی کیف پول:</p>
-                <p class="wallet-value">۱۲۳٬۰۰۰ تومان</p>
+                <p class="wallet-value">{{remaining}} تومان</p>
             </div>
 
         </div>
 
-        <div class="box-row row">
-            <div class="col-lg-10 col-md-9 col-sm-8 col-xs-8 row" style="box-sizing: content-box;">
+        <div class="member-invite-container">
+            <input v-model="credit" dir="rtl" type="number" placeholder="حداقل مبلغ افزایش موجودی ۱۰,۰۰۰ تومان است"
+                   style="flex: 0.9 0 auto; padding: 0 16px; border: none; outline: none;border-radius: 3px;font-family: iran-sans">
+            <button style="color: #fefefe; flex: 0.1 0 auto; border: none; outline: none; background-color: #24D5D8;font-family: iran-yekan; border-top-left-radius: 3px; border-bottom-left-radius: 3px; cursor: pointer; font-size: 1.1em"
+                    @click="chargeCredit(credit)">
+                افرایش موجودی
+            </button>
 
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 row" style="box-sizing: content-box; padding: 0; margin: 0">
-                <button class="charge-button">
-                    افزایش موجودی
-                </button>
-            </div>
         </div>
 
         <p class="section-title">تاریخچه شارژ کیف‌پول شما:</p>
@@ -63,6 +62,7 @@
 <script>
     import ProfileWalletRow from "~/components/Dashboard/profile/wallet-value-row";
     import TitleRow from "~/components/Dashboard/profile/title-row";
+    import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
         name: "profile-wallet",
@@ -71,7 +71,10 @@
             TitleRow,
 
         }, data() {
+
             return {
+                credit:null,
+                remaining: 0,
                 rowTitle: [
                     {title: 'ردیف', width: '8%'},
                     {title: 'تاریخ', width: '15%'},
@@ -152,6 +155,59 @@
                 pageRangeSection: []
             }
         }, methods: {
+            async requestWalletRemaining(){
+
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    let response = await this.$store.dispatch("walletRemaining");
+                    this.remaining = response.remaining
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    if (e.status === 401) {
+                        this.$router.replace('/user/login')
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+                    }
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+            },
+            async chargeCredit(credit){
+                if(credit === null){
+                    return
+                }
+                if(credit < 100){
+                    return
+                }
+
+                try {
+                    this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                    let response = await this.$store.dispatch("chargeWallet", credit);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    this.$router.push(`plans/bill/${response.invoice.id}`);
+                } catch (e) {
+                    if (e.status === 401) {
+                        this.$router.replace('/user/login')
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+                    }
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }
+
+
+
+            },
             pageClicked(position) {
                 this.currentPage = position;
                 if (this.totalPage > 7 && position < this.totalPage) {
@@ -197,6 +253,7 @@
                 }
             }
         }, created() {
+            this.requestWalletRemaining();
             this.createPageRange();
         }
     }
@@ -348,7 +405,7 @@
             padding-right 16px
             display inline-block
             font-stretch: normal;
-            color: #000000;
+            color: $fontBlack;
 
         p.wallet-value
             font-family: iran-sans;
@@ -362,6 +419,18 @@
             float right
             padding-left 16px
             text-align right
-            color: #000000;
+            color: $fontBlack;
+
+    .member-invite-container
+        border-radius 3px
+        box-shadow 0 2px 6px rgba(0, 0, 0, 0.09)
+        width 50%
+        min-width 350px
+        height 50px
+        background-color #fefefe
+        margin-top 24px
+        margin-bottom 64px
+        display flex
+        padding 0
 
 </style>
