@@ -64,6 +64,27 @@ export const activation = async ({commit, state}, {code, id}) => {
     }
 };
 
+
+export const chargeWallet = async ({commit, state}, credit) =>{
+  try {
+      return await Request().post('/api/wallets', {
+          credit:credit
+      })
+  }  catch (e) {
+      return Promise.reject(e)
+
+  }
+};
+
+
+export const walletRemaining = async ({commit, state}) => {
+  try {
+      return await Request().get('/api/wallets')
+  }  catch (e) {
+      return Promise.reject(e)
+  }
+};
+
 export const getInvitationDetail = async ({commit, state}, token) => {
 
     try {
@@ -334,10 +355,14 @@ export const dumpServiceManifest = async ({commit, state}, service_name) => {
     }
 };
 
-export const getTransactions = async ({commit, state}) => {
+export const getTransactions = async ({commit, state}, payment_type) => {
 
     try {
-        return await Request().get('api/billing')
+        return await Request().get('api/billing',{
+            params: {
+                payment_type: payment_type
+            }
+        })
     } catch (e) {
         return Promise.reject(e)
     }

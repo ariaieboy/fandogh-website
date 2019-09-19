@@ -17,7 +17,7 @@ export const requestPlan = async ({commit, state}, {memory, dedicatedVolume, vou
             {
                 memory,
                 dedicated_volume: dedicatedVolume,
-                voucher_code: voucher_code
+                voucher_code: voucher_code,
             });
         commit("SET_DATA", {id: "requestedPlan", data: res});
         return res;

@@ -46,7 +46,7 @@
         methods: {
             async requestTransactions() {
 
-                await this.$store.dispatch("getTransactions")
+                await this.$store.dispatch("getTransactions", 'PLAN')
                     .then(transactionResponse => {
                         this.transactions = transactionResponse.map(
                             ({id, paid_at, total, items}) => {
