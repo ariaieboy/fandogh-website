@@ -204,6 +204,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
     *
         -webkit-user-select: none
         -moz-user-select: none
