@@ -1,10 +1,17 @@
 <template>
     <div style="padding-bottom: 32px">
 
+        <div class="row" style="width: 100%">
+            <div class="wallet-remaining-container">
+                <p class="wallet-title">موجودی کیف پول:</p>
+                <p class="wallet-value">۱۲۳٬۰۰۰ تومان</p>
+            </div>
+
+        </div>
+
         <div class="box-row row">
             <div class="col-lg-10 col-md-9 col-sm-8 col-xs-8 row" style="box-sizing: content-box;">
-                <p class="wallet-title">موجودی حساب کیف پول:</p>
-                <p class="wallet-value">۱۲۳٬۰۰۰ تومان</p>
+
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 row" style="box-sizing: content-box; padding: 0; margin: 0">
                 <button class="charge-button">
@@ -214,32 +221,6 @@
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         background-color #ffffff
 
-        p.wallet-title
-            font-family: iran-yekan;
-            font-size: .9em;
-            font-style: normal;
-            margin-bottom auto
-            margin-top auto
-            float right
-            padding-right 16px
-            display inline-block
-            font-stretch: normal;
-            color: #000000;
-
-        p.wallet-value
-            font-family: iran-sans;
-            font-size: .8em;
-            font-style: normal;
-            font-stretch: normal;
-            padding-right 16px
-            display inline-block
-            margin-bottom auto
-            margin-top auto
-            float right
-            padding-left 16px
-            text-align right
-            color: #000000;
-
     .charge-button
         width 100%
         height 45px
@@ -349,5 +330,36 @@
         cursor pointer
         text-align center
 
+    .wallet-remaining-container
+        width 100%
+        height max-content
+        padding-top 32px
+        padding-bottom 32px
+        display flex
+        p.wallet-title
+            font-family: iran-yekan;
+            font-size: 2em;
+            font-style: normal;
+            margin-bottom auto
+            margin-top auto
+            float right
+            padding-right 16px
+            display inline-block
+            font-stretch: normal;
+            color: #000000;
+
+        p.wallet-value
+            font-family: iran-sans;
+            font-size: 2em;
+            font-style: normal;
+            font-stretch: normal;
+            padding-right 16px
+            display inline-block
+            margin-bottom auto
+            margin-top auto
+            float right
+            padding-left 16px
+            text-align right
+            color: #000000;
 
 </style>
