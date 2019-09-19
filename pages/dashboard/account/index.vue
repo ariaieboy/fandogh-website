@@ -86,7 +86,7 @@
                     <p :style="{borderLeft: '1px solid #1757FF'}">پلن من</p>
                 </div>
 
-                <div @click="sectionClicked('ProfileWallet')"
+                <div v-if="verifyUserAccess({ADMIN:'ADMIN'})" @click="sectionClicked('ProfileWallet')"
                 :class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">
                 <p :style="{borderLeft: '1px solid #1757FF'}">کیف پول</p>
                 </div>
