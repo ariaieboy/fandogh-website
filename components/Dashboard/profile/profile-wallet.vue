@@ -1,19 +1,19 @@
 <template>
     <div style="padding-bottom: 32px">
 
-        <!--<div class="box-row row">-->
-            <!--<div class="col-lg-10 col-md-9 col-sm-8 col-xs-8 row" style="box-sizing: content-box">-->
-                <!--<p class="title">موجودی حساب کیف پول:</p>-->
-                <!--<p class="value">۱۲۳٬۰۰۰ تومان</p>-->
-            <!--</div>-->
-            <!--<div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 row" style="box-sizing: content-box">-->
-                <!--<button class="edit-button">-->
-                    <!--افزایش موجودی-->
-                <!--</button>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="box-row row">
+            <div class="col-lg-10 col-md-9 col-sm-8 col-xs-8 row" style="box-sizing: content-box;">
+                <p class="wallet-title">موجودی حساب کیف پول:</p>
+                <p class="wallet-value">۱۲۳٬۰۰۰ تومان</p>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-4 row" style="box-sizing: content-box; padding: 0; margin: 0">
+                <button class="charge-button">
+                    افزایش موجودی
+                </button>
+            </div>
+        </div>
 
-        <!--<p class="section-title">تاریخچه شارژ کیف‌پول شما:</p>-->
+        <p class="section-title">تاریخچه شارژ کیف‌پول شما:</p>
 
         <TitleRow v-bind:celSpec="rowTitle"></TitleRow>
 
@@ -22,32 +22,32 @@
                           v-bind:rowNo="index"
                           v-bind:celSpec="item"/>
 
-        <div class="row" style="margin-top: 32px;">
-            <div class="container-fluid">
-                <div style="margin: 4px; display: flex; box-sizing: content-box; width: 300px; height: 35px; border-radius: 25px; background-color: #fefefe;">
+        <!--<div class="row" style="margin-top: 32px;">-->
+            <!--<div class="container-fluid">-->
+                <!--<div style="margin: 4px; display: flex; box-sizing: content-box; width: 300px; height: 35px; border-radius: 25px; background-color: #fefefe;">-->
 
-                    <div class="right-cursor" @click="nextPage">
-                        <img src="~/assets/svg/arrow.svg" alt="arrow"/>
-                    </div>
+                    <!--<div class="right-cursor" @click="nextPage">-->
+                        <!--<img src="~/assets/svg/arrow.svg" alt="arrow"/>-->
+                    <!--</div>-->
 
-                    <div style="width: 80%; height: 35px; overflow: hidden; white-space: nowrap; display: inline-flex;direction: ltr ">
+                    <!--<div style="width: 80%; height: 35px; overflow: hidden; white-space: nowrap; display: inline-flex;direction: ltr ">-->
 
-                        <a v-for="item of pageRangeSection"
-                           :class="[currentPage === item ? 'page-active': 'page-inactive']"
-                           :key="item"
-                           @click="pageClicked(item)">{{item}}</a>
+                        <!--<a v-for="item of pageRangeSection"-->
+                           <!--:class="[currentPage === item ? 'page-active': 'page-inactive']"-->
+                           <!--:key="item"-->
+                           <!--@click="pageClicked(item)">{{item}}</a>-->
 
-                    </div>
+                    <!--</div>-->
 
-                    <div class="left-cursor" @click="prevPage">
-                        <img src="~/assets/svg/arrow.svg" alt="arrow"/>
-                    </div>
+                    <!--<div class="left-cursor" @click="prevPage">-->
+                        <!--<img src="~/assets/svg/arrow.svg" alt="arrow"/>-->
+                    <!--</div>-->
 
-                </div>
+                <!--</div>-->
 
-            </div>
+            <!--</div>-->
 
-        </div>
+        <!--</div>-->
 
 
     </div>
@@ -211,25 +211,23 @@
 
     .box-row
         min-height 45px
-        border-radius 3px
         box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
-        padding-left 16px
-        padding-right 16px
         background-color #ffffff
 
-        p.title
-            font-family: yekan-bold;
+        p.wallet-title
+            font-family: iran-yekan;
             font-size: .9em;
             font-style: normal;
             margin-bottom auto
             margin-top auto
             float right
+            padding-right 16px
             display inline-block
             font-stretch: normal;
             color: #000000;
 
-        p.value
-            font-family: iran-yekan;
+        p.wallet-value
+            font-family: iran-sans;
             font-size: .8em;
             font-style: normal;
             font-stretch: normal;
@@ -242,21 +240,20 @@
             text-align right
             color: #000000;
 
-    .edit-button
-        border-radius 21px
-        width 150px
-        height 30px
+    .charge-button
+        width 100%
+        height 45px
+        line-height 45px
         background-color #7ed321
         color #ffffff
         font-family iran-yekan
         display block
-        font-size 0.7em
+        font-size 1em
         border none
         outline none
         cursor pointer
         margin-bottom auto
         margin-top auto
-        box-shadow 0 2px 6px 0 rgba(126, 211, 33, 0.42)
 
     .section-title
         font-family yekan-bold
