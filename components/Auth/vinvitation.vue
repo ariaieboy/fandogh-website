@@ -50,7 +50,7 @@
                             class="invitation-dialog-button">
                         تایید دعوت‌نامه
                     </button>
-                    <a v-else-if="error === null" href="https://fandogh-staging123123.fandogh.cloud/user/login"
+                    <a v-else-if="error === null" href="https://fandogh.cloud/user/login"
                        target="_blank" class="invitation-dialog-button">ورود
                         به حساب کاربری</a>
                 </div>
