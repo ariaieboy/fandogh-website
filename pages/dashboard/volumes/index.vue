@@ -91,7 +91,7 @@
                 ],
                 menuList: [],
                 menuListComplete: [
-                    {method: this.remove, icon: 'ic_delete.svg', title: 'حذف حافظه ذخیره‌سازی', style: {color: '#fd3259'}},
+                    {method: this.remove, icon: 'ic_delete.svg', title: 'حذف فضای ذخیره‌سازی', style: {color: '#fd3259'}},
                 ]
             }
         },
