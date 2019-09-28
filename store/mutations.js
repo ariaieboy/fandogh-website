@@ -45,6 +45,10 @@ export const SET_IMAGES = (state, images) => {
     state.images = images
 }
 
+export const SET_VOLUMES = (state, volumes) => {
+  state.volumes = volumes
+};
+
 export const SET_IMAGE_VERSIONS = (state, versions) => {
     state.versions = versions
 }
