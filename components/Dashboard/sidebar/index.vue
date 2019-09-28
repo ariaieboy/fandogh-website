@@ -31,7 +31,7 @@
                     {icon: 'ic-service', text: 'سرویس‌ها', link: '/dashboard/services'},
                     {icon: 'ic-domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
                     {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
-                    {icon: 'ic-dedicated-volume', text: 'والیوم‌ها', link: '/dashboard/volumes'},
+                    {icon: 'ic-dedicated-volume', text: 'فضای‌ ذخیره‌سازی', link: '/dashboard/volumes'},
                     {icon: 'ic-monitoring', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
                     {icon: 'ic-plans', text: 'پلن‌های فندق', link: '/dashboard/plans'},
                 ],
@@ -41,7 +41,7 @@
                     {icon: 'ic-service', text: 'سرویس‌ها', link: '/dashboard/services'},
                     {icon: 'ic-domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
                     {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
-                    {icon: 'ic-dedicated-volume', text: 'والیوم‌ها', link: '/dashboard/volumes'},
+                    {icon: 'ic-dedicated-volume', text: 'فضای‌ ذخیره‌سازی‌', link: '/dashboard/volumes'},
                     {icon: 'ic-monitoring', isBorder: false, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
                 ]
             }
