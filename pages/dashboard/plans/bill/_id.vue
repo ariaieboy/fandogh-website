@@ -174,8 +174,7 @@
             async pay() {
                 try {
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                    const invoiceId = this.$store.state.plan.requestedPlan.invoice.id;
-                    await this.$store.dispatch('plan/requestPayment', invoiceId);
+                    await this.$store.dispatch('plan/requestPayment', this.invoice_id);
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     window.location = this.$store.state.plan.requestedPayment.payment_url;
                 } catch (e) {
@@ -198,6 +197,7 @@
                 await this.$store
                     .dispatch('plan/reloadPlan', this.invoice_id)
                     .then(response => {
+                        console.log(response)
                         this.invoice = response.invoice;
                         this.items = response.invoice.items;
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
