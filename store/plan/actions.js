@@ -11,14 +11,10 @@ export const requestActivePlan = async ({commit, state}, namespace) => {
 };
 
 
-export const requestPlan = async ({commit, state}, {memory, dedicatedVolume, voucher_code}) => {
+export const requestPlan = async ({commit, state}, plan_items) => {
     try {
         let res = await Request().post(`/api/plans`,
-            {
-                memory,
-                dedicated_volume: dedicatedVolume,
-                voucher_code: voucher_code,
-            });
+            plan_items);
         commit("SET_DATA", {id: "requestedPlan", data: res});
         return res;
     } catch (e) {
