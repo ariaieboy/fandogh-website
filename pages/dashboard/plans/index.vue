@@ -337,7 +337,7 @@
                     contained: false,
                     direction: 'rtl',
                     interval: 0.5,
-                    min: 0.5,
+                    min: 0,
                     max: 64,
                     disabled: false,
                     clickable: true,
