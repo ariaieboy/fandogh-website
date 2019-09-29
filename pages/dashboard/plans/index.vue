@@ -516,9 +516,7 @@
                 // });
                 const bill = this.makeBill();
 
-
-
-                await this.$store.dispatch("plan/requestPlan", {})
+                await this.$store.dispatch("plan/requestPlan", bill)
                     .then(planRespose => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
                         this.$router.push(`plans/bill/${planRespose.invoice.id}`);
