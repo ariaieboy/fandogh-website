@@ -321,7 +321,7 @@
                 quota: {},
                 finalBill: {
                     memory: 0,
-                    dedicatedVolume: 0,
+                    dedicated_volume: 0,
                     voucher_code: null
                 }, features: [
                     {title: 'Load Balancer', subtitle: 'رایگان', image: 'load-balancer.png'},
@@ -475,21 +475,36 @@
                     this.planData.dedicatedVolume -= 1;
             }, makeBill() {
                 this.finalBill.memory = this.planData.memory;
+                let bill = {}
 
                 if (this.planData.dedicatedVolume >= 10) {
-                    this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
+                    this.finalBill.dedicated_volume = this.planData.dedicatedVolume;
                 }
+
+                //adding quota to current selected plan resources
                 if (this.quota !== null) {
                     if (parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1)) >= 0.5) {
                         this.finalBill.memory += parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1));
                     }
                     if (this.quota.volume_limit > 0) {
-                        this.finalBill.dedicatedVolume += this.quota.volume_limit;
+                        this.finalBill.dedicated_volume += this.quota.volume_limit;
                     }
                 }
 
+                if(this.finalBill.memory > 0){
+                    bill['memory'] = this.finalBill.memory;
+                }
 
-                return this.finalBill;
+                if(this.finalBill.dedicated_volume > 0){
+                    bill['dedicated_volume'] = this.finalBill.dedicated_volume;
+                }
+
+                if(this.finalBill.voucher_code !== null){
+                    bill['voucher_code'] = this.finalBill.voucher_code;
+                }
+
+
+                return bill;
             },
             async pushUrl() {
                 // this.$ga.event({
@@ -499,6 +514,8 @@
                 //     eventValue: index
                 // });
                 const bill = this.makeBill();
+
+
 
                 await this.$store.dispatch("plan/requestPlan", bill)
                     .then(planRespose => {
