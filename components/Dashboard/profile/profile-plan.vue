@@ -164,11 +164,17 @@
                     });
 
             }, makeBill() {
+                let bill = {}
                 if (this.quota) {
                     this.finalBill.memory = parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1));
                     this.finalBill.dedicatedVolume += this.quota.volume_limit;
+
+                    if(this.finalBill.memory > 0)
+                        bill['memory'] = this.finalBill.memory
+                    if(this.finalBill.dedicatedVolume > 0)
+                        bill['dedicated_volume'] = this.finalBill.dedicatedVolume
                 }
-                return this.finalBill;
+                return bill;
             },
             navigateToPlanPage() {
                 this.$router.push('/dashboard/plans');
