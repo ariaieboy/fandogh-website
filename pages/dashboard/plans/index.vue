@@ -316,7 +316,7 @@
                 isCollapsed: false,
                 dedicatedVolumeMin: '10GB',
                 dedicatedVolumeMax: '1TB',
-                memoryRangeMin: '0.5GB',
+                memoryRangeMin: '0GB',
                 memoryRangeMax: '64GB',
                 quota: {},
                 finalBill: {
