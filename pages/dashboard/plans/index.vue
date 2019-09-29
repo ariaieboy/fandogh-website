@@ -309,8 +309,8 @@
         data: function () {
             return {
                 planData: {
-                    memory: .5,
-                    cpu: 0.5,
+                    memory: 0,
+                    cpu: 0,
                     dedicatedVolume: 0,
                 },
                 isCollapsed: false,
