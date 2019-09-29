@@ -201,9 +201,12 @@
                                 <p v-if="memory > 0.49" style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     {{memory}} گیگ
                                 </p>
+                                <p v-else style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                    ۴۰۰ مگابایت
+                                </p>
                             </div>
 
-                            <div v-if="planData.memory > 0" style="flex: 1">
+                            <div style="flex: 1">
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     سفارش:
                                 </p>
@@ -239,14 +242,14 @@
                     </div>
 
                     <div style="flex: 1">
-                        <p class="checkout-section-title">مبلغ نهایی (تومان)</p>
+                        <p class="checkout-section-title">مبلغ نهایی</p>
                         <div style="display: flex">
                             <div style="flex: 1">
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:</p>
 
                                 <p style="width: 100%; text-align: center; font-family: iran-sans; color: #0045ff; line-height: 2; margin: 0">
-                                    {{fixedTotal.toLocaleString()}}
+                                    {{fixedTotal.toLocaleString() + 'تومان '}}
                                 </p>
 
                             </div>
@@ -255,11 +258,30 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     سفارش:</p>
                                 <p style="width: 100%; text-align: center; font-family: iran-sans;line-height: 2; margin: 0">
-                                    {{total}}
+                                    {{total === '0' ? '۰ تومان' : total + ' تومان'}}
                                 </p>
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="row"
+                     style="display: block; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span>
+                        مدت اعتبار پلن:
+                        <v-select
+                                dir="rtl"
+                                :clearable="false"
+                                :searchable="false"
+                                label="title"
+                                style="margin-bottom: 0 !important;"
+                                v-model="selectedMonth"
+                                :options="monthList"
+                                @input="monthChanged"
+                                placeholder="مدت اعتبار پلن"
+                        ></v-select>
+                    </span>
+
                 </div>
 
                 <div class="row"
@@ -313,6 +335,108 @@
                     cpu: 0,
                     dedicatedVolume: 0,
                 },
+                selectedMonth:{
+                  title: '۳۰ روز',
+                  value: 1
+                },
+                monthList:[
+                    {
+                        title: '۳۰ روز',
+                        value: 1
+                    },
+                    {
+                        title: '۲ ماه',
+                        value: 2
+                    },
+                    {
+                        title: '۳ ماه',
+                        value: 3
+                    },
+                    {
+                        title: '۴ ماه',
+                        value: 4
+                    },
+                    {
+                        title: '۵ ماه',
+                        value: 5
+                    },
+                    {
+                        title: '۶ ماه',
+                        value: 6
+                    },
+                    {
+                        title: '۷ ماه',
+                        value: 7
+                    },
+                    {
+                        title: '۸ ماه',
+                        value: 8
+                    },
+                    {
+                        title: '۹ ماه',
+                        value: 9
+                    },
+                    {
+                        title: '۱۰ ماه',
+                        value: 10
+                    },
+                    {
+                        title: '۱۱ ماه',
+                        value: 11
+                    },
+                    {
+                        title: '۱ سال',
+                        value: 12
+                    },
+                    {
+                        title: '۱۳ ماه',
+                        value: 13
+                    },
+                    {
+                        title: '۱۴ ماه',
+                        value: 14
+                    },
+                    {
+                        title: '۱۵ ماه',
+                        value: 15
+                    },
+                    {
+                        title: '۱۶ ماه',
+                        value: 16
+                    },
+                    {
+                        title: '۱۷ ماه',
+                        value: 17
+                    },
+                    {
+                        title: '۱۸ ماه',
+                        value: 18
+                    },
+                    {
+                        title: '۱۹ ماه',
+                        value: 19
+                    },
+                    {
+                        title: '۲۰ ماه',
+                        value: 20
+                    },
+                    {
+                        title: '۲۱ ماه',
+                        value: 21
+                    },
+                    {
+                        title: '۲۲ ماه',
+                        value: 22
+                    },
+                    {
+                        title: '۲۳ ماه',
+                        value: 23
+                    },
+                    {
+                        title: '۲ سال',
+                        value: 24
+                    }
+                ],
                 isCollapsed: false,
                 dedicatedVolumeMin: '10GB',
                 dedicatedVolumeMax: '1TB',
@@ -323,7 +447,8 @@
                 finalBill: {
                     memory: 0,
                     dedicated_volume: 0,
-                    voucher_code: null
+                    voucher_code: null,
+                    month_count: 1
                 }, features: [
                     {title: 'Load Balancer', subtitle: 'رایگان', image: 'load-balancer.png'},
                     {title: 'پهنای باند', subtitle: 'رایگان', image: 'band-width.svg'},
@@ -452,6 +577,10 @@
             this.requestActivePlan();
         },
         methods: {
+            monthChanged(month) {
+                this.selectedMonth = month;
+                this.finalBill.month_count = month.value;
+            },
             translateCheckoutBox() {
                 if (this.isCollapsed) {
                     this.isCollapsed = false;
@@ -504,6 +633,7 @@
                     bill['voucher_code'] = this.finalBill.voucher_code;
                 }
 
+                bill['month_count'] = this.finalBill.month_count
 
                 return bill;
             },
@@ -860,4 +990,7 @@
         transform: rotate(180deg);
     }
 
+    .v-select .vs__dropdown-toggle{
+        margin-bottom: 0 !important;
+    }
 </style>
