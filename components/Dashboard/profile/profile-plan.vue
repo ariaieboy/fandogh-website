@@ -10,7 +10,7 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" style="height: 100px">
                 <div class="container-fluid row plan-item">
                     <img class="plan-image" alt="cpu" src="../../../assets/svg/ic-cpu.svg">
-                    </img>
+
 
                     <div style="margin-top: auto;margin-bottom: auto;margin-right: 24px; padding: 0;">
                         <p class="plan-title">پردازنده</p>
@@ -93,6 +93,108 @@
                     memory: 0,
                     dedicatedVolume: 0,
                 },
+                selectedMonth:{
+                    title: '۳۰ روز',
+                    value: 1
+                },
+                monthList:[
+                    {
+                        title: '۳۰ روز',
+                        value: 1
+                    },
+                    {
+                        title: '۲ ماه',
+                        value: 2
+                    },
+                    {
+                        title: '۳ ماه',
+                        value: 3
+                    },
+                    {
+                        title: '۴ ماه',
+                        value: 4
+                    },
+                    {
+                        title: '۵ ماه',
+                        value: 5
+                    },
+                    {
+                        title: '۶ ماه',
+                        value: 6
+                    },
+                    {
+                        title: '۷ ماه',
+                        value: 7
+                    },
+                    {
+                        title: '۸ ماه',
+                        value: 8
+                    },
+                    {
+                        title: '۹ ماه',
+                        value: 9
+                    },
+                    {
+                        title: '۱۰ ماه',
+                        value: 10
+                    },
+                    {
+                        title: '۱۱ ماه',
+                        value: 11
+                    },
+                    {
+                        title: '۱ سال',
+                        value: 12
+                    },
+                    {
+                        title: '۱۳ ماه',
+                        value: 13
+                    },
+                    {
+                        title: '۱۴ ماه',
+                        value: 14
+                    },
+                    {
+                        title: '۱۵ ماه',
+                        value: 15
+                    },
+                    {
+                        title: '۱۶ ماه',
+                        value: 16
+                    },
+                    {
+                        title: '۱۷ ماه',
+                        value: 17
+                    },
+                    {
+                        title: '۱۸ ماه',
+                        value: 18
+                    },
+                    {
+                        title: '۱۹ ماه',
+                        value: 19
+                    },
+                    {
+                        title: '۲۰ ماه',
+                        value: 20
+                    },
+                    {
+                        title: '۲۱ ماه',
+                        value: 21
+                    },
+                    {
+                        title: '۲۲ ماه',
+                        value: 22
+                    },
+                    {
+                        title: '۲۳ ماه',
+                        value: 23
+                    },
+                    {
+                        title: '۲ سال',
+                        value: 24
+                    }
+                ],
             }
         },
         components: {
@@ -254,7 +356,7 @@
 
     .date-tile
         font-family yekan-bold
-        font-size .9em
+        font-size 1.3em
         font-style normal
         margin-top 24px
         margin-bottom 16px
