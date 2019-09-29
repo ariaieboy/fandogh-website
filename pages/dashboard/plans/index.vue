@@ -318,6 +318,7 @@
                 dedicatedVolumeMax: '1TB',
                 memoryRangeMin: '0GB',
                 memoryRangeMax: '64GB',
+                order: [],
                 quota: {},
                 finalBill: {
                     memory: 0,
@@ -517,7 +518,7 @@
 
 
 
-                await this.$store.dispatch("plan/requestPlan", bill)
+                await this.$store.dispatch("plan/requestPlan", {})
                     .then(planRespose => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
                         this.$router.push(`plans/bill/${planRespose.invoice.id}`);
