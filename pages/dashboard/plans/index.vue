@@ -711,6 +711,8 @@
 
 <style lang="stylus" scoped>
 
+    @import "../../../assets/css/variables.styl"
+
 
     .service-plan-heading
         font-family: iran-yekan
