@@ -198,10 +198,12 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p v-if="memory > 0.49" style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                <p v-if="memory > 0.49"
+                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     {{memory}} گیگ
                                 </p>
-                                <p v-else style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                <p v-else
+                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     ۴۰۰ مگابایت
                                 </p>
                             </div>
@@ -240,7 +242,54 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="row" style="background-color: #fefefe">
+                    <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}"
+                            @click="is_upgrading_plan = !is_upgrading_plan">
+                        افزایش منابع فعلی
+                    </button>
+                </div>
+
+                <div class="checkout-box-bottom-container">
+                    <div class="row"
+                         v-if="!is_upgrading_plan"
+                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span style="width: 100%">
+                        مدت اعتبار پلن:
+                        <v-select
+                                dir="rtl"
+                                :clearable="false"
+                                :searchable="false"
+                                label="title"
+                                style="margin-bottom: 0 !important;"
+                                v-model="selectedMonth"
+                                :options="monthList"
+                                @input="monthChanged"
+                                placeholder="مدت اعتبار پلن"
+                        ></v-select>
+                    </span>
+
+                    </div>
+
+                    <div class="row"
+                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span style="width: 100%">
+                        کد تخفیف:
+                        <v-text-field
+                                type="text"
+                                style=" direction: rtl !important;"
+                                dir="ltr"
+                                :placeholder="'کد تخفیف را اینجا وارد نمایید'"
+                                v-model="finalBill.voucher_code">
+
+                        </v-text-field>
+                    </span>
+
+                    </div>
+                </div>
+
+                <div class="row" style="background-color: #fefefe; padding-bottom: 12px">
                     <div style="flex: 1">
                         <p class="checkout-section-title">مبلغ نهایی</p>
                         <div style="display: flex">
@@ -265,40 +314,6 @@
                     </div>
                 </div>
 
-                <div class="row"
-                     style="display: block; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
-                    <span>
-                        مدت اعتبار پلن:
-                        <v-select
-                                dir="rtl"
-                                :clearable="false"
-                                :searchable="false"
-                                label="title"
-                                style="margin-bottom: 0 !important;"
-                                v-model="selectedMonth"
-                                :options="monthList"
-                                @input="monthChanged"
-                                placeholder="مدت اعتبار پلن"
-                        ></v-select>
-                    </span>
-
-                </div>
-
-                <div class="row"
-                     style="display: block; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
-                    <span>
-                        کد تخفیف:
-                        <v-text-field
-                                type="text"
-                                style=" direction: rtl !important;"
-                                dir="ltr"
-                                :placeholder="'کد تخفیف را اینجا وارد نمایید'"
-                                v-model="finalBill.voucher_code">
-
-                        </v-text-field>
-                    </span>
-
-                </div>
 
                 <div class="row" style="background-color: #fefefe">
                     <button class="checkout" @click="pushUrl">
@@ -330,16 +345,17 @@
 
         data: function () {
             return {
+                is_upgrading_plan: false,
                 planData: {
                     memory: 0,
                     cpu: 0,
                     dedicatedVolume: 0,
                 },
-                selectedMonth:{
-                  title: '۳۰ روز',
-                  value: 1
+                selectedMonth: {
+                    title: '۳۰ روز',
+                    value: 1
                 },
-                monthList:[
+                monthList: [
                     {
                         title: '۳۰ روز',
                         value: 1
@@ -590,11 +606,11 @@
             },
             incMemory() {
                 if (this.planData.memory < this.memoryOptions.max) {
-                        this.planData.memory += 0.5;
+                    this.planData.memory += 0.5;
                 }
             }, decMemory() {
                 if (this.planData.memory > this.memoryOptions.min) {
-                        this.planData.memory -= 0.5;
+                    this.planData.memory -= 0.5;
                 }
 
             }, incDedicatedVolume() {
@@ -621,19 +637,19 @@
                     }
                 }
 
-                if(this.finalBill.memory > 0){
+                if (this.finalBill.memory > 0) {
                     bill['memory'] = this.finalBill.memory;
                 }
 
-                if(this.finalBill.dedicated_volume > 0){
+                if (this.finalBill.dedicated_volume > 0) {
                     bill['dedicated_volume'] = this.finalBill.dedicated_volume;
                 }
 
-                if(this.finalBill.voucher_code !== null){
+                if (this.finalBill.voucher_code !== null) {
                     bill['voucher_code'] = this.finalBill.voucher_code;
                 }
 
-                bill['month_count'] = this.finalBill.month_count
+                bill['month_count'] = this.is_upgrading_plan ? 0 : this.finalBill.month_count
 
                 return bill;
             },
@@ -697,6 +713,8 @@
 
 
 <style lang="stylus" scoped>
+
+    @import "../../../assets/css/variables.styl"
 
 
     .service-plan-heading
@@ -977,6 +995,53 @@
             line-height 1.7 g
             padding 7px 16px
 
+
+    .checkout-box-bottom-container
+        width 100%
+        height max-content
+        display flex
+        flex-direction column
+        @media only screen and (max-width: 850px)
+            flex-direction row
+        @media only screen and (max-width: 550px)
+            flex-direction column
+
+    .upgrade-button
+        width 100%
+        height 45px
+        font-family iran-yekan
+        border-radius 3px
+        margin-bottom 16px
+        margin-right 16px
+        margin-left 16px
+        border none
+        color $fontGray
+        outline none
+        cursor pointer
+        background-color rgba(36, 213, 216, .4)
+        margin-top 12px
+        font-size 1em
+        @media only screen and (max-width: 900px)
+            height 40px
+            margin-bottom 12px
+            margin-right 16px
+            margin-left 16px
+        @media only screen and (max-width: 600px)
+            max-height 73px
+
+        &.enabled
+            background-color $colorAccent
+            color $fontBlack
+
+
+    .upgrade-button:hover
+        background-color $colorAccent
+        color $fontBlack
+        &.enabled:hover
+            background-color rgba(36, 213, 216, .4)
+            color $fontGray
+
+
 </style>
 
 
@@ -990,7 +1055,11 @@
         transform: rotate(180deg);
     }
 
-    .v-select .vs__dropdown-toggle{
+    .v-select .vs__dropdown-toggle {
         margin-bottom: 0 !important;
+    }
+
+    .v-text-field {
+        padding-top: 3px !important;
     }
 </style>
