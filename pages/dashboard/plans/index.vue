@@ -245,7 +245,8 @@
                 </div>
 
                 <div class="row" style="background-color: #fefefe">
-                    <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}" @click="is_upgrading_plan = !is_upgrading_plan">
+                    <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}"
+                            @click="is_upgrading_plan = !is_upgrading_plan">
                         افزایش منابع فعلی
                     </button>
                 </div>
@@ -648,7 +649,7 @@
                     bill['voucher_code'] = this.finalBill.voucher_code;
                 }
 
-                bill['month_count'] = this.finalBill.month_count
+                bill['month_count'] = this.is_upgrading_plan ? 0 : this.finalBill.month_count
 
                 return bill;
             },
@@ -1032,11 +1033,13 @@
             background-color $colorAccent
             color $fontBlack
 
+
     .upgrade-button:hover
         background-color $colorAccent
         color $fontBlack
-
-
+        &.enabled:hover
+            background-color rgba(36, 213, 216, .4)
+            color $fontGray
 
 
 </style>
