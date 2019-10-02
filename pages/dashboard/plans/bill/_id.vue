@@ -92,10 +92,15 @@
                     <div class="row"
                          style="height: 1px; background-color: #7c7c7c;box-sizing: content-box; margin-top: 16px"></div>
 
-                    <div class="row">
-                        <p class="col-xs-12 col-md-12 col-sm-12 col-lg-12"
-                           style="text-align: center; font-size: 0.9em; color: #000;display: inline-block">
+                    <div class="row" style="margin-top: 16px">
+                        <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
+                           style="text-align: center; font-size: 0.9em; color: #000;display: inline-block; margin-right: auto; margin-left: auto">
                             مبلغ قابل پرداخت: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{Number(invoice.total).toLocaleString()}} تومان</span>
+                        </p>
+                        <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
+                           v-if="invoice.payment_type === 'PLAN'"
+                           style="text-align: center; font-size: 0.9em; color: #000;display: inline-block">
+                            برای مدت: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{invoice.month_count}} ماه</span>
                         </p>
                     </div>
 
@@ -116,6 +121,10 @@
 
                         <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #0045ff; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
                             همچنین شما زودتر از موعد سررسید پلن خود نمی‌توانید پلن انتخاب شده را تنزل داده و از منابع آن کم کنید.
+                        </li>
+
+                        <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: #0045ff; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
+                            تعداد ماه‌ها تنها برای فاکتور منظور می‌گردد و این بدان معنی نیست که پلن قبلی از بین می‌رود؛ بلکه تفاوت محاسبه و پلن فعلی به قبلی اضافه می‌شود.
                         </li>
 
                         <li style="font-family: iran-yekan; font-size: 0.8em; text-align: right; color: orangered; letter-spacing: normal; line-height: 1.75; margin-top: 12px">
