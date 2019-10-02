@@ -198,10 +198,12 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p v-if="memory > 0.49" style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                <p v-if="memory > 0.49"
+                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     {{memory}} گیگ
                                 </p>
-                                <p v-else style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                <p v-else
+                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     ۴۰۰ مگابایت
                                 </p>
                             </div>
@@ -265,9 +267,10 @@
                     </div>
                 </div>
 
-                <div class="row"
-                     style="display: block; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
-                    <span>
+                <div class="checkout-box-bottom-container">
+                    <div class="row"
+                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span style="width: 100%">
                         مدت اعتبار پلن:
                         <v-select
                                 dir="rtl"
@@ -282,11 +285,11 @@
                         ></v-select>
                     </span>
 
-                </div>
+                    </div>
 
-                <div class="row"
-                     style="display: block; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
-                    <span>
+                    <div class="row"
+                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span style="width: 100%">
                         کد تخفیف:
                         <v-text-field
                                 type="text"
@@ -298,6 +301,7 @@
                         </v-text-field>
                     </span>
 
+                    </div>
                 </div>
 
                 <div class="row" style="background-color: #fefefe">
@@ -335,11 +339,11 @@
                     cpu: 0,
                     dedicatedVolume: 0,
                 },
-                selectedMonth:{
-                  title: '۳۰ روز',
-                  value: 1
+                selectedMonth: {
+                    title: '۳۰ روز',
+                    value: 1
                 },
-                monthList:[
+                monthList: [
                     {
                         title: '۳۰ روز',
                         value: 1
@@ -590,11 +594,11 @@
             },
             incMemory() {
                 if (this.planData.memory < this.memoryOptions.max) {
-                        this.planData.memory += 0.5;
+                    this.planData.memory += 0.5;
                 }
             }, decMemory() {
                 if (this.planData.memory > this.memoryOptions.min) {
-                        this.planData.memory -= 0.5;
+                    this.planData.memory -= 0.5;
                 }
 
             }, incDedicatedVolume() {
@@ -621,15 +625,15 @@
                     }
                 }
 
-                if(this.finalBill.memory > 0){
+                if (this.finalBill.memory > 0) {
                     bill['memory'] = this.finalBill.memory;
                 }
 
-                if(this.finalBill.dedicated_volume > 0){
+                if (this.finalBill.dedicated_volume > 0) {
                     bill['dedicated_volume'] = this.finalBill.dedicated_volume;
                 }
 
-                if(this.finalBill.voucher_code !== null){
+                if (this.finalBill.voucher_code !== null) {
                     bill['voucher_code'] = this.finalBill.voucher_code;
                 }
 
@@ -977,6 +981,17 @@
             line-height 1.7 g
             padding 7px 16px
 
+
+    .checkout-box-bottom-container
+        width 100%
+        height max-content
+        display flex
+        flex-direction column
+        @media only screen and (max-width: 850px)
+            flex-direction row
+        @media only screen and (max-width: 550px)
+            flex-direction column
+
 </style>
 
 
@@ -990,7 +1005,11 @@
         transform: rotate(180deg);
     }
 
-    .v-select .vs__dropdown-toggle{
+    .v-select .vs__dropdown-toggle {
         margin-bottom: 0 !important;
+    }
+
+    .v-text-field{
+        padding-top: 3px !important;
     }
 </style>
