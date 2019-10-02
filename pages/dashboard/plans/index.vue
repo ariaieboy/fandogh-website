@@ -242,29 +242,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div style="flex: 1">
-                        <p class="checkout-section-title">مبلغ نهایی</p>
-                        <div style="display: flex">
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    فعلی:</p>
-
-                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #0045ff; line-height: 2; margin: 0">
-                                    {{fixedTotal.toLocaleString() + 'تومان '}}
-                                </p>
-
-                            </div>
-
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    سفارش:</p>
-                                <p style="width: 100%; text-align: center; font-family: iran-sans;line-height: 2; margin: 0">
-                                    {{total === '0' ? '۰ تومان' : total + ' تومان'}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="checkout-box-bottom-container">
@@ -303,6 +280,31 @@
 
                     </div>
                 </div>
+                <div class="row" style="background-color: #fefefe; padding-bottom: 12px">
+                    <div style="flex: 1">
+                        <p class="checkout-section-title">مبلغ نهایی</p>
+                        <div style="display: flex">
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
+                                    فعلی:</p>
+
+                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #0045ff; line-height: 2; margin: 0">
+                                    {{fixedTotal.toLocaleString() + 'تومان '}}
+                                </p>
+
+                            </div>
+
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
+                                    سفارش:</p>
+                                <p style="width: 100%; text-align: center; font-family: iran-sans;line-height: 2; margin: 0">
+                                    {{total === '0' ? '۰ تومان' : total + ' تومان'}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="row" style="background-color: #fefefe">
                     <button class="checkout" @click="pushUrl">
@@ -1009,7 +1011,7 @@
         margin-bottom: 0 !important;
     }
 
-    .v-text-field{
+    .v-text-field {
         padding-top: 3px !important;
     }
 </style>
