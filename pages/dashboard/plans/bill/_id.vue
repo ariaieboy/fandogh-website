@@ -98,9 +98,14 @@
                             مبلغ قابل پرداخت: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{Number(invoice.total).toLocaleString()}} تومان</span>
                         </p>
                         <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
-                           v-if="invoice.payment_type === 'PLAN'"
+                           v-if="invoice.payment_type === 'PLAN' && invoice.month_count !== 0"
                            style="text-align: center; font-size: 0.9em; color: #000;display: inline-block">
                             برای مدت: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{invoice.month_count}} ماه</span>
+                        </p>
+                        <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
+                           v-else-if="invoice.payment_type === 'PLAN' && invoice.month_count === 0"
+                           style="text-align: center; font-size: 0.9em; color: #000;display: inline-block">
+                             ارتقا منابع پلن فعلی
                         </p>
                     </div>
 
