@@ -1005,27 +1005,33 @@
 
     .upgrade-button
         width 100%
-        height 40px
+        height 45px
+        font-family iran-yekan
         border-radius 3px
         margin-bottom 16px
         margin-right 16px
         margin-left 16px
         border none
-        color #fefefe
+        color $fontGray
         outline none
         cursor pointer
-        box-shadow 0 3px 6px 0 rgba(60, 204, 56, 0.42)
-        background-color #3ccc38
-        font-family iran-yekan
-        font-size 14px
+        background-color rgba(36, 213, 216, .4)
+        margin-top 12px
+        font-size 1em
         @media only screen and (max-width: 900px)
-            height 35px
+            height 40px
             margin-bottom 12px
             margin-right 16px
             margin-left 16px
         @media only screen and (max-width: 600px)
             max-height 73px
+
         &.enabled
+            background-color $colorAccent
+
+    .upgrade-button:hover
+        background-color $colorAccent
+
 
 
 
