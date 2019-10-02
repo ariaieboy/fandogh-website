@@ -343,6 +343,7 @@
 
         data: function () {
             return {
+                is_upgrading_plan: false,
                 planData: {
                     memory: 0,
                     cpu: 0,
