@@ -244,6 +244,12 @@
                     </div>
                 </div>
 
+                <div class="row" style="background-color: #fefefe">
+                    <button class="upgrade-button" @click="pushUrl">
+                        افزایش منابع فعلی
+                    </button>
+                </div>
+
                 <div class="checkout-box-bottom-container">
                     <div class="row"
                          style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
@@ -280,6 +286,7 @@
 
                     </div>
                 </div>
+
                 <div class="row" style="background-color: #fefefe; padding-bottom: 12px">
                     <div style="flex: 1">
                         <p class="checkout-section-title">مبلغ نهایی</p>
@@ -993,6 +1000,32 @@
             flex-direction row
         @media only screen and (max-width: 550px)
             flex-direction column
+
+    .upgrade-button
+        width 100%
+        height 40px
+        border-radius 3px
+        margin-bottom 16px
+        margin-right 16px
+        margin-left 16px
+        border none
+        color #fefefe
+        outline none
+        cursor pointer
+        box-shadow 0 3px 6px 0 rgba(60, 204, 56, 0.42)
+        background-color #3ccc38
+        font-family iran-yekan
+        font-size 14px
+        @media only screen and (max-width: 900px)
+            height 35px
+            margin-bottom 12px
+            margin-right 16px
+            margin-left 16px
+        @media only screen and (max-width: 600px)
+            max-height 73px
+        &.enabled
+
+
 
 </style>
 
