@@ -245,13 +245,14 @@
                 </div>
 
                 <div class="row" style="background-color: #fefefe">
-                    <button class="upgrade-button" @click="pushUrl">
+                    <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}" @click="is_upgrading_plan = !is_upgrading_plan">
                         افزایش منابع فعلی
                     </button>
                 </div>
 
                 <div class="checkout-box-bottom-container">
                     <div class="row"
+                         v-if="!is_upgrading_plan"
                          style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
                     <span style="width: 100%">
                         مدت اعتبار پلن:
@@ -1029,9 +1030,11 @@
 
         &.enabled
             background-color $colorAccent
+            color $fontBlack
 
     .upgrade-button:hover
         background-color $colorAccent
+        color $fontBlack
 
 
 
