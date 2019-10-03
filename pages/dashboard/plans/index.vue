@@ -244,7 +244,7 @@
                     </div>
                 </div>
 
-                <div class="row" style="background-color: #fefefe">
+                <div v-if="memory > .4" class="row" style="background-color: #fefefe">
                     <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}"
                             @click="is_upgrading_plan = !is_upgrading_plan">
                         افزایش منابع فعلی
@@ -817,9 +817,10 @@
             outline none
             cursor pointer
             box-shadow 0 3px 6px 0 rgba(60, 204, 56, 0.42)
-            background-color #3ccc38
+            background-color rgba(60, 204,56, 0.9)
             font-family iran-yekan
             font-size 14px
+            transition all .2s ease-in-out
             @media only screen and (max-width: 900px)
                 height 35px
                 margin-bottom 12px
@@ -827,6 +828,10 @@
                 margin-left 16px
             @media only screen and (max-width: 600px)
                 max-height 73px
+
+        button.checkout:hover
+            transition all .2s ease-in-out
+            background-color rgba(60, 204,56, 1)
 
 
     .section-title-image
@@ -1037,9 +1042,6 @@
     .upgrade-button:hover
         background-color $colorAccent
         color $fontBlack
-        &.enabled:hover
-            background-color rgba(36, 213, 216, .4)
-            color $fontGray
 
 
 </style>
