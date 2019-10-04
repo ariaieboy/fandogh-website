@@ -64,6 +64,27 @@ export const activation = async ({commit, state}, {code, id}) => {
     }
 };
 
+
+export const chargeWallet = async ({commit, state}, credit) => {
+    try {
+        return await Request().post('/api/wallets', {
+            credit: credit
+        })
+    } catch (e) {
+        return Promise.reject(e)
+
+    }
+};
+
+
+export const walletRemaining = async ({commit, state}) => {
+    try {
+        return await Request().get('/api/wallets')
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const getInvitationDetail = async ({commit, state}, token) => {
 
     try {
@@ -125,16 +146,16 @@ export const removeMemberFromNamespace = async ({commit, state}, member_id) => {
     try {
         return await Request().delete(`/api/users/namespaces/members/${member_id}`)
     } catch (e) {
-      return Promise.reject(e)
+        return Promise.reject(e)
     }
 };
 
 export const changeMemberRole = async ({commit, state}, {member_id, new_role}) => {
     try {
-        return await Request().patch(`/api/users/namespaces/members/${member_id}`,{
+        return await Request().patch(`/api/users/namespaces/members/${member_id}`, {
             role: new_role
         })
-    }catch (e) {
+    } catch (e) {
         return Promise.reject(e)
     }
 };
@@ -334,10 +355,14 @@ export const dumpServiceManifest = async ({commit, state}, service_name) => {
     }
 };
 
-export const getTransactions = async ({commit, state}) => {
+export const getTransactions = async ({commit, state}, payment_type) => {
 
     try {
-        return await Request().get('api/billing')
+        return await Request().get('api/billing', {
+            params: {
+                payment_type: payment_type
+            }
+        })
     } catch (e) {
         return Promise.reject(e)
     }
@@ -503,11 +528,35 @@ export const getSecret = async ({commit, state}) => {
 
 export const getVolumes = async ({commit, state}) => {
     try {
-        let volume = await Request().get(`/api/volumes`);
-        commit("SET_DATA", {id: "volumes", data: volume});
+        let volumes = await Request().get(`/api/volumes`);
+        commit("SET_DATA", {id: "volumes", data: volumes});
+        commit('SET_VOLUMES', volumes)
         return volumes;
     } catch (e) {
         return Promise.reject(e);
+    }
+};
+
+
+export const createNewVolume = async ({commit, state}, {volume_name, volume_capacity}) => {
+    try {
+        return await Request().post('api/volumes', {
+            name: volume_name,
+            capacity: volume_capacity
+        })
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const deleteSelectedVolume = async ({commit, state}, volume_name) => {
+
+    try {
+
+        return await Request().delete(`api/volumes/${volume_name}`)
+
+    } catch (e) {
+        return Promise.reject(e)
     }
 };
 

@@ -31,6 +31,7 @@ const createStore = () => {
         },
         images: null,
         versions: null,
+        volumes: null,
         builds: null,
         domains: null,
         domain: null,

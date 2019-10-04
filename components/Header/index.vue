@@ -301,7 +301,7 @@
                 this.$store.dispatch("TOGGLE_NAV", {data: type, id: "sidebar"});
             },
             toggleMenu() {
-                
+
                 if (this.$refs.sub_menu.style.visibility === 'hidden') {
                     this.$refs.sub_menu.style.opacity = '100';
                     this.$refs.sub_menu.style.visibility = 'visible'

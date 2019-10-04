@@ -198,12 +198,17 @@
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     فعلی:
                                 </p>
-                                <p v-if="memory > 0.49" style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                <p v-if="memory > 0.49"
+                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
                                     {{memory}} گیگ
+                                </p>
+                                <p v-else
+                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                    ۴۰۰ مگابایت
                                 </p>
                             </div>
 
-                            <div v-if="planData.memory > 0" style="flex: 1">
+                            <div style="flex: 1">
                                 <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
                                     سفارش:
                                 </p>
@@ -237,34 +242,39 @@
                             </div>
                         </div>
                     </div>
-
-                    <div style="flex: 1">
-                        <p class="checkout-section-title">مبلغ نهایی (تومان)</p>
-                        <div style="display: flex">
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    فعلی:</p>
-
-                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #0045ff; line-height: 2; margin: 0">
-                                    {{fixedTotal.toLocaleString()}}
-                                </p>
-
-                            </div>
-
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    سفارش:</p>
-                                <p style="width: 100%; text-align: center; font-family: iran-sans;line-height: 2; margin: 0">
-                                    {{total}}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="row"
-                     style="display: block; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
-                    <span>
+                <div v-if="memory > .4" class="row" style="background-color: #fefefe">
+                    <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}"
+                            @click="is_upgrading_plan = !is_upgrading_plan">
+                        افزایش منابع فعلی
+                    </button>
+                </div>
+
+                <div class="checkout-box-bottom-container">
+                    <div class="row"
+                         v-if="!is_upgrading_plan"
+                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span style="width: 100%">
+                        مدت اعتبار پلن:
+                        <v-select
+                                dir="rtl"
+                                :clearable="false"
+                                :searchable="false"
+                                label="title"
+                                style="margin-bottom: 0 !important;"
+                                v-model="selectedMonth"
+                                :options="monthList"
+                                @input="monthChanged"
+                                placeholder="مدت اعتبار پلن"
+                        ></v-select>
+                    </span>
+
+                    </div>
+
+                    <div class="row"
+                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
+                    <span style="width: 100%">
                         کد تخفیف:
                         <v-text-field
                                 type="text"
@@ -276,7 +286,34 @@
                         </v-text-field>
                     </span>
 
+                    </div>
                 </div>
+
+                <div class="row" style="background-color: #fefefe; padding-bottom: 12px">
+                    <div style="flex: 1">
+                        <p class="checkout-section-title">مبلغ نهایی</p>
+                        <div style="display: flex">
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
+                                    فعلی:</p>
+
+                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #0045ff; line-height: 2; margin: 0">
+                                    {{fixedTotal.toLocaleString() + 'تومان '}}
+                                </p>
+
+                            </div>
+
+                            <div style="flex: 1">
+                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
+                                    سفارش:</p>
+                                <p style="width: 100%; text-align: center; font-family: iran-sans;line-height: 2; margin: 0">
+                                    {{total === '0' ? '۰ تومان' : total + ' تومان'}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="row" style="background-color: #fefefe">
                     <button class="checkout" @click="pushUrl">
@@ -308,21 +345,126 @@
 
         data: function () {
             return {
+                is_upgrading_plan: false,
                 planData: {
-                    memory: .5,
-                    cpu: 0.5,
+                    memory: 0,
+                    cpu: 0,
                     dedicatedVolume: 0,
                 },
+                selectedMonth: {
+                    title: '۳۰ روز',
+                    value: 1
+                },
+                monthList: [
+                    {
+                        title: '۳۰ روز',
+                        value: 1
+                    },
+                    {
+                        title: '۲ ماه',
+                        value: 2
+                    },
+                    {
+                        title: '۳ ماه',
+                        value: 3
+                    },
+                    {
+                        title: '۴ ماه',
+                        value: 4
+                    },
+                    {
+                        title: '۵ ماه',
+                        value: 5
+                    },
+                    {
+                        title: '۶ ماه',
+                        value: 6
+                    },
+                    {
+                        title: '۷ ماه',
+                        value: 7
+                    },
+                    {
+                        title: '۸ ماه',
+                        value: 8
+                    },
+                    {
+                        title: '۹ ماه',
+                        value: 9
+                    },
+                    {
+                        title: '۱۰ ماه',
+                        value: 10
+                    },
+                    {
+                        title: '۱۱ ماه',
+                        value: 11
+                    },
+                    {
+                        title: '۱ سال',
+                        value: 12
+                    },
+                    {
+                        title: '۱۳ ماه',
+                        value: 13
+                    },
+                    {
+                        title: '۱۴ ماه',
+                        value: 14
+                    },
+                    {
+                        title: '۱۵ ماه',
+                        value: 15
+                    },
+                    {
+                        title: '۱۶ ماه',
+                        value: 16
+                    },
+                    {
+                        title: '۱۷ ماه',
+                        value: 17
+                    },
+                    {
+                        title: '۱۸ ماه',
+                        value: 18
+                    },
+                    {
+                        title: '۱۹ ماه',
+                        value: 19
+                    },
+                    {
+                        title: '۲۰ ماه',
+                        value: 20
+                    },
+                    {
+                        title: '۲۱ ماه',
+                        value: 21
+                    },
+                    {
+                        title: '۲۲ ماه',
+                        value: 22
+                    },
+                    {
+                        title: '۲۳ ماه',
+                        value: 23
+                    },
+                    {
+                        title: '۲ سال',
+                        value: 24
+                    }
+                ],
                 isCollapsed: false,
                 dedicatedVolumeMin: '10GB',
                 dedicatedVolumeMax: '1TB',
-                memoryRangeMin: '1GB',
+                memoryRangeMin: '0GB',
                 memoryRangeMax: '64GB',
+                order: [],
                 quota: {},
                 finalBill: {
                     memory: 0,
-                    dedicatedVolume: 0,
-                    voucher_code: null
+                    dedicated_volume: 0,
+                    voucher_code: null,
+                    month_count: 1
                 }, features: [
                     {title: 'Load Balancer', subtitle: 'رایگان', image: 'load-balancer.png'},
                     {title: 'پهنای باند', subtitle: 'رایگان', image: 'band-width.svg'},
@@ -337,7 +479,7 @@
                     contained: false,
                     direction: 'rtl',
                     interval: 0.5,
-                    min: 0.5,
+                    min: 0,
                     max: 64,
                     disabled: false,
                     clickable: true,
@@ -451,6 +593,10 @@
             this.requestActivePlan();
         },
         methods: {
+            monthChanged(month) {
+                this.selectedMonth = month;
+                this.finalBill.month_count = month.value;
+            },
             translateCheckoutBox() {
                 if (this.isCollapsed) {
                     this.isCollapsed = false;
@@ -460,11 +606,11 @@
             },
             incMemory() {
                 if (this.planData.memory < this.memoryOptions.max) {
-                        this.planData.memory += 0.5;
+                    this.planData.memory += 0.5;
                 }
             }, decMemory() {
                 if (this.planData.memory > this.memoryOptions.min) {
-                        this.planData.memory -= 0.5;
+                    this.planData.memory -= 0.5;
                 }
 
             }, incDedicatedVolume() {
@@ -475,21 +621,37 @@
                     this.planData.dedicatedVolume -= 1;
             }, makeBill() {
                 this.finalBill.memory = this.planData.memory;
+                let bill = {}
 
                 if (this.planData.dedicatedVolume >= 10) {
-                    this.finalBill.dedicatedVolume = this.planData.dedicatedVolume;
+                    this.finalBill.dedicated_volume = this.planData.dedicatedVolume;
                 }
+
+                //adding quota to current selected plan resources
                 if (this.quota !== null) {
                     if (parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1)) >= 0.5) {
                         this.finalBill.memory += parseFloat(Math.fround(this.quota.memory_limit / 1024).toExponential(1));
                     }
                     if (this.quota.volume_limit > 0) {
-                        this.finalBill.dedicatedVolume += this.quota.volume_limit;
+                        this.finalBill.dedicated_volume += this.quota.volume_limit;
                     }
                 }
 
+                if (this.finalBill.memory > 0) {
+                    bill['memory'] = this.finalBill.memory;
+                }
 
-                return this.finalBill;
+                if (this.finalBill.dedicated_volume > 0) {
+                    bill['dedicated_volume'] = this.finalBill.dedicated_volume;
+                }
+
+                if (this.finalBill.voucher_code !== null) {
+                    bill['voucher_code'] = this.finalBill.voucher_code;
+                }
+
+                bill['month_count'] = this.is_upgrading_plan ? 0 : this.finalBill.month_count
+
+                return bill;
             },
             async pushUrl() {
                 // this.$ga.event({
@@ -551,6 +713,8 @@
 
 
 <style lang="stylus" scoped>
+
+    @import "../../../assets/css/variables.styl"
 
 
     .service-plan-heading
@@ -653,9 +817,10 @@
             outline none
             cursor pointer
             box-shadow 0 3px 6px 0 rgba(60, 204, 56, 0.42)
-            background-color #3ccc38
+            background-color rgba(60, 204,56, 0.9)
             font-family iran-yekan
             font-size 14px
+            transition all .2s ease-in-out
             @media only screen and (max-width: 900px)
                 height 35px
                 margin-bottom 12px
@@ -663,6 +828,10 @@
                 margin-left 16px
             @media only screen and (max-width: 600px)
                 max-height 73px
+
+        button.checkout:hover
+            transition all .2s ease-in-out
+            background-color rgba(60, 204,56, 1)
 
 
     .section-title-image
@@ -831,6 +1000,50 @@
             line-height 1.7 g
             padding 7px 16px
 
+
+    .checkout-box-bottom-container
+        width 100%
+        height max-content
+        display flex
+        flex-direction column
+        @media only screen and (max-width: 850px)
+            flex-direction row
+        @media only screen and (max-width: 550px)
+            flex-direction column
+
+    .upgrade-button
+        width 100%
+        height 45px
+        font-family iran-yekan
+        border-radius 3px
+        margin-bottom 16px
+        margin-right 16px
+        margin-left 16px
+        border none
+        color $fontGray
+        outline none
+        cursor pointer
+        background-color rgba(36, 213, 216, .4)
+        margin-top 12px
+        font-size 1em
+        @media only screen and (max-width: 900px)
+            height 40px
+            margin-bottom 12px
+            margin-right 16px
+            margin-left 16px
+        @media only screen and (max-width: 600px)
+            max-height 73px
+
+        &.enabled
+            background-color $colorAccent
+            color $fontBlack
+
+
+    .upgrade-button:hover
+        background-color $colorAccent
+        color $fontBlack
+
+
 </style>
 
 
@@ -844,4 +1057,11 @@
         transform: rotate(180deg);
     }
 
+    .v-select .vs__dropdown-toggle {
+        margin-bottom: 0 !important;
+    }
+
+    .v-text-field {
+        padding-top: 3px !important;
+    }
 </style>
