@@ -86,10 +86,10 @@
                     <p :style="{borderLeft: '1px solid #1757FF'}">پلن من</p>
                 </div>
 
-                <div v-if="verifyUserAccess({ADMIN:'ADMIN'})" @click="sectionClicked('ProfileWallet')"
-                :class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">
-                <p :style="{borderLeft: '1px solid #1757FF'}">کیف پول</p>
-                </div>
+                <!--<div v-if="verifyUserAccess({ADMIN:'ADMIN'})" @click="sectionClicked('ProfileWallet')"-->
+                <!--:class="[(activeSectionName === 'ProfileWallet' ? 'enabled' : 'disabled')]">-->
+                <!--<p :style="{borderLeft: '1px solid #1757FF'}">کیف پول</p>-->
+                <!--</div>-->
 
                 <div v-if="verifyUserAccess({ADMIN:'ADMIN'})" @click="sectionClicked('ProfileTransactions')"
                      :class="[(activeSectionName === 'ProfileTransactions' ? 'enabled' : 'disabled')]">
