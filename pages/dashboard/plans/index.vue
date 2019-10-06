@@ -243,7 +243,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div v-if="memory > .4" class="row" style="background-color: #fefefe">
                     <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}"
                             @click="is_upgrading_plan = !is_upgrading_plan">
@@ -579,7 +578,7 @@
                 let temp = this.planData.memory * 60000 + (this.planData.dedicatedVolume >= 10 ? this.planData.dedicatedVolume * 1200 : 0);
                 return temp.toLocaleString()
             }, fixedTotal() {
-                return Math.round(this.quota.memory_limit / 1024) * 60000 + this.quota.volume_limit * 1200;
+                return Math.fround(this.quota.memory_limit / 1024) * 60000 + this.quota.volume_limit * 1200;
             }
         },
         loading() {
