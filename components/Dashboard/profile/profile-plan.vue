@@ -73,7 +73,7 @@
                                 <p class="plan-value">{{(quota.memory_limit > 511 ?
                                     parseFloat(Math.fround(quota.memory_limit /
                                     1024).toExponential(1)) : quota.memory_limit)}}
-                                    <span v-if="quota.memory_limit>=1024">گیگابایت</span>
+                                    <span v-if="quota.memory_limit>=512">گیگابایت</span>
                                     <span v-else>مگابایت</span>
                                 </p>
 
