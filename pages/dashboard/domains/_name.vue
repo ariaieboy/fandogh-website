@@ -171,6 +171,12 @@
                                 </div>
                             </div>
                         </f-collaps>
+                        <div class="col-xs-12" style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,.17); margin-top: 8px;padding-left: 0; padding-right: 0;">
+
+                            <div style="border-top-right-radius: 3px; border-top-left-radius: 3px; height: 4px; background-color: #fd3259; width: 100%;"></div>
+                            <p style="margin-bottom: 0; line-height: 1.75; padding: 16px">اگر دامنه فعلی به سرویسی متصل است و قبل از آن ssl فعال نبوده است، برای برقرار شدن ssl، نیاز است تا یک بار سرویس را destroy و سپس دوباره از نو deploy کنید تا تنظیمات جدید بر روی آن قرار گیرد.</p>
+
+                        </div>
                         <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" style="margin-top: 12px">
                             <button
                                     style="color: #fefefe; font-family: iran-yekan; outline: none; width: 100%; background-color: #fd3259; box-shadow: 0 2px 6px rgba(253, 50, 89, 0.4); border-radius: 3px; padding: 12px 0"
