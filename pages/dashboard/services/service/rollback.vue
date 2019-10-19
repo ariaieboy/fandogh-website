@@ -148,7 +148,6 @@
                     status => {
                         if (status) {
                             this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                            console.log(this.history.history_id)
                             this.$store.dispatch("deleteServiceHistory", {
                                 service_name: this.service.name,
                                 history_id: this.history.history_id

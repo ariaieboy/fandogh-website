@@ -211,7 +211,6 @@
                 await this.$store
                     .dispatch('plan/reloadPlan', this.invoice_id)
                     .then(response => {
-                        console.log(response)
                         this.invoice = response.invoice;
                         this.items = response.invoice.items;
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});

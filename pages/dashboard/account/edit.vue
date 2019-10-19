@@ -326,9 +326,6 @@
                     this.user.national_id.value = res.national_id
                     this.user.newsletter_subscriber.value = res.newsletter_subscriber
 
-                    console.log(this.user)
-                    console.log(res)
-
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
