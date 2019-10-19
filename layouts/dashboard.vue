@@ -25,7 +25,7 @@
                                            style="display: inline-block; margin: auto 16px auto 0; font-family: iran-yekan; font-size: 1.2em; color: #D8000C">
                                             تنها
                                             <span style="font-family: iran-sans; color: #D8000C">{{remainingTime}}</span>
-                                            روز دیگر از پلن شما باقی مانده است. جهت تمدید، لطفا نسبت به تمدید پلن خو
+                                            روز دیگر از پلن شما باقی مانده است. جهت تمدید، لطفا نسبت به تمدید پلن خود
                                             اقدام فرمایید، در غیر این صورت بعد از این تاریخ سرویس‌های شما از دسترس خارج
                                             خواهند شد.
                                         </p>
@@ -217,7 +217,7 @@
                 await this.$store.dispatch("plan/requestPlan", bill)
                     .then(planRespose => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                        this.$router.push(`plans/bill/${planRespose.invoice.id}`);
+                        this.$router.push(`/dashboard/plans/bill/${planRespose.invoice.id}`);
                     }).catch(e => {
                         if (e.status === 401) {
                             this.$router.push("/user/login");
