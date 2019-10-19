@@ -4,7 +4,6 @@ import FButton from '../button'
 export default {
   functional: true,
   render(h, {props, ...rest}){
-    console.log(document)
     const rename = (title) => document.getElementById('file').innerText = title
     let classes = ['btn']
     let styles = props.styles ? props.styles.split(' ') : []

@@ -171,33 +171,31 @@
         methods: {
             fetchUserNamespace() {
                 this.$store.commit('SET_DATA', {data: true, id: 'loading'})
-                if(getValue(('namespace'))){
-                this.$store.dispatch('getNameSpace', getValue('namespace'))
-                    .then(response => {
-                        this.namespace = response
-                        let old_role = getValue(('user_role'));
-                        this.$store.commit('SET_DATA', {data: false, id: 'loading'})
-                        if(old_role !== this.namespace.user_role){
-                            setValue({key: 'user_role', value: this.namespace.user_role});
-                            window.location.reload();
-                        }
-                    })
-                    .catch(e => {
-                        console.log('error')
-                        console.log(e)
-                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                        if (e.status === 401) {
-                            this.$router.push("/user/login");
-                        } else {
-                            ErrorReporter(e, this.$data, true).forEach(error => {
-                                this.$notify({
-                                    title: error,
-                                    time: 4000,
-                                    type: "error"
+                if (getValue(('namespace'))) {
+                    this.$store.dispatch('getNameSpace', getValue('namespace'))
+                        .then(response => {
+                            this.namespace = response
+                            let old_role = getValue(('user_role'));
+                            this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                            if (old_role !== this.namespace.user_role) {
+                                setValue({key: 'user_role', value: this.namespace.user_role});
+                                window.location.reload();
+                            }
+                        })
+                        .catch(e => {
+                            this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                            if (e.status === 401) {
+                                this.$router.push("/user/login");
+                            } else {
+                                ErrorReporter(e, this.$data, true).forEach(error => {
+                                    this.$notify({
+                                        title: error,
+                                        time: 4000,
+                                        type: "error"
+                                    });
                                 });
-                            });
-                        }
-                    });
+                            }
+                        });
                 }
             },
             async redeemPlan() {
@@ -236,14 +234,19 @@
 
             },
             makeBill(quota) {
-                let finalBill = {
-                    memory: 0.0,
-                    dedicatedVolume: 0,
-                }
+                let finalBill = {};
+                let memory = 0.0;
+                let dedicatedVolume = 0;
                 if (quota) {
-                    finalBill.memory = parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1));
-                    finalBill.dedicatedVolume += quota.volume_limit;
+                    memory = parseFloat(Math.fround(quota.memory_limit / 1024).toExponential(1));
+                    dedicatedVolume += quota.volume_limit;
+
+                    if (memory > 0)
+                        finalBill['memory'] = memory;
+                    if (dedicatedVolume > 0)
+                        finalBill['dedicated_volume'] = dedicatedVolume
                 }
+
                 return finalBill;
             },
             handelRyChat() {
