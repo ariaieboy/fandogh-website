@@ -52,7 +52,7 @@
                 return this.$store.state.loading;
             }
         },
-        created() {
+        mounted() {
             this.$store.commit("SET_DATA", {data: true, id: "loading"});
             this.verifyPayment();
         }, methods: {
