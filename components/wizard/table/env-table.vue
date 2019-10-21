@@ -10,6 +10,7 @@
 
                 <td style="direction: ltr">{{item.name}}</td>
                 <td style="direction: ltr">{{!item.hidden ? item.value : '************'}}</td>
+                <td style="direction: ltr">{{item.secret ? item.secret : '---------'}}</td>
                 <td>
                     <div :class="[item.hidden ? 'circle-border selected': 'circle-border']">
                         <div :class="[item.hidden ? 'circle-fill selected': 'circle-fill']">
