@@ -526,6 +526,15 @@ export const getSecret = async ({commit, state}) => {
     }
 };
 
+export const getSecretDetails = async ({commit, state}, secret_name) => {
+    try {
+        let secret = await Request().get(`/api/secrets/${secret_name}`);
+        return secret;
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 export const getVolumes = async ({commit, state}) => {
     try {
         let volumes = await Request().get(`/api/volumes`);
