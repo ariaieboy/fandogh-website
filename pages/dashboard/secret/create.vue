@@ -3,105 +3,20 @@
         <div>
             <h2 class="title_header">ساخت سکرت جدید</h2>
 
-            <div style="padding: 16px">
-                <div class="row"
-                     style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;">
+            <div class="secret-type-rail">
 
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div v-for="(item, index) in secret_types"
+                     @click="selectedSecret(index)"
+                     :class="[item.selected === true ? 'type-selected' : 'type-unselected']">
 
-                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0045ff"
-                                      type="text"
-                                      dir="ltr"
-                                      :rules="[rules.required, rules.counter, rules.secret_regex]"
-                                      v-model="secret.name.value"
-                                      :hint="secret.name.hint"
-                                      :counter="secret.name.counter"
-                                      :maxlength="secret.name.counter"
-                                      :label="secret.name.label">
-
-                        </v-text-field>
-
-                        <popover :tooltip="tooltips.name"></popover>
-
-                    </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0045ff"
-                                      type="text"
-                                      dir="ltr"
-                                      :disabled="true"
-                                      v-model="secret.type.value"
-                                      :label="secret.type.label">
-
-                        </v-text-field>
-
-                        <popover :tooltip="tooltips.type"></popover>
-
-                    </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                        <v-text-field
-                                style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
-                                color="#0045ff"
-                                type="text"
-                                dir="ltr"
-                                :rules="[rules.required]"
-                                v-model="secret.username.value"
-                                :hint="secret.username.hint"
-                                :label="secret.username.label">
-
-                        </v-text-field>
-
-                        <popover :tooltip="tooltips.username"></popover>
-
-                    </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0045ff"
-                                      type="text"
-                                      dir="ltr"
-                                      :type="'password'"
-                                      browser-autocomplete="new-password"
-                                      :rules="[rules.required]"
-                                      v-model="secret.password.value"
-                                      :hint="secret.password.hint"
-                                      :label="secret.password.label">
-
-                        </v-text-field>
-
-                        <popover :tooltip="tooltips.password"></popover>
-
-                    </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                      color="#0045ff"
-                                      type="text"
-                                      dir="ltr"
-                                      :rules="[rules.required, rules.url_regex]"
-                                      v-model="secret.server.value"
-                                      :hint="secret.server.hint"
-                                      :label="secret.server.label">
-
-                        </v-text-field>
-
-                        <popover :tooltip="tooltips.server"></popover>
-
-                    </div>
+                    <span>{{item.title}}</span>
 
                 </div>
 
-
-                <div class="row" style="width: 100%; padding: 16px">
-                    <button v-if="!loading" @click="createSecret"
-                            class="col-lg-6 col-md-6 col-sm-12 col-xs-12 container-fluid"
-                            style="max-width: 300px; background: #00E5FF; width: 100%; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4);
-                                    outline: none; font-family: iran-yekan; color: #1d1d1d">اتمام ساخت</button>
-                </div>
             </div>
+
+            <docker-secret :secret="selected_secret_type.secret" :editing="false" v-if="selected_secret_type.type === 'docker-registry'"></docker-secret>
+            <general-secret :secret="selected_secret_type.secret" :editing="false" v-else></general-secret>
         </div>
     </div>
 </template>
@@ -113,6 +28,8 @@
     import FormValidator from "~/utils/formValidator";
     import Popover from "../../../components/wizard/tooltip/popover";
     import RoleAccessHandler from "../../../utils/RoleAccessHandler";
+    import DockerSecret from "./components/docker-secret";
+    import GeneralSecret from "./components/general-secret";
 
     export default {
         layout: "dashboard",
@@ -127,6 +44,43 @@
                     counter: value => value.length <= 253 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
                     url_regex: value => new RegExp('^(http:\\/\\/www\\.|https:\\/\\/www\\.|http:\\/\\/|https:\\/\\/)?[a-z0-9]+([\\-\\.]{1}[a-z0-9]+)*\\.[a-z]{2,5}(:[0-9]{1,5})?(\\/.*)?$').test(value) || 'آدرس وارد شده معتبر نیست'
                 },
+                selected_secret_type: {
+
+                    type: 'docker-registry',
+                    selected: true,
+                    title: 'Docker Registry',
+                    secret: {
+                        type: 'docker-registry',
+                        name: null,
+                        server: null,
+                        username: null,
+                        password: null
+                    }
+
+                },
+                secret_types: [
+                    {
+                        type: 'docker-registry',
+                        selected: true,
+                        title: 'Docker Registry',
+                        secret: {
+                            type: 'docker-registry',
+                            name: null,
+                            server: null,
+                            username: null,
+                            password: null
+                        }
+                    }, {
+                        type: 'general',
+                        selected: false,
+                        title: 'General',
+                        secret: {
+                            type: 'general',
+                            name: null,
+                            fields: {},
+                        }
+                    }
+                ],
                 secret: {
                     name: {
                         label: 'نام سکرت',
@@ -191,6 +145,8 @@
             }
         },
         components: {
+            GeneralSecret,
+            DockerSecret,
             ProgressBar,
             Popover
         },
@@ -202,7 +158,15 @@
             });
         },
         methods: {
-            verifyUserAccess(permitted_roles){
+            selectedSecret(index) {
+                this.secret_types.forEach(item => {
+                    item.selected = false
+                });
+
+                this.secret_types[index].selected = true;
+                this.selected_secret_type = this.secret_types[index]
+            },
+            verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
             createSecret() {
@@ -235,7 +199,7 @@
                 }
 
 
-                if(this.rules.url_regex(this.secret.server.value) !== true){
+                if (this.rules.url_regex(this.secret.server.value) !== true) {
 
                     this.$notify({
                         title: 'آدرس url وارد شده معتبر نیست!',
@@ -302,6 +266,57 @@
         line-height 1.75
         color #7c7c7c
         letter-spacing normal
+
+    .secret-type-rail
+        width 100%
+        -ms-overflow-style none
+        scrollbar-width none
+        white-space nowrap
+        display block
+        padding-bottom 3px
+        overflow-x scroll
+        overflow-y hidden
+
+        div.type-selected
+            display inline-flex
+            overflow-x scroll
+            width 200px
+            height 50px
+            cursor pointer
+            background-color #0045ff
+            box-shadow 0 2px 6px rgba(0, 69, 255, 0.4)
+            border-radius 3px
+            margin-left 16px
+
+            span
+                font-family "Helvetica Neue"
+                font-size 1.2em
+                color #fefefe
+                width 100%
+                cursor pointer
+                line-height 50px
+                text-align center
+
+        div.type-unselected
+            display inline-flex
+            overflow-x scroll
+            width 200px
+            height 50px
+            cursor pointer
+            background-color #fefefe
+            box-shadow 0 2px 6px rgba(0, 0, 0, 0.17)
+            border-radius 3px
+            margin-left 16px
+
+            span
+                width 100%
+                font-family "Helvetica Neue"
+                font-size 1.2em
+                color #3c3c3c
+                cursor pointer
+                text-align center
+                line-height 50px
+
 
 </style>
 
