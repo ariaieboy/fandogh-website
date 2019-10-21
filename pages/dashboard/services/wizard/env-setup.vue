@@ -51,6 +51,25 @@
                             <popover :tooltip="tooltips.env_value"></popover>
 
                         </div>
+                        <div style="display: flex;">
+
+                            <v-text-field
+                                    ref="secret"
+                                    :rules="[rules.secret_regex, rules.no_space]"
+                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
+                                    color="#0045ff"
+                                    type="text"
+                                    dir="ltr"
+                                    @change="(manifest_model.environment_variable.secret = manifest_model.environment_variable.secret.trim())"
+                                    v-model="manifest_model.environment_variable.secret"
+                                    :hint="env_obj.secret_hint"
+                                    :label="env_obj.secret_label">
+
+                            </v-text-field>
+
+                            <popover :tooltip="tooltips.secret"></popover>
+
+                        </div>
 
                         <div style="display: inline-block; margin-top: 16px; width: 100%">
 
@@ -59,7 +78,8 @@
                                           :object="hidden_obj"></fan-checkbox>
 
                             <span class="left create-env-button" @click="onSubmitClicked">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
-                            <span v-if="isEditing" style="margin-left: 16px" @click="cancelEdit" class="left cancel-button">{{'انصراف'}}</span>
+                            <span v-if="isEditing" style="margin-left: 16px" @click="cancelEdit"
+                                  class="left cancel-button">{{'انصراف'}}</span>
 
                         </div>
 
@@ -103,7 +123,7 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 required: true
             }
         },
-        model:{
+        model: {
             prop: 'manifest_model',
         },
         components: {
@@ -124,6 +144,7 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                     value_required: value => !!value.trim() || 'مقدار متغیر نمی‌تواند خالی باشد',
                     no_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
                     regex: value => new RegExp('^[a-zA-Z1-9_]+$').test(value) || 'فقط حروف کوچک، حروف بزرگ، underscore و اعداد معتبر هستند',
+                    secret_regex: value => new RegExp('^[a-z0-9]+([-.a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)',
                     redundant: value => (this.allowed_name === null ? this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0 : this.allowed_name === value || this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0) || 'مقدار تکراری است',
                 },
                 sections: {
@@ -144,16 +165,24 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                         title: 'مقدار متغیر',
                         text: 'مقداری که قصد دارید به متغیر جدید تعلق گیرد',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
+                    },
+                    secret: {
+                        title: 'مقدار سکرت',
+                        text: 'اگر قصد دارید مقدار env از سکرت خوانده شود و کسی به مقادیر دسترسی نداشته باشد، با گذاشتن نام سکرتی که مقادیر در آن ذخیره شده است می‌توانید این کار را انجام دهید.',
+                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
                     }
                 },
                 env_obj: {
                     key_label: 'نام متغیر',
                     value_label: 'مقدار متغیر',
+                    secret_label: 'مقدار سکرت',
                     key_hint: 'نام متغیر را وارد نمایید',
+                    secret_hint: 'نام سکرت را وارد نمایید',
                     value_hint: 'مقدار متغیر را وارد نمایید',
                     default: '',
                     key: '',
-                    value: ''
+                    value: '',
+                    secret: ''
                 },
                 hidden_obj: {
                     label: "مقدار محرمانه",
@@ -161,9 +190,10 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                     selected: false
                 },
                 titleRow: [
-                    {title: 'نام متغیر', width: '40%', name: 'key'},
-                    {title: 'مقدار متغیر', width: '40%', name: 'value'},
-                    {title: 'محرمانه', width: '16%', name: 'hidden'},
+                    {title: 'نام متغیر', width: '28%', name: 'key'},
+                    {title: 'مقدار متغیر', width: '28%', name: 'value'},
+                    {title: 'مقدار سکرت', width: '28%', name: 'secret'},
+                    {title: 'محرمانه', width: '12%', name: 'hidden'},
                     {title: '', width: '4%', name: ''},
 
                 ],
@@ -180,17 +210,20 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 this.editing_index = index
                 this.manifest_model.environment_variable.name = this.manifest_model.environment_variable.env_list[index].name
                 this.manifest_model.environment_variable.value = this.manifest_model.environment_variable.env_list[index].value
+                let secret = this.manifest_model.environment_variable.env_list[index].secret
+                this.manifest_model.environment_variable.secret = secret ? secret : null
                 this.hidden_obj.selected = this.manifest_model.environment_variable.env_list[index].hidden
 
-                this.allowed_name =  this.manifest_model.environment_variable.env_list[index].name
+                this.allowed_name = this.manifest_model.environment_variable.env_list[index].name
 
                 this.$refs.key.focus()
             },
-            cancelEdit(){
+            cancelEdit() {
                 this.isEditing = false
 
                 this.manifest_model.environment_variable.name = null;
                 this.manifest_model.environment_variable.value = null;
+                this.manifest_model.environment_variable.secret = null;
                 this.hidden_obj.selected = false;
                 this.allowed_name = null
 
@@ -232,9 +265,9 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                     return;
                 }
 
-                if(this.rules.no_space(this.manifest_model.environment_variable.name.trim()) !== true ||
-                this.rules.regex(this.manifest_model.environment_variable.name.trim()) !== true ||
-                this.rules.redundant(this.manifest_model.environment_variable.name.trim()) !== true){
+                if (this.rules.no_space(this.manifest_model.environment_variable.name.trim()) !== true ||
+                    this.rules.regex(this.manifest_model.environment_variable.name.trim()) !== true ||
+                    this.rules.redundant(this.manifest_model.environment_variable.name.trim()) !== true) {
                     this.$refs.key.focus()
                     return;
                 }
@@ -250,18 +283,23 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                     this.manifest_model.environment_variable.env_list.splice(this.editing_index, 1, {
                         name: this.manifest_model.environment_variable.name.trim(),
                         value: this.manifest_model.environment_variable.value.trim(),
+                        secret: this.manifest_model.environment_variable.secret ?
+                            this.manifest_model.environment_variable.secret : null,
                         hidden: this.hidden_obj.selected
                     })
                 } else {
                     this.manifest_model.environment_variable.env_list.push({
                         name: this.manifest_model.environment_variable.name.trim(),
                         value: this.manifest_model.environment_variable.value.trim(),
+                        secret: this.manifest_model.environment_variable.secret ?
+                            this.manifest_model.environment_variable.secret : null,
                         hidden: this.hidden_obj.selected
                     })
                 }
 
                 this.manifest_model.environment_variable.value = null
                 this.manifest_model.environment_variable.name = null
+                this.manifest_model.environment_variable.secret = null
                 this.hidden_obj.selected = false
                 this.isEditing = false
                 this.editing_index = -1
