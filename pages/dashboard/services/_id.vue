@@ -9,7 +9,7 @@
                     <img
                             :src="(service.state.toString().toLowerCase() === 'running' && !this.removing ? require('../../../components/Dashboard/home/icons/ic-service-successfull.svg') : require('../../../components/Dashboard/home/icons/ic-service-failed.svg'))"
                             :class="[service.state.toString().toLowerCase() === 'running' && !this.removing? 'success' : 'failed']">
-                    <span >{{service.name}}</span>
+                    <span>{{service.name}}</span>
                 </div>
 
                 <div v-if="windowWidth > 766"
@@ -29,20 +29,24 @@
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
                 </span>
 
-                <div v-if="!removing && verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" class="service-edit-container">
+                <div v-if="!removing && verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
+                     class="service-edit-container">
                     <span class="service-edit"
                           @click="editService">
                         ویرایش سرویس
                     </span>
+                    <span class="service-restart"
+                          @click="restart">
+                        راه‌اندازی مجدد
+                    </span>
                     <span class="service-delete"
-                          @click="this.remove">
+                          @click="remove">
                         حذف سرویس
                     </span>
                 </div>
-
             </div>
-
         </div>
+
 
         <div class="row main" style="margin: 0;">
             <div class="box-row row col-lg-2 col-md-2 col-sm-2 col-xs-12 padding">
@@ -74,9 +78,30 @@
                     <p>لاگ‌ها</p>
                 </div>
 
-                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" @click="sectionClicked('rollback')"
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
+                     @click="sectionClicked('rollback')"
                      :class="[(activeSectionName === 'rollback' ? 'enabled' : 'disabled')]">
                     <p>کپسول زمان</p>
+                </div>
+
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
+                     class="action-divider">
+                    <p>عملیات سرویس</p>
+                </div>
+
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" @click="editService"
+                     class="edit-service">
+                    <p>ویرایش سرویس</p>
+                </div>
+
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" @click="remove"
+                     class="delete-service">
+                    <p>حذف سرویس</p>
+                </div>
+
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" @click="restart"
+                     class="restart-service">
+                    <p>راه‌اندازی مجدد</p>
                 </div>
             </div>
 
@@ -146,7 +171,60 @@
             this.getData();
         },
         methods: {
-            verifyUserAccess(permitted_roles){
+            restart() {
+                this.$ga.event({
+                    eventCategory: "service",
+                    eventAction: "click btn restart service",
+                    eventLabel: "service name",
+                    eventValue: this.service_name
+                });
+                this.$alertify(
+                    {
+                        title: `راه‌اندازی مجدد سرویس`,
+                        img: require("../../../components/Dashboard/alert/images/ic_restart.svg"),
+                        description: `آیا از راه‌اندازی مجدد ${this.service_name}  مطمئن هستید؟`,
+                        label: 'تایید راه‌اندازی مجدد'
+                    },
+                    status => {
+                        if (status) {
+                            // this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store.dispatch("performServiceAction", {
+                                service_name: this.service_name,
+                                service_action: 'RESTART'
+                            })
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    location.reload()
+                                    this.$ga.event({
+                                        eventCategory: "service",
+                                        eventAction: "restart service",
+                                        eventLabel: "service name",
+                                        eventValue: this.service_name
+                                    });
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "service",
+                                        eventAction: "fail restarting service",
+                                        eventLabel: "service name",
+                                        eventValue: this.service_name
+                                    });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                });
+
+                        }
+                    }
+                );
+            },
+            verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
             editService() {
@@ -325,8 +403,8 @@
             padding 0
             cursor pointer
             @media only screen and (max-width: 766px)
-                margin-left -5px
-                display inline-flex
+                margin-right: -5px
+                display: inline-flex
 
             p
                 font-style normal
@@ -361,8 +439,8 @@
             cursor pointer
             @media only screen and (max-width: 766px)
                 background-color #0045ff
-                margin-right -1px
-                display inline-flex
+                margin-right: -1px
+                display: inline-flex
 
             p
                 font-style normal
@@ -390,6 +468,101 @@
                     margin-bottom 8px
                     background-color transparent
 
+        div.edit-service
+            padding 0
+            cursor pointer
+            @media only screen and (max-width: 766px)
+                margin-right: -1px
+                display: none
+
+            p
+                font-style normal
+                font-stretch normal
+                line-height 40px
+                text-align center
+                font-family iran-yekan
+                font-weight normal
+                font-size .9em
+                background-color $greenLight
+                border-radius 3px
+                box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.2)
+                outline none
+                margin-top 0
+                margin-bottom 8px
+                letter-spacing normal
+                color #fefefe
+
+        div.delete-service
+            padding 0
+            cursor pointer
+            @media only screen and (max-width: 766px)
+                margin-right: -1px
+                display: none
+
+            p
+                font-style normal
+                font-stretch normal
+                line-height 40px
+                text-align center
+                font-family iran-yekan
+                font-weight normal
+                font-size .9em
+                background-color $red
+                border-radius 3px
+                box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.2)
+                outline none
+                margin-top 0
+                margin-bottom 8px
+                letter-spacing normal
+                color #fefefe
+
+        div.action-divider
+            padding 0
+            margin-top 24px
+            @media only screen and (max-width: 766px)
+                margin-right: -1px
+                display: none
+
+            p
+                font-style normal
+                font-stretch normal
+                line-height 40px
+                text-align center
+                font-family iran-yekan
+                font-weight bold
+                font-size .9em
+                outline none
+                margin-top 0
+                margin-bottom 8px
+                border-bottom 1px solid #3c3c3c
+                letter-spacing normal
+                color #3c3c3c
+
+        div.restart-service
+            padding 0
+            cursor pointer
+            @media only screen and (max-width: 766px)
+                margin-right: -1px
+                display: none
+
+            p
+                font-style normal
+                font-stretch normal
+                line-height 40px
+                text-align center
+                font-family iran-yekan
+                font-weight normal
+                font-size .9em
+                background-color $colorAccent
+                border-radius 3px
+                box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.2)
+                outline none
+                margin-top 0
+                margin-bottom 8px
+                letter-spacing normal
+                color $fontGray
+
+
     .box-row::-webkit-scrollbar
         display none
 
@@ -412,6 +585,7 @@
             max-width 550px
             @media only screen and (max-width: 766px)
                 display block
+
             span
                 margin-top auto
                 margin-bottom auto
@@ -555,68 +729,60 @@
 
 
     .service-edit-container
-        margin-top -5px
-        order 2
-        margin-bottom auto
-        margin-right auto
+        margin-top 16px
         display block
+        overflow-y hidden
+        overflow-x scroll
+        @media only screen and (min-width 772px)
+            display none
 
     .service-edit
-        display block
+        display inline-block
         color $totalWhite
         line-height 1.75
         margin-bottom auto
-        font-size 1em
+        font-size 1.2em
         font-family iran-yekan
         font-weight normal
         background-color $greenLight
-        border-radius 50px
+        border-radius 3px
         text-align center
         align-self start
-        padding 6px 24px
+        padding 8px 24px
+        margin-top 0
         cursor pointer
-        @media only screen and (max-width: 766px)
-            font-size 1.2em
-            display inline-block
-            padding-right 24px
-            padding-left 24px
-            margin-top 0
 
-        &:hover
-            background-color $green
-            box-shadow 0 2px 6px rgba(53, 204, 51, 0.3)
-            transition all .3s ease-in-out
-
-
-    .service-delete
-        display block
-        color $red
+    .service-restart
+        display inline-block
+        color $fontGray
         line-height 1.75
-        margin-top 6px
-        margin-bottom -5px
-        font-size 1em
+        margin-bottom auto
+        font-size 1.2em
         font-family iran-yekan
         font-weight normal
-        background-color transparent
-        border 1px solid $red
-        border-radius 50px
+        background-color $colorAccent
+        border-radius 3px
         text-align center
         align-self start
-        padding 4px 24px
+        padding 8px 24px
+        margin-top 0
         cursor pointer
-        @media only screen and (max-width: 766px)
-            font-size 1.2em
-            display inline-block
-            float left
-            padding-right 24px
-            padding-left 24px
-            margin-top 0
 
-        &:hover
-            background-color $red
-            color $totalWhite
-            box-shadow 0 2px 6px rgba(253, 50, 80, 0.3)
-            transition all .3s ease-in-out
+    .service-delete
+        display inline-block
+        color $totalWhite
+        line-height 1.75
+        font-size 1.2em
+        font-family iran-yekan
+        font-weight normal
+        background-color $red
+        border-radius 3px
+        text-align center
+        align-self start
+        padding 8px 24px
+        margin-top 0
+        cursor pointer
+
 
     .service-spec
         color #7c7c7c
