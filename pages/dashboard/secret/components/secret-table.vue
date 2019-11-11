@@ -8,25 +8,18 @@
             </tr>
             <tr class="data-head" v-for="(item, index) in items" :key="index">
 
-                <td style="direction: ltr">{{item.name}}</td>
-                <td style="direction: ltr">{{!item.hidden ? item.value : '************'}}</td>
-                <td style="direction: ltr">{{item.secret ? item.secret : '---------'}}</td>
-                <td>
-                    <div :class="[item.hidden ? 'circle-border selected': 'circle-border']">
-                        <div :class="[item.hidden ? 'circle-fill selected': 'circle-fill']">
-                        </div>
-                    </div>
-                </td>
+                <td style="direction: ltr">{{item.key}}</td>
+                <td style="direction: ltr">**************</td>
                 <td class="more-button">
                     <div class="dropdown dropbtn" @click="notify(index)" style="display: flex; margin: auto">
-                        <img style="margin: auto; align-self: center" src="../../../assets/svg/more.svg"
+                        <img style="margin: auto; align-self: center" src="../../../../assets/svg/more.svg"
                              class="dropbtn" alt="more" @click="notify(index)">
 
                         <div :id="index" class="dropdown-content">
 
                             <a v-for="item_menu in menu" @click="item_menu.method(index)" :style="item_menu.style">
 
-                                <img :src="require('../../../static/icons/' + item_menu.icon)"
+                                <img :src="require('../../../../static/icons/' + item_menu.icon)"
                                      :alt="item_menu.title"/>
 
                                 {{item_menu.title}}
@@ -44,10 +37,12 @@
 
 <script>
     export default {
-        name: "env-table",
+        name: "secret-table",
         props: ['items', 'titles', 'menu', 'func'],
         methods: {
             notify(id) {
+                if (document.getElementById(id) === null)
+                    return;
                 var dropdowns = document.getElementsByClassName("dropdown-content");
                 var i;
                 for (i = 0; i < dropdowns.length; i++) {
@@ -56,6 +51,7 @@
                         openDropdown.classList.remove('show');
                     }
                 }
+
 
                 document.getElementById(id).classList.toggle("show");
             }
@@ -234,6 +230,6 @@
         transition all .3s ease-in-out
 
         &.selected
-                background-color #0045ff
+            background-color #0045ff
 
 </style>

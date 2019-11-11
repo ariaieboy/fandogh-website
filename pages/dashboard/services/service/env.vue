@@ -29,8 +29,14 @@
                     },
                     {
                         sortable: false,
-                        label: "مقدار",
+                        label: "مقدار متغیر",
                         key: "value",
+                        tdClass: "ellipsis ltr"
+                    },
+                    {
+                        sortable: false,
+                        label: "نام سکرت",
+                        key: "secret",
                         tdClass: "ellipsis ltr"
                     }
                 ],
