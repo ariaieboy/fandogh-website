@@ -35,7 +35,7 @@
                     },
                     {
                         sortable: false,
-                        label: "مقدار سکرت",
+                        label: "نام سکرت",
                         key: "secret",
                         tdClass: "ellipsis ltr"
                     }
