@@ -1,7 +1,9 @@
 kind: ExternalService
 name: fandogh-staging123123
 spec:
-  env: []
+  env:
+    - name: API
+      value: https://api.mahmole.com/fa
   image: start:${IMAGE_VERSION}
   image_pull_policy: IfNotPresent
   port: 80
