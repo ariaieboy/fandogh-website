@@ -130,10 +130,6 @@
         data() {
             return {
                 type: "docker-registry",
-                server: "",
-                username: "",
-                password: "",
-                email: "",
                 loading: false,
                 loadingProgress: false,
                 rules: {
@@ -213,8 +209,6 @@
         }, methods: {
             putSecret() {
                 this.loading = true;
-                console.log('mirese put')
-
 
                 if (this.rules.required(this.secret.server) !== true ||
                     this.rules.required(this.secret.username) !== true ||
@@ -283,8 +277,6 @@
                     });
             },
             createSecret() {
-
-                console.log('mirese')
 
                 if (this.rules.required(this.secret.name) !== true ||
                     this.rules.required(this.secret.server) !== true ||
