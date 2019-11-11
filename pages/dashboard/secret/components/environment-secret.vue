@@ -12,8 +12,8 @@
                         type="text"
                         dir="ltr"
                         :disabled="editing"
-                        @change="(secret_object.name = secret_object.name.trim())"
-                        v-model="secret_object.name"
+                        @change="(secret.name = secret.name.trim())"
+                        v-model="secret.name"
                         :hint="secret_obj.name.hint"
                         :label="secret_obj.name.label">
 
@@ -31,31 +31,11 @@
                         type="text"
                         dir="ltr"
                         :disabled="true"
-                        v-model="secret_object.type"
+                        v-model="secret.type"
                         :hint="secret_obj.type.hint"
                         :label="secret_obj.type.label">
 
                 </v-text-field>
-
-            </div>
-
-            <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                <v-text-field
-                        ref="key"
-                        :rules="[rules.redundant]"
-                        style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                        color="#0045ff"
-                        type="text"
-                        dir="ltr"
-                        @change="(secret_field.key = secret_field.key.trim())"
-                        v-model="secret_field.key"
-                        :hint="secret_obj.secret_key.hint"
-                        :label="secret_obj.secret_key.label">
-
-                </v-text-field>
-
-                <popover :tooltip="tooltips.secret_name"></popover>
 
             </div>
 
@@ -67,8 +47,8 @@
                         color="#0045ff"
                         type="text"
                         dir="ltr"
-                        @change="(secret_field.value = secret_field.value.trim())"
-                        v-model="secret_field.value"
+                        @change="(secret.value = secret.value.trim())"
+                        v-model="secret.value"
                         :hint="secret_obj.secret_value.hint"
                         :label="secret_obj.secret_value.label">
 
@@ -78,37 +58,16 @@
 
             </div>
 
-            <div class="secret-action-container">
-
-                <div class="edit">
-
-                    <span class="right create-env-button" @click="onSubmitClicked">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
-                    <span v-if="isEditing" style="margin-left: 16px" @click="cancelEdit"
-                          class="left cancel-button">{{'انصراف'}}</span>
-                </div>
-
-                <button v-if="editing" @click="putSecret"
-                        class="confirm">تایید ویرایش
-                </button>
-                <button v-else @click="createSecret"
-                        class="confirm">ایجاد سکرت جدید
-                </button>
-
-            </div>
-
         </div>
 
-        <div class="row" style="margin-top: 24px">
+        <div class="secret-action-container">
 
-            <secret-table
-                    :titles="titleRow"
-                    :items="secret_object.fields"
-                    :menu="menuList">
-                <span style="width: 100%; background-color: #EBF4FF; text-align: center; padding: 43px; font-family: iran-yekan; font-size: 1em;
-border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
-                متغیری ذخیره نشده است
-                    </span>
-            </secret-table>
+            <button v-if="editing" @click="putSecret"
+                    class="confirm">تایید ویرایش
+            </button>
+            <button v-else @click="createSecret"
+                    class="confirm">ایجاد سکرت جدید
+            </button>
 
         </div>
 
@@ -123,7 +82,7 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
     import ErrorReporter from "../../../../utils/ErrorReporter";
 
     export default {
-        name: "general-secret",
+        name: "environment-secret",
         props: {
             secret: {
                 type: Object,
@@ -144,15 +103,6 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         },
         data() {
             return {
-                secret_field: {
-                    key: null,
-                    value: null
-                },
-                secret_object: {
-                    name: null,
-                    type: null,
-                    fields: []
-                },
                 editing_index: -1,
                 isEditing: false,
                 allowed_name: null,
@@ -163,7 +113,6 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                     no_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
                     regex: value => new RegExp('^[a-zA-Z1-9_]+$').test(value) || 'فقط حروف کوچک، حروف بزرگ، underscore و اعداد معتبر هستند',
                     secret_regex: value => new RegExp('^[a-z0-9]+([-.a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)',
-                    redundant: value => (this.allowed_name === null ? this.secret_object.fields.filter(e => e.key === value).length === 0 : this.allowed_name === value || this.secret_object.fields.filter(e => e.key === value).length === 0) || 'نام متغیر تکراری است',
                 },
                 sections: {
                     create_env: 'ساخت Environment Variable',
@@ -208,108 +157,23 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                         default: '',
                         value: 'general'
                     },
-                    secret_key: {
-                        label: 'نام متغیر',
-                        hint: 'نام متغیری که قصد ساختن آن را دارید',
-                        default: '',
-                        value: null
-                    },
                     secret_value: {
                         label: 'مقدار متغیر',
                         hint: 'مقدار متغیری که قصد ساختن آن را دارید',
                         default: '',
                         value: null
                     }
-                },
-                titleRow: [
-                    {title: 'نام سکرت', width: '48%', name: 'key'},
-                    {title: 'مقدار سکرت', width: '48%', name: 'value'},
-                    {title: '', width: '4%', name: ''},
-
-                ],
-                menuList: [
-                    {method: this.editSecret, icon: 'ic-upload.svg', title: 'ویرایش متغیر', style: {}},
-                    {method: this.removeSecret, icon: 'ic_delete.svg', title: 'حذف  متغیر', style: {color: '#fd3259'}},
-                ]
-
+                }
             }
         },
         methods: {
-            editSecret(index) {
-                this.isEditing = true;
-                this.editing_index = index;
-                this.secret_field.key = this.secret_object.fields[index].key;
-                this.secret_field.value = this.secret_object.fields[index].value;
-                this.allowed_name = this.secret_object.fields[index].key
-                this.$refs.key.focus()
-            },
-            cancelEdit() {
-                this.isEditing = false;
-
-                this.secret_field.key = null;
-                this.secret_field.value = null;
-                this.allowed_name = null
-                this.editing_index = -1
-            },
-            removeSecret(index) {
-                this.secret_object.fields.splice(index, 1)
-            },
-            onHiddenClicked() {
-
-                this.hidden_obj.selected = !this.hidden_obj.selected
-            },
-            onSubmitClicked() {
-
-                if (this.secret_field.value === null) {
-                    this.$refs.value.focus();
-                    return;
-                }
-
-
-                if (this.secret_field.key.trim().length === 0) {
-                    this.$refs.key.focus();
-                    return;
-                }
-
-
-                if (this.secret_field.value.trim().length === 0) {
-                    this.$refs.value.focus();
-                    return;
-                }
-
-                if (this.rules.no_space(this.secret_field.key.trim()) !== true ||
-                    this.rules.regex(this.secret_field.key.trim()) !== true ||
-                    this.rules.redundant(this.secret_field.key.trim()) !== true) {
-                    this.$refs.key.focus();
-                    return;
-                }
-
-
-                if (this.isEditing) {
-                    this.secret_object.fields.splice(this.editing_index, 1, {
-                        key: this.secret_field.key,
-                        value: this.secret_field.value
-                    })
-                } else {
-                    this.secret_object.fields.push({
-                        key: this.secret_field.key,
-                        value: this.secret_field.value
-                    })
-                }
-
-                this.secret_field.key = null;
-                this.secret_field.value = null;
-                this.isEditing = false;
-                this.allowed_name = null;
-                this.editing_index = -1;
-
-            },
             putSecret() {
                 this.loading = true;
 
 
-                if (this.rules.required(this.secret_object.name) !== true ||
-                    this.rules.required(this.secret_object.type) !== true) {
+                if (this.rules.required(this.secret.name) !== true ||
+                    this.rules.required(this.secret.type) !== true ||
+                    this.rules.required(this.secret.value) !== true) {
 
                     this.$notify({
                         title: 'از پر بودن همه فیلدها اطمینان حاصل فرمایید!',
@@ -320,28 +184,12 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                     return
                 }
 
-                if (this.secret_object.fields.length === 0) {
-                    this.$notify({
-                        title: 'برای ساخت سکرت حداقل باید یک فیلد بسازید!',
-                        time: 4000,
-                        type: "error"
-                    });
-
-                    return
-                }
-
-                let final_fields = {};
-
-                this.secret_object.fields.forEach(item => {
-                    final_fields[item.key] = item.value
-                });
-
 
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 this.$store.dispatch("putSecret", {
-                    name: this.secret_object.name,
-                    type: this.secret_object.type,
-                    fields: final_fields
+                    name: this.secret.name,
+                    type: this.secret.type,
+                    fields: {SECRET_KEY: this.secret.value}
                 }).then(res => {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     this.$ga.event({
@@ -377,7 +225,8 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
             createSecret() {
 
 
-                if (this.rules.required(this.secret_object.name) !== true) {
+                if (this.rules.required(this.secret.name) !== true ||
+                    this.rules.required(this.secret.value) !== true) {
 
                     this.$notify({
                         title: 'از پر بودن همه فیلدها اطمینان حاصل فرمایید!',
@@ -388,7 +237,7 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                     return
                 }
 
-                if (this.rules.secret_regex(this.secret_object.name) !== true) {
+                if (this.rules.secret_regex(this.secret.name) !== true) {
 
                     this.$notify({
                         title: 'نام سکرت صحیح نیست!',
@@ -400,29 +249,13 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
 
                 }
 
-                if ([...this.secret_object.fields].length === 0) {
-                    this.$notify({
-                        title: 'برای ساخت سکرت حداقل باید یک فیلد بسازید!',
-                        time: 4000,
-                        type: "error"
-                    });
-
-                    return
-                }
-
-                let final_fields = {};
-
-                this.secret_object.fields.forEach(item => {
-                    final_fields[item.key] = item.value
-                });
-
 
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 this.$store
                     .dispatch("createSecret", {
-                        name: this.secret_object.name,
-                        type: this.secret_object.type,
-                        fields: final_fields
+                        name: this.secret.name,
+                        type: this.secret.type,
+                        fields: {SECRET_KEY: this.secret.value}
                     })
                     .then(res => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -452,17 +285,6 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                         });
                     });
             }
-        }, created() {
-
-            this.secret_object.name = this.secret.name;
-            this.secret_object.type = this.secret.type;
-            Object.keys({...this.secret.fields}).map((key) => {
-                let temp = {};
-                temp['key'] = key;
-                temp['value'] = atob(this.secret.fields[key]);
-                this.secret_object.fields.push(temp)
-            });
-
         }
     }
 </script>
@@ -486,10 +308,8 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         margin-top 16px
         width 100%
 
-        div.edit
-            margin-left auto
-
         button.confirm
+            margin-left auto
             margin-right auto
             max-width: 300px;
             background: #00E5FF;
