@@ -4,7 +4,7 @@
             <h2 class="title_header">ویرایش سکرت</h2>
 
             <docker-secret :secret="secret" :editing="true" v-if="secret && secret.type === 'docker-registry'"></docker-secret>
-            <general-secret v-else-if="secret && secret.type === 'general'" :secret="secret" :editing="true"></general-secret>
+            <general-secret v-else-if="secret && secret.type === 'environment-secret'" :secret="secret" :editing="true"></general-secret>
         </div>
     </div>
 </template>
@@ -12,7 +12,7 @@
 <script>
     import RoleAccessHandler from "../../../../utils/RoleAccessHandler";
     import DockerSecret from "../components/docker-secret";
-    import GeneralSecret from "../components/general-secret";
+    import GeneralSecret from "../components/environment-secret";
 
     export default {
         layout: "dashboard",
@@ -55,7 +55,6 @@
                 try {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     this.secret = await this.$store.dispatch("getSecretDetails", this.name);
-                    console.log(this.secret)
                 }catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (e.status === 401) {
