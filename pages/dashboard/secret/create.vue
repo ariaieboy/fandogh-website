@@ -8,15 +8,13 @@
                 <div v-for="(item, index) in secret_types"
                      @click="selectedSecret(index)"
                      :class="[item.selected === true ? 'type-selected' : 'type-unselected']">
-
                     <span>{{item.title}}</span>
-
                 </div>
 
             </div>
 
             <docker-secret :secret="selected_secret_type.secret" :editing="false" v-if="selected_secret_type.type === 'docker-registry'"></docker-secret>
-            <general-secret :secret="selected_secret_type.secret" :editing="false" v-else></general-secret>
+            <environment-secret :secret="selected_secret_type.secret" :editing="false" v-else></environment-secret>
         </div>
     </div>
 </template>
@@ -25,11 +23,10 @@
     import {formData} from "~/utils/formData";
     import ProgressBar from "~/components/Dashboard/progress-bar";
     import ErrorReporter from "~/utils/ErrorReporter";
-    import FormValidator from "~/utils/formValidator";
     import Popover from "../../../components/wizard/tooltip/popover";
     import RoleAccessHandler from "../../../utils/RoleAccessHandler";
     import DockerSecret from "./components/docker-secret";
-    import GeneralSecret from "./components/general-secret";
+    import EnvironmentSecret from "./components/environment-secret";
 
     export default {
         layout: "dashboard",
@@ -71,13 +68,13 @@
                             password: null
                         }
                     }, {
-                        type: 'general',
+                        type: 'environment-secret',
                         selected: false,
-                        title: 'General',
+                        title: 'Environment',
                         secret: {
-                            type: 'general',
+                            type: 'environment-secret',
                             name: null,
-                            fields: {},
+                            value: null
                         }
                     }
                 ],
@@ -145,7 +142,7 @@
             }
         },
         components: {
-            GeneralSecret,
+            EnvironmentSecret,
             DockerSecret,
             ProgressBar,
             Popover
