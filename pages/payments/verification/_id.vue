@@ -55,9 +55,13 @@
         mounted() {
             this.$store.commit("SET_DATA", {data: true, id: "loading"});
             this.verifyPayment();
+            window.onbeforeunload = function() {
+                return "You can not refresh payment verification page, it may result in data loss!";
+            }
         }, methods: {
             async verifyPayment() {
 
+                console.log('verification called: ' + Date.now());
                 let id = this.$route.params['id'];
                 let ref = this.$route.query['refid'];
 

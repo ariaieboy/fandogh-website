@@ -578,7 +578,16 @@
                 let temp = this.planData.memory * 60000 + (this.planData.dedicatedVolume >= 10 ? this.planData.dedicatedVolume * 1200 : 0);
                 return temp.toLocaleString()
             }, fixedTotal() {
-                return Math.fround(this.quota.memory_limit / 1024) * 60000 + this.quota.volume_limit * 1200;
+                let total = 0;
+                if (this.quota.memory_limit > 400) {
+                    total += Math.fround(this.quota.memory_limit / 1024) * 60000
+                }
+
+                if (this.quota.volume_limit > 0) {
+                    total += this.quota.volume_limit * 1200;
+                }
+
+                return total
             }
         },
         loading() {
