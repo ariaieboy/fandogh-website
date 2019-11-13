@@ -237,7 +237,6 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
             },
             cancelEdit() {
                 this.isEditing = false;
-
                 this.manifest_model.environment_variable.name = null;
                 this.manifest_model.environment_variable.value = null;
                 this.manifest_model.environment_variable.secret = null;
