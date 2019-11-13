@@ -32,7 +32,14 @@
 
                         </div>
 
-                        <div style="display: flex;">
+                        <div class="env-value-selector-container">
+                            <p v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر را باید به صورت مستقیم تایپ نمایید.'" @click="onSecretClicked(false)" :class="{'selected' : !secret_obj.selected}">مقدار مستقیم</p>
+                            <p v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر از سکرتی که اسم آن را تایپ می‌کنید، خوانده می‌شود.'" @click="onSecretClicked(true)" :class="{'selected' : secret_obj.selected}">مقدار سکرت</p>
+                            <div></div>
+                        </div>
+
+                        <div style="display: flex;"
+                             :style="{display: !secret_obj.selected ? 'flex' : 'none'}">
 
                             <v-text-field
                                     ref="value"
@@ -41,7 +48,6 @@
                                     color="#0045ff"
                                     type="text"
                                     dir="ltr"
-                                    :disabled="secret_obj.selected"
                                     v-model="manifest_model.environment_variable.value"
                                     @change="(manifest_model.environment_variable.value = manifest_model.environment_variable.value.trim())"
                                     :hint="env_obj.value_hint"
@@ -52,7 +58,9 @@
                             <popover :tooltip="tooltips.env_value"></popover>
 
                         </div>
-                        <div style="display: flex;">
+
+                        <div style="display: flex;"
+                             :style="{display: secret_obj.selected ? 'flex' : 'none'}">
 
                             <v-text-field
                                     ref="secret"
@@ -61,7 +69,6 @@
                                     color="#0045ff"
                                     type="text"
                                     dir="ltr"
-                                    :disabled="!secret_obj.selected"
                                     @change="(manifest_model.environment_variable.secret = manifest_model.environment_variable.secret.trim())"
                                     v-model="manifest_model.environment_variable.secret"
                                     :hint="env_obj.secret_hint"
@@ -75,15 +82,10 @@
 
                         <div style="display: inline-block; margin-top: 16px; width: 100%">
 
-                            <div style="margin-bottom: 16px">
-                                <fan-checkbox @click.native="onHiddenClicked"
-                                              v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر در مانیفست hidden خواهد شد'"
-                                              :object="hidden_obj"></fan-checkbox>
-
-                                <fan-checkbox @click.native="onSecretClicked"
-                                              v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر از سکرتی که اسم آن را نوشته‌اید خوانده می‌شود.'"
-                                              :object="secret_obj"></fan-checkbox>
-                            </div>
+                            <fan-checkbox @click.native="onHiddenClicked"
+                                          :style="{display: secret_obj.selected ? 'none' : 'inline-flex'}"
+                                          v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر در مانیفست hidden خواهد شد'"
+                                          :object="hidden_obj"></fan-checkbox>
 
                             <span class="left create-env-button" @click="onSubmitClicked">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
                             <span v-if="isEditing" style="margin-left: 16px" @click="cancelEdit"
@@ -227,7 +229,6 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 let secret = this.manifest_model.environment_variable.env_list[index].secret;
                 this.manifest_model.environment_variable.secret = secret ? secret : null;
                 this.hidden_obj.selected = this.manifest_model.environment_variable.env_list[index].hidden;
-                console.log(this.manifest_model.environment_variable.env_list[index].secret)
                 this.secret_obj.selected = !!this.manifest_model.environment_variable.env_list[index].secret;
 
                 this.allowed_name = this.manifest_model.environment_variable.env_list[index].name;
@@ -252,13 +253,13 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
             onHiddenClicked() {
                 this.hidden_obj.selected = !this.hidden_obj.selected
             },
-            onSecretClicked() {
-                if (!this.secret_obj.selected) {
+            onSecretClicked(activated) {
+                if (!activated) {
                     this.manifest_model.environment_variable.value = null;
                 } else {
                     this.manifest_model.environment_variable.secret = null;
                 }
-                this.secret_obj.selected = !this.secret_obj.selected;
+                this.secret_obj.selected = activated
 
             },
             addToManifest(value, path) {
@@ -380,6 +381,8 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
 
 <style lang="stylus" scoped>
 
+    @import "../../../../assets/css/variables.styl"
+
     .create-env-button
         font-size .9em
         color #fefefe
@@ -391,5 +394,36 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         user-select none
         box-shadow 0 1px 3px 0 rgba(36, 213, 216, 0.3), 0 1px 5px 0 rgba(36, 213, 216, 0.6)
         float: left
+
+    .env-value-selector-container
+        margin-top 24px
+        margin-bottom 16px
+        display flex
+
+        div
+            background-color $grayMedium
+            height 1px
+            width 100%
+            margin-top auto
+
+        p
+            color #7c7c7c
+            padding-left 24px
+            font-family iran-yekan
+            margin-bottom 0
+            min-width max-content
+            cursor pointer
+            font-size .9em
+            position relative
+            transition all .2s ease-in-out
+            border-bottom 1px solid $grayMedium
+
+            &.selected
+                color $colorPrimary
+                border-bottom 1px solid $colorPrimary
+
+        p:hover
+            color $colorPrimary
+            border-bottom 1px solid $colorPrimary
 
 </style>
