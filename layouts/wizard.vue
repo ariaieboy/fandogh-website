@@ -317,6 +317,7 @@
                     environment_variable: {
                         name: '',
                         value: '',
+                        secret: null,
                         env_list: []
                     },
                     port_mapping: {
@@ -1622,7 +1623,7 @@
     .cancel-button
         font-size .9em
         color $grayMedium
-        padding 8px 16px
+        padding 12px 24px
         border-radius 3px
         font-family iran-yekan
         cursor pointer

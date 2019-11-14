@@ -7,7 +7,7 @@
         <img src="../../../assets/svg/ic-fandogh-mini.svg" alt="logo">
       </router-link>
     </div>
-    <div @click="$router.replace('/')" style="cursor: pointer; width: 100%; height: 100%; max-width: 150px; display: flex; background: #fd3259; padding: 0 16px;">
+    <div @click="$router.replace('/dashboard/services')" style="cursor: pointer; width: 100%; height: 100%; max-width: 150px; display: flex; background: #fd3259; padding: 0 16px;">
           <p style="font-size: 1.2em; color: #fefefe; margin-top: auto; margin-bottom: auto;flex: 1; padding-left: 12px; font-weight: bold; text-align: center">انصراف</p>
           <img src="./icons/turn-off.svg" width="24" height="24" style="filter: invert(100%); margin-top: auto; margin-bottom: auto">
     </div>
