@@ -32,7 +32,13 @@
 
                         </div>
 
-                        <div style="display: flex;">
+                        <div class="env-value-selector-container">
+                            <p v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر را باید به صورت مستقیم تایپ نمایید.'" @click="onSecretClicked(false)" :class="{'selected' : !secret_obj.selected}">مقدار مستقیم</p>
+                            <p v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر از سکرتی که اسم آن را تایپ می‌کنید، خوانده می‌شود.'" @click="onSecretClicked(true)" :class="{'selected' : secret_obj.selected}">مقدار سکرت</p>
+                        </div>
+
+                        <div style="display: flex;"
+                             :style="{display: !secret_obj.selected ? 'flex' : 'none'}">
 
                             <v-text-field
                                     ref="value"
@@ -52,14 +58,40 @@
 
                         </div>
 
+                        <div style="display: flex;"
+                             :style="{display: secret_obj.selected ? 'flex' : 'none'}">
+
+                            <div class="fandogh-form-group"
+                                 style="display: block; width: 100%; margin-left: -15px; margin-bottom: 16px;">
+                                <label style="font-size: 12px; color: #6c6c6c; margin-bottom: 7px; z-index: 1002; position: relative;">{{env_obj.secret_label}}</label>
+                                <v-select
+                                        ref="secret_selector"
+                                        style="height: 38px; font-family: iran-yekan;margin-top: -5px; position: relative; z-index: 1001;"
+                                        dir="rtl"
+                                        :clearable="clearable"
+                                        :options="secretList"
+                                        v-model="manifest_model.environment_variable.secret"
+                                        language="en-US"
+                                        :searchable="searchable"
+                                        :placeholder="env_obj.secret_hint">
+                                </v-select>
+
+                            </div>
+
+                            <popover style="z-index: 1001" :tooltip="tooltips.secret"></popover>
+
+                        </div>
+
                         <div style="display: inline-block; margin-top: 16px; width: 100%">
 
                             <fan-checkbox @click.native="onHiddenClicked"
+                                          :style="{display: secret_obj.selected ? 'none' : 'inline-flex'}"
                                           v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر در مانیفست hidden خواهد شد'"
                                           :object="hidden_obj"></fan-checkbox>
 
                             <span class="left create-env-button" @click="onSubmitClicked">{{(isEditing ? 'بروزرسانی متغیر' : 'افزودن به جدول')}}</span>
-                            <span v-if="isEditing" style="margin-left: 16px" @click="cancelEdit" class="left cancel-button">{{'انصراف'}}</span>
+                            <span v-if="isEditing" style="margin-left: 16px" @click="cancelEdit"
+                                  class="left cancel-button">{{'انصراف'}}</span>
 
                         </div>
 
@@ -103,7 +135,7 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 required: true
             }
         },
-        model:{
+        model: {
             prop: 'manifest_model',
         },
         components: {
@@ -116,14 +148,18 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         data() {
             return {
 
+                searchable: true,
+                clearable: true,
                 editing_index: -1,
                 isEditing: false,
                 allowed_name: null,
                 rules: {
                     name_required: value => !!value.trim() || 'نام متغیر نمی‌تواند خالی باشد',
-                    value_required: value => !!value.trim() || 'مقدار متغیر نمی‌تواند خالی باشد',
+                    value_required: value => !!value.trim() || !this.secret_obj.selected || 'مقدار متغیر نمی‌تواند خالی باشد',
+                    secret_required: value => !!value.trim() || this.secret_obj.selected || 'مقدار متغیر نمی‌تواند خالی باشد',
                     no_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
                     regex: value => new RegExp('^[a-zA-Z1-9_]+$').test(value) || 'فقط حروف کوچک، حروف بزرگ، underscore و اعداد معتبر هستند',
+                    secret_regex: value => new RegExp('^[a-z0-9]+([-.a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)',
                     redundant: value => (this.allowed_name === null ? this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0 : this.allowed_name === value || this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0) || 'مقدار تکراری است',
                 },
                 sections: {
@@ -144,26 +180,40 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                         title: 'مقدار متغیر',
                         text: 'مقداری که قصد دارید به متغیر جدید تعلق گیرد',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
+                    },
+                    secret: {
+                        title: 'مقدار سکرت',
+                        text: 'اگر قصد دارید مقدار env از سکرت خوانده شود و کسی به مقادیر دسترسی نداشته باشد، با گذاشتن نام سکرتی که مقادیر در آن ذخیره شده است می‌توانید این کار را انجام دهید.',
+                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#env'
                     }
                 },
                 env_obj: {
                     key_label: 'نام متغیر',
                     value_label: 'مقدار متغیر',
+                    secret_label: 'نام سکرت',
                     key_hint: 'نام متغیر را وارد نمایید',
+                    secret_hint: 'نام سکرت را وارد نمایید',
                     value_hint: 'مقدار متغیر را وارد نمایید',
                     default: '',
                     key: '',
-                    value: ''
+                    value: '',
+                    secret: ''
                 },
                 hidden_obj: {
                     label: "مقدار محرمانه",
                     value: "hidden",
                     selected: false
                 },
+                secret_obj: {
+                    label: 'سکرت',
+                    value: 'secret',
+                    selected: false
+                },
                 titleRow: [
-                    {title: 'نام متغیر', width: '40%', name: 'key'},
-                    {title: 'مقدار متغیر', width: '40%', name: 'value'},
-                    {title: 'محرمانه', width: '16%', name: 'hidden'},
+                    {title: 'نام متغیر', width: '28%', name: 'key'},
+                    {title: 'مقدار متغیر', width: '28%', name: 'value'},
+                    {title: 'نام سکرت', width: '28%', name: 'secret'},
+                    {title: 'محرمانه', width: '12%', name: 'hidden'},
                     {title: '', width: '4%', name: ''},
 
                 ],
@@ -176,23 +226,28 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         },
         methods: {
             editEnv(index) {
-                this.isEditing = true
-                this.editing_index = index
-                this.manifest_model.environment_variable.name = this.manifest_model.environment_variable.env_list[index].name
-                this.manifest_model.environment_variable.value = this.manifest_model.environment_variable.env_list[index].value
-                this.hidden_obj.selected = this.manifest_model.environment_variable.env_list[index].hidden
+                this.isEditing = true;
+                this.editing_index = index;
+                this.manifest_model.environment_variable.name = this.manifest_model.environment_variable.env_list[index].name;
+                this.manifest_model.environment_variable.value = this.manifest_model.environment_variable.env_list[index].value;
+                let secret = this.manifest_model.environment_variable.env_list[index].secret;
+                this.manifest_model.environment_variable.secret = secret ? secret : null;
+                this.hidden_obj.selected = this.manifest_model.environment_variable.env_list[index].hidden;
+                this.secret_obj.selected = !!this.manifest_model.environment_variable.env_list[index].secret;
 
-                this.allowed_name =  this.manifest_model.environment_variable.env_list[index].name
+                this.allowed_name = this.manifest_model.environment_variable.env_list[index].name;
 
                 this.$refs.key.focus()
             },
-            cancelEdit(){
-                this.isEditing = false
+            cancelEdit() {
+                this.isEditing = false;
 
                 this.manifest_model.environment_variable.name = null;
                 this.manifest_model.environment_variable.value = null;
+                this.manifest_model.environment_variable.secret = null;
                 this.hidden_obj.selected = false;
-                this.allowed_name = null
+                this.allowed_name = null;
+                this.secret_obj.selected = false;
 
                 this.editing_index = -1
             },
@@ -200,8 +255,16 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 this.manifest_model.environment_variable.env_list.splice(index, 1)
             },
             onHiddenClicked() {
-
                 this.hidden_obj.selected = !this.hidden_obj.selected
+            },
+            onSecretClicked(activated) {
+                if (!activated) {
+                    this.manifest_model.environment_variable.value = null;
+                } else {
+                    this.manifest_model.environment_variable.secret = null;
+                }
+                this.secret_obj.selected = activated
+
             },
             addToManifest(value, path) {
                 this.$store.dispatch('manifestGenerator', {
@@ -217,54 +280,90 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
             onSubmitClicked() {
 
                 if (this.manifest_model.environment_variable.name === null) {
-                    this.$refs.key.focus()
+                    this.$refs.key.focus();
                     return;
                 }
 
-                if (this.manifest_model.environment_variable.value === null) {
-                    this.$refs.value.focus()
+
+                if (this.manifest_model.environment_variable.value === null && !this.secret_obj.selected) {
+                    this.$refs.value.focus();
+                    return;
+                }
+
+
+                if (this.manifest_model.environment_variable.secret === null && this.secret_obj.selected) {
+                    this.$refs.secret.focus();
                     return;
                 }
 
 
                 if (this.manifest_model.environment_variable.name.trim().length === 0) {
-                    this.$refs.key.focus()
-                    return;
-                }
-
-                if(this.rules.no_space(this.manifest_model.environment_variable.name.trim()) !== true ||
-                this.rules.regex(this.manifest_model.environment_variable.name.trim()) !== true ||
-                this.rules.redundant(this.manifest_model.environment_variable.name.trim()) !== true){
-                    this.$refs.key.focus()
+                    this.$refs.key.focus();
                     return;
                 }
 
 
-                if (this.manifest_model.environment_variable.value.trim().length === 0) {
-                    this.$refs.value.focus()
+                if (this.rules.no_space(this.manifest_model.environment_variable.name.trim()) !== true ||
+                    this.rules.regex(this.manifest_model.environment_variable.name.trim()) !== true ||
+                    this.rules.redundant(this.manifest_model.environment_variable.name.trim()) !== true) {
+                    this.$refs.key.focus();
                     return;
+                }
+
+
+                if (!this.secret_obj.selected) {
+                    if (this.manifest_model.environment_variable.value.trim().length === 0) {
+                        this.$refs.value.focus();
+                        return;
+                    }
+                }
+
+
+                if (this.secret_obj.selected) {
+                    if (this.manifest_model.environment_variable.secret.trim().length === 0) {
+                        this.$refs.secret.focus();
+                        return;
+                    }
                 }
 
 
                 if (this.isEditing) {
-                    this.manifest_model.environment_variable.env_list.splice(this.editing_index, 1, {
-                        name: this.manifest_model.environment_variable.name.trim(),
-                        value: this.manifest_model.environment_variable.value.trim(),
-                        hidden: this.hidden_obj.selected
-                    })
+                    if (this.secret_obj.selected) {
+                        this.manifest_model.environment_variable.env_list.splice(this.editing_index, 1, {
+                            name: this.manifest_model.environment_variable.name.trim(),
+                            secret: this.manifest_model.environment_variable.secret,
+                            hidden: this.hidden_obj.selected
+                        })
+                    } else {
+                        this.manifest_model.environment_variable.env_list.splice(this.editing_index, 1, {
+                            name: this.manifest_model.environment_variable.name.trim(),
+                            value: this.manifest_model.environment_variable.value.trim(),
+                            hidden: this.hidden_obj.selected
+                        })
+                    }
                 } else {
-                    this.manifest_model.environment_variable.env_list.push({
-                        name: this.manifest_model.environment_variable.name.trim(),
-                        value: this.manifest_model.environment_variable.value.trim(),
-                        hidden: this.hidden_obj.selected
-                    })
+                    if (this.secret_obj.selected) {
+                        this.manifest_model.environment_variable.env_list.push({
+                            name: this.manifest_model.environment_variable.name.trim(),
+                            secret: this.manifest_model.environment_variable.secret,
+                            hidden: this.hidden_obj.selected
+                        })
+                    } else {
+                        this.manifest_model.environment_variable.env_list.push({
+                            name: this.manifest_model.environment_variable.name.trim(),
+                            value: this.manifest_model.environment_variable.value.trim(),
+                            hidden: this.hidden_obj.selected
+                        })
+                    }
                 }
 
-                this.manifest_model.environment_variable.value = null
-                this.manifest_model.environment_variable.name = null
-                this.hidden_obj.selected = false
-                this.isEditing = false
-                this.editing_index = -1
+                this.manifest_model.environment_variable.value = null;
+                this.manifest_model.environment_variable.name = null;
+                this.manifest_model.environment_variable.secret = null;
+                this.hidden_obj.selected = false;
+                this.secret_obj.selected = false;
+                this.isEditing = false;
+                this.editing_index = -1;
                 this.allowed_name = null
 
             }
@@ -273,18 +372,28 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
             'manifest_model.environment_variable.env_list': {
                 handler: function (value, oldValue) {
                     if (value.length === 0)
-                        this.deleteFromManifest('spec.env')
+                        this.deleteFromManifest('spec.env');
                     else
                         this.addToManifest(value, 'spec.env')
 
                 }, deep: true
             }
         },
-        computed: {},
+        computed: {
+            secretList() {
+                if (!this.$store.state.secrets) return [];
+                return this.$store.state.secrets.map(item => {
+                    if( item.type === 'environment-secret')
+                        return item.name
+                });
+            }
+        },
     }
 </script>
 
 <style lang="stylus" scoped>
+
+    @import "../../../../assets/css/variables.styl"
 
     .create-env-button
         font-size .9em
@@ -297,5 +406,39 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         user-select none
         box-shadow 0 1px 3px 0 rgba(36, 213, 216, 0.3), 0 1px 5px 0 rgba(36, 213, 216, 0.6)
         float: left
+
+    .env-value-selector-container
+        margin-top 24px
+        margin-bottom 16px
+        display flex
+
+        p
+            color #7c7c7c
+            text-align center
+            font-family iran-yekan
+            margin-bottom 0
+            min-width 130px
+            cursor pointer
+            height 34px
+            line-height 34px
+            font-size .9em
+            position relative
+            transition all .2s ease-in-out
+
+            @media only screen and (max-width 992px)
+                font-size 1em
+                min-width 120px
+
+            &.selected
+                color $totalWhite
+                background-color rgba(0, 69, 255, 0.7)
+                border-right 5px solid $colorPrimary
+                border-left 5px solid $colorPrimary
+
+            &.selected:hover
+                color $totalWhite
+
+        p:hover
+            color $colorPrimary
 
 </style>

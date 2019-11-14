@@ -374,7 +374,8 @@
             secretList() {
                 if (!this.$store.state.secrets) return [];
                 return this.$store.state.secrets.map(item => {
-                    return item.name
+                    if (item.type !== 'environment-secret')
+                        return item.name
                 });
             },
         },
