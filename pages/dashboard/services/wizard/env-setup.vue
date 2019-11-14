@@ -63,7 +63,7 @@
 
                             <div class="fandogh-form-group"
                                  style="display: block; width: 100%; margin-left: -15px; margin-bottom: 16px;">
-                                <label style="font-size: 12px; color: #6c6c6c; margin-bottom: 7px; z-index: 1002; position: relative;">{{manifest_model.image.secret_obj.label}}</label>
+                                <label style="font-size: 12px; color: #6c6c6c; margin-bottom: 7px; z-index: 1002; position: relative;">{{env_obj.secret_label}}</label>
                                 <v-select
                                         ref="secret_selector"
                                         style="height: 38px; font-family: iran-yekan;margin-top: -5px; position: relative; z-index: 1001;"
@@ -414,23 +414,31 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
 
         p
             color #7c7c7c
-            padding-left 16px
-            padding-right 16px
+            text-align center
             font-family iran-yekan
             margin-bottom 0
-            min-width max-content
+            min-width 130px
             cursor pointer
+            height 34px
+            line-height 34px
             font-size .9em
             position relative
             transition all .2s ease-in-out
-            border-bottom 1px solid $grayMedium
+
+            @media only screen and (max-width 992px)
+                font-size 1em
+                min-width 120px
 
             &.selected
-                color $colorPrimary
-                border-bottom 1px solid $colorPrimary
+                color $totalWhite
+                background-color rgba(0, 69, 255, 0.7)
+                border-right 5px solid $colorPrimary
+                border-left 5px solid $colorPrimary
+
+            &.selected:hover
+                color $totalWhite
 
         p:hover
             color $colorPrimary
-            border-bottom 1px solid $colorPrimary
 
 </style>
