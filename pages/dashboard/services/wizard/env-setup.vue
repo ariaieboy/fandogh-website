@@ -35,7 +35,6 @@
                         <div class="env-value-selector-container">
                             <p v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر را باید به صورت مستقیم تایپ نمایید.'" @click="onSecretClicked(false)" :class="{'selected' : !secret_obj.selected}">مقدار مستقیم</p>
                             <p v-tooltip="'در صورت فعال کردن این گزینه، مقدار متغیر از سکرتی که اسم آن را تایپ می‌کنید، خوانده می‌شود.'" @click="onSecretClicked(true)" :class="{'selected' : secret_obj.selected}">مقدار سکرت</p>
-                            <div></div>
                         </div>
 
                         <div style="display: flex;"
@@ -62,21 +61,24 @@
                         <div style="display: flex;"
                              :style="{display: secret_obj.selected ? 'flex' : 'none'}">
 
-                            <v-text-field
-                                    ref="secret"
-                                    :rules="[rules.secret_required, rules.secret_regex, rules.no_space]"
-                                    style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; padding-left: 0;"
-                                    color="#0045ff"
-                                    type="text"
-                                    dir="ltr"
-                                    @change="(manifest_model.environment_variable.secret = manifest_model.environment_variable.secret.trim())"
-                                    v-model="manifest_model.environment_variable.secret"
-                                    :hint="env_obj.secret_hint"
-                                    :label="env_obj.secret_label">
+                            <div class="fandogh-form-group"
+                                 style="display: block; width: 100%; margin-left: -15px; margin-bottom: 16px;">
+                                <label style="font-size: 12px; color: #6c6c6c; margin-bottom: 7px; z-index: 1002; position: relative;">{{manifest_model.image.secret_obj.label}}</label>
+                                <v-select
+                                        ref="secret_selector"
+                                        style="height: 38px; font-family: iran-yekan;margin-top: -5px; position: relative; z-index: 1001;"
+                                        dir="rtl"
+                                        :clearable="clearable"
+                                        :options="secretList"
+                                        v-model="manifest_model.environment_variable.secret"
+                                        language="en-US"
+                                        :searchable="searchable"
+                                        :placeholder="env_obj.secret_hint">
+                                </v-select>
 
-                            </v-text-field>
+                            </div>
 
-                            <popover :tooltip="tooltips.secret"></popover>
+                            <popover style="z-index: 1001" :tooltip="tooltips.secret"></popover>
 
                         </div>
 
@@ -146,6 +148,8 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         data() {
             return {
 
+                searchable: true,
+                clearable: true,
                 editing_index: -1,
                 isEditing: false,
                 allowed_name: null,
@@ -375,7 +379,15 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
                 }, deep: true
             }
         },
-        computed: {},
+        computed: {
+            secretList() {
+                if (!this.$store.state.secrets) return [];
+                return this.$store.state.secrets.map(item => {
+                    if( item.type === 'environment-secret')
+                        return item.name
+                });
+            }
+        },
     }
 </script>
 
@@ -400,15 +412,10 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
         margin-bottom 16px
         display flex
 
-        div
-            background-color $grayMedium
-            height 1px
-            width 100%
-            margin-top auto
-
         p
             color #7c7c7c
-            padding-left 24px
+            padding-left 16px
+            padding-right 16px
             font-family iran-yekan
             margin-bottom 0
             min-width max-content
