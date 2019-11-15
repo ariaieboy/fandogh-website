@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
 import FAvatar from './avatar'
 import hamburgerMenu from '~/components/Dashboard/sidebar/hamburger-menu'
 
