@@ -267,6 +267,7 @@ export const getServices = async ({commit, state}) => {
         return Promise.reject(e);
     }
 };
+
 export const getServiceLog = async ({commit, state}, {name}) => {
     try {
         let logs = await Request().get(`/api/services/${name}/logs`);
@@ -276,6 +277,7 @@ export const getServiceLog = async ({commit, state}, {name}) => {
         return Promise.reject(e);
     }
 };
+
 export const getServicesName = async ({commit, state}, {name}) => {
     try {
         let services = await Request().get(`/api/services/${name}`);
@@ -285,6 +287,7 @@ export const getServicesName = async ({commit, state}, {name}) => {
         return Promise.reject(e);
     }
 };
+
 export const deleteService = async ({commit, state}, name) => {
     try {
         return await Request().delete(`/api/services/${name}`);
@@ -312,6 +315,20 @@ export const requestServiceRollback = async ({commit, state}, {service_name, his
         return await Request().post(`/api/services/rollbacks`, {
             service_name: service_name,
             history_id: history_id
+        })
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+
+export const performServiceAction = async ({commit, state}, {service_name, service_action}) => {
+
+    try {
+
+        return await Request().post(`/api/services/${service_name}/actions`, {
+            action: service_action
         })
 
     } catch (e) {
