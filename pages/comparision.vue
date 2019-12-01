@@ -42,12 +42,14 @@
 
     import FandoghCompetitors from '../components/Landing/comparision/fandogh-competitors'
     import InfraServicesSchema from '../components/Landing/comparision/infra-services-schema'
+    import VpsVSPaaS from '../components/Landing/comparision/vps-vs-paas'
 
     export default {
         name: "comparision",
         components: {
             FandoghCompetitors,
-            InfraServicesSchema
+            InfraServicesSchema,
+            VpsVSPaaS
 
         },
         data() {
@@ -89,7 +91,7 @@
                         title: 'قیاس VPS و PaaS',
                         description: 'سکوی ابری فندق یک PaaS یا Platform as a Service به حساب می‌آید که به کاربران در هر سطحی این امکان را میدهد تا محصولات نرم‌افزاری خود را بر روی سرورهای ابری مستقر کنند، بدون آنکه نیازی به دانش فنی زیرساخت داشته باشند. همچنین سکوی ابری فندق مدیریت تمام زیرساخت را برای شما انجام می‌دهد و شما می‌توانید مثل گذشته تمام تمرکز خود را بر روی توسعه محصول خود بگذارید و نگران موارد زیرساختی نباشید.' +
                             '<br/><br/>برای شروع از قیاس رقیبان خارجی فندق شروع می‌کنیم که در جدول زیر عمده تفاوت‌ها و شباهت‌های سکوی ابری فندق با ۲ رقیب فدرتمند خود یعنی sloppy.io و heroku  را مشاهده می‌کنید.\n',
-                        section_name: '',
+                        section_name: 'VpsVSPaaS',
                     },
                 ]
             }

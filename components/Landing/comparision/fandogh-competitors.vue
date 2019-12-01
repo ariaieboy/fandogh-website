@@ -93,7 +93,7 @@
                         is_boolean: true,
                         fandogh: false,
                         sloppy: true,
-                        heroku: true
+                        heroku: false
                     },
                     {
                         title: 'CLI',
