@@ -62,15 +62,9 @@
 </template>
 
 <script>
-    import TableHeader from "../../Dashboard/home/children/table-header";
-    import TableTitle from "../../Dashboard/home/children/table-title";
 
     export default {
         name: "fandogh-competitors",
-        components: {
-            TableHeader,
-            TableTitle
-        },
         data() {
             return {
                 headers: [

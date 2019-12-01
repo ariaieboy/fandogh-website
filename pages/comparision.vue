@@ -1,5 +1,5 @@
 <template>
-    <div class="row" style="background: #F8FAFF; padding-bottom: 64px; margin-left: 0; margin-right: 0; display: flex; flex-direction: column">
+    <div class="row" style="background: #F8FAFF; padding-bottom: 128px; margin-left: 0; margin-right: 0; display: flex; flex-direction: column">
         <div class="audience-container container-fluid">
 
             <div class="audience-inner-container">
@@ -27,7 +27,7 @@
 
         </div>
 
-        <div style="max-width: 1750px;" class="container-fluid">
+        <div style="max-width: 1750px; width: 100%" class="container-fluid">
 
             <component :is="comp_sections[selected_index].section_name"
                        class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
@@ -41,11 +41,13 @@
 <script>
 
     import FandoghCompetitors from '../components/Landing/comparision/fandogh-competitors'
+    import InfraServicesSchema from '../components/Landing/comparision/infra-services-schema'
 
     export default {
         name: "comparision",
         components: {
-            FandoghCompetitors
+            FandoghCompetitors,
+            InfraServicesSchema
 
         },
         data() {
@@ -81,7 +83,7 @@
                         title: 'شمای سرویس‌های زیرساختی',
                         description: 'موضوع سرویس‌های ابری تقریبا برای تمام کسب‌و‌کارها به صورت جهانی به یک موضوع داغ و جذاب تبدیل شده است اما در این میان مفاهیم متفاوتی وجود دارد که حیطه کاری و خدماتی هر یک از این سرویس‌ها را مشخص می‌کند. اگر تصمیم دارید تا سرویس‌های خود را بر روی زیرساخت‌های ابری مستقر کنید فرقی ندارد که به چه منظور و با چه مقیاسی تصمیم به این عمل گرفته‌اید؛ مهمترین کاری که باید بکنید این است که مرزبندی بین این خدمات را به خوبی بشناسید و نسبت به حیطه خدمات هر یک از این سرویس‌ها آگاهی کافی داشته باشید.<br/>' +
                             'سرویس‌های ابری که به صورت فراگیر استفاده می‌شوند در ۳ بخش IaaS، PaaS و SaaS خلاصه می‌شوند؛ البته سرویس‌های FaaS هم وجود دارند اما استفاده از آن‌ها ملاحضات خاص خود را دارد و همانند ۳ مدل دیگر فراگیر نیست. این قبیل سرویس‌ها مزایای زیادی نسبت به سرورهای On Premise یا سرورهای اختصاصی به شما ارائه می‌کنند که در چند لایه می‌توان آن‌ها را توضیح داد. سرویس سکوی ابری فندق در حیطه PaaSها قرار دارد و در جدول زیر مزایای سرویس‌های ابری نسبت به سرورهای On Premise',
-                        section_name: '',
+                        section_name: 'InfraServicesSchema',
                     },
                     {
                         title: 'قیاس VPS و PaaS',
@@ -142,10 +144,10 @@
             font-stretch normal
             line-height 1.71
             letter-spacing normal
-            text-align left
+            text-align center
             color $silverDark
             @media only screen and (max-width: 992px)
-                font-size 2.4em
+                font-size 2.3em
 
 
         div.horizontal-line
@@ -174,8 +176,8 @@
             color $fontGray
             @media only screen and (max-width: 992px)
                 font-size 1.3em
-                margin-left 48px
-                margin-right 48px
+                margin-left 0
+                margin-right 0
 
 
     .comp-section-header
@@ -184,7 +186,7 @@
         max-width 1750px
         height 100%
         flex-direction column
-        padding-top 150px
+        padding-top 100px
         @media only screen and (max-width: 992px)
             padding-top 80px
 
@@ -198,20 +200,20 @@
             font-stretch normal
             line-height 1.71
             letter-spacing normal
-            text-align left
+            text-align center
             color $silverDark
             @media only screen and (max-width: 992px)
-                font-size 2.4em
+                font-size 2.3em
 
 
-        div.section-horizontal-line
-            width 450px
+        div.comp-section-horizontal-line
+            width 500px
             height 0
             border solid 1px $colorPrimary
             margin-left auto
             margin-right auto
             border-radius 25px
-            margin-top 2px
+            margin-top 8px
             @media only screen and (max-width: 992px)
                 width 350px
 
@@ -230,8 +232,8 @@
             color $fontGray
             @media only screen and (max-width: 992px)
                 font-size 1.3em
-                margin-left 48px
-                margin-right 48px
+                margin-left 0
+                margin-right 0
 
     .comp-menu
         display flex
