@@ -1,7 +1,5 @@
 <template>
     <div class="audience-container container-fluid">
-        <!--<img src="../../../assets/svg/pod_bg.svg" width="100%" style="opacity: 20%;position: absolute"/>-->
-
 
         <div class="audience-inner-container">
 
