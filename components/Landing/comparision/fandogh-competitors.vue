@@ -270,7 +270,7 @@
             border-collapse collapse
             color #fefefe
             font-family iran-yekan
-            font-size 1em
+            font-size 1.1em
             font-weight bold
 
     img
