@@ -13,6 +13,7 @@ install:
 # command to run tests
 script:
   - echo $TRAVIS_COMMIT
+  - export FANDOGH_HOST=http://159.69.216.179:8080
   - COLLECT_ERROR=True fandogh login --username=$FANDOGH_USERNAME --password=$FANDOGH_PASSWORD
   - fandogh namespace active --name=default
   - fandogh image publish --version=$TRAVIS_COMMIT || travis_terminate 1
