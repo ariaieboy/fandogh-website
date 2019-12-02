@@ -90,7 +90,7 @@
                 <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
 
                     <a v-for="language in languages" class="language-support"
-                       @click="$router.push('languages/' + language.href)">
+                       @click="$router.push('/languages/' + language.href)">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: auto; margin-bottom: auto;"
                              :src="require('../../assets/svg/services/language/' + language.icon +  '.svg')"
                              :alt="language.icon"/>
