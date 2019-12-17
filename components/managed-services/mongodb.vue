@@ -33,7 +33,7 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.counter, rules.required, rules.regex]"
+                                :rules="[rules.counter, rules.required]"
                                 v-model="mongodb_manifest.username.value"
                                 :label="username.label"
                                 :hint="username.hint">
@@ -51,7 +51,7 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.counter, rules.required, rules.regex]"
+                                :rules="[rules.counter, rules.required]"
                                 v-model="mongodb_manifest.password.value"
                                 :label="password.label"
                                 :hint="password.hint">
@@ -135,7 +135,7 @@
                                     dir="ltr"
                                     color="#0093ff"
                                     required
-                                    :rules="[rules.counter, rules.required, rules.regex]"
+                                    :rules="[rules.counter, rules.required]"
                                     v-model="mongodb_manifest.mongo_dashboard_username.value"
                                     :label="mongo_dashboard_username.label"
                                     :hint="mongo_dashboard_username.hint">
@@ -153,7 +153,7 @@
                                     dir="ltr"
                                     color="#0093ff"
                                     required
-                                    :rules="[rules.counter, rules.required, rules.regex]"
+                                    :rules="[rules.counter, rules.required]"
                                     v-model="mongodb_manifest.mongo_dashboard_password.value"
                                     :label="mongo_dashboard_password.label"
                                     :hint="mongo_dashboard_password.hint">
