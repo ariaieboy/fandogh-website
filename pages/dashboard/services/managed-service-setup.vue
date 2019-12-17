@@ -66,7 +66,7 @@
 
     import MongoDB from "../../../components/managed-services/mongodb";
     import Mysql from "../../../components/managed-services/mysql";
-    import PostgreSQL from "../../../components/managed-services/postgresql";
+    import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
@@ -76,9 +76,9 @@
         layout: 'dashboard',
         service_name: null,
         components: {
-            MongoDB,
             Mysql,
-            PostgreSQL,
+            Postgresql,
+            MongoDB,
             Redis,
             Proxy
         },

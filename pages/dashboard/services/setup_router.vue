@@ -45,9 +45,9 @@
         data() {
             return {
                 managed_services: [
+                    {title: 'MySQL', description: 'Database', icon: 'mysql', path: "mysql"},
+                    {title: 'PostgreSQL', description: 'Database', icon: 'postgresql', path: "postgresql"},
                     {title: 'MongoDB', description: 'Database', icon: 'mongodb', path: "mongodb"},
-                    {title: 'Mysql', description: 'Database', icon: 'mysql', path: "mysql"},
-                    {title: 'Postgresql', description: 'Database', icon: 'postgresql', path: "postgresql"},
                     {title: 'Redis', description: 'In Memory Data Store', icon: 'redis', path: "redis"},
                     {title: 'Proxy', description: 'Proxy Service', icon: 'proxy', path: "proxy"}
                 ],
