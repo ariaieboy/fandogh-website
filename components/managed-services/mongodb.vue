@@ -391,7 +391,20 @@
         }, methods: {
             mongoDashboardSelected() {
                 this.mongo_dashboard.selected = !this.mongo_dashboard.selected;
-                this.mongodb_manifest.mongo_dashboard_enabled.value = this.mongo_dashboard.selected
+                this.mongodb_manifest.mongo_dashboard_enabled.value = this.mongo_dashboard.selected;
+
+                if (!this.mongo_dashboard.selected) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'mongo_dashboard_username') {
+                            this.manifest_model.parameters.splice(index, 1);
+                        }
+                    });
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'mongo_dashboard_password') {
+                            this.manifest_model.parameters.splice(index, 1);
+                        }
+                    })
+                }
             }
         },
         mounted() {
