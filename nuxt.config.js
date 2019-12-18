@@ -11,7 +11,7 @@ module.exports = {
         height: "5px"
     },
     env: {
-        API: "https://api.mahmole.com/fa",
+        API: process.env.API || "https://api.fandogh.cloud/fa",
         MONITORING_API: process.env.MONITORING_API || "https://mon.fandogh.cloud"
     },
     router: {
