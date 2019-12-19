@@ -30,8 +30,7 @@
 </template>
 
 <script>
-    import FDate from "~/utils/date";
-    import FFromDate from "~/utils/fromDate";
+
     import TableHeader from "./children/table-header";
     import TableTitle from "./children/table-title";
     import TableNavigation from "./children/table-navigation";

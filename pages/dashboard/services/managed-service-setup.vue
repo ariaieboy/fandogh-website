@@ -64,6 +64,7 @@
 
 <script>
 
+    import MongoDB from "../../../components/managed-services/mongodb";
     import Mysql from "../../../components/managed-services/mysql";
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
@@ -77,6 +78,7 @@
         components: {
             Mysql,
             Postgresql,
+            MongoDB,
             Redis,
             Proxy
         },
@@ -131,6 +133,16 @@
                             path: "postgresql",
                             version: '10.4',
                             description: 'Postgresql یک ORDBMS معروف و پرطرفدار است که می‌توانید به سادگی به عنوان یک managed-service روی Namespace خود دیپلوی کنید. '
+                        },
+
+                    mongodb:
+                        {
+                            title: 'MongoDB',
+                            short_desc: 'Database',
+                            icon: 'mongodb',
+                            path: "mongodb",
+                            version: '4.2',
+                            description: 'MongoDB یک پایگاه داده ‌NoSQL کارا، مقیاس‌پذیر، بدون نیاز به طرح‌بندی اولیه نوشته شده در زبان برنامه‌نویسی ++C است.'
                         },
 
                     redis:
@@ -231,14 +243,14 @@
 
 
                     if (this.managed_service[this.service_name].title === 'Mysql') {
-                        let mysql_root_password_enbabaled = false
+                        let mysql_root_password_enabaled = false
                         this.managed_service_manifest.parameters.forEach(item => {
                             if (item.name === 'mysql_root_password') {
-                                mysql_root_password_enbabaled = true
+                                mysql_root_password_enabaled = true
                             }
                         });
 
-                        if (!mysql_root_password_enbabaled) {
+                        if (!mysql_root_password_enabaled) {
                             this.$notify({
                                 title: 'لطفا رمز عبور Mysql را مشخص نمایید',
                                 time: 4000,
