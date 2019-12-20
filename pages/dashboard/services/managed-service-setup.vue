@@ -78,7 +78,7 @@
         components: {
             Mysql,
             Postgresql,
-            MongoDB,
+            // MongoDB,
             Redis,
             Proxy
         },
@@ -135,15 +135,15 @@
                             description: 'Postgresql یک ORDBMS معروف و پرطرفدار است که می‌توانید به سادگی به عنوان یک managed-service روی Namespace خود دیپلوی کنید. '
                         },
 
-                    mongodb:
-                        {
-                            title: 'MongoDB',
-                            short_desc: 'Database',
-                            icon: 'mongodb',
-                            path: "mongodb",
-                            version: '4.2',
-                            description: 'MongoDB یک پایگاه داده ‌NoSQL کارا، مقیاس‌پذیر، بدون نیاز به طرح‌بندی اولیه نوشته شده در زبان برنامه‌نویسی ++C است.'
-                        },
+                    // mongodb:
+                    //     {
+                    //         title: 'MongoDB',
+                    //         short_desc: 'Database',
+                    //         icon: 'mongodb',
+                    //         path: "mongodb",
+                    //         version: '4.2',
+                    //         description: 'MongoDB یک پایگاه داده ‌NoSQL کارا، مقیاس‌پذیر، بدون نیاز به طرح‌بندی اولیه نوشته شده در زبان برنامه‌نویسی ++C است.'
+                    //     },
 
                     redis:
                         {
