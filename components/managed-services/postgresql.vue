@@ -287,6 +287,14 @@
                         this.postgresql_manifest.password.value = param.value
                     }else {
                         this.postgresql_manifest.volume_name.value = param.value
+                        if (this.postgresql_manifest.volume_name.value !== null) {
+                            this.volumes.forEach(item => {
+                                item.selected = false
+                            });
+
+                            this.volumes[1].selected = true
+                            this.selected_volume = this.volumes[1]
+                        }
                     }
                 })
             }

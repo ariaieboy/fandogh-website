@@ -248,7 +248,7 @@
                         text: 'نام Dedicated Volume که قصد دارید داده‌ها در آن ذخیره شوند',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
                     },
-                    password:{
+                    password: {
                         title: 'رمز عبور database',
                         text: 'رمز عبوری که برای database خود انتخاب میکنید.',
                         url: '#'
@@ -281,13 +281,21 @@
 
             if (this.manifest_model.parameters.length !== 0) {
                 this.manifest_model.parameters.forEach(param => {
-                    if(param.name === 'phpmyadmin_enabled'){
+                    if (param.name === 'phpmyadmin_enabled') {
                         this.mysql_manifest.phpmyadmin_enabled.value = param.value
                         this.phpmyadmin.selected = param.value
-                    }else if(param.name === 'mysql_root_password'){
+                    } else if (param.name === 'mysql_root_password') {
                         this.mysql_manifest.password.value = param.value
-                    }else {
+                    } else {
                         this.mysql_manifest.volume_name.value = param.value
+                        if (this.mysql_manifest.volume_name.value !== null) {
+                            this.volumes.forEach(item => {
+                                item.selected = false
+                            });
+
+                            this.volumes[1].selected = true
+                            this.selected_volume = this.volumes[1]
+                        }
                     }
                 })
             }
