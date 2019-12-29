@@ -8,13 +8,11 @@
 </template>
 
 <script>
-    import Recovery from '~/components/Auth/Recovery.vue'
     import Vrecovery from "../../components/Auth/vrecovery";
 
     export default {
         components: {
-            Vrecovery,
-            Recovery
+            Vrecovery
         }
     }
 </script>

@@ -66,7 +66,7 @@
                 return RoleAccessHandler(permitted_roles)
             },
             onSelected(path) {
-                this.$router.replace('/dashboard/services/' + path)
+                this.$router.replace({path: '/dashboard/services/' + path})
             },
         }
     }

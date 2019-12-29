@@ -31,13 +31,11 @@
 </template>
 
 <script>
-    import Register from '~/components/Auth/Register.vue'
     import Vregister from "../../components/Auth/vregister";
 
     export default {
         components: {
-            Vregister,
-            Register
+            Vregister
         },
         mounted() {
             this.$store.dispatch('logout')

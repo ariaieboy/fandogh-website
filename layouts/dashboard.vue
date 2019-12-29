@@ -82,7 +82,8 @@
         data() {
             return {
 
-                namespace: null
+                namespace: null,
+                namespaces: []
 
             }
         },
@@ -132,9 +133,17 @@
                 }
             }
         },
-
         watch: {
-            $route() {
+            $route(to, from) {
+
+                if (!to.query.ns) {
+                    if (from.query.ns) {
+                        this.$router.replace({path: to.path, query: {...to.query, ns: from.query.ns}});
+                    } else {
+                        this.fetchUserNamespace()
+                    }
+                }
+
                 if (this.message) {
                     this.$store.dispatch("setMessage", this.message);
                     this.$store.dispatch("showModal", "message");
@@ -153,9 +162,12 @@
                 token = readCookie("USER_TOKEN");
                 valid = token ? true : false;
                 if (!valid) {
-                    this.$router.push("/user/login");
+                    this.$router.replace("/user/login");
                 }
             }
+        },
+        beforeDestroy() {
+            this.$router.push({query: {}})
         },
         mounted() {
             this.handelEventSize()
@@ -169,18 +181,57 @@
             this.fetchUserNamespace()
         },
         methods: {
+            async fetchUserNamespaces() {
+                this.namespaces.length = 0;
+                try {
+                    this.namespaces = await this.$store.dispatch('requestUserNamespaces');
+                    var queries = {}
+                    queries['ns'] = this.namespaces[0].name;
+                    for (const [key, value] of Object.entries(this.$route.query)) {
+                        queries[key] = value
+                    }
+                    let last_route = this.$route
+                    this.$router.replace({
+                        path: last_route.path,
+                        query: queries
+                    }, () => {
+                        window.location.reload()
+                    }, null);
+
+                    this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+
+                    }
+                }
+            },
             fetchUserNamespace() {
                 this.$store.commit('SET_DATA', {data: true, id: 'loading'})
-                if (getValue(('namespace'))) {
-                    this.$store.dispatch('getNameSpace', getValue('namespace'))
+                if (this.$route.query.ns) {
+                    this.$store.dispatch('getNameSpace', this.$route.query.ns)
                         .then(response => {
-                            this.namespace = response
-                            let old_role = getValue(('user_role'));
-                            this.$store.commit('SET_DATA', {data: false, id: 'loading'})
-                            if (old_role !== this.namespace.user_role) {
-                                setValue({key: 'user_role', value: this.namespace.user_role});
-                                window.location.reload();
+                            this.namespace = response;
+                            if (!this.$route.query.ns) {
+                                this.$router.replace({
+                                    path: this.$route.path,
+                                    query: {...this.$route.query, ns: this.namespace.name}
+                                });
                             }
+
+                            if (!sessionStorage.getItem('user_role')){
+                                sessionStorage.setItem('user_role', this.namespace.user_role)
+                            }
+                            this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                         })
                         .catch(e => {
                             this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -196,6 +247,8 @@
                                 });
                             }
                         });
+                } else {
+                    this.fetchUserNamespaces();
                 }
             },
             async redeemPlan() {

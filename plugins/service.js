@@ -22,10 +22,9 @@ function request(params, {baseUrl}) {
                 config.headers["Authorization"] = "JWT " + token;
             }
 
-            const namespace = getValue("namespace")
-            if (namespace && namespace !== "null") {
-                config.headers["ACTIVE-NAMESPACE"] = namespace;
-            }
+            // const namespace = getValue("namespace")
+            var urlParams = new URLSearchParams(window.location.search);
+            config.headers["ACTIVE-NAMESPACE"] = urlParams.get('ns') || 'ns';
 
             if (params) config.params = {...config.params, ...params};
             return config;

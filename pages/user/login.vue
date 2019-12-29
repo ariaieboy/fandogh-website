@@ -8,15 +8,13 @@
 </template>
 
 <script>
-    import Login from '~/components/Auth/Login.vue'
     import Vlogin from "../../components/Auth/vlogin.vue";
     import 'vuetify/dist/vuetify.min.css';
 
 
     export default {
         components: {
-            Vlogin,
-            Login
+            Vlogin
         },
         mounted() {
             this.$store.dispatch('logout')

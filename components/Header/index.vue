@@ -45,7 +45,7 @@
                     <button class="nav-action-button" @click="$router.push('/user/login')">ورود</button>
                 </div>
                 <div class="user" v-else>
-                    <button @click="$router.push('/dashboard')" class="nav-action-button">داشبورد</button>
+                    <button @click="$router.push('/dashboard/general')" class="nav-action-button">داشبورد</button>
                 </div>
                 <!-- <div v-if="loggedIn" class="profile">
                   <a href="#" @click.prevent="toggleMenu(null)">
@@ -54,10 +54,9 @@
                 </div>-->
             </nav>
 
-            <login ref="login"/>
-            <register ref="register"/>
+            <!--<login ref="login"/>-->
+            <!--<register ref="register"/>-->
             <sidebar ref="menu"/>
-            <message ref="message"/>
         </header>
         <div id="sub_menu" ref="sub_menu" class="sub_menu" style="opacity: 0; visibility: hidden;">
             <div class="menu_section">
@@ -90,7 +89,7 @@
                 <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
 
                     <a v-for="language in languages" class="language-support"
-                       @click="$router.push('languages/' + language.href)">
+                       @click="$router.push('/languages/' + language.href)">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: auto; margin-bottom: auto;"
                              :src="require('../../assets/svg/services/language/' + language.icon +  '.svg')"
                              :alt="language.icon"/>
@@ -139,21 +138,15 @@
 <script>
     import logo from "./logo";
     import FButton from "~/components/elements/button";
-    import Login from "~/components/Auth/Login";
     import Sidebar from "./sidebar";
-    import Register from "../Auth/Register";
-    import Message from "../Auth/Message";
     import {getValue} from "~/utils/cookie";
     import Gravatar from "~/utils/gravatar";
 
     export default {
         components: {
-            Register,
             logo,
             FButton,
-            Login,
-            Sidebar,
-            Message
+            Sidebar
         },
         props: ["noFixed"],
         data() {

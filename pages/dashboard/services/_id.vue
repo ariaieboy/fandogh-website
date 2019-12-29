@@ -231,7 +231,7 @@
                 if (this.service.service_type === 'managed') {
                     this.dumpManifest(this.service.name)
                 } else {
-                    this.$router.push({path: '/dashboard/services/wizard', query: {service: this.service.name}})
+                    this.$router.push({path: '/dashboard/services/wizard'})
                 }
             },
             remove() {
@@ -252,7 +252,7 @@
                             this.$store.dispatch("deleteService", this.service_name)
                                 .then(res => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                                    this.$router.replace('/dashboard/services');
+                                    this.$router.replace({path: '/dashboard/services'});
                                     this.$ga.event({
                                         eventCategory: "service",
                                         eventAction: "remove service",
@@ -302,7 +302,7 @@
                     if (e.status === 401) {
                         this.$router.push("/user/login");
                     } else {
-                        this.$router.push("/dashboard/services")
+                        this.$router.push({path: "/dashboard/services"})
                     }
                 }
             },
