@@ -673,7 +673,7 @@
                 await this.$store.dispatch("plan/requestPlan", bill)
                     .then(planRespose => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                        this.$router.push({path: `plans/bill/${planRespose.invoice.id}`, query: {ns: this.$route.query.ns}});
+                        this.$router.push({path: `plans/bill/${planRespose.invoice.id}`});
                     }).catch(e => {
                         if (e.status === 401) {
                             this.$router.push("/user/login");

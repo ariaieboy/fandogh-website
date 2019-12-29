@@ -134,15 +134,16 @@
             }
         },
         watch: {
-            '$route.query.ns': {
-                handler: function (ns) {
-                    if (!ns) {
-                        this.fetchUserNamespace();
+            $route(to, from) {
+
+                if (!to.query.ns) {
+                    if (from.query.ns) {
+                        this.$router.replace({path: to.path, query: {...to.query, ns: from.query.ns}});
+                    } else {
+                        this.fetchUserNamespace()
                     }
-                }, deep: true,
-                immediate: true
-            },
-            $route() {
+                }
+
                 if (this.message) {
                     this.$store.dispatch("setMessage", this.message);
                     this.$store.dispatch("showModal", "message");
@@ -161,9 +162,12 @@
                 token = readCookie("USER_TOKEN");
                 valid = token ? true : false;
                 if (!valid) {
-                    this.$router.push("/user/login");
+                    this.$router.replace("/user/login");
                 }
             }
+        },
+        beforeDestroy() {
+            this.$router.push({query: {}})
         },
         mounted() {
             this.handelEventSize()
@@ -181,7 +185,19 @@
                 this.namespaces.length = 0;
                 try {
                     this.namespaces = await this.$store.dispatch('requestUserNamespaces');
-                    this.$router.push({query: {ns: this.namespaces[0].name}});
+                    var queries = {}
+                    queries['ns'] = this.namespaces[0].name;
+                    for (const [key, value] of Object.entries(this.$route.query)) {
+                        queries[key] = value
+                    }
+                    let last_route = this.$route
+                    this.$router.replace({
+                        path: last_route.path,
+                        query: queries
+                    }, () => {
+                        window.location.reload()
+                    }, null);
+
                     this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -206,7 +222,12 @@
                         .then(response => {
                             this.namespace = response;
                             let old_role = getValue(('user_role'));
-                            this.$router.push({query: {ns: this.namespace.name}});
+                            if (!this.$route.query.ns) {
+                                this.$router.replace({
+                                    path: this.$route.path,
+                                    query: {...this.$route.query, ns: this.namespace.name}
+                                });
+                            }
                             if (old_role !== this.namespace.user_role) {
                                 setValue({key: 'user_role', value: this.namespace.user_role});
                                 window.location.reload();
@@ -228,6 +249,7 @@
                             }
                         });
                 } else {
+                    console.log('man begiram')
                     this.fetchUserNamespaces();
                 }
             },

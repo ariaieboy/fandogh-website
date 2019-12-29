@@ -209,8 +209,7 @@
                                 type: "success"
                             });
                             this.$router.push({
-                                path: `/dashboard/images/${this.name}/versions/${this.image.version.value}/logs`,
-                                query: {ns: this.$route.query.ns}
+                                path: `/dashboard/images/${this.name}/versions/${this.image.version.value}/logs`
                             });
                         })
                         .catch(e => {

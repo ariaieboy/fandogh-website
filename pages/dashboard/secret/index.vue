@@ -8,7 +8,7 @@
                 <div class="right" style="float: right;"><p class="title_header"> لیست سکرت‌ها</p></div>
                 <div class="left" style="float: left; cursor: pointer; margin-top: 8px"
                      v-if="verifyUserAccess({ADMIN: 'ADMIN'})"
-                     @click="$router.push({path: '/dashboard/secret/create', query: {ns: $route.query.ns}})">
+                     @click="$router.push({path: '/dashboard/secret/create'})">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -134,7 +134,7 @@
                     eventLabel: "secret name",
                     eventValue: this.secrets[index].name
                 });
-                this.$router.push({path: `/dashboard/secret/edit/${this.secrets[index].name}`, query: {ns: this.$route.query.ns}});
+                this.$router.push({path: `/dashboard/secret/edit/${this.secrets[index].name}`});
             },
             remove(index) {
                 this.$ga.event({

@@ -341,7 +341,7 @@
                             // removeValue('name')
                             // removeValue('versions')
                             this.$store.commit("SET_DATA", {id: "service", data: res});
-                            this.$router.replace({path: `/dashboard/services/${res.name}`, query: {ns: this.$route.query.ns}})
+                            this.$router.replace({path: `/dashboard/services/${res.name}`})
                             this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                         }, 5000);
 

@@ -225,8 +225,7 @@
                     eventValue: this.services[index].name
                 });
                 this.$router.push({
-                    path: `/dashboard/services/${this.services[index].name}`,
-                    query: {ns: this.$route.query.ns}
+                    path: `/dashboard/services/${this.services[index].name}`
                 });
             },
             logs(index) {
@@ -237,13 +236,11 @@
                     eventValue: this.services[index].name
                 });
                 this.$router.push({
-                    path: `/dashboard/services/${this.services[index].name}/logs`,
-                    query: {ns: this.$route.query.ns}
+                    path: `/dashboard/services/${this.services[index].name}/logs`
                 });
             }, newService() {
                 this.$router.push({
-                    path: '/dashboard/services/setup_router',
-                    query: {ns: this.$route.query.ns}
+                    path: '/dashboard/services/setup_router'
                 })
             }
         }

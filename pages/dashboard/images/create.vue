@@ -245,8 +245,7 @@
                                         eventAction: "images create"
                                     });
                                     this.$router.push({
-                                            path: `/dashboard/images/${this.image.name.value}/versions/${this.image.version.value}/logs`,
-                                            query: {ns: this.$route.query.ns}
+                                            path: `/dashboard/images/${this.image.name.value}/versions/${this.image.version.value}/logs`
                                         }
                                     );
                                 })
@@ -267,7 +266,7 @@
                                 eventCategory: "images",
                                 eventAction: "images version create"
                             });
-                            this.$router.push({path: "/dashboard/images", query: {ns: this.$route.query.ns}});
+                            this.$router.push({path: "/dashboard/images"});
                         }
                     })
                     .catch(e => {
