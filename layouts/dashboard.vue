@@ -83,7 +83,7 @@
             return {
 
                 namespace: null,
-                namespaces: [],
+                namespaces: []
 
             }
         },
@@ -221,16 +221,15 @@
                     this.$store.dispatch('getNameSpace', this.$route.query.ns)
                         .then(response => {
                             this.namespace = response;
-                            let old_role = getValue(('user_role'));
                             if (!this.$route.query.ns) {
                                 this.$router.replace({
                                     path: this.$route.path,
                                     query: {...this.$route.query, ns: this.namespace.name}
                                 });
                             }
-                            if (old_role !== this.namespace.user_role) {
-                                setValue({key: 'user_role', value: this.namespace.user_role});
-                                window.location.reload();
+
+                            if (!sessionStorage.getItem('user_role')){
+                                sessionStorage.setItem('user_role', this.namespace.user_role)
                             }
                             this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                         })
@@ -249,7 +248,6 @@
                             }
                         });
                 } else {
-                    console.log('man begiram')
                     this.fetchUserNamespaces();
                 }
             },

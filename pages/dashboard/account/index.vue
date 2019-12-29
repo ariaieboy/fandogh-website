@@ -165,9 +165,9 @@
                     return this.activeNamespace;
                 }, set: function (namespace) {
                     if (this.$route.query.ns !== namespace.name) {
-                        setValue({key: 'user_role', value: namespace.user_role})
-                        this.$store.commit('SET_DATA', {data: false, id: 'loading'})
-                        window.location.replace(this.$route.path + '?ns=' + namespace.name)
+                        sessionStorage.setItem('user_role', namespace.user_role);
+                        this.$store.commit('SET_DATA', {data: false, id: 'loading'});
+                        window.location.replace(this.$route.path + '?ns=' + namespace.name);
                     }
                 }
             },
@@ -215,7 +215,7 @@
                     for (let i = 0; i < this.namespaces.length; i++) {
                         if (this.namespaces[i].name === this.$route.query.ns) {
                             this.activeNamespace = this.namespaces[i];
-                            setValue({key: 'user_role', value: this.namespaces[i].user_role})
+                            sessionStorage.setItem('user_role', this.namespaces[i].user_role);
                             break;
                         }
                     }
