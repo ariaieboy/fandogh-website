@@ -164,14 +164,11 @@
                 get: function () {
                     return this.activeNamespace;
                 }, set: function (namespace) {
-                    if (namespace.hasOwnProperty('name')) {
-                        if (getValue('namespace') !== namespace.name) {
-                            setValue({key: 'namespace', value: namespace.name});
-                            setValue({key: 'user_role', value: namespace.user_role})
-                            window.location.reload();
-                        }
+                    if (this.$route.query.ns !== namespace.name) {
+                        setValue({key: 'user_role', value: namespace.user_role})
+                        this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                        window.location.replace(this.$route.path + '?ns=' + namespace.name)
                     }
-
                 }
             },
             openSidebar() {
@@ -204,10 +201,11 @@
         },
         created() {
             this.getData();
-            this.fetchUserNamespaces()
+            if (this.$route.query.ns)
+                this.fetchUserNamespaces();
         },
         methods: {
-            verifyUserAccess(permitted_roles){
+            verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
             async fetchUserNamespaces() {
@@ -215,7 +213,7 @@
                 try {
                     this.namespaces = await this.$store.dispatch('requestUserNamespaces');
                     for (let i = 0; i < this.namespaces.length; i++) {
-                        if (this.namespaces[i].name === this.namespace) {
+                        if (this.namespaces[i].name === this.$route.query.ns) {
                             this.activeNamespace = this.namespaces[i];
                             setValue({key: 'user_role', value: this.namespaces[i].user_role})
                             break;

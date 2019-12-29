@@ -6,7 +6,7 @@
                 <div class="right" style="float: right;"><p class="title_header"> لیست دامنه‌ها</p></div>
                 <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
                      class="left" style="float: left; cursor: pointer; margin-top: 8px"
-                     @click="$router.push('/dashboard/domains/create')">
+                     @click="$router.push({path: '/dashboard/domains/create', query: {ns: $route.query.ns}})">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -196,10 +196,10 @@
                     eventLabel: "domain name",
                     eventValue: this.domains[index].name
                 });
-                this.$router.push(`/dashboard/domains/verification/${this.domains[index].name}`);
+                this.$router.push({path: `/dashboard/domains/verification/${this.domains[index].name}`, query: {ns: this.$route.query.ns}});
             },
             details(index) {
-                this.$router.push(`/dashboard/domains/${this.domains[index].name}`);
+                this.$router.push({path: `/dashboard/domains/${this.domains[index].name}`, query: {ns: this.$route.query.ns}});
             },
             getClass(verified) {
                 return verified ? "success-circle" : "error-circle";

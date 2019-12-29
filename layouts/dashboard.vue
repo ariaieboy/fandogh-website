@@ -82,7 +82,8 @@
         data() {
             return {
 
-                namespace: null
+                namespace: null,
+                namespaces: [],
 
             }
         },
@@ -132,8 +133,15 @@
                 }
             }
         },
-
         watch: {
+            '$route.query.ns': {
+                handler: function (ns) {
+                    if (!ns) {
+                        this.fetchUserNamespace();
+                    }
+                }, deep: true,
+                immediate: true
+            },
             $route() {
                 if (this.message) {
                     this.$store.dispatch("setMessage", this.message);
@@ -169,18 +177,41 @@
             this.fetchUserNamespace()
         },
         methods: {
+            async fetchUserNamespaces() {
+                this.namespaces.length = 0;
+                try {
+                    this.namespaces = await this.$store.dispatch('requestUserNamespaces');
+                    this.$router.push({query: {ns: this.namespaces[0].name}});
+                    this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+
+                    }
+                }
+            },
             fetchUserNamespace() {
                 this.$store.commit('SET_DATA', {data: true, id: 'loading'})
-                if (getValue(('namespace'))) {
-                    this.$store.dispatch('getNameSpace', getValue('namespace'))
+                if (this.$route.query.ns) {
+                    this.$store.dispatch('getNameSpace', this.$route.query.ns)
                         .then(response => {
-                            this.namespace = response
+                            this.namespace = response;
                             let old_role = getValue(('user_role'));
-                            this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                            this.$router.push({query: {ns: this.namespace.name}});
                             if (old_role !== this.namespace.user_role) {
                                 setValue({key: 'user_role', value: this.namespace.user_role});
                                 window.location.reload();
                             }
+                            this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                         })
                         .catch(e => {
                             this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -196,6 +227,8 @@
                                 });
                             }
                         });
+                } else {
+                    this.fetchUserNamespaces();
                 }
             },
             async redeemPlan() {

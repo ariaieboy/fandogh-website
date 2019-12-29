@@ -11,6 +11,7 @@ export default {
     }
     let styles = props.styles ? props.styles.split(' ') : []
     styles.forEach(element => classes.push('btn-'+element));
-    return <router-link to={{path: props.path}} nativeOnClick={clickHandler} class={classes}> {rest.slots().default} </router-link>
+    var urlParams = new URLSearchParams(window.location.search);
+    return <router-link to={{path: props.path, query: {ns: urlParams.get('ns')}}} nativeOnClick={clickHandler} class={classes}> {rest.slots().default} </router-link>
   }
 }

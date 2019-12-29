@@ -50,17 +50,22 @@
 
                     </div>
 
-                    <div class="uploader-container fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12" style="display: flex;">
+                    <div class="uploader-container fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12"
+                         style="display: flex;">
                         <button style="background: #00E5FF; width: 100%; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4);
-                                    outline: none; font-family: iran-yekan; color: #1d1d1d" v-if="!loading" @click="createImage" >ایجاد ایمیج جدید</button>
+                                    outline: none; font-family: iran-yekan; color: #1d1d1d" v-if="!loading"
+                                @click="createImage">ایجاد ایمیج جدید
+                        </button>
                         <button
                                 style="width: 100%; color: #1d1d1d; margin-top: auto; margin-bottom: auto; padding: 12px 0; border-radius: 3px;
                                     font-family: iran-yekan; outline: none; border: 1px solid #00E5FF;"
-                                v-if="loading && !loadingProgress" >در حال ساخت</button>
+                                v-if="loading && !loadingProgress">در حال ساخت
+                        </button>
                         <progress-bar v-if="loadingProgress" :progress="progress"></progress-bar>
                     </div>
 
-                    <div class="browser-container fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12" style="margin-top: 16px">
+                    <div class="browser-container fandogh-form-group col-lg-6 col-md-6 col-xs-12 col-sm-12"
+                         style="margin-top: 16px">
                         <file class="file" id="source"/>
                     </div>
                 </div>
@@ -90,7 +95,7 @@
                 name: "",
                 version: "",
                 loading: false,
-                rules:{
+                rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
@@ -150,7 +155,7 @@
         destroyed() {
         },
         methods: {
-            verifyUserAccess(permitted_roles){
+            verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
             createImage() {
@@ -161,7 +166,7 @@
                     // eventValue:'userId'
                 });
 
-                if(this.rules.required(this.image.name.value) !== true){
+                if (this.rules.required(this.image.name.value) !== true) {
                     this.$notify({
                         title: 'نام ایمیج نمی‌تواند خالی باشد.',
                         time: 4000,
@@ -171,7 +176,7 @@
                 }
 
 
-                if(this.rules.service_regex(this.image.name.value) !== true){
+                if (this.rules.service_regex(this.image.name.value) !== true) {
                     this.$notify({
                         title: 'نام ایمیج وارد شده صحیح نمی‌باشد',
                         time: 4000,
@@ -180,7 +185,7 @@
                     return
                 }
 
-                if(this.rules.required(this.image.version.value) !== true){
+                if (this.rules.required(this.image.version.value) !== true) {
                     this.$notify({
                         title: 'نام نسخه نمی‌تواند خالی باشد.',
                         time: 4000,
@@ -190,8 +195,8 @@
                 }
 
 
-                if(this.rules.version_start_regex(this.image.version.value) !== true ||
-                this.rules.version_start_regex(this.image.version.value) !== true){
+                if (this.rules.version_start_regex(this.image.version.value) !== true ||
+                    this.rules.version_start_regex(this.image.version.value) !== true) {
                     this.$notify({
                         title: 'نسخه ایمیج وارد شده صحیح نمی‌باشد',
                         time: 4000,
@@ -239,8 +244,10 @@
                                         eventCategory: "images",
                                         eventAction: "images create"
                                     });
-                                    this.$router.push(
-                                        `/dashboard/images/${this.image.name.value}/versions/${this.image.version.value}/logs`
+                                    this.$router.push({
+                                            path: `/dashboard/images/${this.image.name.value}/versions/${this.image.version.value}/logs`,
+                                            query: {ns: this.$route.query.ns}
+                                        }
                                     );
                                 })
                                 .catch(e => {
@@ -260,7 +267,7 @@
                                 eventCategory: "images",
                                 eventAction: "images version create"
                             });
-                            this.$router.push("/dashboard/images");
+                            this.$router.push({path: "/dashboard/images", query: {ns: this.$route.query.ns}});
                         }
                     })
                     .catch(e => {

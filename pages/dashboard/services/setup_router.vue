@@ -22,7 +22,7 @@
                                       :title="item.title"
                                       :key="index"
                                       :description="item.description"
-                                      @click.native="$router.push({ path: '/dashboard/services/managed-service-setup', query: {service: item.path} })"
+                                      @click.native="$router.push({ path: '/dashboard/services/managed-service-setup', query: {service: item.path, ns: $route.query.ns} })"
                                       :icon="item.icon">
 
                 </managed-service-card>
@@ -66,7 +66,7 @@
                 return RoleAccessHandler(permitted_roles)
             },
             onSelected(path) {
-                this.$router.replace('/dashboard/services/' + path)
+                this.$router.replace({path: '/dashboard/services/' + path, query: {ns: this.$route.query.ns}})
             },
         }
     }

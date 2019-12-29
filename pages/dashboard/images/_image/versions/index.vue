@@ -4,7 +4,7 @@
             <f-button
                     v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
                     styles="red"
-                    @onClick="$router.push(`/dashboard/images/${image}/versions/create`)"
+                    @onClick="$router.push({path: `/dashboard/images/${image}/versions/create`, query: {ns: $route.query.ns}})"
             >افزودن ورژن
             </f-button>
         </f-empty>
@@ -15,7 +15,7 @@
                 <div class="left"
                      v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
                      style="float: left; cursor: pointer; margin-top: 8px"
-                     @click="$router.push(`/dashboard/images/${image}/versions/create`)">
+                     @click="$router.push({path: `/dashboard/images/${image}/versions/create`, query: {ns: $route.query.ns}})">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
@@ -121,7 +121,7 @@
             this.$store.commit("SET_DATA", {data: null, id: "versions"});
         },
         methods: {
-            verifyUserAccess(permitted_roles){
+            verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
             async getData() {
@@ -156,7 +156,7 @@
                         : `<span style="color: #0045ff">در حال ساخت ...</span>`;
             },
             createVersions(index) {
-                this.$router.push(`/dashboard/services/setup`);
+                this.$router.push({path: `/dashboard/services/setup`, query: {ns: this.$route.query.ns}});
                 setValue({key: "versions", value: this.versions[index].version});
                 setValue({key: "name", value: this.image});
             },
@@ -165,8 +165,10 @@
                     eventCategory: "images-version",
                     eventAction: "click btn logs version image"
                 });
-                this.$router.push(
-                    `/dashboard/images/${this.image}/versions/${this.versions[index].version}/logs`
+                this.$router.push({
+                        path: `/dashboard/images/${this.image}/versions/${this.versions[index].version}/logs`,
+                        query: {ns: this.$route.query.ns}
+                    }
                 );
             }
         }

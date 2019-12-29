@@ -18,7 +18,7 @@
                 <span class="font-roboto">{{username}}</span>
             </div>
             <div class="header-avatar-list-item">
-                <router-link :to="item.link" class="header-avatar-item" v-for="(item,i) in items" :key="i">
+                <router-link :to="{path: item.link, query: {ns: $route.query.ns}}"  class="header-avatar-item" v-for="(item,i) in items" :key="i">
                     <img :src="require('./icons/'+item.icon+'.svg')">
                     <span>{{item.text}}</span>
                 </router-link>
@@ -54,7 +54,7 @@
                 return getValue("username");
             },
             namespace() {
-                return getValue("namespace");
+                return this.$route.query.ns
             },
             isNativeMenus() {
                 return this.$store.state.isNativeMenus
