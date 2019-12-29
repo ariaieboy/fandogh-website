@@ -229,7 +229,8 @@
                             }
 
                             if (!sessionStorage.getItem('user_role')){
-                                sessionStorage.setItem('user_role', this.namespace.user_role)
+                                sessionStorage.setItem('user_role', this.namespace.user_role);
+                                window.location.reload()
                             }
                             this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                         })
