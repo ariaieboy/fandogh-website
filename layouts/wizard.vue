@@ -689,47 +689,36 @@
                     }
                 }, deep: true
             },
-            'manifest_model.image.image_object':{
-              handler: function(value, oldValue){
-                  if(value.name === null){
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = false;
-                              return
-                          }
-                      })
-                  }
+            'manifest_model.image.image_object': {
+                handler: function (value, oldValue) {
+                    if (value.name === null) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'ImageSetup') {
+                                item.edited = false;
+                                return
+                            }
+                        })
+                    }
 
-                  if (value.name !== '') {
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = true;
-                          }
-                      })
-                  } else {
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = false;
-                          }
-                      })
-                  }
-              }, deep: true
+                    if (value.name !== '') {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'ImageSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'ImageSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+                }, deep: true
             },
             manifest_model: {
                 handler: function (value, oldValue) {
 
                 }, deep: true
-            },
-            $route() {
-                if (this.message) {
-                    this.$store.dispatch("setMessage", this.message);
-                    this.$store.dispatch("showModal", "message");
-                }
-                this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                this.$store.commit('SET_DATA', {id: 'isNativeMenus', data: null});
-                if (this.isMobile) {
-                    this.$store.commit("SET_DATA", {data: false, id: "sideMunu"});
-                }
             }
         },
         created() {
@@ -941,9 +930,9 @@
                             }
                         });
 
-                        if([...spec.domains].length === 0){
+                        if ([...spec.domains].length === 0) {
                             this.deleteFromManifest('spec.domains')
-                        }else {
+                        } else {
                             spec.domains.forEach(item => {
                                 this.manifest_model.service.domains.push(item['name'])
                             })
@@ -1005,7 +994,7 @@
                 }
 
                 if (this.manifest_model.image.registry.local_name === 'Docker') {
-                    if(this.manifest_model.image.image_object.name.split('/').length !== 2){
+                    if (this.manifest_model.image.image_object.name.split('/').length !== 2) {
                         this.$notify({
                             title: 'ساختار ایمیج وارد شده برای داکر صحیح نمی‌باشد',
                             time: 4000,
@@ -1016,7 +1005,7 @@
                 }
 
                 if (this.manifest_model.image.registry.local_name === 'Other') {
-                    if(this.manifest_model.image.image_object.name.split('/').length < 3){
+                    if (this.manifest_model.image.image_object.name.split('/').length < 3) {
                         this.$notify({
                             title: 'ساختار ایمیج وارد شده برای رجیستری‌های غیر داکر صحیح نمی‌باشد',
                             time: 4000,

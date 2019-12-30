@@ -136,9 +136,19 @@
         watch: {
             $route(to, from) {
 
-                if (!to.query.ns) {
+                if (!to.query.ns && to.path.indexOf('/wizard') === -1 ) {
                     if (from.query.ns) {
-                        this.$router.replace({path: to.path, query: {...to.query, ns: from.query.ns}});
+                        var queries = {};
+                        queries['ns'] = from.query.ns;
+                        for (const [key, value] of Object.entries(to.query)) {
+                            queries[key] = value
+                        }
+
+                        this.$router.replace({
+                            path: to.path,
+                            query: queries
+                        });
+
                     } else {
                         this.fetchUserNamespace()
                     }
@@ -165,9 +175,6 @@
                     this.$router.replace("/user/login");
                 }
             }
-        },
-        beforeDestroy() {
-            this.$router.push({query: {}})
         },
         mounted() {
             this.handelEventSize()
@@ -222,13 +229,22 @@
                         .then(response => {
                             this.namespace = response;
                             if (!this.$route.query.ns) {
+
+                                var queries = {}
+                                queries['ns'] = this.namespace.name;
+                                for (const [key, value] of Object.entries(this.$route.query)) {
+                                    queries[key] = value
+                                }
+
                                 this.$router.replace({
                                     path: this.$route.path,
-                                    query: {...this.$route.query, ns: this.namespace.name}
-                                });
+                                    query: queries
+                                }, () => {
+                                    window.location.reload()
+                                }, null);
                             }
 
-                            if (!sessionStorage.getItem('user_role')){
+                            if (!sessionStorage.getItem('user_role')) {
                                 sessionStorage.setItem('user_role', this.namespace.user_role);
                                 window.location.reload()
                             }
