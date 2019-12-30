@@ -166,6 +166,7 @@
                 }, set: function (namespace) {
                     if (this.$route.query.ns !== namespace.name) {
                         sessionStorage.setItem('user_role', namespace.user_role);
+                        sessionStorage.setItem('namespace', namespace.name);
                         this.$store.commit('SET_DATA', {data: false, id: 'loading'});
                         window.location.replace(this.$route.path + '?ns=' + namespace.name);
                     }
@@ -216,6 +217,7 @@
                         if (this.namespaces[i].name === this.$route.query.ns) {
                             this.activeNamespace = this.namespaces[i];
                             sessionStorage.setItem('user_role', this.namespaces[i].user_role);
+                            sessionStorage.setItem('namespace', this.namespaces[i].name);
                             break;
                         }
                     }

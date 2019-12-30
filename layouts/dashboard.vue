@@ -134,9 +134,23 @@
             }
         },
         watch: {
+
+            '$route.query.ns': {
+                handler: function (ns) {
+                    if (!sessionStorage.hasOwnProperty('namespace') || !sessionStorage.hasOwnProperty('user_role')) {
+                        this.fetchUserNamespace()
+                    } else if (sessionStorage.getItem('namespace') !== ns) {
+                        this.fetchUserNamespace()
+                    }
+                },
+                deep: true
+            },
             $route(to, from) {
 
-                if (!to.query.ns && to.path.indexOf('/wizard') === -1 ) {
+                if (!sessionStorage.hasOwnProperty('namespace') || !sessionStorage.hasOwnProperty('user_role'))
+                    this.fetchUserNamespace()
+
+                if (!to.query.ns && to.path.indexOf('/wizard') === -1) {
                     if (from.query.ns) {
                         var queries = {};
                         queries['ns'] = from.query.ns;
@@ -202,6 +216,8 @@
                         path: last_route.path,
                         query: queries
                     }, () => {
+                        sessionStorage.setItem('namespace', this.namespaces[0].name);
+                        sessionStorage.setItem('user_role', this.namespaces[0].user_role);
                         window.location.reload()
                     }, null);
 
@@ -244,10 +260,15 @@
                                 }, null);
                             }
 
-                            if (!sessionStorage.getItem('user_role')) {
+                            if (this.namespace.name !== sessionStorage.getItem('namespace') ||
+                                !sessionStorage.hasOwnProperty('namespace') ||
+                                !sessionStorage.hasOwnProperty('user_role')) {
+
+                                sessionStorage.setItem('namespace', this.namespace.name);
                                 sessionStorage.setItem('user_role', this.namespace.user_role);
                                 window.location.reload()
                             }
+
                             this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                         })
                         .catch(e => {
