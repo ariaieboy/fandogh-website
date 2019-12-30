@@ -231,7 +231,7 @@
                 if (this.service.service_type === 'managed') {
                     this.dumpManifest(this.service.name)
                 } else {
-                    this.$router.push({path: '/dashboard/services/wizard'})
+                    this.$router.push({path: '/dashboard/services/wizard', query: {service: this.service_name, ns: this.$route.query.ns}})
                 }
             },
             remove() {
