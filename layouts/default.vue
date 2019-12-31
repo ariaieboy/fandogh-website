@@ -50,6 +50,23 @@
         },
         watch: {
             $route() {
+
+                if(this.$route.path === '/'){
+                    if (this.$route.query.ns){
+                        var queries = {};
+                        for (const [key, value] of Object.entries(this.$route.query)) {
+                            if (key !== 'ns')
+                                queries[key] = value
+                        }
+                        this.$router.replace({
+                            path: this.$route.path,
+                            query: queries
+                        }, () => {
+                            window.location.reload()
+                        }, null);
+                    }
+                }
+
                 if (this.message) {
                     this.$store.dispatch('setMessage', this.message)
                     this.$store.dispatch('showModal', 'message')
