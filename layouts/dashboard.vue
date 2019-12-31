@@ -150,7 +150,7 @@
                 if (!sessionStorage.hasOwnProperty('namespace') || !sessionStorage.hasOwnProperty('user_role'))
                     this.fetchUserNamespace()
 
-                if (!to.query.ns && to.path.indexOf('/wizard') === -1) {
+                if (!to.query.ns && to.path.indexOf('/wizard') === -1 && to.path !== '/') {
                     if (from.query.ns) {
                         var queries = {};
                         queries['ns'] = from.query.ns;
@@ -202,24 +202,29 @@
             this.fetchUserNamespace()
         },
         methods: {
+            syncUrlWithNs(namespace){
+                var queries = {};
+                queries['ns'] = namespace.name;
+                for (const [key, value] of Object.entries(this.$route.query)) {
+                    queries[key] = value
+                }
+                let last_route = this.$route;
+                this.$router.replace({
+                    path: last_route.path,
+                    query: queries
+                }, () => {
+                    sessionStorage.setItem('namespace', namespace.name);
+                    sessionStorage.setItem('user_role', namespace.user_role);
+                    window.location.reload()
+                }, null);
+
+            },
             async fetchUserNamespaces() {
                 this.namespaces.length = 0;
                 try {
                     this.namespaces = await this.$store.dispatch('requestUserNamespaces');
-                    var queries = {}
-                    queries['ns'] = this.namespaces[0].name;
-                    for (const [key, value] of Object.entries(this.$route.query)) {
-                        queries[key] = value
-                    }
-                    let last_route = this.$route
-                    this.$router.replace({
-                        path: last_route.path,
-                        query: queries
-                    }, () => {
-                        sessionStorage.setItem('namespace', this.namespaces[0].name);
-                        sessionStorage.setItem('user_role', this.namespaces[0].user_role);
-                        window.location.reload()
-                    }, null);
+
+                    this.syncUrlWithNs(this.namespaces[0]);
 
                     this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                 } catch (e) {
@@ -246,27 +251,16 @@
                             this.namespace = response;
                             if (!this.$route.query.ns) {
 
-                                var queries = {}
-                                queries['ns'] = this.namespace.name;
-                                for (const [key, value] of Object.entries(this.$route.query)) {
-                                    queries[key] = value
-                                }
+                                this.syncUrlWithNs(this.namespace);
 
-                                this.$router.replace({
-                                    path: this.$route.path,
-                                    query: queries
-                                }, () => {
-                                    window.location.reload()
-                                }, null);
-                            }
-
-                            if (this.namespace.name !== sessionStorage.getItem('namespace') ||
+                            } else if (this.namespace.name !== sessionStorage.getItem('namespace') ||
                                 !sessionStorage.hasOwnProperty('namespace') ||
                                 !sessionStorage.hasOwnProperty('user_role')) {
 
                                 sessionStorage.setItem('namespace', this.namespace.name);
                                 sessionStorage.setItem('user_role', this.namespace.user_role);
                                 window.location.reload()
+
                             }
 
                             this.$store.commit('SET_DATA', {data: false, id: 'loading'})
