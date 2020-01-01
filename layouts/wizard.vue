@@ -512,7 +512,18 @@
         },
 
         watch: {
-
+            $route(to, from) {
+                if (to.path.indexOf('/wizard') === -1) {
+                    if (window.confirm('در صورت خروج،‌ کلیه تغییراتی که اعمال کرده‌اید حذف می‌شوند. آیا می‌خواهید خارج شوید؟')) {
+                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                    } else {
+                        this.$router.replace({
+                            path: from.path,
+                            query: from.query
+                        })
+                    }
+                }
+            },
             'manifest_model.service.kinds': {
                 handler: function (value, oldValue) {
                     let kind = this.manifest_model.service.kind
@@ -762,10 +773,6 @@
                 this.populateManifest(manifest)
             }
 
-
-        },
-        beforeDestroy() {
-            this.leaving()
         },
         methods: {
             async getImages() {
@@ -1057,14 +1064,6 @@
                     path: path
                 })
             },
-            leaving() {
-                if (!this.finished) {
-                    if (confirm('اگر میخواهید تغییرات مانیفست draft شوند ok را انتخاب نمایید، در غیر این صورت دکمه cancel را بزنید')) {
-                    } else {
-                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
-                    }
-                }
-            },
             persistData(manifest) {
                 for (let key in manifest) {
                     if (manifest.hasOwnProperty(key)) {
@@ -1153,7 +1152,7 @@
                 }
 
             }
-        }
+        },
     };
 </script>
 
