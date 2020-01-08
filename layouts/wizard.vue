@@ -679,7 +679,7 @@
                                 item.edited = false;
                             }
                         })
-                        this.deleteFromManifest([...value], 'spec.port_mapping')
+                        this.deleteFromManifest('spec.port_mapping')
                     }
                 }, deep: true
             },

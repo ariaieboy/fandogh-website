@@ -47,6 +47,7 @@
                 managed_services: [
                     {title: 'MySQL', description: 'Database', icon: 'mysql', path: "mysql"},
                     {title: 'PostgreSQL', description: 'Database', icon: 'postgresql', path: "postgresql"},
+                    {title: 'MSSQL Server', description: 'Database', icon: 'mssql', path: "mssql"},
                     {title: 'MongoDB', description: 'Database', icon: 'mongodb', path: "mongodb"},
                     {title: 'Redis', description: 'In Memory Data Store', icon: 'redis', path: "redis"},
                     {title: 'Proxy', description: 'Proxy Service', icon: 'proxy', path: "proxy"}

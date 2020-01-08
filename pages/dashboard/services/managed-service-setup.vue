@@ -31,7 +31,7 @@
                 </div>
 
                 <span style="display: inline-flex; font-family: iran-yekan; font-size: 2em; text-align: left; margin-top: auto; margin-bottom: auto; order: 3; padding: 0 12px; color: #2979ff; font-weight: bold">
-                    {{managed_service[service_name].title}}
+                    {{managed_service[service_name].local_title}}
                 </span>
                 <div style="width: 2px; background-color: #2979ff; margin: 16px 0; border-radius: 25px; order: 2">
 
@@ -43,7 +43,7 @@
 
             </div>
             <div style="width: 100%; margin-top: 16px; background-color: #2979ff; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px; display: block">
-                <span style="color: #fefefe; font-size: 1.2em;display: block; font-weight: bold">{{managed_service[service_name].title}}</span>
+                <span style="color: #fefefe; font-size: 1.2em;display: block; font-weight: bold">{{managed_service[service_name].local_title}}</span>
                 <span style="color: #fefefe; font-size: 1em;display: block; margin-top: 16px; line-height: 1.75; font-weight: normal;">
                     {{managed_service[service_name].description}}
                 </span>
@@ -66,6 +66,7 @@
 
     import MongoDB from "../../../components/managed-services/mongodb";
     import Mysql from "../../../components/managed-services/mysql";
+    import Mssql from "../../../components/managed-services/mssql";
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
     import Proxy from "../../../components/managed-services/proxy";
@@ -79,6 +80,7 @@
             Mysql,
             Postgresql,
             MongoDB,
+            Mssql,
             Redis,
             Proxy
         },
@@ -116,6 +118,7 @@
                     mysql:
                         {
                             title: 'Mysql',
+                            local_title: 'Mysql',
                             short_desc: 'Database',
                             icon: 'mysql',
                             path: "mysql",
@@ -128,6 +131,7 @@
                     postgresql:
                         {
                             title: 'Postgresql',
+                            local_title: 'Postgresql',
                             short_desc: 'Database',
                             icon: 'postgresql',
                             path: "postgresql",
@@ -135,9 +139,21 @@
                             description: 'Postgresql یک ORDBMS معروف و پرطرفدار است که می‌توانید به سادگی به عنوان یک managed-service روی Namespace خود دیپلوی کنید. '
                         },
 
+                    mssql:
+                        {
+                            title: 'Mssql',
+                            local_title: 'MSSQL Server',
+                            short_desc: 'Database',
+                            icon: 'mssql',
+                            path: "mssql",
+                            version: 'latest',
+                            description: 'Microsoft SQL Server یک نرم‌افزار سیستم مدیریت بانک‌های اطلاعاتی رابطه ای است که توسط شرکت مایکروسافت ساخته شده‌است. این محصول نرم‌افزاری عملکرد اصلی‌اش ذخیره‌سازی و بازیابی اطلاعات با توجه به درخواست سایر برنامه‌ها است؛ که بر روی همان فضانام وجود دارند.'
+                        },
+
                     mongodb:
                         {
                             title: 'MongoDB',
+                            local_title: 'MongoDB',
                             short_desc: 'Database',
                             icon: 'mongodb',
                             path: "mongodb",
@@ -148,6 +164,7 @@
                     redis:
                         {
                             title: 'Redis',
+                            local_title: 'Redis',
                             short_desc: 'In Memory Data Store',
                             icon: 'redis',
                             path: "redis",
@@ -158,6 +175,7 @@
                     proxy:
                         {
                             title: 'Proxy',
+                            local_title: 'Proxy',
                             short_desc: 'Proxy Service',
                             icon: 'proxy',
                             path: "proxy",
@@ -284,7 +302,7 @@
                 this.addToManifest(this.managed_service_manifest.kind.name, 'kind')
                 this.addToManifest(this.managed_service[this.service_name].title.toLowerCase(), 'spec.service_name')
                 this.addToManifest(this.managed_service[this.service_name].version, 'spec.version')
-
+                this.addToManifest(this.managed_service_manifest.memory.amount.toString().concat('Mi'), 'spec.resources.memory')
 
                 if (manifest.hasOwnProperty('name')) {
                     this.managed_service_manifest.name.name = manifest.name
