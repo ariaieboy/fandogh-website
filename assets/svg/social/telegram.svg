@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
+    <title>telegram</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="telegram" fill="#FEFEFE" fill-rule="nonzero">
+            <path d="M24,48 C37.258,48 48,37.258 48,24 C48,10.742 37.258,0 24,0 C10.742,0 0,10.742 0,24 C0,37.258 10.742,48 24,48 Z M10.982,23.48 L34.122,14.558 C35.196,14.17 36.134,14.82 35.786,16.444 L35.788,16.442 L31.848,35.004 C31.556,36.32 30.774,36.64 29.68,36.02 L23.68,31.598 L20.786,34.386 C20.466,34.706 20.196,34.976 19.576,34.976 L20.002,28.87 L31.122,18.824 C31.606,18.398 31.014,18.158 30.376,18.582 L16.634,27.234 L10.71,25.386 C9.424,24.978 9.396,24.1 10.982,23.48 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

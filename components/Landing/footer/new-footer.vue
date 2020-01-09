@@ -77,6 +77,12 @@
                         src="../../../assets/svg/social/github.svg"/></a>
                 <a rel="noopener" target="_blank" href="https://twitter.com/fandoghpaas"><img
                         src="../../../assets/svg/social/twitter.svg"/></a>
+                <a rel="noopener" target="_blank" href="https://linkedin.com/company/fandogh-paas"><img
+                        src="../../../assets/svg/social/linkedin.svg"/></a>
+                <a rel="noopener" target="_blank" href="https://facebook.com/fandoghpaas/"><img
+                        src="../../../assets/svg/social/facebook.svg"/></a>
+                <a rel="noopener" target="_blank" href="https://t.me/fandoghpaas"><img
+                        src="../../../assets/svg/social/telegram.svg"/></a>
                 <a rel="noopener" target="_blank" href="mailto:support@fandogh.cloud"><img
                         src="../../../assets/svg/social/email.svg"/></a>
 
