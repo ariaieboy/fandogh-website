@@ -114,16 +114,28 @@
                     description: 'تمرکز و منابع خود را صرف توسعه محصولتان کنید و آسان کردن مدیریت و مقیاس پذیری آن را به ما بسپارید',
                     services: [
                         {
+                            title: 'MySQL',
+                            description: 'SQL Database',
+                            icon: 'managed_service_mysql',
+                            href: 'https://docs.fandogh.cloud/docs/mysql-managed-service.html'
+                        },
+                        {
                             title: 'PostgreSQL',
                             description: 'SQL Database',
                             icon: 'managed_service_postgresql',
                             href: 'https://docs.fandogh.cloud/docs/postgresql-managed-service.html'
                         },
                         {
-                            title: 'MySQL',
+                            title: 'MongoDB',
+                            description: 'NoSQL Database',
+                            icon: 'managed_service_mongodb',
+                            href: 'https://docs.fandogh.cloud/docs/mongodb-managed-service.html'
+                        },
+                        {
+                            title: 'MSSQL Server',
                             description: 'SQL Database',
-                            icon: 'managed_service_mysql',
-                            href: 'https://docs.fandogh.cloud/docs/mysql-managed-service.html'
+                            icon: 'managed_service_mssql',
+                            href: 'https://docs.fandogh.cloud/docs/mssql-managed-service.html'
                         },
                         {
                             title: 'Redis',
