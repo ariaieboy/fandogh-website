@@ -107,6 +107,7 @@
                 let volumes = this.$store.state.volumes;
                 if (volumes) {
                     return volumes.map(({name, age, capacity, mounted_to}) => {
+                        console.log(age)
                         {
                             return {
                                 name,
