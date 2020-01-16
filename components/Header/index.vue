@@ -523,7 +523,7 @@
 <style lang="stylus">
 
     *
-        user-select none
+        user-select auto
 
     .header-container
         position fixed
