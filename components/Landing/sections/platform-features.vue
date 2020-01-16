@@ -63,6 +63,20 @@
                                 href: ''
                             },
                             {
+                                title: 'MongoDB',
+                                sub_title: 'NoSQL Database',
+                                description: 'یکی از این پایگاه‌داده‌های محبوب MongoDB است که در میان توسعه دهندگان از محبوبیت بسیار بالایی برخوردار بوده و نشان داده است که در ساختارها و مقیاس‌های بزرگ و پیچیده به راحتی می‌تواند پاسخگوی نیاز‌های یک پروژه باشد.',
+                                image: 'managed/managed_service_mongodb',
+                                href: ''
+                            },
+                            {
+                                title: 'MSSQL Server',
+                                sub_title: 'Database',
+                                description: 'Microsoft SQL Server یک سیستم مدیریت پایگاه داده رابطه ای (RDBMS) است که از طیف گسترده ای از برنامه های پردازش تراکنش، هوش تجاری و تجزیه و تحلیل پشتیبانی می کند. Microsoft SQL Server به همراه اوراکل دیتابیس و IBM DB2 یکی از سه فناوری پیشرو در بازار است.',
+                                image: 'managed/managed_service_mssql',
+                                href: ''
+                            },
+                            {
                                 title: 'Redis',
                                 sub_title: 'In Memory Cache Database',
                                 description: 'Redis به عنوان یک پایگاه داده key-value با سرعت فوق‌العاده در بین توسعه‌دهندگان از شهرت و محبوبیت بالایی برخوردار است. حال این سرویس In Memory Cache Database به صورت مدیریت شده بر روی سکو قابل دسترسی‌ است تا سرعت توسعه محصولات شما دو چندان شود.',
