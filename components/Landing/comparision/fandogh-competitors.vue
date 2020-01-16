@@ -110,7 +110,7 @@
                         heroku: false
                     },
                     {
-                        title: 'CI/CD',
+                        title: 'CI/CD Friendly',
                         is_boolean: true,
                         fandogh: true,
                         sloppy: true,
@@ -155,14 +155,14 @@
                         title: 'Custom Manifest',
                         is_boolean: true,
                         fandogh: true,
-                        sloppy: false,
+                        sloppy: true,
                         heroku: true
                     },
                     {
                         title: 'k8s support',
                         is_boolean: true,
                         fandogh: true,
-                        sloppy: false,
+                        sloppy: true,
                         heroku: false
                     },
                     {
