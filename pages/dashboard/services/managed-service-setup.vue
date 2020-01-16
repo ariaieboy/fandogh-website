@@ -69,6 +69,7 @@
     import Mssql from "../../../components/managed-services/mssql";
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
+    import Minio from "../../../components/managed-services/minio";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
 
@@ -82,6 +83,7 @@
             MongoDB,
             Mssql,
             Redis,
+            Minio,
             Proxy
         },
         data() {
@@ -170,6 +172,18 @@
                             path: "redis",
                             version: '5.0.3',
                             description: 'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
+                        },
+
+                    minio:
+                        {
+                            title: 'Minio',
+                            local_title: 'Minio',
+                            short_desc: 'Object Storage',
+                            icon: 'minio',
+                            path: "minio",
+                            version: 'latest',
+                            description: 'اگر شما به دنبال راه حلی برای ذخیره‌سازی داده‌های متفاوت هستید بهتر است از Object Storageها استفاده کنید. یکی از این Object Storageها Minio است.\n' +
+                                'Minio یک cloud storage سازگار با Amazon S3 است که به شما این امکان را میدهد تا فایل‌های خود را بر روی آن ذخیره کنید.'
                         },
 
                     proxy:
