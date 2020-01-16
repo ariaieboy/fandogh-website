@@ -530,7 +530,7 @@
 <style lang="stylus">
 
     *
-        user-select text
+        user-select auto
 
     .header-container
         position fixed
