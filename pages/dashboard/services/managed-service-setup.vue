@@ -69,6 +69,7 @@
     import Mssql from "../../../components/managed-services/mssql";
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
+    import FileBrowser from "../../../components/managed-services/filemanager";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
 
@@ -82,6 +83,7 @@
             MongoDB,
             Mssql,
             Redis,
+            FileBrowser,
             Proxy
         },
         data() {
@@ -172,15 +174,15 @@
                             description: 'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
                         },
 
-                    filemanager:
+                    filebrowser:
                         {
-                            title: 'FileManager',
-                            local_title: 'File Manager',
-                            short_desc: 'File Browser',
-                            icon: 'filemanager',
-                            path: "filemanager",
+                            title: 'FileBrowser',
+                            local_title: 'File Browser',
+                            short_desc: 'File Manager',
+                            icon: 'filebrowser',
+                            path: "filebrowser",
                             version: 'latest',
-                            description: 'یکی از مشکلات کاربران بر روی سکو‌های ابری، دسترسی به داده‌های ذخیره‌شده بر روی Storage است، برای آنکه بتوانید به صورت گرافیکی با محل ذخیره‌سازی داده‌ها کار کنید و داده‌های خود را دانلود و آپلود و یا حتی Edit کنید، می‌توانید از سرویس مدیریت شده FileBrowser فندق استفاده کنید.'
+                            description: 'یکی از مشکلات کاربران بر روی سکو‌های ابری، دسترسی به داده‌های ذخیره‌شده بر روی Storage است، برای آنکه بتوانید به صورت گرافیکی با محل ذخیره‌سازی داده‌ها کار کنید و داده‌های خود را دانلود و آپلود و یا حتی Edit کنید، می‌توانید از سرویس مدیریت شده File Browser فندق استفاده کنید.'
                         },
 
                     proxy:
