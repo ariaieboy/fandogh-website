@@ -172,6 +172,17 @@
                             description: 'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
                         },
 
+                    kong:
+                        {
+                            title: 'Kong',
+                            local_title: 'Kong',
+                            short_desc: 'API Gateway',
+                            icon: 'kong',
+                            path: "kong",
+                            version: 'latest',
+                            description: 'Kong یک سرویس API Layer متن‌باز و مقیاس‌پذیر است که از آن به عنوان یک سرویس API Gateway یا API Middleware نیز یاد می‌شود. Kong در جلوی RESTful API قرار می‌گیرد و این قابلیت را دارد تا با پلاگین‌های متفاوتی که Functionalityهای بیشتری به آن می‌دهد توسط کاربر تنظیم شود.'
+                        },
+
                     proxy:
                         {
                             title: 'Proxy',
