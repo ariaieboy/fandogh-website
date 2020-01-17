@@ -69,6 +69,7 @@
     import Mssql from "../../../components/managed-services/mssql";
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
+    import Kong from "../../../components/managed-services/kong";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
 
@@ -82,6 +83,7 @@
             MongoDB,
             Mssql,
             Redis,
+            Kong,
             Proxy
         },
         data() {
