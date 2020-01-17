@@ -172,6 +172,17 @@
                             description: 'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
                         },
 
+                    filemanager:
+                        {
+                            title: 'FileManager',
+                            local_title: 'File Manager',
+                            short_desc: 'File Browser',
+                            icon: 'filemanager',
+                            path: "filemanager",
+                            version: 'latest',
+                            description: 'یکی از مشکلات کاربران بر روی سکو‌های ابری، دسترسی به داده‌های ذخیره‌شده بر روی Storage است، برای آنکه بتوانید به صورت گرافیکی با محل ذخیره‌سازی داده‌ها کار کنید و داده‌های خود را دانلود و آپلود و یا حتی Edit کنید، می‌توانید از سرویس مدیریت شده FileBrowser فندق استفاده کنید.'
+                        },
+
                     proxy:
                         {
                             title: 'Proxy',
