@@ -70,6 +70,7 @@
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
     import Kong from "../../../components/managed-services/kong";
+    import Konga from "../../../components/managed-services/konga";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
 
@@ -84,6 +85,7 @@
             Mssql,
             Redis,
             Kong,
+            Konga,
             Proxy
         },
         data() {
@@ -114,7 +116,7 @@
                         hint: 'میزان رم مورد نیاز برای ساخت سرویس',
                         default: '200',
                         amount: 200
-                    },
+                    }
                 },
                 managed_service: {
                     mysql:
@@ -183,6 +185,17 @@
                             path: "kong",
                             version: 'latest',
                             description: 'Kong یک سرویس API Layer متن‌باز و مقیاس‌پذیر است که از آن به عنوان یک سرویس API Gateway یا API Middleware نیز یاد می‌شود. Kong در جلوی RESTful API قرار می‌گیرد و این قابلیت را دارد تا با پلاگین‌های متفاوتی که Functionalityهای بیشتری به آن می‌دهد توسط کاربر تنظیم شود.'
+                        },
+
+                    konga:
+                        {
+                            title: 'Konga',
+                            local_title: 'Konga',
+                            short_desc: 'Kong Dashboard',
+                            icon: 'konga',
+                            path: "konga",
+                            version: 'latest',
+                            description: 'داشبورد مدیریتی Konga به شما این امکان را می‌دهد تا بتوانید به سرویس‌ Kong دسترسی داشته و از طریق Web UI به مدیریت آن بپردازید.'
                         },
 
                     proxy:
@@ -312,10 +325,10 @@
             },
             populateManifest(manifest) {
 
-                this.addToManifest(this.managed_service_manifest.kind.name, 'kind')
-                this.addToManifest(this.managed_service[this.service_name].title.toLowerCase(), 'spec.service_name')
-                this.addToManifest(this.managed_service[this.service_name].version, 'spec.version')
-                this.addToManifest(this.managed_service_manifest.memory.amount.toString().concat('Mi'), 'spec.resources.memory')
+                this.addToManifest(this.managed_service_manifest.kind.name, 'kind');
+                this.addToManifest(this.managed_service[this.service_name].title.toLowerCase(), 'spec.service_name');
+                this.addToManifest(this.managed_service[this.service_name].version, 'spec.version');
+                this.addToManifest(this.managed_service_manifest.memory.amount.toString().concat('Mi'), 'spec.resources.memory');
 
                 if (manifest.hasOwnProperty('name')) {
                     this.managed_service_manifest.name.name = manifest.name
@@ -363,22 +376,22 @@
             deploy() {
 
                 if (this.isManifestValid()) {
-                    this.loading = true
+                    this.loading = true;
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.$store.dispatch('createServiceManifest').then(res => {
                         setTimeout(() => {
-                            this.loading = false
-                            this.finished = true
+                            this.loading = false;
+                            this.finished = true;
                             // removeValue('name')
                             // removeValue('versions')
                             this.$store.commit("SET_DATA", {id: "service", data: res});
-                            this.$router.replace(`/dashboard/services/${res.name}`)
+                            this.$router.replace(`/dashboard/services/${res.name}`);
                             this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                         }, 5000);
 
                     }).catch(e => {
-                        this.loading = false
-                        this.finished = false
+                        this.loading = false;
+                        this.finished = false;
                         // ErrorReporter(e, [], true).forEach(error => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
                         //
@@ -446,9 +459,7 @@
                         } else {
                             this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
                         }
-
-                    }
-                    ,
+                    },
                     deep: true
                 }
             ,

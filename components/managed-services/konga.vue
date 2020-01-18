@@ -52,13 +52,13 @@
                                 color="#0093ff"
                                 required
                                 :rules="[rules.counter, rules.required]"
-                                v-model="kong_manifest.pg_database.value"
-                                :label="pg_database.label"
-                                :hint="pg_database.hint">
+                                v-model="kong_manifest.dashboard_database.value"
+                                :label="dashboard_database.label"
+                                :hint="dashboard_database.hint">
 
                         </v-text-field>
 
-                        <popover :tooltip="tooltips.pg_database"></popover>
+                        <popover :tooltip="tooltips.dashboard_database"></popover>
 
                     </div>
 
@@ -115,26 +115,9 @@
 
                         </v-text-field>
 
+
                         <popover :tooltip="tooltips.memory"></popover>
 
-                    </div>
-
-
-                    <div style="display: flex; margin-top: 12px">
-
-                        <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px"
-                                      color="#0093ff"
-                                      dir="ltr"
-                                      type="number"
-                                      min="1"
-                                      v-model.number="kong_manifest.replicas.value"
-                                      @change="(kong_manifest.replicas.value < 1 ? kong_manifest.replicas.value = 1 : kong_manifest.replicas.value)"
-                                      :hint="replicas.hint"
-                                      :label="replicas.label">
-
-                        </v-text-field>
-
-                        <popover :tooltip="tooltips.replicas"></popover>
 
                     </div>
 
@@ -143,7 +126,6 @@
             </config-box>
 
         </div>
-
 
     </div>
 </template>
@@ -155,7 +137,7 @@
     import FanCheckbox from "../../components/wizard/select-box/fan-checkbox";
 
     export default {
-        name: "kong",
+        name: "konga",
         layout: 'dashboard',
         components: {
             ConfigBox,
@@ -191,15 +173,9 @@
                     name: ''
 
                 },
-                pg_database: {
-                    label: 'نام دیتابیس سرویس Kong',
-                    hint: 'نام دیتابیسی که باید داخل PostgreSQL ساخته شده تا اطلاعات سرویس Kong را نگهداری کند را وارد نمایید',
-                    name: ''
-
-                },
-                replicas: {
-                    label: 'تعداد Replica',
-                    hint: 'تعداد سرویس‌های مشابهی که میخواهید از این سرویس ساخته شود',
+                dashboard_database: {
+                    label: 'نام دیتابیس داشبورد Kong',
+                    hint: 'نام دیتابیسی که باید داخل PostgreSQL ساخته شده تا اطلاعات داشبورد Konga را نگهداری کند را وارد نمایید',
                     name: ''
 
                 },
@@ -216,13 +192,9 @@
                         name: 'kong_pg_password',
                         value: 'postgres'
                     },
-                    pg_database: {
-                        name: 'kong_pg_database',
-                        value: 'kong-database'
-                    },
-                    replicas: {
-                        name: 'replicas',
-                        value: 1
+                    dashboard_database: {
+                        name: 'dashboard_database',
+                        value: 'kong-dashboard-db'
                     }
                 },
                 rules: {
@@ -242,19 +214,9 @@
                         text: 'از طریق این فیلد می‌توانید مشخص کنید که سرویس شما چه مقدار منابع در اختیار داشته باشد.',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#resources'
                     },
-                    replicas: {
-                        title: 'تعیین تعداد replica سرویس',
-                        text: 'از طریق این فیلد می‌توانید مشخص کنید که چه تعداد سرویس با همین تنظیمات ساخته شود.',
-                        url: 'https://docs.fandogh.cloud/docs/service-manifest.html#replicas'
-                    },
                     pg_host: {
                         title: 'نام سرویس PostgreSQL',
-                        text: 'نام سرویس PostgreSQL را باید در این بخش وارد کنید تا سرویس ‌Kong با متصل شدن به آن بتواند اطلاعات خود را، در آن ذخیره کند.',
-                        url: '#'
-                    },
-                    pg_database: {
-                        title: 'نام دیتابیس سرویس Kong',
-                        text: 'نام دیتابیسی که از قبل در سرویس PostgreSQL برای سرویس ‌Kong ایجاد کرده‌اید تا بتواند اطلاعات خود را در آن ذخیره کند. در صورتی که نام دیتابیس را وارد نمایید ولی آن را نساخته باشید سرویس به درستی عمل نخواهد کرد!',
+                        text: 'نام سرویس PostgreSQL را باید در این بخش وارد کنید تا سرویس ‌Konga با متصل شدن به آن بتواند اطلاعات خود را، در آن ذخیره کند.',
                         url: '#'
                     },
                     pg_username: {
@@ -267,18 +229,22 @@
                         text: 'گذرواژه‌ای که با آن وارد سرویس PostgreSQL می‌شوید را وارد نمایید.',
                         url: '#'
                     },
-
+                    dashboard_database: {
+                        title: 'نام دیتابیس داشبورد aKong',
+                        text: 'نام دیتابیسی که از قبل در سرویس PostgreSQL برای داشبورد ‌Konga ایجاد کرده‌اید تا بتواند اطلاعات خود را در آن ذخیره کند. در صورتی که نام دیتابیس را وارد نمایید ولی آن را نساخته باشید سرویس به درستی عمل نخواهد کرد!',
+                        url: '#'
+                    }
                 },
                 sections: {
-                    service_config: 'تنظیمات سرویس Kong'
+                    service_config: 'تنظیمات سرویس Konga'
                 },
             }
         },
         mounted() {
 
 
-            if (this.manifest_model.memory.amount < 1024) {
-                this.manifest_model.memory.amount = 1024;
+            if (this.manifest_model.memory.amount < 512){
+                this.manifest_model.memory.amount = 512;
             }
 
 
@@ -298,8 +264,8 @@
                         case 'kong_pg_password':
                             this.kong_manifest.pg_password.value = param.value;
                             break;
-                        case 'replicas':
-                            this.kong_manifest.replicas.value = param.value;
+                        case 'dashboard_database':
+                            this.kong_manifest.dashboard_database.value = param.value;
                             break;
                     }
                 })
@@ -340,21 +306,10 @@
                         this.manifest_model.parameters.push(value)
                 }, deep: true
             },
-            'kong_manifest.pg_database': {
+            'kong_manifest.dashboard_database': {
                 handler: function (value, oldvalue) {
                     this.manifest_model.parameters.forEach((param, index) => {
-                        if (param.name === 'kong_pg_database') {
-                            this.manifest_model.parameters.splice(index, 1)
-                        }
-                    });
-                    if (value.value.toString().length > 0)
-                        this.manifest_model.parameters.push(value)
-                }, deep: true
-            },
-            'kong_manifest.replicas': {
-                handler: function (value, oldvalue) {
-                    this.manifest_model.parameters.forEach((param, index) => {
-                        if (param.name === 'replicas') {
+                        if (param.name === 'dashboard_database') {
                             this.manifest_model.parameters.splice(index, 1)
                         }
                     });
