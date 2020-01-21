@@ -113,6 +113,28 @@
 
             </config-box>
 
+            <config-box :section-title="sections.plugin_config">
+
+                <div style="width: 100%">
+                    <div style="padding: 0 0 24px 0;">
+                        <span style="font-size: 0.8em; line-height: 1.75">
+                            {{plugins_tooltip}}
+                        </span>
+                    </div>
+
+                    <div>
+                        <fan-checkbox v-for="(plugin, index) in plugins"
+                                      :key="index"
+                                      @click.native="pluginSelected(index)"
+                                      style="margin-bottom: 12px"
+                                      :object="plugin">
+
+                        </fan-checkbox>
+                    </div>
+
+                </div>
+
+            </config-box>
             <config-box :section-title="sections.storage_config">
 
                 <div style="width: 100%">
@@ -184,6 +206,7 @@
         },
         data() {
             return {
+                plugins_tooltip: 'سرویس RabbitMQ به شما این اجازه را می‌دهد تا برخی Pluginهایی که از پیش در آن تعریف شده است را متناسب با کار خود انتخاب و فعال کنید. در صورتی که با این پلاگین‌ها آشنایی دارید می‌توانید از طریق این بخش هر کدام از پلاگین‌های مورد نظر خود را فعال کنید؛ در غیر این صورت می‌توانید این بخش را نادیده بگیرید.',
                 selected_volume: {
                     label: "Dedicated Volume",
                     value: "DedicatedVolume",
@@ -202,6 +225,164 @@
                         value: "DedicatedVolume",
                         selected: false,
                         tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume مورد نظر شما ذخیره خواهند شد.'
+                    }
+                ],
+                plugins: [
+
+                    {
+                        label: "rabbitmq_amqp1_0",
+                        value: "rabbitmq_amqp1_0",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_auth_backend_cache",
+                        value: "rabbitmq_auth_backend_cache",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_auth_backend_http",
+                        value: "rabbitmq_auth_backend_http",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_auth_backend_ldap",
+                        value: "rabbitmq_auth_backend_ldap",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_auth_backend_oauth2",
+                        value: "rabbitmq_auth_backend_oauth2",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_auth_mechanism_ssl",
+                        value: "rabbitmq_auth_mechanism_ssl",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_consistent_hash_exchange",
+                        value: "rabbitmq_consistent_hash_exchange",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_event_exchange",
+                        value: "rabbitmq_event_exchange",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_federation",
+                        value: "rabbitmq_federation",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_federation_management",
+                        value: "rabbitmq_federation_management",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_jms_topic_exchange",
+                        value: "rabbitmq_jms_topic_exchange",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_peer_discovery_aws",
+                        value: "rabbitmq_peer_discovery_aws",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_peer_discovery_common",
+                        value: "rabbitmq_peer_discovery_common",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_peer_discovery_consul",
+                        value: "rabbitmq_peer_discovery_consul",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_peer_discovery_etcd",
+                        value: "rabbitmq_peer_discovery_etcd",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_peer_discovery_k8s",
+                        value: "rabbitmq_peer_discovery_k8s",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_prometheus",
+                        value: "rabbitmq_prometheus",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_random_exchange",
+                        value: "rabbitmq_random_exchange",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_recent_history_exchange",
+                        value: "rabbitmq_recent_history_exchange",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_sharding",
+                        value: "rabbitmq_sharding",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_shovel_management",
+                        value: "rabbitmq_shovel_management",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_stomp",
+                        value: "rabbitmq_stomp",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_tracing",
+                        value: "rabbitmq_tracing",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_trust_store",
+                        value: "rabbitmq_trust_store",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_web_mqtt",
+                        value: "rabbitmq_web_mqtt",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_web_mqtt_examples",
+                        value: "rabbitmq_web_mqtt_examples",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_web_stomp",
+                        value: "rabbitmq_web_stomp",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_web_stomp_examples",
+                        value: "rabbitmq_web_stomp_examples",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_shovel",
+                        value: "rabbitmq_shovel",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_mqtt",
+                        value: "rabbitmq_mqtt",
+                        selected: false
+                    },
+                    {
+                        label: "rabbitmq_top",
+                        value: "rabbitmq_top",
+                        selected: false
                     }
                 ],
                 username: {
@@ -239,7 +420,10 @@
                         name: 'dashboard_enabled',
                         value: false
                     },
-
+                    plugins_list: {
+                        name: 'rabbitmq_plugins',
+                        value: ''
+                    },
                     volume_name: {
                         name: 'volume_name',
                         value: null
@@ -279,25 +463,49 @@
                         title: 'رمز عبور RabbitMQ',
                         text: 'رمز عبوری که برای RabbitMQ باید انتخاب کنید.',
                         url: '#'
+                    },
+                    plugins: {
+                        title: 'پلاگین‌های RabbitMQ',
+                        text: 'رمز عبوری که برای RabbitMQ باید انتخاب کنید.',
+                        url: '#'
                     }
                 },
                 sections: {
                     service_config: 'تنظیمات سرویس RabbitMQ',
                     storage_config: 'تعیین محل ذخیره سازی',
+                    plugin_config: 'پلاگین‌های RabbitMQ',
                     dashboard_config: 'تنظیمات داشبورد RabbitMQ'
                 },
             }
         }, methods: {
             checkBoxSelected() {
 
-                if (this.selected_volume.selected){
+                if (this.selected_volume.selected) {
                     this.selected_volume.selected = false;
                     this.volumes[0].selected = false;
                     this.rabbitmq_manifest.volume_name.value = null
-                }else {
+                } else {
                     this.selected_volume.selected = true;
                     this.volumes[0].selected = true;
                 }
+            },
+            pluginSelected(index) {
+
+                this.plugins.forEach((plugin, it) => {
+                    if (index === it) {
+                        if (plugin.selected) {
+                            plugin.selected = false;
+                            this.rabbitmq_manifest.plugins_list.value = this.rabbitmq_manifest.plugins_list.value.replace(plugin.value, '');
+                        } else {
+                            plugin.selected = true;
+                            this.rabbitmq_manifest.plugins_list.value += plugin.value.concat(' ');
+                        }
+                        this.rabbitmq_manifest.plugins_list.value.trim();
+                    }
+                });
+
+                console.log(this.rabbitmq_manifest.plugins_list.value)
+                console.log(this.rabbitmq_manifest.plugins_list.value.length)
             },
             RabbitmqExposeSelected() {
                 this.rabbitmq_dashboard.selected = !this.rabbitmq_dashboard.selected;
@@ -306,7 +514,7 @@
         },
         mounted() {
 
-            if (this.manifest_model.memory.amount < 512){
+            if (this.manifest_model.memory.amount < 512) {
                 this.manifest_model.memory.amount = 512
             }
 
@@ -328,6 +536,14 @@
                             this.rabbitmq_manifest.volume_name.value = param.value;
                             this.selected_volume.selected = true;
                             this.volumes[0].selected = true;
+                            break;
+                        case 'rabbitmq_plugins':
+                            this.plugins.forEach((item, index) => {
+                               if (param.value.toString().includes(item.value)){
+                                   item.selected = true;
+                                   this.rabbitmq_manifest.plugins_list.value += item.value.concat(' ');
+                               }
+                            });
                             break;
                     }
                 })
@@ -375,6 +591,20 @@
                     });
                     if (value.value !== null)
                         this.manifest_model.parameters.push(value)
+                }, deep: true
+            },
+            'rabbitmq_manifest.plugins_list': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'rabbitmq_plugins') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value !== null) {
+                        if (value.value.trim() !== '') {
+                            this.manifest_model.parameters.push(value)
+                        }
+                    }
                 }, deep: true
             },
         }
