@@ -306,6 +306,10 @@
         },
         mounted() {
 
+            if (this.manifest_model.memory.amount < 512){
+                this.manifest_model.memory.amount = 512
+            }
+
             if (this.manifest_model.parameters.length !== 0) {
                 this.manifest_model.parameters.forEach(param => {
                     switch (param.name) {
