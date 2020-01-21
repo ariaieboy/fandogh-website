@@ -89,14 +89,14 @@
 
             </config-box>
 
-            <config-box :section-title="sections.rabbitmq_expose_config">
+            <config-box :section-title="sections.dashboard_config">
 
                 <div style="width: 100%">
 
 
                     <div>
                         <span style="font-size: 0.8em; line-height: 1.75">
-                            {{rabbitmq_exposed.hint}}
+                            {{dashboard_enabled.hint}}
                         </span>
                     </div>
 
@@ -216,7 +216,7 @@
                     name: 'rabbitmq'
 
                 },
-                rabbitmq_exposed: {
+                dashboard_enabled: {
                     label: 'RabbitMQ رابط ادمین',
                     hint: 'در صورتی که نیاز دارید از داشبورد RabbitMQ استفاده کنید، آن را فعال نمایید. این قابلیت به صورت پیش‌فرض انتخاب برای شما ساخته خواهد شد.',
                     name: ''
@@ -235,8 +235,8 @@
                         name: 'rabbitmq_password',
                         value: 'rabbitmq'
                     },
-                    rabbitmq_exposed: {
-                        name: 'rabbitmq_exposed',
+                    dashboard_enabled: {
+                        name: 'dashboard_enabled',
                         value: false
                     },
 
@@ -284,7 +284,7 @@
                 sections: {
                     service_config: 'تنظیمات سرویس RabbitMQ',
                     storage_config: 'تعیین محل ذخیره سازی',
-                    rabbitmq_expose_config: 'تنظیمات داشبورد RabbitMQ'
+                    dashboard_config: 'تنظیمات داشبورد RabbitMQ'
                 },
             }
         }, methods: {
@@ -301,7 +301,7 @@
             },
             RabbitmqExposeSelected() {
                 this.rabbitmq_dashboard.selected = !this.rabbitmq_dashboard.selected;
-                this.rabbitmq_manifest.rabbitmq_exposed.value = this.rabbitmq_dashboard.selected;
+                this.rabbitmq_manifest.dashboard_enabled.value = this.rabbitmq_dashboard.selected;
             }
         },
         mounted() {
@@ -310,8 +310,8 @@
                 this.manifest_model.parameters.forEach(param => {
                     switch (param.name) {
 
-                        case 'rabbitmq_exposed':
-                            this.rabbitmq_manifest.rabbitmq_exposed.value = param.value;
+                        case 'dashboard_enabled':
+                            this.rabbitmq_manifest.dashboard_enabled.value = param.value;
                             this.rabbitmq_dashboard.selected = param.value;
                             break;
                         case 'rabbitmq_username':
@@ -330,10 +330,10 @@
             }
 
         }, watch: {
-            'rabbitmq_manifest.rabbitmq_exposed': {
+            'rabbitmq_manifest.dashboard_enabled': {
                 handler: function (value, oldvalue) {
                     this.manifest_model.parameters.forEach((param, index) => {
-                        if (param.name === 'rabbitmq_exposed') {
+                        if (param.name === 'dashboard_enabled') {
                             this.manifest_model.parameters.splice(index, 1)
                         }
                     });
