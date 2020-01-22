@@ -331,7 +331,6 @@
     import FActivePlan from "~/components/Dashboard/plans/active-plan/panel";
     import FActivePlanBox from "~/components/Dashboard/plans/active-plan";
     import {getValue} from "~/utils/cookie";
-    import Image from "../services/image";
     import Plan from "~/components/Plan";
     import Moment from 'moment-jalaali';
     import Feature from '~/components/Plan/feature.vue';
@@ -530,7 +529,6 @@
             }
         },
         components: {
-            Image,
             PanelBox,
             FPanels,
             FActivePlan,
