@@ -53,6 +53,7 @@
                     <img :src="avatar" alt="profile">
                   </a>
                 </div>-->
+
             </nav>
 
             <login ref="login"/>
