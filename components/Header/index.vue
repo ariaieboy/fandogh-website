@@ -10,7 +10,7 @@
                         </a>
                     </div>
                     <div class="logo" style="display: flex">
-                        <router-link  title="fandogh logo" :to="{path:'/'}">
+                        <router-link title="fandogh logo" :to="{path:'/'}">
                             <logo/>
                         </router-link>
                         <span class="logo-span" @click="$router.push('/')"> سکوی ابری فندق</span>
@@ -34,7 +34,8 @@
                                     بلاگ
                                 </a>
                             </li>
-                            <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px"
+                            <li v-if="isMainPage"
+                                style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px"
                                 v-scroll-to="{el: '#prices', duration:1000, easing: 'linear'}">
                                 قیمت‌ها
                             </li>
@@ -52,6 +53,7 @@
                     <img :src="avatar" alt="profile">
                   </a>
                 </div>-->
+
             </nav>
 
             <!--<login ref="login"/>-->
@@ -287,6 +289,9 @@
             },
             dashboard() {
                 return this.$route.fullPath.includes("dashboard");
+            },
+            isMainPage() {
+                return this.$route.path === '/'
             }
         },
         methods: {

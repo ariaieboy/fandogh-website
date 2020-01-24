@@ -307,6 +307,7 @@
         font-weight bold
         font-size 1.2em
         line-height 1.75
+        padding-top 18px
         color #7c7c7c
 
     .scroll
