@@ -68,18 +68,18 @@
                     icon: 'ic-dedicated-volume',
                 },
                 sectionTitle: {
-                    title: 'حافظه‌های ذخیره‌سازی',
+                    title: 'فضای ذخیره‌سازی',
                     icon: 'ic-dedicated-volume'
                 },
                 headers: [
-                    {title: 'نام حافظه‌', width: '30%'},
+                    {title: 'نام فضای ذخیره‌سازی', width: '30%'},
                     {title: 'تاریخ ساخت', width: '20%'},
                     {title: 'فضای کل', width: '25%'},
                     {title: 'وضعیت اتصال', width: '25%'},
                 ],
                 navigation: {
-                    title: 'تعداد حافظه‌ ذخیره‌سازی',
-                    button: 'لیست حافظه‌ها'
+                    title: 'تعداد فضای ذخیره‌سازی',
+                    button: 'لیست فضاها'
                 },
             }
         }, computed: {
