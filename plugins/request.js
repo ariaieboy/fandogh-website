@@ -13,7 +13,13 @@ export default function request(params, options) {
                 const {data} = await service(params, options).get(url, body)
                 return data
             } catch (e) {
-                return Promise.reject(e.response)
+                if (e.response.status === 400){
+                    if (e.response.data.message.indexOf('Namespace') !== -1){
+                        window.location.replace('https://fandogh-staging123123.fandogh.cloud/dashboard/general')
+                    }
+                }else{
+                    return Promise.reject(e.response)
+                }
             }
         },
         post: async (url, body, config) => {

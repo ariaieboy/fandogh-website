@@ -7,6 +7,7 @@ const _baseURL = process.env.API;
 
 function request(params, {baseUrl}) {
     baseUrl = baseUrl || _baseURL
+    const urlParams = new URLSearchParams(window.location.search);
     const service = axios.create({
         baseURL: baseUrl,
         timeout: 60 * 4 * 1000
@@ -23,8 +24,7 @@ function request(params, {baseUrl}) {
             }
 
             // const namespace = getValue("namespace")
-            var urlParams = new URLSearchParams(window.location.search);
-            config.headers["ACTIVE-NAMESPACE"] = urlParams.get('ns') || 'ns';
+            config.headers["ACTIVE-NAMESPACE"] = urlParams.get('ns') || sessionStorage.getItem('namespace') || 'ns';
 
             if (params) config.params = {...config.params, ...params};
             return config;
