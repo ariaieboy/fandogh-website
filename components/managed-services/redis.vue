@@ -34,7 +34,7 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.counter, rules.regex]"
+                                :rules="[rules.counter]"
                                 v-model="redis_manifest.password.value"
                                 :label="password.label"
                                 :hint="password.hint">

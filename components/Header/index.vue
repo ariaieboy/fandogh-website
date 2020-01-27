@@ -46,7 +46,7 @@
                     <button class="nav-action-button" @click="$router.push('/user/login')">ورود</button>
                 </div>
                 <div class="user" v-else>
-                    <button @click="$router.push('/dashboard')" class="nav-action-button">داشبورد</button>
+                    <button @click="$router.push('/dashboard/general')" class="nav-action-button">داشبورد</button>
                 </div>
                 <!-- <div v-if="loggedIn" class="profile">
                   <a href="#" @click.prevent="toggleMenu(null)">
@@ -56,10 +56,9 @@
 
             </nav>
 
-            <login ref="login"/>
-            <register ref="register"/>
+            <!--<login ref="login"/>-->
+            <!--<register ref="register"/>-->
             <sidebar ref="menu"/>
-            <message ref="message"/>
         </header>
         <div id="sub_menu" ref="sub_menu" class="sub_menu" style="opacity: 0; visibility: hidden;">
             <div class="menu_section">
@@ -141,21 +140,15 @@
 <script>
     import logo from "./logo";
     import FButton from "~/components/elements/button";
-    import Login from "~/components/Auth/Login";
     import Sidebar from "./sidebar";
-    import Register from "../Auth/Register";
-    import Message from "../Auth/Message";
     import {getValue} from "~/utils/cookie";
     import Gravatar from "~/utils/gravatar";
 
     export default {
         components: {
-            Register,
             logo,
             FButton,
-            Login,
-            Sidebar,
-            Message
+            Sidebar
         },
         props: ["noFixed"],
         data() {

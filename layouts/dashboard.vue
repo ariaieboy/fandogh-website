@@ -82,7 +82,8 @@
         data() {
             return {
 
-                namespace: null
+                namespace: null,
+                namespaces: []
 
             }
         },
@@ -132,9 +133,41 @@
                 }
             }
         },
-
         watch: {
-            $route() {
+
+            '$route.query.ns': {
+                handler: function (ns) {
+                    if (!sessionStorage.hasOwnProperty('namespace') || !sessionStorage.hasOwnProperty('user_role')) {
+                        this.fetchUserNamespace()
+                    } else if (sessionStorage.getItem('namespace') !== ns) {
+                        this.fetchUserNamespace()
+                    }
+                },
+                deep: true
+            },
+            $route(to, from) {
+
+                if (!sessionStorage.hasOwnProperty('namespace') || !sessionStorage.hasOwnProperty('user_role'))
+                    this.fetchUserNamespace()
+
+                if (!to.query.ns && to.path.indexOf('/wizard') === -1 && to.path !== '/') {
+                    if (from.query.ns) {
+                        var queries = {};
+                        queries['ns'] = from.query.ns;
+                        for (const [key, value] of Object.entries(to.query)) {
+                            queries[key] = value
+                        }
+
+                        this.$router.replace({
+                            path: to.path,
+                            query: queries
+                        });
+
+                    } else {
+                        this.fetchUserNamespace()
+                    }
+                }
+
                 if (this.message) {
                     this.$store.dispatch("setMessage", this.message);
                     this.$store.dispatch("showModal", "message");
@@ -153,7 +186,7 @@
                 token = readCookie("USER_TOKEN");
                 valid = token ? true : false;
                 if (!valid) {
-                    this.$router.push("/user/login");
+                    this.$router.replace("/user/login");
                 }
             }
         },
@@ -169,18 +202,68 @@
             this.fetchUserNamespace()
         },
         methods: {
+            syncUrlWithNs(namespace){
+                var queries = {};
+                queries['ns'] = namespace.name;
+                for (const [key, value] of Object.entries(this.$route.query)) {
+                    queries[key] = value
+                }
+                let last_route = this.$route;
+                this.$router.replace({
+                    path: last_route.path,
+                    query: queries
+                }, () => {
+                    sessionStorage.setItem('namespace', namespace.name);
+                    sessionStorage.setItem('user_role', namespace.user_role);
+                    window.location.reload()
+                }, null);
+
+            },
+            async fetchUserNamespaces() {
+                this.namespaces.length = 0;
+                try {
+                    this.namespaces = await this.$store.dispatch('requestUserNamespaces');
+
+                    this.syncUrlWithNs(this.namespaces[0]);
+
+                    this.$store.commit('SET_DATA', {data: false, id: 'loading'})
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        ErrorReporter(e, this.$data, true).forEach(error => {
+                            this.$notify({
+                                title: error,
+                                time: 4000,
+                                type: "error"
+                            });
+                        });
+
+                    }
+                }
+            },
             fetchUserNamespace() {
                 this.$store.commit('SET_DATA', {data: true, id: 'loading'})
-                if (getValue(('namespace'))) {
-                    this.$store.dispatch('getNameSpace', getValue('namespace'))
+                if (this.$route.query.ns) {
+                    this.$store.dispatch('getNameSpace', this.$route.query.ns)
                         .then(response => {
-                            this.namespace = response
-                            let old_role = getValue(('user_role'));
-                            this.$store.commit('SET_DATA', {data: false, id: 'loading'})
-                            if (old_role !== this.namespace.user_role) {
-                                setValue({key: 'user_role', value: this.namespace.user_role});
-                                window.location.reload();
+                            this.namespace = response;
+                            if (!this.$route.query.ns) {
+
+                                this.syncUrlWithNs(this.namespace);
+
+                            } else if (this.namespace.name !== sessionStorage.getItem('namespace') ||
+                                !sessionStorage.hasOwnProperty('namespace') ||
+                                !sessionStorage.hasOwnProperty('user_role')) {
+
+                                sessionStorage.setItem('namespace', this.namespace.name);
+                                sessionStorage.setItem('user_role', this.namespace.user_role);
+                                window.location.reload()
+
                             }
+
+                            this.$store.commit('SET_DATA', {data: false, id: 'loading'})
                         })
                         .catch(e => {
                             this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -196,6 +279,8 @@
                                 });
                             }
                         });
+                } else {
+                    this.fetchUserNamespaces();
                 }
             },
             async redeemPlan() {

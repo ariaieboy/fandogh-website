@@ -190,6 +190,7 @@
 
                 loading: false,
                 finished: false,
+                deploying_manifest: false,
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
@@ -512,7 +513,18 @@
         },
 
         watch: {
-
+            $route(to, from) {
+                if (to.path.indexOf('/wizard') === -1 && !this.deploying_manifest) {
+                    if (window.confirm('در صورت خروج،‌ کلیه تغییراتی که اعمال کرده‌اید حذف می‌شوند. آیا می‌خواهید خارج شوید؟')) {
+                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
+                    } else {
+                        this.$router.replace({
+                            path: from.path,
+                            query: from.query
+                        })
+                    }
+                }
+            },
             'manifest_model.service.kinds': {
                 handler: function (value, oldValue) {
                     let kind = this.manifest_model.service.kind
@@ -689,47 +701,36 @@
                     }
                 }, deep: true
             },
-            'manifest_model.image.image_object':{
-              handler: function(value, oldValue){
-                  if(value.name === null){
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = false;
-                              return
-                          }
-                      })
-                  }
+            'manifest_model.image.image_object': {
+                handler: function (value, oldValue) {
+                    if (value.name === null) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'ImageSetup') {
+                                item.edited = false;
+                                return
+                            }
+                        })
+                    }
 
-                  if (value.name !== '') {
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = true;
-                          }
-                      })
-                  } else {
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = false;
-                          }
-                      })
-                  }
-              }, deep: true
+                    if (value.name !== '') {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'ImageSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'ImageSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+                }, deep: true
             },
             manifest_model: {
                 handler: function (value, oldValue) {
 
                 }, deep: true
-            },
-            $route() {
-                if (this.message) {
-                    this.$store.dispatch("setMessage", this.message);
-                    this.$store.dispatch("showModal", "message");
-                }
-                this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                this.$store.commit('SET_DATA', {id: 'isNativeMenus', data: null});
-                if (this.isMobile) {
-                    this.$store.commit("SET_DATA", {data: false, id: "sideMunu"});
-                }
             }
         },
         created() {
@@ -773,10 +774,6 @@
                 this.populateManifest(manifest)
             }
 
-
-        },
-        beforeDestroy() {
-            this.leaving()
         },
         methods: {
             async getImages() {
@@ -941,9 +938,9 @@
                             }
                         });
 
-                        if([...spec.domains].length === 0){
+                        if ([...spec.domains].length === 0) {
                             this.deleteFromManifest('spec.domains')
-                        }else {
+                        } else {
                             spec.domains.forEach(item => {
                                 this.manifest_model.service.domains.push(item['name'])
                             })
@@ -1005,7 +1002,7 @@
                 }
 
                 if (this.manifest_model.image.registry.local_name === 'Docker') {
-                    if(this.manifest_model.image.image_object.name.split('/').length !== 2){
+                    if (this.manifest_model.image.image_object.name.split('/').length !== 2) {
                         this.$notify({
                             title: 'ساختار ایمیج وارد شده برای داکر صحیح نمی‌باشد',
                             time: 4000,
@@ -1016,7 +1013,7 @@
                 }
 
                 if (this.manifest_model.image.registry.local_name === 'Other') {
-                    if(this.manifest_model.image.image_object.name.split('/').length < 3){
+                    if (this.manifest_model.image.image_object.name.split('/').length < 3) {
                         this.$notify({
                             title: 'ساختار ایمیج وارد شده برای رجیستری‌های غیر داکر صحیح نمی‌باشد',
                             time: 4000,
@@ -1033,6 +1030,7 @@
 
                 if (this.isManifestValid()) {
                     this.loading = true
+                    this.deploying_manifest = true;
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.$store.dispatch('createServiceManifest').then(res => {
                         this.loading = false
@@ -1067,14 +1065,6 @@
                 this.$store.dispatch('manifestDeleter', {
                     path: path
                 })
-            },
-            leaving() {
-                if (!this.finished) {
-                    if (confirm('اگر میخواهید تغییرات مانیفست draft شوند ok را انتخاب نمایید، در غیر این صورت دکمه cancel را بزنید')) {
-                    } else {
-                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
-                    }
-                }
             },
             persistData(manifest) {
                 for (let key in manifest) {
@@ -1164,7 +1154,7 @@
                 }
 
             }
-        }
+        },
     };
 </script>
 

@@ -84,7 +84,11 @@
                             eventValue: getValue("username")
                         });
                         this.$store.dispatch("logout");
-                        this.$router.replace("/");
+                        if (this.$route.query.ns){
+                            this.$router.replace({path: "/dashboard/service", query: {ns: this.$route.query.ns}});
+                        }else {
+                            this.$router.replace("/");
+                        }
                     }
                 );
 
