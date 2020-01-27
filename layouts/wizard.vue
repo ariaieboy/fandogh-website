@@ -190,6 +190,7 @@
 
                 loading: false,
                 finished: false,
+                deploying_manifest: false,
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
@@ -513,7 +514,7 @@
 
         watch: {
             $route(to, from) {
-                if (to.path.indexOf('/wizard') === -1) {
+                if (to.path.indexOf('/wizard') === -1 && !this.deploying_manifest) {
                     if (window.confirm('در صورت خروج،‌ کلیه تغییراتی که اعمال کرده‌اید حذف می‌شوند. آیا می‌خواهید خارج شوید؟')) {
                         this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                     } else {
@@ -1029,6 +1030,7 @@
 
                 if (this.isManifestValid()) {
                     this.loading = true
+                    this.deploying_manifest = true;
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.$store.dispatch('createServiceManifest').then(res => {
                         this.loading = false
