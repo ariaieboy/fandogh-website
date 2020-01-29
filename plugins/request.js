@@ -15,7 +15,7 @@ export default function request(params, options) {
             } catch (e) {
                 if (e.response.status === 400){
                     if (e.response.data.message.indexOf('Namespace') !== -1){
-                        window.location.replace('https://fandogh-staging123123.fandogh.cloud/dashboard/general')
+                        window.location.replace('https://fandogh.cloud/dashboard/general')
                     }
                 }else{
                     return Promise.reject(e.response)
