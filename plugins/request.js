@@ -16,9 +16,9 @@ export default function request(params, options) {
                 if (e.response.status === 400){
                     if (e.response.data.message.indexOf('Namespace') !== -1){
                         if (getValue('namespace')) {
-                            window.location.replace(`http://localhost:4000/dashboard/general?ns=${getValue('namespace')}`)
+                            window.location.replace(`https://fandogh.cloud/dashboard/general?ns=${getValue('namespace')}`)
                         }else {
-                            window.location.replace('http://localhost:4000/dashboard/general')
+                            window.location.replace('https://fandogh.cloud/dashboard/general')
                         }
                     }
                 }else{
