@@ -16,7 +16,7 @@
                                  :style="{padding:(isMobile ? '0 16px': '0px')}">
                                 <banner class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0; margin: 0;"
                                         :page="stepPage.page"></banner>
-                                <keep-alive>
+                                <keep-alive v-if="$route.query.ns">
                                     <component :is="stepPage.step_name"
                                                class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
                                                style="padding: 0;"

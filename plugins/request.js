@@ -1,6 +1,6 @@
 import service from './service'
 import store from '../store'
-import {setToken} from "../utils/cookie";
+import {getValue, setToken} from "../utils/cookie";
 
 const isClient = typeof window !== 'undefined'
 
@@ -15,7 +15,11 @@ export default function request(params, options) {
             } catch (e) {
                 if (e.response.status === 400){
                     if (e.response.data.message.indexOf('Namespace') !== -1){
-                        window.location.replace('https://fandogh.cloud/dashboard/general')
+                        if (getValue('namespace')) {
+                            window.location.replace(`http://localhost:4000/dashboard/general?ns=${getValue('namespace')}`)
+                        }else {
+                            window.location.replace('http://localhost:4000/dashboard/general')
+                        }
                     }
                 }else{
                     return Promise.reject(e.response)

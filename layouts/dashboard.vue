@@ -45,7 +45,7 @@
 
                             </div>
 
-                            <nuxt/>
+                            <nuxt v-if="$route.query.ns"/>
 
                         </div>
                     </div>
@@ -77,11 +77,10 @@
             AdminSidebar,
             Notification,
             Alert,
-            Moment
+            Moment,
         },
         data() {
             return {
-
                 namespace: null,
                 namespaces: []
 
