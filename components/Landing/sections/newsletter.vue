@@ -57,7 +57,7 @@
                             .catch(error => {
                                 this.$store.commit("SET_DATA", {data: false, id: "loading"});
                                 this.$notify({
-                                    title: error['error'],
+                                    title: error,
                                     time: 4000,
                                     type: "error"
                                 });
