@@ -24,7 +24,7 @@ function request(params, {baseUrl}) {
             }
 
             // const namespace = getValue("namespace")
-            config.headers["ACTIVE-NAMESPACE"] = urlParams.get('ns') || sessionStorage.getItem('namespace') || 'ns';
+            config.headers["ACTIVE-NAMESPACE"] = urlParams.get('ns')? urlParams.get('ns') : getValue('namespace');
 
             if (params) config.params = {...config.params, ...params};
             return config;

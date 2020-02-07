@@ -244,6 +244,14 @@ export const createImageVersion = async (
     }
 };
 
+export const subscribeNewsletter = async ({commit, state}, email) => {
+    try {
+        return await Request().post('/api/users/newsletter', {email})
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 export const getImageVersionBuilds = async (
     {commit, state},
     {name, version}
