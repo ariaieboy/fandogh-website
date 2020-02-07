@@ -63,14 +63,6 @@
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 left-footer-container">
 
 
-            <!--<p class="subscription-title">ثبت‌نام در خبرنامه فندق</p>-->
-            <!--<div class="subscription-container">-->
-                <!--<button class="subscription-button">تایید</button>-->
-                <!--<input class="subscription-input"-->
-                       <!--type="email"-->
-                       <!--placeholder="آدرس ایمیل شما"/>-->
-            <!--</div>-->
-
             <div class="footer-social-container">
 
                 <a rel="noopener" target="_blank" href="https://github.com/fandoghpaas"> <img
@@ -187,51 +179,6 @@
 
     .footer-col-option:hover
         color #00ffff
-
-    .left-footer-container
-        display flex
-        flex-direction column
-        padding 32px 24px
-
-        p.subscription-title
-            font-family iran-yekan
-            font-size 1.1em
-            font-weight normal
-            font-style normal
-            font-stretch normal
-            line-height 1.72
-            letter-spacing normal
-            text-align center
-            color #fefefe
-            margin-top 0
-
-        div.subscription-container
-            width 100%
-            max-width 450px
-            border-radius 10px
-            background-color #ffffff
-            height 54px
-            display flex
-            padding 4px
-            margin 0 auto
-            @media only screen and (max-width: 992px)
-                height 48px
-
-            button.subscription-button
-                width 100px
-                height 100%
-                background-color #00ffff
-                border-radius 10px
-                color #3c3c3c
-                text-align center
-                font-weight bold
-                font-family iran-yekan
-                outline none
-
-            input.subscription-input
-                flex 1
-                padding 0 12px
-                outline none
 
 
     .footer-social-container
