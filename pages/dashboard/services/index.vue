@@ -86,9 +86,10 @@
                 isLoading: false,
                 titleRow: [
                     {title: 'نام سرویس', width: '39%', name: 'name'},
-                    {title: 'حافظه (مگابایت)', width: '23%', name: 'memory'},
-                    {title: 'تاریخ ساخت', width: '24%', name: 'start_date'},
-                    {title: 'وضعیت', width: '10%', name: 'state'}
+                    {title: 'حافظه (مگابایت)', width: '20%', name: 'memory'},
+                    {title: 'تاریخ ساخت', width: '18%', name: 'start_date'},
+                    {title: 'restart', width: '12%', name: 'service_restarts'},
+                    {title: 'وضعیت', width: '9%', name: 'state'}
                 ],
                 menuList: [
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
@@ -108,12 +109,14 @@
             services() {
                 let services = this.$store.state.services;
                 if (services) {
+                    console.log(services)
                     return services.map(
-                        ({memory, start_date, name, service_type, state}) => {
+                        ({memory, start_date, name, service_restarts, service_type, state}) => {
                             return {
                                 name,
                                 //version: last_version.version,
                                 service_type: service_type,
+                                service_restarts: service_restarts,
                                 memory: memory,
                                 state: `<div style="display: flex"><canvas class='state' style="border-radius: 100px; margin-top: auto; margin-bottom: auto;background-color: ${state.toString().toLowerCase() === 'running' ? '#3ccc38' : '#fd3259'};"/></div>`,
                                 start_date: Moment(start_date).format('jYYYY/jMM/jDD')
