@@ -75,6 +75,8 @@
                         src="../../../assets/svg/social/facebook.svg"/></a>
                 <a rel="noopener" target="_blank" href="https://t.me/fandoghpaas"><img
                         src="../../../assets/svg/social/telegram.svg"/></a>
+                <a rel="noopener" target="_blank" href="https://virgool.io/@fandogh.cloud"><img
+                        src="../../../assets/svg/social/virgool.svg"/></a>
                 <a rel="noopener" target="_blank" href="mailto:support@fandogh.cloud"><img
                         src="../../../assets/svg/social/email.svg"/></a>
 
