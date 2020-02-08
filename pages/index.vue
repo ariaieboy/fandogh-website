@@ -5,6 +5,7 @@
             <slider/>
             <languages/>
             <audiences/>
+            <newsletter/>
             <!--<language-tutorials/>-->
             <platform-features/>
             <business-solution/>
@@ -23,9 +24,11 @@
     import BusinessSolution from "../components/Landing/sections/business-solution";
     import SuccessStory from "../components/Landing/sections/success-story";
     import Price from "../components/Landing/sections/price";
+    import Newsletter from "../components/Landing/sections/newsletter";
 
     export default {
         components: {
+            Newsletter,
             SuccessStory,
             BusinessSolution,
             Slider,

@@ -74,7 +74,7 @@
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">دریافت خبرنامه:</p>
                         <p class="profile-entity-value">
-                            {{(account.newsletter_subscriber ? 'تایید نکرده‌ام' : 'دریافت میکنم')}}</p>
+                            {{account.newsletter_subscriber ? 'دریافت میکنم' : 'تایید نکرده‌ام'}}</p>
                     </div>
 
                 </div>

@@ -26,7 +26,10 @@
                         <td :width="headers[1].width" style="text-align: center; font-family: iran-sans; text-overflow: ellipsis; ; overflow: hidden; white-space: nowrap">
                             {{service.start_date}}
                         </td>
-                        <td :width="headers[2].width" style="text-align: center; padding-left: 6px; padding-right: 6px">
+                        <td :width="headers[2].width" style="text-align: center; font-family: iran-sans; text-overflow: ellipsis; ; overflow: hidden; white-space: nowrap">
+                            {{service.service_restarts}}
+                        </td>
+                        <td :width="headers[3].width" style="text-align: center; padding-left: 6px; padding-right: 6px">
                             <status-container
                                     :icon="stateIcons[service.state.toLowerCase()]"
                                     :status="service.state | state">
@@ -82,9 +85,10 @@
                     icon: 'ic-service'
                 },
                 headers: [
-                    {title: 'نام سرویس', width: '33%'},
-                    {title: 'تاریخ ساخت', width: '33%'},
-                    {title: 'وضعیت سرویس', width: '33%'}
+                    {title: 'نام سرویس', width: '30%'},
+                    {title: 'تاریخ ساخت', width: '25%'},
+                    {title: 'restarts', width: '11%'},
+                    {title: 'وضعیت سرویس', width: '30%'}
                 ],
                 navigation: {
                     title: 'تعداد سرویس‌ها',
