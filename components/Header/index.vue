@@ -236,10 +236,10 @@
                         href: 'https://docs.fandogh.cloud/docs/postgresql-managed-service.html'
                     },
                     {
-                        title: 'Proxy',
-                        caption: 'IP Range Limiter',
-                        icon: 'managed_service_proxy',
-                        href: 'https://docs.fandogh.cloud/docs/proxy-managed-service.html'
+                        title: 'MongoDB',
+                        caption: 'NoSQL Database',
+                        icon: 'managed_service_mongodb',
+                        href: 'https://docs.fandogh.cloud/docs/mongodb-managed-service.html'
                     },
                     {
                         title: 'Redis',
@@ -247,6 +247,12 @@
                         icon: 'managed_service_redis',
                         href: 'https://docs.fandogh.cloud/docs/redis-managed-service.html'
                     },
+                    {
+                        title: 'RabbitMQ',
+                        caption: 'Message Broker',
+                        icon: 'managed_service_rabbitmq',
+                        href: 'https://docs.fandogh.cloud/docs/rabbitmq-managed-service.html'
+                    }
                 ]
             };
         },
