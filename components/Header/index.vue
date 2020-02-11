@@ -181,6 +181,10 @@
                                 title: 'CLI',
                                 href: 'https://docs.fandogh.cloud/docs/getting-started.html'
                             },
+                            {
+                                title: 'Manifests',
+                                href: 'https://github.com/fandoghpaas/fandogh-manifests'
+                            },
                         ]
                     },
                     // {

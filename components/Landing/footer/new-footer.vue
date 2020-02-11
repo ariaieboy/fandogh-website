@@ -26,7 +26,7 @@
                         <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">مستندات</a>
                     </li>
                     <li>
-                        <a class="footer-col-option">آموزش‌ها</a>
+                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-manifests">مانیفست‌ها</a>
                     </li>
                     <li>
                         <a class="footer-col-option" href="https://blog.fandogh.cloud/" target="_blank">وبلاگ</a>
