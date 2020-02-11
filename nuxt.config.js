@@ -31,7 +31,7 @@ module.exports = {
             {
                 hid: "description",
                 name: "description",
-                content: "سرویس های ابری فندق، همه چیز با داکر فایل شروع میشه"
+                content: "سکوی ابری فندق، ارائه دهنده خدمات رایانش ابری و جایگزینی مطمئن برای هاستینگ. در کوتاه‌تری زمان سرویس ابری خود را ایجاد کنید"
             }
         ],
         link: [{rel: "iScon", type: "image/x-icon", href: "/favicon.ico"}]
