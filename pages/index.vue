@@ -5,7 +5,7 @@
             <slider/>
             <languages/>
             <audiences/>
-            <newsletter/>
+            <newsletter id="newsletter"></newsletter>
             <!--<language-tutorials/>-->
             <platform-features/>
             <business-solution/>
@@ -40,6 +40,13 @@
         },
         data() {
             return {}
+        },
+        mounted(){
+          if (this.$route.hash){
+              if(this.$route.hash === '#newsletter'){
+                  document.getElementById('newsletter').scrollIntoView({ block: 'center',  behavior: 'smooth' })
+              }
+          }
         }
     }
 </script>
