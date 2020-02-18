@@ -3,7 +3,7 @@
         <div :class="['sidebar-dashboard-list ' , {open}]">
             <router-link
                     :title="item.text"
-                    :to="item.link"
+                    :to="{path: item.link, query: {ns: $route.query.ns}}"
                     :class="['sidebar-dashboard-item' , {'is-border':item.isBorder,open}]"
                     v-for="(item,index) in (verifyUserAccess({ADMIN: 'ADMIN'}) ? all_items: items)"
                     :key="index">

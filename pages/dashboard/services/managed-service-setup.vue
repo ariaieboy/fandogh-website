@@ -70,6 +70,7 @@
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
     import FileBrowser from "../../../components/managed-services/filemanager";
+    import RabbitMQ from "../../../components/managed-services/rabbitmq";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
 
@@ -83,6 +84,7 @@
             MongoDB,
             Mssql,
             Redis,
+            RabbitMQ,
             FileBrowser,
             Proxy
         },
@@ -172,6 +174,19 @@
                             path: "redis",
                             version: '5.0.3',
                             description: 'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
+
+                        },
+
+                    rabbitmq:
+                        {
+                            title: 'RabbitMQ',
+                            local_title: 'RabbitMQ',
+                            short_desc: 'Message Broker',
+                            icon: 'rabbitmq',
+                            path: "rabbitmq",
+                            version: 'latest',
+                            description: 'RabbitMQ یک سرویس متن باز message-broker یا پیام دهنده است که معماری Advanced Message Queuing Protocol یا به اختصار (AMQP) را ایجاد کرده‌ است.\n' +
+                                'همچنین این سرویس در ادامه با معماری plug-in به نحوی گسترش یافت تا بتواند از پروتکول‌هایی مثل Streaming Text Oriented Messaging Protocol یا به اختصار (STOMP)، MQTT و ... هم پشتیبانی کند.'
                         },
 
                     filebrowser:
@@ -372,7 +387,7 @@
                             // removeValue('name')
                             // removeValue('versions')
                             this.$store.commit("SET_DATA", {id: "service", data: res});
-                            this.$router.replace(`/dashboard/services/${res.name}`)
+                            this.$router.replace({path: `/dashboard/services/${res.name}`})
                             this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                         }, 5000);
 

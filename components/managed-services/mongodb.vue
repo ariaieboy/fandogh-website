@@ -263,31 +263,31 @@
                     }
                 ],
                 username: {
-                    label: 'نام کاربری database',
+                    label: 'نام کاربری Database',
                     hint: 'نام کاربری خود را وارد نمایید',
                     name: ''
 
                 },
                 password: {
-                    label: 'رمز عبور database',
+                    label: 'رمز عبور Database',
                     hint: 'رمز عبور خود را وارد نمایید',
                     name: ''
 
                 },
                 mongo_dashboard_username: {
-                    label: 'نام کاربری mongo dashboard',
+                    label: 'نام کاربری Mongo Dashboard',
                     hint: 'نام کاربری خود را وارد نمایید',
                     name: ''
 
                 },
                 mongo_dashboard_password: {
-                    label: 'رمز عبور mongo dashboard',
+                    label: 'رمز عبور Mongo Dashboard',
                     hint: 'رمز عبور خود را وارد نمایید',
                     name: ''
 
                 },
                 init_database: {
-                    label: 'نام database اولیه',
+                    label: 'نام Database اولیه',
                     hint: 'نام دیتابیس اولیه‌ای که باید هنگام بالا آمدن سرویس ساخته شود',
                     name: ''
 

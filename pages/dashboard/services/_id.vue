@@ -29,6 +29,11 @@
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
                 </span>
 
+                <span class="service-spec">
+                    تعداد restart<br>
+                    <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.service_restarts}}</span>
+                </span>
+
                 <div v-if="!removing && verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
                      class="service-edit-container">
                     <span class="service-edit"
@@ -231,7 +236,7 @@
                 if (this.service.service_type === 'managed') {
                     this.dumpManifest(this.service.name)
                 } else {
-                    this.$router.push({path: '/dashboard/services/wizard', query: {service: this.service.name}})
+                    this.$router.push({path: '/dashboard/services/wizard', query: {service: this.service_name, ns: this.$route.query.ns}})
                 }
             },
             remove() {
@@ -252,7 +257,7 @@
                             this.$store.dispatch("deleteService", this.service_name)
                                 .then(res => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                                    this.$router.replace('/dashboard/services');
+                                    this.$router.replace({path: '/dashboard/services'});
                                     this.$ga.event({
                                         eventCategory: "service",
                                         eventAction: "remove service",
@@ -302,7 +307,7 @@
                     if (e.status === 401) {
                         this.$router.push("/user/login");
                     } else {
-                        this.$router.push("/dashboard/services")
+                        this.$router.push({path: "/dashboard/services"})
                     }
                 }
             },
@@ -799,6 +804,7 @@
         @media only screen and (max-width: 766px)
             font-size 1.2em
             display block
+            margin-top 8px
             padding-right 0
             padding-left 0
 

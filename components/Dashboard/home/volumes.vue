@@ -3,7 +3,11 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <div style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
+        <empty-feature v-if="volumes.length === 0" :privileged="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER'})" :title="emptySection.title" :icon="emptySection.icon" :url="createVolume">
+
+        </empty-feature>
+
+        <div v-else style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
 
             <table-header :headers="headers"></table-header>
 
@@ -44,6 +48,8 @@
     import TableTitle from "./children/table-title";
     import TableNavigation from "./children/table-navigation";
     import Moment from 'moment-jalaali'
+    import EmptyFeature from "./children/empty-feature";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         name: "volumes",
@@ -51,23 +57,29 @@
             TableNavigation,
             TableTitle,
             TableHeader,
-            Moment
+            Moment,
+            EmptyFeature,
+            RoleAccessHandler
         },
         data() {
             return {
+                emptySection:{
+                    title:'فضای ‌‌ذخیره‌سازی',
+                    icon: 'ic-dedicated-volume',
+                },
                 sectionTitle: {
-                    title: 'حافظه‌های ذخیره‌سازی',
+                    title: 'فضای ذخیره‌سازی',
                     icon: 'ic-dedicated-volume'
                 },
                 headers: [
-                    {title: 'نام حافظه‌', width: '30%'},
+                    {title: 'نام فضای ذخیره‌سازی', width: '30%'},
                     {title: 'تاریخ ساخت', width: '20%'},
                     {title: 'فضای کل', width: '25%'},
                     {title: 'وضعیت اتصال', width: '25%'},
                 ],
                 navigation: {
-                    title: 'تعداد حافظه‌ ذخیره‌سازی',
-                    button: 'لیست حافظه‌ها'
+                    title: 'تعداد فضای ذخیره‌سازی',
+                    button: 'لیست فضاها'
                 },
             }
         }, computed: {
@@ -98,6 +110,12 @@
             },
             goToVolumes() {
                 this.$router.push('/dashboard/volumes/')
+            },
+            createVolume() {
+                this.$router.push('/dashboard/volumes/create')
+            },
+            verifyUserAccess(permitted_roles){
+                return RoleAccessHandler(permitted_roles)
             },
             stateIcon: function (service) {
                 if(service){

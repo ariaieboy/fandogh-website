@@ -51,6 +51,7 @@
                     {title: 'MongoDB', description: 'Database', icon: 'mongodb', path: "mongodb"},
                     {title: 'Redis', description: 'In Memory Data Store', icon: 'redis', path: "redis"},
                     {title: 'File Browser', description: 'File Manager', icon: 'filebrowser', path: "filebrowser"},
+                    {title: 'RabbitMQ', description: 'Message Broker', icon: 'rabbitmq', path: "rabbitmq"},
                     {title: 'Proxy', description: 'Proxy Service', icon: 'proxy', path: "proxy"}
                 ],
                 services: [
@@ -68,7 +69,7 @@
                 return RoleAccessHandler(permitted_roles)
             },
             onSelected(path) {
-                this.$router.replace('/dashboard/services/' + path)
+                this.$router.replace({path: '/dashboard/services/' + path})
             },
         }
     }

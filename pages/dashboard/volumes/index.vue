@@ -8,7 +8,7 @@
                 <div class="right" style="float: right;"><p class="title_header"> لیست فضاهای ذخیره‌سازی</p></div>
                 <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" class="left"
                      style="float: left; cursor: pointer; margin-top: 8px"
-                     @click="$router.push('/dashboard/volumes/create')">
+                     @click="$router.push({path: '/dashboard/volumes/create'})">
                     <svg width="185px" height="58px" viewBox="0 0 208 63" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
                         <title>Group 29</title>
@@ -107,6 +107,7 @@
                 let volumes = this.$store.state.volumes;
                 if (volumes) {
                     return volumes.map(({name, age, capacity, mounted_to}) => {
+                        console.log(age)
                         {
                             return {
                                 name,
@@ -205,6 +206,7 @@
         font-size 1.2em
         font-stretch normal
         line-height 1.75
+        padding-top 18px
         color #7c7c7c
         letter-spacing normal
 

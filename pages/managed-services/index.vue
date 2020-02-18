@@ -144,6 +144,12 @@
                             href: 'https://docs.fandogh.cloud/docs/redis-managed-service.html'
                         },
                         {
+                            title: 'RabbitMQ',
+                            description: 'Message Broker',
+                            icon: 'managed_service_rabbitmq',
+                            href: 'https://docs.fandogh.cloud/docs/rabbitmq-managed-service.html'
+                        },
+                        {
                             title: 'Proxy',
                             description: 'IP Range Limiter',
                             icon: 'managed_service_proxy',
@@ -157,7 +163,7 @@
                     video: ''
                 },
                 register: {
-                    title: 'همین حالا ثبت‌نام کنید و سرویس‌ مدیریت‌ شده خود را ظرف چند ثانیه بسازید و در پروژه خود استفاده کنید'
+                    title: 'همین حالا ثبت‌نام کنید و سرویس‌ مدیریت‌ شده خود را ظرف چند ثانیه بسازید'
                 }
 
             }
@@ -409,7 +415,7 @@
             border-radius 5px
             background-color #fefefe
             font-family  iran-yekan
-            font-size  1.2em
+            font-size  1.3em
             font-weight  normal
             font-style  normal
             font-stretch  normal
@@ -420,6 +426,11 @@
             margin-top 32px
             margin-left auto
             margin-right auto
-            box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.3)
+            transition all .2s ease-in-out
+            box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.17)
+
+        button:hover
+            transition all .2s ease-in-out
+            box-shadow 0 3px 12px 0 rgba(0, 0, 0, 0.3)
 
 </style>

@@ -83,6 +83,7 @@
             <div class="info-action-container">
                 <a>حریم خصوصی</a>
                 <a @click="$router.push('/conditions-of-use')">قوانین سکو</a>
+                <a @click="$router.replace('/')">صفحه اصلی</a>
             </div>
             <p class="ownership-right">© 2019 Fandogh PaaS</p>
 

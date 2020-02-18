@@ -305,12 +305,15 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
             min-height 650px
             padding-right 0
             padding-left 0
+            margin-left -32px
             border-radius: 5px;
-            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+            box-shadow: 6px 3px 16px 8px rgba(0, 0, 0, 0.16);
             background-color: #fefefe;
             flex-direction column
             @media only screen and (max-width 992px)
+                box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
                 max-width 100%
+                margin-left 0
 
             p.register-dialog-title
                 width 100%
@@ -357,7 +360,7 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
 
     .register-feature-card
         width: 100%;
-        max-width: 450px;
+        max-width: 500px;
         display: flex;
         margin-bottom: 32px
 
