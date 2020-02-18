@@ -69,6 +69,7 @@
     import Mssql from "../../../components/managed-services/mssql";
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
+    import FileBrowser from "../../../components/managed-services/filemanager";
     import RabbitMQ from "../../../components/managed-services/rabbitmq";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
@@ -84,6 +85,7 @@
             Mssql,
             Redis,
             RabbitMQ,
+            FileBrowser,
             Proxy
         },
         data() {
@@ -185,6 +187,17 @@
                             version: 'latest',
                             description: 'RabbitMQ یک سرویس متن باز message-broker یا پیام دهنده است که معماری Advanced Message Queuing Protocol یا به اختصار (AMQP) را ایجاد کرده‌ است.\n' +
                                 'همچنین این سرویس در ادامه با معماری plug-in به نحوی گسترش یافت تا بتواند از پروتکول‌هایی مثل Streaming Text Oriented Messaging Protocol یا به اختصار (STOMP)، MQTT و ... هم پشتیبانی کند.'
+                        },
+
+                    filebrowser:
+                        {
+                            title: 'FileBrowser',
+                            local_title: 'File Browser',
+                            short_desc: 'File Manager',
+                            icon: 'filebrowser',
+                            path: "filebrowser",
+                            version: 'latest',
+                            description: 'یکی از مشکلات کاربران بر روی سکو‌های ابری، دسترسی به داده‌های ذخیره‌شده بر روی Storage است، برای آنکه بتوانید به صورت گرافیکی با محل ذخیره‌سازی داده‌ها کار کنید و داده‌های خود را دانلود و آپلود و یا حتی Edit کنید، می‌توانید از سرویس مدیریت شده File Browser فندق استفاده کنید.'
                         },
 
                     proxy:
