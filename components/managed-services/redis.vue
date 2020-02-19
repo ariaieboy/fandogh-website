@@ -330,6 +330,7 @@
                 if (!this.redis_dashboard.selected) {
                     this.manifest_model.parameters.forEach((param, index) => {
                         if (param.name === 'redis_dashboard_username') {
+
                             this.manifest_model.parameters.splice(index, 1);
                         }
                     });
