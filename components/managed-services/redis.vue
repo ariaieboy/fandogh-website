@@ -356,7 +356,7 @@
                             this.redis_manifest.volume_name.value = param.value;
                             break;
                         case 'redis_dashboard_enabled':
-                            this.redis_manifest.redis_dashboard_enabled = param.value;
+                            this.redis_manifest.redis_dashboard_enabled.value = param.value;
                             this.redis_dashboard.selected = param.value;
                             break;
                         case 'redis_dashboard_username':
