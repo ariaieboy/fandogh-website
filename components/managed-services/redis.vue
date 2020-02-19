@@ -72,6 +72,71 @@
 
             </config-box>
 
+            <config-box :section-title="sections.dashboard_config">
+
+                <div style="width: 100%">
+
+
+                    <div>
+                        <span style="font-size: 0.8em; line-height: 1.75">
+                            {{dashboard_enabled.hint}}
+                        </span>
+                    </div>
+
+                    <div style="margin-top: 16px">
+                        <fan-checkbox
+                                @click.native="redisDashboardSelected"
+                                v-tooltip="redis_dashboard.tooltip"
+                                :object="redis_dashboard">
+
+                        </fan-checkbox>
+                    </div>
+
+                    <form v-if="redis_dashboard.selected" class="col-xs-12" style="padding: 0">
+
+                        <div style="display: flex; margin-top: 12px">
+
+                            <v-text-field
+                                    style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
+                                    dir="ltr"
+                                    color="#0093ff"
+                                    required
+                                    :rules="[rules.required]"
+                                    v-model="redis_manifest.redis_dashboard_username.value"
+                                    :label="redis_dashboard_username.label"
+                                    :hint="redis_dashboard_username.hint">
+
+                            </v-text-field>
+
+                            <popover :tooltip="tooltips.redis_dashboard_username"></popover>
+
+                        </div>
+
+                        <div style="display: flex; margin-top: 12px">
+
+                            <v-text-field
+                                    style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
+                                    dir="ltr"
+                                    color="#0093ff"
+                                    required
+                                    :rules="[rules.required]"
+                                    v-model="redis_manifest.redis_dashboard_password.value"
+                                    :label="redis_dashboard_password.label"
+                                    :hint="redis_dashboard_password.hint">
+
+                            </v-text-field>
+
+                            <popover :tooltip="tooltips.redis_dashboard_password"></popover>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+            </config-box>
+
             <config-box :section-title="sections.storage_config">
 
                 <div style="width: 100%">
@@ -148,15 +213,38 @@
                     selected: false,
                     tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume ذخیره خواهند شد.'
                 },
+                redis_dashboard: {
+                    label: "Redis Dashboard",
+                    value: "redis_dashboard_enabled",
+                    selected: false,
+                    tooltip: 'با استفاده از این دکمه می‌توانید تعیین کنید رابط ادمین Redis Dashboard ساخته شود یا خیر'
+                },
                 password: {
                     label: 'رمز عبور database',
                     hint: 'رمز عبور سرویس دیتابیس شما',
                     name: ''
 
                 },
+                redis_dashboard_username: {
+                    label: 'نام کاربری Redis Dashboard',
+                    hint: 'نام کاربری دلخواه خود را وارد نمایید',
+                    name: ''
+
+                },
+                redis_dashboard_password: {
+                    label: 'رمز عبور Redis Dashboard',
+                    hint: 'رمز عبور دلخواه خود را وارد نمایید',
+                    name: ''
+
+                },
                 volume_name: {
                     label: 'نام Volume',
                     hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند.',
+                    name: ''
+                },
+                dashboard_enabled: {
+                    label: 'Redis رابط ادمین',
+                    hint: 'در صورتی که نیاز دارید از داشبورد Redis استفاده کنید، آن را فعال نمایید. این قابلیت به صورت پیش‌فرض برای سرویس شما غیرفعال است.',
                     name: ''
                 },
                 redis_manifest: {
@@ -167,7 +255,19 @@
                     volume_name: {
                         name: 'volume_name',
                         value: null
-                    }
+                    },
+                    redis_dashboard_enabled: {
+                        name: 'redis_dashboard_enabled',
+                        value: false
+                    },
+                    redis_dashboard_username: {
+                        name: 'redis_dashboard_username',
+                        value: null
+                    },
+                    redis_dashboard_password: {
+                        name: 'redis_dashboard_password',
+                        value: null
+                    },
                 },
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
@@ -194,15 +294,26 @@
                         text: 'نام Dedicated Volume که قصد دارید داده‌ها در آن ذخیره شوند',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
                     },
-                    password:{
+                    password: {
                         title: 'رمز عبور database',
                         text: 'رمز عبوری که برای database خود انتخاب میکنید،‌در صورتی خالی گذاشتن این بخش، رمز عبوی ساخته نخواهد شد.',
                         url: '#'
-                    }
+                    },
+                    redis_dashboard_username: {
+                        title: 'نام کاربری داشبورد',
+                        text: 'نام کاربری که برای داشبورد مدیریت خود انتخاب میکنید.',
+                        url: '#'
+                    },
+                    redis_dashboard_password: {
+                        title: 'رمز عبور داشبورد',
+                        text: 'رمز عبوری که برای داشبورد مدیریت خود انتخاب میکنید.',
+                        url: '#'
+                    },
                 },
                 sections: {
                     service_config: 'تنظیمات سرویس Redis',
-                    storage_config: 'تعیین محل ذخیره سازی',
+                    dashboard_config: 'تنظیمات داشبورد Redis',
+                    storage_config: 'تعیین محل ذخیره سازی'
                 },
             }
         }, methods: {
@@ -212,16 +323,48 @@
                     this.redis_manifest.volume_name.value = null
                 }
             },
-        },mounted() {
+            redisDashboardSelected() {
+                this.redis_dashboard.selected = !this.redis_dashboard.selected;
+                this.redis_manifest.redis_dashboard_enabled.value = this.redis_dashboard.selected;
+
+                if (!this.redis_dashboard.selected) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'redis_dashboard_username') {
+                            this.manifest_model.parameters.splice(index, 1);
+                            this.redis_manifest.redis_dashboard_username.value = null;
+                        }
+                    });
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'redis_dashboard_password') {
+                            this.manifest_model.parameters.splice(index, 1);
+                            this.redis_manifest.redis_dashboard_password.value = null;
+                        }
+                    })
+                }
+            }
+        }, mounted() {
 
             if (this.manifest_model.parameters.length === 0) {
                 this.redis_manifest.volume_name.value = null
-            }else {
+            } else {
                 this.manifest_model.parameters.forEach(param => {
-                    if(param.name === 'redis_password'){
-                        this.redis_manifest.password.value = param.value
-                    }else {
-                        this.redis_manifest.volume_name.value = param.value
+                    switch (param.name) {
+                        case 'redis_password':
+                            this.redis_manifest.password.value = param.value;
+                            break;
+                        case 'volume_name':
+                            this.redis_manifest.volume_name.value = param.value;
+                            break;
+                        case 'redis_dashboard_enabled':
+                            this.redis_manifest.redis_dashboard_enabled.value = param.value;
+                            this.redis_dashboard.selected = param.value;
+                            break;
+                        case 'redis_dashboard_username':
+                            this.redis_manifest.redis_dashboard_username.value = param.value;
+                            break;
+                        case 'redis_dashboard_password':
+                            this.redis_manifest.redis_dashboard_password.value = param.value;
+                            break;
                     }
                 })
             }
@@ -242,6 +385,37 @@
                 handler: function (value, oldvalue) {
                     this.manifest_model.parameters.forEach((param, index) => {
                         if (param.name === 'volume_name') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value !== null)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+            }, 'redis_manifest.redis_dashboard_enabled': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'redis_dashboard_enabled') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    this.manifest_model.parameters.push(value)
+                }, deep: true
+            },
+            'redis_manifest.redis_dashboard_username': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'redis_dashboard_username') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    if (value.value !== null)
+                        this.manifest_model.parameters.push(value)
+                }, deep: true
+            },
+            'redis_manifest.redis_dashboard_password': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'redis_dashboard_password') {
                             this.manifest_model.parameters.splice(index, 1)
                         }
                     });
