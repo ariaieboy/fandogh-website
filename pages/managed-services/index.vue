@@ -150,6 +150,12 @@
                             href: 'https://docs.fandogh.cloud/docs/rabbitmq-managed-service.html'
                         },
                         {
+                            title: 'File Browser',
+                            description: 'File Management',
+                            icon: 'managed_service_filebrowser',
+                            href: 'https://docs.fandogh.cloud/docs/file-browser-managed-service.html'
+                        },
+                        {
                             title: 'Proxy',
                             description: 'IP Range Limiter',
                             icon: 'managed_service_proxy',
