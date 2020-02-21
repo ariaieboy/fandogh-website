@@ -374,7 +374,7 @@ export const dumpServiceManifest = async ({commit, state}, service_name) => {
         })
         delete manifest.data['requested_at']
         commit("SET_JSON_MANIFEST", manifest.data);
-        return true
+        return manifest.data
     } catch (e) {
         return Promise.reject(e)
     }
