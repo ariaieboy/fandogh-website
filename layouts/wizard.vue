@@ -879,9 +879,16 @@
                             this.onRegistryClicked(0)
                             this.getImageV(image.split(':')[0])
                         }
-                        this.manifest_model.image.image_object.name = image.split(':')[0] || '';
-                        this.manifest_model.image.image_object.version = image.split(':')[1] || '';
-
+                        this.manifest_model.image.image_object.name = '';
+                        this.manifest_model.image.image_object.version = '';
+                        let image_parts = image.split(':');
+                        for (let index = 0; index < image_parts.length; index++) {
+                            if (index !== image_parts.length - 1) {
+                                this.manifest_model.image.image_object.name += image_parts[index] || ''
+                            } else {
+                                this.manifest_model.image.image_object.version += image_parts[index] || ''
+                            }
+                        }
                     }
 
                     if (spec.hasOwnProperty('image_pull_policy')) {
