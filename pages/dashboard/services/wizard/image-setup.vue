@@ -291,7 +291,6 @@
                         this.onRegistryClicked(1)
                     } else {
                         this.onRegistryClicked(0)
-
                         this.getImageV(image.split(':')[0])
                     }
                 }
