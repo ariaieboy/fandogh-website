@@ -48,6 +48,10 @@
                           @click="remove">
                         حذف سرویس
                     </span>
+                    <span class="download-service"
+                          @click="downloadServiceManifest(service.name)">
+                        دانلود مانیفست
+                    </span>
                 </div>
             </div>
         </div>
@@ -108,6 +112,12 @@
                      class="restart-service">
                     <p>راه‌اندازی مجدد</p>
                 </div>
+
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER', OPERATOR:'OPERATOR'})"
+                     @click="downloadServiceManifest(service.name)"
+                     class="download-service">
+                    <p>دانلود مانیفست</p>
+                </div>
             </div>
 
             <keep-alive>
@@ -141,6 +151,7 @@
     import rollback from "./service/rollback"
     import ErrorReporter from "../../../utils/ErrorReporter";
     import RoleAccessHandler from "../../../utils/RoleAccessHandler";
+    import * as yaml from "js-yaml";
 
     export default {
         layout: "dashboard",
@@ -236,7 +247,10 @@
                 if (this.service.service_type === 'managed') {
                     this.dumpManifest(this.service.name)
                 } else {
-                    this.$router.push({path: '/dashboard/services/wizard', query: {service: this.service_name, ns: this.$route.query.ns}})
+                    this.$router.push({
+                        path: '/dashboard/services/wizard',
+                        query: {service: this.service_name, ns: this.$route.query.ns}
+                    })
                 }
             },
             remove() {
@@ -310,6 +324,32 @@
                         this.$router.push({path: "/dashboard/services"})
                     }
                 }
+            },
+            async downloadServiceManifest(service_name) {
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                await this.$store.dispatch('dumpServiceManifest', service_name)
+                    .then(response => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        var fileURL = window.URL.createObjectURL(new Blob([yaml.dump(response, {'sortKeys': true})]));
+                        var fileLink = document.createElement('a');
+                        fileLink.href = fileURL;
+                        fileLink.setAttribute('download', `${service_name}-manifest.yml`);
+                        document.body.appendChild(fileLink);
+                        fileLink.click();
+                    }).catch(e => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    });
             },
             async dumpManifest(service_name) {
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
@@ -566,6 +606,30 @@
                 margin-bottom 8px
                 letter-spacing normal
                 color $fontGray
+
+        div.download-service
+            padding 0
+            cursor pointer
+            @media only screen and (max-width: 766px)
+                margin-right: -1px
+                display: none
+
+            p
+                font-style normal
+                font-stretch normal
+                line-height 40px
+                text-align center
+                font-family iran-yekan
+                font-weight normal
+                font-size .9em
+                background-color $colorPrimary
+                border-radius 3px
+                box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.2)
+                outline none
+                margin-top 0
+                margin-bottom 8px
+                letter-spacing normal
+                color $totalWhite
 
 
     .box-row::-webkit-scrollbar
