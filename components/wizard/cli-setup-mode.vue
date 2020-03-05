@@ -8,12 +8,20 @@
                        v-model="manifest_model.service.kind.prod_name">
             </div>
             <span v-if="keys.kind.value_invalid"
-                  style="width: max-content; color: #fe135c; font-size: .9em; padding-top: 6px; padding-bottom: 6px;">{{keys.kind.validation_error}}</span>
+                  class="invalid-message">
+                {{keys.kind.validation_error}}
+            </span>
             <div>
                 <pre class="cli-key-label" v-tooltip="keys.name.tooltip">{{keys.name.label}}</pre>
                 <input class="cli-input"
+                       maxlength="100"
+                       @input="validateServiceName"
                        v-model="manifest_model.service.service_name.name">
             </div>
+            <span v-if="keys.name.value_invalid"
+                  class="invalid-message">
+                {{keys.name.validation_error}}
+            </span>
             <div>
                 <pre class="cli-key-label">{{keys.spec.label}}</pre>
             </div>
@@ -677,8 +685,8 @@
             addDomain() {
                 var redundant = false;
 
-                if (this.domain){
-                    if(this.domain.trim() !== ''){
+                if (this.domain) {
+                    if (this.domain.trim() !== '') {
                         this.manifest_model.service.domains.forEach(domain => {
                             if (domain === this.domain) {
                                 redundant = true
@@ -697,6 +705,7 @@
                 this.manifest_model.service.domains.splice(index, 1)
             },
             addEnv() {
+
 
                 if (this.manifest_model.environment_variable.name === null) {
                     return;
@@ -875,6 +884,30 @@
             },
             validateServiceKind(input) {
                 this.keys.kind.value_invalid = input.target.value !== 'ExternalService' && input.target.value !== 'InternalService';
+            },
+            validateServiceName(input) {
+
+                if (input.target.value === '') {
+                    this.keys.name.value_invalid = true;
+                    this.keys.name.validation_error = 'مقدار نام سرویس اجباری است';
+                    return false;
+                }
+
+                if (!new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(input.target.value)) {
+                    this.keys.name.value_invalid = true;
+                    this.keys.name.validation_error = 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)';
+                    return false;
+                }
+
+                if (input.target.value.length > 100) {
+                    this.keys.name.value_invalid = true;
+                    this.keys.name.validation_error = 'طول نام سرویس نمی‌تواند بیش از ۱۰۰ کاراکتر باشد';
+                    return false;
+                }
+
+                this.keys.name.value_invalid = false;
+                return true;
+
             }
         }
     }
@@ -962,5 +995,13 @@
             margin-top: auto
             margin-bottom: auto
             color: white
+
+    .invalid-message
+        width 100%
+        color #fe135c
+        text-align center
+        font-size .9em
+        padding-top 6px
+        padding-bottom 6px
 
 </style>
