@@ -44,7 +44,7 @@
 
                 <input class="cli-input"
                        type="text"
-                       placeholder="/DIR_ADDRESS"
+                       placeholder="/dir_address"
                        v-model="manifest_model.service.path.dir">
             </div>
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
