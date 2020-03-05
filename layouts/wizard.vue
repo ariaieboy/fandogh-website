@@ -279,7 +279,7 @@
                             },
                             {
                                 suffix: '/library',
-                                local_name: 'Docker',
+                                local_name: 'Docker Hub',
                                 icon: 'ic_docker.svg',
                                 is_active: false,
                                 tooltip: 'مبدا ایمیج رجیستری داکرهاب'
@@ -322,6 +322,7 @@
                         name: '',
                         value: '',
                         secret: null,
+                        hidden: false,
                         env_list: []
                     },
                     port_mapping: {
@@ -373,16 +374,16 @@
                         liveness_object: {
                             initial_delay_seconds: null,
                             period_seconds: null,
-                            timeout_seconds: 1,
+                            timeout_seconds: null,
                             http_get_method: null,
-                            http_get_port: 80
+                            http_get_port: null
                         },
                         readiness_object: {
                             initial_delay_seconds: null,
                             period_seconds: null,
-                            timeout_seconds: 1,
+                            timeout_seconds: null,
                             http_get_method: null,
-                            http_get_port: 80
+                            http_get_port: null
                         },
                     }
                 },
@@ -520,7 +521,6 @@
                 return Math.max(Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear(), 0)
             }
         },
-
         watch: {
             $route(to, from) {
                 if (to.path.indexOf('/wizard') === -1 && !this.deploying_manifest) {
@@ -830,7 +830,6 @@
         }
         ,
         methods: {
-
             updateServiceKind(kind_value) {
 
                 this.manifest_model.service.kinds.forEach(item => {
@@ -1108,7 +1107,7 @@
                     return false
                 }
 
-                if (this.manifest_model.image.registry.local_name === 'Docker') {
+                if (this.manifest_model.image.registry.local_name === 'Docker Hub') {
                     if (this.manifest_model.image.image_object.name.split('/').length !== 2) {
                         this.$notify({
                             title: 'ساختار ایمیج وارد شده برای داکر صحیح نمی‌باشد',
