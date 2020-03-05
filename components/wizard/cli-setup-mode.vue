@@ -44,8 +44,13 @@
                 <input class="cli-input"
                        type="text"
                        placeholder="Always/IfNotPresent"
+                       @input="validateImagePullPolicy"
                        v-model="manifest_model.image.image_pull_policy.value">
             </div>
+            <span v-if="keys.spec.image_pull_policy.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.image_pull_policy.validation_error}}
+            </span>
 
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
                 <pre class="cli-key-label" v-tooltip="keys.spec.path.tooltip">    {{keys.spec.path.label}}</pre>
@@ -53,8 +58,14 @@
                 <input class="cli-input"
                        type="text"
                        placeholder="/dir_address"
+                       @input="validatePath"
                        v-model="manifest_model.service.path.dir">
             </div>
+            <span v-if="keys.spec.path.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.path.validation_error}}
+            </span>
+
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
                 <pre class="cli-key-label" v-tooltip="keys.spec.port.tooltip">    {{keys.spec.port.label}}</pre>
 
@@ -884,6 +895,33 @@
             },
             validateServiceKind(input) {
                 this.keys.kind.value_invalid = input.target.value !== 'ExternalService' && input.target.value !== 'InternalService';
+            },
+            validateImagePullPolicy(input){
+                if (input.target.value === '') {
+                    this.keys.spec.image_pull_policy.value_invalid = true;
+                    this.keys.spec.image_pull_policy.validation_error = 'مقدار ImagePullPolicy اجباری است';
+                    return false;
+                }
+
+                if (input.target.value !== 'Always' && input.target.value !== 'IfNotPresent') {
+                    this.keys.spec.image_pull_policy.value_invalid = true;
+                    this.keys.spec.image_pull_policy.validation_error = 'مقدار ImagePullPolicy باید یکی از ۲ حالت Always یا IfNotPresent باشد';
+                    return false;
+                }
+
+                this.keys.spec.image_pull_policy.value_invalid = false;
+                return true;
+            },
+            validatePath(input){
+
+                if (!input.target.value.toString().startsWith('/')) {
+                    this.keys.spec.path.value_invalid = true;
+                    this.keys.spec.path.validation_error = 'مقدار path باید از روت آدرس دهی شود';
+                    return false;
+                }
+
+                this.keys.spec.path.value_invalid = false;
+                return true;
             },
             validateServiceName(input) {
 
