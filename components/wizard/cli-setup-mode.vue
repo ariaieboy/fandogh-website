@@ -38,6 +38,8 @@
                        v-autowidth="{maxWidth: '300px', minWidth: '100px', comfortZone: 0}"
                        v-model="manifest_model.image.image_object.version">
             </div>
+
+
             <div>
                 <pre class="cli-key-label" v-tooltip="keys.spec.image_pull_policy.tooltip">    {{keys.spec.image_pull_policy.label}}</pre>
 
@@ -51,6 +53,7 @@
                   class="invalid-message">
                 {{keys.spec.image_pull_policy.validation_error}}
             </span>
+
 
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
                 <pre class="cli-key-label" v-tooltip="keys.spec.path.tooltip">    {{keys.spec.path.label}}</pre>
@@ -66,14 +69,24 @@
                 {{keys.spec.path.validation_error}}
             </span>
 
+
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
                 <pre class="cli-key-label" v-tooltip="keys.spec.port.tooltip">    {{keys.spec.port.label}}</pre>
 
                 <input class="cli-input"
                        type="number"
                        placeholder="80"
+                       min="1"
+                       max="65535"
+                       @input="validatePort"
                        v-model.number="manifest_model.service.port.number">
             </div>
+            <span v-if="keys.spec.port.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.port.validation_error}}
+            </span>
+
+
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
                 <pre class="cli-key-label"
                      v-tooltip="keys.spec.allow_http.tooltip">    {{keys.spec.allow_http.label}}</pre>
@@ -82,14 +95,23 @@
                        type="checkbox"
                        v-model="manifest_model.service.allow_http.selected">
             </div>
+
+
             <div>
                 <pre class="cli-key-label" v-tooltip="keys.spec.replicas.tooltip">    {{keys.spec.replicas.label}}</pre>
 
                 <input class="cli-input"
                        type="number"
                        min="1"
+                       @input="validateReplicas"
                        v-model.number="manifest_model.service.replica.count">
             </div>
+            <span v-if="keys.spec.replicas.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.replicas.validation_error}}
+            </span>
+
+
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'" style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.domains.tooltip">    {{keys.spec.domains.label}}</pre>
             </div>
@@ -102,6 +124,7 @@
                             <pre class="cli-key-label">    - name:</pre>
                             <input class="cli-input"
                                    type="text"
+                                   @input="validateDomain"
                                    v-autowidth="auto_width_config"
                                    v-model="manifest_model.service.domains[index]">
                         </div>
@@ -119,6 +142,11 @@
                        v-autowidth="auto_width_config"
                        v-model="domain">
             </div>
+            <span v-if="keys.spec.domains.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.domains.validation_error}}
+            </span>
+
 
             <div style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.env.tooltip">    {{keys.spec.env.label}}</pre>
@@ -163,7 +191,7 @@
             <div style="flex-direction: column-reverse; display: flex;">
                 <div style="flex-direction: column; display: flex;">
                     <div>
-                        <pre class="cli-key-label" v-tooltip="keys.spec.env.name.tooltip">    {{keys.spec.env.name.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.env.name.tooltip">    {{keys.spec.env.name.label}}</pre>
                         <input class="cli-input"
                                type="text"
                                @keyup.enter="addEnv"
@@ -172,8 +200,8 @@
                                v-model="manifest_model.environment_variable.name">
                     </div>
                     <div v-if="!manifest_model.environment_variable.secret">
-                        <pre class="cli-key-label" v-tooltip="keys.spec.env.value.tooltip">      {{keys.spec.env.value.label}}</pre>
-                        <input class="cli-input"
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.env.value.tooltip">      {{keys.spec.env.value.label}}</pre>
+                        <input class="cli-input input"
                                type="text"
                                @keyup.enter="addEnv"
                                placeholder="type env value"
@@ -181,7 +209,7 @@
                                v-model="manifest_model.environment_variable.value">
                     </div>
                     <div v-if="!manifest_model.environment_variable.secret">
-                        <pre class="cli-key-label" v-tooltip="keys.spec.env.hidden.tooltip">      {{keys.spec.env.hidden.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.env.hidden.tooltip">      {{keys.spec.env.hidden.label}}</pre>
                         <input class="cli-input"
                                type="checkbox"
                                @keyup.enter="addEnv"
@@ -189,7 +217,7 @@
                                v-model="manifest_model.environment_variable.hidden">
                     </div>
                     <div v-if="!manifest_model.environment_variable.value">
-                        <pre class="cli-key-label" v-tooltip="keys.spec.env.secret.tooltip">      {{keys.spec.env.secret.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.env.secret.tooltip">      {{keys.spec.env.secret.label}}</pre>
                         <input class="cli-input"
                                @keyup.enter="addEnv"
                                placeholder="type env secret"
@@ -199,10 +227,15 @@
                 </div>
 
             </div>
+            <span v-if="keys.spec.env.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.env.validation_error}}
+            </span>
+
+
             <div style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.volume_mounts.tooltip">    {{keys.spec.volume_mounts.label}}</pre>
             </div>
-
             <div v-if="manifest_model.volumes.volume_list.length > 0"
                  style="flex-direction: column-reverse; display: flex"
                  v-for="(volume_mount, index) in manifest_model.volumes.volume_list">
@@ -236,7 +269,7 @@
             <div style="flex-direction: column-reverse; display: flex;">
                 <div style="flex-direction: column; display: flex;">
                     <div>
-                        <pre class="cli-key-label" v-tooltip="keys.spec.volume_mounts.mount_path.tooltip">    {{keys.spec.volume_mounts.mount_path.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.volume_mounts.mount_path.tooltip">    {{keys.spec.volume_mounts.mount_path.label}}</pre>
                         <input class="cli-input"
                                type="text"
                                @keyup.enter="addVolume"
@@ -245,19 +278,19 @@
                                v-model="manifest_model.volumes.volume.mount_path">
                     </div>
                     <div>
-                        <pre class="cli-key-label" v-tooltip="keys.spec.volume_mounts.sub_path.tooltip">      {{keys.spec.volume_mounts.sub_path.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.volume_mounts.sub_path.tooltip">      {{keys.spec.volume_mounts.sub_path.label}}</pre>
                         <input class="cli-input"
                                type="text"
-                               placeholder="sub path (optional)"
+                               placeholder="sub path"
                                @keyup.enter="addVolume"
                                v-autowidth="auto_width_config"
                                v-model="manifest_model.volumes.volume.sub_path">
                     </div>
                     <div>
-                        <pre class="cli-key-label" v-tooltip="keys.spec.volume_mounts.volume_name.tooltip">      {{keys.spec.volume_mounts.volume_name.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.volume_mounts.volume_name.tooltip">      {{keys.spec.volume_mounts.volume_name.label}}</pre>
                         <input class="cli-input"
                                type="text"
-                               placeholder="dedicated volume name"
+                               placeholder="dedicated volume name (optional)"
                                @keyup.enter="addVolume"
                                v-autowidth="auto_width_config"
                                v-model="manifest_model.volumes.volume.volume_name">
@@ -265,6 +298,11 @@
                 </div>
 
             </div>
+            <span v-if="keys.spec.volume_mounts.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.volume_mounts.validation_error}}
+            </span>
+
 
             <div style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.port_mapping.tooltip">    {{keys.spec.port_mapping.label}}</pre>
@@ -299,11 +337,10 @@
                     <span @click="removePortMap(index)">حذف</span>
                 </div>
             </div>
-
             <div style="flex-direction: column-reverse; display: flex;">
                 <div style="flex-direction: column; display: flex;">
                     <div>
-                        <pre class="cli-key-label" v-tooltip="keys.spec.port_mapping.port.tooltip">    {{keys.spec.port_mapping.port.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.port_mapping.port.tooltip">    {{keys.spec.port_mapping.port.label}}</pre>
                         <input class="cli-input"
                                type="number"
                                @keyup.enter="addPortMap"
@@ -312,7 +349,7 @@
                                v-model.number="manifest_model.port_mapping.port_map.port">
                     </div>
                     <div>
-                        <pre class="cli-key-label" v-tooltip="keys.spec.port_mapping.target_port.tooltip">      {{keys.spec.port_mapping.target_port.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.port_mapping.target_port.tooltip">      {{keys.spec.port_mapping.target_port.label}}</pre>
                         <input class="cli-input"
                                type="number"
                                placeholder="enter desired port"
@@ -321,7 +358,7 @@
                                v-model.number="manifest_model.port_mapping.port_map.target_port">
                     </div>
                     <div>
-                        <pre class="cli-key-label" v-tooltip="keys.spec.port_mapping.protocol.tooltip">      {{keys.spec.port_mapping.protocol.label}}</pre>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.port_mapping.protocol.tooltip">      {{keys.spec.port_mapping.protocol.label}}</pre>
                         <input class="cli-input"
                                type="text"
                                placeholder="connection port protocol (UDP/TCP)"
@@ -332,6 +369,12 @@
                 </div>
 
             </div>
+            <span v-if="keys.spec.port_mapping.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.port_mapping.validation_error}}
+            </span>
+
+
             <div style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.liveness_probe.tooltip">    {{keys.spec.liveness_probe.label}}</pre>
             </div>
@@ -367,6 +410,7 @@
                     <pre class="cli-key-label" v-tooltip="keys.spec.liveness_probe.http_get.path.tooltip">          {{keys.spec.liveness_probe.http_get.path.label}}</pre>
                     <input class="cli-input"
                            type="text"
+                           @input="validateLivenessPath"
                            placeholder="enter method path starting from root"
                            v-model="manifest_model.health_check.liveness_object.http_get_method">
                 </div>
@@ -375,10 +419,17 @@
                     <input class="cli-input"
                            type="number"
                            min="1"
+                           @input="validateLivenessPort"
                            placeholder="enter http get port"
                            v-model.number="manifest_model.health_check.liveness_object.http_get_port">
                 </div>
             </div>
+            <span v-if="keys.spec.liveness_probe.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.liveness_probe.validation_error}}
+            </span>
+
+
             <div style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.readiness_probe.tooltip">    {{keys.spec.readiness_probe.label}}</pre>
             </div>
@@ -414,6 +465,7 @@
                     <pre class="cli-key-label" v-tooltip="keys.spec.readiness_probe.http_get.path.tooltip">          {{keys.spec.readiness_probe.http_get.path.label}}</pre>
                     <input class="cli-input"
                            type="text"
+                           @input="validateReadinessPath"
                            placeholder="enter method path starting from root"
                            v-model="manifest_model.health_check.readiness_object.http_get_method">
                 </div>
@@ -422,10 +474,17 @@
                     <input class="cli-input"
                            type="number"
                            min="1"
+                           @input="validateReadinessPort"
                            placeholder="enter http get port"
                            v-model.number="manifest_model.health_check.readiness_object.http_get_port">
                 </div>
             </div>
+            <span v-if="keys.spec.readiness_probe.value_invalid"
+                  class="invalid-message">
+                {{keys.spec.readiness_probe.validation_error}}
+            </span>
+
+
             <div style="margin-top: 12px">
                 <pre class="cli-key-label"
                      v-tooltip="keys.spec.resources.tooltip">    {{keys.spec.resources.label}}</pre>
@@ -436,6 +495,7 @@
                 <input class="cli-input"
                        type="number"
                        min="200"
+                       @input="validateMemory"
                        v-model.number="manifest_model.service.memory.amount">
             </div>
         </div>
@@ -453,6 +513,25 @@
         },
         data() {
             return {
+                rules: {
+                    name_required: value => !!value.trim() || 'نام متغیر نمی‌تواند خالی باشد',
+                    value_required: value => !!value.trim() || !this.secret_obj.selected || 'مقدار متغیر نمی‌تواند خالی باشد',
+                    secret_required: value => !!value.trim() || this.secret_obj.selected || 'مقدار متغیر نمی‌تواند خالی باشد',
+                    no_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
+                    regex: value => new RegExp('^[a-zA-Z1-9_]+$').test(value) || 'فقط حروف کوچک، حروف بزرگ، underscore و اعداد معتبر هستند',
+                    secret_regex: value => new RegExp('^[a-z0-9]+([-.a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)',
+                    redundant: value => (this.allowed_name === null ? this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0 : this.allowed_name === value || this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0) || 'مقدار تکراری است',
+                    volume_mounts: {
+                        is_root_addressed: value => value.toString().startsWith('/') || value.toString() === '' || 'آدرس وارد شده، باید از root (/) شروع شود',
+                        no_slash: value => !value.toString().startsWith('/') || '/ مجاز نیست',
+                        volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
+                        redundant: value => (this.allowed_name === null ? this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0 : this.allowed_name === value || this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0) || 'مقدار تکراری است',
+                    },
+                    port_mapping: {
+                        valid_port: value => value >= 1 && value <= 65535 || value === null || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد',
+                        redundant: value => (this.allowed_name === null ? this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0 : this.allowed_name === value || this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0) || 'مقدار تکراری است'
+                    }
+                },
                 domain: null,
                 auto_width_config: {
                     maxWidth: '600px', minWidth: '300px', comfortZone: 0
@@ -482,19 +561,19 @@
                             label: 'image_pull_policy:',
                             tooltip: 'مشخص می‌کند در هر بار ساخت ایمیج از نو دریافت شود یا خیر',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                            validation_error: ''
                         },
                         path: {
                             label: 'path:',
                             tooltip: 'مشخص می‌کند سرویس بر روی مسیر خاصی اجرا شود',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                            validation_error: ''
                         },
                         port: {
                             label: 'port:',
                             tooltip: 'پورتی که سرویس بر روی آن Expose شده است',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                            validation_error: ''
                         },
                         allow_http: {
                             label: 'allow_http:',
@@ -506,131 +585,131 @@
                             label: 'domains:',
                             tooltip: 'نام دامنه‌هایی که قصد دارید به سرویس متصل نمایید',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                            validation_error: ''
                         },
                         replicas: {
                             label: 'replicas:',
                             tooltip: 'تعداد instance‌هایی که از این سرویس باید ساخته شود',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                            validation_error: ''
                         },
                         env: {
                             label: 'env:',
                             tooltip: 'لیست‌ ‌environment variable‌های مورد نیاز سرویس',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                            validation_error: '',
                             name: {
                                 label: '- name:',
                                 tooltip: 'نام environment variable',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             value: {
                                 label: 'value:',
                                 tooltip: 'مقدار مستقیم environment variable',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             secret: {
                                 label: 'secret:',
                                 tooltip: 'نام سکرتی که مقدار environment variable داخل آن ذخیره شده است.',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             hidden: {
                                 label: 'hidden:',
                                 tooltip: 'مشخص می‌کند مقدار environment variable نمایش داده شود یا خیر',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                         },
                         volume_mounts: {
                             label: 'volume_mounts:',
                             tooltip: 'مشخص کردن محل‌های ذخیره‌سازی',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                            validation_error: '',
                             mount_path: {
                                 label: '- mount_path:',
                                 tooltip: 'آدرس مسیری از سرویس که باید به محل ذخیره‌سازی متصل شود و از root آدرس دهی می‌شود',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             sub_path: {
                                 label: 'aub_path:',
                                 tooltip: 'نام محل ذخیره‌سازی دلخواه',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             volume_name: {
                                 label: 'volume_name:',
                                 tooltip: 'در صورت نیاز، نام dedicated volume که باید به سرویس متصل شود',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                         },
                         port_mapping: {
                             label: 'port_mapping:',
                             tooltip: 'تخصیص پورت‌های داخلی سرویس در فضانام',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                            validation_error: '',
                             port: {
                                 label: '- port:',
                                 tooltip: 'پورت جدید که قرار است target_port به آن map شود',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             target_port: {
                                 label: 'target_port:',
                                 tooltip: 'پورتی از سرویس که قرار است به پورت جدید map شود',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             protocol: {
                                 label: 'protocol:',
                                 tooltip: 'نوع پروتکول پورت (TCP/UDP)',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                         },
                         liveness_probe: {
                             label: 'liveness_probe:',
                             tooltip: 'مکانیزم تشخیص سلامت و فعال بودن سرویس',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                            validation_error: '',
                             initial_delay_seconds: {
                                 label: 'initial_delay_seconds:',
                                 tooltip: 'زمان اولیه تا اولین صدا کردن متد',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             period_seconds: {
                                 label: 'period_seconds:',
                                 tooltip: 'میزان زمان بر حسب ثانیه که فندق بین هر بار صدا کردن متد صبر می‌کند',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             timeout_seconds: {
                                 label: 'timeout_seconds:',
                                 tooltip: 'میزان زمانی که فندق منتظر پاسخ میماند تا خطای timeout دهد',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             http_get: {
                                 label: 'http_get:',
                                 tooltip: 'دستور http get که برای تشخیص آمادگی صدا زده می‌شود',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                                validation_error: '',
                                 path: {
                                     label: 'path:',
                                     tooltip: 'آدرس متد مورد نظر که از root شروع می‌شود',
                                     value_invalid: false,
-                                    validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                    validation_error: ''
                                 },
                                 port: {
                                     label: 'port:',
                                     tooltip: 'پورت متد مورد نظر',
                                     value_invalid: false,
-                                    validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                    validation_error: ''
                                 },
                             },
                         },
@@ -638,41 +717,41 @@
                             label: 'readiness_probe:',
                             tooltip: 'مکانیزم تشخیص آمادگی سرویس',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                            validation_error: '',
                             initial_delay_seconds: {
                                 label: 'initial_delay_seconds:',
                                 tooltip: 'زمان اولیه تا اولین صدا کردن متد',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             period_seconds: {
                                 label: 'period_seconds:',
                                 tooltip: 'میزان زمان بر حسب ثانیه که فندق بین هر بار صدا کردن متد صبر می‌کند',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             timeout_seconds: {
                                 label: 'timeout_seconds:',
                                 tooltip: 'میزان زمانی که فندق منتظر پاسخ میماند تا خطای timeout دهد',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                             http_get: {
                                 label: 'http_get:',
                                 tooltip: 'دستور http get که برای تشخیص آمادگی صدا زده می‌شود',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                                validation_error: '',
                                 path: {
                                     label: 'path:',
                                     tooltip: 'آدرس متد مورد نظر که از root شروع می‌شود',
                                     value_invalid: false,
-                                    validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                    validation_error: ''
                                 },
                                 port: {
                                     label: 'port:',
                                     tooltip: 'پورت متد مورد نظر',
                                     value_invalid: false,
-                                    validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                    validation_error: ''
                                 },
                             },
                         },
@@ -680,12 +759,12 @@
                             label: 'resources:',
                             tooltip: 'تخصیص منابع مورد نیاز سرویس',
                             value_invalid: false,
-                            validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد',
+                            validation_error: '',
                             memory: {
                                 label: 'memory (Mi):',
                                 tooltip: 'میزان رم سرویس بر حسب مگابایت',
                                 value_invalid: false,
-                                validation_error: 'پر کردن این فیلد اجباری‌ است و نوع سرویس باید ExternalService یا InternalService باشد'
+                                validation_error: ''
                             },
                         },
                     }
@@ -695,6 +774,9 @@
         methods: {
             addDomain() {
                 var redundant = false;
+                let input = {target: {value: this.domain}};
+                console.log(input)
+                this.validateDomain(input);
 
                 if (this.domain) {
                     if (this.domain.trim() !== '') {
@@ -717,34 +799,8 @@
             },
             addEnv() {
 
-
-                if (this.manifest_model.environment_variable.name === null) {
+                if (!this.validateEnvironmentVariable())
                     return;
-                }
-
-
-                // if (this.manifest_model.environment_variable.value === null && !this.secret_obj.selected) {
-                //     return;
-                // }
-                //
-                //
-                // if (this.manifest_model.environment_variable.secret === null && this.secret_obj.selected) {
-                //     return;
-                // }
-
-
-                if (this.manifest_model.environment_variable.name.trim().length === 0) {
-                    return;
-                }
-
-
-                // if (this.rules.no_space(this.manifest_model.environment_variable.name.trim()) !== true ||
-                //     this.rules.regex(this.manifest_model.environment_variable.name.trim()) !== true ||
-                //     this.rules.redundant(this.manifest_model.environment_variable.name.trim()) !== true) {
-                //     this.$refs.key.focus();
-                //     return;
-                // }
-
 
                 if (this.manifest_model.environment_variable.secret) {
                     this.manifest_model.environment_variable.env_list.push({
@@ -772,62 +828,28 @@
             },
             addVolume() {
 
-                if (this.manifest_model.volumes.volume.mount_path === null) {
+                if (!this.validateVolumeMounts()) {
                     return;
                 }
 
-                if (this.manifest_model.volumes.volume.sub_path === null) {
-                    return;
+                var volume = {};
+                if (this.manifest_model.volumes.volume.mount_path) {
+                    volume.mount_path = this.manifest_model.volumes.volume.mount_path
                 }
 
 
-                if (this.manifest_model.volumes.volume.mount_path.trim().length === 0) {
-                    return;
+                if (this.manifest_model.volumes.volume.sub_path) {
+                    volume.sub_path = this.manifest_model.volumes.volume.sub_path
                 }
 
-                // if (this.rules.is_root_addressed(this.manifest_model.volumes.volume.mount_path) !== true ||
-                //     this.rules.no_space(this.manifest_model.volumes.volume.mount_path) !== true) {
-                //     return;
-                // }
-                // if(this.rules.redundant(this.manifest_model.volumes.volume.mount_path) !== true){
-                //     return;
-                // }
-                // if (this.manifest_model.volumes.volume.sub_path.trim().length === 0 ||
-                //     this.rules.no_slash(this.manifest_model.volumes.volume.sub_path) !== true) {
-                //     return;
-                // }
-                // if (this.manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume') {
-                //
-                //     if (this.manifest_model.volumes.volume.volume_name === null) {
-                //         return;
-                //     }
-                //
-                //
-                //     if (this.manifest_model.volumes.volume.volume_name.trim().length === 0) {
-                //         this.$refs.volume_name_selector.focus()
-                //         return;
-                //     }
-                //
-                //     if (this.rules.volume_name_regex(this.manifest_model.volumes.volume.volume_name.trim()) !== true ||
-                //         this.rules.no_space(this.manifest_model.volumes.volume.volume_name.trim()) !== true) {
-                //         this.$refs.volume_name_selector.focus()
-                //         return;
-                //     }
-                //
-                // }
 
                 if (this.manifest_model.volumes.volume.volume_name) {
-                    this.manifest_model.volumes.volume_list.push({
-                        mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
-                        sub_path: this.manifest_model.volumes.volume.sub_path.trim(),
-                        volume_name: this.manifest_model.volumes.volume.volume_name.trim()
-                    })
-                } else {
-                    this.manifest_model.volumes.volume_list.push({
-                        mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
-                        sub_path: this.manifest_model.volumes.volume.sub_path.trim()
-                    })
+                    volume.volume_name = this.manifest_model.volumes.volume.volume_name
                 }
+
+                this.manifest_model.volumes.volume_list.push(volume);
+
+                // console.log(this.manifest_model.volumes.volume_list);
 
                 this.manifest_model.volumes.volume.mount_path = null;
                 this.manifest_model.volumes.volume.sub_path = null;
@@ -839,36 +861,9 @@
             },
             addPortMap() {
 
-                if (this.manifest_model.port_mapping.port_map.port === null) {
+                if (!this.validatePortMapping()) {
                     return;
                 }
-
-                if (this.manifest_model.port_mapping.port_map.target_port === null) {
-                    return;
-                }
-
-
-                if (this.manifest_model.port_mapping.port_map.port.toString().trim().length === 0) {
-                    return;
-                }
-
-
-                if (this.manifest_model.port_mapping.port_map.target_port.toString().trim().length === 0) {
-                    return;
-                }
-
-                // if (this.rules.valid_port(this.manifest_model.port_mapping.port_map.port) !== true) {
-                //     return;
-                // }
-                //
-                // if (this.rules.valid_port(this.manifest_model.port_mapping.port_map.target_port) !== true) {
-                //     return;
-                // }
-
-                // if(this.rules.redundant(this.manifest_model.port_mapping.port_map.port) !== true){
-                //     return;
-                // }
-
 
                 this.manifest_model.port_mapping.port_map_list.push({
                     port: this.manifest_model.port_mapping.port_map.port,
@@ -896,7 +891,7 @@
             validateServiceKind(input) {
                 this.keys.kind.value_invalid = input.target.value !== 'ExternalService' && input.target.value !== 'InternalService';
             },
-            validateImagePullPolicy(input){
+            validateImagePullPolicy(input) {
                 if (input.target.value === '') {
                     this.keys.spec.image_pull_policy.value_invalid = true;
                     this.keys.spec.image_pull_policy.validation_error = 'مقدار ImagePullPolicy اجباری است';
@@ -910,18 +905,18 @@
                 }
 
                 this.keys.spec.image_pull_policy.value_invalid = false;
-                return true;
-            },
-            validatePath(input){
 
-                if (!input.target.value.toString().startsWith('/')) {
+            },
+            validatePath(input) {
+
+                if (!input.target.value.toString().startsWith('/') && input.target.value.trim() !== '') {
                     this.keys.spec.path.value_invalid = true;
                     this.keys.spec.path.validation_error = 'مقدار path باید از روت آدرس دهی شود';
                     return false;
                 }
 
                 this.keys.spec.path.value_invalid = false;
-                return true;
+
             },
             validateServiceName(input) {
 
@@ -944,7 +939,281 @@
                 }
 
                 this.keys.name.value_invalid = false;
+
+            }, validatePort(input) {
+                if (input.target.value === '') {
+                    this.keys.spec.port.value_invalid = true;
+                    this.keys.spec.port.validation_error = 'مقدار پورت اجباری است';
+                    return false;
+                }
+                if (input.target.value > 65535 || input.target.value < 1) {
+                    this.keys.spec.port.value_invalid = true;
+                    this.keys.spec.port.validation_error = 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد';
+                    return false;
+                }
+
+                this.keys.spec.port.value_invalid = false;
+
+            }, validateReplicas(input) {
+                if (input.target.value === '') {
+                    this.keys.spec.replicas.value_invalid = true;
+                    this.keys.spec.replicas.validation_error = 'مقدار رپلیکا حداقل باید ۱ باشد';
+                    return false;
+                }
+
+                this.keys.spec.replicas.value_invalid = false;
+
+            }, validateDomain(input) {
+
+                if (!input.target.value) {
+                    this.keys.spec.domains.value_invalid = true;
+                    this.keys.spec.domains.validation_error = 'مقدار دامنه خالی است';
+                    return false;
+                }
+
+                if (input.target.value === '') {
+                    this.keys.spec.domains.value_invalid = true;
+                    this.keys.spec.domains.validation_error = 'مقدار دامنه خالی است';
+                    return false;
+                }
+
+                this.keys.spec.domains.value_invalid = false;
+
+            },
+            validateEnvironmentVariable() {
+
+
+                if (this.manifest_model.environment_variable.name === null) {
+                    this.keys.spec.env.value_invalid = true;
+                    this.keys.spec.env.validation_error = 'نام environment variable نمی‌تواند خالی باشد';
+                    return false;
+                }
+
+                if (this.manifest_model.environment_variable.name.trim().length === 0) {
+                    this.keys.spec.env.value_invalid = true;
+                    this.keys.spec.env.validation_error = 'نام environment variable نمی‌تواند خالی باشد';
+                    return false;
+                }
+
+                if (this.rules.no_space(this.manifest_model.environment_variable.name.trim()) !== true) {
+                    this.keys.spec.env.value_invalid = true;
+                    this.keys.spec.env.validation_error = 'نام environment variable نمی‌تواند شامل space باشد';
+                    return false;
+                }
+
+                if (this.rules.regex(this.manifest_model.environment_variable.name.trim()) !== true) {
+                    this.keys.spec.env.value_invalid = true;
+                    this.keys.spec.env.validation_error = 'فقط حروف کوچک، حروف بزرگ، underscore و اعداد معتبر هستند';
+                    return false;
+                }
+
+                if (this.rules.redundant(this.manifest_model.environment_variable.name.trim()) !== true) {
+                    this.keys.spec.env.value_invalid = true;
+                    this.keys.spec.env.validation_error = 'مقدار تکراری است';
+                    return false;
+                }
+
+                if (this.manifest_model.environment_variable.value === null && this.manifest_model.environment_variable.secret === null) {
+                    this.keys.spec.env.value_invalid = true;
+                    this.keys.spec.env.validation_error = 'حداقل یکی از مقادیر secret و یا value را باید وارد کنید';
+                    return false;
+                }
+
+                if (this.manifest_model.environment_variable.secret && this.rules.secret_regex(this.manifest_model.environment_variable.secret)) {
+                    this.keys.spec.env.value_invalid = true;
+                    this.keys.spec.env.validation_error = 'نام secret وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)';
+                    return false;
+                }
+
+                this.keys.spec.env.value_invalid = false;
                 return true;
+            },
+            validateVolumeMounts() {
+
+                if (this.manifest_model.volumes.volume.mount_path === null) {
+                    this.keys.spec.volume_mounts.value_invalid = true;
+                    this.keys.spec.volume_mounts.validation_error = 'مقدار mount_path نمی‌تواند خالی باشد';
+                    return false;
+                }
+
+
+                if (this.manifest_model.volumes.volume.mount_path.trim().length === 0) {
+                    this.keys.spec.volume_mounts.value_invalid = true;
+                    this.keys.spec.volume_mounts.validation_error = 'مقدار mount_path نمی‌تواند خالی باشد';
+                    return false;
+                }
+
+                if (this.rules.volume_mounts.is_root_addressed(this.manifest_model.volumes.volume.mount_path) !== true) {
+                    this.keys.spec.volume_mounts.value_invalid = true;
+                    this.keys.spec.volume_mounts.validation_error = 'آدرس وارد شده، باید از root (/) شروع شود';
+                    return false;
+
+                }
+
+                if (this.rules.no_space(this.manifest_model.volumes.volume.mount_path) !== true) {
+                    this.keys.spec.volume_mounts.value_invalid = true;
+                    this.keys.spec.volume_mounts.validation_error = 'فاصله در mount_path مجاز نیست';
+                    return false;
+                }
+
+                if (this.rules.volume_mounts.redundant(this.manifest_model.volumes.volume.mount_path) !== true) {
+                    this.keys.spec.volume_mounts.value_invalid = true;
+                    this.keys.spec.volume_mounts.validation_error = 'مقدار mount_path تکراری است';
+                    return false;
+                }
+
+                if (this.manifest_model.volumes.volume.sub_path !== null) {
+                    if (this.rules.volume_mounts.no_slash(this.manifest_model.volumes.volume.sub_path) !== true) {
+                        this.keys.spec.volume_mounts.value_invalid = true;
+                        this.keys.spec.volume_mounts.validation_error = 'مقدار / در sub_path مجاز نیست';
+                        return false;
+                    }
+                }
+
+                if (this.manifest_model.volumes.volume.volume_name !== null) {
+
+                    if (this.rules.volume_mounts.volume_name_regex(this.manifest_model.volumes.volume.volume_name.trim()) !== true) {
+                        this.keys.spec.volume_mounts.value_invalid = true;
+                        this.keys.spec.volume_mounts.validation_error = 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)';
+                        return false;
+                    }
+
+                    if (this.rules.volume_mounts.no_space(this.manifest_model.volumes.volume.volume_name.trim()) !== true) {
+                        this.keys.spec.volume_mounts.value_invalid = true;
+                        this.keys.spec.volume_mounts.validation_error = 'فاصله در volume_name مجاز نیست';
+                        return false;
+                    }
+
+                }
+
+                this.keys.spec.volume_mounts.value_invalid = false;
+                return true;
+            },
+            validatePortMapping() {
+
+                if (this.manifest_model.port_mapping.port_map.port === null) {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار port اجباری است';
+                    return false;
+                }
+
+                if (this.manifest_model.port_mapping.port_map.port.toString().trim().length === 0) {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار port اجباری است';
+                    return false;
+                }
+
+                if (this.manifest_model.port_mapping.port_map.target_port === null) {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار target_port اجباری است';
+                    return false;
+                }
+
+
+                if (this.manifest_model.port_mapping.port_map.target_port.toString().trim().length === 0) {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار target_port اجباری است';
+                    return false;
+                }
+
+                if (this.rules.port_mapping.valid_port(this.manifest_model.port_mapping.port_map.port) !== true) {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار port باید بین ۱ تا ۶۵۵۳۵ باشد';
+                    return false;
+                }
+
+                if (this.rules.port_mapping.valid_port(this.manifest_model.port_mapping.port_map.target_port) !== true) {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار target_port باید بین ۱ تا ۶۵۵۳۵ باشد';
+                    return false;
+                }
+
+                if (this.rules.port_mapping.redundant(this.manifest_model.port_mapping.port_map.port) !== true) {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار port_mapping تکراری است';
+                    return false;
+                }
+
+                if (this.manifest_model.port_mapping.port_map.protocol !== 'TCP' && this.manifest_model.port_mapping.port_map.protocol !== 'UDP') {
+                    this.keys.spec.port_mapping.value_invalid = true;
+                    this.keys.spec.port_mapping.validation_error = 'مقدار protocol تنها می‌تواند UDP یا TCP باشد';
+                    return false;
+                }
+
+                this.keys.spec.port_mapping.value_invalid = false;
+                return true;
+            },
+            validateMemory(input) {
+                if (!input.target.value) {
+                    this.manifest_model.service.memory.amount = 200;
+                    return false;
+                }
+
+                if (input.target.value < 0) {
+                    this.manifest_model.service.memory.amount = 200;
+                    return false;
+                }
+            },
+            validateLivenessPort(input) {
+
+                if (!input.target.value) {
+                    this.keys.spec.liveness_probe.value_invalid = false;
+                    return;
+                }
+
+                if (input.target.value > 65535 || input.target.value < 1) {
+                    this.keys.spec.liveness_probe.value_invalid = true;
+                    this.keys.spec.liveness_probe.validation_error = 'مقدار port باید بین ۱ تا ۶۵۵۳۵ باشد';
+                    return false;
+                }
+
+                this.keys.spec.liveness_probe.value_invalid = false;
+            },
+            validateLivenessPath(input) {
+
+                if (!input.target.value) {
+                    this.keys.spec.liveness_probe.value_invalid = false;
+                    return;
+                }
+
+                if (!input.target.value) {
+                    this.keys.spec.liveness_probe.value_invalid = true;
+                    this.keys.spec.liveness_probe.validation_error = 'مقدار path اجباری است';
+                    return false;
+                }
+
+                this.keys.spec.liveness_probe.value_invalid = false;
+
+            },
+            validateReadinessPort(input) {
+
+                if (!input.target.value) {
+                    this.keys.spec.readiness_probe.value_invalid = false;
+                    return;
+                }
+
+                if (input.target.value > 65535 || input.target.value < 1) {
+                    this.keys.spec.readiness_probe.value_invalid = true;
+                    this.keys.spec.readiness_probe.validation_error = 'مقدار port باید بین ۱ تا ۶۵۵۳۵ باشد';
+                    return false;
+                }
+
+                this.keys.spec.readiness_probe.value_invalid = false;
+            },
+            validateReadinessPath(input) {
+
+                if (!input.target.value) {
+                    this.keys.spec.readiness_probe.value_invalid = false;
+                    return;
+                }
+
+                if (!input.target.value) {
+                    this.keys.spec.readiness_probe.value_invalid = true;
+                    this.keys.spec.readiness_probe.validation_error = 'مقدار path اجباری است';
+                    return false;
+                }
+
+                this.keys.spec.readiness_probe.value_invalid = false;
 
             }
         }
@@ -972,6 +1241,19 @@
     .cli-key-label
         text-align: left
         color: #3ccc38
+        padding-right: 6px
+        font-family "Helvetica Neue"
+        font-weight normal
+        font-size 1em
+        display: flex
+        width: max-content
+        margin-bottom: 3px
+        direction: ltr
+        cursor pointer
+
+    .cli-input-key-label
+        text-align: left
+        color: #27fffd
         padding-right: 6px
         font-family "Helvetica Neue"
         font-weight normal

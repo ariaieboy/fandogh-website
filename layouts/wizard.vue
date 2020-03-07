@@ -319,8 +319,8 @@
                         ]
                     },
                     environment_variable: {
-                        name: '',
-                        value: '',
+                        name: null,
+                        value: null,
                         secret: null,
                         hidden: false,
                         env_list: []
@@ -486,7 +486,7 @@
         },
         computed: {
             domainsList() {
-                if (!this.$store.state.domains) return []
+                if (!this.$store.state.domains) return [];
                 return this.$store.state.domains.map(item => {
                     return {
                         title: item.name,
@@ -546,7 +546,7 @@
             'manifest_model.service.service_name':
                 {
                     handler: function (value, oldValue) {
-                        let name = value.name
+                        let name = value.name;
                         if (name.length.valueOf() === 0) {
                             this.deleteFromManifest('name')
                         } else {
@@ -606,7 +606,7 @@
                 {
                     handler: function (value, oldValue) {
                         if (value.dir === null) {
-                            this.deleteFromManifest('spec.path')
+                            this.deleteFromManifest('spec.path');
                             return
                         }
                         if (value.dir.toString().length === 0) {
@@ -637,11 +637,11 @@
             'manifest_model.service.domains':
                 {
                     handler: function (value, oldValue) {
-                        let list = [...value]
+                        let list = [...value];
                         let mapList = list.map(v => {
                             return {name: v}
-                        })
-                        this.addToManifest(mapList, 'spec.domains')
+                        });
+                        this.addToManifest(mapList, 'spec.domains');
                         if (mapList.length === 0) {
                             this.deleteFromManifest('spec.domains')
                         }
@@ -651,9 +651,9 @@
             'manifest_model.health_check':
                 {
                     handler: function (value, oldValue) {
-                        let empty = true
-                        const liveness_keys = Object.keys(value['liveness_object'])
-                        const readiness_keys = Object.keys(value['readiness_object'])
+                        let empty = true;
+                        const liveness_keys = Object.keys(value['liveness_object']);
+                        const readiness_keys = Object.keys(value['readiness_object']);
 
                         for (let key of liveness_keys) {
                             if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
@@ -718,14 +718,14 @@
                                 if (item.step_name === 'PortMappingSetup') {
                                     item.edited = true;
                                 }
-                            })
+                            });
                             this.addToManifest([...value], 'spec.port_mapping')
                         } else {
                             this.items.forEach(item => {
                                 if (item.step_name === 'PortMappingSetup') {
                                     item.edited = false;
                                 }
-                            })
+                            });
                             this.deleteFromManifest('spec.port_mapping')
                         }
                     }
@@ -749,6 +749,11 @@
                                 }
                             })
                         }
+                        if (value.length === 0) {
+                            this.deleteFromManifest('spec.volume_mounts')
+                        } else {
+                            this.addToManifest(value, 'spec.volume_mounts')
+                        }
                     }
                     ,
                     deep: true
@@ -761,7 +766,7 @@
                             this.items.forEach(item => {
                                 if (item.step_name === 'ImageSetup') {
                                     item.edited = false;
-                                    return
+
                                 }
                             })
                         }
@@ -801,7 +806,7 @@
         ,
         mounted() {
             this.$store.dispatch("getDomains", {verified: true});
-            this.getImages()
+            this.getImages();
             this.$store.dispatch("getSecret");
 
 
@@ -811,13 +816,13 @@
                 // localStorage.removeItem('vuex')
             });
             if (this.isMobile) {
-                this.$store.commit('SET_DATA', {id: 'isNativeMenus', data: null})
+                this.$store.commit('SET_DATA', {id: 'isNativeMenus', data: null});
                 this.$store.commit("SET_DATA", {data: false, id: "sideMunu"});
             }
-            let manifest = this.$store.state.manifest
+            let manifest = this.$store.state.manifest;
             // if (!Object.keys(manifest).length) this.$router.push({ path: this._steps[0].path })
-            this.persistData(manifest)
-            this.handelRyChat()
+            this.persistData(manifest);
+            this.handelRyChat();
 
             //populating manifest
             if (this.$route.query.hasOwnProperty('service')) {
@@ -838,25 +843,25 @@
 
                 if (kind_value === this.manifest_model.service.kinds[0].name) {
                     this.manifest_model.service.kinds[0].is_active = true;
-                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[0].name
-                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[0].local_name
+                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[0].name;
+                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[0].local_name;
                     this.manifest_model.service.kind.tooltip = this.manifest_model.service.kinds[0].tooltip
 
                 } else {
                     this.manifest_model.service.kinds[1].is_active = true;
-                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[1].name
-                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[1].local_name
+                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[1].name;
+                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[1].local_name;
                     this.manifest_model.service.kind.tooltip = this.manifest_model.service.kinds[1].tooltip
                 }
 
 
                 if (this.manifest_model.service.kind.name === 'ExternalService') {
-                    this.manifest_model.service.port.number = null
+                    this.manifest_model.service.port.number = null;
                     this.manifest_model.service.allow_http.selected = true
                 } else {
                     this.manifest_model.service.domains = [];
-                    this.manifest_model.service.port.number = null
-                    this.manifest_model.service.allow_http.selected = null
+                    this.manifest_model.service.port.number = null;
+                    this.manifest_model.service.allow_http.selected = null;
                     this.manifest_model.service.path.dir = null
                 }
 
@@ -884,10 +889,10 @@
                     item.is_active = false
                 });
                 this.manifest_model.image.registries[index].is_active = true;
-                this.manifest_model.image.registry = this.manifest_model.image.registries[index]
+                this.manifest_model.image.registry = this.manifest_model.image.registries[index];
 
-                this.manifest_model.image.image_object.name = null
-                this.manifest_model.image.image_object.version = null
+                this.manifest_model.image.image_object.name = null;
+                this.manifest_model.image.image_object.version = null;
 
                 if (this.manifest_model.image.registry.local_name === 'Fandogh' &&
                     this.manifest_model.image.secret_obj.value !== null &&
@@ -900,7 +905,7 @@
                 this.loading = true;
                 await this.$store.dispatch('dumpServiceManifest', service_name)
                     .then(response => {
-                        this.loading = false
+                        this.loading = false;
                         manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
                         this.populateManifest(manifest)
                     }).catch(e => {
@@ -927,7 +932,7 @@
                     let kind_name = manifest.kind;
 
                     this.manifest_model.service.kinds.forEach(item => {
-                        item.is_active = false
+                        item.is_active = false;
                         if (item.name === kind_name) {
                             item.is_active = true;
                             this.manifest_model.service.kind.tooltip = item.tooltip;
@@ -945,7 +950,7 @@
                 }
 
                 if (manifest.hasOwnProperty('spec')) {
-                    let spec = manifest.spec
+                    let spec = manifest.spec;
 
                     if (spec.hasOwnProperty('resources')) {
                         if (spec.resources.hasOwnProperty('memory')) {
@@ -971,7 +976,7 @@
                         } else if (image.split('/').length === 2) {
                             this.onRegistryClicked(1)
                         } else {
-                            this.onRegistryClicked(0)
+                            this.onRegistryClicked(0);
                             this.getImageV(image.split(':')[0])
                         }
                         this.manifest_model.image.image_object.name = '';
@@ -988,7 +993,7 @@
 
                     if (spec.hasOwnProperty('image_pull_policy')) {
                         this.manifest_model.image.image_pull_policy_obj.forEach((item, index) => {
-                            item.selected = false
+                            item.selected = false;
                             if (item.value === spec.image_pull_policy) {
                                 item.selected = true
                             }
@@ -1036,7 +1041,7 @@
                         spec.domains.forEach((domain, index) => {
                             if (domain.name.toString().includes('fandogh.cloud')) {
                                 spec.domains.splice(index, 1);
-                                return
+
                             }
                         });
 
@@ -1069,9 +1074,9 @@
                     this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[0].local_name;
                     this.manifest_model.service.kind.tooltip = this.manifest_model.service.kinds[0].tooltip;
 
-                    this.manifest_model.service.replica.count = this.manifest_model.service.replica.default
-                    this.manifest_model.service.memory.amount = this.manifest_model.service.memory.default
-                    this.manifest_model.service.allow_http.selected = false
+                    this.manifest_model.service.replica.count = this.manifest_model.service.replica.default;
+                    this.manifest_model.service.memory.amount = this.manifest_model.service.memory.default;
+                    this.manifest_model.service.allow_http.selected = false;
                     this.manifest_model.service.allow_http.selected = true
 
                 }
@@ -1136,20 +1141,20 @@
             deploy() {
 
                 if (this.isManifestValid()) {
-                    this.loading = true
+                    this.loading = true;
                     this.deploying_manifest = true;
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.$store.dispatch('createServiceManifest').then(res => {
-                        this.loading = false
-                        this.finished = true
+                        this.loading = false;
+                        this.finished = true;
                         // removeValue('name')
                         // removeValue('versions')
                         this.$store.commit("SET_DATA", {id: "service", data: res});
-                        this.$router.replace(`/dashboard/services/${res.name}`)
+                        this.$router.replace(`/dashboard/services/${res.name}`);
                         this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                     }).catch(e => {
-                        this.loading = false
-                        this.finished = false
+                        this.loading = false;
+                        this.finished = false;
                         // ErrorReporter(e, [], true).forEach(error => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
                         //
@@ -1191,10 +1196,10 @@
             }
             ,
             handelRyChat() {
-                let elm = document.querySelector('#raychatFrame')
+                let elm = document.querySelector('#raychatFrame');
                 if (!elm) {
-                    const raychatScript = document.createElement('script')
-                    raychatScript.innerText = '!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="b34779ab-3e49-4256-8f71-ec8ae7e76d64";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();'
+                    const raychatScript = document.createElement('script');
+                    raychatScript.innerText = '!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="b34779ab-3e49-4256-8f71-ec8ae7e76d64";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();';
                     document.head.appendChild(raychatScript)
                 }
             }
