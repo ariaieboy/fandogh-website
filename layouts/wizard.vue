@@ -195,7 +195,10 @@
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
                     service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     default_replica: value => value >= 1 || 'کمترین مقدار مجاز ۱ است',
-                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد'
+                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد',
+                    min_value: value => value >= 1 || 'کمترین زمان ۱ ثانیه است',
+                    is_root_addressed: value => value.toString().startsWith('/') || 'آدرس وارد شده، باید از root (/) شروع شود',
+                    has_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست'
                 },
                 manifest_model: {
                     service: {
@@ -375,15 +378,19 @@
                             initial_delay_seconds: null,
                             period_seconds: null,
                             timeout_seconds: null,
-                            http_get_method: null,
-                            http_get_port: null
+                            http_get: {
+                                path: null,
+                                port: null
+                            }
                         },
                         readiness_object: {
                             initial_delay_seconds: null,
                             period_seconds: null,
                             timeout_seconds: null,
-                            http_get_method: null,
-                            http_get_port: null
+                            http_get: {
+                                path: null,
+                                port: null
+                            }
                         },
                     }
                 },
@@ -404,8 +411,7 @@
                         title: 'انتخاب نوع سرویس',
                         description: 'هر سرویس در فندق یک نسخه در حال اجرا از یک ورژن بخصوص از یکی از image های شماست. سرویس ها انواع مختلفی دارند و برای ساخت آن ها روش های متفاوتی در نظر گرفته شده است.'
                     }
-                }
-                ,
+                },
                 items: [
                     {
                         step: 0,
@@ -556,11 +562,8 @@
                                 this.deleteFromManifest('name')
                             }
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.service.memory':
                 {
                     handler: function (value, oldValue) {
@@ -570,11 +573,8 @@
                         } else {
                             this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.service.replica':
                 {
                     handler: function (value, oldValue) {
@@ -584,11 +584,8 @@
                         } else {
                             this.addToManifest(count, 'spec.replicas')
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.service.allow_http':
                 {
                     handler: function (value, oldValue) {
@@ -597,11 +594,8 @@
                             return
                         }
                         this.addToManifest(value.selected, 'spec.allow_http')
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.service.path':
                 {
                     handler: function (value, oldValue) {
@@ -614,11 +608,8 @@
                         } else {
                             this.addToManifest(value.dir, 'spec.path')
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.service.port':
                 {
                     handler: function (value, oldValue) {
@@ -629,11 +620,8 @@
                         } else {
                             this.addToManifest(parseInt(value.number), 'spec.port')
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.service.domains':
                 {
                     handler: function (value, oldValue) {
@@ -646,32 +634,49 @@
                             this.deleteFromManifest('spec.domains')
                         }
                     }
-                }
-            ,
+                },
             'manifest_model.health_check':
                 {
                     handler: function (value, oldValue) {
-                        let empty = true;
+                        let liveness_empty = false;
+                        let readiness_empty = false;
                         const liveness_keys = Object.keys(value['liveness_object']);
                         const readiness_keys = Object.keys(value['readiness_object']);
 
                         for (let key of liveness_keys) {
-                            if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
-                                empty = false;
-                                break
-                            }
-                        }
-
-                        if (empty) {
-                            for (let key of readiness_keys) {
-                                if (value.readiness_object[key] === null || value.readiness_object[key] === '') {
-                                    empty = false;
-                                    break
+                            if (key === 'http_get') {
+                                if (value.liveness_object[key]['path'] === null || value.liveness_object[key]['path'] === '') {
+                                    liveness_empty = true;
+                                }
+                                if (value.liveness_object[key]['port'] === null || value.liveness_object[key]['port'] === '') {
+                                    liveness_empty = true;
+                                }
+                            } else {
+                                if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
+                                    liveness_empty = true;
                                 }
                             }
                         }
 
-                        if (!empty) {
+
+                        for (let key of readiness_keys) {
+
+                            if (key === 'http_get') {
+                                if (value.readiness_object[key]['path'] === null || value.readiness_object[key]['path'] === '') {
+                                    readiness_empty = true;
+                                }
+                                if (value.readiness_object[key]['port'] === null || value.readiness_object[key]['port'] === '') {
+                                    readiness_empty = true;
+                                }
+                            } else {
+                                if (value.readiness_object[key] === null || value.readiness_object[key] === '') {
+                                    readiness_empty = true;
+                                }
+                            }
+                        }
+
+
+                        if (!readiness_empty || !liveness_empty) {
                             this.items.forEach(item => {
                                 if (item.step_name === 'HealthCheckSetup') {
                                     item.edited = true;
@@ -684,11 +689,8 @@
                                 }
                             })
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.environment_variable.env_list':
                 {
                     handler: function (value, oldValue) {
@@ -705,11 +707,13 @@
                                 }
                             })
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+
+                        if (value.length === 0)
+                            this.deleteFromManifest('spec.env');
+                        else
+                            this.addToManifest(value, 'spec.env')
+                    }, deep: true
+                },
             'manifest_model.port_mapping.port_map_list':
                 {
                     handler: function (value, oldValue) {
@@ -728,11 +732,8 @@
                             });
                             this.deleteFromManifest('spec.port_mapping')
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.volumes.volume_list':
                 {
                     handler: function (value, oldValue) {
@@ -754,11 +755,8 @@
                         } else {
                             this.addToManifest(value, 'spec.volume_mounts')
                         }
-                    }
-                    ,
-                    deep: true
-                }
-            ,
+                    }, deep: true
+                },
             'manifest_model.image.image_object':
                 {
                     handler: function (value, oldValue) {
@@ -784,10 +782,78 @@
                                 }
                             })
                         }
+                    }, deep: true
+                },
+            'manifest_model.health_check.liveness_object': {
+                handler: function (value, oldValue) {
+                    var empty = false;
+                    let keys = Object.keys(value);
+                    for (let key of keys) {
+                        if (value[key] === null || value[key] === '') {
+                            this.deleteFromManifest('spec.liveness_probe');
+                            empty = true;
+                            break
+                        } else if (key === 'http_get') {
+                            if (this.rules.is_root_addressed(value[key]['path']) !== true || this.rules.has_space(value[key]['path']) !== true) {
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
+                            if (this.rules.valid_port(value[key]['port']) !== true) {
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
+                        } else {
+                            if (this.rules.min_value(value[key]) !== true) {
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
+                        }
                     }
-                    ,
-                    deep: true
-                }
+
+                    if (!empty) {
+                        this.addToManifest(value, 'spec.liveness_probe')
+                    }
+
+                }, deep: true
+            },
+            'manifest_model.health_check.readiness_object': {
+                handler: function (value, oldValue) {
+                    let empty = false;
+                    let keys = Object.keys(value);
+                    for (let key of keys) {
+                        if (value[key] === null || value[key] === '') {
+                            this.deleteFromManifest('spec.readiness_probe');
+                            empty = true;
+                            break
+                        } else if (key === 'http_get') {
+                            if (this.rules.is_root_addressed(value[key]['path']) !== true || this.rules.has_space(value[key]['path']) !== true) {
+                                this.deleteFromManifest('spec.readiness_probe');
+                                empty = true;
+                                break
+                            }
+
+                            if (this.rules.valid_port(value[key]['port']) !== true) {
+                                this.deleteFromManifest('spec.readiness_probe');
+                                empty = true;
+                                break
+                            }
+                        } else {
+                            if (this.rules.min_value(value[key]) !== true) {
+                                this.deleteFromManifest('spec.readiness_probe');
+                                empty = true;
+                                break
+                            }
+                        }
+                    }
+
+                    if (!empty) {
+                        this.addToManifest(value, 'spec.readiness_probe')
+                    }
+                }, deep: true
+            }
         },
         created() {
         }
