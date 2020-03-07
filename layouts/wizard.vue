@@ -378,15 +378,19 @@
                             initial_delay_seconds: null,
                             period_seconds: null,
                             timeout_seconds: null,
-                            http_get_method: null,
-                            http_get_port: null
+                            http_get: {
+                                path: null,
+                                port: null
+                            }
                         },
                         readiness_object: {
                             initial_delay_seconds: null,
                             period_seconds: null,
                             timeout_seconds: null,
-                            http_get_method: null,
-                            http_get_port: null
+                            http_get: {
+                                path: null,
+                                port: null
+                            }
                         },
                     }
                 },
@@ -634,27 +638,45 @@
             'manifest_model.health_check':
                 {
                     handler: function (value, oldValue) {
-                        let empty = true;
+                        let liveness_empty = false;
+                        let readiness_empty = false;
                         const liveness_keys = Object.keys(value['liveness_object']);
                         const readiness_keys = Object.keys(value['readiness_object']);
 
                         for (let key of liveness_keys) {
-                            if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
-                                empty = false;
-                                break
-                            }
-                        }
-
-                        if (empty) {
-                            for (let key of readiness_keys) {
-                                if (value.readiness_object[key] === null || value.readiness_object[key] === '') {
-                                    empty = false;
-                                    break
+                            if (key === 'http_get') {
+                                if (value.liveness_object[key]['path'] === null || value.liveness_object[key]['path'] === '') {
+                                    liveness_empty = true;
+                                }
+                                if (value.liveness_object[key]['port'] === null || value.liveness_object[key]['port'] === '') {
+                                    liveness_empty = true;
+                                }
+                            } else {
+                                if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
+                                    liveness_empty = true;
                                 }
                             }
                         }
 
-                        if (!empty) {
+
+                        for (let key of readiness_keys) {
+
+                            if (key === 'http_get') {
+                                if (value.readiness_object[key]['path'] === null || value.readiness_object[key]['path'] === '') {
+                                    readiness_empty = true;
+                                }
+                                if (value.readiness_object[key]['port'] === null || value.readiness_object[key]['port'] === '') {
+                                    readiness_empty = true;
+                                }
+                            } else {
+                                if (value.readiness_object[key] === null || value.readiness_object[key] === '') {
+                                    readiness_empty = true;
+                                }
+                            }
+                        }
+
+
+                        if (!readiness_empty || !liveness_empty) {
                             this.items.forEach(item => {
                                 if (item.step_name === 'HealthCheckSetup') {
                                     item.edited = true;
@@ -771,14 +793,13 @@
                             this.deleteFromManifest('spec.liveness_probe');
                             empty = true;
                             break
-                        } else if (key === 'http_get_method') {
-                            if (this.rules.is_root_addressed(value[key]) !== true || this.rules.has_space(value[key]) !== true) {
+                        } else if (key === 'http_get') {
+                            if (this.rules.is_root_addressed(value[key]['path']) !== true || this.rules.has_space(value[key]['path']) !== true) {
                                 this.deleteFromManifest('spec.liveness_probe');
                                 empty = true;
                                 break
                             }
-                        } else if (key === 'http_get_port') {
-                            if (this.rules.valid_port(value[key]) !== true) {
+                            if (this.rules.valid_port(value[key]['port']) !== true) {
                                 this.deleteFromManifest('spec.liveness_probe');
                                 empty = true;
                                 break
@@ -807,14 +828,14 @@
                             this.deleteFromManifest('spec.readiness_probe');
                             empty = true;
                             break
-                        } else if (key === 'http_get_method') {
-                            if (this.rules.is_root_addressed(value[key]) !== true || this.rules.has_space(value[key]) !== true) {
+                        } else if (key === 'http_get') {
+                            if (this.rules.is_root_addressed(value[key]['path']) !== true || this.rules.has_space(value[key]['path']) !== true) {
                                 this.deleteFromManifest('spec.readiness_probe');
                                 empty = true;
                                 break
                             }
-                        } else if (key === 'http_get_port') {
-                            if (this.rules.valid_port(value[key]) !== true) {
+
+                            if (this.rules.valid_port(value[key]['port']) !== true) {
                                 this.deleteFromManifest('spec.readiness_probe');
                                 empty = true;
                                 break

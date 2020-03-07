@@ -81,7 +81,7 @@
                                     type="text"
                                     dir="ltr"
                                     :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
-                                    v-model="manifest_model.health_check.liveness_object.http_get_method"
+                                    v-model="manifest_model.health_check.liveness_object.http_get.path"
                                     :hint="health_check_obj.http_get_method_hint"
                                     :label="health_check_obj.http_get_method_label">
 
@@ -100,7 +100,7 @@
                                     type="number"
                                     dir="ltr"
                                     :rules="[rules.required, rules.valid_port]"
-                                    v-model.number="manifest_model.health_check.liveness_object.http_get_port"
+                                    v-model.number="manifest_model.health_check.liveness_object.http_get.port"
                                     :hint="health_check_obj.http_get_port_hint"
                                     :label="health_check_obj.http_get_port_label">
 
@@ -193,7 +193,7 @@
                                     type="text"
                                     dir="ltr"
                                     :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
-                                    v-model="manifest_model.health_check.readiness_object.http_get_method"
+                                    v-model="manifest_model.health_check.readiness_object.http_get.path"
                                     :hint="health_check_obj.http_get_method_hint"
                                     :label="health_check_obj.http_get_method_label">
 
@@ -212,7 +212,7 @@
                                     dir="ltr"
                                     type="number"
                                     :rules="[rules.required, rules.valid_port]"
-                                    v-model.number="manifest_model.health_check.readiness_object.http_get_port"
+                                    v-model.number="manifest_model.health_check.readiness_object.http_get.port"
                                     :hint="health_check_obj.http_get_port_hint"
                                     :label="health_check_obj.http_get_port_label">
 

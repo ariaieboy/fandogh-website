@@ -412,7 +412,7 @@
                            type="text"
                            @input="validateLivenessPath"
                            placeholder="enter method path starting from root"
-                           v-model="manifest_model.health_check.liveness_object.http_get_method">
+                           v-model="manifest_model.health_check.liveness_object.http_get.path">
                 </div>
                 <div>
                     <pre class="cli-key-label" v-tooltip="keys.spec.liveness_probe.http_get.port.tooltip">          {{keys.spec.liveness_probe.http_get.port.label}}</pre>
@@ -421,7 +421,7 @@
                            min="1"
                            @input="validateLivenessPort"
                            placeholder="enter http get port"
-                           v-model.number="manifest_model.health_check.liveness_object.http_get_port">
+                           v-model.number="manifest_model.health_check.liveness_object.http_get.port">
                 </div>
             </div>
             <span v-if="keys.spec.liveness_probe.value_invalid"
@@ -467,7 +467,7 @@
                            type="text"
                            @input="validateReadinessPath"
                            placeholder="enter method path starting from root"
-                           v-model="manifest_model.health_check.readiness_object.http_get_method">
+                           v-model="manifest_model.health_check.readiness_object.http_get.path">
                 </div>
                 <div>
                     <pre class="cli-key-label" v-tooltip="keys.spec.readiness_probe.http_get.port.tooltip">          {{keys.spec.readiness_probe.http_get.port.label}}</pre>
@@ -476,7 +476,7 @@
                            min="1"
                            @input="validateReadinessPort"
                            placeholder="enter http get port"
-                           v-model.number="manifest_model.health_check.readiness_object.http_get_port">
+                           v-model.number="manifest_model.health_check.readiness_object.http_get.port">
                 </div>
             </div>
             <span v-if="keys.spec.readiness_probe.value_invalid"
