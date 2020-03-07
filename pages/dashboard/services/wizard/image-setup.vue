@@ -15,8 +15,8 @@
                           @click="onRegistryClicked(index)">
                         {{registry.local_name}}
                         <img :src="require('../../../../assets/svg/' + registry.icon)"
-                             :style="{width:(registry.local_name === 'Docker' ? '34px': '30px'),
-                             marginRight: (registry.local_name === 'Other' ? '40px': '27px')}"/>
+                             :style="{width:(registry.local_name === 'Docker Hub' ? '34px': '30px'),
+                             marginRight: (registry.local_name === 'Other' ? '40px': registry.local_name === 'Docker Hub'? '12px': '27px')}"/>
                     </span>
 
                 </div>
@@ -63,7 +63,7 @@
                                 type="text"
                                 dir="ltr"
                                 required
-                                :placeholder="manifest_model.image.registry.local_name === 'Docker' ? 'library/image-name OR organization-name/image-name' : ''"
+                                :placeholder="manifest_model.image.registry.local_name === 'Docker Hub' ? 'library/image-name OR organization-name/image-name' : ''"
                                 v-model="manifest_model.image.image_object.name"
                                 :hint="image_name_obj.hint"
                                 :label="image_name_obj.label">
@@ -291,7 +291,6 @@
                         this.onRegistryClicked(1)
                     } else {
                         this.onRegistryClicked(0)
-
                         this.getImageV(image.split(':')[0])
                     }
                 }

@@ -45,7 +45,7 @@
                                 style="font-family: iran-yekan;font-size: 1em; margin-left: -15px"
                                 dir="ltr"
                                 color="#0045ff"
-                                :rules="[rules.required, rules.no_slash]"
+                                :rules="[rules.no_slash]"
                                 v-model="manifest_model.volumes.volume.sub_path"
                                 :label="volume_obj.sub_path_label"
                                 :hint="volume_obj.sub_path_hint">
@@ -249,110 +249,87 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
             addVolume() {
 
                 if (this.manifest_model.volumes.volume.mount_path === null) {
-                    this.$refs.mount_path_selector.focus()
-                    return;
-                }
-
-                if (this.manifest_model.volumes.volume.sub_path === null) {
-                    this.$refs.sub_path_selector.focus()
+                    this.$refs.mount_path_selector.focus();
                     return;
                 }
 
 
                 if (this.manifest_model.volumes.volume.mount_path.trim().length === 0) {
-                    this.$refs.mount_path_selector.focus()
+                    this.$refs.mount_path_selector.focus();
                     return;
                 }
 
                 if (this.rules.is_root_addressed(this.manifest_model.volumes.volume.mount_path) !== true ||
                     this.rules.no_space(this.manifest_model.volumes.volume.mount_path) !== true) {
-                    this.$refs.mount_path_selector.focus()
+                    this.$refs.mount_path_selector.focus();
                     return;
                 }
 
-                if(this.rules.redundant(this.manifest_model.volumes.volume.mount_path) !== true){
-                    this.$refs.mount_path_selector.focus()
+                if (this.rules.redundant(this.manifest_model.volumes.volume.mount_path) !== true) {
+                    this.$refs.mount_path_selector.focus();
                     return;
                 }
 
 
-                if (this.manifest_model.volumes.volume.sub_path.trim().length === 0 ||
-                    this.rules.no_slash(this.manifest_model.volumes.volume.sub_path) !== true) {
-                    this.$refs.sub_path_selector.focus()
-                    return;
-                }
+                // if (this.manifest_model.volumes.volume.sub_path !== null){
+                //     if (this.manifest_model.volumes.volume.sub_path.trim().length === 0 ||
+                //         this.rules.no_slash(this.manifest_model.volumes.volume.sub_path) !== true) {
+                //         this.$refs.sub_path_selector.focus();
+                //         return;
+                //     }
+                // }
 
                 if (this.manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume') {
 
                     if (this.manifest_model.volumes.volume.volume_name === null) {
-                        this.$refs.volume_name_selector.focus()
+                        this.$refs.volume_name_selector.focus();
                         return;
                     }
 
 
                     if (this.manifest_model.volumes.volume.volume_name.trim().length === 0) {
-                        this.$refs.volume_name_selector.focus()
+                        this.$refs.volume_name_selector.focus();
                         return;
                     }
 
                     if (this.rules.volume_name_regex(this.manifest_model.volumes.volume.volume_name.trim()) !== true ||
                         this.rules.no_space(this.manifest_model.volumes.volume.volume_name.trim()) !== true) {
-                        this.$refs.volume_name_selector.focus()
+                        this.$refs.volume_name_selector.focus();
                         return;
                     }
 
                 }
 
 
+                var volume = {};
+                if (this.manifest_model.volumes.volume.mount_path) {
+                    volume.mount_path = this.manifest_model.volumes.volume.mount_path
+                }
+
+
+                if (this.manifest_model.volumes.volume.sub_path) {
+                    volume.sub_path = this.manifest_model.volumes.volume.sub_path
+                }
+
+
+                if (this.manifest_model.volumes.volume.volume_name) {
+                    volume.volume_name = this.manifest_model.volumes.volume.volume_name
+                }
+
+
                 if (this.isEditing) {
-                    if (this.manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume') {
-                        this.manifest_model.volumes.volume_list.splice(this.editing_index, 1, {
-                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
-                            sub_path: this.manifest_model.volumes.volume.sub_path.trim(),
-                            volume_name: this.manifest_model.volumes.volume.volume_name.trim()
-                        })
-                    } else {
-                        this.manifest_model.volumes.volume_list.splice(this.editing_index, 1, {
-                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
-                            sub_path: this.manifest_model.volumes.volume.sub_path.trim(),
-                        })
-                    }
-
+                    this.manifest_model.volumes.volume_list.splice(this.editing_index, 1, volume)
                 } else {
-                    if (this.manifest_model.volumes.volume_kind.local_name === 'Dedicated Volume') {
-                        this.manifest_model.volumes.volume_list.push({
-                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
-                            sub_path: this.manifest_model.volumes.volume.sub_path.trim(),
-                            volume_name: this.manifest_model.volumes.volume.volume_name.trim()
-                        })
-                    } else {
-                        this.manifest_model.volumes.volume_list.push({
-                            mount_path: this.manifest_model.volumes.volume.mount_path.trim(),
-                            sub_path: this.manifest_model.volumes.volume.sub_path.trim()
-                        })
-                    }
+                    this.manifest_model.volumes.volume_list.push(volume)
                 }
 
-                this.manifest_model.volumes.volume.mount_path = null
-                this.manifest_model.volumes.volume.sub_path = null
-                this.manifest_model.volumes.volume.volume_name = null
-                this.isEditing = false
-                this.allowed_name = null
-                this.editing_index = -1
+                this.manifest_model.volumes.volume.mount_path = null;
+                this.manifest_model.volumes.volume.sub_path = null;
+                this.manifest_model.volumes.volume.volume_name = null;
+                this.isEditing = false;
+                this.allowed_name = null;
+                this.editing_index = -1;
 
-            }
-        },
-        computed: {},
-        watch: {
-            'manifest_model.volumes.volume_list': {
-                handler: function (value, oldValue) {
-                    if (value.length === 0) {
-                        this.deleteFromManifest('spec.volume_mounts')
-                    } else {
-                        this.addToManifest(value, 'spec.volume_mounts')
-                    }
-
-                }
             }
         }
     }
