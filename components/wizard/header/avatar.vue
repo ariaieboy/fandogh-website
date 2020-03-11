@@ -85,7 +85,7 @@
                         });
                         this.$store.dispatch("logout");
                         if (this.$route.query.ns){
-                            this.$router.replace({path: "/dashboard/service", query: {ns: this.$route.query.ns}});
+                            this.$router.replace({path: "/dashboard/services", query: {ns: this.$route.query.ns}});
                         }else {
                             this.$router.replace("/");
                         }

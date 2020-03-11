@@ -421,7 +421,7 @@
             <div style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.command_args.tooltip">    {{keys.spec.command_args.label}}</pre>
             </div>
-            <div v-if="manifest_model.service_commands.length> 0"
+            <div v-if="manifest_model.service_command_args.length> 0"
                  style="flex-direction: column-reverse; display: flex"
                  v-for="(command_arg, index) in manifest_model.service_command_args">
                 <div class="spec-container">
