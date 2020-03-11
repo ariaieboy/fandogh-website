@@ -55,6 +55,21 @@
             </span>
 
 
+            <div v-if="manifest_model.image.registry.local_name !== 'Fandogh'">
+                <pre class="cli-key-label" v-tooltip="keys.spec.image_pull_secret.tooltip">    {{keys.spec.image_pull_secret.label}}</pre>
+
+                <input class="cli-input"
+                       type="text"
+                       placeholder="enter image pull secret"
+                       @input="validateImagePullSecret"
+                       v-model="manifest_model.image.secret_obj.value">
+            </div>
+            <span v-if="keys.spec.image_pull_secret.value_invalid && manifest_model.image.registry.local_name !== 'Fandogh'"
+                  class="invalid-message">
+                {{keys.spec.image_pull_secret.validation_error}}
+            </span>
+
+
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
                 <pre class="cli-key-label" v-tooltip="keys.spec.path.tooltip">    {{keys.spec.path.label}}</pre>
 
@@ -717,6 +732,12 @@
                             value_invalid: false,
                             validation_error: ''
                         },
+                        image_pull_secret: {
+                            label: 'image_pull_secret:',
+                            tooltip: 'نام سکرت مربوط به رجیستری',
+                            value_invalid: false,
+                            validation_error: ''
+                        },
                         path: {
                             label: 'path:',
                             tooltip: 'مشخص می‌کند سرویس بر روی مسیر خاصی اجرا شود',
@@ -1058,41 +1079,41 @@
             removePortMap(index) {
                 this.manifest_model.port_mapping.port_map_list.splice(index, 1)
             },
-            removeServiceCommand(index){
-              this.manifest_model.service_commands.splice(index, 1);
+            removeServiceCommand(index) {
+                this.manifest_model.service_commands.splice(index, 1);
             },
-            addServiceCommand(input){
-              if (this.command.trim() !== ''){
-                  this.manifest_model.service_commands.push(this.command);
-                  this.command = '';
-              }
+            addServiceCommand(input) {
+                if (this.command.trim() !== '') {
+                    this.manifest_model.service_commands.push(this.command);
+                    this.command = '';
+                }
             },
-            removeServiceCommandArg(index){
+            removeServiceCommandArg(index) {
                 this.manifest_model.service_command_args.splice(index, 1);
             },
-            addServiceCommandArg(input){
-                if (this.command_args.trim() !== ''){
+            addServiceCommandArg(input) {
+                if (this.command_args.trim() !== '') {
                     this.manifest_model.service_command_args.push(this.command_args);
                     this.command_args = '';
                 }
             },
-            removePostStartCommand(index){
-              this.manifest_model.post_start_commands.splice(index, 1);
+            removePostStartCommand(index) {
+                this.manifest_model.post_start_commands.splice(index, 1);
             },
-            addPostStartCommand(input){
-              if (this.post_start_command.trim() !== ''){
-                  this.manifest_model.post_start_commands.push(this.post_start_command);
-                  this.post_start_command = '';
-              }
+            addPostStartCommand(input) {
+                if (this.post_start_command.trim() !== '') {
+                    this.manifest_model.post_start_commands.push(this.post_start_command);
+                    this.post_start_command = '';
+                }
             },
-            removePreStopCommand(index){
-              this.manifest_model.pre_stop_commands.splice(index, 1);
+            removePreStopCommand(index) {
+                this.manifest_model.pre_stop_commands.splice(index, 1);
             },
-            addPreStopCommand(input){
-              if (this.pre_stop_command.trim() !== ''){
-                  this.manifest_model.pre_stop_commands.push(this.pre_stop_command);
-                  this.pre_stop_command = '';
-              }
+            addPreStopCommand(input) {
+                if (this.pre_stop_command.trim() !== '') {
+                    this.manifest_model.pre_stop_commands.push(this.pre_stop_command);
+                    this.pre_stop_command = '';
+                }
             },
             checkServiceKind(input) {
                 this.validateServiceKind(input);
@@ -1119,6 +1140,18 @@
                 }
 
                 this.keys.spec.image_pull_policy.value_invalid = false;
+
+            },
+            validateImagePullSecret(input) {
+
+                if (this.rules.secret_regex(input.target.value) !== true) {
+                    this.keys.spec.image_pull_secret.value_invalid = true;
+                    this.keys.spec.image_pull_secret.validation_error = 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)';
+                    return false;
+                }
+
+                this.keys.spec.image_pull_secret.value_invalid = false;
+                this.keys.spec.image_pull_secret.validation_error = '';
 
             },
             validatePath(input) {

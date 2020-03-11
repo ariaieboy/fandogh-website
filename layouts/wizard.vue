@@ -915,8 +915,58 @@
                                 }
                             })
                         }
+
+
+                        let image_name = value.name;
+                        let image_version = value.version || '';
+
+                        if (image_name === null) {
+                            this.manifest_model.image.image_object.name = '';
+                            this.manifest_model.image.image_object.version = '';
+                            this.deleteFromManifest('spec.image');
+
+                        } else if (image_name !== '') {
+
+                            this.manifest_model.image.registries.forEach(item => {
+                                item.is_active = false
+                            });
+
+                            if (image_name.split('/').length > 2) {
+                                this.manifest_model.image.registries[2].is_active = true;
+                                this.manifest_model.image.registry = this.manifest_model.image.registries[2]
+                            } else if (image_name.split('/').length === 2) {
+                                this.manifest_model.image.registries[1].is_active = true;
+                                this.manifest_model.image.registry = this.manifest_model.image.registries[1]
+                            } else {
+                                this.manifest_model.image.registries[0].is_active = true;
+                                this.manifest_model.image.registry = this.manifest_model.image.registries[0]
+                            }
+
+                            let final_image = image_name.concat(':').concat(image_version);
+                            if (image_version !== '') {
+                                this.addToManifest(final_image, 'spec.image')
+                            }
+
+                        }
                     }, deep: true
                 },
+            'manifest_model.image.image_pull_policy_obj': {
+                handler: function (value, oldValue) {
+                    let policy = this.manifest_model.image.image_pull_policy.value;
+                    this.addToManifest(policy, "spec.image_pull_policy");
+                }, deep: true
+            },
+            'manifest_model.image.secret_obj': {
+                handler: function (value, oldValue) {
+                    let secret = value;
+                    if (secret.value === null || secret.value === '') {
+                        this.deleteFromManifest('spec.image_pull_secret')
+                    } else {
+                        this.addToManifest(secret.value, 'spec.image_pull_secret')
+                    }
+
+                }, deep: true
+            },
             'manifest_model.health_check.liveness_object': {
                 handler: function (value, oldValue) {
                     var empty = false;

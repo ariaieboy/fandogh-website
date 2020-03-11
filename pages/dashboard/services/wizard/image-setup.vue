@@ -384,42 +384,14 @@
                 handler: function (value, oldValue) {
 
                     let image_name = value.name;
-                    let image_version = value.version || '';
 
                     if (image_name === null) {
-                        this.manifest_model.image.image_object.name = '';
-                        this.manifest_model.image.image_object.version = '';
                         this.version_loaded = false
-                        this.deleteFromManifest('spec.image');
                         this.$refs.version_selector.clearSelection()
 
-                    } else if (image_name !== '') {
-
-                        let final_image = image_name.concat(':').concat(image_version);
-                        if (image_version !== '') {
-                            this.addToManifest(final_image, 'spec.image')
-                        }
-
                     }
                 }, deep: true
 
-            },
-            'manifest_model.image.image_pull_policy_obj': {
-                handler: function (value, oldValue) {
-                    let policy = this.manifest_model.image.image_pull_policy.value
-                    this.addToManifest(policy, "spec.image_pull_policy");
-                }, deep: true
-            },
-            'manifest_model.image.secret_obj': {
-                handler: function (value, oldValue) {
-                    let secret = value
-                    if (secret.value === null || secret.value === '') {
-                        this.deleteFromManifest('spec.image_pull_secret')
-                    } else {
-                        this.addToManifest(secret.value, 'spec.image_pull_secret')
-                    }
-
-                }, deep: true
             }
         }
     }
@@ -509,7 +481,8 @@
         filter invert(0%) sepia(100%) saturate(0%) hue-rotate(203deg) brightness(205%) contrast(105%) !important
 
         @media only screen and (max-width: 900px)
-            margin-top -8px !important
+            margin-top
+        -8px !important
 
 </style>
 
