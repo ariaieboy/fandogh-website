@@ -112,7 +112,7 @@
 
                                     <text x="118"
                                           y="21"
-                                          :fill="(stepPage.step === 5 ? '#9c9c9c' : '#000000')"
+                                          :fill="(stepPage.step === items.length - 1 ? '#9c9c9c' : '#000000')"
                                           style="font-family: iran-yekan; font-size: 16px; font-weight: bold; user-select: none"
                                           text-anchor="start"
                                           alignment-baseline="middle">
@@ -151,6 +151,7 @@
     import PortMappingSetup from "../pages/dashboard/services/wizard/port-mapping-setup";
     import HealthCheckSetup from "../pages/dashboard/services/wizard/health-check-setup";
     import CommandArgsSetup from "../pages/dashboard/services/wizard/command-args-setup";
+    import LifecycleMethodsSetup from "../pages/dashboard/services/wizard/lifecycle-methods-setup";
     import Banner from "../components/wizard/banner/banner";
     import 'vuetify/dist/vuetify.min.css';
     import ErrorReporter from "../utils/ErrorReporter";
@@ -174,6 +175,7 @@
             PortMappingSetup,
             HealthCheckSetup,
             CommandArgsSetup,
+            LifecycleMethodsSetup,
             Banner,
             Popover
         },
@@ -377,6 +379,8 @@
                     },
                     service_commands: [],
                     service_command_args: [],
+                    post_start_commands: [],
+                    pre_stop_commands: [],
                     health_check: {
                         liveness_object: {
                             initial_delay_seconds: null,
@@ -501,6 +505,19 @@
                         page: {
                             title: 'Command & Command Args',
                             description: 'گاهی نیاز است تا دستورات پیش‌فرض یا argumentهای داکرفایل یک سرویس را تغییر دهید و یا حتی جایگزین کنید. با استفاده از commands و command_args شما می‌توانید این عمل را انجام دهید.'
+                        },
+                    },
+                    {
+                        step: 7,
+                        text: 'دستورات چرخه حیات',
+                        component: '/dashboard/general',
+                        active: false,
+                        step_name: 'LifecycleMethodsSetup',
+                        edited: false,
+                        page: {
+                            title: 'دستورات چرخه حیات',
+                            description: 'هر سرویس در طول دوره حیات خود دو نقطه مهم را طی می‌کند؛ یکی نقطه شروع (start) و دیگری نقطه پایان (stop).\n' +
+                                'شما می‌توانید با استفاده از دستورهایی که در ادامه در مورد آن‌ها توضیح داده‌ شده است، درست هنگام شروع و دقیقا قبل از پایان یافتن حیات یک سرویس و بدون آنکه نیاز باشد تا تغییری در Dockerfile سرویس ایجاد کنید، با استفاده از دستورهای post_start_command و pre_stop_command دستورات مورد نیاز خود را اجرا کنید.'
                         },
                     },
                 ]
@@ -818,6 +835,56 @@
                         this.deleteFromManifest('spec.command_args')
                     } else {
                         this.addToManifest(value, 'spec.command_args')
+                    }
+
+                }, deep: true
+
+            },
+            'manifest_model.post_start_commands': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.pre_stop_commands.length > 0 || this.manifest_model.post_start_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.post_start_commands')
+                    } else {
+                        this.addToManifest(value, 'spec.post_start_commands')
+                    }
+
+                }, deep: true
+
+            },
+            'manifest_model.pre_stop_commands': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.pre_stop_commands.length > 0 || this.manifest_model.post_start_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.pre_stop_commands')
+                    } else {
+                        this.addToManifest(value, 'spec.pre_stop_commands')
                     }
 
                 }, deep: true
@@ -1195,13 +1262,19 @@
                         this.manifest_model.health_check.readiness_object = spec.readiness_probe
                     }
 
-
                     if (spec.hasOwnProperty('command')){
                         this.manifest_model.service_commands = [...spec.command]
                     }
 
                     if (spec.hasOwnProperty('command_args')){
                         this.manifest_model.service_command_args = [...spec.command_args]
+                    }
+                    if (spec.hasOwnProperty('post_start_command')){
+                        this.manifest_model.post_start_commands = [...spec.post_start_command]
+                    }
+
+                    if (spec.hasOwnProperty('pre_stop_command')){
+                        this.manifest_model.pre_stop_commands = [...spec.pre_stop_command]
                     }
 
                 } else {
