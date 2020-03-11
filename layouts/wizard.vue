@@ -150,6 +150,7 @@
     import VolumeSetup from "../pages/dashboard/services/wizard/volume-setup";
     import PortMappingSetup from "../pages/dashboard/services/wizard/port-mapping-setup";
     import HealthCheckSetup from "../pages/dashboard/services/wizard/health-check-setup";
+    import CommandArgsSetup from "../pages/dashboard/services/wizard/command-args-setup";
     import Banner from "../components/wizard/banner/banner";
     import 'vuetify/dist/vuetify.min.css';
     import ErrorReporter from "../utils/ErrorReporter";
@@ -172,6 +173,7 @@
             VolumeSetup,
             PortMappingSetup,
             HealthCheckSetup,
+            CommandArgsSetup,
             Banner,
             Popover
         },
@@ -373,6 +375,8 @@
                         ],
                         volume_list: []
                     },
+                    service_commands: [],
+                    service_command_args: [],
                     health_check: {
                         liveness_object: {
                             initial_delay_seconds: null,
@@ -489,13 +493,13 @@
                     },
                     {
                         step: 6,
-                        text: 'Commands/Args',
+                        text: 'Command/Command Args',
                         component: '/dashboard/general',
                         active: false,
                         step_name: 'CommandArgsSetup',
                         edited: false,
                         page: {
-                            title: 'Commands/Args',
+                            title: 'Command & Command Args',
                             description: 'گاهی نیاز است تا دستورات پیش‌فرض یا argumentهای داکرفایل یک سرویس را تغییر دهید و یا حتی جایگزین کنید. با استفاده از commands و command_args شما می‌توانید این عمل را انجام دهید.'
                         },
                     },
@@ -769,6 +773,56 @@
                         }
                     }, deep: true
                 },
+            'manifest_model.service_commands': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.service_command_args.length > 0 || this.manifest_model.service_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.command')
+                    } else {
+                        this.addToManifest(value, 'spec.command')
+                    }
+
+                }, deep: true
+
+            },
+            'manifest_model.service_command_args': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.service_command_args.length > 0 || this.manifest_model.service_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.command_args')
+                    } else {
+                        this.addToManifest(value, 'spec.command_args')
+                    }
+
+                }, deep: true
+
+            },
             'manifest_model.image.image_object':
                 {
                     handler: function (value, oldValue) {
@@ -1141,6 +1195,15 @@
                         this.manifest_model.health_check.readiness_object = spec.readiness_probe
                     }
 
+
+                    if (spec.hasOwnProperty('command')){
+                        this.manifest_model.service_commands = [...spec.command]
+                    }
+
+                    if (spec.hasOwnProperty('command_args')){
+                        this.manifest_model.service_command_args = [...spec.command_args]
+                    }
+
                 } else {
 
                     this.manifest_model.service.kinds.forEach(item => {
@@ -1220,7 +1283,7 @@
                         }
                     });
 
-                    if (invalid){
+                    if (invalid) {
                         this.$notify({
                             title: 'شما باید مقادیر ‌envهایی که hidden شده‌اند را دوباره وارد نمایید در غیر این صورت مقادیر با **** جایگزین شده و باعث تداخل در روند سرویس شما می‌شود.',
                             time: 8000,
