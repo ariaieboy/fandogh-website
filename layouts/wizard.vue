@@ -1485,7 +1485,7 @@
             ,
             forward() {
 
-                if (this.stepPage.step < 5) {
+                if (this.stepPage.step < (this.items.length - 1)) {
 
                     this.items.forEach(item => {
                         item.active = item.text === this.items[this.stepPage.step + 1].text;
