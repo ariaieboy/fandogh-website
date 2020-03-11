@@ -384,6 +384,76 @@
 
 
             <div style="margin-top: 12px">
+                <pre class="cli-key-label" v-tooltip="keys.spec.command.tooltip">    {{keys.spec.command.label}}</pre>
+            </div>
+            <div v-if="manifest_model.service_commands.length> 0"
+                 style="flex-direction: column-reverse; display: flex"
+                 v-for="(command, index) in manifest_model.service_commands">
+                <div class="spec-container">
+                    <div style="flex-direction: column; display: flex;">
+                        <div>
+                            <pre class="cli-key-label" v-tooltip="keys.spec.command.tooltip">    -</pre>
+                            <input class="cli-input"
+                                   type="text"
+                                   v-autowidth="auto_width_config"
+                                   v-model="manifest_model.service_commands[index]">
+                        </div>
+                    </div>
+                    <span @click="removeServiceCommand(index)">حذف</span>
+                </div>
+            </div>
+            <div style="flex-direction: column-reverse; display: flex;">
+                <div style="flex-direction: column; display: flex;">
+                    <div>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.command.tooltip">    -</pre>
+                        <input class="cli-input"
+                               type="text"
+                               @keyup.enter.prevent="addServiceCommand"
+                               placeholder="enter command part"
+                               v-autowidth="auto_width_config"
+                               v-model="command">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style="margin-top: 12px">
+                <pre class="cli-key-label" v-tooltip="keys.spec.command_args.tooltip">    {{keys.spec.command_args.label}}</pre>
+            </div>
+            <div v-if="manifest_model.service_command_args.length> 0"
+                 style="flex-direction: column-reverse; display: flex"
+                 v-for="(command_arg, index) in manifest_model.service_command_args">
+                <div class="spec-container">
+                    <div style="flex-direction: column; display: flex;">
+                        <div>
+                            <pre class="cli-key-label" v-tooltip="keys.spec.command_args.tooltip">    -</pre>
+                            <input class="cli-input"
+                                   type="text"
+                                   v-autowidth="auto_width_config"
+                                   v-model="manifest_model.service_command_args[index]">
+                        </div>
+                    </div>
+                    <span @click="removeServiceCommandArg(index)">حذف</span>
+                </div>
+            </div>
+            <div style="flex-direction: column-reverse; display: flex;">
+                <div style="flex-direction: column; display: flex;">
+                    <div>
+                        <pre class="cli-input-key-label" v-tooltip="keys.spec.command_args.tooltip">    -</pre>
+                        <input class="cli-input"
+                               type="text"
+                               @keyup.enter="addServiceCommandArg"
+                               placeholder="enter command arg"
+                               v-autowidth="auto_width_config"
+                               v-model="command_args">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style="margin-top: 12px">
                 <pre class="cli-key-label" v-tooltip="keys.spec.liveness_probe.tooltip">    {{keys.spec.liveness_probe.label}}</pre>
             </div>
             <div style="flex-direction: column; display: flex;">
@@ -506,6 +576,8 @@
                        @input="validateMemory"
                        v-model.number="manifest_model.service.memory.amount">
             </div>
+
+
         </div>
     </div>
 </template>
@@ -521,6 +593,8 @@
         },
         data() {
             return {
+                command: '',
+                command_args: '',
                 rules: {
                     name_required: value => !!value.trim() || 'نام متغیر نمی‌تواند خالی باشد',
                     value_required: value => !!value.trim() || !this.secret_obj.selected || 'مقدار متغیر نمی‌تواند خالی باشد',
@@ -654,6 +728,18 @@
                                 value_invalid: false,
                                 validation_error: ''
                             },
+                        },
+                        command: {
+                            label: 'command:',
+                            tooltip: 'دستورات سرویس',
+                            value_invalid: false,
+                            validation_error: '',
+                        },
+                        command_args: {
+                            label: 'command_args:',
+                            tooltip: 'argumentهای دستور command',
+                            value_invalid: false,
+                            validation_error: '',
                         },
                         port_mapping: {
                             label: 'port_mapping:',
@@ -887,6 +973,24 @@
             },
             removePortMap(index) {
                 this.manifest_model.port_mapping.port_map_list.splice(index, 1)
+            },
+            removeServiceCommand(index){
+              this.manifest_model.service_commands.splice(index, 1);
+            },
+            addServiceCommand(input){
+              if (this.command.trim() !== ''){
+                  this.manifest_model.service_commands.push(this.command);
+                  this.command = '';
+              }
+            },
+            removeServiceCommandArg(index){
+              this.manifest_model.service_command_args.splice(index, 1);
+            },
+            addServiceCommandArg(input){
+              if (this.command_args.trim() !== ''){
+                  this.manifest_model.service_command_args.push(this.command_args);
+                  this.command_args = '';
+              }
             },
             checkServiceKind(input) {
                 this.validateServiceKind(input);

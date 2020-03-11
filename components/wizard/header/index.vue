@@ -15,7 +15,7 @@
                 CLI
             </div>
         </div>
-        <div @click="$router.replace('/dashboard/services')"
+        <div @click='$router.replace({path: "/dashboard/services", query: {ns: $route.query.ns}})'
              style="cursor: pointer; width: 100%; height: 100%; max-width: 24px; display: flex; background: #fd3259; padding: 0 16px;"
              v-tooltip="'انصراف از ساخت'">
             <img src="./icons/turn-off.svg" width="24" height="24"
