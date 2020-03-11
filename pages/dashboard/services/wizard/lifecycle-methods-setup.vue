@@ -99,7 +99,7 @@
                     post_start_command_label: 'Post Start Command',
                     post_start_command_hint: 'دستور مورد نظر خود را به صورت آرایه‌ای و بخش بخش وارد کرده و در انتها هر بخش enter را فشار دهید',
                     pre_stop_command_label: 'Pre Stop Command',
-                    pre_stop_command_hint: 'Argumentهای مورد نظر خود را به صورت تک تک وارد کرده و در انتهای هر کدام کلید enter را فشار دهید.'
+                    pre_stop_command_hint: 'دستور مورد نظر خود را به صورت آرایه‌ای و بخش بخش وارد کرده و در انتها هر بخش enter را فشار دهید'
                 },
                 tooltips: {
                     post_start_command: {
