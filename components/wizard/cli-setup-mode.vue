@@ -458,7 +458,7 @@
             </div>
             <div v-if="manifest_model.post_start_commands.length> 0"
                  style="flex-direction: column-reverse; display: flex"
-                 v-for="(command, index) in manifest_model.service_commands">
+                 v-for="(command, index) in manifest_model.post_start_commands">
                 <div class="spec-container">
                     <div style="flex-direction: column; display: flex;">
                         <div>
@@ -479,7 +479,7 @@
                         <input class="cli-input"
                                type="text"
                                @keyup.enter.prevent="addPostStartCommand"
-                               placeholder="enter start command part"
+                               placeholder="enter post start command part"
                                v-autowidth="auto_width_config"
                                v-model="post_start_command">
                     </div>
@@ -514,7 +514,7 @@
                         <input class="cli-input"
                                type="text"
                                @keyup.enter="addPreStopCommand"
-                               placeholder="enter command arg"
+                               placeholder="enter pre stop command part"
                                v-autowidth="auto_width_config"
                                v-model="pre_stop_command">
                     </div>
@@ -814,13 +814,13 @@
                             validation_error: '',
                         },
                         post_start_commands: {
-                            label: 'post_start_commands:',
+                            label: 'post_start_command:',
                             tooltip: 'دستور یا دستوراتی که هنگام شروع سرویس اجرا می‌شوند',
                             value_invalid: false,
                             validation_error: '',
                         },
                         pre_stop_commands: {
-                            label: 'pre_stop_commands:',
+                            label: 'pre_stop_command:',
                             tooltip: 'دستور یا دستوراتی که قبل از توقف سرویس اجرا می‌شوند',
                             value_invalid: false,
                             validation_error: '',
