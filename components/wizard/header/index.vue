@@ -11,8 +11,9 @@
             <div :class="[wizard_mode.gui ? 'active-mode' : 'inactive-mode']" @click="toggleWizardMode('GUI')">
                 GUI
             </div>
-            <div :class="[wizard_mode.cli ? 'active-mode' : 'inactive-mode']" @click="toggleWizardMode('CLI')">
-                CLI
+            <div :class="[wizard_mode.manifest ? 'active-mode' : 'inactive-mode']"
+                 @click="toggleWizardMode('Manifest')">
+                Manifest
             </div>
         </div>
         <div @click='$router.replace({path: "/dashboard/services", query: {ns: $route.query.ns}})'
@@ -81,13 +82,8 @@
                 this.$store.commit("SET_DATA", {data: !this.open, id: "sideMunu"});
             },
             toggleWizardMode(mode) {
-                if (mode === 'GUI') {
-                    this.wizard_mode.gui = true;
-                    this.wizard_mode.cli = false;
-                } else {
-                    this.wizard_mode.gui = false;
-                    this.wizard_mode.cli = true;
-                }
+                this.wizard_mode.gui = mode === 'GUI';
+                this.wizard_mode.manifest = mode === 'Manifest';
             }
         }
     }
