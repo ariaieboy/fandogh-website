@@ -182,7 +182,7 @@
             return {
 
                 wizard_mode: {
-                    cli: false,
+                    manifest: false,
                     gui: true
                 },
                 loading: false,
