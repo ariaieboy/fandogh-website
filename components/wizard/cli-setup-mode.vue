@@ -161,19 +161,26 @@
                             <input class="cli-input"
                                    type="text"
                                    v-autowidth="auto_width_config"
+                                   :disabled="env.hidden"
                                    v-model="env.name">
                         </div>
                         <div v-if="!env.secret">
                             <pre class="cli-key-label" v-tooltip="keys.spec.env.value.tooltip">      {{keys.spec.env.value.label}}</pre>
-                            <input class="cli-input"
+                            <input v-if="!env.hidden" class="cli-input"
                                    type="text"
                                    v-autowidth="auto_width_config"
                                    v-model="env.value">
+                            <input v-else class="cli-input"
+                                   type="text"
+                                   :disabled="env.hidden"
+                                   placeholder="**********"
+                                   v-autowidth="auto_width_config"/>
                         </div>
                         <div v-if="!env.secret">
                             <pre class="cli-key-label" v-tooltip="keys.spec.env.hidden.tooltip">      {{keys.spec.env.hidden.label}}</pre>
                             <input class="cli-input"
                                    type="checkbox"
+                                   :disabled="env.hidden"
                                    v-autowidth="auto_width_config"
                                    v-model="env.hidden">
                         </div>
@@ -181,6 +188,7 @@
                             <pre class="cli-key-label" v-tooltip="keys.spec.env.secret.tooltip">      {{keys.spec.env.secret.label}}</pre>
                             <input class="cli-input"
                                    type="text"
+                                   :disabled="env.hidden"
                                    v-autowidth="auto_width_config"
                                    v-model="env.secret">
                         </div>

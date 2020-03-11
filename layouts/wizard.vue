@@ -1200,8 +1200,25 @@
                     }
                 }
 
+                if (this.manifest_model.environment_variable.env_list.length > 0) {
+                    var invalid = false;
+                    this.manifest_model.environment_variable.env_list.forEach(env => {
+                        if (env.value === '****' && env.hidden) {
+                            invalid = true;
+                        }
+                    });
 
-                return true
+                    if (invalid){
+                        this.$notify({
+                            title: 'شما باید مقادیر ‌envهایی که hidden شده‌اند را دوباره وارد نمایید در غیر این صورت مقادیر با **** جایگزین شده و باعث تداخل در روند سرویس شما می‌شود.',
+                            time: 8000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+                return true;
             }
             ,
             deploy() {
