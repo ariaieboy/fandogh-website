@@ -1356,8 +1356,8 @@
                     return false
                 }
 
-                if (this.manifest_model.service.kind.name === 'ExternalService') {
-                    if (this.manifest_model.service.port.number === null) {
+                if (this.manifest_model.service.kind.prod_name === 'ExternalService') {
+                    if (!this.manifest_model.service.port.number) {
                         this.$notify({
                             title: 'لطفا پورت را مشخص نمایید',
                             time: 4000,
