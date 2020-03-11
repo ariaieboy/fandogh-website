@@ -70,6 +70,7 @@
 
         </div>
     </div>
+
 </template>
 
 <script>
@@ -176,14 +177,6 @@
 </script>
 
 <style lang="stylus" scoped>
-
-
-        &.is-active
-            color #fefefe
-            box-shadow 0 0 3px 0 rgba(0, 69, 255, 0.2), 0 0 9px 0 rgba(0, 69, 255, 0.5)
-            background-color #0045ff
-            font-weight bolder
-            transition all .3s ease-in-out
 
 
     .add-button

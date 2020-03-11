@@ -392,7 +392,7 @@
                 <div class="spec-container">
                     <div style="flex-direction: column; display: flex;">
                         <div>
-                            <pre class="cli-key-label" v-tooltip="keys.spec.command.tooltip">    -</pre>
+                            <pre class="cli-key-label">    -</pre>
                             <input class="cli-input"
                                    type="text"
                                    v-autowidth="auto_width_config"
@@ -405,7 +405,7 @@
             <div style="flex-direction: column-reverse; display: flex;">
                 <div style="flex-direction: column; display: flex;">
                     <div>
-                        <pre class="cli-input-key-label" v-tooltip="keys.spec.command.tooltip">    -</pre>
+                        <pre class="cli-input-key-label">    -</pre>
                         <input class="cli-input"
                                type="text"
                                @keyup.enter.prevent="addServiceCommand"
@@ -427,7 +427,7 @@
                 <div class="spec-container">
                     <div style="flex-direction: column; display: flex;">
                         <div>
-                            <pre class="cli-key-label" v-tooltip="keys.spec.command_args.tooltip">    -</pre>
+                            <pre class="cli-key-label">    -</pre>
                             <input class="cli-input"
                                    type="text"
                                    v-autowidth="auto_width_config"
@@ -440,13 +440,83 @@
             <div style="flex-direction: column-reverse; display: flex;">
                 <div style="flex-direction: column; display: flex;">
                     <div>
-                        <pre class="cli-input-key-label" v-tooltip="keys.spec.command_args.tooltip">    -</pre>
+                        <pre class="cli-input-key-label">    -</pre>
                         <input class="cli-input"
                                type="text"
                                @keyup.enter="addServiceCommandArg"
                                placeholder="enter command arg"
                                v-autowidth="auto_width_config"
                                v-model="command_args">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style="margin-top: 12px">
+                <pre class="cli-key-label" v-tooltip="keys.spec.post_start_commands.tooltip">    {{keys.spec.post_start_commands.label}}</pre>
+            </div>
+            <div v-if="manifest_model.post_start_commands.length> 0"
+                 style="flex-direction: column-reverse; display: flex"
+                 v-for="(command, index) in manifest_model.post_start_commands">
+                <div class="spec-container">
+                    <div style="flex-direction: column; display: flex;">
+                        <div>
+                            <pre class="cli-key-label">    -</pre>
+                            <input class="cli-input"
+                                   type="text"
+                                   v-autowidth="auto_width_config"
+                                   v-model="manifest_model.post_start_commands[index]">
+                        </div>
+                    </div>
+                    <span @click="removePostStartCommand(index)">حذف</span>
+                </div>
+            </div>
+            <div style="flex-direction: column-reverse; display: flex;">
+                <div style="flex-direction: column; display: flex;">
+                    <div>
+                        <pre class="cli-input-key-label">    -</pre>
+                        <input class="cli-input"
+                               type="text"
+                               @keyup.enter.prevent="addPostStartCommand"
+                               placeholder="enter post start command part"
+                               v-autowidth="auto_width_config"
+                               v-model="post_start_command">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style="margin-top: 12px">
+                <pre class="cli-key-label" v-tooltip="keys.spec.pre_stop_commands.tooltip">    {{keys.spec.pre_stop_commands.label}}</pre>
+            </div>
+            <div v-if="manifest_model.pre_stop_commands.length> 0"
+                 style="flex-direction: column-reverse; display: flex"
+                 v-for="(command, index) in manifest_model.pre_stop_commands">
+                <div class="spec-container">
+                    <div style="flex-direction: column; display: flex;">
+                        <div>
+                            <pre class="cli-key-label">    -</pre>
+                            <input class="cli-input"
+                                   type="text"
+                                   v-autowidth="auto_width_config"
+                                   v-model="manifest_model.pre_stop_commands[index]">
+                        </div>
+                    </div>
+                    <span @click="removePreStopCommand(index)">حذف</span>
+                </div>
+            </div>
+            <div style="flex-direction: column-reverse; display: flex;">
+                <div style="flex-direction: column; display: flex;">
+                    <div>
+                        <pre class="cli-input-key-label">    -</pre>
+                        <input class="cli-input"
+                               type="text"
+                               @keyup.enter="addPreStopCommand"
+                               placeholder="enter pre stop command part"
+                               v-autowidth="auto_width_config"
+                               v-model="pre_stop_command">
                     </div>
                 </div>
 
@@ -595,6 +665,8 @@
             return {
                 command: '',
                 command_args: '',
+                post_start_command: '',
+                pre_stop_command: '',
                 rules: {
                     name_required: value => !!value.trim() || 'نام متغیر نمی‌تواند خالی باشد',
                     value_required: value => !!value.trim() || !this.secret_obj.selected || 'مقدار متغیر نمی‌تواند خالی باشد',
@@ -738,6 +810,18 @@
                         command_args: {
                             label: 'command_args:',
                             tooltip: 'argumentهای دستور command',
+                            value_invalid: false,
+                            validation_error: '',
+                        },
+                        post_start_commands: {
+                            label: 'post_start_command:',
+                            tooltip: 'دستور یا دستوراتی که هنگام شروع سرویس اجرا می‌شوند',
+                            value_invalid: false,
+                            validation_error: '',
+                        },
+                        pre_stop_commands: {
+                            label: 'pre_stop_command:',
+                            tooltip: 'دستور یا دستوراتی که قبل از توقف سرویس اجرا می‌شوند',
                             value_invalid: false,
                             validation_error: '',
                         },
@@ -984,12 +1068,30 @@
               }
             },
             removeServiceCommandArg(index){
-              this.manifest_model.service_command_args.splice(index, 1);
+                this.manifest_model.service_command_args.splice(index, 1);
             },
             addServiceCommandArg(input){
-              if (this.command_args.trim() !== ''){
-                  this.manifest_model.service_command_args.push(this.command_args);
-                  this.command_args = '';
+                if (this.command_args.trim() !== ''){
+                    this.manifest_model.service_command_args.push(this.command_args);
+                    this.command_args = '';
+                }
+            },
+            removePostStartCommand(index){
+              this.manifest_model.post_start_commands.splice(index, 1);
+            },
+            addPostStartCommand(input){
+              if (this.post_start_command.trim() !== ''){
+                  this.manifest_model.post_start_commands.push(this.post_start_command);
+                  this.post_start_command = '';
+              }
+            },
+            removePreStopCommand(index){
+              this.manifest_model.pre_stop_commands.splice(index, 1);
+            },
+            addPreStopCommand(input){
+              if (this.pre_stop_command.trim() !== ''){
+                  this.manifest_model.pre_stop_commands.push(this.pre_stop_command);
+                  this.pre_stop_command = '';
               }
             },
             checkServiceKind(input) {
