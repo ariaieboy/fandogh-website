@@ -857,9 +857,9 @@
                     }
 
                     if (value.length === 0) {
-                        this.deleteFromManifest('spec.post_start_commands')
+                        this.deleteFromManifest('spec.post_start_command')
                     } else {
-                        this.addToManifest(value, 'spec.post_start_commands')
+                        this.addToManifest(value, 'spec.post_start_command')
                     }
 
                 }, deep: true
@@ -882,9 +882,9 @@
                     }
 
                     if (value.length === 0) {
-                        this.deleteFromManifest('spec.pre_stop_commands')
+                        this.deleteFromManifest('spec.pre_stop_command')
                     } else {
-                        this.addToManifest(value, 'spec.pre_stop_commands')
+                        this.addToManifest(value, 'spec.pre_stop_command')
                     }
 
                 }, deep: true
