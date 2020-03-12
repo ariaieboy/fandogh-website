@@ -1,7 +1,6 @@
 <template>
     <div v-if="domain">
         <h2 class="title_header">جزئیات دامنه</h2>
-
         <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.17); padding: 16px">
             <div class="row">
 
@@ -56,13 +55,12 @@
 
         </div>
 
-
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <h2 class="title_header" style="margin-top: 32px">تأیید دامنه</h2>
                 <div class="row" v-if="domain.verified">
                     <div class="col-xs-12">
-                        <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); margin-bottom: 12px; padding: 16px">
+                        <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.07); margin-bottom: 8px; padding: 15px 16px">
                             <span>وضعیت دامنه: <span v-html="textVeify"></span></span>
                         </div>
                         <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17);">
@@ -105,7 +103,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <h2 class="title_header" style="margin-top: 32px">گواهینامه SSL</h2>
                 <div class="row" v-if="!domain.verified">
@@ -185,7 +182,7 @@
                                 destroy و سپس دوباره از نو deploy کنید تا تنظیمات جدید بر روی آن قرار گیرد.</p>
 
                         </div>
-                        <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" style="margin-top: 12px">
+                        <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" style="margin-top: 8px">
                             <button
                                     style="color: #fefefe; font-family: iran-yekan; outline: none; width: 100%; background-color: #fd3259; box-shadow: 0 2px 6px rgba(253, 50, 89, 0.4); border-radius: 3px; padding: 12px 0"
                                     @click="removeCertificateDomain">لغو گواهینامه SSL
@@ -194,17 +191,19 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <h2 class="title_header" style="margin-top: 32px">بررسی رکورد‌های دامنه</h2>
                 <div class="row">
                     <div class="col-xs-12">
+                        <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); margin-bottom: 16px">
+                            <p style="margin-bottom: 0; font-size: 1em; padding: 16px" v-html="dns_record_check_description"></p>
+                        </div>
                         <button @click="checkDomainCNAMERecord"
                                 style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0;">
                             بررسی رکورد‌های CNAME
                         </button>
                         <button @click="checkDomainCNAMERecord"
-                                style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 12px">
+                                style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 8px">
                             بررسی رکورد‌های TXT
                         </button>
                     </div>
@@ -251,6 +250,7 @@
                 description:
                     "لطفا روی دامنه مورد نظر یک رکورد با مقدار TXT زیر ایجاد کنید و روی کلید بررسی دامنه کلیک کنید ",
                 cname_description: 'توجه داشته باشید برای اینکه فندق بتواند ترافیک ورودی را، به سمت دامنه‌ی جدید منتقل کند باید یک رکورد CNAME با مقدار زیر را بر روی دامنه خود ثبت کنید.',
+                dns_record_check_description: 'شما می‌توانید با استفاده از این بخش، بررسی کنید که آیا مقادیر رکوردهای <b>CNAME</b> و <b>TXT</b> برای دامنه شما ایجاد شده است یا خیر. در نظر داشته که در رکوردهای دامنه شما باید <b>مقدار TXT Record که فندق به شما داده است</b> وجود داشته باشد و برای <b>CNAME Record</b> هم باید مقدار <b>lb.fandogh.cloud</b> ایجاد شده باشد.',
                 domain_obj: {
                     name: {
                         label: 'نام دامنه',
