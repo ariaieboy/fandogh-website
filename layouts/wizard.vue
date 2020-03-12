@@ -202,7 +202,10 @@
                     valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد',
                     min_value: value => value >= 1 || 'کمترین زمان ۱ ثانیه است',
                     is_root_addressed: value => value.toString().startsWith('/') || 'آدرس وارد شده، باید از root (/) شروع شود',
-                    has_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست'
+                    has_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
+                    env_redundant: value => (this.allowed_name === null ? this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0 : this.allowed_name === value || this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0) || 'مقدار تکراری است',
+                    volume_redundant: value => (this.allowed_name === null ? this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0 : this.allowed_name === value || this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0) || 'مقدار تکراری است',
+                    port_map_redundant: value => (this.allowed_name === null ? this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0 : this.allowed_name === value || this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0) || 'مقدار تکراری است'
                 },
                 manifest_model: {
                     service: {
@@ -1312,18 +1315,18 @@
                         this.manifest_model.health_check.readiness_object = spec.readiness_probe
                     }
 
-                    if (spec.hasOwnProperty('command')){
+                    if (spec.hasOwnProperty('command')) {
                         this.manifest_model.service_commands = [...spec.command]
                     }
 
-                    if (spec.hasOwnProperty('command_args')){
+                    if (spec.hasOwnProperty('command_args')) {
                         this.manifest_model.service_command_args = [...spec.command_args]
                     }
-                    if (spec.hasOwnProperty('post_start_command')){
+                    if (spec.hasOwnProperty('post_start_command')) {
                         this.manifest_model.post_start_commands = [...spec.post_start_command]
                     }
 
-                    if (spec.hasOwnProperty('pre_stop_command')){
+                    if (spec.hasOwnProperty('pre_stop_command')) {
                         this.manifest_model.pre_stop_commands = [...spec.pre_stop_command]
                     }
 
@@ -1410,6 +1413,62 @@
                         this.$notify({
                             title: 'شما باید مقادیر ‌envهایی که hidden شده‌اند را دوباره وارد نمایید در غیر این صورت مقادیر با **** جایگزین شده و باعث تداخل در روند سرویس شما می‌شود.',
                             time: 8000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+
+                var value_redundant = false;
+
+
+                if (this.manifest_model.environment_variable.env_list.length !== 0) {
+                    this.manifest_model.environment_variable.env_list.forEach(env_obj => {
+                        if (this.manifest_model.environment_variable.env_list.filter(e => e.name === env_obj.name).length > 1) {
+                            value_redundant = true;
+                        }
+                    });
+
+                    if (value_redundant) {
+                        this.$notify({
+                            title: 'مقادیر environment تکراری است',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+                if (this.manifest_model.port_mapping.port_map_list.length !== 0) {
+                    this.manifest_model.port_mapping.port_map_list.forEach(port_map_obj => {
+                        if (this.manifest_model.port_mapping.port_map_list.filter(e => e.port === port_map_obj.port).length > 1) {
+                            value_redundant = true;
+                        }
+                    });
+
+                    if (value_redundant) {
+                        this.$notify({
+                            title: 'مقادیر port_mapping تکراری است',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+
+                if (this.manifest_model.volumes.volume_list.length !== 0) {
+                    this.manifest_model.volumes.volume_list.forEach(volume_obj => {
+                        if (this.manifest_model.volumes.volume_list.filter(e => e.mount_path === volume_obj.mount_path).length > 1) {
+                            value_redundant = true;
+                        }
+                    });
+
+                    if (value_redundant) {
+                        this.$notify({
+                            title: 'مقادیر volumes تکراری است',
+                            time: 4000,
                             type: 'error'
                         });
                         return false;
