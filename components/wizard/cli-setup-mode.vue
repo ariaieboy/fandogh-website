@@ -1266,7 +1266,7 @@
                     return false;
                 }
 
-                if (this.manifest_model.environment_variable.secret && this.rules.secret_regex(this.manifest_model.environment_variable.secret)) {
+                if (this.manifest_model.environment_variable.secret && this.rules.secret_regex(this.manifest_model.environment_variable.secret) !== true) {
                     this.keys.spec.env.value_invalid = true;
                     this.keys.spec.env.validation_error = 'نام secret وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)';
                     return false;
@@ -1462,6 +1462,23 @@
 
                 this.keys.spec.readiness_probe.value_invalid = false;
 
+            },
+            checkBoxSelected(index) {
+                this.manifest_model.image.image_pull_policy_obj.forEach(item => {
+                    item.selected = false
+                });
+                this.manifest_model.image.image_pull_policy_obj[index].selected = true;
+                this.manifest_model.image.image_pull_policy = this.manifest_model.image.image_pull_policy_obj[index]
+            },
+        }, watch: {
+            'manifest_model.image.image_pull_policy': {
+                handler: function (value, oldValue) {
+                    if (value.value === 'IfNotPresent') {
+                        this.checkBoxSelected(0)
+                    } else {
+                        this.checkBoxSelected(1)
+                    }
+                }, deep: true
             }
         }
     }
