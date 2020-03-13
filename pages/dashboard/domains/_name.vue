@@ -200,11 +200,11 @@
                         </div>
                         <button @click="checkDomainCNAMERecord"
                                 style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0;">
-                            بررسی رکورد‌های CNAME
+                            بررسی رکورد‌های CNAME دامنه
                         </button>
                         <button @click="checkDomainCNAMERecord"
                                 style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 8px">
-                            بررسی رکورد‌های TXT
+                            بررسی رکورد‌های TXT دامنه
                         </button>
                     </div>
                 </div>
