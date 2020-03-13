@@ -367,7 +367,7 @@
                         <input class="cli-input"
                                type="number"
                                @keyup.enter="addPortMap"
-                               placeholder="enter target port to map port to"
+                               placeholder="enter desired port to map target_port to"
                                v-autowidth="auto_width_config"
                                v-model.number="manifest_model.port_mapping.port_map.port">
                     </div>
@@ -375,7 +375,7 @@
                         <pre class="cli-input-key-label" v-tooltip="keys.spec.port_mapping.target_port.tooltip">      {{keys.spec.port_mapping.target_port.label}}</pre>
                         <input class="cli-input"
                                type="number"
-                               placeholder="enter desired port"
+                               placeholder="enter target port"
                                @keyup.enter="addPortMap"
                                v-autowidth="auto_width_config"
                                v-model.number="manifest_model.port_mapping.port_map.target_port">
