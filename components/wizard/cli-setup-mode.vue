@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div v-if="manifest_model.service.kind.prod_name === 'ExternalService'">
-                <pre class="cli-key-label"
+                <pre class="cli-input-key-label"
                      v-tooltip="keys.spec.domains.tooltip">    - name:</pre>
 
                 <input class="cli-input"
