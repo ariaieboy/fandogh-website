@@ -930,27 +930,28 @@
 
                         } else if (image_name !== '') {
 
-                            this.manifest_model.image.registries.forEach(item => {
-                                item.is_active = false
-                            });
-
-                            if (image_name.split('/').length > 2) {
-                                this.manifest_model.image.registries[2].is_active = true;
-                                this.manifest_model.image.registry = this.manifest_model.image.registries[2]
-                            } else if (image_name.split('/').length === 2) {
-                                this.manifest_model.image.registries[1].is_active = true;
-                                this.manifest_model.image.registry = this.manifest_model.image.registries[1]
-                            } else {
-                                this.manifest_model.image.registries[0].is_active = true;
-                                this.manifest_model.image.registry = this.manifest_model.image.registries[0]
-                            }
-
                             let final_image = image_name.concat(':').concat(image_version);
                             if (image_version !== '') {
+
+                                this.manifest_model.image.registries.forEach(item => {
+                                    item.is_active = false
+                                });
+
+                                if (image_name.split('/').length > 2) {
+                                    this.manifest_model.image.registries[2].is_active = true;
+                                    this.manifest_model.image.registry = this.manifest_model.image.registries[2]
+                                } else if (image_name.split('/').length === 2) {
+                                    this.manifest_model.image.registries[1].is_active = true;
+                                    this.manifest_model.image.registry = this.manifest_model.image.registries[1]
+                                } else {
+                                    this.manifest_model.image.registries[0].is_active = true;
+                                    this.manifest_model.image.registry = this.manifest_model.image.registries[0]
+                                }
+
                                 this.addToManifest(final_image, 'spec.image')
                             }
-
                         }
+
                     }, deep: true
                 },
             'manifest_model.image.image_pull_policy_obj': {
