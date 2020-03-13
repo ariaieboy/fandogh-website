@@ -191,24 +191,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <h2 class="title_header" style="margin-top: 32px">بررسی رکورد‌های دامنه</h2>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); margin-bottom: 16px">
-                            <p style="margin-bottom: 0; font-size: 1em; padding: 16px" v-html="dns_record_check_description"></p>
-                        </div>
-                        <button @click="checkDomainCNAMERecord"
-                                style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0;">
-                            بررسی رکورد‌های CNAME دامنه
-                        </button>
-                        <button @click="checkDomainCNAMERecord"
-                                style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 8px">
-                            بررسی رکورد‌های TXT دامنه
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
+                <!--<h2 class="title_header" style="margin-top: 32px">بررسی رکورد‌های دامنه</h2>-->
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-12">-->
+                        <!--<div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); margin-bottom: 16px">-->
+                            <!--<p style="margin-bottom: 0; font-size: 1em; padding: 16px" v-html="dns_record_check_description"></p>-->
+                        <!--</div>-->
+                        <!--<button @click="checkDomainCNAMERecord"-->
+                                <!--style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0;">-->
+                            <!--بررسی رکورد‌های CNAME دامنه-->
+                        <!--</button>-->
+                        <!--<button @click="checkDomainCNAMERecord"-->
+                                <!--style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 8px">-->
+                            <!--بررسی رکورد‌های TXT دامنه-->
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
         </div>
     </div>
 </template>
