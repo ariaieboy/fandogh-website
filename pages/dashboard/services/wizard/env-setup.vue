@@ -368,17 +368,6 @@ border-radius: 3px; border: 1px solid #0045ff; color: #3C3C3C">
 
             }
         },
-        watch: {
-            'manifest_model.environment_variable.env_list': {
-                handler: function (value, oldValue) {
-                    if (value.length === 0)
-                        this.deleteFromManifest('spec.env');
-                    else
-                        this.addToManifest(value, 'spec.env')
-
-                }, deep: true
-            }
-        },
         computed: {
             secretList() {
                 if (!this.$store.state.secrets) return [];

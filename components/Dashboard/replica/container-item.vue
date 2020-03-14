@@ -1,15 +1,15 @@
 <template>
   <div class="replica-containers-items">
     <div class="replica-containers-item">
-      <strong>نام :</strong>
+      <strong>نام کانتینر:</strong>
       <span>{{name}}</span>
     </div>
     <div class="replica-containers-item">
-      <strong>ایمیج :</strong>
+      <strong>ایمیج:</strong>
       <span>{{image}}</span>
     </div>
     <div class="replica-containers-item">
-      <strong>وضعیت :</strong>
+      <strong>وضعیت:</strong>
       <span>{{state | state}}</span>
     </div>
   </div>
@@ -53,10 +53,13 @@ export default {
 
 <style lang="stylus" scoped>
 .replica-containers-items
-  display flex
+  column-count 2
   flex-direction column
   font-family yekan
   overflow-x hidden
+  @media only screen and (max-width 992px)
+    display flex
+    column-count 1
   .replica-containers-item
     strong
       margin-left 5px

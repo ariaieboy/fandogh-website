@@ -7,7 +7,7 @@
                     <f-collaps :selected="service.pods.length < 2">
                         <div slot="collapse-header">
                             <f-replica-header
-                                    :name="item.name"
+                                    :name="service.name"
                                     :state="item.phase"
                                     :count="item.containers.length"
                                     color="success-text"
@@ -16,7 +16,7 @@
                         <div slot="collapse-body">
                             <f-replica-details
                                     :date="item.created_at"
-                                    :name="item.name"
+                                    :name="service.name"
                                     :state="item.phase"
                                     :count="item.containers.length"
                                     color="success-text"
