@@ -111,9 +111,9 @@
                         {
                             return {
                                 name,
-                                created_at: Moment(age).format('jYYYY/jMM/jDD'),
+                                created_at: age ? Moment(age).format('jYYYY/jMM/jDD') : 'در حال ساخت',
                                 capacity,
-                                mounted_to: mounted_to === null ? 'آزاد' : mounted_to
+                                mounted_to: mounted_to ? 'آزاد' : mounted_to
                             };
                         }
                     });
