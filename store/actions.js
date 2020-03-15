@@ -594,6 +594,19 @@ export const deleteSelectedVolume = async ({commit, state}, volume_name) => {
     }
 };
 
+export const resizeSelectedVolume = async ({commit, state}, {volume_name, volume_size}) => {
+
+    try {
+
+        return await Request().post(`api/volumes/${volume_name}`, {
+            new_size: volume_size
+        })
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const deleteSecret = async ({commit, state}, name) => {
     try {
         return await Request().delete(`/api/secrets/${name}`);
