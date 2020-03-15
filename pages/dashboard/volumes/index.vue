@@ -145,6 +145,54 @@
                     }
                 }
             },
+            increase_capacity(index, new_size){
+                this.$ga.event({
+                    eventCategory: "volume",
+                    eventAction: "click btn resize volume",
+                    eventLabel: "volume name",
+                    eventValue: this.volumes[index].name
+                });
+                this.$alertify(
+                    {
+                        title: `افزایش حجم فضای ذخیره‌سازس`,
+                        description: `  از انجام فرایند افزایش حجم ${this.volumes[index].name}مطمئن هستید؟ در صورت تایید روند افزایش حجم شروع می‌شود، این عمل ممکن است به از دست دادن داده‌ها منجر شود؛ لذا بهتر است قبل از ادامه از داده‌های خود Backup تهیه فرمایید!`
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                            this.$store
+                                .dispatch("resizeSelectedVolume", {volume_name: this.volumes[index].name, volume_size: new_size})
+                                .then(res => {
+                                    this.getData();
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "volume",
+                                        eventAction: "volume resize completed",
+                                        eventLabel: "volume name",
+                                        eventValue: this.volumes[index].name
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "volume",
+                                        eventAction: "failed to resize volume",
+                                        eventLabel: "volume name",
+                                        eventValue: this.volumes[index].name
+                                    });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                });
+                        }
+                    }
+                );
+            },
             remove(index) {
                 this.$ga.event({
                     eventCategory: "volume",
