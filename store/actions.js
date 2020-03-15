@@ -607,6 +607,17 @@ export const resizeSelectedVolume = async ({commit, state}, {volume_name, volume
     }
 };
 
+export const getVolumeDetails = async ({commit, state}, volume_name) => {
+
+    try {
+
+        return await Request().get(`api/volumes/${volume_name}`)
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
 export const deleteSecret = async ({commit, state}, name) => {
     try {
         return await Request().delete(`/api/secrets/${name}`);
