@@ -61,7 +61,7 @@
 
             <f-empty v-if="!volumes || !volumes.length" title="هنوز فضای ذخیره‌سازی جدیدی اضافه نشده !"></f-empty>
 
-            <box-table v-else :titles="titleRow" :items="volumes" :func="versions"
+            <box-table v-else :titles="titleRow" :items="volumes"
                        :menu="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER', OPERATOR: 'OPERATOR'})? menuListComplete : menuList"></box-table>
 
         </div>
@@ -95,10 +95,10 @@
             return {
                 isLoading: false,
                 titleRow: [
-                    {title: 'نام فضای ذخیره‌سازی', width: '27%', name: 'name'},
-                    {title: 'تاریخ ساخت', width: '19%', name: 'created_at'},
-                    {title: 'حجم', width: '23%', name: 'capacity'},
-                    {title: 'وضعیت', width: '27%', name: 'mounted_to'}
+                    {title: 'نام فضای ذخیره‌سازی', width: '24%', name: 'name'},
+                    {title: 'تاریخ ساخت', width: '16%', name: 'created_at'},
+                    {title: 'حجم', width: '13%', name: 'capacity'},
+                    {title: 'وضعیت', width: '43%', name: 'mounted_to'}
                 ],
                 menuList: [],
                 menuListComplete: [
@@ -130,7 +130,7 @@
                                 name,
                                 created_at: age ? Moment(age).format('jYYYY/jMM/jDD') : 'در حال ساخت',
                                 capacity,
-                                mounted_to: condition ? condition === 'Resizing' || condition === 'FileSystemResizePending' ? 'در حال افزایش فضا' : !mounted_to ? 'آزاد' : mounted_to : !mounted_to ? 'آزاد' : mounted_to
+                                mounted_to: ((condition === 'Resizing' || condition === 'FileSystemResizePending') && !mounted_to) ? 'در انتظار اتصال به سرویس و اتمام افزایش فضا' : (condition === 'Resizing' || condition === 'FileSystemResizePending') ? 'در حال افزایش فضا' : !mounted_to ? 'آزاد' : `متصل به سرویس ${mounted_to}`
                             };
                         }
                     });
