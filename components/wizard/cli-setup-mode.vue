@@ -1325,7 +1325,7 @@
                         return false;
                     }
 
-                    if (this.rules.volume_mounts.no_space(this.manifest_model.volumes.volume.volume_name.trim()) !== true) {
+                    if (this.rules.no_space(this.manifest_model.volumes.volume.volume_name.trim()) !== true) {
                         this.keys.spec.volume_mounts.value_invalid = true;
                         this.keys.spec.volume_mounts.validation_error = 'فاصله در volume_name مجاز نیست';
                         return false;
