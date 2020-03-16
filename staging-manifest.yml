@@ -7,6 +7,6 @@ spec:
   port: 80
   replicas: 2
   volume_mounts:
-    - mount_path: /assets/media
+    - mount_path: /app/assets/media
   resources:
     memory: 200Mi
