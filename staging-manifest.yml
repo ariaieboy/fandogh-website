@@ -6,5 +6,7 @@ spec:
   image_pull_policy: IfNotPresent
   port: 80
   replicas: 2
+  volume_mounts:
+    - mount_path: /assets/media
   resources:
     memory: 200Mi
