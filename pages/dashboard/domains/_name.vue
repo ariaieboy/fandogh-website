@@ -191,25 +191,61 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">-->
-                <!--<h2 class="title_header" style="margin-top: 32px">بررسی رکورد‌های دامنه</h2>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-xs-12">-->
-                        <!--<div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); margin-bottom: 16px">-->
-                            <!--<p style="margin-bottom: 0; font-size: 1em; padding: 16px" v-html="dns_record_check_description"></p>-->
-                        <!--</div>-->
-                        <!--<button @click="checkDomainCNAMERecord"-->
-                                <!--style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0;">-->
-                            <!--بررسی رکورد‌های CNAME دامنه-->
-                        <!--</button>-->
-                        <!--<button @click="checkDomainCNAMERecord"-->
-                                <!--style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 8px">-->
-                            <!--بررسی رکورد‌های TXT دامنه-->
-                        <!--</button>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <h2 class="title_header" style="margin-top: 32px">بررسی رکورد‌های دامنه</h2>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); margin-bottom: 16px">
+                            <p style="margin-bottom: 0; font-size: 1em; padding: 16px"
+                               v-html="dns_record_check_description"></p>
+                        </div>
+                        <button @click="checkDomainCNAMERecord"
+                                style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0;">
+                            بررسی رکورد‌های CNAME دامنه
+                        </button>
+                        <button @click="checkDomainCNAMERecord"
+                                style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 8px">
+                            بررسی رکورد‌های TXT دامنه
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <h2 class="title_header" style="margin-top: 48px">آموزش تایید و دخواست SSL دامنه</h2>
+        <div style="width: 100%; display: flex; background: #0045ff; padding: 16px;">
+            <div class="row lang-detail-media-container" style="margin: 0 !important;">
+
+                <div class="col-lg-4 col-md-4 col-xs-12 col-md-12 lang-menu-container">
+
+                    <div v-for="(menu, index) in domain_record_tutorials_model"
+                         :key="menu.title"
+                         class="lang-menu-item"
+                         :class="[menu.selected ? 'selected' : '']"
+                         @click="menuItemSelected(index)">
+                        <p class="menu-item-number">{{index + 1}}</p>
+                        <p class="menu-item-title">{{menu.title}}</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                    <vue-plyr class="tut_player" :key="menu_item.video"
+                              :options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume','current-time','fullscreen']}">
+                        <video style="width: 100%">
+                            <source style="width: 100%"
+                                    :src="require('../../../assets/media/' + menu_item.video + '.mp4')"
+                                    type="video/mp4"/>
+                        </video>
+                    </vue-plyr>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
     </div>
 </template>
 
@@ -271,6 +307,28 @@
                         value: '',
                     }
                 },
+                domain_record_tutorials_model: [
+                    {
+                        title: 'اضافه کردن رکورد TXT',
+                        selected: true,
+                        video: 'fandogh_txt_record_tutorial'
+                    },
+                    {
+                        title: 'اضافه کردن رکورد CNAME',
+                        selected: false,
+                        video: 'fandogh_cname_record_tutorial'
+                    },
+                    {
+                        title: 'اضافه کردن دامنه به سرویس',
+                        selected: false,
+                        video: 'fandogh_deploy_service_with_domain_tutorial'
+                    }
+                ],
+                menu_item: {
+                    title: 'اضافه کردن رکورد TXT',
+                    selected: true,
+                    video: 'fandogh_txt_record_tutorial'
+                },
 
             };
         },
@@ -328,6 +386,14 @@
         destroyed() {
         },
         methods: {
+            menuItemSelected(index) {
+                this.domain_record_tutorials_model.forEach(menu => {
+                    menu.selected = false
+                });
+
+                this.domain_record_tutorials_model[index].selected = true;
+                this.menu_item = this.domain_record_tutorials_model[index];
+            },
             checkDomainCNAMERecord() {
                 window.open(this.cname_record, '_blank')
             },
@@ -558,4 +624,186 @@
                 color black !important
                 min-width: 0;
                 width: 100%
+
+    .lang-detail-media-container
+        width 100%
+        padding 24px 16px
+        border-radius: 5px;
+        box-shadow: 0 0 44px 0 rgba(0, 0, 0, 0.51);
+        background-color: #080295;
+        display flex
+
+        div.lang-menu-container
+            width 100%;
+            display flex
+            height available
+            flex-direction column
+
+            p.menu-title
+                font-family: iran-yekan;
+                font-size: 1.4em
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.71;
+                width 100%
+                letter-spacing: normal;
+                text-align: center;
+                color: #fafafa;
+                margin-bottom 32px
+
+            button.menu-button
+                border-radius: 5px;
+                background-color: #0045ff;
+                margin-left 16px
+                margin-right 16px
+                height 40px
+                font-family: iran-yekan;
+                font-size: 1.2em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 40px
+                letter-spacing: normal;
+                text-align: center;
+                color: #fafafa;
+                margin-bottom 16px
+                outline none
+
+    .lang-menu-item
+        display flex
+        width 100%
+        height max-content
+        flex-direction row
+        cursor pointer
+        margin-left 16px
+
+        p.menu-item-number
+            font-family iran-sans
+            font-size: 1.1em;
+            width 40px
+            height 40px
+            border: solid 2px #8c8c8c;
+            border-radius 100%
+            text-align center
+            line-height 40px
+            color #8c8c8c
+            transition all .2s ease-in-out
+            @media only screen and (max-width 992px)
+                width 30px
+                height 30px
+                line-height 30px
+
+        p.menu-item-title
+            padding-left 16px
+            height available
+            padding-right 16px
+            font-family: iran-yekan;
+            font-size: 1.1em;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height 40px
+            letter-spacing: normal;
+            text-align: right;
+            color: #8c8c8c;
+            transition all .2s ease-in-out
+
+
+        &.selected
+            p.menu-item-number
+                width 40px
+                height 40px
+                font-family iran-sans
+                font-size: 1.1em;
+                background #fafafa
+                border-radius 100%
+                color #080295
+                border none
+                text-align center
+                line-height 40px
+                font-weight bold
+                transition all .2s ease-in-out
+                @media only screen and (max-width 992px)
+                    width 30px
+                    height 30px
+                    line-height 30px
+
+            p.menu-item-title
+                padding-left 16px
+                height available
+                padding-right 16px
+                font-family: iran-yekan;
+                font-size: 1.1em;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height 40px
+                letter-spacing: normal;
+                text-align: right;
+                color: #fafafa;
+                transition all .2s ease-in-out
+
+
+</style>
+
+<style lang="stylus">
+
+    .tut_player
+        .plyr
+            border-radius 0 0 5px 5px !important
+            width 100% !important
+            @media only screen and (max-width: 992px) {
+                border-radius 0 !important
+            }
+
+
+    .plyr--video .plyr__control.plyr__tab-focus, .plyr--video .plyr__control:hover, .plyr--video .plyr__control[aria-expanded=true] {
+        background: transparent !important;
+        color: #fff;
+        outline none !important
+    }
+
+    .plyr--full-ui input[type=range] {
+        border-radius: 25px !important;
+        color: rgba(255, 255, 255, 0.99) !important;
+        @media only screen and (max-width: 992px) {
+            border-radius 0 !important
+        }
+
+    }
+
+    .plyr--video .plyr__controls {
+        background: rgba(0, 69, 255, 0.7) !important;
+        bottom: 0;
+        color: #fff;
+        left: 0;
+        padding: 5px !important;
+        position: absolute;
+        margin 12px !important
+        border-radius 25px !important
+        right: 0;
+        outline none !important
+        transition: opacity .4s ease-in-out, -webkit-transform .4s ease-in-out;
+        transition: opacity .4s ease-in-out, transform .4s ease-in-out;
+        transition: opacity .4s ease-in-out, transform .4s ease-in-out, -webkit-transform .4s ease-in-out;
+        z-index: 3;
+    }
+
+    .plyr__controls > .plyr__control:first-child, .plyr__controls > .plyr__control:first-child + [data-plyr=pause] {
+        margin-left: 0;
+        margin-right: 0 !important;
+    }
+
+    .plyr__progress__container
+        width available !important
+        flex 1 !important
+
+
+    .plyr--full-ui.plyr--video .plyr__control--overlaid
+        display: block;
+        background: rgba(0, 69, 255, 0.7) !important;
+        border-radius: 5px !important;
+        padding 24px !important
+
 </style>
