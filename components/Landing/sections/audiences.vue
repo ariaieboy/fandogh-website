@@ -95,7 +95,7 @@
         @media only screen and (max-width: 992px)
             padding-top 180px
 
-        h1.aud-title
+        h2.aud-title
             margin-left auto
             margin-right auto
             font-family iran-yekan
