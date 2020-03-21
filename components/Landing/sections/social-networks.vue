@@ -5,77 +5,14 @@
 
         <div class="row" style="margin-top: 32px">
 
-            <div class="col-xs-12 col-md-4 col-lg-4">
-                <blockquote class="twitter-tweet"><p lang="fa" dir="rtl">پاس چیه، چرا باید ازش استفاده کنیم و معرفی یه
-                    پاس برای تمرین و پروداکشن<a href="https://t.co/hnz0jALxF8">https://t.co/hnz0jALxF8</a><br><br>تا
-                    حالا پیش اومده به خاطر تغییر دکور خونه، مجبور بشین پشم گاومیش بتراشین؟ پاس کمک می کنه مجبور نشین (:
-                    مهارت مهمی که اگر حرفه ای هستین...<a href="https://twitter.com/fandoghpaas?ref_src=twsrc%5Etfw">@fandoghpaas</a>
-                </p>&mdash; jadi (@jadi) <a
-                        href="https://twitter.com/jadi/status/1219586780258799617?ref_src=twsrc%5Etfw">January 21,
-                    2020</a></blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-
-            <div class="col-xs-12 col-md-4 col-lg-4">
-                <blockquote class="twitter-tweet"><p lang="fa" dir="rtl">پایتون با طعم فندق<br>با هم یک پروژه پایتونی
-                    ساده را گام به گام ابتدا داکرایز می‌کنیم و سپس برای اجرا بر روی فندق <a
-                            href="https://twitter.com/fandoghpaas?ref_src=twsrc%5Etfw">@fandoghpaas</a> می‌فرستیم<a
-                            href="https://t.co/xcv6CD6tv6">https://t.co/xcv6CD6tv6</a></p>&mdash; مُصْطَفی اسدی
-                    (@mostafaasadi73) <a
-                            href="https://twitter.com/mostafaasadi73/status/1156933802775719938?ref_src=twsrc%5Etfw">August
-                        1, 2019</a></blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-
-            <div class="col-xs-12 col-md-4 col-lg-4">
-                <blockquote class="twitter-tweet"><p lang="fa" dir="rtl"><a
-                        href="https://twitter.com/fandoghpaas?ref_src=twsrc%5Etfw">@fandoghpaas</a> <br><br>قسمت ۴۲ 🔥🔥<a
-                        href="https://twitter.com/hashtag/%D8%AF%DB%8C%D9%BE%D9%84%D9%88%DB%8C?src=hash&amp;ref_src=twsrc%5Etfw">#دیپلوی</a>
-                    کردن پروژه‌ی <a
-                            href="https://twitter.com/hashtag/%D9%81%D9%84%D8%B3%DA%A9?src=hash&amp;ref_src=twsrc%5Etfw">#فلسک</a>
-                    روی <a href="https://twitter.com/hashtag/%D9%81%D9%86%D8%AF%D9%82?src=hash&amp;ref_src=twsrc%5Etfw">#فندق</a><a
-                            href="https://t.co/pdGnWH93Tn">https://t.co/pdGnWH93Tn</a><a
-                            href="https://twitter.com/hashtag/Flask?src=hash&amp;ref_src=twsrc%5Etfw">#Flask</a> <a
-                            href="https://twitter.com/hashtag/Python?src=hash&amp;ref_src=twsrc%5Etfw">#Python</a> <a
-                            href="https://twitter.com/hashtag/%D8%A2%D9%85%D9%88%D8%B2%D8%B4?src=hash&amp;ref_src=twsrc%5Etfw">#آموزش</a>
-                    <a href="https://twitter.com/hashtag/%D9%BE%D8%A7%DB%8C%D8%AA%D9%88%D9%86?src=hash&amp;ref_src=twsrc%5Etfw">#پایتون</a>
-                    <a href="https://twitter.com/hashtag/Deploy?src=hash&amp;ref_src=twsrc%5Etfw">#Deploy</a></p>&mdash;
-                    Alireza Ayinmehr (@DarkSuniuM) <a
-                            href="https://twitter.com/DarkSuniuM/status/1234392673164939264?ref_src=twsrc%5Etfw">March
-                        2, 2020</a></blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-
-            <div class="col-xs-12 col-md-4 col-lg-4">
-                <blockquote class="twitter-tweet"><p lang="fa" dir="rtl">آقا این <a
-                        href="https://twitter.com/fandoghpaas?ref_src=twsrc%5Etfw">@fandoghpaas</a> ی‌ها واقعاً خوبن<br>برعکس
-                    بقیه هم صنف‌هاشون فقط ادعا نیستند و قشنگ تو کارشون حرفه‌ای هستن</p>&mdash; Mojtaba Darvishi
-                    (@mojtabad) <a href="https://twitter.com/mojtabad/status/1222822982583754756?ref_src=twsrc%5Etfw">January
-                        30, 2020</a></blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-
-            <div class="col-xs-12 col-md-4 col-lg-4">
-                <blockquote class="twitter-tweet"><p lang="fa" dir="rtl">باید بگم دم <a
-                        href="https://twitter.com/fandoghpaas?ref_src=twsrc%5Etfw">@fandoghpaas</a> گرم که بدون همایش
-                    چند میلیونی و بعد هد هانت نیرو هاش داره سرویس استیبل میده و مشتری هاش راضی هستند.</p>&mdash; Arash
-                    👨‍💻 (@x3n0b1a) <a
-                            href="https://twitter.com/x3n0b1a/status/1234463530793021441?ref_src=twsrc%5Etfw">March 2,
-                        2020</a></blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
-
-            <div class="col-xs-12 col-md-4 col-lg-4">
-                <blockquote class="twitter-tweet"><p lang="fa" dir="rtl">ولی جا داره بگیم دم بچه های <a
-                        href="https://twitter.com/fandoghpaas?ref_src=twsrc%5Etfw">@fandoghpaas</a> گرم که زیرساختشون رو
-                    جوری سریع تغییر دادن که تو کوتاه ترین زمان سرویسامون هم از ایران و هم از خارج قابل دسترس
-                    بودن…<br><br>خسته نباشین همگی 💪</p>&mdash; اشـکانــ آر اِمْ‌ کِیْ (@NakhsaKMR) <a
-                        href="https://twitter.com/NakhsaKMR/status/1198648869237731329?ref_src=twsrc%5Etfw">November 24,
-                    2019</a></blockquote>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
+            <img v-for="(tweet, index) in tweets"
+                 class="col-xs-12 col-md-4 col-lg-4" :src="require('../../../assets/svg/' + tweet.img + '.svg')"
+                 :alt="tweet.img"
+                 style="cursor: pointer; margin-bottom: auto; margin-top: 24px"
+                 @click="openTweet(index)">
 
         </div>
+
 
         <p class="social-sec-description">{{description}}</p>
         <div style="width: 100%; display: flex; justify-content: center; justify-items: center">
@@ -95,6 +32,39 @@
             return {
                 title: 'سکوی ابری فندق در رسانه‌ها',
                 description: 'شما هم می‌توانید تجربه خود را در توئیتر منتشر کنید و سکوی ابری فندق را در آن منشن کنید تا در این قسمت دیده‌ شوید.',
+                tweets: [
+                    {
+                        img: 'jadi_tweet',
+                        link: 'https://twitter.com/jadi/status/1219586780258799617?ref_src=twsrc%5Etfw'
+                    },
+                    {
+                        img: 'mostafa_tweet',
+                        link: 'https://twitter.com/mostafaasadi73/status/1156933802775719938?ref_src=twsrc%5Etfw'
+                    },
+                    {
+                        img: 'alireza_tweet',
+                        link: 'https://twitter.com/DarkSuniuM/status/1234392673164939264?ref_src=twsrc%5Etfw'
+                    },
+                    {
+                        img: 'mojtaba_tweet',
+                        link: 'https://twitter.com/mojtabad/status/1222822982583754756?ref_src=twsrc%5Etfw'
+                    },
+                    {
+                        img: 'arash_tweet',
+                        link: 'https://twitter.com/x3n0b1a/status/1234463530793021441?ref_src=twsrc%5Etfw'
+                    },
+                    {
+                        img: 'ashkan_tweet',
+                        link: 'https://twitter.com/NakhsaKMR/status/1198648869237731329?ref_src=twsrc%5Etfw'
+                    },
+                ]
+            }
+        },
+        methods: {
+            openTweet(index) {
+
+                window.open(this.tweets[index].link, '_blank');
+
             }
         }
     }
