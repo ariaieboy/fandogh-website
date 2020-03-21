@@ -3,7 +3,7 @@
 
         <div class="audience-inner-container">
 
-            <h1 class="aud-title">{{title}}</h1>
+            <h2 class="aud-title">{{title}}</h2>
 
             <div class="horizontal-line"></div>
 
