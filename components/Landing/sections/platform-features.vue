@@ -1,7 +1,7 @@
 <template>
     <div class="features-container container-fluid">
 
-        <p class="feature-sec-title">{{title}}</p>
+        <h1 class="feature-sec-title">{{title}}</h1>
         <p class="feature-sec-description">{{description}}</p>
 
         <div class="row" style="margin-top: 64px;">

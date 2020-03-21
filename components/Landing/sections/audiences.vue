@@ -3,7 +3,7 @@
 
         <div class="audience-inner-container">
 
-            <p class="aud-title">{{title}}</p>
+            <h1 class="aud-title">{{title}}</h1>
 
             <div class="horizontal-line"></div>
 
@@ -95,7 +95,7 @@
         @media only screen and (max-width: 992px)
             padding-top 180px
 
-        p.aud-title
+        h1.aud-title
             margin-left auto
             margin-right auto
             font-family iran-yekan
