@@ -24,7 +24,7 @@ module.exports = {
         'vue-plyr/dist/vue-plyr.css'
     ],
     head: {
-        title: "سرویس های ابری فندق",
+        title: "سرویس های ابری | سکوی ابری فندق",
         meta: [
             {charset: "utf-8"},
             {name: "viewport", content: "width=device-width, initial-scale=1"},
