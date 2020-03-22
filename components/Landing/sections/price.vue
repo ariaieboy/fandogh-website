@@ -20,7 +20,8 @@
 
             <div style="width: 100%; box-sizing: border-box; clear: both; height: max-content; display: flex; flex-direction: column; position: relative">
 
-                <div class="row bg-test" style="width: 100%; display: flex; justify-content: center; margin-right: auto; margin-left: auto">
+                <div class="row bg-test"
+                     style="width: 100%; display: flex; justify-content: center; margin-right: auto; margin-left: auto">
                     <div class="row card-plan-container container-fluid" style="max-width: 2200px;">
 
                         <div v-for="item in plans" style="padding: 16px; max-width: 820px"
@@ -84,7 +85,8 @@
                                     </div>
                                 </div>
                                 <div style="width: 100%; display: flex; margin-top: 48px; justify-content: center">
-                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none" @click="$router.push(item.action_href)">
+                                    <button style="width: 100%; margin-left: 20%; margin-right: 20%; height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4);border: solid 1px #0045ff;background-color: #0045ff;color: #fefefe; font-family: iran-yekan; font-size: 1.4em; outline: none"
+                                            @click="$router.push(item.action_href)">
                                         {{item.action}}
                                     </button>
                                 </div>
@@ -194,7 +196,7 @@
                                                  style="display: flex; flex-direction: column">
                                                 <div style="display: flex; width: 100%">
                                                     <span class="calculator-config-title">پردازنده</span>
-                                                    <span class="calculator-config-description">۰.۵ هسته</span>
+                                                    <span class="calculator-config-description">{{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} هسته</span>
                                                 </div>
 
                                                 <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -226,7 +228,8 @@
                                     </div>
 
                                     <div style="width: 100%; margin-top: 16px; display: flex; justify-content: center;">
-                                        <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;" @click="$router.push('/user/login')">
+                                        <button style="outline: none;border: none; width: 300px;height: 45px;border-radius: 5px;box-shadow: 0 0 6px 0 rgba(41, 121, 255, 0.4); background-color: #0045ff; color: #fefefe; font-family: iran-yekan; font-size: 1.4em;"
+                                                @click="$router.push('/user/login')">
                                             سفارش پلن
                                         </button>
                                     </div>
