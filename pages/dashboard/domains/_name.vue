@@ -322,6 +322,11 @@
                         title: 'اضافه کردن دامنه به سرویس',
                         selected: false,
                         video: 'fandogh_deploy_service_with_domain_tutorial'
+                    },
+                    {
+                        title: 'ssl در سرویس‌های در حال اجرا',
+                        selected: false,
+                        video: 'fandogh_domain_ssl_for_running_service'
                     }
                 ],
                 menu_item: {
