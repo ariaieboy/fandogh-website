@@ -17,7 +17,7 @@
 
                         <div class="slider-main">
 
-                            <div class="main-title">{{item.title}}</div>
+                            <h1 class="main-title">{{item.title}}</h1>
 
                             <div class="main-description">{{item.description}}</div>
 
@@ -186,7 +186,7 @@
             padding-right 16px
             padding-left 16px
 
-        div.main-title
+        h1.main-title
             width: 100%
             font-size: 1.8em
             font-family: iran-yekan

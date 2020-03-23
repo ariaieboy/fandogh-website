@@ -24,7 +24,7 @@ module.exports = {
         'vue-plyr/dist/vue-plyr.css'
     ],
     head: {
-        title: "سرویس های ابری فندق",
+        title: "سرویس های ابری | سکوی ابری فندق",
         meta: [
             {charset: "utf-8"},
             {name: "viewport", content: "width=device-width, initial-scale=1"},
@@ -32,7 +32,7 @@ module.exports = {
             {
                 hid: "description",
                 name: "description",
-                content: "سکوی ابری فندق، ارائه دهنده خدمات رایانش ابری و جایگزینی مطمئن برای هاستینگ. در کوتاه‌تری زمان سرویس ابری خود را ایجاد کنید"
+                content: "سکوی ابری فندق، ارائه دهنده خدمات رایانش ابری و داکر و جایگزینی مطمئن برای هاستینگ. در کوتاه‌تری زمان سرویس ابری خود را ایجاد کنید"
             }
         ],
         link: [{rel: "iScon", type: "image/x-icon", href: "/favicon.ico"}]
