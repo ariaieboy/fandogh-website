@@ -123,14 +123,13 @@
             volumes() {
                 let volumes = this.$store.state.volumes;
                 if (volumes) {
-                    console.log(volumes);
                     return volumes.map(({name, age, capacity, condition, mounted_to}) => {
                         {
                             return {
                                 name,
                                 created_at: age ? Moment(age).format('jYYYY/jMM/jDD') : 'در حال ساخت',
                                 capacity,
-                                mounted_to: ((condition === 'Resizing' || condition === 'FileSystemResizePending') && !mounted_to) ? 'در انتظار اتصال به سرویس و اتمام افزایش فضا' : (condition === 'Resizing' || condition === 'FileSystemResizePending') ? 'در حال افزایش فضا' : !mounted_to ? 'آزاد' : `متصل به سرویس ${mounted_to}`
+                                mounted_to: ((condition === 'Resizing' || condition === 'FileSystemResizePending') && !mounted_to) ? 'در انتظار اتصال به سرویس و اتمام افزایش فضا' : (condition === 'Resizing' || condition === 'FileSystemResizePending') ? 'در حال افزایش فضا...' : !mounted_to ? 'آزاد' : `متصل به سرویس ${mounted_to}`
                             };
                         }
                     });
@@ -150,7 +149,7 @@
                     await this.$store.dispatch("getVolumes");
                     let internal = null;
                     this.volumes.forEach(volume => {
-                        if (volume.mounted_to === 'در حال افزایش فضا') {
+                        if (volume.mounted_to === 'در حال افزایش فضا...') {
                             setTimeout(() => {
                                 this.getData();
                             }, 5000);
