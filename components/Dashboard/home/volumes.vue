@@ -100,7 +100,7 @@
                         ({age, capacity, name, mounted_to, condition}) => {
                             return {
                                 created_at: Moment(age).format('jYYYY/jMM/jDD'),
-                                capacity: `${capacity.toString().replace('Gi', '')}GB`,
+                                capacity: `${capacity.toString().replace('Gi', '')}Gi`,
                                 name,
                                 condition: name === null ? 'در حال ساخت...' : ((condition === 'Resizing' || condition === 'FileSystemResizePending') && !mounted_to) ? 'در انتظار اتصال به سرویس و اتمام افزایش فضا' : (condition === 'Resizing' || condition === 'FileSystemResizePending') ? 'در حال افزایش فضا...' : 'آماده',
                                 service: mounted_to
