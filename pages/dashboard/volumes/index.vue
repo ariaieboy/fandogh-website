@@ -95,10 +95,11 @@
             return {
                 isLoading: false,
                 titleRow: [
-                    {title: 'نام فضای ذخیره‌سازی', width: '24%', name: 'name'},
-                    {title: 'تاریخ ساخت', width: '16%', name: 'created_at'},
-                    {title: 'حجم', width: '13%', name: 'capacity'},
-                    {title: 'وضعیت', width: '43%', name: 'mounted_to'}
+                    {title: 'نام فضای ذخیره‌سازی', width: '20%', name: 'name'},
+                    {title: 'تاریخ ساخت', width: '13%', name: 'created_at'},
+                    {title: 'حجم', width: '10%', name: 'capacity'},
+                    {title: 'متصل به', width: '13%', name: 'mounted_to'},
+                    {title: 'وضعیت', width: '41%', name: 'condition'}
                 ],
                 menuList: [],
                 menuListComplete: [
@@ -126,10 +127,11 @@
                     return volumes.map(({name, age, capacity, condition, mounted_to}) => {
                         {
                             return {
-                                name,
-                                created_at: age ? Moment(age).format('jYYYY/jMM/jDD') : 'در حال ساخت',
-                                capacity,
-                                mounted_to: ((condition === 'Resizing' || condition === 'FileSystemResizePending') && !mounted_to) ? 'در انتظار اتصال به سرویس و اتمام افزایش فضا' : (condition === 'Resizing' || condition === 'FileSystemResizePending') ? 'در حال افزایش فضا...' : !mounted_to ? 'آزاد' : `متصل به سرویس ${mounted_to}`
+                                name: name !== null ? name : '----',
+                                created_at: age ? Moment(age).format('jYYYY/jMM/jDD') : '----',
+                                capacity: capacity !== null ? capacity : '----',
+                                condition: name === null ? 'در حال ساخت...' : ((condition === 'Resizing' || condition === 'FileSystemResizePending') && !mounted_to) ? 'در انتظار اتصال به سرویس و اتمام افزایش فضا' : (condition === 'Resizing' || condition === 'FileSystemResizePending') ? 'در حال افزایش فضا...' : 'آماده',
+                                mounted_to: name === null ? '----' : !mounted_to ? 'آزاد' : `${mounted_to}`
                             };
                         }
                     });
@@ -149,7 +151,7 @@
                     await this.$store.dispatch("getVolumes");
                     let internal = null;
                     this.volumes.forEach(volume => {
-                        if (volume.mounted_to === 'در حال افزایش فضا...') {
+                        if (volume.condition === 'در حال افزایش فضا...' || volume.condition === 'در حال ساخت...') {
                             setTimeout(() => {
                                 this.getData();
                             }, 5000);
