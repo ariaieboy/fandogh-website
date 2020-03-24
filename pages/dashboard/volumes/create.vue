@@ -9,6 +9,7 @@
                 <div style="display: flex; margin-bottom: 24px"
                      class="col-xs-12 col-sm-12 col-md-6 col-lg-6 volume-chart">
                     <f-charts
+                            v-if="volumeUsage.length > 0"
                             class="pr-lg-25"
                             title="فضای ذخیره‌سازی"
                             :data="volumeUsage"
@@ -92,6 +93,7 @@
         data() {
             return {
                 name: "",
+                namespace: null,
                 loading: false,
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
@@ -132,9 +134,7 @@
             };
         },
         created() {
-
-            this.$store.commit("SET_DATA", {data: false, id: "loading"});
-
+            this.getNamespaceData();
         },
         methods: {
 
@@ -213,16 +213,36 @@
                         });
                     });
 
+            },
+            async getNamespaceData() {
+                try {
+                    this.namespace = await this.$store.dispatch("getNameSpace", "ns");
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: e.data.message,
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
             }
 
         },
         computed: {
-            volumeUsage(){
-                let planObject = JSON.parse(localStorage.getItem('vuex')).activePlan;
-                const used = planObject.current_used_resources.volume_usage;
-                const free = planObject.quota.volume_limit - used;
+            volumeUsage() {
+                if (this.namespace){
+                const used = this.namespace.current_used_resources.volume_usage;
+                const free = this.namespace.quota.volume_limit - used;
                 const usage = [free, used];
                 return usage
+                }else {
+                    return []
+                }
             }
         }
     }

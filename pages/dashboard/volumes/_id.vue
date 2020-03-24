@@ -13,6 +13,7 @@
                 <div style="display: flex; margin-bottom: 24px"
                      class="col-xs-12 col-sm-12 col-md-6 col-lg-6 volume-chart">
                     <f-charts
+                            v-if="volumeUsage.length > 0"
                             class="pr-lg-25"
                             title="فضای ذخیره‌سازی"
                             :data="volumeUsage"
@@ -89,6 +90,7 @@
             return {
                 volume_name: this.$route.params.id,
                 name: "",
+                namespace: null,
                 volume_object: null,
                 loading: false,
                 volume: {
@@ -123,23 +125,24 @@
                         url: 'https://docs.fandogh.cloud/docs/dedicated-volume.html#%DA%86%DA%AF%D9%88%D9%86%DA%AF%DB%8C-%D8%B3%D8%A7%D8%AE%D8%AA-volume'
                     },
                 },
-                description: ` توجه داشته باشید عمل افزایش فضای ذخیره‌سازی بدون بازگشت است و شما دیگر قادر به کاهش آن نخواهید بود
-      <br>
-       <b style="margin-top: 8px;display: inline-block;"> همچنین افزایش فضای ذخیره‌سازی ممکن است در موارد خاص منجر به حذف داده‌های شما شود، لذا قبل از افزایش حجم از داده‌های خود بکاپ تهیه نمایید.</b>.`
-
+                description: ` توجه داشته باشید عمل افزایش فضای ذخیره‌سازی بدون بازگشت است و شما دیگر قادر به کاهش آن نخواهید بود`
             }
         },
         computed: {
             volumeUsage() {
-                let planObject = JSON.parse(localStorage.getItem('vuex')).activePlan;
-                const used = planObject.current_used_resources.volume_usage;
-                const free = planObject.quota.volume_limit - used;
-                const usage = [free, used];
-                return usage
+                if (this.namespace){
+                    const used = this.namespace.current_used_resources.volume_usage;
+                    const free = this.namespace.quota.volume_limit - used;
+                    const usage = [free, used];
+                    return usage
+                }else {
+                    return []
+                }
             }
         },
         created() {
             this.getData();
+            this.getNamespaceData();
         },
         methods: {
             verifyUserAccess(permitted_roles) {
@@ -217,6 +220,23 @@
                         }
                     }
                 );
+            },
+            async getNamespaceData() {
+                try {
+                    this.namespace = await this.$store.dispatch("getNameSpace", "ns");
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: e.data.message,
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
             },
             async getData() {
                 try {
