@@ -598,7 +598,7 @@ export const resizeSelectedVolume = async ({commit, state}, {volume_name, volume
 
     try {
 
-        return await Request().post(`api/volumes/${volume_name}`, {
+        return await Request().patch(`api/volumes/${volume_name}`, {
             new_size: volume_size
         })
 
