@@ -142,7 +142,6 @@
                 return RoleAccessHandler(permitted_roles)
             },
             createVolume() {
-                this.$store.commit("SET_DATA", {data: true, id: "loading"});
 
                 this.$ga.event({
                     eventCategory: "volume",
@@ -187,6 +186,8 @@
                     });
                     return
                 }
+
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
 
                 this.$store
                     .dispatch("createNewVolume", {
