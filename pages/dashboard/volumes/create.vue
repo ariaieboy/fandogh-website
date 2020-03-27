@@ -196,7 +196,7 @@
                     })
                     .then(res => {
                         this.$notify({
-                            title: res.message,
+                            title: 'فضای ذخیره‌سازی با موفقیت ساخته شد.',
                             time: 3000,
                             type: "success"
                         });
