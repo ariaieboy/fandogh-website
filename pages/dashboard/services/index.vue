@@ -88,7 +88,7 @@
                     {title: 'نام سرویس', width: '39%', name: 'name'},
                     {title: 'حافظه (مگابایت)', width: '20%', name: 'memory'},
                     {title: 'تاریخ ساخت', width: '18%', name: 'start_date'},
-                    {title: 'restart', width: '12%', name: 'service_restarts'},
+                    {title: 'restart', width: '11%', name: 'service_restarts'},
                     {title: 'وضعیت', width: '9%', name: 'state'}
                 ],
                 menuList: [

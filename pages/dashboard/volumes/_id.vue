@@ -1,7 +1,11 @@
 <template>
     <div>
-        <h2 class="title_header">ساخت فضای ذخیره‌سازی</h2>
-
+        <h2 class="title_header">افزایش فضای ذخیره‌سازی</h2>
+        <div class="fandogh-form-group" style="margin-bottom: 32px">
+            <div style="background: #0045ff; width: 100%; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.4)">
+                <p style="padding: 32px 16px; text-align: center; color: #fefefe; " v-html="description"></p>
+            </div>
+        </div>
 
         <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.17); padding: 16px">
             <div class="row" style="display: flex; width: 100%">
@@ -26,17 +30,10 @@
                                       color="#0045ff"
                                       type="text"
                                       dir="ltr"
-                                      required
-                                      :rules="[rules.counter, rules.required, rules.volume_name_regex]"
-                                      :counter="volume.name.counter"
-                                      :maxlength="volume.name.counter"
-                                      v-model="volume.name.value"
-                                      :hint="volume.name.hint"
-                                      :label="volume.name.label">
+                                      v-model="volume_name"
+                                      :disabled="true">
 
                         </v-text-field>
-
-                        <popover :tooltip="tooltips.name"></popover>
 
                     </div>
 
@@ -46,12 +43,10 @@
                                       color="#0045ff"
                                       type="number"
                                       dir="ltr"
-                                      :min="10"
                                       required
-                                      :rules="[rules.required, rules.min_value]"
+                                      :rules="[rules.required]"
                                       v-model.number="volume.capacity.value"
                                       :hint="volume.capacity.hint"
-                                      :maxlength="volume.capacity.counter"
                                       :label="volume.capacity.label">
 
                         </v-text-field>
@@ -67,16 +62,17 @@
             <div style="display: flex; width: 100%; padding: 32px 16px">
                 <button style="background: #00E5FF; width: 100%; margin: auto; padding: 12px 0; border-radius: 3px; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4);
                         max-width: 350px; outline: none; font-family: iran-yekan; color: #1d1d1d"
-                        @click="createVolume">ایجاد فضای ذخیره‌سازی جدید
+                        @click="increaseCapacity">
+                    افزایش فضای ذخیره‌سازی
                 </button>
             </div>
 
         </div>
     </div>
-
 </template>
 
 <script>
+
     import RoleAccessHandler from "../../../utils/RoleAccessHandler";
     import Popover from "../../../components/wizard/tooltip/popover";
     import {getValue} from "../../../utils/cookie";
@@ -84,7 +80,7 @@
     import FCharts from "~/components/Dashboard/home/usage.vue";
 
     export default {
-        name: "create",
+        name: "_id",
         layout: 'dashboard',
         components: {
             Popover,
@@ -92,15 +88,11 @@
         },
         data() {
             return {
+                volume_name: this.$route.params.id,
                 name: "",
                 namespace: null,
+                volume_object: null,
                 loading: false,
-                rules: {
-                    required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
-                    volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
-                    counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
-                    min_value: value => value >= 10 || 'میزان حافظه ذخیره‌سازی نمی‌تواند کمتر از ۱۰ گیگابایت باشد'
-                },
                 volume: {
                     name: {
                         label: 'نام فضای ذخیره‌سازی',
@@ -116,6 +108,11 @@
                         value: 10
                     }
                 },
+                rules: {
+                    required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
+                    volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
+                    counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد'
+                },
                 tooltips: {
                     name: {
                         title: 'نام فضای ذخیره‌سازی',
@@ -128,36 +125,30 @@
                         url: 'https://docs.fandogh.cloud/docs/dedicated-volume.html#%DA%86%DA%AF%D9%88%D9%86%DA%AF%DB%8C-%D8%B3%D8%A7%D8%AE%D8%AA-volume'
                     },
                 },
-                description: ` برای ساخت ایمیج لازم است که محتویات پروژه خود را با فرمت zip فشرده کنید و سپس آن را آپلود نمایید.
-      <br>
-       <b style="margin-top: 8px;display: inline-block;"> در هنگام فشرده سازی حتما توجه داشته باشید که Dockerfile مستقیما در Root  فایل zip قرار بگیرد </b>.`
-            };
+                description: ` توجه داشته باشید عمل افزایش فضای ذخیره‌سازی بدون بازگشت است و شما دیگر قادر به کاهش آن نخواهید بود`
+            }
+        },
+        computed: {
+            volumeUsage() {
+                if (this.namespace){
+                    const used = this.namespace.current_used_resources.volume_usage;
+                    const free = this.namespace.quota.volume_limit - used;
+                    const usage = [free, used];
+                    return usage
+                }else {
+                    return []
+                }
+            }
         },
         created() {
+            this.getData();
             this.getNamespaceData();
         },
         methods: {
-
             verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
-            createVolume() {
-
-                this.$ga.event({
-                    eventCategory: "volume",
-                    eventAction: "click btn create volume",
-                    eventLabel: 'namespace',
-                    eventValue: getValue('namespace')
-                });
-
-                if (this.rules.required(this.volume.name.value) !== true) {
-                    this.$notify({
-                        title: 'نام فضای ذخیره‌سازی نمی‌تواند خالی باشد.',
-                        time: 4000,
-                        type: "error"
-                    });
-                    return
-                }
+            increaseCapacity() {
 
                 if (this.rules.required(this.volume.capacity.value) !== true) {
                     this.$notify({
@@ -168,52 +159,67 @@
                     return
                 }
 
-
-                if (this.rules.volume_name_regex(this.volume.name.value) !== true) {
+                if (this.volume.capacity.value <= parseInt(this.volume_object.capacity.toString().replace('Gi', ''))) {
                     this.$notify({
-                        title: 'نام فضای ذخیره‌سازی وارد شده صحیح نمی‌باشد',
+                        title: `شما نمی‌توانید فضای ذخیره‌سازی را کاهش دهید`,
                         time: 4000,
                         type: "error"
                     });
                     return
                 }
 
-                if (this.rules.min_value(this.volume.capacity.value) !== true) {
-                    this.$notify({
-                        title: 'حداقل فضای قابل ساخت ۱۰ گیگابایت است',
-                        time: 4000,
-                        type: "error"
-                    });
-                    return
-                }
+                this.$ga.event({
+                    eventCategory: "volume",
+                    eventAction: "click btn resize volume",
+                    eventLabel: "volume name",
+                    eventValue: this.volume_name
+                });
+                this.$alertify(
+                    {
+                        title: `افزایش حجم فضای ذخیره‌سازی`,
+                        img: require("../../../components/Dashboard/alert/images/resize_volume.svg"),
+                        description: ` از انجام فرآیند افزایش فضای ذخیره‌سازی ${this.volume_name} مطمئن هستید؟`,
+                        label: 'افزایش فضا'
+                    },
+                    status => {
+                        if (status) {
+                            this.$store.commit("SET_DATA", {data: true, id: "loading"});
 
-                this.$store.commit("SET_DATA", {data: true, id: "loading"});
-
-                this.$store
-                    .dispatch("createNewVolume", {
-                        volume_name: this.volume.name.value,
-                        volume_capacity: this.volume.capacity.value
-                    })
-                    .then(res => {
-                        this.$notify({
-                            title: res.message,
-                            time: 3000,
-                            type: "success"
-                        });
-                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                        this.$router.replace("/dashboard/volumes");
-                    })
-                    .catch(e => {
-                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                        ErrorReporter(e, this.$data, true).forEach(error => {
-                            this.$notify({
-                                title: error,
-                                time: 4000,
-                                type: "error"
-                            });
-                        });
-                    });
-
+                            this.$store
+                                .dispatch("resizeSelectedVolume", {
+                                    volume_name: this.volume_name,
+                                    volume_size: this.volume.capacity.value
+                                })
+                                .then(res => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$router.replace('/dashboard/volumes');
+                                    this.$notify({
+                                        title: res.message,
+                                        type: "success"
+                                    });
+                                    this.$ga.event({
+                                        eventCategory: "volume",
+                                        eventAction: "volume resize completed",
+                                        eventLabel: "volume name",
+                                        eventValue: this.volume_name
+                                    });
+                                })
+                                .catch(e => {
+                                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                                    this.$ga.event({
+                                        eventCategory: "volume",
+                                        eventAction: "failed to resize volume",
+                                        eventLabel: "volume name",
+                                        eventValue: this.volume_name
+                                    });
+                                    this.$notify({
+                                        title: e.data.message,
+                                        type: "error"
+                                    });
+                                });
+                        }
+                    }
+                );
             },
             async getNamespaceData() {
                 try {
@@ -231,20 +237,25 @@
                         });
                     }
                 }
-            }
-
-        },
-        computed: {
-            volumeUsage() {
-                if (this.namespace){
-                const used = this.namespace.current_used_resources.volume_usage;
-                const free = this.namespace.quota.volume_limit - used;
-                const usage = [free, used];
-                return usage
-                }else {
-                    return []
+            },
+            async getData() {
+                try {
+                    this.volume_object = await this.$store.dispatch("getVolumeDetails", this.volume_name);
+                    this.volume.capacity.value = parseInt(this.volume_object.capacity.toString().replace('Gi', ''));
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: e.data.message,
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
                 }
-            }
+            },
         }
     }
 </script>
