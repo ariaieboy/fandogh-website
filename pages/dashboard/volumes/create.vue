@@ -150,6 +150,7 @@
                     eventValue: getValue('namespace')
                 });
 
+
                 if (this.rules.required(this.volume.name.value) !== true) {
                     this.$notify({
                         title: 'نام فضای ذخیره‌سازی نمی‌تواند خالی باشد.',
