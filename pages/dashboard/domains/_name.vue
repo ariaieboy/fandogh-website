@@ -213,6 +213,7 @@
         </div>
 
         <h2 class="title_header" style="margin-top: 48px">آموزش تایید و درخواست SSL دامنه</h2>
+
         <div style="width: 100%; display: flex; background: #0045ff; padding: 16px;">
             <div class="row lang-detail-media-container" style="margin: 0 !important;">
 
