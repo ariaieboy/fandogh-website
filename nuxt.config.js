@@ -28,7 +28,7 @@ module.exports = {
         meta: [
             {charset: "utf-8"},
             {name: "viewport", content: "width=device-width, initial-scale=1"},
-            { name: 'keywords', content: 'docker, kubernetes, k8s, داکر, سرویس ابری,سکو ابری,سکوی ابری,رایانش ابری, سرور ابری, هاست,هاستینگ'},
+            {name: 'keywords', content: 'docker, kubernetes, k8s, داکر, سرویس ابری,سکو ابری,سکوی ابری,رایانش ابری, سرور ابری, هاست,هاستینگ'},
             {
                 hid: "description",
                 name: "description",

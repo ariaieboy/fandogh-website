@@ -4,7 +4,7 @@
 
             <div class="audience-inner-container">
 
-                <h2 class="comp-header-title">{{header.title}}</h2>
+                <h1 class="comp-header-title">{{header.title}}</h1>
                 <div class="horizontal-line"></div>
                 <p class="comp-header-desc">{{header.description}}</p>
 
@@ -52,11 +52,23 @@
             VpsVSPaaS
 
         },
+        head(){
+          return{
+              title: this.title,
+              meta:[
+                  { hid: 'description', name: 'description', content: 'اگر در ذهن شما سوال ایجاد شده است که سکوی ابری فندق چه ارزش افزوده‌ای را در برابر هاست‌های سنتی یا vpsها در اختیار شما قرار می‌دهد، در صفحه درستی قرار دارید . ' +
+                          'در این بخش قصد داریم با توضیح برخی مفاهیم و ایجاد جداول قیاسی مزایا و تفاوت‌های سکوی ابری فندق با دیگر سرویس‌های زیرساختی را برای شما توضیح دهیم.' },
+                  {hid: 'keywords', name: 'keywords', content: 'docker, kubernetes, k8s, VPS, vps, PaaS, paas, fandogh, heroku, sloppy,' +
+                          'CI/CD, K8S, Docker, ssl, domain, deploy, host, Host, داکر, زیرساخت, زیرساخت ابری,' +
+                          'سکو, سکو ابری, سکوی ابری, سکوی ابری فندق, فندق, هاست'},
+              ]
+          }
+        },
         data() {
             return {
                 selected_index: 0,
                 header: {
-                    title: 'چرا فندق',
+                    title: 'چرا سکوی ابری فندق؟',
                     description: 'اگر در ذهن شما سوال ایجاد شده است که سکوی ابری فندق چه ارزش افزوده‌ای را در برابر هاست‌های سنتی یا vpsها در اختیار شما قرار می‌دهد، در صفحه درستی قرار دارید . ' +
                         'در این بخش قصد داریم با توضیح برخی مفاهیم و ایجاد جداول قیاسی مزایا و تفاوت‌های سکوی ابری فندق با دیگر سرویس‌های زیرساختی را برای شما توضیح دهیم.'
                 },
@@ -136,7 +148,7 @@
         @media only screen and (max-width: 992px)
             padding-top 180px
 
-        h2.comp-header-title
+        h1.comp-header-title
             margin-left auto
             margin-right auto
             font-family iran-yekan
@@ -153,7 +165,7 @@
 
 
         div.horizontal-line
-            width 450px
+            width 550px
             height 0
             border solid 1px $colorPrimary
             margin-left auto
