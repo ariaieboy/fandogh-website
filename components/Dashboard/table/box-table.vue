@@ -9,8 +9,10 @@
             </tr>
             <tr class="data-head" v-for="(item, index) in items">
 
-                <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func? func(index) : ''"
-                    v-tooltip="item[title.name].toString().length > 12 ? item[title.name] : null"
+                <td :class="title.class" v-html="item[title.name]" v-for="title in titles"
+                    @click="func? func(index) : ''"
+                    v-tooltip="item[title.name].toString().length > 12 ? item[title.name].toString().includes('canvas')
+                    ? null : item[title.name] : null"
                     :style="{cursor: (func ? 'pointer' : 'unset')}">
                     {{item[title.name]}}
                 </td>
@@ -64,7 +66,7 @@
                     var dropdowns = document.getElementsByClassName("dropdown-content");
                     var i;
                     for (i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
+                        var openDropdown = dropdowns[i].toString();
                         if (openDropdown.classList.contains('show')) {
                             openDropdown.classList.remove('show');
                         }
@@ -137,7 +139,6 @@
                     @media only screen and (max-width: 766px)
                         width 7px
                         height 15px
-
 
 
     .dropbtn {
