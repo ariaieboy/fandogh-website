@@ -10,6 +10,7 @@
             <tr class="data-head" v-for="(item, index) in items">
 
                 <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func? func(index) : ''"
+                    v-tooltip="item[title.name].toString().length > 12 ? item[title.name] : null"
                     :style="{cursor: (func ? 'pointer' : 'unset')}">
                     {{item[title.name]}}
                 </td>

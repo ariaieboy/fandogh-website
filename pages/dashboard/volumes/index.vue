@@ -62,7 +62,7 @@
             <f-empty v-if="!volumes || !volumes.length" title="هنوز فضای ذخیره‌سازی جدیدی اضافه نشده !"></f-empty>
 
             <box-table v-else :titles="titleRow" :items="volumes"
-                       :menu="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER', OPERATOR: 'OPERATOR'})? menuListComplete : menuList"></box-table>
+                       :menu="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER'})? menuListComplete : menuList"></box-table>
 
         </div>
     </div>
