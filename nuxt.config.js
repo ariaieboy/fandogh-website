@@ -52,17 +52,17 @@ module.exports = {
             {hid: 'twitter:url', name: 'twitter:url', content: 'https://www.fandogh.cloud'},
             {hid: 'twitter:title', name: 'twitter:title', content: 'سرویس های ابری | سکوی ابری فندق'},
             {hid: 'twitter:description', name: 'twitter:description', content: 'سکوی ابری فندق، ارائه دهنده خدمات رایانش ابری و داکر و جایگزینی مطمئن برای هاستینگ. در کوتاه‌ترین زمان سرویس ابری خود را ایجاد کنید.'},
-            {hid: 'twitter:image', name: 'twitter:image', content: '/icon.png'},
+            {hid: 'twitter:image', name: 'twitter:image', content: '/fandogh-icon.png'},
 
             {name: 'apple-mobile-web-app-capable', content: 'yes'},
             {name: 'mobile-web-app-capable', content: 'yes'},
 
 
-            {name: 'msapplication-TileImage', content: '/icon.png'},
+            {name: 'msapplication-TileImage', content: '/fandogh-icon.png'},
             {name: 'msapplication-TileColor', content: '#0045ff'},
 
 
-            {name: 'keywords', content: 'ثبت نام سرور مجازی, خدمات ابری ایران, ابر ایران, رایانش ابری, سرور مجازی, سرور ابری, مرکزداده مجازی, سرور داخلی, هاستینگ ابری, هاست, رایانش ابری, محاسبات ابری, کلود کامپیوتینگ, کلود ایرانی, ابر Fandogh, زیرساخت به عنوان سرویس, پلت فرم به عنوان سرویس, نرم افزار به عنوان سرویس, خدمات ابری ایران, ابری, سرور مجازی, رایانش ابری, کلودکامپیوتینگ,docker, kubernetes, k8s, داکر, سرویس ابری,سکو ابری,سکوی ابری,رایانش ابری, سرور ابری, هاست,هاستینگ'},
+            {name: 'keywords', content: 'خبرنامه,استارتاپ,دانشجو,شرکت,تیم,مشاوره ابری,پلن,امنیت,ثبت نام سرور مجازی, خدمات ابری ایران, ابر ایران, رایانش ابری, سرور مجازی, سرور ابری, مرکزداده مجازی, سرور داخلی, هاستینگ ابری, هاست, رایانش ابری, محاسبات ابری, کلود کامپیوتینگ, کلود ایرانی, ابر Fandogh, زیرساخت به عنوان سرویس, پلت فرم به عنوان سرویس, نرم افزار به عنوان سرویس, خدمات ابری ایران, ابری, سرور مجازی, رایانش ابری, کلودکامپیوتینگ,docker, kubernetes, k8s, داکر, سرویس ابری,سکو ابری,سکوی ابری,رایانش ابری, سرور ابری, هاست,هاستینگ,MySQL,Kong,Database,PostgreSQL,Redis,MongoDB,Proxy,MSSQL,java,php,C#,python,Django,Spring Boot,Java Script,net core,laravel,nodejs,node,vue.js,react.js,gitlab,github,docker hub,fandogh registry,registry,private registry,dedicated storage,storage,shared,sla,pay as you go,freelancer'},
             {
                 hid: "description",
                 name: "description",
