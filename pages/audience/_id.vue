@@ -7,7 +7,7 @@
                     <img :src="require('../../assets/svg/targets/' + audience_model[audience].icon)"
                          :alt="audience_model[audience].icon">
                 </span>
-                <p class="banner-title">{{audience_model[audience].title}}</p>
+                <h1 class="banner-title">{{audience_model[audience].title}}</h1>
                 <p class="banner-description">{{audience_model[audience].description}}</p>
             </div>
         </div>
@@ -24,12 +24,12 @@
 
             <div class="descriptions">
 
-                <h3>{{descriptions[audience].title}}</h3>
+                <h2>{{descriptions[audience].title}}</h2>
                 <p v-html="descriptions[audience].description"></p>
 
                 <div v-for="item in descriptions[audience].others" class="other-descriptions">
 
-                    <h4>{{item.title}}</h4>
+                    <h3>{{item.title}}</h3>
                     <p v-html="item.description"></p>
 
                 </div>
@@ -78,31 +78,66 @@
                         title: 'Freelancers',
                         description: 'برای Freelancer هایی که نیاز به میزبانی یکپارچه و تطبیق‌پذیر دارند',
                         icon: 'freelancers.svg',
-                        name: 'freelancers'
+                        name: 'freelancers',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'Freelancer,Freelancers,میزبانی,تطبیق‌پذیر,یکپارچه,پروژه,دسترس‌پذیر,سکو,سکوی ابری,سکوی ابری فندق,توسعه,پشتیبانی,فریم‌ورک,سرویس‌,رایگان,Prototype,DevOps,پشتیبانی,CLI,terminal,fandogh cli,مانیتورینگ,ایمیج,'
+                            }
+                        ]
                     },
                     students: {
                         title: 'دانشجویان',
                         description: 'برای دانشجویان با ایده‌های ناب و بودجه محدود',
                         icon: 'students.svg',
-                        name: 'students'
+                        name: 'students',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'دانشجو,دانشجویان,ایده‌,بودجه,سکو,سکوی ابری,سکوی ابری فندق,دانش‌آموز,محدودیت‌های مالی,سرویس‌های رایگان,سرویس‌,MVP,فریم ورک,استقرار,DevOps,پشتیبانی,توسعه‌دهنده,پرداخت هزینه,student'
+                            }
+                        ]
                     },
                     startups: {
                         title: 'استارتاپ‌ها',
                         description: 'سکویی برای توسعه، مدیریت و مقیاس‌پذیری پروژه‌های شما',
                         icon: 'startups.svg',
-                        name: 'startups'
+                        name: 'startups',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'استارتاپ‌ها,سکو,مدیریت,مقیاس پذیری,توسعه,محصول,سکوی ابری,سکوی ابری فندق,زیرساخت,تامین منابع,کاهش هزینه,کیفیت,محصول,مارکتینگ,monolithic,SOA,Service Oriented Architecture,میکروسرویس,مقیاس پذیری,فریم ورک,استقرار,سرویس,DevOps,پلن,پشتیبانی,حرفه‌ای,CLI,terminal,fandogh cli,Wizard,مانیتورینگ,ایمیج,رایگان,startup'
+                            }
+                        ]
                     },
                     teams: {
                         title: 'تیم‌ها',
                         description: 'سهولت در توسعه و سادگی در مدیریت',
                         icon: 'teams.svg',
-                        name: 'teams'
+                        name: 'teams',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'team,تیم,توسعه,مدیریت,یکپارچه,پروژه‌,اپلیکیشن,سکو,سکوی ابری,سکوی ابری فندقفریم ورک,استقرار,سرویس‌,داکر,منابع,پلن‌,DevOps,پشتیبانی,مدیریت,Wizard,CLI,fandogh cli,داشبورد,مانیتورینگ,terminal'
+                            }
+                        ]
                     },
                     companies: {
                         title: 'شرکت‌ها',
                         description: 'راه‌حل‌های Enterprise در برابر هزینه‌های پایین و مزایای بی‌شمار',
                         icon: 'companies.svg',
-                        name: 'companies'
+                        name: 'companies',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'شرکت‌ها,Enterprise,هزینه‌های پایین,هزینه‌ پایین,پروژه‌,کاربر,امنیت,زیرساخت,کیفیت,سکو,سکوی ابری,سکوی ابری فندق,افزایش سود,استارتاپ,کسب‌و‌کار,فریم ورک,داکر,استقرار,DevOps,مدیریت,پشتیبانی,منابع,پلن‌,Wizard,داشبورد,مانیتورینگ,ایمیج,CLI,terminal,fandogh cli,مشاوره معماری,SLA,مانیتورینگ منابع,Managed Cluster'
+                            }
+                        ]
                     }
                 },
                 descriptions: {
@@ -444,6 +479,13 @@
                     },
                 }
             }
+        },
+        head() {
+            return {
+                title: `${this.audience_model[this.audience].title} | سکوی ابری فندق`,
+                description: this.audience_model[this.audience].description,
+                meta: this.audience_model[this.audience].meta
+            };
         }
     }
 </script>
@@ -492,7 +534,7 @@
                     height 80px
 
 
-        p.banner-title
+        h1.banner-title
             font-family iran-yekan
             font-size 3em
             font-weight normal
@@ -669,7 +711,7 @@
         padding-left 10%
         margin-top 32px
 
-        h3
+        h2
             font-family: iran-yekan;
             font-size: 2.2em;
             font-weight: normal;
@@ -702,7 +744,7 @@
             margin-top 48px
             flex-direction column
 
-            h4
+            h3
                 font-family: iran-yekan;
                 font-size: 2em;
                 font-weight: normal;
