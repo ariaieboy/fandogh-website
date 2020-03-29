@@ -3,7 +3,7 @@
 
         <div class="row language-header">
             <div class="language-bg">
-                <p class="banner-title">{{title}}</p>
+                <h1 class="banner-title">{{title}}</h1>
                 <p class="banner-description">{{description}}</p>
             </div>
         </div>
@@ -14,7 +14,7 @@
                     <img :src="require('./icons/' + item.icon)" :alt="item.icon">
                 </span>
                 <div>
-                    <p class="lang-card-title">{{item.title}}</p>
+                    <h3 class="lang-card-title">{{item.title}}</h3>
                     <p class="lang-card-description">{{item.description}}</p>
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div style="width: 100%; height: 0; border: solid .5px #c4c2c2;"></div>
 
         <div class="languages-container" style="max-width: 1230px; margin-left: auto; margin-right: auto">
-            <p class="languages-title">{{languages_title}}</p>
+            <h2 class="languages-title">{{languages_title}}</h2>
             <p class="languages-description">{{languages_description}}</p>
             <div class="col-lg-10 col-sm-12 col-md-10 col-xs-12 container-fluid"
                  style="padding-bottom: 32px; margin-top: 32px">
@@ -33,7 +33,7 @@
                         <img :src="require('../../assets/svg/services/language/' + item.icon + '.svg')"
                              :alt="item.icon">
                         <div>
-                            <p class="language-title">{{item.title}}</p>
+                            <h4 class="language-title">{{item.title}}</h4>
                             <p class="language-description">{{item.description}}</p>
                             <p @click="$router.push('/languages/' + item.href)" class="language-link">مشاهده مستندات</p>
                         </div>
@@ -110,6 +110,18 @@
                     }
                 ]
             }
+        },
+        head() {
+            return {
+                title: "languages | سکوی ابری فندق",
+                meta: [
+                    {
+                        hid: 'keywords',
+                        name: 'keywords',
+                        content: 'Languages,فندق,معماری,معماری ابری,فریم‌ورک,سکوی ابری,سکو,سکوی ابری فندق,توسعه‌ دهنده,کد,docker,برنامه‌نویسی,برنامه‌نویس,Java,Python,Spring Boot,JDK‌,Django Project,Django,Java Script,frontend,front,Angular.js,React.js,Node.js,PHP,Laravel,C#,net core.'
+                    },
+                ]
+            };
         }
     }
 </script>
@@ -138,7 +150,7 @@
         @media only screen and (max-width 992px)
             padding-bottom 50px
 
-        p.banner-title
+        h1.banner-title
             font-family 'Helvetica Neue'
             font-size 3.5em
             font-weight bold
@@ -206,7 +218,7 @@
             padding-left 16px
             padding-right 16px
 
-            p.lang-card-title
+            h3.lang-card-title
                 font-family iran-yekan
                 font-size 1.4em
                 font-weight normal
@@ -237,7 +249,7 @@
         padding 16px
         margin-bottom 16px
 
-        p.languages-title
+        h2.languages-title
             font-family iran-yekan
             font-size 2em
             font-weight normal
@@ -293,7 +305,7 @@
             padding-left 16px
             padding-right 16px
 
-            p.language-title
+            h4.language-title
                 font-family 'Helvetica Neue'
                 font-size 1.4em
                 font-weight normal
