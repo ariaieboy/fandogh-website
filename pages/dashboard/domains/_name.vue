@@ -1,5 +1,54 @@
 <template>
     <div v-if="domain">
+
+        <div style="display: flex; flex-direction: row; background: #0045ff; padding: 16px; cursor: pointer;"
+             @click="player_expanded = !player_expanded"
+             :style="{boxShadow: (!player_expanded ? '0 3px 6px 0 rgba(0,0,0,0.17)': '0 0 6px 0 rgba(0,0,0,0.17)'),
+             borderRadius: (!player_expanded ? '3px': '3px 3px 0 0'),
+             marginBottom: (!player_expanded ? '16px': '0')}">
+            <img style="width: 48px; height: 48px;"
+                 :src="require('../../../assets/svg/' + (player_expanded ? 'ic_pause' : 'ic_play') + '.svg')"
+                 :alt="player_expanded ? 'ic_pause' : 'ic_play'"/>
+            <h2 class="title_header"
+                style="padding-bottom: 0; padding-right: 12px; vertical-align: middle; line-height: normal; margin-top: auto; margin-bottom: auto; color: #fefefe;">
+                آموزش تایید و درخواست SSL دامنه</h2>
+        </div>
+
+        <div v-if="player_expanded"
+             style="width: 100%; display: flex; background: #0045ff; padding: 16px; margin-bottom: 16px"
+             :style="{borderRadius: (!player_expanded ? '0': '0 0 3px 3px'),
+                      boxShadow: '0 5px 5px 0 rgba(0,0,0,0.17)'}">
+            <div class="row lang-detail-media-container" style="margin: 0 !important;">
+
+                <div class="col-lg-4 col-md-4 col-xs-12 col-md-12 lang-menu-container">
+
+                    <div v-for="(menu, index) in domain_record_tutorials_model"
+                         :key="menu.title"
+                         class="lang-menu-item"
+                         :class="[menu.selected ? 'selected' : '']"
+                         @click="menuItemSelected(index)">
+                        <p class="menu-item-number">{{index + 1}}</p>
+                        <p class="menu-item-title">{{menu.title}}</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                    <vue-plyr class="tut_player" :key="menu_item.video"
+                              :options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume','current-time','fullscreen']}">
+                        <video style="width: 100%">
+                            <source style="width: 100%"
+                                    :src="require('../../../assets/media/' + menu_item.video + '.mp4')"
+                                    type="video/mp4"/>
+                        </video>
+                    </vue-plyr>
+
+                </div>
+
+            </div>
+
+        </div>
+
         <h2 class="title_header">جزئیات دامنه</h2>
         <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.17); padding: 16px">
             <div class="row">
@@ -212,41 +261,6 @@
             </div>
         </div>
 
-        <h2 class="title_header" style="margin-top: 48px">آموزش تایید و درخواست SSL دامنه</h2>
-
-        <div style="width: 100%; display: flex; background: #0045ff; padding: 16px;">
-            <div class="row lang-detail-media-container" style="margin: 0 !important;">
-
-                <div class="col-lg-4 col-md-4 col-xs-12 col-md-12 lang-menu-container">
-
-                    <div v-for="(menu, index) in domain_record_tutorials_model"
-                         :key="menu.title"
-                         class="lang-menu-item"
-                         :class="[menu.selected ? 'selected' : '']"
-                         @click="menuItemSelected(index)">
-                        <p class="menu-item-number">{{index + 1}}</p>
-                        <p class="menu-item-title">{{menu.title}}</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-
-                    <vue-plyr class="tut_player" :key="menu_item.video"
-                              :options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume','current-time','fullscreen']}">
-                        <video style="width: 100%">
-                            <source style="width: 100%"
-                                    :src="require('../../../assets/media/' + menu_item.video + '.mp4')"
-                                    type="video/mp4"/>
-                        </video>
-                    </vue-plyr>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
     </div>
 </template>
 
@@ -277,6 +291,7 @@
         },
         data() {
             return {
+                player_expanded: false,
                 cname_record: 'https://dnschecker.org/#CNAME/',
                 txt_record: 'https://dnschecker.org/#TXT/',
                 name: this.$route.params.name,
