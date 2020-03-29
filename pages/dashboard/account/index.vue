@@ -81,6 +81,7 @@
                 </div>
             </div>
 
+
             <div class="box-row row">
                 <div @click="sectionClicked('ProfilePlan')"
                      :class="[(activeSectionName === 'ProfilePlan' ? 'enabled' : 'disabled')]">
