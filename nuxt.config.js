@@ -122,5 +122,5 @@ module.exports = {
 
 const modifyHtml = (html) => {
     html = html.replace(/ data-n-head="true"/g, '');
-    return html.replace(/ data-hid="[a-z]*:[a-z]*"/g, '')
+    return html.replace(/ data-hid="[a-z_:-]*"/g, '')
 };
