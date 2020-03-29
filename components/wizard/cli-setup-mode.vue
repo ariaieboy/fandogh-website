@@ -974,7 +974,6 @@
             addDomain() {
                 var redundant = false;
                 let input = {target: {value: this.domain}};
-                console.log(input)
                 this.validateDomain(input);
 
                 if (this.domain) {
@@ -1047,8 +1046,6 @@
                 }
 
                 this.manifest_model.volumes.volume_list.push(volume);
-
-                // console.log(this.manifest_model.volumes.volume_list);
 
                 this.manifest_model.volumes.volume.mount_path = null;
                 this.manifest_model.volumes.volume.sub_path = null;

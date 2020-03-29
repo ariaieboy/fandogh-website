@@ -504,8 +504,6 @@
                     }
                 });
 
-                console.log(this.rabbitmq_manifest.plugins_list.value)
-                console.log(this.rabbitmq_manifest.plugins_list.value.length)
             },
             RabbitmqExposeSelected() {
                 this.rabbitmq_dashboard.selected = !this.rabbitmq_dashboard.selected;

@@ -109,7 +109,6 @@
             services() {
                 let services = this.$store.state.services;
                 if (services) {
-                    console.log(services)
                     return services.map(
                         ({memory, start_date, name, service_restarts, service_type, state}) => {
                             return {
