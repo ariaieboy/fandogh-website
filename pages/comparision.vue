@@ -99,7 +99,6 @@
         methods: {
 
             onMenuClicked(index) {
-                console.log(index);
                 this.comp_menu.forEach((item) => {
                     item.selected = false
                 });
