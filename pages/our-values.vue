@@ -4,7 +4,7 @@
             <section class="article">
                 <article>
 
-                    <h2 class="no-line-height">ارزش‌های ما</h2>
+                    <h1 style="font-size: 2.5em" class="no-line-height">ارزش‌های سکوی ابری فندق</h1>
                     <p>
                         ارزش ها در یک مجموعه حاصل فرهنگ سازمانی و سیاست‌های آن مجموعه است. حال این ارزش‌ها را با شما به اشتراک میگذاریم تا با آن‌ها آشنا شوید.
                     </p>
@@ -40,6 +40,14 @@
         name: "our-values",
         components:{
             Single,
+        },
+        head() {
+            return {
+                title: "ارزش‌های سکوی ابری فندق",
+                meta:[
+                    {hid: 'keywords', name: 'keywords', content: 'سکو,فندق,تیم,توسعه,نرم افزار,فرهنگ سازمانی,سکوی ابری,مهندس,سیاست'},
+                ]
+            };
         }
     }
 </script>
