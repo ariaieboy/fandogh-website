@@ -35,7 +35,10 @@ export default {
   },
   head() {
     return {
-      title: "در باره فندق",
+      title: "درباره فندق",
+      meta:[
+        {hid: 'keywords', name: 'keywords', content: 'سکو,استقرار,فندق,سرورهای ابری,سرور,سرویس,OpenShift,PaaS,زیرساخت,سکوی ابری,سکو ابری,توسعه دهنده,freeland,متن باز,رایگان'},
+      ]
     };
   }
 };
