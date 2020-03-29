@@ -176,12 +176,12 @@
         },
         head() {
             return {
-                title: "سرویس‌های مدیریت شده | سکوی ابری فندق",
+                title: "سرویس ‌های مدیریت شده | سکوی ابری فندق",
                 meta: [
                     {
                         hid: 'keywords',
                         name: 'keywords',
-                        content: 'سرویس‌,سرویس‌ مدیریت شده,تکنولوژی‌,مقیاس‌پذیر,سرویس,پشتیبانی,سکو,سکوی ابری,سکوی ابری فندق,امنیت,Private Network,Private Network,اعتماد,stable,منابع,database,sql,mysql,postgresql,mongodb,mssql server,redis,rabbitmq,file browser,file,proxy,ip,range,ip range,ثبت‌نام'
+                        content: 'سرویس‌,سرویس‌ مدیریت شده,تکنولوژی‌,مقیاس‌پذیر,سرویس,پشتیبانی,سکو,سکوی ابری,سکوی ابری فندق,امنیت,Private Network,Private Network,اعتماد,stable,منابع,database,sql,mysql,postgresql,mongodb,mssql server,redis,rabbitmq,file browser,file,proxy,ip,range,ip range,ثبت‌نام,message broker,memory,cache,nosql,'
                     },
                 ]
             };
