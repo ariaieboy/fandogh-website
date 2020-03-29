@@ -45,7 +45,7 @@
     import VpsVSPaaS from '../components/Landing/comparision/vps-vs-paas'
 
     export default {
-        name: "comparision",
+        name: "comparison",
         components: {
             FandoghCompetitors,
             InfraServicesSchema,

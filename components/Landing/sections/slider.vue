@@ -56,7 +56,7 @@
                         title: "چرا سکوی ابری فندق؟",
                         description: 'سکوهای ابری مزایای خیلی بیشتری را در مقابل VPSها و Hostها در اختیار شما قرار می‌دهند و در عین حال از هزینه‌های شما هم می‌کاهند. سکوی ابری فندق به عنوان اولین سکوی ابری ایران ...',
                         button_text: "مطالعه بیشتر",
-                        button_link: "/comparision",
+                        button_link: "/comparison",
                         banner: "question-mark",
                         selected: true
                     },

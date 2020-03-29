@@ -43,7 +43,7 @@
                 <p class="footer-col-title">درباره ما</p>
                 <ul>
                     <li>
-                        <a class="footer-col-option" @click="$router.push('/comparision')">چرا فندق؟</a>
+                        <a class="footer-col-option" @click="$router.push('/comparison')">چرا فندق؟</a>
                     </li><li>
                         <a class="footer-col-option" @click="$router.push('/about-us')">درباره ما</a>
                     </li>
