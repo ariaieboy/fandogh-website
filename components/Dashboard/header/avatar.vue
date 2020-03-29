@@ -1,14 +1,14 @@
 <template>
     <div class="header-avatar">
         <div class="header-avatar-box" @click="toggleAvatar('avatar')">
-            <img class="header-avatar-img" :src="avatar" alt>
+            <img class="header-avatar-img" :src="avatar" alt="avatar">
             <div class="header-avatar-name">
                 <span>{{namespace}}</span>
             </div>
             <img
                     class="header-avatar-arrow"
                     src="./icons/arrow-point-to-right.svg"
-                    alt
+                    alt="arrow"
                     :class="{open:isNativeMenus === 'avatar'}"
             >
         </div>
@@ -19,11 +19,11 @@
             </div>
             <div class="header-avatar-list-item">
                 <router-link :to="{path: item.link, query: {ns: $route.query.ns}}"  class="header-avatar-item" v-for="(item,i) in items" :key="i">
-                    <img :src="require('./icons/'+item.icon+'.svg')">
+                    <img :src="require('./icons/'+item.icon+'.svg')" :alt="item.icon">
                     <span>{{item.text}}</span>
                 </router-link>
                 <div @click="exit" class="header-avatar-item">
-                    <img src="./icons/ic-exit.svg" alt>
+                    <img src="./icons/ic-exit.svg" alt="exit">
                     <span>خروج</span>
                 </div>
             </div>

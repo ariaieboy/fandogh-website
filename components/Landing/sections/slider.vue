@@ -31,7 +31,7 @@
             </div>
 
             <div class="bullet-section">
-                <img src="../../../assets/svg/bullet_bg.svg" width="100%" class="top-curve"/>
+                <img src="../../../assets/svg/bullet_bg.svg" width="100%" class="top-curve" alt="bullet"/>
                 <div class="main-slider-bullet-container">
                     <div v-for="(item, index) in slider_data" @click="bulletClicked(index)" class="main-slider-bullet"
                          :style="{backgroundColor: item.selected ? '#fefefe' : 'rgba(254, 254, 254, 0.4)'}">

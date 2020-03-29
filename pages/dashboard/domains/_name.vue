@@ -219,7 +219,7 @@
                                             data-balloon-pos="up"
                                     >
                 {{domain.certificate.details.status | status}}
-                <img src="~/static/icons/plans/info-button.png"></span>
+                <img src="~/static/icons/plans/info-button.png" alt="info"></span>
                                 </div>
                             </div>
                         </f-collaps>
@@ -434,7 +434,7 @@
                     if (this.domain.service) {
                         this.textService = `<a href="/dashboard/services/${this.domain.service}" >
             ${this.domain.service}
-            <img src="/icons/plans/info-button.png" >
+            <img src="/icons/plans/info-button.png" alt="info">
             </a>`;
                     }
                 } catch (e) {

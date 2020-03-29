@@ -1,6 +1,6 @@
 <template>
   <div class="empty">
-    <img src="./images/ic_es_services.svg" alt>
+    <img src="./images/ic_es_services.svg" alt="services">
     <label>{{title}}</label>
     <slot></slot>
   </div>

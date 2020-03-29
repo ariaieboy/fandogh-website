@@ -5,7 +5,8 @@
                 {{title}}
                 <span v-if="loading">
                     <img style=" margin-top: auto; margin-bottom: auto; width: 32px; height: 32px"
-                         src="~/assets/img/icons/loading.svg"/>
+                         src="~/assets/img/icons/loading.svg"
+                         alt="loading"/>
                 </span>
             </div>
             <div>
