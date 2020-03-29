@@ -45,7 +45,7 @@ module.exports = {
             {hid: 'og:url', property: 'og:url', content: 'https://www.fandogh.cloud'},
             {hid: 'og:site_name', property: 'og:site_name', content: 'Fandogh'},
             {hid: 'og:locale', property: 'og:locale', content: 'fa'},
-            {hid: 'og:image', property: 'og:image', content: '/icon.png'},
+            {hid: 'og:image', property: 'og:image', content: '/fandogh-icon.png'},
 
             {hid: 'twitter:card', name: 'twitter:card', content: 'summary'},
             {hid: 'twitter:site', name: 'twitter:site', content: '@fandoghpaas'},
