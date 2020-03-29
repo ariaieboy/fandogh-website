@@ -3,7 +3,7 @@
 
         <div class="row managed-service-header">
             <div class="managed-service-bg">
-                <p class="banner-title">{{title}}</p>
+                <h1 class="banner-title">{{title}}</h1>
                 <p class="banner-description">{{description}}</p>
             </div>
         </div>
@@ -173,6 +173,18 @@
                 }
 
             }
+        },
+        head() {
+            return {
+                title: "سرویس‌های مدیریت شده | سکوی ابری فندق",
+                meta: [
+                    {
+                        hid: 'keywords',
+                        name: 'keywords',
+                        content: 'سرویس‌,سرویس‌ مدیریت شده,تکنولوژی‌,مقیاس‌پذیر,سرویس,پشتیبانی,سکو,سکوی ابری,سکوی ابری فندق,امنیت,Private Network,Private Network,اعتماد,stable,منابع,database,sql,mysql,postgresql,mongodb,mssql server,redis,rabbitmq,file browser,file,proxy,ip,range,ip range,ثبت‌نام'
+                    },
+                ]
+            };
         }
     }
 </script>
@@ -201,7 +213,7 @@
         @media only screen and (max-width 992px)
             padding-bottom 50px
 
-        p.banner-title
+        h1.banner-title
             font-family iran-yekan
             font-size 3.5em
             font-weight bold
