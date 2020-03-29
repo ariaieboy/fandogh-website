@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="lang-logo-container">
-            <p>{{ '< ' + language_model[language_id].title_en + ' >' }}</p>
+            <h1>{{ '< ' + language_model[language_id].title_en + ' >' }}</h1>
             <div>
                 <div>
                     <img :src="require('../../assets/svg/services/language/' + language_model[language_id].logo + '.svg')"
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <p class="lang-detail-desc-title">{{language_model[language_id].slogan}}</p>
+        <h2 class="lang-detail-desc-title">{{language_model[language_id].slogan}}</h2>
 
         <div class="row features-box">
             <div v-for="item in language_feature_model[language_id]"
@@ -26,7 +26,7 @@
                     <img :src="require('./icons/' + item.icon)" :alt="item.icon">
                 </span>
                 <div>
-                    <p class="feature-card-title">{{item.title}}</p>
+                    <h3 class="feature-card-title">{{item.title}}</h3>
                     <p class="feature-card-description">{{item.description}}</p>
                 </div>
             </div>
@@ -82,7 +82,7 @@
         <!--</div>-->
 
         <div class="framework-container row" v-if="frameworks_model[language_id].length > 0">
-            <p class="framework-title">فریم‌ورک‌های پشتیبانی شده</p>
+            <h2 class="framework-title">فریم‌ورک‌های پشتیبانی شده</h2>
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 feature-sec-menu">
                 <div @click="frameworkItemSelected(index)" v-for="(item, index) in frameworks_model[language_id]"
@@ -97,7 +97,7 @@
                      :alt="framework.image"
                      class="col-2"/>
                 <div class="col-10 card-container">
-                    <p class="card-title">{{framework.title}}</p>
+                    <h3 class="card-title">{{framework.title}}</h3>
                     <p class="card-description" v-html="framework.description"></p>
                 </div>
 
@@ -124,35 +124,70 @@
                         title_fa: 'پایتون',
                         slogan: 'دنیای بی‌کران پایتون بر روی سکوی ابری فندق',
                         logo: 'python_lang',
-                        banner: 'python_bg.svg'
+                        banner: 'python_bg.svg',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'فریم‌ورک,زبان‌ها,توسعه‌دهندگان,معماری,معماری ابری,سکو,سکوی ابری,سکوی ابری فندق,تکنولوژی,docker,پشتیبانی,پایتون,Python,Django,Django Project,متن باز,برنامه‌نویسی,Rapid Development,هاست پایتون'
+                            }
+                        ]
                     },
                     java: {
                         title_en: 'Java',
                         title_fa: 'جاوا',
                         slogan: 'دنیای بی‌کران جاوا بر روی سکوی ابری فندق',
                         logo: 'java_lang',
-                        banner: 'java_bg.svg'
+                        banner: 'java_bg.svg',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'فریم‌ورک,زبان‌ها,توسعه‌دهندگان,معماری,معماری ابری,سکو,سکوی ابری,سکوی ابری فندق,تکنولوژی,docker,پشتیبانی,Java,جاوا,Spring Boot,کد نویسی,هاست جاوا'
+                            }
+                        ]
                     },
                     php: {
                         title_en: 'PHP',
                         title_fa: 'پی‌اچ‌پی',
                         slogan: 'دنیای بی‌کران پی‌اچ‌پی بر روی سکوی ابری فندق',
                         logo: 'php_lang',
-                        banner: 'php_bg.svg'
+                        banner: 'php_bg.svg',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'فریم‌ورک,زبان‌ها,توسعه‌دهندگان,معماری,معماری ابری,سکو,سکوی ابری,سکوی ابری فندق,تکنولوژی,docker,پشتیبانی,PHP,پی‌اچ‌پی,Laravel,رایگان,هاست php,MVC,Symfony,dependencyها,'
+                            }
+                        ]
                     },
                     java_script: {
                         title_en: 'Java Script',
                         title_fa: 'جاوا اسکریپت',
                         slogan: 'دنیای بی‌کران جاوا اسکریپت بر روی سکوی ابری فندق',
                         logo: 'nodejs_lang',
-                        banner: 'java_script_bg.svg'
+                        banner: 'java_script_bg.svg',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'فریم‌ورک,زبان‌ها,توسعه‌دهندگان,معماری,معماری ابری,سکو,سکوی ابری,سکوی ابری فندق,تکنولوژی,docker,پشتیبانی,Java Script,هاست جاوا اسکریپت,هاست node,'
+                            }
+                        ]
                     },
                     c_sharp: {
                         title_en: 'C#',
                         title_fa: 'سی شارپ',
                         slogan: 'دنیای بی‌کران سی شارپ بر روی سکوی ابری فندق',
                         logo: 'c_sharp_lang',
-                        banner: 'c_sharp_bg.svg'
+                        banner: 'c_sharp_bg.svg',
+                        meta: [
+                            {
+                                hid: 'keywords',
+                                name: 'keywords',
+                                content: 'فریم‌ورک,زبان‌ها,توسعه‌دهندگان,معماری,معماری ابری,سکو,سکوی ابری,سکوی ابری فندق,تکنولوژی,docker,پشتیبانی,C#,سی شارپ,Asp.Net Core,Asp.Net,Net Core,Cross Platform,هاست net core,'
+                            }
+                        ]
                     }
 
                 },
@@ -476,6 +511,13 @@
                 this.frameworks_model[this.language_id][0].selected = true;
                 this.framework = this.frameworks_model[this.language_id][0].card
             }
+        },
+        head() {
+            return {
+                title: `${this.language_model[this.language_id].title_fa} | سکوی ابری فندق`,
+                meta: this.language_model[this.language_id].meta
+
+            };
         }
     }
 </script>
@@ -507,7 +549,7 @@
         @media only screen and (max-width 1230px)
             margin-top: -191px
 
-        p
+        h1
             font-family: 'Helvetica Neue';
             font-size: 4em;
             font-weight: bold;
@@ -598,7 +640,7 @@
             padding-left 16px
             padding-right 16px
 
-            p.feature-card-title
+            h3.feature-card-title
                 font-family iran-yekan
                 font-size 1.4em
                 font-weight normal
@@ -811,7 +853,7 @@
         height max-content
         padding-bottom 64px
 
-        p.framework-title
+        h2.framework-title
             font-family: iran-yekan;
             font-size: 2.2em
             font-weight: normal;
@@ -920,7 +962,7 @@
             padding-right 24px
             padding-left 24px
 
-            p.card-title
+            h3.card-title
                 font-family 'Helvetica Neue'
                 font-size 1.8em
                 font-weight bold
