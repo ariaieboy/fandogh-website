@@ -101,7 +101,7 @@
                         ]
                     },
                     startups: {
-                        title: 'استارتاپ‌ها',
+                        title: 'استارتاپ ‌ها',
                         description: 'سکویی برای توسعه، مدیریت و مقیاس‌پذیری پروژه‌های شما',
                         icon: 'startups.svg',
                         name: 'startups',
@@ -114,7 +114,7 @@
                         ]
                     },
                     teams: {
-                        title: 'تیم‌ها',
+                        title: 'تیم ‌ها',
                         description: 'سهولت در توسعه و سادگی در مدیریت',
                         icon: 'teams.svg',
                         name: 'teams',
@@ -127,7 +127,7 @@
                         ]
                     },
                     companies: {
-                        title: 'شرکت‌ها',
+                        title: 'شرکت ‌ها',
                         description: 'راه‌حل‌های Enterprise در برابر هزینه‌های پایین و مزایای بی‌شمار',
                         icon: 'companies.svg',
                         name: 'companies',
