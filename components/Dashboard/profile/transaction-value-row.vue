@@ -8,7 +8,7 @@
                 <td class="number" style="direction: ltr;" width="17%">{{celSpec.date}}</td>
                 <td width="20%">{{celSpec.transactionCode}}</td>
                 <td width="20%">{{celSpec.namespace}}</td>
-                <td class="number" width="20%" style="direction: ltr">{{celSpec.transactionAmount}}</td>
+                <td class="number" width="20%" style="direction: ltr">{{celSpec.transactionAmount.toLocaleString()}}</td>
                 <td class="number description-col" width="15%" @click="showTransactionDetail" style="cursor: pointer;">
                     <a  :href="`https://fandogh.cloud/dashboard/account/transaction-details?ns=${$route.query.ns}`" target="_blank">
                         {{celSpec.description}}
