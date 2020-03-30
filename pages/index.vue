@@ -40,15 +40,21 @@
             Price,
             SocialNetwork
         },
+        head() {
+            return {
+                title: 'page title'
+            }
+
+        },
         data() {
             return {}
         },
-        mounted(){
-          if (this.$route.hash){
-              if(this.$route.hash === '#newsletter'){
-                  document.getElementById('newsletter').scrollIntoView({ block: 'center',  behavior: 'smooth' })
-              }
-          }
+        mounted() {
+            if (this.$route.hash) {
+                if (this.$route.hash === '#newsletter') {
+                    document.getElementById('newsletter').scrollIntoView({block: 'center', behavior: 'smooth'})
+                }
+            }
         }
     }
 </script>

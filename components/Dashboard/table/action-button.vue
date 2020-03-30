@@ -6,7 +6,7 @@
     :data-balloon="label"
     data-balloon-pos="up"
   >
-    <img :src="`/icons/${icon}`" alt>
+    <img :src="`/icons/${icon}`" :alt="icon">
     <label>{{label}}</label>
     <slot/>
   </a>

@@ -4,13 +4,14 @@
       <div class="service---box">
         <div class="service----item">
           <div class="service-----image">
-            <img :src="'/icons/plans/services-icon/'+icon">
+            <img :src="'/icons/plans/services-icon/'+icon" alt="services">
           </div>
           <div class="service-----text">
             <span class="service------title">
               {{title}}
               <img
                 src="~/static/icons/plans/info-button.png"
+                alt="info"
                 @click.stop.prevent="$emit('clickInfo')"
               >
               <!-- tooltipShow -->
@@ -33,14 +34,14 @@
           </div>-->
           <div class="service-----information">
             <span class="service------image">
-              <img :src="'/icons/plans/memory.png'" alt>
+              <img :src="'/icons/plans/memory.png'" alt="memory">
             </span>
             <span class="service------name font-roboto">RAM</span>
             <span class="service------info">{{ram}}</span>
           </div>
           <div class="service-----information">
             <span class="service------image">
-              <img :src="'/icons/plans/dedicatedVolume.png'" alt>
+              <img :src="'/icons/plans/dedicatedVolume.png'" alt="dedicated volume">
             </span>
             <span class="service------name font-roboto">Storage</span>
             <span class="service------info">{{space}}</span>

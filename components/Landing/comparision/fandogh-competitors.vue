@@ -235,6 +235,13 @@
                         sloppy: true,
                         heroku: true
                     },
+                    {
+                        title: 'Docker Support',
+                        is_boolean: true,
+                        fandogh: true,
+                        sloppy: true,
+                        heroku: true
+                    },
                 ]
             }
         }

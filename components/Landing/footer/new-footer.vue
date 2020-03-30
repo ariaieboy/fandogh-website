@@ -43,7 +43,7 @@
                 <p class="footer-col-title">درباره ما</p>
                 <ul>
                     <li>
-                        <a class="footer-col-option" @click="$router.push('/comparision')">چرا فندق؟</a>
+                        <a class="footer-col-option" @click="$router.push('/comparison')">چرا فندق؟</a>
                     </li><li>
                         <a class="footer-col-option" @click="$router.push('/about-us')">درباره ما</a>
                     </li>
@@ -66,19 +66,19 @@
             <div class="footer-social-container">
 
                 <a rel="noopener" target="_blank" href="https://github.com/fandoghpaas"> <img
-                        src="../../../assets/svg/social/github.svg"/></a>
+                        src="../../../assets/svg/social/github.svg" alt="github"/></a>
                 <a rel="noopener" target="_blank" href="https://twitter.com/fandoghpaas"><img
-                        src="../../../assets/svg/social/twitter.svg"/></a>
+                        src="../../../assets/svg/social/twitter.svg" alt="twitter"/></a>
                 <a rel="noopener" target="_blank" href="https://linkedin.com/company/fandogh-paas"><img
-                        src="../../../assets/svg/social/linkedin.svg"/></a>
+                        src="../../../assets/svg/social/linkedin.svg" alt="linkedin"/></a>
                 <a rel="noopener" target="_blank" href="https://facebook.com/fandoghpaas/"><img
-                        src="../../../assets/svg/social/facebook.svg"/></a>
+                        src="../../../assets/svg/social/facebook.svg" alt="facebook"/></a>
                 <a rel="noopener" target="_blank" href="https://t.me/fandoghpaas"><img
-                        src="../../../assets/svg/social/telegram.svg"/></a>
+                        src="../../../assets/svg/social/telegram.svg" alt="telegram"/></a>
                 <a rel="noopener" target="_blank" href="https://virgool.io/@fandogh.cloud"><img
-                        src="../../../assets/svg/social/virgool.svg"/></a>
+                        src="../../../assets/svg/social/virgool.svg" alt="virgool"/></a>
                 <a rel="noopener" target="_blank" href="mailto:support@fandogh.cloud"><img
-                        src="../../../assets/svg/social/email.svg"/></a>
+                        src="../../../assets/svg/social/email.svg" alt="email"/></a>
 
             </div>
 
@@ -87,7 +87,7 @@
 
         <div class="copy-right-container">
 
-            <img src="../../../assets/svg/ic-fandogh-mini.svg">
+            <img src="../../../assets/svg/ic-fandogh-mini.svg" alt="fandogh-logo">
             <p>
                 تمام حقوق مادی و معنوی این سایت متعلق به سکوی ابری فندق است
             </p>
