@@ -30,7 +30,7 @@
 
                             <p style="margin: 5px 0 0 0; font-family: iran-yekan; font-size: 1em; color: #fff; text-align: right; direction: rtl;" dir="rtl">
                                 <span style="font-family: iran-yekan; font-size: 1.1em; color: #fff; direction: rtl;" dir="rtl">سفارش دهنده:</span>
-                                {{username}}</p>
+                                {{namespace}}</p>
 
                             <p style="margin: 5px 0 0 0; font-family: iran-yekan; letter-spacing: 0.05em; font-size: 1em; color: #fff; text-align: right">
                                 <span style="font-family: iran-yekan; font-size: 1.1em; color: #fff;">فضانام:</span>
@@ -82,11 +82,19 @@
                         <div class="row"
                              style="height: 1px; background-color: #7c7c7c;box-sizing: content-box; margin-top: 16px"></div>
 
-                        <div class="row">
-                            <p class="col-xs-12 col-md-12 col-sm-12 col-lg-12"
-                               style="text-align: center; font-size: 0.9em; color: #000;display: inline-block; margin-top: 32px">
+                        <div class="row" style="margin-top: 16px">
+                            <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
+                               style="text-align: center; font-size: 0.9em; color: #000;display: inline-block; margin-right: auto; margin-left: auto">
                                 مبلغ پرداخت شده: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{Number(transaction.transactionAmount).toLocaleString()}} تومان</span>
                             </p>
+                            <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
+                               v-if="transaction.payment_type === 'PLAN' && transaction.month_count !== 0"
+                               style="text-align: center; font-size: 0.9em; color: #000;display: inline-block">
+                                برای مدت: <span style="font-family: iran-sans; font-size: 1em; color: #222">{{transaction.month_count}} ماه</span>
+                            </p>
+                            <p class="col-xs-12 col-md-6 col-sm-6 col-lg-6"
+                               v-else-if="transaction.payment_type === 'PLAN' && transaction.month_count === 0"
+                               style="text-align: center; font-size: 0.9em; color: #000;display: inline-block">ارتقا منابع</p>
                         </div>
 
                     </div>
@@ -123,7 +131,7 @@
                 return getValue("username");
             },
             namespace() {
-                return getValue("namespace");
+                return sessionStorage.getItem("namespace");
             }
         },
         beforeDestroy() {
