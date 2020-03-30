@@ -10,7 +10,7 @@
                 <td width="20%">{{celSpec.namespace}}</td>
                 <td class="number" width="20%" style="direction: ltr">{{celSpec.transactionAmount}}</td>
                 <td class="number description-col" width="15%" @click="showTransactionDetail" style="cursor: pointer;">
-                    <a href="https://fandogh.cloud/dashboard/account/transaction-details" target="_blank">
+                    <a  :href="`http://localhost:4000/dashboard/account/transaction-details?ns=${$route.query.ns}`" target="_blank">
                         {{celSpec.description}}
                     </a>
                 </td>
