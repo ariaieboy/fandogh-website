@@ -93,11 +93,9 @@
                 ],
                 menuList: [
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
-                    {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
                 ],
                 menuListComplete: [
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
-                    {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سرویس', style: {color: '#fd3259'}},
                 ]
             };
@@ -228,17 +226,6 @@
                 });
                 this.$router.push({
                     path: `/dashboard/services/${this.services[index].name}`
-                });
-            },
-            logs(index) {
-                this.$ga.event({
-                    eventCategory: "service",
-                    eventAction: "click btn logs service",
-                    eventLabel: "service name",
-                    eventValue: this.services[index].name
-                });
-                this.$router.push({
-                    path: `/dashboard/services/${this.services[index].name}/logs`
                 });
             }, newService() {
                 this.$router.push({

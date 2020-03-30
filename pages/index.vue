@@ -40,12 +40,6 @@
             Price,
             SocialNetwork
         },
-        head() {
-            return {
-                title: 'page title'
-            }
-
-        },
         data() {
             return {}
         },
