@@ -4,7 +4,8 @@
             <tbody>
             <tr v-for="(log, index) in logs">
                 <td>{{index+1}}</td>
-                <td v-html="processLogLine(log)"></td>
+                <td v-if="is_image_log">{{log}}</td>
+                <td v-else v-html="processLogLine(log)"></td>
             </tr>
             </tbody>
         </table>
@@ -18,7 +19,7 @@
     import FLoading from "~/components/Loading";
 
     export default {
-        props: ['logs'],
+        props: ['logs', 'is_image_log'],
         components: {
             FLoading
         },
@@ -31,6 +32,10 @@
         methods: {
             processLogLine(line) {
                 let parts = line.toString().split('->');
+                console.log(parts)
+                if (!parts) {
+                    return line
+                }
                 let words = parts[0].match(/[+[a-zA-Z-0-9]+]/g);
                 var phrase = '';
                 for (let word of words) {

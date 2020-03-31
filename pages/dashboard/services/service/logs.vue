@@ -70,7 +70,7 @@
             </div>
 
         </div>
-        <log v-if="!loading" :logs="logs ? logs.split('\n') : []"/>
+        <log v-if="!loading" :logs="logs ? logs.split('\n') : []" :is_image_log="false"/>
         <span v-if="showFab" class="fab-button"
               @click="backToTop">
             <img src="../../../../assets/svg/arrow.svg" alt="back_top">
