@@ -48,7 +48,7 @@ module.exports = {
     head: {
         title: "سرویس های ابری | سکوی ابری فندق",
         meta: [
-            {'http-equiv':'Content-Type', content:'text/html', charset: 'utf-8'},
+            {charset: 'utf-8'},
             {'http-equiv':'X-UA-Compatible', content:'IE=edge'},
 
             {name: "viewport", content: "width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=3.0, user-scalable=yes"},
