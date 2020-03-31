@@ -39,13 +39,13 @@ module.exports = {
 
             {name: "viewport", content: "width=device-width, initial-scale=1"},
 
-            {hid: 'og:type', property: 'og:type', content: 'website'},
-            {hid: 'og:title', property: 'og:title', content: 'سرویس های ابری | سکوی ابری فندق'},
-            {hid: 'og:description', property: 'og:description', content: 'سکوی ابری فندق، ارائه دهنده خدمات رایانش ابری و داکر و جایگزینی مطمئن برای هاستینگ. در کوتاه‌ترین زمان سرویس ابری خود را ایجاد کنید.'},
-            {hid: 'og:url', property: 'og:url', content: 'https://www.fandogh.cloud'},
-            {hid: 'og:site_name', property: 'og:site_name', content: 'Fandogh'},
-            {hid: 'og:locale', property: 'og:locale', content: 'fa'},
-            {hid: 'og:image', property: 'og:image', content: 'https://fandogh.cloud/fandogh-icon.png'},
+            {property: 'og:type', content: 'website'},
+            {property: 'og:title', content: 'سرویس های ابری | سکوی ابری فندق'},
+            {property: 'og:description', content: 'سکوی ابری فندق، ارائه دهنده خدمات رایانش ابری و داکر و جایگزینی مطمئن برای هاستینگ. در کوتاه‌ترین زمان سرویس ابری خود را ایجاد کنید.'},
+            {property: 'og:url', content: 'https://www.fandogh.cloud'},
+            {property: 'og:site_name', content: 'Fandogh'},
+            {property: 'og:locale', content: 'fa'},
+            {property: 'og:image', content: 'https://fandogh.cloud/fandogh-icon.png'},
 
             {hid: 'twitter:card', name: 'twitter:card', content: 'summary'},
             {hid: 'twitter:site', name: 'twitter:site', content: '@fandoghpaas'},
