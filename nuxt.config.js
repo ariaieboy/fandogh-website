@@ -34,6 +34,16 @@ module.exports = {
         "@/assets/css/main.styl",
         'vue-plyr/dist/vue-plyr.css'
     ],
+    pwa:{
+        icon: {
+            iconFileName: 'pwa_icon.png'
+        },
+        manifest:{
+            name: 'Fandogh PaaS',
+            lang: 'fa',
+            description: 'Fandogh Platform as a Service application'
+        }
+    },
     head: {
         title: "سرویس های ابری | سکوی ابری فندق",
         meta: [
