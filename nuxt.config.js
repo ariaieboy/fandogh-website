@@ -40,7 +40,7 @@ module.exports = {
             {'http-equiv':'Content-Type', content:'text/html', charset: 'utf-8'},
             {'http-equiv':'X-UA-Compatible', content:'IE=edge'},
 
-            {name: "viewport", content: "width=device-width, initial-scale=1, user-scalable=3.0"},
+            {name: "viewport", content: "width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=3.0, user-scalable=yes"},
 
             {property: 'og:type', content: 'website'},
             {property: 'og:title', content: 'سرویس های ابری | سکوی ابری فندق'},
