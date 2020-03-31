@@ -432,7 +432,7 @@
                     });
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (this.domain.service) {
-                        this.textService = `<a href="/dashboard/services/${this.domain.service}" >
+                        this.textService = `<a href="/dashboard/services/${this.domain.service}" rel="noopener">
             ${this.domain.service}
             <img src="/icons/plans/info-button.png" alt="info">
             </a>`;

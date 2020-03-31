@@ -6,11 +6,11 @@
                 <p class="footer-col-title">محصولات</p>
                 <ul>
                     <li>
-                        <a class="footer-col-option" href="https://fandogh.cloud/managed-services" target="_blank">سرویس‌های مدیریت شده</a>
+                        <a class="footer-col-option" href="https://fandogh.cloud/managed-services" target="_blank" rel="noopener">سرویس‌های مدیریت شده</a>
                     </li>
 
                     <li>
-                        <a class="footer-col-option" href="https://fandogh.cloud/languages" target="_blank">سرویس‌های مستقیم</a>
+                        <a class="footer-col-option" href="https://fandogh.cloud/languages" target="_blank" rel="noopener">سرویس‌های مستقیم</a>
                     </li>
 
                     <!--<li>-->
@@ -22,19 +22,19 @@
                 <p class="footer-col-title">منابع</p>
                 <ul>
                     <li>
-                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">مستندات</a>
+                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank" rel="noopener">مستندات</a>
                     </li>
                     <li>
-                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-manifests">مانیفست‌ها</a>
+                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-manifests" rel="noopener">مانیفست‌ها</a>
                     </li>
                     <li>
-                        <a class="footer-col-option" href="https://blog.fandogh.cloud/" target="_blank">وبلاگ</a>
+                        <a class="footer-col-option" href="https://blog.fandogh.cloud/" target="_blank" rel="noopener">وبلاگ</a>
                     </li>
                     <li>
-                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml" target="_blank">API</a>
+                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml" target="_blank" rel="noopener">API</a>
                     </li>
                     <li>
-                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank">CLI</a>
+                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank" rel="noopener">CLI</a>
                     </li>
                 </ul>
             </div>
@@ -42,18 +42,18 @@
                 <p class="footer-col-title">درباره ما</p>
                 <ul>
                     <li>
-                        <a class="footer-col-option" @click="$router.push('/comparison')">چرا فندق؟</a>
+                        <a class="footer-col-option" @click="$router.push('/comparison')" rel="noopener">چرا فندق؟</a>
                     </li><li>
-                        <a class="footer-col-option" @click="$router.push('/about-us')">درباره ما</a>
+                        <a class="footer-col-option" @click="$router.push('/about-us')" rel="noopener">درباره ما</a>
                     </li>
                     <li>
-                        <a class="footer-col-option" @click="$router.push('/our-values')">ارزش‌های ما</a>
+                        <a class="footer-col-option" @click="$router.push('/our-values')" rel="noopener">ارزش‌های ما</a>
                     </li>
                     <li>
-                        <a class="footer-col-option" @click="$router.push('/conditions-of-use')">قوانین سکو</a>
+                        <a class="footer-col-option" @click="$router.push('/conditions-of-use')" rel="noopener">قوانین سکو</a>
                     </li>
                     <li>
-                        <a class="footer-col-option" @click="$router.push('/contact-us')">تماس با ما</a>
+                        <a class="footer-col-option" @click="$router.push('/contact-us')" rel="noopener">تماس با ما</a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@
                         src="../../../assets/svg/social/telegram.svg" alt="telegram"/></a>
                 <a rel="noopener" target="_blank" href="https://virgool.io/@fandogh.cloud"><img
                         src="../../../assets/svg/social/virgool.svg" alt="virgool"/></a>
-                <a rel="noopener" target="_blank" href="mailto:support@fandogh.cloud"><img
+                <a rel="noopener nofollow" target="_blank" href="mailto:support@fandogh.cloud"><img
                         src="../../../assets/svg/social/email.svg" alt="email"/></a>
 
             </div>

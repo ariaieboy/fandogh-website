@@ -3,6 +3,7 @@
     @click.prevent="$emit('onClick')"
     class="action-button"
     href="#"
+    rel="noopener"
     :data-balloon="label"
     data-balloon-pos="up"
   >

@@ -71,8 +71,8 @@
 
             <div class="info-line"></div>
             <div class="info-action-container">
-                <a>حریم خصوصی</a>
-                <a>شرایط استفاده</a>
+                <a rel="noopener">حریم خصوصی</a>
+                <a rel="noopener">شرایط استفاده</a>
             </div>
             <p class="ownership-right">© 2019 Fandogh PaaS</p>
 

@@ -21,7 +21,7 @@
     <div v-show="show && _options.length" class="dropdown-selector">
       <ul>
         <li v-for="option in _options">
-          <a @click="$emit('input', _selects.concat(option))" href="#">{{option}}</a>
+          <a rel="noopener" @click="$emit('input', _selects.concat(option))" href="#">{{option}}</a>
         </li>
       </ul>
     </div>

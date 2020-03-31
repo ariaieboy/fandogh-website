@@ -8,7 +8,7 @@
                     <img src="../../../../assets/img/external-link.png" alt="open new window">
                 </button>
                 <a :href="(!item.toString().startsWith('http://') && !item.toString().startsWith('https://') ?
-                    'https://'.concat(item): item)" style="color: #fefefe; direction: ltr; font-family: iran-yekan" target="_blank">{{item}}</a>
+                    'https://'.concat(item): item)" style="color: #fefefe; direction: ltr; font-family: iran-yekan" target="_blank" rel="noopener">{{item}}</a>
 
             </span>
 

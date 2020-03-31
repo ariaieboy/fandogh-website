@@ -39,7 +39,7 @@
 
             <div class="row" style="width: 100%; margin-top: 48px; max-width: 1370px; margin-left: auto; margin-right: auto">
                 <div v-for="service in managed_services.services" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="padding: 16px">
-                    <a :href="service.href" target="_blank" class="managed-service-card">
+                    <a :href="service.href" target="_blank" class="managed-service-card" rel="noopener">
                         <img :src="require('../../assets/svg/services/managed/' + service.icon + '.svg')" :alt="service.icon"/>
                         <h5>{{service.title}}</h5>
                         <div style=" width: 100%; padding-left: 10%; padding-right: 10%;  height: 1px; border-radius: 25px; background-image: linear-gradient(to right, rgba(0, 69, 255, 0.2), #c1c1c1 49%, rgba(0, 69, 255, 0.2));"></div>
