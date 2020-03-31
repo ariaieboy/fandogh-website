@@ -2,60 +2,54 @@
     <div class="row footer-container">
 
         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="display: flex; box-sizing: padding-box">
-            <div style=" padding: 32px 12px; width: max-content">
+            <div style=" padding: 32px 12px; width: max-content; display: flex; flex-direction: column">
                 <p class="footer-col-title">محصولات</p>
-                <ul>
-                    <li>
-                        <a class="footer-col-option" href="https://fandogh.cloud/managed-services" target="_blank" rel="noopener">سرویس‌های مدیریت شده</a>
-                    </li>
 
-                    <li>
-                        <a class="footer-col-option" href="https://fandogh.cloud/languages" target="_blank" rel="noopener">سرویس‌های مستقیم</a>
-                    </li>
+                <a class="footer-col-option" href="https://fandogh.cloud/managed-services" target="_blank"
+                   rel="noopener">سرویس‌های مدیریت شده</a>
 
-                    <!--<li>-->
-                        <!--<a class="footer-col-option">ذخیره سازی</a>-->
-                    <!--</li>-->
-                </ul>
+                <a class="footer-col-option" href="https://fandogh.cloud/languages" target="_blank"
+                   rel="noopener">سرویس‌های مستقیم</a>
+
+                <!--<li>-->
+                <!--<a class="footer-col-option">ذخیره سازی</a>-->
+                <!--</li>-->
+
             </div>
-            <div style="width: max-content; padding: 32px 12px;">
+            <div style="width: max-content; padding: 32px 12px; display: flex; flex-direction: column">
                 <p class="footer-col-title">منابع</p>
-                <ul>
-                    <li>
-                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank" rel="noopener">مستندات</a>
-                    </li>
-                    <li>
-                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-manifests" target="_blank" rel="noopener">مانیفست‌ها</a>
-                    </li>
-                    <li>
-                        <a class="footer-col-option" href="https://blog.fandogh.cloud/" target="_blank" rel="noopener">وبلاگ</a>
-                    </li>
-                    <li>
-                        <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml" target="_blank" rel="noopener">API</a>
-                    </li>
-                    <li>
-                        <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html" target="_blank" rel="noopener">CLI</a>
-                    </li>
-                </ul>
+
+                <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html"
+                   target="_blank" rel="noopener">مستندات</a>
+
+                <a class="footer-col-option" href="https://github.com/fandoghpaas/fandogh-manifests" target="_blank"
+                   rel="noopener">مانیفست‌ها</a>
+
+                <a class="footer-col-option" href="https://blog.fandogh.cloud/" target="_blank"
+                   rel="noopener">وبلاگ</a>
+
+                <a class="footer-col-option"
+                   href="https://github.com/fandoghpaas/fandogh-cli/blob/master/api-docs/api-contract.yaml"
+                   target="_blank" rel="noopener">API</a>
+
+                <a class="footer-col-option" href="https://docs.fandogh.cloud/docs/getting-started.html"
+                   target="_blank" rel="noopener">CLI</a>
+
             </div>
-            <div style="width: max-content; padding: 32px 12px;">
+            <div style=" padding: 32px 12px; width: max-content; display: flex; flex-direction: column">
                 <p class="footer-col-title">درباره ما</p>
-                <ul>
-                    <li>
-                        <a class="footer-col-option" @click="$router.push('/comparison')" rel="noopener">چرا فندق؟</a>
-                    </li><li>
-                        <a class="footer-col-option" @click="$router.push('/about-us')" rel="noopener">درباره ما</a>
-                    </li>
-                    <li>
-                        <a class="footer-col-option" @click="$router.push('/our-values')" rel="noopener">ارزش‌های ما</a>
-                    </li>
-                    <li>
-                        <a class="footer-col-option" @click="$router.push('/conditions-of-use')" rel="noopener">قوانین سکو</a>
-                    </li>
-                    <li>
-                        <a class="footer-col-option" @click="$router.push('/contact-us')" rel="noopener">تماس با ما</a>
-                    </li>
-                </ul>
+
+                <a class="footer-col-option" @click="$router.push('/comparison')" rel="noopener">چرا فندق؟</a>
+
+                <a class="footer-col-option" @click="$router.push('/about-us')" rel="noopener">درباره ما</a>
+
+                <a class="footer-col-option" @click="$router.push('/our-values')" rel="noopener">ارزش‌های ما</a>
+
+                <a class="footer-col-option" @click="$router.push('/conditions-of-use')" rel="noopener">قوانین
+                    سکو</a>
+
+                <a class="footer-col-option" @click="$router.push('/contact-us')" rel="noopener">تماس با ما</a>
+
             </div>
         </div>
 
@@ -176,6 +170,8 @@
         cursor pointer
         @media only screen and (max-width: 992px)
             font-size .8em
+            padding-top 4px
+            padding-bottom 4px
 
 
     .footer-col-option:hover
