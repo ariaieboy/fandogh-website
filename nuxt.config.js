@@ -41,6 +41,7 @@ module.exports = {
         manifest:{
             name: 'Fandogh PaaS',
             lang: 'fa',
+            display: 'standalone',
             description: 'Fandogh Platform as a Service application'
         }
     },
