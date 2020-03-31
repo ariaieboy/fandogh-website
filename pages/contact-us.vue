@@ -35,7 +35,7 @@
                                 تلفن: ۰۲۱۲۸۴۲۲۳۸۳
                             </li>
                             <li>
-                                ایمیل: support@fandogh.cloud
+                                ایمیل: support[at]fandogh.cloud
                             </li>
 
                         </ul>
