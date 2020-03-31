@@ -16,7 +16,6 @@
                     <!--<li>-->
                         <!--<a class="footer-col-option">ذخیره سازی</a>-->
                     <!--</li>-->
-
                 </ul>
             </div>
             <div style="width: max-content; padding: 32px 12px;">
