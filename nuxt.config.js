@@ -45,14 +45,14 @@ module.exports = {
             {property: 'og:url', content: 'https://www.fandogh.cloud'},
             {property: 'og:site_name', content: 'Fandogh'},
             {property: 'og:locale', content: 'fa'},
-            {property: 'og:image', content: 'https://fandogh.cloud/fandogh-icon.png'},
+            {property: 'og:image', content: 'https://fandogh.cloud/public/header.png'},
 
-            {hid: 'twitter:card', name: 'twitter:card', content: 'summary'},
+            {hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image'},
             {hid: 'twitter:site', name: 'twitter:site', content: '@fandoghpaas'},
             {hid: 'twitter:url', name: 'twitter:url', content: 'https://www.fandogh.cloud'},
             {hid: 'twitter:title', name: 'twitter:title', content: 'سرویس های ابری | سکوی ابری فندق'},
             {hid: 'twitter:description', name: 'twitter:description', content: 'سکوی ابری فندق، ارائه دهنده خدمات رایانش ابری و داکر و جایگزینی مطمئن برای هاستینگ. در کوتاه‌ترین زمان سرویس ابری خود را ایجاد کنید.'},
-            {hid: 'twitter:image', name: 'twitter:image', content: 'https://fandogh.cloud/fandogh-icon.png'},
+            {hid: 'twitter:image:src', name: 'twitter:image:src', content: 'https://fandogh.cloud/public/header.png'},
 
             {name: 'apple-mobile-web-app-capable', content: 'yes'},
             {name: 'mobile-web-app-capable', content: 'yes'},
