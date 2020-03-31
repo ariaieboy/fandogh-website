@@ -88,16 +88,14 @@
                     {title: 'نام سرویس', width: '39%', name: 'name'},
                     {title: 'حافظه (مگابایت)', width: '20%', name: 'memory'},
                     {title: 'تاریخ ساخت', width: '18%', name: 'start_date'},
-                    {title: 'restart', width: '12%', name: 'service_restarts'},
+                    {title: 'restart', width: '11%', name: 'service_restarts'},
                     {title: 'وضعیت', width: '9%', name: 'state'}
                 ],
                 menuList: [
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
-                    {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
                 ],
                 menuListComplete: [
                     {method: this.details, icon: 'ic-logs.svg', title: 'جزئیات سرویس', style: {}},
-                    {method: this.logs, icon: 'file.svg', title: '‌مشاهده لاگ‌ها', style: {}},
                     {method: this.remove, icon: 'ic_delete.svg', title: 'حذف سرویس', style: {color: '#fd3259'}},
                 ]
             };
@@ -109,7 +107,6 @@
             services() {
                 let services = this.$store.state.services;
                 if (services) {
-                    console.log(services)
                     return services.map(
                         ({memory, start_date, name, service_restarts, service_type, state}) => {
                             return {
@@ -229,17 +226,6 @@
                 });
                 this.$router.push({
                     path: `/dashboard/services/${this.services[index].name}`
-                });
-            },
-            logs(index) {
-                this.$ga.event({
-                    eventCategory: "service",
-                    eventAction: "click btn logs service",
-                    eventLabel: "service name",
-                    eventValue: this.services[index].name
-                });
-                this.$router.push({
-                    path: `/dashboard/services/${this.services[index].name}/logs`
                 });
             }, newService() {
                 this.$router.push({

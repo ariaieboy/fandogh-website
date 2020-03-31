@@ -23,9 +23,11 @@
 
                     <div style="width: 100%; display: flex;">
                         <a :href="tooltip.url" target="_blank"
+                           rel="noopener"
                            style=" cursor: pointer; background-color: #0045ff;box-shadow: 0 0 6px rgba(0,69, 255, 0.7), 0 0 8px rgba(0,69, 255, 0.4); font-weight: bold; padding: 7px 12px; border-radius: 3px">مطالعه‌ی
                             مستندات</a>
                         <a v-close-popover
+                           rel="noopener"
                            style="cursor: pointer;margin-right: 12px; font-weight: bold; padding: 7px 12px; color: #2c2c2c;">بستن</a>
                     </div>
                 </template>

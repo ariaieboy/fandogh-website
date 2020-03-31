@@ -1,5 +1,55 @@
 <template>
     <div v-if="domain">
+
+        <div style="display: flex; flex-direction: row; background: #0045ff; padding: 16px; cursor: pointer;"
+             @click="player_expanded = !player_expanded"
+             :style="{boxShadow: (!player_expanded ? '0 3px 6px 0 rgba(0,0,0,0.17)': '0 0 6px 0 rgba(0,0,0,0.17)'),
+             borderRadius: (!player_expanded ? '3px': '3px 3px 0 0'),
+             marginBottom: (!player_expanded ? '16px': '0')}">
+            <img class="player-header"
+                 :src="require('../../../assets/svg/' + (player_expanded ? 'ic_pause' : 'ic_play') + '.svg')"
+                 :alt="player_expanded ? 'ic_pause' : 'ic_play'"/>
+            <h2 class="title_header"
+                style="padding-bottom: 0; padding-right: 12px; vertical-align: middle; line-height: normal; margin-top: auto; margin-bottom: auto; color: #fefefe;">
+                آموزش تایید و درخواست SSL دامنه</h2>
+        </div>
+        <transition name="fade">
+            <div v-if="player_expanded"
+                 style="width: 100%; display: flex; background: #0045ff; padding: 16px; margin-bottom: 16px"
+                 :style="{borderRadius: (!player_expanded ? '0': '0 0 3px 3px'),
+                      boxShadow: '0 5px 5px 0 rgba(0,0,0,0.17)'}">
+                <div class="row lang-detail-media-container" style="margin: 0 !important;">
+
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-md-12 lang-menu-container">
+
+                        <div v-for="(menu, index) in domain_record_tutorials_model"
+                             :key="menu.title"
+                             class="lang-menu-item"
+                             :class="[menu.selected ? 'selected' : '']"
+                             @click="menuItemSelected(index)">
+                            <p class="menu-item-number">{{index + 1}}</p>
+                            <p class="menu-item-title">{{menu.title}}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+
+                        <vue-plyr class="tut_player" :key="menu_item.video"
+                                  :options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume','current-time','fullscreen']}">
+                            <video style="width: 100%">
+                                <source style="width: 100%"
+                                        :src="require('../../../assets/media/' + menu_item.video + '.mp4')"
+                                        type="video/mp4"/>
+                            </video>
+                        </vue-plyr>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </transition>
+
         <h2 class="title_header">جزئیات دامنه</h2>
         <div style="background: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0, 0.17); padding: 16px">
             <div class="row">
@@ -169,7 +219,7 @@
                                             data-balloon-pos="up"
                                     >
                 {{domain.certificate.details.status | status}}
-                <img src="~/static/icons/plans/info-button.png"></span>
+                <img src="~/static/icons/plans/info-button.png" alt="info"></span>
                                 </div>
                             </div>
                         </f-collaps>
@@ -203,7 +253,7 @@
                                 style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0;">
                             بررسی رکورد‌های CNAME دامنه
                         </button>
-                        <button @click="checkDomainCNAMERecord"
+                        <button @click="checkDomainTXTRecord"
                                 style="color: #1e1e1e; font-family: iran-yekan; outline: none; width: 100%; background-color: #00E5FF; box-shadow: 0 2px 6px rgba(0, 229, 255, 0.4); border-radius: 3px; padding: 12px 0; margin-top: 8px">
                             بررسی رکورد‌های TXT دامنه
                         </button>
@@ -211,40 +261,6 @@
                 </div>
             </div>
         </div>
-
-        <h2 class="title_header" style="margin-top: 48px">آموزش تایید و دخواست SSL دامنه</h2>
-        <div style="width: 100%; display: flex; background: #0045ff; padding: 16px;">
-            <div class="row lang-detail-media-container" style="margin: 0 !important;">
-
-                <div class="col-lg-4 col-md-4 col-xs-12 col-md-12 lang-menu-container">
-
-                    <div v-for="(menu, index) in domain_record_tutorials_model"
-                         :key="menu.title"
-                         class="lang-menu-item"
-                         :class="[menu.selected ? 'selected' : '']"
-                         @click="menuItemSelected(index)">
-                        <p class="menu-item-number">{{index + 1}}</p>
-                        <p class="menu-item-title">{{menu.title}}</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-
-                    <vue-plyr class="tut_player" :key="menu_item.video"
-                              :options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume','current-time','fullscreen']}">
-                        <video style="width: 100%">
-                            <source style="width: 100%"
-                                    :src="require('../../../assets/media/' + menu_item.video + '.mp4')"
-                                    type="video/mp4"/>
-                        </video>
-                    </vue-plyr>
-
-                </div>
-
-            </div>
-
-        </div>
-
 
     </div>
 </template>
@@ -276,6 +292,7 @@
         },
         data() {
             return {
+                player_expanded: false,
                 cname_record: 'https://dnschecker.org/#CNAME/',
                 txt_record: 'https://dnschecker.org/#TXT/',
                 name: this.$route.params.name,
@@ -322,6 +339,11 @@
                         title: 'اضافه کردن دامنه به سرویس',
                         selected: false,
                         video: 'fandogh_deploy_service_with_domain_tutorial'
+                    },
+                    {
+                        title: 'ssl در سرویس‌های در حال اجرا',
+                        selected: false,
+                        video: 'fandogh_domain_ssl_for_running_service'
                     }
                 ],
                 menu_item: {
@@ -410,9 +432,9 @@
                     });
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (this.domain.service) {
-                        this.textService = `<a href="/dashboard/services/${this.domain.service}" >
+                        this.textService = `<a href="/dashboard/services/${this.domain.service}" rel="noopener">
             ${this.domain.service}
-            <img src="/icons/plans/info-button.png" >
+            <img src="/icons/plans/info-button.png" alt="info">
             </a>`;
                     }
                 } catch (e) {
@@ -744,6 +766,13 @@
                 color: #fafafa;
                 transition all .2s ease-in-out
 
+    .player-header
+        width 48px
+        height 48px
+        @media only screen and (max-width 992px)
+            width 36px
+            height 36px
+
 
 </style>
 
@@ -806,4 +835,15 @@
         border-radius: 5px !important;
         padding 24px !important
 
+</style>
+
+<style lang="css">
+    .fade-enter-active {
+        transition: opacity .3s ease-in-out;
+    }
+
+    .fade-enter, .fade-leave-to, .fade-leave-active /* .fade-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
+    }
 </style>

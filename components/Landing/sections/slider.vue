@@ -17,7 +17,7 @@
 
                         <div class="slider-main">
 
-                            <div class="main-title">{{item.title}}</div>
+                            <h1 class="main-title">{{item.title}}</h1>
 
                             <div class="main-description">{{item.description}}</div>
 
@@ -31,7 +31,7 @@
             </div>
 
             <div class="bullet-section">
-                <img src="../../../assets/svg/bullet_bg.svg" width="100%" class="top-curve"/>
+                <img src="../../../assets/svg/bullet_bg.svg" width="100%" class="top-curve" alt="bullet"/>
                 <div class="main-slider-bullet-container">
                     <div v-for="(item, index) in slider_data" @click="bulletClicked(index)" class="main-slider-bullet"
                          :style="{backgroundColor: item.selected ? '#fefefe' : 'rgba(254, 254, 254, 0.4)'}">
@@ -56,7 +56,7 @@
                         title: "چرا سکوی ابری فندق؟",
                         description: 'سکوهای ابری مزایای خیلی بیشتری را در مقابل VPSها و Hostها در اختیار شما قرار می‌دهند و در عین حال از هزینه‌های شما هم می‌کاهند. سکوی ابری فندق به عنوان اولین سکوی ابری ایران ...',
                         button_text: "مطالعه بیشتر",
-                        button_link: "/comparision",
+                        button_link: "/comparison",
                         banner: "question-mark",
                         selected: true
                     },
@@ -70,7 +70,7 @@
                     },
                     {
                         title: "برای هر زبانی راه حلی داریم…",
-                        description: 'برای آنکه توسعه برای شما ساده‌تر شود، ما زبان‌های برنامه‌نویسی محبوب و پر استفاده را در قالب اجرای مستقیم کد با ساختاری منطبق با معماری ابری و پوشش گستره بزرگی از فریم‌ورک‌های محبوب فراهم آورده‌ایم. با این ویژگی دیگر نیاز نیست شما دانش داکر داشته باشید یا درگیر پیچیدگی‌های یادگیری تکنولوژی‌های جدید شوید، در عوض شما می‌توانید تمام تمرکز و منابع خود را صرف توسعه پروژه‌هایتان کنید.',
+                        description: 'برای آنکه توسعه برای شما ساده‌تر شود، ما زبان‌های برنامه‌نویسی محبوب و پر استفاده را در قالب اجرای مستقیم کد با ساختاری منطبق با معماری ابری و docker و پوشش گستره بزرگی از فریم‌ورک‌های محبوب فراهم آورده‌ایم. با این ویژگی دیگر نیاز نیست شما دانش داکر داشته باشید یا درگیر پیچیدگی‌های یادگیری تکنولوژی‌های جدید شوید، در عوض شما می‌توانید تمام تمرکز و منابع خود را صرف توسعه پروژه‌هایتان کنید.',
                         button_text: "ثبت‌نام رایگان",
                         button_link: '/user/register',
                         banner: "banner_one",
@@ -186,7 +186,7 @@
             padding-right 16px
             padding-left 16px
 
-        div.main-title
+        h1.main-title
             width: 100%
             font-size: 1.8em
             font-family: iran-yekan

@@ -11,7 +11,7 @@
             <business-solution/>
             <!--<success-story/>-->
             <price/>
-
+            <social-network/>
         </div>
     </section>
 </template>
@@ -25,6 +25,7 @@
     import SuccessStory from "../components/Landing/sections/success-story";
     import Price from "../components/Landing/sections/price";
     import Newsletter from "../components/Landing/sections/newsletter";
+    import SocialNetwork from "../components/Landing/sections/social-networks";
 
     export default {
         components: {
@@ -36,17 +37,18 @@
             Audiences,
             LanguageTutorials,
             PlatformFeatures,
-            Price
+            Price,
+            SocialNetwork
         },
         data() {
             return {}
         },
-        mounted(){
-          if (this.$route.hash){
-              if(this.$route.hash === '#newsletter'){
-                  document.getElementById('newsletter').scrollIntoView({ block: 'center',  behavior: 'smooth' })
-              }
-          }
+        mounted() {
+            if (this.$route.hash) {
+                if (this.$route.hash === '#newsletter') {
+                    document.getElementById('newsletter').scrollIntoView({block: 'center', behavior: 'smooth'})
+                }
+            }
         }
     }
 </script>

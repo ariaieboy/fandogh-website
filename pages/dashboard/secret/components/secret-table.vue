@@ -17,7 +17,8 @@
 
                         <div :id="index" class="dropdown-content">
 
-                            <a v-for="item_menu in menu" @click="item_menu.method(index)" :style="item_menu.style">
+                            <a v-for="item_menu in menu" @click="item_menu.method(index)" :style="item_menu.style"
+                               rel="noopener">
 
                                 <img :src="require('../../../../static/icons/' + item_menu.icon)"
                                      :alt="item_menu.title"/>

@@ -1,6 +1,6 @@
 <template>
     <div v-if="service && !loading">
-        <p class="title">جزییات سرویس</p>
+        <p id="service_title" class="title">جزییات سرویس</p>
 
         <div class="row" style="margin: 0 0 12px 0;">
             <div class="service-header">
@@ -830,6 +830,25 @@
         font-family iran-yekan
         font-weight normal
         background-color $colorAccent
+        border-radius 3px
+        text-align center
+        align-self start
+        padding 8px 24px
+        margin-top 0
+        cursor pointer
+
+    span.download-service
+        font-style normal
+        background-color $colorPrimary
+        outline none
+        letter-spacing normal
+        color $totalWhite
+        display inline-block
+        line-height 1.75
+        margin-bottom auto
+        font-size 1.2em
+        font-family iran-yekan
+        font-weight normal
         border-radius 3px
         text-align center
         align-self start

@@ -30,7 +30,7 @@
         </div>
 
         <div style="width: 100%; display: flex">
-            <a href="mailto:support@fandogh.cloud" class="business-solution-button">درخواست مشاوره</a>
+            <a href="mailto:support@fandogh.cloud" class="business-solution-button" rel="noopener nofollow">درخواست مشاوره</a>
         </div>
 
     </div>

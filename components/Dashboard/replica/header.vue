@@ -9,7 +9,7 @@
       :data-balloon="state"
       data-balloon-pos="up"
     >
-      <img src="./images/Ellipsis-2s-167px.svg" alt>
+      <img src="./images/Ellipsis-2s-167px.svg" alt="ellipse">
     </div>
     <i style="font-style: normal; color: #7f828b">|</i>
     <label>

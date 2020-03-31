@@ -9,14 +9,14 @@
             <span class="service------price">{{type}}</span>
           </div>
           <div class="service-----image">
-            <img :src="'/icons/plans/services-icon/blimp.png'">
+            <img :src="'/icons/plans/services-icon/blimp.png'" alt="services">
           </div>
         </div>
         <div class="service----line"></div>
         <div class="service----item service----item-second">
           <div class="service-----information">
             <span class="service------image">
-              <img :src="'/icons/plans/memory.png'">
+              <img :src="'/icons/plans/memory.png'" alt="memory">
             </span>
             <span class="service------name font-roboto">RAM</span>
             <span class="service------info">{{memory_limit}}</span>

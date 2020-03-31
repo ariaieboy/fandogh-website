@@ -20,6 +20,7 @@
              style="cursor: pointer; width: 100%; height: 100%; max-width: 24px; display: flex; background: #fd3259; padding: 0 16px;"
              v-tooltip="'انصراف از ساخت'">
             <img src="./icons/turn-off.svg" width="24" height="24"
+                 alt="turn-off"
                  style="filter: invert(100%); margin-top: auto; margin-bottom: auto">
         </div>
     </div>

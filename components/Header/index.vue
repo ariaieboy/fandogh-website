@@ -4,7 +4,7 @@
             <nav class="header-container" :class="{'no-fixed': noFixed, 'header-dashboard': dashboard}">
                 <div class="right-menu">
                     <div class="menu">
-                        <a>
+                        <a rel="noopener">
                             <img class="nev-button" @click="toggleSideBar('navbar')" alt="hamburger button"
                                  :src="require('../../assets/svg/ic_hamburger.svg')">
                         </a>
@@ -68,7 +68,8 @@
                     <div v-for="service in managed_services"
                          style="display: flex; flex-direction: column; width: 50%; height: max-content; margin-bottom: 12px">
                         <a class="managed-service"
-                           :href="service.href" target="_blank">
+                           :href="service.href" target="_blank"
+                           rel="noopener">
                             <img :src="require('../../assets/svg/services/managed/' + service.icon + '.svg')"
                                  :alt="service.icon"
                                  style="max-width: 48px; max-height: 48px"/>
@@ -80,7 +81,7 @@
                     </div>
                 </div>
 
-                <a class="button" @click="$router.push('/managed-services')">مشاهده همه</a>
+                <a class="button" @click="$router.push('/managed-services')" rel="noopener">مشاهده همه</a>
 
             </div>
             <div class="vertical_line"></div>
@@ -91,7 +92,8 @@
                 <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
 
                     <a v-for="language in languages" class="language-support"
-                       @click="$router.push('/languages/' + language.href)">
+                       @click="$router.push('/languages/' + language.href)"
+                       rel="noopener">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: auto; margin-bottom: auto;"
                              :src="require('../../assets/svg/services/language/' + language.icon +  '.svg')"
                              :alt="language.icon"/>
@@ -100,7 +102,7 @@
 
                 </div>
 
-                <a class="button" @click="$router.push('languages')">مشاهده همه</a>
+                <a class="button" @click="$router.push('languages')" rel="noopener">مشاهده همه</a>
 
             </div>
             <div class="vertical_line"></div>
@@ -120,6 +122,7 @@
                             </div>
                             <div class="product-sub-category-section">
                                 <a v-for="item in product.items" :href="item.href"
+                                   rel="noopener"
                                    target="_blank">
                                     {{item.title}}</a>
                             </div>

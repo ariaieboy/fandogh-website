@@ -66,8 +66,9 @@
 
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">نوع کاربری:</p>
-                        <p class="profile-entity-value" v-if="activeNamespace.quota">
-                            {{(activeNamespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
+                        <p class="profile-entity-value" v-if="activeNamespace.quota"
+                        :style="{color: (activeNamespace.quota.memory_limit/512 >=1 ? '#0045ff' : '#000000')}">
+                            {{(activeNamespace.quota.memory_limit/512 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
                     </div>
 
 
@@ -79,6 +80,7 @@
 
                 </div>
             </div>
+
 
             <div class="box-row row">
                 <div @click="sectionClicked('ProfilePlan')"

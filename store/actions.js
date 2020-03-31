@@ -276,9 +276,15 @@ export const getServices = async ({commit, state}) => {
     }
 };
 
-export const getServiceLog = async ({commit, state}, {name}) => {
+export const getServiceLog = async ({commit, state}, {name, with_timestamp, max_logs, last_logged_time}) => {
     try {
-        let logs = await Request().get(`/api/services/${name}/logs`);
+        let logs = await Request().get(`/api/services/${name}/logs`,{
+            params: {
+                with_timestamp: with_timestamp,
+                max_logs: max_logs,
+                last_logged_time: last_logged_time
+            }
+        });
         commit("SET_DATA", {data: logs, id: "serviceLog"});
         return logs;
     } catch (e) {
@@ -588,6 +594,30 @@ export const deleteSelectedVolume = async ({commit, state}, volume_name) => {
     try {
 
         return await Request().delete(`api/volumes/${volume_name}`)
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const resizeSelectedVolume = async ({commit, state}, {volume_name, volume_size}) => {
+
+    try {
+
+        return await Request().patch(`api/volumes/${volume_name}`, {
+            capacity: volume_size
+        })
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const getVolumeDetails = async ({commit, state}, volume_name) => {
+
+    try {
+
+        return await Request().get(`api/volumes/${volume_name}`)
 
     } catch (e) {
         return Promise.reject(e)

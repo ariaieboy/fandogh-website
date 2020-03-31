@@ -1,7 +1,7 @@
 <template>
   <div class="chart">
     <div class="chart-label">
-      <img :src="require('~/static/img/icons/'+icon+'')" alt>
+      <img :src="require('~/static/img/icons/'+icon+'')" :alt="icon">
       <label>{{title}}</label>
     </div>
     <div class="chart-items">
