@@ -14,6 +14,9 @@ module.exports = {
         API: process.env.API || "https://api.fandogh.cloud/fa",
         MONITORING_API: process.env.MONITORING_API || "https://mon.fandogh.cloud"
     },
+    serverMiddleware:  [
+        '~/redirect_to_www.js'
+    ],
     router: {
         middleware: ["authentication"]
     },
@@ -37,7 +40,7 @@ module.exports = {
             {'http-equiv':'Content-Type', content:'text/html', charset: 'utf-8'},
             {'http-equiv':'X-UA-Compatible', content:'IE=edge'},
 
-            {name: "viewport", content: "width=device-width, initial-scale=1"},
+            {name: "viewport", content: "width=device-width, initial-scale=1, user-scalable=3.0"},
 
             {property: 'og:type', content: 'website'},
             {property: 'og:title', content: 'سرویس های ابری | سکوی ابری فندق'},
