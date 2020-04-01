@@ -60,6 +60,8 @@
 
                 <a rel="noopener" target="_blank" href="https://github.com/fandoghpaas"> <img
                         src="../../../assets/svg/social/github.svg" alt="github"/></a>
+                <a rel="noopener" target="_blank" href="https://instagram.com/fandoghpaas"> <img
+                        src="../../../assets/svg/social/instagram.svg" alt="instagram"/></a>
                 <a rel="noopener" target="_blank" href="https://twitter.com/fandoghpaas"><img
                         src="../../../assets/svg/social/twitter.svg" alt="twitter"/></a>
                 <a rel="noopener" target="_blank" href="https://linkedin.com/company/fandogh-paas"><img
