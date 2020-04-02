@@ -8,7 +8,11 @@
             <strong>ایمیج:</strong>
             <span>{{image}}</span>
         </div>
-        <div v-if="terminated">
+        <div v-if="state" class="replica-containers-item">
+            <strong>وضعیت:</strong>
+            <span class="success-text">{{state | state}}</span>
+        </div>
+        <div v-else-if="terminated">
             <div class="replica-containers-item">
                 <strong>وضعیت:</strong>
                 <span class="error-text">{{terminated.reason}}</span>
@@ -18,7 +22,7 @@
                 <span class="error-text">{{terminated.message}}</span>
             </div>
         </div>
-        <div v-else-if="waiting">
+        <div v-else>
             <div class="replica-containers-item">
                 <strong>وضعیت:</strong>
                 <span class="pending-text">{{waiting.reason}}</span>
@@ -27,10 +31,6 @@
                 <strong>توضیح:</strong>
                 <span class="pending-text">{{waiting.message}}</span>
             </div>
-        </div>
-        <div v-else class="replica-containers-item">
-            <strong>وضعیت:</strong>
-            <span class="success-text">{{state | state}}</span>
         </div>
     </div>
 </template>
@@ -66,8 +66,7 @@
         },
         filters: {
             state(value) {
-                if (!value) return "";
-                return value ? "آماده شده" : "آماده نشده";
+                return value === null ? null : "آماده شده";
             },
             terminated(value) {
                 return value === null ? null : value
@@ -78,7 +77,7 @@
         },
         computed: {
             stateColor() {
-                if (!this.state) return ''
+                if (!this.state) return '';
                 return this.state ? "success-text" : "error-text";
             }
         },
