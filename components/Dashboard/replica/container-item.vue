@@ -17,6 +17,7 @@
                 <strong>وضعیت قبلی:</strong>
                 <span class="error-text">{{terminated.reason}}</span>
             </div>
+
             <div v-if="terminated.message" class="replica-containers-item">
                 <strong>توضیح:</strong>
                 <span class="error-text">{{terminated.message}}</span>
