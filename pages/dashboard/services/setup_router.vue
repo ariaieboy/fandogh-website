@@ -69,7 +69,10 @@
                 return RoleAccessHandler(permitted_roles)
             },
             onSelected(path) {
-                this.$router.replace({path: '/dashboard/services/' + path})
+                console.log(path)
+                console.log(this.$route.query)
+                console.log(this.$route.path)
+                this.$router.replace({path: '/dashboard/services/' + path, query: this.$route.query})
             },
         }
     }
