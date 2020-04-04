@@ -8,11 +8,16 @@
             <strong>ایمیج:</strong>
             <span>{{image}}</span>
         </div>
+        <div class="replica-containers-item">
+            <strong>وضعیت:</strong>
+            <span class="success-text">{{state | state}}</span>
+        </div>
         <div v-if="terminated">
             <div class="replica-containers-item">
-                <strong>وضعیت:</strong>
+                <strong>وضعیت قبلی:</strong>
                 <span class="error-text">{{terminated.reason}}</span>
             </div>
+
             <div v-if="terminated.message" class="replica-containers-item">
                 <strong>توضیح:</strong>
                 <span class="error-text">{{terminated.message}}</span>
@@ -20,17 +25,13 @@
         </div>
         <div v-else-if="waiting">
             <div class="replica-containers-item">
-                <strong>وضعیت:</strong>
+                <strong>وضعیت قبلی:</strong>
                 <span class="pending-text">{{waiting.reason}}</span>
             </div>
             <div v-if="waiting.message" class="replica-containers-item">
                 <strong>توضیح:</strong>
                 <span class="pending-text">{{waiting.message}}</span>
             </div>
-        </div>
-        <div v-else class="replica-containers-item">
-            <strong>وضعیت:</strong>
-            <span class="success-text">{{state | state}}</span>
         </div>
     </div>
 </template>
@@ -66,19 +67,18 @@
         },
         filters: {
             state(value) {
-                if (!value) return "";
-                return value ? "آماده شده" : "آماده نشده";
+                return !value ? 'در حال ارزیابی' : "آماده شده";
             },
             terminated(value) {
-                return value === null ? null : value
+                return !value ? null : value
             },
             waiting(value) {
-                return value === null ? null : value
+                return !value ? null : value
             }
         },
         computed: {
             stateColor() {
-                if (!this.state) return ''
+                if (!this.state) return '';
                 return this.state ? "success-text" : "error-text";
             }
         },
