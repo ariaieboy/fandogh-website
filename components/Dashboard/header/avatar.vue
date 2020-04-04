@@ -18,7 +18,12 @@
                 <span class="font-roboto">{{username}}</span>
             </div>
             <div class="header-avatar-list-item">
-                <router-link :to="{path: item.link, query: {ns: $route.query.ns}}"  class="header-avatar-item" v-for="(item,i) in items" :key="i">
+                <div @click="changeNamespace" class="header-avatar-item">
+                    <img src="./icons/ic-exchange.svg" alt="change">
+                    <span>تغییر فضانام</span>
+                </div>
+                <router-link :to="{path: item.link, query: {ns: $route.query.ns}}" class="header-avatar-item"
+                             v-for="(item,i) in items" :key="i">
                     <img :src="require('./icons/'+item.icon+'.svg')" :alt="item.icon">
                     <span>{{item.text}}</span>
                 </router-link>
@@ -67,6 +72,12 @@
             this.getAvatar();
         },
         methods: {
+            changeNamespace() {
+
+                this.$emit('change-namespace');
+                this.toggleAvatar(null)
+
+            },
             exit() {
                 this.$alertify(
                     {
@@ -232,6 +243,7 @@
             &.nuxt-link-active, &:hover
                 span
                     color $colorPrimary
+
                 img
                     filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 </style>
