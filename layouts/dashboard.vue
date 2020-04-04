@@ -527,6 +527,7 @@
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.27)
                 @media only screen and (max-width 992px)
                     border-radius 0
+                    height 68px
 
 
                 div.pod-container
@@ -541,6 +542,7 @@
                     @media only screen and (max-width 992px)
                         background-size 75%
                         width 100%
+                        height 68px
 
                 div
                     width 100%
@@ -566,6 +568,8 @@
                         margin auto
                         color #fefefe
                         font-size 1.2em
+                        @media only screen and (max-width 992px)
+                            font-size 1.3em
 
         div.namespace-list-container
             width 100%
