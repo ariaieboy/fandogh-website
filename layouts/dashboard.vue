@@ -234,6 +234,7 @@
             changeNamespaceTo(namespace) {
                 if(this.$route.query['ns']){
                     if(this.$route.query['ns'] !== namespace.name){
+                        this.toggleNamespaceModal();
                         this.syncUrlWithNs(namespace)
                     }else {
                         this.toggleNamespaceModal()
