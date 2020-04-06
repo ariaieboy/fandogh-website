@@ -64,6 +64,7 @@
               ]
           }
         },
+
         data() {
             return {
                 selected_index: 0,
