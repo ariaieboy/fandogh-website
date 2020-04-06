@@ -4,106 +4,116 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-<url>
-  <loc>https://fandogh.cloud/</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/languages</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/languages/python</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/languages/java</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/languages/java_script</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/languages/php</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/languages/c_sharp</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/managed-services</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/audience/companies</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/audience/teams</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/audience/startups</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/audience/students</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/audience/freelancers</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.70</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/about-us</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/our-values</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/conditions-of-use</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/contact-us</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/user/login</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/user/register</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://fandogh.cloud/user/forgot_password</loc>
-  <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+    <url>
+        <loc>https://fandogh.cloud/</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://docs.fandogh.cloud/</loc>
+        <lastmod>2020-04-06T00:01:03+00:00</lastmod>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://blog.fandogh.cloud/</loc>
+        <lastmod>2020-04-06T00:01:03+00:00</lastmod>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/languages</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/languages/python</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/languages/java</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/languages/java_script</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/languages/php</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/languages/c_sharp</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/managed-services</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/audience/companies</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/audience/teams</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/audience/startups</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/audience/students</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/audience/freelancers</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/about-us</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/our-values</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/conditions-of-use</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/contact-us</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/user/login</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/user/register</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://fandogh.cloud/user/forgot_password</loc>
+        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
 
 
 </urlset>
