@@ -1,14 +1,16 @@
 <template>
 
-    <div class="row">
-        <div class="container-fluid" style="max-width: 1200px">
+    <div class="row container-fluid" style="max-width: 1500px; width: 100%">
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
             <h2 class="title_header">مشخصات کاربری</h2>
-            <div style="padding: 16px">
-                <div class="row"
-                     style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;">
 
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div v-if="setting_sections.user_information">
+                <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;
+                            display: flex; flex-direction: column">
+
+                    <div style="display: flex; margin-left: 15px">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       color="#0045ff"
@@ -21,7 +23,7 @@
                         </v-text-field>
 
                     </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-left: 15px">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       color="#0045ff"
@@ -34,7 +36,7 @@
                         </v-text-field>
 
                     </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-left: 15px">
 
                         <v-text-field
                                 style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
@@ -48,7 +50,7 @@
                         </v-text-field>
 
                     </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-left: 15px">
 
                         <v-text-field
                                 style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
@@ -62,7 +64,7 @@
                         </v-text-field>
 
                     </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-left: 15px">
 
                         <v-text-field style="font-family: iran-sans; font-size: 1em;margin-left: -15px"
                                       color="#0045ff"
@@ -75,8 +77,8 @@
                         </v-text-field>
 
                     </div>
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                        <v-container class="px-0" fluid>
+                    <div style="display: flex;">
+                        <v-container class="px-0" fluid style="padding-top: 0">
                             <v-checkbox
                                     :color="'#0022ff'"
                                     :disabled="!editing"
@@ -89,19 +91,27 @@
 
 
                 <div class="row profile-edit-container">
-                    <button v-if="!loading && !editing" @click="editing = true" class="start-editing">ویرایش مشخصات
+                    <button v-if="!loading && !editing" @click="editing = true" class="start-editing">ویرایش
+                        مشخصات
                     </button>
-                    <button v-if="!loading && editing" @click="saveEdit" class="submit-editing">تایید تغییرات</button>
-                    <button v-if="!loading && editing" @click="cancelEditing()" class="cancel-editing">انصراف</button>
+                    <button v-if="!loading && editing" @click="saveEdit" class="submit-editing">تایید تغییرات
+                    </button>
+                    <button v-if="!loading && editing" @click="cancelEditing()" class="cancel-editing">انصراف
+                    </button>
                 </div>
             </div>
 
-            <h2 class="title_header" style="margin-top: 48px">تغییر رمز عبور</h2>
-            <div style="padding: 16px; width: 100%;">
-                <div class="row"
-                     style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;">
+        </div>
 
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+            <h2 class="title_header">تغییر رمز عبور</h2>
+
+            <div v-if="setting_sections.user_password">
+                <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;
+                                display: flex; flex-direction: column;">
+
+                    <div style="display: flex; margin-left: 15px">
 
                         <v-text-field
                                 style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
@@ -119,7 +129,7 @@
 
                     </div>
 
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-left: 15px">
 
                         <v-text-field
                                 style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
@@ -137,7 +147,7 @@
 
                     </div>
 
-                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-bottom: 12px; margin-left: 15px">
 
                         <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
                                       color="#0045ff"
@@ -158,7 +168,8 @@
 
 
                 <div class="row profile-edit-container">
-                    <button v-if="!loading && !editing" @click="saveNewPassword" class="start-editing">تایید رمز عبور
+                    <button v-if="!loading && !editing" @click="saveNewPassword" class="start-editing">تایید رمز
+                        عبور
                         جدید
                     </button>
                 </div>
@@ -406,15 +417,21 @@
 <style lang="stylus" scoped>
     @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons")
 
+    .row
+        margin-right 0 !important
+        margin-left 0 !important
+
+
     .title_header
         font-family iran-yekan
         font-style normal
         font-weight bold
         font-size 1.2em
         font-stretch normal
-        line-height 1.75
         color #7c7c7c
         letter-spacing normal
+        padding-right 16px
+
 
     .profile-edit-container
         width 100%
@@ -425,7 +442,7 @@
             flex-direction column
 
         button.submit-editing
-            max-width: 300px;
+            max-width: 200px;
             background: #00E5FF;
             width: 100%;
             margin-top: auto;
@@ -472,7 +489,7 @@
 
 
         button.cancel-editing
-            max-width: 300px;
+            max-width: 200px;
             background: #fd3259;
             width: 100%;
             margin-top: auto;
@@ -507,4 +524,15 @@
         margin-bottom auto !important
 
 
+</style>
+
+<style lang="css">
+    .fade-enter-active {
+        transition: opacity .3s ease-in-out;
+    }
+
+    .fade-enter, .fade-leave-to, .fade-leave-active /* .fade-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
+    }
 </style>
