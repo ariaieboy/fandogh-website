@@ -1,149 +1,169 @@
 <template>
 
     <div class="row">
-        <h2 class="title_header">مشخصات کاربری</h2>
+        <div class="container-fluid" style="max-width: 1200px">
 
-        <div style="padding: 16px">
-            <div class="row"
-                 style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;">
+            <h2 class="title_header">مشخصات کاربری</h2>
+            <div style="padding: 16px">
+                <div class="row"
+                     style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;">
 
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 
-                    <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                  color="#0045ff"
-                                  type="text"
-                                  dir="ltr"
-                                  v-model="user.user_name.value"
-                                  :readonly="true"
-                                  :label="user.user_name.label">
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
+                                      color="#0045ff"
+                                      type="text"
+                                      dir="ltr"
+                                      v-model="user.user_name.value"
+                                      :readonly="true"
+                                      :label="user.user_name.label">
 
-                    </v-text-field>
+                        </v-text-field>
 
+                    </div>
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
+                                      color="#0045ff"
+                                      type="text"
+                                      dir="ltr"
+                                      :readonly="true"
+                                      v-model="user.email.value"
+                                      :label="user.email.label">
+
+                        </v-text-field>
+
+                    </div>
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                        <v-text-field
+                                style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
+                                color="#0045ff"
+                                type="text"
+                                dir="ltr"
+                                :readonly="!editing"
+                                v-model="user.first_name.value"
+                                :label="user.first_name.label">
+
+                        </v-text-field>
+
+                    </div>
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                        <v-text-field
+                                style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
+                                color="#0045ff"
+                                type="text"
+                                dir="ltr"
+                                :readonly="!editing"
+                                v-model="user.last_name.value"
+                                :label="user.last_name.label">
+
+                        </v-text-field>
+
+                    </div>
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                        <v-text-field style="font-family: iran-sans; font-size: 1em;margin-left: -15px"
+                                      color="#0045ff"
+                                      type="text"
+                                      dir="ltr"
+                                      :readonly="!editing"
+                                      v-model="user.national_id.value"
+                                      :label="user.national_id.label">
+
+                        </v-text-field>
+
+                    </div>
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <v-container class="px-0" fluid>
+                            <v-checkbox
+                                    :color="'#0022ff'"
+                                    :disabled="!editing"
+                                    v-model="user.newsletter_subscriber.value"
+                                    :label="user.newsletter_subscriber.label + ' (' + user.newsletter_subscriber.hint + ')'"
+                            ></v-checkbox>
+                        </v-container>
+                    </div>
                 </div>
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                    <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                  color="#0045ff"
-                                  type="text"
-                                  dir="ltr"
-                                  :readonly="true"
-                                  v-model="user.email.value"
-                                  :label="user.email.label">
-
-                    </v-text-field>
-
-                </div>
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                    <v-text-field
-                            style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
-                            color="#0045ff"
-                            type="text"
-                            dir="ltr"
-                            :readonly="!editing"
-                            v-model="user.first_name.value"
-                            :label="user.first_name.label">
-
-                    </v-text-field>
-
-                </div>
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                    <v-text-field
-                            style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
-                            color="#0045ff"
-                            type="text"
-                            dir="ltr"
-                            :readonly="!editing"
-                            v-model="user.last_name.value"
-                            :label="user.last_name.label">
-
-                    </v-text-field>
-
-                </div>
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                    <v-text-field style="font-family: iran-sans; font-size: 1em;margin-left: -15px"
-                                  color="#0045ff"
-                                  type="text"
-                                  dir="ltr"
-                                  :readonly="!editing"
-                                  v-model="user.national_id.value"
-                                  :label="user.national_id.label">
-
-                    </v-text-field>
-
-                </div>
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <v-container class="px-0" fluid>
-                        <v-checkbox
-                                :color="'#0022ff'"
-                                :disabled="!editing"
-                                v-model="user.newsletter_subscriber.value"
-                                :label="user.newsletter_subscriber.label + ' (' + user.newsletter_subscriber.hint + ')'"
-                        ></v-checkbox>
-                    </v-container>
-                </div>
-            </div>
 
 
-            <div class="row profile-edit-container">
-                <button v-if="!loading && !editing" @click="editing = true" class="start-editing">ویرایش مشخصات</button>
-                <button v-if="!loading && editing" @click="saveEdit" class="submit-editing">تایید تغییرات</button>
-                <button v-if="!loading && editing" @click="cancelEditing()" class="cancel-editing">انصراف</button>
-            </div>
-        </div>
-
-        <h2 class="title_header" style="margin-top: 48px">تغییر رمز عبور</h2>
-
-        <div style="padding: 16px; width: 100%;">
-            <div class="row"
-                 style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;">
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                    <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
-                                  color="#0045ff"
-                                  type="text"
-                                  dir="ltr"
-                                  v-model="current_password"
-                                  :label="password.current_password.label">
-
-                    </v-text-field>
-
-                </div>
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                    <v-text-field
-                            style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
-                            color="#0045ff"
-                            type="text"
-                            dir="ltr"
-                            v-model="new_password"
-                            :label="password.new_password.label">
-
-                    </v-text-field>
-
-                </div>
-                <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
-                    <v-text-field
-                            style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
-                            color="#0045ff"
-                            type="text"
-                            dir="ltr"
-                            v-model="repeat_new_password"
-                            :label="password.repeat_new_password.label">
-
-                    </v-text-field>
-
+                <div class="row profile-edit-container">
+                    <button v-if="!loading && !editing" @click="editing = true" class="start-editing">ویرایش مشخصات
+                    </button>
+                    <button v-if="!loading && editing" @click="saveEdit" class="submit-editing">تایید تغییرات</button>
+                    <button v-if="!loading && editing" @click="cancelEditing()" class="cancel-editing">انصراف</button>
                 </div>
             </div>
 
+            <h2 class="title_header" style="margin-top: 48px">تغییر رمز عبور</h2>
+            <div style="padding: 16px; width: 100%;">
+                <div class="row"
+                     style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;">
 
-            <div class="row profile-edit-container">
-                <button v-if="!loading && !editing" @click="saveNewPassword" class="start-editing">تایید رمز عبور جدید
-                </button>
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                        <v-text-field
+                                style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
+                                color="#0045ff"
+                                type="text"
+                                dir="ltr"
+                                :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                                :type="show_pass ? 'text' : 'password'"
+                                browser-autocomplete="new-password"
+                                @click:append="show_pass = !show_pass"
+                                v-model="new_password"
+                                :label="password.new_password.label">
+
+                        </v-text-field>
+
+                    </div>
+
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                        <v-text-field
+                                style="font-family: iran-yekan; font-size: 1em;margin-left: -15px; background-color: transparent !important;"
+                                color="#0045ff"
+                                type="text"
+                                dir="ltr"
+                                :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                                :type="show_pass ? 'text' : 'password'"
+                                browser-autocomplete="new-password"
+                                @click:append="show_pass = !show_pass"
+                                v-model="repeat_new_password"
+                                :label="password.repeat_new_password.label">
+
+                        </v-text-field>
+
+                    </div>
+
+                    <div style="display: flex; margin-bottom: 24px" class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em;margin-left: -15px"
+                                      color="#0045ff"
+                                      type="text"
+                                      dir="ltr"
+                                      :append-icon="show_pass ? 'visibility_off' : 'visibility'"
+                                      :type="show_pass ? 'text' : 'password'"
+                                      browser-autocomplete="new-password"
+                                      @click:append="show_pass = !show_pass"
+                                      v-model="current_password"
+                                      :label="password.current_password.label">
+
+                        </v-text-field>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row profile-edit-container">
+                    <button v-if="!loading && !editing" @click="saveNewPassword" class="start-editing">تایید رمز عبور
+                        جدید
+                    </button>
+                </div>
             </div>
+
         </div>
 
     </div>
@@ -170,6 +190,7 @@
                 loading: false,
                 loadingProgress: false,
                 editing: false,
+                show_pass: false,
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     secret_regex: value => new RegExp('^[a-z0-9]+([-.a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد، خط تیره (-) و (.) معتبر هستند)',
@@ -276,9 +297,9 @@
                 }
                 if (
                     !FormValidator(this.$data, {
-                        current_password: { required: true, name: "رمز عبور قبلی " },
-                        new_password: { required: true, name: "رمز عبور جدید " },
-                        repeat_new_password: { required: true, name: "تکرار رمز عبور" }
+                        current_password: {required: true, name: "رمز عبور قبلی "},
+                        new_password: {required: true, name: "رمز عبور جدید "},
+                        repeat_new_password: {required: true, name: "تکرار رمز عبور"}
                     })
                 ) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});

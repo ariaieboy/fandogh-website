@@ -13,15 +13,7 @@
 
         </div>
 
-
         <p class="social-sec-description">{{description}}</p>
-        <div style="width: 100%; display: flex; justify-content: center; justify-items: center">
-            <a href="https://twitter.com/intent/tweet?screen_name=fandoghpaas&ref_src=twsrc%5Etfw"
-               rel="noopener"
-               class="twitter-mention-button"
-               data-show-count="false">Tweet to @fandoghpaas</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
 
     </div>
 
