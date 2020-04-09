@@ -6,7 +6,7 @@
 
             <h2 class="title_header">مشخصات کاربری</h2>
 
-            <div v-if="setting_sections.user_information">
+            <div>
                 <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;
                             display: flex; flex-direction: column">
 
@@ -107,7 +107,7 @@
 
             <h2 class="title_header">تغییر رمز عبور</h2>
 
-            <div v-if="setting_sections.user_password">
+            <div>
                 <div style="background-color: #fefefe; border-radius: 3px; box-shadow: 0 2px 6px rgba(0,0,0,0.17); padding: 16px;
                                 display: flex; flex-direction: column;">
 
