@@ -77,6 +77,12 @@
 
         </price-header>
 
+
+        <div style="background: rgba(196,194,194,0.31); width: 100%; padding: 32px 16px;" class="row">
+
+
+        </div>
+
     </div>
 </template>
 

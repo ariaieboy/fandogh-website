@@ -23,7 +23,7 @@
 
         </div>
 
-        <div class="divider"></div>
+        <div class="price-header-divider"></div>
 
     </div>
 
@@ -76,7 +76,7 @@
 
         div.divider
             width 1px
-            background #707070
+            background rgba(112, 112, 112, 0.5)
 
         div.description-container
             width 100%
@@ -96,5 +96,11 @@
                 max-width 275px
                 line-height 2
                 padding-top 5px
+
+
+
+    .price-header-divider
+        height 1px
+        background rgba(112, 112, 112, 0.5)
 
 </style>
