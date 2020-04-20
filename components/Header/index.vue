@@ -34,10 +34,8 @@
                                     بلاگ
                                 </a>
                             </li>
-                            <li v-if="isMainPage"
-                                style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px"
-                                v-scroll-to="{el: '#prices', duration:1000, easing: 'linear'}">
-                                قیمت‌ها
+                            <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px">
+                                <a rel="noopener" target="_blank" href="https://fandogh.cloud/pricing">قیمت‌ها</a>
                             </li>
                         </ul>
                     </div>
@@ -302,9 +300,6 @@
             },
             dashboard() {
                 return this.$route.fullPath.includes("dashboard");
-            },
-            isMainPage() {
-                return this.$route.path === '/'
             }
         },
         methods: {
