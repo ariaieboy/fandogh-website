@@ -6,7 +6,8 @@
 
             <div class="col-xs-12 col-md-8 col-lg-8 col-sm-12">
 
-                <h2>{{title}}</h2>
+                <h2 v-if="en" style="font-family: 'Helvetica Neue'">{{title}}</h2>
+                <h2 v-else>{{title}}</h2>
                 <p class="price-header-description" v-html="description">{{description}}</p>
 
             </div>
@@ -17,6 +18,15 @@
                 <div class="description-container">
                     <p>مستندات مرتبط</p>
                     <a :href="link.href" v-for="link in links" target="_blank" rel="noopener">{{link.title}}</a>
+                </div>
+
+            </div>
+
+            <div v-if="alter" class="col-xs-12 col-md-4 col-lg-4 col-sm-12 price-header-links-container">
+
+                <div class="divider"></div>
+                <div class="description-container">
+                    <p style="color: #001069; font-size: 3em; text-align: center; margin-bottom: auto; margin-top: auto;">{{alter}}</p>
                 </div>
 
             </div>
@@ -32,7 +42,7 @@
 <script>
     export default {
         name: "price-header",
-        props: ['title', 'description', 'links'],
+        props: ['title', 'description', 'links', 'alter', 'en'],
         data() {
             return {}
         }

@@ -77,7 +77,6 @@
 
         </price-header>
 
-
         <div style="background: rgba(225,223,223,0.2); width: 100%; padding: 32px 16px;" class="row">
 
             <div class="calculator-parent-container">
@@ -220,6 +219,13 @@
 
         </div>
 
+        <price-header :title="headers.pay_as_you_go.title"
+                      :description="headers.pay_as_you_go.description"
+                      :en="true"
+                      :alter="headers.pay_as_you_go.alter">
+
+        </price-header>
+
     </div>
 
 </template>
@@ -260,7 +266,11 @@
                                 href: 'https://docs.fandogh.cloud/docs/resources.html'
                             }
                         ]
-                    },
+                    }, pay_as_you_go: {
+                        title: 'Pay As You Go',
+                        description: 'به میزان مصرف پرداخت کنید و نگران محاسبه داینامیک مصرف منابع سرویس‌های خود نباشید.<br> سکوی ابری فندق به صورت هوشمند منابع مورد نیاز را به سرویس‌های شما تخصیص می‌دهد.',
+                        alter: 'به زودی ...'
+                    }
                 },
                 plans: [
                     {
