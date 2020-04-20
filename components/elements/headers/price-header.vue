@@ -91,7 +91,7 @@
 
             a
                 color #0045FF
-                font-size 1.2em
+                font-size 1.1em
                 cursor pointer
                 max-width 275px
                 line-height 2
