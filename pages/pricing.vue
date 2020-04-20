@@ -432,7 +432,7 @@
                     dedicatedVolume: 0,
                 },
                 memoryRangeMin: '0.5GB',
-                memoryRangeMax: '64GB',
+                memoryRangeMax: '128GB',
                 volumeRangeMin: '10GB',
                 volumeRangeMax: '1T',
                 memoryOptions: {
@@ -443,7 +443,7 @@
                     direction: 'rtl',
                     interval: 0.5,
                     min: 0.5,
-                    max: 64,
+                    max: 128,
                     disabled: false,
                     clickable: true,
                     tooltip: 'none',
