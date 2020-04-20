@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%; background: #F4F6FF">
+    <div style="width: 100%; max-width: 1750px; margin-left: auto; margin-right: auto">
 
         <div class="parallax-container">
             <h1>{{title}}</h1>
@@ -221,6 +221,7 @@
         </div>
 
     </div>
+
 </template>
 
 <script>
