@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%; max-width: 1750px; margin-left: auto; margin-right: auto">
+    <div style="width: 100%; max-width: 1750px; margin-left: auto; margin-right: auto; background: rgba(225,223,223,0.2);">
 
         <div class="parallax-container">
             <h1>{{title}}</h1>
@@ -28,7 +28,7 @@
 
         </price-header>
 
-        <div style="background: rgba(225,223,223,0.2); width: 100%; padding: 32px 16px;" class="row">
+        <div style="width: 100%; padding: 32px 16px;" class="row">
 
             <div v-for="plan in plans" class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="padding: 0">
                 <div class="plan-card-container">
@@ -77,7 +77,7 @@
 
         </price-header>
 
-        <div style="background: rgba(225,223,223,0.2); width: 100%; padding: 32px 16px;" class="row">
+        <div style="width: 100%; padding: 32px 16px;" class="row">
 
             <div class="calculator-parent-container">
 
@@ -225,6 +225,85 @@
                       :alter="headers.pay_as_you_go.alter">
 
         </price-header>
+
+
+        <div style="width: 100%;">
+
+            <div class="payg-parent-container" style="max-width: 2100px">
+
+                <div class="row payg-div">
+
+                    <div class="coming-soon-container">
+                        <p>به زودی...</p>
+                    </div>
+
+
+                    <div class="payg-container">
+
+                        <p class="payg-title">{{pay_as_you_go_title}}</p>
+
+                        <div class="row"
+                             style="width: 100%; margin-top: 16px; margin-left: 0; margin-right: 0">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 payg-config-container">
+
+                                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                     style="display: flex; flex-direction: column">
+
+                                    <div style="display: flex; width: 100%">
+                                        <span class="card-plan-config-title">رم (حافظه تصادفی)</span>
+                                        <span class="card-plan-config-description">نامحدود</span>
+                                    </div>
+
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
+                                        <span class="card-plan-config-description">سفارشی</span>
+                                    </div>
+
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Load Balancer</span>
+                                        <span class="card-plan-config-description">رایگان</span>
+                                    </div>
+
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Monitoring</span>
+                                        <span class="card-plan-config-description">رایگان</span>
+                                    </div>
+
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                     style="display: flex; flex-direction: column">
+                                    <div style="display: flex; width: 100%">
+                                        <span class="card-plan-config-title">پردازنده</span>
+                                        <span class="card-plan-config-description">نامحدود</span>
+                                    </div>
+
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Dedicated Volume</span>
+                                        <span class="card-plan-config-description">سفارشی</span>
+                                    </div>
+
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">Image Registry</span>
+                                        <span class="card-plan-config-description">رایگان</span>
+                                    </div>
+
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">پشتیبانی حرفه‌ای</span>
+                                        <span class="card-plan-config-description">رایگان</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -840,6 +919,108 @@
         height max-content
         @media only screen and (max-width: 1230px)
             flex-direction column
+
+
+    .payg-parent-container
+        width 100%
+        box-sizing padding-box
+        margin-bottom 64px
+        box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+
+        div.payg-div
+            width 100%
+            height max-content
+            background-color #0045ff
+            margin-left 0
+            margin-right 0
+            display flex
+            flex 3
+            @media only screen and (max-width: 992px)
+                flex-direction column
+
+
+    .coming-soon-container
+        flex 1
+        height available
+        padding 32px
+        display flex
+
+        p
+            margin-top auto
+            margin-bottom auto
+            text-align center
+            width 100%
+            font-family iran-yekan
+            font-size 3.5em
+            font-weight bold
+            @media only screen and (max-width: 992px)
+                font-size 2.6em
+
+
+    .payg-container
+        flex 2
+        height 100%
+        background-color #fefefe
+        border-radius 0 1000px 1000px 0
+        display flex
+        flex-direction column
+        padding 32px
+        box-sizing padding-box
+        @media only screen and (max-width: 992px)
+            border-radius 0 0 25px 25px
+
+        p.payg-title
+            text-align center
+            width 100%
+            font-family iran-yekan
+            font-size 2.5em
+            font-weight bold
+            color #0045ff
+
+    .payg-config-container
+        display flex
+        justify-content center
+        margin-right 48px
+        margin-bottom 32px
+        @media only screen and (max-width: 992px)
+            margin-right 0
+            margin-bottom 16px
+
+
+    .card-plan-config-title
+        font-family iran-yekan
+        font-size 1em
+        font-weight bold
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align right
+        color #3c3c3c
+        @media only screen and (max-width: 992px)
+            font-size .85em
+        @media only screen and (min-width: 1850px)
+            font-size 1.2em
+
+    .card-plan-config-description
+        font-family iran-yekan
+        font-size 1em
+        font-weight normal
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align left
+        color #3c3c3c
+        padding-right 16px
+        padding-left 16px
+        flex 1
+        @media only screen and (max-width: 992px)
+            font-size .85em
+            padding-right 0
+            padding-left 0
+        @media only screen and (min-width: 1850px)
+            font-size 1.2em
 </style>
 
 <style lang="css">
