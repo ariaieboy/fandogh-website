@@ -28,7 +28,7 @@
 
         </price-header>
 
-        <div style="background: rgba(196,194,194,0.31); width: 100%; padding: 32px 16px;" class="row">
+        <div style="background: rgba(225,223,223,0.2); width: 100%; padding: 32px 16px;" class="row">
 
             <div v-for="plan in plans" class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="padding: 0">
                 <div class="plan-card-container">
@@ -78,8 +78,145 @@
         </price-header>
 
 
-        <div style="background: rgba(196,194,194,0.31); width: 100%; padding: 32px 16px;" class="row">
+        <div style="background: rgba(225,223,223,0.2); width: 100%; padding: 32px 16px;" class="row">
 
+            <div class="calculator-parent-container">
+
+                <div class="container-fluid"
+                     style="width: 100%; padding: 16px; box-sizing: padding-box; max-width: 2100px; display: flex; flex-direction: column">
+                    <div class="row calculator-container">
+
+                        <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calculator-slider-container">
+
+                                <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                                       style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
+                                    رم (حافظه تصادفی)
+                                    <input style="border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none; font-family: iran-sans"
+                                           type="number"
+                                           min="0.5"
+                                           step="0.5"
+                                           max="64"
+                                           value="planData.memory"
+                                           v-model="planData.memory"/>
+
+                                </label>
+
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
+                                     style="margin-top: 20px; padding: 0; height: max-content">
+                                    <vue-slider
+                                            v-model="planData.memory"
+                                            v-bind="memoryOptions"/>
+                                    <div class="range-title">
+                                        <p>{{memoryRangeMin}}</p>
+                                        <p style="float: left;">{{memoryRangeMax}}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 calculator-slider-container">
+
+                                <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
+                                       style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
+                                    Dedicated Volume
+                                    <input style="font-family: iran-sans; border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
+                                           type="number"
+                                           min="0"
+                                           step="1"
+                                           max="1000"
+                                           value="planData.dedicatedVolume"
+                                           v-model="planData.dedicatedVolume"/>
+
+                                </label>
+
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12"
+                                     style="margin-top: 20px; padding: 0; height: max-content">
+                                    <vue-slider
+                                            v-model="planData.dedicatedVolume"
+                                            v-bind="dedicatedVolumeOptions"/>
+                                    <div class="range-title">
+                                        <p>{{volumeRangeMin}}</p>
+                                        <p style="float: left;">{{volumeRangeMax}}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row"
+                         style="width: 100%; margin-top: 32px; margin-right: 0; margin-left: 0">
+
+                        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12"
+                             style="display: flex; padding: 0">
+                            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                 style="display: flex; flex-direction: column">
+                                <div style="display: flex; width: 100%">
+                                    <span class="calculator-config-title">رم (حافظه تصادفی)</span>
+                                    <span class="calculator-config-description">{{planData.memory}} گیگابایت</span>
+                                </div>
+
+
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">حافظه ذخیره‌سازی</span>
+                                    <span class="calculator-config-description">۲.۵ گیگابایت</span>
+                                </div>
+
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">Load Balancer</span>
+                                    <span class="calculator-config-description">رایگان</span>
+                                </div>
+
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">Monitoring</span>
+                                    <span class="calculator-config-description">رایگان</span>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
+                                 style="display: flex; flex-direction: column">
+                                <div style="display: flex; width: 100%">
+                                    <span class="calculator-config-title">پردازنده</span>
+                                    <span class="calculator-config-description">{{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} هسته</span>
+                                </div>
+
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">Dedicated Volume</span>
+                                    <span class="calculator-config-description">{{planData.dedicatedVolume}} گیگابات</span>
+                                </div>
+
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">Image Registry</span>
+                                    <span class="calculator-config-description">رایگان</span>
+                                </div>
+
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">پشتیبانی حرفه‌ای</span>
+                                    <span class="calculator-config-description">رایگان</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 calculator-result-container">
+                            <p>ماهیانه</p>
+                            <p class="calc-result">{{(planData.memory * 60000 + planData.dedicatedVolume
+                                *
+                                1200).toLocaleString()}}</p>
+                            <p>تومان</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
 
         </div>
 
@@ -87,7 +224,9 @@
 </template>
 
 <script>
+
     import PriceHeader from "../components/elements/headers/price-header";
+    import 'vue-slider-component/theme/default.css';
 
     export default {
         name: 'pricing',
@@ -286,7 +425,73 @@
                             }
                         ]
                     },
-                ]
+                ],
+                planData: {
+                    memory: .5,
+                    cpu: 0.5,
+                    dedicatedVolume: 0,
+                },
+                memoryRangeMin: '0.5GB',
+                memoryRangeMax: '64GB',
+                volumeRangeMin: '10GB',
+                volumeRangeMax: '1T',
+                memoryOptions: {
+                    dotSize: 32,
+                    width: 'auto',
+                    height: 24,
+                    contained: false,
+                    direction: 'rtl',
+                    interval: 0.5,
+                    min: 0.5,
+                    max: 64,
+                    disabled: false,
+                    clickable: true,
+                    tooltip: 'none',
+                    useKeyboard: false,
+                    enableCross: true,
+                    fixed: false,
+                    included: true,
+                    order: true,
+                    process: true,
+                    dotStyle: {backgroundColor: '#00ffff', boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.17)'},
+                    railStyle: {backgroundColor: 'rgba(0, 69, 255, 0.25)', cursor: 'pointer'},
+                    processStyle: {backgroundColor: '#0045ff'},
+                    labelStyle: {
+                        color: '#2979ff',
+                        fontFamily: 'iran-yekan',
+                        fontWeight: 'bold',
+                        letterSpacing: 'normal'
+                    }
+                },
+                dedicatedVolumeOptions: {
+                    dotSize: 32,
+                    width: 'auto',
+                    height: 24,
+                    contained: false,
+                    direction: 'rtl',
+                    min: 0,
+                    max: 1000,
+                    interval: 1,
+                    disabled: false,
+                    clickable: true,
+                    duration: 0.5,
+                    tooltip: 'none',
+                    useKeyboard: false,
+                    enableCross: true,
+                    fixed: false,
+                    included: true,
+                    order: true,
+                    process: true,
+                    dotStyle: {backgroundColor: '#00ffff', boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.17)'},
+                    railStyle: {backgroundColor: 'rgba(0, 69, 255, 0.25)', cursor: 'pointer'},
+                    processStyle: {backgroundColor: '#0045ff'},
+                    labelStyle: {
+                        color: '#2979ff',
+                        fontFamily: 'iran-yekan',
+                        fontWeight: 'bold',
+                        letterSpacing: 'normal'
+                    }
+                }
             }
         },
         head() {
@@ -311,6 +516,8 @@
 </script>
 
 <style lang="stylus" scoped>
+
+    @import "../assets/css/variables.styl"
 
     .row
         margin-right 0
@@ -509,4 +716,126 @@
         z-index 10000
         @media only screen and (max-width 1230px)
             top 0
+
+
+    .calculator-parent-container
+        width 100%
+
+
+    .calculator-container
+        width 100%
+        border-radius 5px
+        box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.17)
+        background-color #ffffff
+        display flex
+        flex-direction column
+        padding 32px
+        box-sizing padding-box
+        margin-left 0
+        margin-right 0
+
+
+    .calculator-config-title
+        font-family iran-yekan
+        font-size 1.2em
+        font-weight bold
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align right
+        color #3c3c3c
+        margin-top 8px
+        @media only screen and (max-width: 992px)
+            font-size .9em
+
+    .calculator-config-description
+        font-family iran-sans
+        font-size 1.3em
+        font-weight normal
+        font-style normal
+        font-stretch normal
+        line-height 1.75
+        letter-spacing normal
+        text-align left
+        color #3c3c3c
+        margin-top 8px
+        padding-right 16px
+        padding-left 16px
+        flex 1
+        @media only screen and (max-width: 992px)
+            font-size .9em
+            padding-right 0
+            padding-left 0
+
+    .calculator-result-container
+        display flex
+        flex-direction column
+        justify-content center
+        @media only screen and (max-width: 992px)
+            margin-top 16px
+            flex-direction unset
+
+        p
+            font-family iran-yekan
+            font-size 3em
+            font-weight normal
+            font-style normal
+            font-stretch normal
+            line-height 1.73
+            letter-spacing normal
+            text-align center
+            color #535353
+            margin-bottom 0
+            @media only screen and (max-width: 992px)
+                font-size 1.4em
+
+
+        p.calc-result
+            font-family iran-sans
+            font-size 3.2em
+            font-weight bold
+            font-style normal
+            font-stretch normal
+            line-height 1.73
+            letter-spacing normal
+            text-align center
+            color #0045ff
+            margin-bottom 0
+            @media only screen and (max-width: 992px)
+                font-size 1.8em
+                padding-left 24px
+                padding-right 24px
+
+    .range-title
+        box-sizing content-box
+        position relative
+        width 100%
+        margin-top -8px
+        margin-bottom 16px
+
+        p
+            color #2979ff
+            font-family iran-yekan
+            font-size 1em
+            font-weight bold
+            margin 0
+            display inline-block
+
+    .calculator-slider-container
+        padding 0
+        display flex
+        flex-direction row
+        height max-content
+        @media only screen and (max-width: 1230px)
+            flex-direction column
+</style>
+
+<style lang="css">
+    .vue-slider-dot-handle {
+        background-image: url("../assets/svg/double-arrow.svg");
+        background-repeat: no-repeat;
+        background-size: 18px;
+        background-position: center;
+    }
 </style>
