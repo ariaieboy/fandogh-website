@@ -7,7 +7,7 @@
             <div class="col-xs-12 col-md-8 col-lg-8 col-sm-12">
 
                 <h2>{{title}}</h2>
-                <p class="price-header-description">{{description}}</p>
+                <p class="price-header-description" v-html="description">{{description}}</p>
 
             </div>
 
