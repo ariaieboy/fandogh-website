@@ -780,6 +780,7 @@
                 border-radius 5px
                 color #fefefe
                 height 38px
+                transition all .3s ease-in-out
                 font-family iran-yekan
                 margin-top auto
 
