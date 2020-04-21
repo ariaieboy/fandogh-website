@@ -10,7 +10,7 @@
             <platform-features/>
             <business-solution/>
             <!--<success-story/>-->
-            <price/>
+            <!--<price/>-->
             <social-network/>
         </div>
     </section>
