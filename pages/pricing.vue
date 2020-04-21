@@ -62,7 +62,7 @@
                             <p class="description">- {{spec.detail}}</p>
                         </div>
 
-                        <button>جزئیات</button>
+                        <button @click="$router.push(plan.button.url)">{{plan.button.text}}</button>
 
                     </div>
 
@@ -226,7 +226,6 @@
 
         </price-header>
 
-
         <div style="width: 100%;">
 
             <div class="payg-parent-container" style="max-width: 2100px">
@@ -321,7 +320,7 @@
         data() {
             return {
                 title: 'قیمت محصولات سکوی ابری فندق',
-                description: 'قیمت‌گزاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم.<br/> از پروژه‌های کوچک یا پروژه‌های شرکتی را با حداقل هزینه و حداکثر کیفیت تهیه کنید.',
+                description: 'قیمت‌گزاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم.<br/> هر نوع پروژه‌ای با هر مقایسی را به سادگی بر روی فندق اجرا کنید.',
                 headers: {
                     plans: {
                         title: 'پلن‌های پیشنهادی',
@@ -377,15 +376,16 @@
                         ],
                         specs: [
                             {
-                                detail: 'شامل همه ویژگی‌های رایگان'
-                            },
-                            {
                                 detail: 'گواهی ssl رایگان'
                             },
                             {
                                 detail: 'دامنه دلخواه'
                             },
-                        ]
+                        ],
+                        button:{
+                            text: 'ثبت‌نام',
+                            url: '/user/register'
+                        }
                     },
                     {
                         icon: 'base-plan',
@@ -415,15 +415,15 @@
                                 detail: 'ضمانت Uptime'
                             },
                             {
-                                detail: 'شامل همه ویژگی‌های رایگان'
-                            },
-                            {
                                 detail: 'گواهی ssl رایگان'
                             },
                             {
                                 detail: 'دامنه دلخواه'
                             }
-                        ]
+                        ],button:{
+                            text: 'خرید پلن',
+                            url: '/dashboard/plans'
+                        }
                     },
                     {
                         icon: 'economy-plan',
@@ -457,9 +457,6 @@
                                 detail: 'ضمانت Uptime'
                             },
                             {
-                                detail: 'شامل همه ویژگی‌های رایگان'
-                            },
-                            {
                                 detail: 'گواهی ssl رایگان'
                             },
                             {
@@ -468,7 +465,10 @@
                             {
                                 detail: 'ساخت بیش از ۲ سرویس'
                             }
-                        ]
+                        ],button:{
+                            text: 'خرید پلن',
+                            url: '/dashboard/plans'
+                        }
                     },
                     {
                         icon: 'startup-plan',
@@ -502,9 +502,6 @@
                                 detail: 'ضمانت Uptime'
                             },
                             {
-                                detail: 'شامل همه ویژگی‌های رایگان'
-                            },
-                            {
                                 detail: 'گواهی ssl رایگان'
                             },
                             {
@@ -513,7 +510,10 @@
                             {
                                 detail: 'ساخت بیش از ۲ سرویس'
                             }
-                        ]
+                        ],button:{
+                            text: 'خرید پلن',
+                            url: '/dashboard/plans'
+                        }
                     },
                 ],
                 planData: {
@@ -639,6 +639,9 @@
         letter-spacing: normal
         text-align: center
         color: #fefefe
+        @media only screen and (max-width 1200px)
+            font-size 2em
+            padding-top 64px
 
     h2
         font-family: 'yekan'
@@ -657,19 +660,22 @@
         font-size 1.5em
         color: #fefefe
         text-align center
+        @media only screen and (max-width 1200px)
+            font-size 1.1em
+            padding-right 16px
+            padding-left 16px
 
 
     .plan-card-container
         background #fefefe
         border-radius 3px
-        box-shadow none
-        opacity 0.6
+        box-shadow 0 3px 3px rgba(0, 0, 0, 0.07)
         display flex
         flex-direction column
         padding 0
         cursor pointer
         margin 4px
-        transition all 0.3s ease-in-out
+        transition all .3s ease-in-out
 
         .header
             width 100%
@@ -712,7 +718,7 @@
             display flex
             flex-direction column
             padding 16px
-            min-height 150px
+            min-height 200px
 
             .detail-container
                 display flex
@@ -769,10 +775,9 @@
                     margin-bottom 8px
 
             button
-                background rgba(0, 69, 255, 0.41)
+                background rgba(0, 69, 255, 0.75)
                 width 100px
                 border-radius 5px
-                border 1px solid #0045ff
                 color #fefefe
                 height 38px
                 font-family iran-yekan
@@ -780,8 +785,7 @@
 
 
     .plan-card-container:hover
-        opacity 1
-        box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+        box-shadow 0 3px 9px rgba(0, 0, 0, 0.27)
 
         .plan-spec-container
             button
