@@ -28,45 +28,85 @@
 
         </price-header>
 
-        <div style="width: 100%; padding: 32px 16px;" class="row">
+        <div style="width: 100%; padding: 0 16px; margin-top: 32px; margin-bottom: 32px" class="row">
 
-            <div v-for="plan in plans" class="col-xs-12 col-sm-6 col-md-3 col-lg-3" style="padding: 0">
-                <div class="plan-card-container">
+            <div style="width: 100%; display: flex; flex-direction: column;"
+                 class="col-xs-12 col-sm-5 col-md-3 col-lg-3">
 
-                    <div class="header">
-                        <img :src="require('../assets/svg/plans/' + plan.icon + '.svg')" :alt="plan.icon">
-                        <p class="header-title">{{plan.title}}</p>
-                        <p class="header-description">{{plan.price}}</p>
+                <div v-for="(plan, index) in plans"
+                     @click="selectPlan(index)" style="padding: 0; width: 100%">
+                    <div class="plan-card-container">
+
+                        <div class="header" :class="{'selected': selected_plan.index === index}">
+                            <div style="display: flex; flex-direction: row">
+                                <img :src="require('../assets/svg/plans/' + plan.icon + '.svg')" :alt="plan.icon">
+                                <div style="display: flex; flex-direction: column; padding-right: 16px">
+                                    <p class="header-title">{{plan.title}}</p>
+                                    <p class="header-description">{{plan.price}}</p>
+                                </div>
+                            </div>
+
+                            <div class="divider" style="margin-top: 8px; margin-bottom: 8px"></div>
+
+                            <div style="display: inline-flex; flex-wrap: wrap">
+                                <div v-for="(conf, index) in plan.thumb_config"
+                                     class="detail-container">
+                                    <span class="detail-title">{{conf.title}}:</span>
+                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount">| {{conf.detail}}</span>
+                                    <span v-else class="left detail-amount">{{conf.detail}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row col-xs-12 col-sm-7 col-md-9 col-lg-9"
+                 style="border-radius: 3px; box-shadow: 0 3px 6px rgba(0,0,0,0.17);
+                            background: #fefefe; width: 100%; position: sticky; top: 128px; height: max-content;
+                            min-height: 300px; margin-bottom: 4px">
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-top: 16px; margin-bottom: 16px">
+
+                    <div class="divider"></div>
+
+                    <div class="plan-description-container">
+                        <p>{{selected_plan.description}}</p>
                     </div>
 
                     <div class="divider"></div>
 
-                    <div class="plan-config-container">
-                        <div v-for="conf in plan.config" class="detail-container">
+                    <div class="plan-config-container row">
+                        <p style="font-size: 1.3em; font-family: iran-yekan; color: #111" class="col-xs-12">مشخات:</p>
+                        <div v-for="conf in selected_plan.config"
+                             class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <p class="detail-title">{{conf.title}}</p>
                             <p class="detail-amount">{{conf.detail}}</p>
                         </div>
                     </div>
 
-                    <div class="divider"></div>
+                    <div style="width: 100%; display: flex">
 
-                    <div class="plan-description-container">
-                        <p>{{plan.description}}</p>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <div class="plan-spec-container">
-
-                        <div v-for="spec in plan.specs" class="inner-container">
-                            <p class="description">- {{spec.detail}}</p>
-                        </div>
-
-                        <button @click="$router.push(plan.button.url)">{{plan.button.text}}</button>
-
+                        <button class="plan-button" @click="$router.push(selected_plan.button.url)">
+                            {{selected_plan.button.text}}
+                        </button>
                     </div>
 
                 </div>
+
+                <div class="row col-xs-12 col-sm-12 col-md-5 col-lg-5 plan-spec-container">
+
+                    <p style="font-size: 1.3em; font-family: iran-yekan; color: #111; height: max-content"
+                       class="col-xs-12 col-sm-12 col-md-12 col-lg-12">مزایا:</p>
+
+                    <div v-for="spec in selected_plan.specs"
+                         class="inner-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                        <p class="description">- {{spec.detail}}</p>
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
@@ -239,8 +279,6 @@
 
                     <div class="payg-container">
 
-                        <p class="payg-title">{{pay_as_you_go_title}}</p>
-
                         <div class="row"
                              style="width: 100%; margin-top: 16px; margin-left: 0; margin-right: 0">
 
@@ -350,20 +388,88 @@
                         alter: 'به زودی ...'
                     }
                 },
+                selected_plan: {
+                    index: 0,
+                    icon: 'free_plan',
+                    title: 'پلن رایگان',
+                    enabled: true,
+                    price: 'رایگان و بدون هزینه',
+                    description: 'مناسب پروژه‌های دانشجویی و ارائه محصولات MVP و کارهای آزمایشی',
+                    thumb_config: [
+                        {
+                            title: 'رم',
+                            detail: '400 Mi'
+                        },
+                        {
+                            title: 'پردازنده',
+                            detail: '0.5 Core'
+                        },
+                        {
+                            title: 'حافظه ذخیره‌سازی اشتراکی',
+                            detail: '2.5 GB'
+                        },
+                    ],
+                    config: [
+                        {
+                            title: 'رم (حافظه تصادفی)',
+                            detail: '400 Mi'
+                        },
+                        {
+                            title: 'پردازنده',
+                            detail: '0.5 Core'
+                        },
+                        {
+                            title: 'حافظه ذخیره‌سازی اشتراکی',
+                            detail: '2.5 GB'
+                        },
+                        {
+                            title: 'تعداد سرویس مجاز',
+                            detail: '2'
+                        }
+                    ],
+                    specs: [
+                        {
+                            detail: 'گواهی ssl رایگان'
+                        },
+                        {
+                            detail: 'دامنه دلخواه'
+                        },
+                    ],
+                    button: {
+                        text: 'ثبت‌نام',
+                        url: '/user/register'
+                    }
+                },
                 plans: [
                     {
+                        index: 0,
                         icon: 'free_plan',
                         title: 'پلن رایگان',
+                        enabled: true,
                         price: 'رایگان و بدون هزینه',
                         description: 'مناسب پروژه‌های دانشجویی و ارائه محصولات MVP و کارهای آزمایشی',
-                        config: [
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: '400 Mi'
+                            },
                             {
                                 title: 'پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                        ],
+                        config: [
+                            {
                                 title: 'رم (حافظه تصادفی)',
                                 detail: '400 Mi'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: '0.5 Core'
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی اشتراکی',
@@ -382,24 +488,40 @@
                                 detail: 'دامنه دلخواه'
                             },
                         ],
-                        button:{
+                        button: {
                             text: 'ثبت‌نام',
                             url: '/user/register'
                         }
                     },
                     {
+                        index: 1,
                         icon: 'base-plan',
                         title: 'پلن پایه',
+                        enabled: true,
                         price: 'ماهیانه ۳۰ هزار تومان',
                         description: 'مناسب پروژه‌های کوچک که نیاز به ضمانت Uptime دارند؛ مانند چت بات‌ها، وب سایت‌های استاتیک و...‌',
-                        config: [
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: '512 Mi'
+                            },
                             {
                                 title: 'پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                        ],
+                        config: [
+                            {
                                 title: 'رم (حافظه تصادفی)',
                                 detail: '512 Mi'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: '0.5 Core'
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی اشتراکی',
@@ -420,24 +542,44 @@
                             {
                                 detail: 'دامنه دلخواه'
                             }
-                        ],button:{
+                        ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
                         }
                     },
                     {
+                        index: 2,
                         icon: 'economy-plan',
                         title: 'پلن اقتصادی',
+                        enabled: true,
                         price: 'ماهیانه ۷۲ هزار تومان',
                         description: 'مناسب پروژه‌های با مقیاس متوسط که نیاز به ساخت بیش از ۲ سرویس در آن دارید.',
-                        config: [
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: '1024 Mi'
+                            },
                             {
                                 title: 'پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: 'Dedicated Volume',
+                                detail: '10 GB'
+                            },
+                        ],
+                        config: [
+                            {
                                 title: 'رم (حافظه تصادفی)',
                                 detail: '1024 Mi'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: '0.5 Core'
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی اشتراکی',
@@ -465,24 +607,44 @@
                             {
                                 detail: 'ساخت بیش از ۲ سرویس'
                             }
-                        ],button:{
+                        ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
                         }
                     },
                     {
+                        index: 3,
                         icon: 'startup-plan',
                         title: 'پلن استارتاپی',
+                        enabled: true,
                         price: 'ماهیانه ۱۸۰ هزار تومان',
                         description: 'مناسب پروژه‌های استارتاپی که توزیع منابع و مدیریت هزینه برای آن‌ها مهم است.',
-                        config: [
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: '2048 Mi'
+                            },
                             {
                                 title: 'پردازنده',
                                 detail: '1.0 Core'
                             },
                             {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: 'Dedicated Volume',
+                                detail: '50 GB'
+                            },
+                        ],
+                        config: [
+                            {
                                 title: 'رم (حافظه تصادفی)',
                                 detail: '2048 Mi'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: '1.0 Core'
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی اشتراکی',
@@ -510,7 +672,7 @@
                             {
                                 detail: 'ساخت بیش از ۲ سرویس'
                             }
-                        ],button:{
+                        ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
                         }
@@ -601,6 +763,13 @@
                 ]
 
             }
+        },
+        methods: {
+            selectPlan(index) {
+
+                this.selected_plan = this.plans[index]
+
+            }
         }
     }
 </script>
@@ -662,8 +831,6 @@
         text-align center
         @media only screen and (max-width 1200px)
             font-size 1.1em
-            padding-right 16px
-            padding-left 16px
 
 
     .plan-card-container
@@ -674,7 +841,7 @@
         flex-direction column
         padding 0
         cursor pointer
-        margin 4px
+        margin-bottom 8px
         transition all .3s ease-in-out
 
         .header
@@ -683,121 +850,104 @@
             display flex
             flex-direction column
             padding 16px
-            border-top-left-radius 3px
-            border-top-right-radius 3px
+            border-radius 3px
+            transition all .3s ease-in-out
 
             img
                 filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
-                width 94px
-                height 94px
-                margin-left auto
-                margin-right auto
+                width 54px
+                height 54px
+                margin auto 0
 
             p.header-title
                 color #001069
-                text-align center
-                font-size 1.4em
+                text-align right
+                font-size 1.2em
                 font-family iran-yekan
-                padding-top 16px
                 font-weight bold
                 margin-bottom 0
 
             p.header-description
                 color #535353
-                text-align center
+                text-align right
                 font-size 1.2em
                 font-family iran-yekan
                 font-weight normal
                 margin-bottom 0
 
-        .divider
-            height 1px
-            background #e7ebf5
-
-        .plan-config-container
-            display flex
-            flex-direction column
-            padding 16px
-            min-height 200px
-
-            .detail-container
-                display flex
-                flex-direction row
-
-                .detail-title
-                    color #000
-                    flex .7
-                    font-size 1em
-                    font-family iran-yekan
-                    margin-bottom 8px
-
-                .detail-amount
-                    color #000
-                    flex .3
-                    text-align left
-                    font-family "Helvetica Neue"
-                    direction ltr
-                    font-size 1em
-                    margin-bottom 8px
-
-
-        .plan-description-container
-            width 100%
-            background rgba(238, 238, 238, 0.19)
-            display flex
-            flex-direction column
-            padding 16px
-
-            p
-                color #535353
-                text-align center
-                font-size 1em
+            span.detail-title
+                color #343434
+                width max-content
+                font-size .9em
+                margin-bottom 4px
                 font-family iran-yekan
-                font-weight normal
-                margin-bottom 0
+                line-height 1.75
+                padding-right 4px
 
+            span.detail-amount
+                color #7a7a7a
+                line-height 1.75
+                width max-content
+                direction ltr
+                margin-bottom 4px
+                font-family "Helvetica Neue"
+                font-size .9em
+                padding-right 4px
 
-        .plan-spec-container
-            display flex
-            flex-direction column
-            padding 16px
-            min-height 250px
+            .divider
+                height 1px
+                background #535353
 
-            .inner-container
-                display flex
-                flex-direction row
-
-                p.description
-                    color #404040
-                    flex 1
-                    text-align right
-                    font-size 1em
-                    margin-bottom 8px
-
-            button
-                background rgba(0, 69, 255, 0.75)
-                width 100px
-                border-radius 5px
-                color #fefefe
-                height 38px
-                transition all .3s ease-in-out
-                font-family iran-yekan
-                margin-top auto
-
-
-    .plan-card-container:hover
-        box-shadow 0 3px 9px rgba(0, 0, 0, 0.27)
-
-        .plan-spec-container
-            button
+            &.selected
                 background #0045ff
-                width 100px
-                border-radius 5px
-                color #fefefe
-                height 38px
-                font-family iran-yekan
-                margin-top auto
-                border none
+                box-shadow 0 3px 3px rgba(0, 0, 0, 0.07)
+                transition all .3s ease-in-out
+
+                img
+                    filter none
+                    width 54px
+                    height 54px
+                    margin auto 0
+
+                p.header-title
+                    color #fefefe
+                    text-align right
+                    font-size 1.2em
+                    font-family iran-yekan
+                    font-weight bold
+                    margin-bottom 0
+
+                p.header-description
+                    color #e4e4e4
+                    text-align right
+                    font-size 1.2em
+                    font-family iran-yekan
+                    font-weight normal
+                    margin-bottom 0
+
+                span.detail-title
+                    color #fefefe
+                    width max-content
+                    font-size .9em
+                    direction ltr
+                    font-family iran-yekan
+                    margin-bottom 4px
+                    line-height 1.75
+                    padding-right 4px
+
+                span.detail-amount
+                    color #ebebeb
+                    width max-content
+                    line-height 1.75
+                    font-family "Helvetica Neue"
+                    font-size .9em
+                    direction ltr
+                    margin-bottom 4px
+                    padding-right 4px
+
+                .divider
+                    height 1px
+                    background #e7ebf5
 
 
     .price-page-navigation
@@ -1026,6 +1176,96 @@
             padding-left 0
         @media only screen and (min-width: 1850px)
             font-size 1.2em
+
+    .plan-config-container
+        margin-top 16px
+
+        .detail-container
+            display flex
+            flex-direction row
+            height max-content
+
+            .detail-title
+                color #000
+                flex .7
+                font-size 1em
+                font-family iran-yekan
+                margin-bottom 12px
+
+            .detail-amount
+                color #111
+                flex .3
+                text-align left
+                font-family "Helvetica Neue"
+                direction ltr
+                font-size 1em
+                margin-bottom 12px
+
+
+    .plan-description-container
+        width 100%
+        background rgba(168, 171, 255, 0.43)
+        display flex
+        flex-direction column
+        padding 16px
+        border-radius 3px
+
+        p
+            color #535353
+            text-align right
+            font-size 1em
+            font-family iran-yekan
+            font-weight normal
+            margin-bottom 0
+
+
+    .plan-spec-container
+        margin-top 16px
+        margin-bottom 16px
+        border-right 1px dashed rgba(0, 0, 0, 0.17)
+        border-radius 3px
+        display flex
+        align-content start
+        @media only screen and (max-width 992px)
+            border-right none
+
+        .inner-container
+            display flex
+            margin-bottom auto
+            flex-direction row
+            height max-content
+
+            p.description
+                color #404040
+                flex 1
+                height max-content
+                text-align right
+                font-size 1em
+                margin-bottom 12px
+
+
+    .plan-button
+        background rgba(0, 69, 255, 1)
+        width 200px
+        border-radius 5px
+        color #fefefe
+        height 38px
+        box-shadow 0 3px 6px rgba(0, 69, 255, 0.17)
+        font-family iran-yekan
+        margin-right auto
+        margin-left auto
+        margin-top 64px
+        transition all .3s ease-in-out
+        @media only screen and (max-width 992px)
+            margin-top 16px
+            margin-right unset
+            margin-left unset
+            width 100%
+
+    .plan-button:hover
+        box-shadow 0 3px 6px rgba(0, 69, 255, 0.27)
+
+
 </style>
 
 <style lang="css">
