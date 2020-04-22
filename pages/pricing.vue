@@ -463,6 +463,72 @@
                             detail: 'مدیریت تیم و دسترسی‌ها'
                         }
                     ],
+                    suited_for: [
+                        {
+                            title: 'wordpress',
+                            icon: 'wordpress'
+                        },
+                        {
+                            title: 'blog',
+                            icon: 'blog'
+                        },
+                        {
+                            title: 'bot',
+                            icon: 'bot'
+                        },
+                        {
+                            title: 'ai',
+                            icon: 'ai'
+                        },
+                        {
+                            title: 'fintech',
+                            icon: 'fintech'
+                        },
+                        {
+                            title: 'saas',
+                            icon: 'saas'
+                        },
+                        {
+                            title: 'blog',
+                            icon: 'blog'
+                        },
+                        {
+                            title: 'bot',
+                            icon: 'bot'
+                        },
+                        {
+                            title: 'ai',
+                            icon: 'ai'
+                        },
+                        {
+                            title: 'fintech',
+                            icon: 'fintech'
+                        },
+                        {
+                            title: 'saas',
+                            icon: 'saas'
+                        },
+                        {
+                            title: 'blog',
+                            icon: 'blog'
+                        },
+                        {
+                            title: 'bot',
+                            icon: 'bot'
+                        },
+                        {
+                            title: 'ai',
+                            icon: 'ai'
+                        },
+                        {
+                            title: 'fintech',
+                            icon: 'fintech'
+                        },
+                        {
+                            title: 'saas',
+                            icon: 'saas'
+                        }
+                    ],
                     button: {
                         text: 'ثبت‌نام',
                         url: '/user/register'
