@@ -64,6 +64,7 @@
             </div>
 
             <div class="row col-xs-12 col-sm-7 col-md-9 col-lg-9"
+                 id="plan-spec"
                  style="border-radius: 3px; box-shadow: 0 3px 6px rgba(0,0,0,0.17);
                             background: #fefefe; width: 100%; position: sticky; top: 128px; height: max-content;
                             padding-left: 0; padding-right: 0;
@@ -1170,7 +1171,8 @@
         methods: {
             selectPlan(index) {
 
-                this.selected_plan = this.plans[index]
+                this.selected_plan = this.plans[index];
+                document.getElementById('plan-spec').scrollIntoView({block: 'nearest', behavior: 'smooth'});
 
             }
         }
