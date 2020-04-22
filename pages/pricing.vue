@@ -66,8 +66,9 @@
             <div class="row col-xs-12 col-sm-7 col-md-9 col-lg-9"
                  style="border-radius: 3px; box-shadow: 0 3px 6px rgba(0,0,0,0.17);
                             background: #fefefe; width: 100%; position: sticky; top: 128px; height: max-content;
+                            padding-left: 0; padding-right: 0;
                             min-height: 300px; margin-bottom: 4px">
-                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-top: 16px; margin-bottom: 16px">
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-top: 16px; margin-bottom: 16px;">
 
                     <div class="divider"></div>
 
@@ -78,7 +79,9 @@
                     <div class="divider"></div>
 
                     <div class="plan-config-container row">
-                        <p style="font-size: 1.3em; font-family: iran-yekan; color: #111" class="col-xs-12">مشخات:</p>
+                        <p style="font-size: 1.3em; font-family: iran-yekan; color: #111;
+                                  padding-left: 0; padding-right: 0"
+                           class="col-xs-12">مشخصات:</p>
                         <div v-for="conf in selected_plan.config"
                              class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <p class="detail-title">{{conf.title}}</p>
@@ -103,6 +106,22 @@
                     <div v-for="spec in selected_plan.specs"
                          class="inner-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <p class="description">- {{spec.detail}}</p>
+                    </div>
+
+                    <p style="font-size: 1.2em; font-family: iran-yekan; color: #111; height: max-content; margin-top: 16px"
+                       class="col-xs-12 col-sm-12 col-md-12 col-lg-12">مناسب برای پروژه‌های:</p>
+
+                    <div v-for="item in selected_plan.suited_for"
+                         class="inner-container"
+                         style="display: inline-flex; flex-wrap: wrap">
+
+                        <img :src="require('../assets/svg/plans/projects/' + item.icon + '.svg')"
+                             :alt="item.icon"
+                             v-tooltip="item.title"
+                             style="width: 24px; height: 24px; margin: 8px 16px 8px 0;
+                             cursor: help;
+                             filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
+
                     </div>
 
                 </div>
@@ -506,6 +525,72 @@
                                 detail: 'مدیریت تیم و دسترسی‌ها'
                             }
                         ],
+                        suited_for: [
+                            {
+                                title: 'wordpress',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            }
+                        ],
                         button: {
                             text: 'ثبت‌نام',
                             url: '/user/register'
@@ -575,7 +660,73 @@
                         ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
-                        }
+                        },
+                        suited_for: [
+                            {
+                                title: 'wordpress',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            }
+                        ],
                     },
                     {
                         index: 2,
@@ -652,7 +803,73 @@
                         ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
-                        }
+                        },
+                        suited_for: [
+                            {
+                                title: 'wordpress',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            }
+                        ],
                     },
                     {
                         index: 3,
@@ -729,7 +946,73 @@
                         ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
-                        }
+                        },
+                        suited_for: [
+                            {
+                                title: 'wordpress',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'blog',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'bot',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'ai',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'fintech',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'saas',
+                                icon: 'saas'
+                            }
+                        ],
                     },
                 ],
                 planData: {
@@ -1238,6 +1521,8 @@
             display flex
             flex-direction row
             height max-content
+            padding-left 0
+            padding-right 0
 
             .detail-title
                 color #000
@@ -1279,6 +1564,8 @@
         border-right 1px dashed rgba(0, 0, 0, 0.17)
         border-radius 3px
         display flex
+        padding-left 0
+        padding-right 0
         align-content start
         @media only screen and (max-width 992px)
             border-right none
