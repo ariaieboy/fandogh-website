@@ -434,6 +434,15 @@
                         {
                             detail: 'دامنه دلخواه'
                         },
+                        {
+                            detail: 'Load Balancer'
+                        },
+                        {
+                            detail: 'Image Registry'
+                        },
+                        {
+                            detail: 'مدیریت تیم و دسترسی‌ها'
+                        }
                     ],
                     button: {
                         text: 'ثبت‌نام',
@@ -487,6 +496,15 @@
                             {
                                 detail: 'دامنه دلخواه'
                             },
+                            {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            }
                         ],
                         button: {
                             text: 'ثبت‌نام',
@@ -541,6 +559,18 @@
                             },
                             {
                                 detail: 'دامنه دلخواه'
+                            },
+                            {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            },
+                            {
+                                detail: 'ساخت بیش از یک فضانام'
                             }
                         ], button: {
                             text: 'خرید پلن',
@@ -605,8 +635,20 @@
                                 detail: 'دامنه دلخواه'
                             },
                             {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            },
+                            {
+                                detail: 'ساخت بیش از یک فضانام'
+                            },
+                            {
                                 detail: 'ساخت بیش از ۲ سرویس'
-                            }
+                            },
                         ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
@@ -670,8 +712,20 @@
                                 detail: 'دامنه دلخواه'
                             },
                             {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            },
+                            {
+                                detail: 'ساخت بیش از یک فضانام'
+                            },
+                            {
                                 detail: 'ساخت بیش از ۲ سرویس'
-                            }
+                            },
                         ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
