@@ -105,10 +105,9 @@
                     </div>
 
                     <div style="width: 100%; display: flex">
-
-                        <button class="plan-button" @click="$router.push(selected_plan.button.url)">
-                            {{selected_plan.button.text}}
-                        </button>
+                        <a class="plan-button" :href="selected_plan.button.url" target="_blank" rel="noopener">
+                                {{selected_plan.button.text}}
+                        </a>
                     </div>
 
                 </div>
@@ -511,7 +510,7 @@
                     ],
                     button: {
                         text: 'ثبت‌نام',
-                        url: '/user/register'
+                        url: 'https://fandogh.cloud/user/register'
                     }
                 },
                 plans: [
@@ -603,7 +602,7 @@
                         ],
                         button: {
                             text: 'ثبت‌نام',
-                            url: '/user/register'
+                            url: 'https://fandogh.cloud/user/register'
                         }
                     },
                     {
@@ -678,7 +677,7 @@
                         ],
                         button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -786,7 +785,7 @@
                         ],
                         button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -902,7 +901,7 @@
                         ],
                         button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -1032,7 +1031,7 @@
                             },
                         ], button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -1133,7 +1132,7 @@
                             },
                             {
                                 title: '- بیشینه رم مجاز هر سرویس',
-                                detail: '19,660 Mi'
+                                detail: '19.5 GB'
                             }
                         ],
                         specs: [
@@ -1166,7 +1165,7 @@
                             },
                         ], button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -1304,8 +1303,9 @@
                             {
                                 detail: 'مهندسی مهاجرت به زیرساخت سکو ابری فندق'
                             },
-                        ], button: {
-                            text: 'خرید پلن',
+                        ],
+                        button: {
+                            text: 'تماس با ما',
                             url: 'mailto:support@fandogh.cloud'
                         },
                         suited_for: [
@@ -1938,10 +1938,14 @@
         border-radius 5px
         color $fontBlack
         height 38px
+        outline none
         box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
         font-family iran-yekan
         margin-right auto
         margin-left auto
+        text-align center
+        line-height 38px
+        font-size 1em
         margin-top 64px
         transition all .3s ease-in-out
         @media only screen and (max-width 992px)
