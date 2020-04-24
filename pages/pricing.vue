@@ -948,7 +948,7 @@
                     },
                     {
                         index: 4,
-                        icon: 'big-scale-plan',
+                        icon: 'mid-scale-plan',
                         title: 'پلن مقیاس متوسط',
                         enabled: true,
                         price: 'ماهیانه ۵۴۰ هزار تومان',
