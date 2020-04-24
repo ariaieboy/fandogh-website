@@ -1821,7 +1821,7 @@
         background #fefefe
         display flex
         flex-direction column
-        padding 16px
+        padding 0 0 16px 0
         border-radius 3px
         transition all .3s ease-in-out
 
