@@ -92,7 +92,7 @@
                                   padding-left: 0; padding-right: 0; font-weight: bold;"
                            class="col-xs-12">مشخصات:</p>
                         <div v-for="conf in selected_plan.config"
-                             class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                             class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left: 0; padding-right: 0">
                             <p class="detail-title">{{conf.title}}</p>
                             <p class="detail-amount">{{conf.detail}}</p>
                         </div>
@@ -804,8 +804,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -928,8 +928,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -1062,8 +1062,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -1206,8 +1206,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -1727,21 +1727,20 @@
             display flex
             flex-direction row
             height max-content
-            padding-left 0
-            padding-right 0
 
             .detail-title
                 color #333
                 flex .7
                 font-size 1em
                 font-weight bold
+                padding-right 8px
                 font-family iran-yekan
                 margin-bottom 12px
 
             .detail-amount
                 color #000
-                flex .3
                 padding-left 8px
+                flex .3
                 text-align left
                 font-family "Helvetica Neue"
                 direction ltr
@@ -1821,7 +1820,7 @@
         background #fefefe
         display flex
         flex-direction column
-        padding 0 0 16px 0
+        margin-bottom 16px
         border-radius 3px
         transition all .3s ease-in-out
 
