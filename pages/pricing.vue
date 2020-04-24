@@ -64,23 +64,32 @@
             </div>
 
             <div class="row col-xs-12 col-sm-7 col-md-9 col-lg-9"
+                 id="plan-spec"
                  style="border-radius: 3px; box-shadow: 0 3px 6px rgba(0,0,0,0.17);
                             background: #fefefe; width: 100%; position: sticky; top: 128px; height: max-content;
                             padding-left: 0; padding-right: 0;
-                            min-height: 300px; margin-bottom: 4px">
+                            min-height: 300px; margin-bottom: 7px">
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-top: 16px; margin-bottom: 16px;">
 
-                    <div class="divider"></div>
+                    <div class="header-spec">
+
+                        <div style="display: flex; flex-direction: row">
+                            <img :src="require('../assets/svg/plans/' + selected_plan.icon + '.svg')"
+                                 :alt="selected_plan.icon">
+                            <div style="display: flex; flex-direction: column; padding-right: 16px">
+                                <p class="header-title">{{selected_plan.title}}</p>
+                                <p class="header-description">{{selected_plan.price}}</p>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="plan-description-container">
                         <p>{{selected_plan.description}}</p>
                     </div>
 
-                    <div class="divider"></div>
-
                     <div class="plan-config-container row">
                         <p style="font-size: 1.3em; font-family: iran-yekan; color: #111;
-                                  padding-left: 0; padding-right: 0"
+                                  padding-left: 0; padding-right: 0; font-weight: bold;"
                            class="col-xs-12">مشخصات:</p>
                         <div v-for="conf in selected_plan.config"
                              class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -100,7 +109,7 @@
 
                 <div class="row col-xs-12 col-sm-12 col-md-5 col-lg-5 plan-spec-container">
 
-                    <p style="font-size: 1.3em; font-family: iran-yekan; color: #111; height: max-content"
+                    <p style="font-size: 1.3em; font-family: iran-yekan; color: #111; height: max-content; font-weight: bold;"
                        class="col-xs-12 col-sm-12 col-md-12 col-lg-12">مزایا:</p>
 
                     <div v-for="spec in selected_plan.specs"
@@ -108,7 +117,8 @@
                         <p class="description">- {{spec.detail}}</p>
                     </div>
 
-                    <p style="font-size: 1.2em; font-family: iran-yekan; color: #111; height: max-content; margin-top: 16px"
+                    <p style="font-size: 1.2em; font-family: iran-yekan; color: #111; height: max-content; margin-top: 16px;
+                                font-weight: bold;"
                        class="col-xs-12 col-sm-12 col-md-12 col-lg-12">مناسب برای پروژه‌های:</p>
 
                     <div v-for="item in selected_plan.suited_for"
@@ -430,20 +440,28 @@
                     ],
                     config: [
                         {
-                            title: 'رم (حافظه تصادفی)',
+                            title: '- رم (حافظه تصادفی)',
                             detail: '400 Mi'
                         },
                         {
-                            title: 'پردازنده',
+                            title: '- پردازنده',
                             detail: '0.5 Core'
                         },
                         {
-                            title: 'حافظه ذخیره‌سازی اشتراکی',
+                            title: '- حافظه ذخیره‌سازی اشتراکی',
                             detail: '2.5 GB'
                         },
                         {
-                            title: 'تعداد سرویس مجاز',
+                            title: '- تعداد سرویس مجاز',
                             detail: '2'
+                        },
+                        {
+                            title: '- تعداد replica',
+                            detail: '1'
+                        },
+                        {
+                            title: '- بیشینه رم مجاز هر سرویس',
+                            detail: '320 Mi'
                         }
                     ],
                     specs: [
@@ -465,68 +483,24 @@
                     ],
                     suited_for: [
                         {
-                            title: 'wordpress',
+                            title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
                             icon: 'wordpress'
                         },
                         {
-                            title: 'blog',
+                            title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
                             icon: 'blog'
                         },
                         {
-                            title: 'bot',
+                            title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
                             icon: 'bot'
                         },
                         {
-                            title: 'ai',
-                            icon: 'ai'
+                            title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                            icon: 'website'
                         },
                         {
-                            title: 'fintech',
-                            icon: 'fintech'
-                        },
-                        {
-                            title: 'saas',
-                            icon: 'saas'
-                        },
-                        {
-                            title: 'blog',
-                            icon: 'blog'
-                        },
-                        {
-                            title: 'bot',
-                            icon: 'bot'
-                        },
-                        {
-                            title: 'ai',
-                            icon: 'ai'
-                        },
-                        {
-                            title: 'fintech',
-                            icon: 'fintech'
-                        },
-                        {
-                            title: 'saas',
-                            icon: 'saas'
-                        },
-                        {
-                            title: 'blog',
-                            icon: 'blog'
-                        },
-                        {
-                            title: 'bot',
-                            icon: 'bot'
-                        },
-                        {
-                            title: 'ai',
-                            icon: 'ai'
-                        },
-                        {
-                            title: 'fintech',
-                            icon: 'fintech'
-                        },
-                        {
-                            title: 'saas',
-                            icon: 'saas'
+                            title: 'MVP: مناسب برای ساخت محصول اولیه',
+                            icon: 'mvp'
                         }
                     ],
                     button: {
@@ -558,20 +532,28 @@
                         ],
                         config: [
                             {
-                                title: 'رم (حافظه تصادفی)',
+                                title: '- رم (حافظه تصادفی)',
                                 detail: '400 Mi'
                             },
                             {
-                                title: 'پردازنده',
+                                title: '- پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
-                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'تعداد سرویس مجاز',
+                                title: '- تعداد سرویس مجاز',
                                 detail: '2'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: '1'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: '320 Mi'
                             }
                         ],
                         specs: [
@@ -593,68 +575,24 @@
                         ],
                         suited_for: [
                             {
-                                title: 'wordpress',
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
                                 icon: 'wordpress'
                             },
                             {
-                                title: 'blog',
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
                                 icon: 'blog'
                             },
                             {
-                                title: 'bot',
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
                                 icon: 'bot'
                             },
                             {
-                                title: 'ai',
-                                icon: 'ai'
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
                             },
                             {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
-                            },
-                            {
-                                title: 'blog',
-                                icon: 'blog'
-                            },
-                            {
-                                title: 'bot',
-                                icon: 'bot'
-                            },
-                            {
-                                title: 'ai',
-                                icon: 'ai'
-                            },
-                            {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
-                            },
-                            {
-                                title: 'blog',
-                                icon: 'blog'
-                            },
-                            {
-                                title: 'bot',
-                                icon: 'bot'
-                            },
-                            {
-                                title: 'ai',
-                                icon: 'ai'
-                            },
-                            {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
                             }
                         ],
                         button: {
@@ -685,20 +623,28 @@
                         ],
                         config: [
                             {
-                                title: 'رم (حافظه تصادفی)',
+                                title: '- رم (حافظه تصادفی)',
                                 detail: '512 Mi'
                             },
                             {
-                                title: 'پردازنده',
+                                title: '- پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
-                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'تعداد سرویس مجاز',
+                                title: '- تعداد سرویس مجاز',
                                 detail: '2'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: '1'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: '400 Mi'
                             }
                         ],
                         specs: [
@@ -723,74 +669,31 @@
                             {
                                 detail: 'ساخت بیش از یک فضانام'
                             }
-                        ], button: {
+                        ],
+                        button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
                         },
                         suited_for: [
                             {
-                                title: 'wordpress',
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
                                 icon: 'wordpress'
                             },
                             {
-                                title: 'blog',
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
                                 icon: 'blog'
                             },
                             {
-                                title: 'bot',
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
                                 icon: 'bot'
                             },
                             {
-                                title: 'ai',
-                                icon: 'ai'
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
                             },
                             {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
-                            },
-                            {
-                                title: 'blog',
-                                icon: 'blog'
-                            },
-                            {
-                                title: 'bot',
-                                icon: 'bot'
-                            },
-                            {
-                                title: 'ai',
-                                icon: 'ai'
-                            },
-                            {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
-                            },
-                            {
-                                title: 'blog',
-                                icon: 'blog'
-                            },
-                            {
-                                title: 'bot',
-                                icon: 'bot'
-                            },
-                            {
-                                title: 'ai',
-                                icon: 'ai'
-                            },
-                            {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
                             }
                         ],
                     },
@@ -821,24 +724,32 @@
                         ],
                         config: [
                             {
-                                title: 'رم (حافظه تصادفی)',
+                                title: '- رم (حافظه تصادفی)',
                                 detail: '1024 Mi'
                             },
                             {
-                                title: 'پردازنده',
+                                title: '- پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
-                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'Dedicated Volume',
+                                title: '- Dedicated Volume',
                                 detail: '10 GB'
                             },
                             {
-                                title: 'تعداد سرویس مجاز',
+                                title: '- تعداد سرویس مجاز',
                                 detail: '5'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: '5'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: '819 Mi'
                             }
                         ],
                         specs: [
@@ -866,75 +777,40 @@
                             {
                                 detail: 'ساخت بیش از ۲ سرویس'
                             },
-                        ], button: {
+                        ],
+                        button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
                         },
                         suited_for: [
                             {
-                                title: 'wordpress',
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
                                 icon: 'wordpress'
                             },
                             {
-                                title: 'blog',
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
                                 icon: 'blog'
                             },
                             {
-                                title: 'bot',
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
                                 icon: 'bot'
                             },
                             {
-                                title: 'ai',
-                                icon: 'ai'
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
                             },
                             {
-                                title: 'fintech',
-                                icon: 'fintech'
+                                title: 'Online Shop: مناسب برای سایت‌های فروش آنلاین با هر مقیاسی',
+                                icon: 'onlineshop'
                             },
                             {
-                                title: 'saas',
-                                icon: 'saas'
+                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'sotrage'
                             },
                             {
-                                title: 'blog',
-                                icon: 'blog'
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
                             },
-                            {
-                                title: 'bot',
-                                icon: 'bot'
-                            },
-                            {
-                                title: 'ai',
-                                icon: 'ai'
-                            },
-                            {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
-                            },
-                            {
-                                title: 'blog',
-                                icon: 'blog'
-                            },
-                            {
-                                title: 'bot',
-                                icon: 'bot'
-                            },
-                            {
-                                title: 'ai',
-                                icon: 'ai'
-                            },
-                            {
-                                title: 'fintech',
-                                icon: 'fintech'
-                            },
-                            {
-                                title: 'saas',
-                                icon: 'saas'
-                            }
                         ],
                     },
                     {
@@ -964,24 +840,32 @@
                         ],
                         config: [
                             {
-                                title: 'رم (حافظه تصادفی)',
+                                title: '- رم (حافظه تصادفی)',
                                 detail: '2048 Mi'
                             },
                             {
-                                title: 'پردازنده',
+                                title: '- پردازنده',
                                 detail: '1.0 Core'
                             },
                             {
-                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'Dedicated Volume',
+                                title: '- Dedicated Volume',
                                 detail: '50 GB'
                             },
                             {
-                                title: 'تعداد سرویس مجاز',
+                                title: '- تعداد سرویس مجاز',
                                 detail: '10'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: '10'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: '1638 Mi'
                             }
                         ],
                         specs: [
@@ -1009,74 +893,329 @@
                             {
                                 detail: 'ساخت بیش از ۲ سرویس'
                             },
+                        ],
+                        button: {
+                            text: 'خرید پلن',
+                            url: '/dashboard/plans'
+                        },
+                        suited_for: [
+                            {
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'AI: مناسب برای پروژه‌های هوش مصنوعی',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'Fintech: مناسب برای پروژه‌های Fintech با مقیاس‌های مختلف',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
+                            },
+                            {
+                                title: 'Online Shop: مناسب برای سایت‌های فروش آنلاین با هر مقیاسی',
+                                icon: 'onlineshop'
+                            },
+                            {
+                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'sotrage'
+                            },
+                            {
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
+                            },
+                            {
+                                title: 'Deep Learning: مناسب برای ساخت سرویس‌های Deep Learning که نیاز به منابع بالایی دارند',
+                                icon: 'deeplearning'
+                            }
+                        ],
+                    },
+                    {
+                        index: 4,
+                        icon: 'big-scale-plan',
+                        title: 'پلن مقیاس بزرگ',
+                        enabled: true,
+                        price: 'ماهیانه ۵۴۰ هزار تومان',
+                        description: 'مناسب پروژه‌هایی با مقیاس متوسط به بالا که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: '5120 Mi'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: '2.5 Core'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: 'Dedicated Volume',
+                                detail: '200 GB'
+                            },
+                        ],
+                        config: [
+                            {
+                                title: '- رم (حافظه تصادفی)',
+                                detail: '5120 Mi'
+                            },
+                            {
+                                title: '- پردازنده',
+                                detail: '2.5 Core'
+                            },
+                            {
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: '- Dedicated Volume',
+                                detail: '200 GB'
+                            },
+                            {
+                                title: '- تعداد سرویس مجاز',
+                                detail: '50'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: '50'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: '4096 Mi'
+                            }
+                        ],
+                        specs: [
+                            {
+                                detail: 'ضمانت Uptime'
+                            },
+                            {
+                                detail: 'گواهی ssl رایگان'
+                            },
+                            {
+                                detail: 'دامنه دلخواه'
+                            },
+                            {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            },
+                            {
+                                detail: 'ساخت بیش از یک فضانام'
+                            },
+                            {
+                                detail: 'ساخت بیش از ۲ سرویس'
+                            },
+                            {
+                                detail: 'پشیتبانی حرفه‌ای'
+                            },
                         ], button: {
                             text: 'خرید پلن',
                             url: '/dashboard/plans'
                         },
                         suited_for: [
                             {
-                                title: 'wordpress',
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
                                 icon: 'wordpress'
                             },
                             {
-                                title: 'blog',
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
                                 icon: 'blog'
                             },
                             {
-                                title: 'bot',
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
                                 icon: 'bot'
                             },
                             {
-                                title: 'ai',
+                                title: 'AI: مناسب برای پروژه‌های هوش مصنوعی',
                                 icon: 'ai'
                             },
                             {
-                                title: 'fintech',
+                                title: 'Fintech: مناسب برای پروژه‌های Fintech با مقیاس‌های مختلف',
                                 icon: 'fintech'
                             },
                             {
-                                title: 'saas',
+                                title: 'SaaS: مناسب برای پروژه‌های SaaS یا Software as a Service',
                                 icon: 'saas'
                             },
                             {
-                                title: 'blog',
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
+                            },
+                            {
+                                title: 'Online Shop: مناسب برای سایت‌های فروش آنلاین با هر مقیاسی',
+                                icon: 'onlineshop'
+                            },
+                            {
+                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'sotrage'
+                            },
+                            {
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
+                            },
+                            {
+                                title: 'Deep Learning: مناسب برای ساخت سرویس‌های Deep Learning که نیاز به منابع بالایی دارند',
+                                icon: 'deeplearning'
+                            }
+                        ],
+                    },
+                    {
+                        index: 5,
+                        icon: 'enterprise-plan',
+                        title: 'پلن شرکتی',
+                        enabled: true,
+                        price: 'با ما تماس بگیرید',
+                        description: 'مناسب پروژه‌های استارتاپی که توزیع منابع و مدیریت هزینه برای آن‌ها مهم است.',
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: 'Dedicated Volume',
+                                detail: 'سفارشی'
+                            },
+                        ],
+                        config: [
+                            {
+                                title: '- رم (حافظه تصادفی)',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: '- پردازنده',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: '- Dedicated Volume',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: '- تعداد سرویس مجاز',
+                                detail: 'نامحدود'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: 'سفارشی'
+                            }
+                        ],
+                        specs: [
+                            {
+                                detail: 'ضمانت Uptime'
+                            },
+                            {
+                                detail: 'گواهی ssl رایگان'
+                            },
+                            {
+                                detail: 'دامنه دلخواه'
+                            },
+                            {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            },
+                            {
+                                detail: 'ساخت بیش از یک فضانام'
+                            },
+                            {
+                                detail: 'ساخت بیش از ۲ سرویس'
+                            },
+                            {
+                                detail: 'پشتیبانی حرفه‌ای'
+                            },
+                            {
+                                detail: 'مشاوره معماری زیرساخت و پیاده‌سازی'
+                            },
+                            {
+                                detail: 'مهندسی مهاجرت به زیرساخت سکو ابری فندق'
+                            },
+                        ], button: {
+                            text: 'خرید پلن',
+                            url: 'mailto:support@fandogh.cloud'
+                        },
+                        suited_for: [
+                            {
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
                                 icon: 'blog'
                             },
                             {
-                                title: 'bot',
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
                                 icon: 'bot'
                             },
                             {
-                                title: 'ai',
+                                title: 'AI: مناسب برای پروژه‌های هوش مصنوعی',
                                 icon: 'ai'
                             },
                             {
-                                title: 'fintech',
+                                title: 'Fintech: مناسب برای پروژه‌های Fintech با مقیاس‌های مختلف',
                                 icon: 'fintech'
                             },
                             {
-                                title: 'saas',
+                                title: 'SaaS: مناسب برای پروژه‌های SaaS یا Software as a Service',
                                 icon: 'saas'
                             },
                             {
-                                title: 'blog',
-                                icon: 'blog'
+                                title: 'Enterprise: مناسب برای پروژ‌های شرکتی و مقیاس بزرگ',
+                                icon: 'enterprise'
                             },
                             {
-                                title: 'bot',
-                                icon: 'bot'
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
                             },
                             {
-                                title: 'ai',
-                                icon: 'ai'
+                                title: 'Online Shop: مناسب برای سایت‌های فروش آنلاین با هر مقیاسی',
+                                icon: 'onlineshop'
                             },
                             {
-                                title: 'fintech',
-                                icon: 'fintech'
+                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'sotrage'
                             },
                             {
-                                title: 'saas',
-                                icon: 'saas'
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
+                            },
+                            {
+                                title: 'Deep Learning: مناسب برای ساخت سرویس‌های Deep Learning که نیاز به منابع بالایی دارند',
+                                icon: 'deeplearning'
                             }
                         ],
                     },
@@ -1170,7 +1309,8 @@
         methods: {
             selectPlan(index) {
 
-                this.selected_plan = this.plans[index]
+                this.selected_plan = this.plans[index];
+                document.getElementById('plan-spec').scrollIntoView({block: 'nearest', behavior: 'smooth'});
 
             }
         }
@@ -1249,7 +1389,7 @@
 
         .header
             width 100%
-            background #EBEFFF
+            background #fefefe
             display flex
             flex-direction column
             padding 16px
@@ -1591,15 +1731,17 @@
             padding-right 0
 
             .detail-title
-                color #000
+                color #333
                 flex .7
                 font-size 1em
+                font-weight bold
                 font-family iran-yekan
                 margin-bottom 12px
 
             .detail-amount
-                color #111
+                color #000
                 flex .3
+                padding-left 8px
                 text-align left
                 font-family "Helvetica Neue"
                 direction ltr
@@ -1643,7 +1785,7 @@
             height max-content
 
             p.description
-                color #404040
+                color #191919
                 flex 1
                 height max-content
                 text-align right
@@ -1652,12 +1794,12 @@
 
 
     .plan-button
-        background rgba(0, 69, 255, 1)
+        background #00E5FF
         width 200px
         border-radius 5px
-        color #fefefe
+        color $fontBlack
         height 38px
-        box-shadow 0 3px 6px rgba(0, 69, 255, 0.17)
+        box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
         font-family iran-yekan
         margin-right auto
         margin-left auto
@@ -1670,8 +1812,44 @@
             width 100%
 
     .plan-button:hover
-        box-shadow 0 3px 6px rgba(0, 69, 255, 0.27)
+        box-shadow 0 3px 6px rgba(0, 0, 0, 0.27)
 
+
+
+    .header-spec
+        width 100%
+        background #fefefe
+        display flex
+        flex-direction column
+        padding 16px
+        border-radius 3px
+        transition all .3s ease-in-out
+
+        img
+            filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+            width 92px
+            height 92px
+            margin auto 0
+
+        p.header-title
+            color #001069
+            text-align right
+            font-size 1.7em
+            font-family iran-yekan
+            font-weight bold
+            margin-bottom 0
+
+        p.header-description
+            color #535353
+            text-align right
+            font-size 1.6em
+            font-family iran-yekan
+            font-weight normal
+            margin-bottom 0
+
+        .divider
+            height 1px
+            background #535353
 
 </style>
 
