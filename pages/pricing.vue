@@ -106,7 +106,7 @@
 
                     <div style="width: 100%; display: flex">
                         <a class="plan-button" :href="selected_plan.button.url" target="_blank" rel="noopener">
-                                {{selected_plan.button.text}}
+                            {{selected_plan.button.text}}
                         </a>
                     </div>
 
@@ -133,9 +133,7 @@
                         <img :src="require('../assets/svg/plans/projects/' + item.icon + '.svg')"
                              :alt="item.icon"
                              v-tooltip="item.title"
-                             style="width: 24px; height: 24px; margin: 8px 16px 8px 0;
-                             cursor: help;
-                             filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)">
+                             class="project-icon-container">
 
                     </div>
 
@@ -948,7 +946,7 @@
                     },
                     {
                         index: 4,
-                        icon: 'big-scale-plan',
+                        icon: 'mid-scale-plan',
                         title: 'پلن مقیاس متوسط',
                         enabled: true,
                         price: 'ماهیانه ۵۴۰ هزار تومان',
@@ -1992,6 +1990,23 @@
         .divider
             height 1px
             background #535353
+
+
+    .project-icon-container
+        width 24px
+        height 24px
+        margin 8px 16px 8px 0
+        cursor help
+        box-shadow none
+        background transparent
+        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+        transition all .3s ease-in-out
+
+
+    .project-icon-container:hover
+        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0,0,0,0.23))
+        -webkit-filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0,0,0,0.23))
+
 
 </style>
 

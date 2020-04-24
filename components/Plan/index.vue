@@ -12,13 +12,17 @@
                       v-bind:class="(selected === 1 ? 'selected' : 'unselected')"
                       @click.native="clicked(1)"/>
 
-                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="50" memory="2" cpu="1"
+                <plan title="پلن استارتاپی" icon="startup-plan" dedicated-volume="50" memory="2" cpu="1.0"
                       v-bind:class="(selected === 2 ? 'selected' : 'unselected')"
                       @click.native="clicked(2)"/>
 
-                <plan title="پلن حرفه‌ای" icon="professional-plan" dedicated-volume="100" memory="4" cpu="2"
+                <plan title="پلن مقیاس متوسط" icon="mid-scale-plan" dedicated-volume="200" memory="5" cpu="2.5"
                       v-bind:class="(selected === 3 ? 'selected' : 'unselected')"
                       @click.native="clicked(3)"/>
+
+                <plan title="پلن مقیاس بزرگ" icon="big-scale-plan" dedicated-volume="465" memory="24" cpu="12.0"
+                      v-bind:class="(selected === 4 ? 'selected' : 'unselected')"
+                      @click.native="clicked(4)"/>
 
             </div>
         </div>
@@ -66,8 +70,12 @@
                         this.$emit('update:dedicatedVolume', 50);
                         break;
                     case 3:
-                        this.$emit('update:memory', 4);
-                        this.$emit('update:dedicatedVolume', 100);
+                        this.$emit('update:memory', 5);
+                        this.$emit('update:dedicatedVolume', 200);
+                        break;
+                    case 4:
+                        this.$emit('update:memory', 24);
+                        this.$emit('update:dedicatedVolume', 465);
                         break;
                 }
             },
