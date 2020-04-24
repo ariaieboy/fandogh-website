@@ -52,8 +52,10 @@
                                 <div v-for="(conf, index) in plan.thumb_config"
                                      class="detail-container">
                                     <span class="detail-title">{{conf.title}}:</span>
-                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount">| {{conf.detail}}</span>
-                                    <span v-else class="left detail-amount">{{conf.detail}}</span>
+                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount"
+                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">| {{conf.detail}}</span>
+                                    <span v-else class="left detail-amount"
+                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">{{conf.detail}}</span>
                                 </div>
                             </div>
                         </div>
@@ -92,9 +94,13 @@
                                   padding-left: 0; padding-right: 0; font-weight: bold;"
                            class="col-xs-12">مشخصات:</p>
                         <div v-for="conf in selected_plan.config"
-                             class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left: 0; padding-right: 0">
+                             class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12"
+                             style="padding-left: 0; padding-right: 0">
                             <p class="detail-title">{{conf.title}}</p>
-                            <p class="detail-amount">{{conf.detail}}</p>
+                            <p class="detail-amount"
+                               :style="{fontFamily: (selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">
+                                {{conf.detail}}
+                            </p>
                         </div>
                     </div>
 
@@ -944,7 +950,7 @@
                     {
                         index: 4,
                         icon: 'big-scale-plan',
-                        title: 'پلن مقیاس بزرگ',
+                        title: 'پلن مقیاس متوسط',
                         enabled: true,
                         price: 'ماهیانه ۵۴۰ هزار تومان',
                         description: 'مناسب پروژه‌هایی با مقیاس متوسط به بالا که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
@@ -1077,6 +1083,140 @@
                     },
                     {
                         index: 5,
+                        icon: 'big-scale-plan',
+                        title: 'پلن مقیاس بزرگ',
+                        enabled: true,
+                        price: 'ماهیانه ۲ میلیون تومان',
+                        description: 'مناسب پروژه‌هایی با مقیاس بزرگ که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: '24 GB'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: '12 Core'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: 'Dedicated Volume',
+                                detail: '465 GB'
+                            },
+                        ],
+                        config: [
+                            {
+                                title: '- رم (حافظه تصادفی)',
+                                detail: '24 GB'
+                            },
+                            {
+                                title: '- پردازنده',
+                                detail: '12 Core'
+                            },
+                            {
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: '- Dedicated Volume',
+                                detail: '465 GB'
+                            },
+                            {
+                                title: '- تعداد سرویس مجاز',
+                                detail: '120'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: '120'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: '19,660 Mi'
+                            }
+                        ],
+                        specs: [
+                            {
+                                detail: 'ضمانت Uptime'
+                            },
+                            {
+                                detail: 'گواهی ssl رایگان'
+                            },
+                            {
+                                detail: 'دامنه دلخواه'
+                            },
+                            {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            },
+                            {
+                                detail: 'ساخت بیش از یک فضانام'
+                            },
+                            {
+                                detail: 'ساخت بیش از ۲ سرویس'
+                            },
+                            {
+                                detail: 'پشیتبانی حرفه‌ای'
+                            },
+                        ], button: {
+                            text: 'خرید پلن',
+                            url: '/dashboard/plans'
+                        },
+                        suited_for: [
+                            {
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'AI: مناسب برای پروژه‌های هوش مصنوعی',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'Fintech: مناسب برای پروژه‌های Fintech با مقیاس‌های مختلف',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'SaaS: مناسب برای پروژه‌های SaaS یا Software as a Service',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
+                            },
+                            {
+                                title: 'Online Shop: مناسب برای سایت‌های فروش آنلاین با هر مقیاسی',
+                                icon: 'onlineshop'
+                            },
+                            {
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
+                            },
+                            {
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
+                            },
+                            {
+                                title: 'Deep Learning: مناسب برای ساخت سرویس‌های Deep Learning که نیاز به منابع بالایی دارند',
+                                icon: 'deeplearning'
+                            }
+                        ],
+                    },
+                    {
+                        index: 6,
                         icon: 'enterprise-plan',
                         title: 'پلن شرکتی',
                         enabled: true,
@@ -1812,7 +1952,6 @@
 
     .plan-button:hover
         box-shadow 0 3px 6px rgba(0, 0, 0, 0.27)
-
 
 
     .header-spec
