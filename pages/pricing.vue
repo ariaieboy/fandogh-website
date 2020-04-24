@@ -52,8 +52,10 @@
                                 <div v-for="(conf, index) in plan.thumb_config"
                                      class="detail-container">
                                     <span class="detail-title">{{conf.title}}:</span>
-                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount">| {{conf.detail}}</span>
-                                    <span v-else class="left detail-amount">{{conf.detail}}</span>
+                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount"
+                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">| {{conf.detail}}</span>
+                                    <span v-else class="left detail-amount"
+                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">{{conf.detail}}</span>
                                 </div>
                             </div>
                         </div>
@@ -92,17 +94,20 @@
                                   padding-left: 0; padding-right: 0; font-weight: bold;"
                            class="col-xs-12">مشخصات:</p>
                         <div v-for="conf in selected_plan.config"
-                             class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                             class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12"
+                             style="padding-left: 0; padding-right: 0">
                             <p class="detail-title">{{conf.title}}</p>
-                            <p class="detail-amount">{{conf.detail}}</p>
+                            <p class="detail-amount"
+                               :style="{fontFamily: (selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">
+                                {{conf.detail}}
+                            </p>
                         </div>
                     </div>
 
                     <div style="width: 100%; display: flex">
-
-                        <button class="plan-button" @click="$router.push(selected_plan.button.url)">
-                            {{selected_plan.button.text}}
-                        </button>
+                        <a class="plan-button" :href="selected_plan.button.url" target="_blank" rel="noopener">
+                                {{selected_plan.button.text}}
+                        </a>
                     </div>
 
                 </div>
@@ -505,7 +510,7 @@
                     ],
                     button: {
                         text: 'ثبت‌نام',
-                        url: '/user/register'
+                        url: 'https://fandogh.cloud/user/register'
                     }
                 },
                 plans: [
@@ -597,7 +602,7 @@
                         ],
                         button: {
                             text: 'ثبت‌نام',
-                            url: '/user/register'
+                            url: 'https://fandogh.cloud/user/register'
                         }
                     },
                     {
@@ -672,7 +677,7 @@
                         ],
                         button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -780,7 +785,7 @@
                         ],
                         button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -804,8 +809,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -896,7 +901,7 @@
                         ],
                         button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -928,8 +933,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -944,7 +949,7 @@
                     {
                         index: 4,
                         icon: 'big-scale-plan',
-                        title: 'پلن مقیاس بزرگ',
+                        title: 'پلن مقیاس متوسط',
                         enabled: true,
                         price: 'ماهیانه ۵۴۰ هزار تومان',
                         description: 'مناسب پروژه‌هایی با مقیاس متوسط به بالا که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
@@ -1026,7 +1031,7 @@
                             },
                         ], button: {
                             text: 'خرید پلن',
-                            url: '/dashboard/plans'
+                            url: 'https://fandogh.cloud/dashboard/plans'
                         },
                         suited_for: [
                             {
@@ -1062,8 +1067,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -1077,6 +1082,140 @@
                     },
                     {
                         index: 5,
+                        icon: 'big-scale-plan',
+                        title: 'پلن مقیاس بزرگ',
+                        enabled: true,
+                        price: 'ماهیانه ۲ میلیون تومان',
+                        description: 'مناسب پروژه‌هایی با مقیاس بزرگ که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
+                        thumb_config: [
+                            {
+                                title: 'رم',
+                                detail: '24 GB'
+                            },
+                            {
+                                title: 'پردازنده',
+                                detail: '12 Core'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: 'Dedicated Volume',
+                                detail: '465 GB'
+                            },
+                        ],
+                        config: [
+                            {
+                                title: '- رم (حافظه تصادفی)',
+                                detail: '24 GB'
+                            },
+                            {
+                                title: '- پردازنده',
+                                detail: '12 Core'
+                            },
+                            {
+                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                detail: '2.5 GB'
+                            },
+                            {
+                                title: '- Dedicated Volume',
+                                detail: '465 GB'
+                            },
+                            {
+                                title: '- تعداد سرویس مجاز',
+                                detail: '120'
+                            },
+                            {
+                                title: '- تعداد replica',
+                                detail: '120'
+                            },
+                            {
+                                title: '- بیشینه رم مجاز هر سرویس',
+                                detail: '19.5 GB'
+                            }
+                        ],
+                        specs: [
+                            {
+                                detail: 'ضمانت Uptime'
+                            },
+                            {
+                                detail: 'گواهی ssl رایگان'
+                            },
+                            {
+                                detail: 'دامنه دلخواه'
+                            },
+                            {
+                                detail: 'Load Balancer'
+                            },
+                            {
+                                detail: 'Image Registry'
+                            },
+                            {
+                                detail: 'مدیریت تیم و دسترسی‌ها'
+                            },
+                            {
+                                detail: 'ساخت بیش از یک فضانام'
+                            },
+                            {
+                                detail: 'ساخت بیش از ۲ سرویس'
+                            },
+                            {
+                                detail: 'پشیتبانی حرفه‌ای'
+                            },
+                        ], button: {
+                            text: 'خرید پلن',
+                            url: 'https://fandogh.cloud/dashboard/plans'
+                        },
+                        suited_for: [
+                            {
+                                title: 'Wordpress: مناسب برای پروژه‌های وردپرسی',
+                                icon: 'wordpress'
+                            },
+                            {
+                                title: 'Blog: مناسب‌ برای وبلاگ‌های شرکتی و شخصی',
+                                icon: 'blog'
+                            },
+                            {
+                                title: 'Bot: مناسب برای ساخت انواع ربات‌های سبک',
+                                icon: 'bot'
+                            },
+                            {
+                                title: 'AI: مناسب برای پروژه‌های هوش مصنوعی',
+                                icon: 'ai'
+                            },
+                            {
+                                title: 'Fintech: مناسب برای پروژه‌های Fintech با مقیاس‌های مختلف',
+                                icon: 'fintech'
+                            },
+                            {
+                                title: 'SaaS: مناسب برای پروژه‌های SaaS یا Software as a Service',
+                                icon: 'saas'
+                            },
+                            {
+                                title: 'Website: مناسب برای ساخت انواع وب‌سایت',
+                                icon: 'website'
+                            },
+                            {
+                                title: 'Online Shop: مناسب برای سایت‌های فروش آنلاین با هر مقیاسی',
+                                icon: 'onlineshop'
+                            },
+                            {
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
+                            },
+                            {
+                                title: 'MVP: مناسب برای ساخت محصول اولیه',
+                                icon: 'mvp'
+                            },
+                            {
+                                title: 'Deep Learning: مناسب برای ساخت سرویس‌های Deep Learning که نیاز به منابع بالایی دارند',
+                                icon: 'deeplearning'
+                            }
+                        ],
+                    },
+                    {
+                        index: 6,
                         icon: 'enterprise-plan',
                         title: 'پلن شرکتی',
                         enabled: true,
@@ -1164,8 +1303,9 @@
                             {
                                 detail: 'مهندسی مهاجرت به زیرساخت سکو ابری فندق'
                             },
-                        ], button: {
-                            text: 'خرید پلن',
+                        ],
+                        button: {
+                            text: 'تماس با ما',
                             url: 'mailto:support@fandogh.cloud'
                         },
                         suited_for: [
@@ -1206,8 +1346,8 @@
                                 icon: 'onlineshop'
                             },
                             {
-                                title: 'Sotrage: مناسب برای ایجاد سرویس‌های Storage',
-                                icon: 'sotrage'
+                                title: 'Storage: مناسب برای ایجاد سرویس‌های Storage',
+                                icon: 'storage'
                             },
                             {
                                 title: 'MVP: مناسب برای ساخت محصول اولیه',
@@ -1727,21 +1867,20 @@
             display flex
             flex-direction row
             height max-content
-            padding-left 0
-            padding-right 0
 
             .detail-title
                 color #333
                 flex .7
                 font-size 1em
                 font-weight bold
+                padding-right 8px
                 font-family iran-yekan
                 margin-bottom 12px
 
             .detail-amount
                 color #000
-                flex .3
                 padding-left 8px
+                flex .3
                 text-align left
                 font-family "Helvetica Neue"
                 direction ltr
@@ -1799,10 +1938,14 @@
         border-radius 5px
         color $fontBlack
         height 38px
+        outline none
         box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
         font-family iran-yekan
         margin-right auto
         margin-left auto
+        text-align center
+        line-height 38px
+        font-size 1em
         margin-top 64px
         transition all .3s ease-in-out
         @media only screen and (max-width 992px)
@@ -1815,13 +1958,12 @@
         box-shadow 0 3px 6px rgba(0, 0, 0, 0.27)
 
 
-
     .header-spec
         width 100%
         background #fefefe
         display flex
         flex-direction column
-        padding 16px
+        margin-bottom 16px
         border-radius 3px
         transition all .3s ease-in-out
 
