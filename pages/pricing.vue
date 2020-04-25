@@ -1987,7 +1987,7 @@
         min-height 300px
         margin-bottom 7px
         @media only screen and (max-width 1230px)
-            top 64px
+            top 58px
 
         .plan-spec-inner-container
             margin-top 16px
