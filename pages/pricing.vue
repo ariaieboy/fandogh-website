@@ -1659,13 +1659,11 @@
         position sticky
         top 64px
         width 100%
-        height 58px
+        height 48px
         background #EBEFFF
         display flex
         flex-direction column
         z-index 10000
-        padding-left 16px
-        padding-right 16px
         @media only screen and (max-width 1230px)
             top 0
 
@@ -1674,6 +1672,8 @@
             height 100%
             display flex
             flex-direction row
+            padding-left 16px
+            padding-right 16px
 
             .navigation-item-container
                 display flex
@@ -1688,6 +1688,9 @@
                     margin-bottom auto
                     filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
                     transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        width 18px
+                        height 18px
 
                 p
                     margin-right 12px
@@ -1697,6 +1700,8 @@
                     cursor pointer
                     margin-bottom auto
                     transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        font-size 1em
 
             .navigation-item-container:hover
 
