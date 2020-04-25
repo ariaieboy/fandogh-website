@@ -7,13 +7,14 @@
         </div>
 
         <div class="price-page-navigation">
-            <div style="width: 100%; height: 100%; display: flex; flex-direction: row">
+            <div class="inner-container">
+                <div v-for="item in navigation_menu"
+                     class="navigation-item-container"
+                     @click="moveToSection(item.id)">
 
-                <div style="display: flex; flex-direction: row; padding-left: 16px; padding-right: 16px">
-                    <img src="../assets/svg/ic_close.svg"
-                         style="width: 16px; height: 16px; margin-top: auto; margin-bottom: auto;"/>
-                    <p style="margin-right: 12px; color: #0045FF; font-size: 1.1em; margin-top: auto; margin-bottom: auto;">
-                        ماشین حساب</p>
+                    <img :src="require('../assets/svg/' + item.icon + '.svg')" :alt="item.icon"/>
+                    <p>{{item.title}}</p>
+
                 </div>
 
             </div>
@@ -22,7 +23,7 @@
 
         </div>
 
-        <price-header :title="headers.plans.title"
+        <price-header id="plan_section" :title="headers.plans.title"
                       :description="headers.plans.description"
                       :links="headers.plans.links">
 
@@ -143,7 +144,7 @@
 
         </div>
 
-        <price-header :title="headers.calculator.title"
+        <price-header id="calculator_section" :title="headers.calculator.title"
                       :description="headers.calculator.description"
                       :links="headers.calculator.links">
 
@@ -291,7 +292,7 @@
 
         </div>
 
-        <price-header :title="headers.pay_as_you_go.title"
+        <price-header id="payg_section" :title="headers.pay_as_you_go.title"
                       :description="headers.pay_as_you_go.description"
                       :en="true"
                       :alter="headers.pay_as_you_go.alter">
@@ -393,6 +394,7 @@
                 description: 'قیمت‌گزاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم.<br/> هر نوع پروژه‌ای با هر مقایسی را به سادگی بر روی فندق اجرا کنید.',
                 headers: {
                     plans: {
+                        id: 'plan_section',
                         title: 'پلن‌های پیشنهادی',
                         description: 'شاید برای شروع ایده‌ای از اینکه‌ چه\n' +
                             '                    میزان منابع برای پروژه و کسب‌وکار شما نیاز است نداشته باشید و به دنبال یک راهنمایی باشید. سکوی\n' +
@@ -405,6 +407,7 @@
                             }
                         ]
                     }, calculator: {
+                        id: 'calculator_section',
                         title: 'ماشین حساب',
                         description: 'با ماشین‌ حساب سکوی ابری فندق میزان منابع مورد نیاز خود را انتخاب کنید و از هزینه تمام شده ماهیانه آگاه شوید.<br>' +
                             'همچنین می‌توانید محاسبه کنید که در ازای هر میزان منابع، چه ویژگی‌هایی در اختیار شما قرار داده می‌شود.',
@@ -415,6 +418,7 @@
                             }
                         ]
                     }, pay_as_you_go: {
+                        id: 'payg_section',
                         title: 'Pay As You Go',
                         description: 'به میزان مصرف پرداخت کنید و نگران محاسبه داینامیک مصرف منابع سرویس‌های خود نباشید.<br> سکوی ابری فندق به صورت هوشمند منابع مورد نیاز را به سرویس‌های شما تخصیص می‌دهد.',
                         alter: 'به زودی ...'
@@ -1358,6 +1362,23 @@
                         ],
                     },
                 ],
+                navigation_menu: [
+                    {
+                        id: 'plan_section',
+                        title: 'پلن‌ها',
+                        icon: 'ic-plans'
+                    },
+                    {
+                        id: 'calculator_section',
+                        title: 'ماشین‌ حساب',
+                        icon: 'ic-calculator'
+                    },
+                    {
+                        id: 'payg_section',
+                        title: 'Pay As You Go',
+                        icon: 'ic-credit-card'
+                    },
+                ],
                 planData: {
                     memory: .5,
                     cpu: 0.5,
@@ -1450,6 +1471,9 @@
                 this.selected_plan = this.plans[index];
                 document.getElementById('plan-spec').scrollIntoView({block: 'nearest', behavior: 'smooth'});
 
+            },
+            moveToSection(id) {
+                document.getElementById(id).scrollIntoView({block: 'nearest', behavior: 'smooth'});
             }
         }
     }
@@ -1640,8 +1664,48 @@
         display flex
         flex-direction column
         z-index 10000
+        padding-left 16px
+        padding-right 16px
         @media only screen and (max-width 1230px)
             top 0
+
+        .inner-container
+            width 100%
+            height 100%
+            display flex
+            flex-direction row
+
+            .navigation-item-container
+                display flex
+                flex-direction row
+                padding-left 16px
+                cursor pointer
+
+                img
+                    width 24px
+                    height 24px
+                    margin-top auto
+                    margin-bottom auto
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+                    transition all .3s ease-in-out
+
+                p
+                    margin-right 12px
+                    color rgba(0, 69, 255, 0.9)
+                    font-size 1.1em
+                    margin-top auto
+                    cursor pointer
+                    margin-bottom auto
+                    transition all .3s ease-in-out
+
+            .navigation-item-container:hover
+
+                p
+                    color rgba(0, 69, 255, 1)
+                    filter drop-shadow(0 3px 6px rgba(0, 0, 0, .4))
+
+                img
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, .4))
 
 
     .calculator-parent-container
@@ -2004,8 +2068,8 @@
 
 
     .project-icon-container:hover
-        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0,0,0,0.23))
-        -webkit-filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0,0,0,0.23))
+        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.23))
+        -webkit-filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.23))
 
 
 </style>
