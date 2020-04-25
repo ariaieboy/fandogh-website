@@ -1980,14 +1980,14 @@
                 flex .7
                 font-size 1em
                 font-weight bold
-                padding-right 8px
+                padding-right 10px
                 font-family iran-yekan
                 margin-bottom auto
                 margin-top auto
 
             .detail-amount
                 color #000
-                padding-left 8px
+                padding-left 10px
                 flex .3
                 text-align left
                 font-family "Helvetica Neue"
