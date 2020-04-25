@@ -90,9 +90,14 @@
                         <p style="font-size: 1.3em; font-family: iran-yekan; color: #111;
                                   padding-left: 0; padding-right: 0; font-weight: bold;"
                            class="col-xs-12">مشخصات:</p>
-                        <div v-for="conf in selected_plan.config"
+                        <div v-for="(conf, index) in selected_plan.config"
                              class="detail-container col-lg-6 col-md-6 col-sm-12 col-xs-12"
-                             style="padding-left: 0; padding-right: 0">
+                             style="padding-left: 0; padding-right: 0"
+                             :style="{backgroundColor: (isMobile ? (index % 2 === 0 ? '#f5f5f5' : 'transparent') : (index % 4 < 2  ? '#f5f5f5' : 'transparent')),
+                             borderBottomLeftRadius: isMobile ? '3px' : (index % 4 === 0  ? '0' : '3px'),
+                             borderBottomRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0'),
+                             borderTopLeftRadius: isMobile ? '3px' : (index % 4 === 0  ? '0' : '3px'),
+                             borderTopRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0')}">
                             <p class="detail-title">{{conf.title}}</p>
                             <p class="detail-amount"
                                :style="{fontFamily: (selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">
@@ -187,7 +192,7 @@
 
                                 <label class="col-lg-4 col-md-4 col-sm-12 col-xs-12"
                                        style="font-family: iran-yekan;font-size: 19px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.68;letter-spacing: normal;text-align: right;color: #707070; margin-top: -12px; outline: none;">
-                                    Dedicated Volume
+                                    حافظه ذخیره‌سازی اختصاصی
                                     <input style="font-family: iran-sans; border-radius: 5px; border: solid 1px #0045ff;height: 48px; width: 90%;padding-left: 16px; padding-right: 16px; outline: none;"
                                            type="number"
                                            min="0"
@@ -253,7 +258,7 @@
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="calculator-config-title">Dedicated Volume</span>
+                                    <span class="calculator-config-title">حافظه ذخیره‌سازی اختصاصی</span>
                                     <span class="calculator-config-description">{{planData.dedicatedVolume}} گیگابات</span>
                                 </div>
 
@@ -345,7 +350,7 @@
                                     </div>
 
                                     <div style="display: flex; width: 100%; margin-top: 16px;">
-                                        <span class="card-plan-config-title">Dedicated Volume</span>
+                                        <span class="card-plan-config-title">حافظه ذخیره‌سازی اختصاصی</span>
                                         <span class="card-plan-config-description">سفارشی</span>
                                     </div>
 
@@ -443,27 +448,27 @@
                     ],
                     config: [
                         {
-                            title: '- رم (حافظه تصادفی)',
+                            title: 'رم (حافظه تصادفی)',
                             detail: '400 Mi'
                         },
                         {
-                            title: '- پردازنده',
+                            title: 'پردازنده',
                             detail: '0.5 Core'
                         },
                         {
-                            title: '- حافظه ذخیره‌سازی اشتراکی',
+                            title: 'حافظه ذخیره‌سازی اشتراکی',
                             detail: '2.5 GB'
                         },
                         {
-                            title: '- تعداد سرویس مجاز',
+                            title: 'تعداد سرویس مجاز',
                             detail: '2'
                         },
                         {
-                            title: '- تعداد replica',
+                            title: 'تعداد replica',
                             detail: '1'
                         },
                         {
-                            title: '- بیشینه رم مجاز هر سرویس',
+                            title: 'بیشینه رم مجاز هر سرویس',
                             detail: '320 Mi'
                         }
                     ],
@@ -535,27 +540,27 @@
                         ],
                         config: [
                             {
-                                title: '- رم (حافظه تصادفی)',
+                                title: 'رم (حافظه تصادفی)',
                                 detail: '400 Mi'
                             },
                             {
-                                title: '- پردازنده',
+                                title: 'پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
-                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: '- تعداد سرویس مجاز',
+                                title: 'تعداد سرویس مجاز',
                                 detail: '2'
                             },
                             {
-                                title: '- تعداد replica',
+                                title: 'تعداد replica',
                                 detail: '1'
                             },
                             {
-                                title: '- بیشینه رم مجاز هر سرویس',
+                                title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '320 Mi'
                             }
                         ],
@@ -626,27 +631,27 @@
                         ],
                         config: [
                             {
-                                title: '- رم (حافظه تصادفی)',
+                                title: 'رم (حافظه تصادفی)',
                                 detail: '512 Mi'
                             },
                             {
-                                title: '- پردازنده',
+                                title: 'پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
-                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: '- تعداد سرویس مجاز',
+                                title: 'تعداد سرویس مجاز',
                                 detail: '2'
                             },
                             {
-                                title: '- تعداد replica',
+                                title: 'تعداد replica',
                                 detail: '1'
                             },
                             {
-                                title: '- بیشینه رم مجاز هر سرویس',
+                                title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '400 Mi'
                             }
                         ],
@@ -721,37 +726,37 @@
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '10 GB'
                             },
                         ],
                         config: [
                             {
-                                title: '- رم (حافظه تصادفی)',
+                                title: 'رم (حافظه تصادفی)',
                                 detail: '1024 Mi'
                             },
                             {
-                                title: '- پردازنده',
+                                title: 'پردازنده',
                                 detail: '0.5 Core'
                             },
                             {
-                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: '- Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '10 GB'
                             },
                             {
-                                title: '- تعداد سرویس مجاز',
+                                title: 'تعداد سرویس مجاز',
                                 detail: '5'
                             },
                             {
-                                title: '- تعداد replica',
+                                title: 'تعداد replica',
                                 detail: '5'
                             },
                             {
-                                title: '- بیشینه رم مجاز هر سرویس',
+                                title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '819 Mi'
                             }
                         ],
@@ -837,37 +842,37 @@
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '50 GB'
                             },
                         ],
                         config: [
                             {
-                                title: '- رم (حافظه تصادفی)',
+                                title: 'رم (حافظه تصادفی)',
                                 detail: '2048 Mi'
                             },
                             {
-                                title: '- پردازنده',
+                                title: 'پردازنده',
                                 detail: '1.0 Core'
                             },
                             {
-                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: '- Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '50 GB'
                             },
                             {
-                                title: '- تعداد سرویس مجاز',
+                                title: 'تعداد سرویس مجاز',
                                 detail: '10'
                             },
                             {
-                                title: '- تعداد replica',
+                                title: 'تعداد replica',
                                 detail: '10'
                             },
                             {
-                                title: '- بیشینه رم مجاز هر سرویس',
+                                title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '1638 Mi'
                             }
                         ],
@@ -965,37 +970,37 @@
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '200 GB'
                             },
                         ],
                         config: [
                             {
-                                title: '- رم (حافظه تصادفی)',
+                                title: 'رم (حافظه تصادفی)',
                                 detail: '5120 Mi'
                             },
                             {
-                                title: '- پردازنده',
+                                title: 'پردازنده',
                                 detail: '2.5 Core'
                             },
                             {
-                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: '- Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '200 GB'
                             },
                             {
-                                title: '- تعداد سرویس مجاز',
+                                title: 'تعداد سرویس مجاز',
                                 detail: '50'
                             },
                             {
-                                title: '- تعداد replica',
+                                title: 'تعداد replica',
                                 detail: '50'
                             },
                             {
-                                title: '- بیشینه رم مجاز هر سرویس',
+                                title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '4096 Mi'
                             }
                         ],
@@ -1099,37 +1104,37 @@
                                 detail: '2.5 GB'
                             },
                             {
-                                title: 'Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '465 GB'
                             },
                         ],
                         config: [
                             {
-                                title: '- رم (حافظه تصادفی)',
+                                title: 'رم (حافظه تصادفی)',
                                 detail: '24 GB'
                             },
                             {
-                                title: '- پردازنده',
+                                title: 'پردازنده',
                                 detail: '12 Core'
                             },
                             {
-                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
                             {
-                                title: '- Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '465 GB'
                             },
                             {
-                                title: '- تعداد سرویس مجاز',
+                                title: 'تعداد سرویس مجاز',
                                 detail: '120'
                             },
                             {
-                                title: '- تعداد replica',
+                                title: 'تعداد replica',
                                 detail: '120'
                             },
                             {
-                                title: '- بیشینه رم مجاز هر سرویس',
+                                title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '19.5 GB'
                             }
                         ],
@@ -1236,37 +1241,37 @@
                                 detail: 'سفارشی'
                             },
                             {
-                                title: 'Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: 'سفارشی'
                             },
                         ],
                         config: [
                             {
-                                title: '- رم (حافظه تصادفی)',
+                                title: 'رم (حافظه تصادفی)',
                                 detail: 'سفارشی'
                             },
                             {
-                                title: '- پردازنده',
+                                title: 'پردازنده',
                                 detail: 'سفارشی'
                             },
                             {
-                                title: '- حافظه ذخیره‌سازی اشتراکی',
+                                title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: 'سفارشی'
                             },
                             {
-                                title: '- Dedicated Volume',
+                                title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: 'سفارشی'
                             },
                             {
-                                title: '- تعداد سرویس مجاز',
+                                title: 'تعداد سرویس مجاز',
                                 detail: 'نامحدود'
                             },
                             {
-                                title: '- تعداد replica',
+                                title: 'تعداد replica',
                                 detail: 'سفارشی'
                             },
                             {
-                                title: '- بیشینه رم مجاز هر سرویس',
+                                title: 'بیشینه رم مجاز هر سرویس',
                                 detail: 'سفارشی'
                             }
                         ],
@@ -1476,8 +1481,38 @@
             },
             moveToSection(id) {
                 document.getElementById(id).scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            },
+            handelEventSize() {
+                var vm = this;
+                window.addEventListener("resize", function (e) {
+                    vm.setSize(e);
+                });
+                if (process.browser) {
+                    this.setDefaultSize();
+                }
+            },
+            setSize(e) {
+                this.$store.dispatch("SET_SIZE", {
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                });
+            },
+            setDefaultSize(e) {
+                this.$store.dispatch("SET_SIZE", {
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                });
             }
-        }
+        },
+        computed: {
+            isMobile() {
+                console.log(this.$store.state.windowWidth);
+                return this.$store.state.windowWidth <= 991;
+            },
+        },
+        mounted() {
+            this.handelEventSize();
+        },
     }
 </script>
 
@@ -1936,6 +1971,9 @@
             display flex
             flex-direction row
             height max-content
+            padding-top 6px
+            padding-bottom 6px
+            border-radius 3px
 
             .detail-title
                 color #333
@@ -1944,7 +1982,8 @@
                 font-weight bold
                 padding-right 8px
                 font-family iran-yekan
-                margin-bottom 12px
+                margin-bottom auto
+                margin-top auto
 
             .detail-amount
                 color #000
@@ -1954,7 +1993,8 @@
                 font-family "Helvetica Neue"
                 direction ltr
                 font-size 1em
-                margin-bottom 12px
+                margin-bottom auto
+                margin-top auto
 
 
     .plan-description-container
@@ -1976,7 +2016,7 @@
 
     .plan-spec-container
         border-radius 3px
-        box-shadow 0 3px 6px rgba(0,0,0,0.17)
+        box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
         background #fefefe
         width 100%
         position sticky
