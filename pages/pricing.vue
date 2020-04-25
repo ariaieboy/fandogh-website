@@ -7,13 +7,14 @@
         </div>
 
         <div class="price-page-navigation">
-            <div style="width: 100%; height: 100%; display: flex; flex-direction: row">
+            <div class="inner-container">
+                <div v-for="item in navigation_menu"
+                     class="navigation-item-container"
+                     @click="moveToSection(item.id)">
 
-                <div style="display: flex; flex-direction: row; padding-left: 16px; padding-right: 16px">
-                    <img src="../assets/svg/ic_close.svg"
-                         style="width: 16px; height: 16px; margin-top: auto; margin-bottom: auto;"/>
-                    <p style="margin-right: 12px; color: #0045FF; font-size: 1.1em; margin-top: auto; margin-bottom: auto;">
-                        ماشین حساب</p>
+                    <img :src="require('../assets/svg/' + item.icon + '.svg')" :alt="item.icon"/>
+                    <p>{{item.title}}</p>
+
                 </div>
 
             </div>
@@ -22,7 +23,7 @@
 
         </div>
 
-        <price-header :title="headers.plans.title"
+        <price-header id="plan_section" :title="headers.plans.title"
                       :description="headers.plans.description"
                       :links="headers.plans.links">
 
@@ -143,7 +144,7 @@
 
         </div>
 
-        <price-header :title="headers.calculator.title"
+        <price-header id="calculator_section" :title="headers.calculator.title"
                       :description="headers.calculator.description"
                       :links="headers.calculator.links">
 
@@ -291,7 +292,7 @@
 
         </div>
 
-        <price-header :title="headers.pay_as_you_go.title"
+        <price-header id="payg_section" :title="headers.pay_as_you_go.title"
                       :description="headers.pay_as_you_go.description"
                       :en="true"
                       :alter="headers.pay_as_you_go.alter">
@@ -393,8 +394,9 @@
                 description: 'قیمت‌گزاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم.<br/> هر نوع پروژه‌ای با هر مقایسی را به سادگی بر روی فندق اجرا کنید.',
                 headers: {
                     plans: {
+                        id: 'plan_section',
                         title: 'پلن‌های پیشنهادی',
-                        description: 'شاید برای شروع ایده‌ای از اینکه‌ چه\n' +
+                        description: 'شاید برای شروع، ایده‌ای از اینکه‌ چه\n' +
                             '                    میزان منابع برای پروژه و کسب‌وکار شما نیاز است نداشته باشید و به دنبال یک راهنمایی باشید. سکوی\n' +
                             '                    ابری فندق تجربه استفاده محصولات متفاوت را در قالب یک سری پیشنهاد برای شما تهیه کرده است تا\n' +
                             '                    بتوانید بسته به مقیاس پروژه خود، پلن مورد نیاز خود را انتخاب کنید.',
@@ -405,6 +407,7 @@
                             }
                         ]
                     }, calculator: {
+                        id: 'calculator_section',
                         title: 'ماشین حساب',
                         description: 'با ماشین‌ حساب سکوی ابری فندق میزان منابع مورد نیاز خود را انتخاب کنید و از هزینه تمام شده ماهیانه آگاه شوید.<br>' +
                             'همچنین می‌توانید محاسبه کنید که در ازای هر میزان منابع، چه ویژگی‌هایی در اختیار شما قرار داده می‌شود.',
@@ -415,6 +418,7 @@
                             }
                         ]
                     }, pay_as_you_go: {
+                        id: 'payg_section',
                         title: 'Pay As You Go',
                         description: 'به میزان مصرف پرداخت کنید و نگران محاسبه داینامیک مصرف منابع سرویس‌های خود نباشید.<br> سکوی ابری فندق به صورت هوشمند منابع مورد نیاز را به سرویس‌های شما تخصیص می‌دهد.',
                         alter: 'به زودی ...'
@@ -426,7 +430,7 @@
                     title: 'پلن رایگان',
                     enabled: true,
                     price: 'رایگان و بدون هزینه',
-                    description: 'مناسب پروژه‌های دانشجویی و ارائه محصولات MVP و کارهای آزمایشی',
+                    description: 'مناسب برای پروژه‌های دانشجویی و ارائه محصولات MVP و کارهای آزمایشی برای تمام کاربرانی که قصد ندارند برای کار خود هزینه اولیه زیادی پرداخت کنند.',
                     thumb_config: [
                         {
                             title: 'رم',
@@ -518,7 +522,7 @@
                         title: 'پلن رایگان',
                         enabled: true,
                         price: 'رایگان و بدون هزینه',
-                        description: 'مناسب پروژه‌های دانشجویی و ارائه محصولات MVP و کارهای آزمایشی',
+                        description: 'مناسب برای پروژه‌های دانشجویی و ارائه محصولات MVP و کارهای آزمایشی برای تمام کاربرانی که قصد ندارند برای کار خود هزینه اولیه زیادی پرداخت کنند.',
                         thumb_config: [
                             {
                                 title: 'رم',
@@ -706,7 +710,7 @@
                         title: 'پلن اقتصادی',
                         enabled: true,
                         price: 'ماهیانه ۷۲ هزار تومان',
-                        description: 'مناسب پروژه‌های با مقیاس متوسط که نیاز به ساخت بیش از ۲ سرویس در آن دارید.',
+                        description: 'مناسب پروژه‌هایی که نیاز به ساخت بیش از ۲ سرویس دارند اما از مقیاس بزرگی برخوردار نیستند.',
                         thumb_config: [
                             {
                                 title: 'رم',
@@ -822,7 +826,7 @@
                         title: 'پلن استارتاپی',
                         enabled: true,
                         price: 'ماهیانه ۱۸۰ هزار تومان',
-                        description: 'مناسب پروژه‌های استارتاپی که توزیع منابع و مدیریت هزینه برای آن‌ها مهم است.',
+                        description: ' این پلن برای آن دسته از پروژه‌های استارتاپی طراحی شده است که توزیع منابع و مدیریت هزینه برای ایشان از اهمیت بالایی برخوردار است.',
                         thumb_config: [
                             {
                                 title: 'رم',
@@ -950,7 +954,7 @@
                         title: 'پلن مقیاس متوسط',
                         enabled: true,
                         price: 'ماهیانه ۵۴۰ هزار تومان',
-                        description: 'مناسب پروژه‌هایی با مقیاس متوسط به بالا که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
+                        description: 'مناسب برای پروژه‌هایی با مقیاس متوسط به بالا که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
                         thumb_config: [
                             {
                                 title: 'رم',
@@ -1084,7 +1088,7 @@
                         title: 'پلن مقیاس بزرگ',
                         enabled: true,
                         price: 'ماهیانه ۲ میلیون تومان',
-                        description: 'مناسب پروژه‌هایی با مقیاس بزرگ که نیاز به منابع پردازشی و ذخیره‌سازی بالا دارند.',
+                        description: 'مناسب برای پروژه‌هایی با مقیاس بزرگ که نیاز به منابع پردازشی و ذخیره‌سازی بالا داشته و از سطح کیفی و کمی بالایی در میکروسیرویس‌های خود برخوردار هستند.',
                         thumb_config: [
                             {
                                 title: 'رم',
@@ -1161,6 +1165,9 @@
                             {
                                 detail: 'پشیتبانی حرفه‌ای'
                             },
+                            {
+                                detail: 'مهندسی مهاجرت به زیرساخت سکو ابری فندق'
+                            }
                         ], button: {
                             text: 'خرید پلن',
                             url: 'https://fandogh.cloud/dashboard/plans'
@@ -1218,7 +1225,7 @@
                         title: 'پلن شرکتی',
                         enabled: true,
                         price: 'با ما تماس بگیرید',
-                        description: 'مناسب پروژه‌های استارتاپی که توزیع منابع و مدیریت هزینه برای آن‌ها مهم است.',
+                        description: 'اگر نیاز به پلن‌های مخصوص مانند سکوی ابری اختصاصی دارید می‌توانید با ما تماس بگیرید.',
                         thumb_config: [
                             {
                                 title: 'رم',
@@ -1301,6 +1308,9 @@
                             {
                                 detail: 'مهندسی مهاجرت به زیرساخت سکو ابری فندق'
                             },
+                            {
+                                detail: 'سکوی ابری اختصاصی'
+                            },
                         ],
                         button: {
                             text: 'تماس با ما',
@@ -1356,6 +1366,23 @@
                                 icon: 'deeplearning'
                             }
                         ],
+                    },
+                ],
+                navigation_menu: [
+                    {
+                        id: 'plan_section',
+                        title: 'پلن‌ها',
+                        icon: 'ic-plans'
+                    },
+                    {
+                        id: 'calculator_section',
+                        title: 'ماشین‌ حساب',
+                        icon: 'ic-calculator'
+                    },
+                    {
+                        id: 'payg_section',
+                        title: 'Pay As You Go',
+                        icon: 'ic-credit-card'
                     },
                 ],
                 planData: {
@@ -1450,6 +1477,9 @@
                 this.selected_plan = this.plans[index];
                 document.getElementById('plan-spec').scrollIntoView({block: 'nearest', behavior: 'smooth'});
 
+            },
+            moveToSection(id) {
+                document.getElementById(id).scrollIntoView({block: 'nearest', behavior: 'smooth'});
             }
         }
     }
@@ -1635,13 +1665,58 @@
         position sticky
         top 64px
         width 100%
-        height 58px
+        height 48px
         background #EBEFFF
         display flex
         flex-direction column
         z-index 10000
         @media only screen and (max-width 1230px)
             top 0
+
+        .inner-container
+            width 100%
+            height 100%
+            display flex
+            flex-direction row
+            padding-left 16px
+            padding-right 16px
+
+            .navigation-item-container
+                display flex
+                flex-direction row
+                padding-left 16px
+                cursor pointer
+
+                img
+                    width 24px
+                    height 24px
+                    margin-top auto
+                    margin-bottom auto
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+                    transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        width 18px
+                        height 18px
+
+                p
+                    margin-right 12px
+                    color rgba(0, 69, 255, 0.9)
+                    font-size 1.1em
+                    margin-top auto
+                    cursor pointer
+                    margin-bottom auto
+                    transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        font-size 1em
+
+            .navigation-item-container:hover
+
+                p
+                    color rgba(0, 69, 255, 1)
+                    filter drop-shadow(0 3px 6px rgba(0, 0, 0, .4))
+
+                img
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, .4))
 
 
     .calculator-parent-container
@@ -2004,8 +2079,8 @@
 
 
     .project-icon-container:hover
-        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0,0,0,0.23))
-        -webkit-filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0,0,0,0.23))
+        filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.23))
+        -webkit-filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.23))
 
 
 </style>
