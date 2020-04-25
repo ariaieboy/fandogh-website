@@ -66,12 +66,8 @@
 
             </div>
 
-            <div class="row col-xs-12 col-sm-7 col-md-9 col-lg-9"
-                 id="plan-spec"
-                 style="border-radius: 3px; box-shadow: 0 3px 6px rgba(0,0,0,0.17);
-                            background: #fefefe; width: 100%; position: sticky; top: 128px; height: max-content;
-                            padding-left: 0; padding-right: 0;
-                            min-height: 300px; margin-bottom: 7px">
+            <div class="row col-xs-12 col-sm-7 col-md-9 col-lg-9 plan-spec-container"
+                 id="plan-spec">
                 <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7" style="margin-top: 16px; margin-bottom: 16px;">
 
                     <div class="header-spec">
@@ -113,7 +109,7 @@
 
                 </div>
 
-                <div class="row col-xs-12 col-sm-12 col-md-5 col-lg-5 plan-spec-container">
+                <div class="row col-xs-12 col-sm-12 col-md-5 col-lg-5 plan-spec-inner-container">
 
                     <p style="font-size: 1.3em; font-family: iran-yekan; color: #111; height: max-content; font-weight: bold;"
                        class="col-xs-12 col-sm-12 col-md-12 col-lg-12">مزایا:</p>
@@ -1979,30 +1975,45 @@
 
 
     .plan-spec-container
-        margin-top 16px
-        margin-bottom 16px
-        border-right 1px dashed rgba(0, 0, 0, 0.17)
         border-radius 3px
-        display flex
+        box-shadow 0 3px 6px rgba(0,0,0,0.17)
+        background #fefefe
+        width 100%
+        position sticky
+        top 128px
+        height max-content
         padding-left 0
         padding-right 0
-        align-content start
-        @media only screen and (max-width 992px)
-            border-right none
+        min-height 300px
+        margin-bottom 7px
+        @media only screen and (max-width 1230px)
+            top 64px
 
-        .inner-container
+        .plan-spec-inner-container
+            margin-top 16px
+            margin-bottom 16px
+            border-right 1px dashed rgba(0, 0, 0, 0.17)
+            border-radius 3px
             display flex
-            margin-bottom auto
-            flex-direction row
-            height max-content
+            padding-left 0
+            padding-right 0
+            align-content start
+            @media only screen and (max-width 992px)
+                border-right none
 
-            p.description
-                color #191919
-                flex 1
+            .inner-container
+                display flex
+                margin-bottom auto
+                flex-direction row
                 height max-content
-                text-align right
-                font-size 1em
-                margin-bottom 12px
+
+                p.description
+                    color #191919
+                    flex 1
+                    height max-content
+                    text-align right
+                    font-size 1em
+                    margin-bottom 12px
 
 
     .plan-button
