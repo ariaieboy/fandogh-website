@@ -57,6 +57,9 @@
                     <router-link :to="{path:'/our-values'}">ارزش‌های ما</router-link>
                 </li>
                 <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <router-link :to="{path:'/pricing'}">قیمت‌ها</router-link>
+                </li>
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <router-link :to="{path:'/conditions-of-use'}">قوانین سکو</router-link>
                 </li>
                 <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
