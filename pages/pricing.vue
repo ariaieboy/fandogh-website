@@ -53,10 +53,8 @@
                                 <div v-for="(conf, index) in plan.thumb_config"
                                      class="detail-container">
                                     <span class="detail-title">{{conf.title}}:</span>
-                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount"
-                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">| {{conf.detail}}</span>
-                                    <span v-else class="left detail-amount"
-                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">{{conf.detail}}</span>
+                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount">| {{conf.detail}}</span>
+                                    <span v-else class="left detail-amount">{{conf.detail}}</span>
                                 </div>
                             </div>
                         </div>
@@ -99,10 +97,7 @@
                              borderTopLeftRadius: isMobile ? '3px' : (index % 4 === 0  ? '0' : '3px'),
                              borderTopRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0')}">
                             <p class="detail-title">{{conf.title}}</p>
-                            <p class="detail-amount"
-                               :style="{fontFamily: (selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">
-                                {{conf.detail}}
-                            </p>
+                            <p class="detail-amount">{{conf.detail}}</p>
                         </div>
                     </div>
 
@@ -1506,7 +1501,6 @@
         },
         computed: {
             isMobile() {
-                console.log(this.$store.state.windowWidth);
                 return this.$store.state.windowWidth <= 991;
             },
         },
@@ -1632,7 +1626,7 @@
                 width max-content
                 direction ltr
                 margin-bottom 4px
-                font-family "Helvetica Neue"
+                font-family iran-sans
                 font-size .9em
                 padding-right 4px
 
@@ -1681,7 +1675,7 @@
                     color #ebebeb
                     width max-content
                     line-height 1.75
-                    font-family "Helvetica Neue"
+                    font-family iran-sans
                     font-size .9em
                     direction ltr
                     margin-bottom 4px
@@ -1990,7 +1984,7 @@
                 padding-left 10px
                 flex .3
                 text-align left
-                font-family "Helvetica Neue"
+                font-family iran-sans
                 direction ltr
                 font-size 1em
                 margin-bottom auto
