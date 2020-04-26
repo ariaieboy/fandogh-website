@@ -2,6 +2,8 @@
 
     <div class="price-header-container">
 
+        <div class="price-header-divider"></div>
+
         <div class="row inner-container">
 
             <div class="col-xs-12 col-md-8 col-lg-8 col-sm-12">
