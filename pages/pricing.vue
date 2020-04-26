@@ -322,7 +322,7 @@
                                     </div>
 
                                     <div style="display: flex; width: 100%; margin-top: 16px;">
-                                        <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
+                                        <span class="card-plan-config-title">حافظه ذخیره‌سازی اشتراکی</span>
                                         <span class="card-plan-config-description">سفارشی</span>
                                     </div>
 
@@ -1703,8 +1703,11 @@
             height 100%
             display flex
             flex-direction row
-            padding-left 16px
-            padding-right 16px
+            padding-left 32px
+            padding-right 32px
+            @media only screen and (max-width 992px)
+                padding-left 16px
+                padding-right 16px
 
             .navigation-item-container
                 display flex
@@ -1905,6 +1908,7 @@
         box-sizing padding-box
         @media only screen and (max-width: 992px)
             border-radius 0 0 25px 25px
+            border-radius 0
 
         p.payg-title
             text-align center

@@ -72,12 +72,22 @@
         letter-spacing: normal
         text-align: right
         color: #535353
+        padding-right 16px
+        @media only screen and (max-width 992px)
+            padding-right 0
+            font-size 1.5em
 
 
     .price-header-description
         color #535353
         padding-top 24px
         padding-left 32px
+        padding-right 16px
+        font-size 1.1em
+        @media only screen and (max-width 992px)
+            padding-right 0
+            padding-left 0
+            font-size 1em
 
 
     .price-header-links-container
@@ -87,17 +97,24 @@
         div.divider
             width 1px
             background rgba(112, 112, 112, 0.5)
+            @media only screen and (max-width 992px)
+                display none
 
         div.description-container
             width 100%
             display flex
             flex-direction column
-            padding-right 16px
-            padding-left 16px
+            padding-right 32px
+            padding-left 32px
+            @media only screen and (max-width 992px)
+                padding-right 0
+                padding-left 0
 
             p
                 color #535353
                 font-size 1.4em
+                @media only screen and (max-width 992px)
+                    font-size 1.2em
 
             a
                 color #0045FF
@@ -106,6 +123,8 @@
                 max-width 275px
                 line-height 2
                 padding-top 5px
+                @media only screen and (max-width 992px)
+                    font-size 1em
 
 
 
