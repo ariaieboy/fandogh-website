@@ -225,13 +225,13 @@
                                  style="display: flex; flex-direction: column">
                                 <div style="display: flex; width: 100%">
                                     <span class="calculator-config-title">رم (حافظه تصادفی)</span>
-                                    <span class="calculator-config-description">{{planData.memory}} گیگابایت</span>
+                                    <span class="calculator-config-description">{{planData.memory}} GB</span>
                                 </div>
 
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="calculator-config-title">حافظه ذخیره‌سازی</span>
-                                    <span class="calculator-config-description">۲.۵ گیگابایت</span>
+                                    <span class="calculator-config-title">حافظه ذخیره‌سازی اشتراکی</span>
+                                    <span class="calculator-config-description">۲.۵ GB</span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -249,12 +249,12 @@
                                  style="display: flex; flex-direction: column">
                                 <div style="display: flex; width: 100%">
                                     <span class="calculator-config-title">پردازنده</span>
-                                    <span class="calculator-config-description">{{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} هسته</span>
+                                    <span class="calculator-config-description">{{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} Core</span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
                                     <span class="calculator-config-title">حافظه ذخیره‌سازی اختصاصی</span>
-                                    <span class="calculator-config-description">{{planData.dedicatedVolume}} گیگابات</span>
+                                    <span class="calculator-config-description">{{planData.dedicatedVolume}} GB</span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -1788,6 +1788,7 @@
         margin-top 8px
         padding-right 16px
         padding-left 16px
+        direction ltr
         flex 1
         @media only screen and (max-width: 992px)
             font-size .9em
