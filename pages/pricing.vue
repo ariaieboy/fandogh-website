@@ -53,10 +53,8 @@
                                 <div v-for="(conf, index) in plan.thumb_config"
                                      class="detail-container">
                                     <span class="detail-title">{{conf.title}}:</span>
-                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount"
-                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">| {{conf.detail}}</span>
-                                    <span v-else class="left detail-amount"
-                                          :style="{fontFamily: (plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">{{conf.detail}}</span>
+                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount">| {{conf.detail}}</span>
+                                    <span v-else class="left detail-amount">{{conf.detail}}</span>
                                 </div>
                             </div>
                         </div>
@@ -99,10 +97,7 @@
                              borderTopLeftRadius: isMobile ? '3px' : (index % 4 === 0  ? '0' : '3px'),
                              borderTopRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0')}">
                             <p class="detail-title">{{conf.title}}</p>
-                            <p class="detail-amount"
-                               :style="{fontFamily: (selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue')}">
-                                {{conf.detail}}
-                            </p>
+                            <p class="detail-amount">{{conf.detail}}</p>
                         </div>
                     </div>
 
@@ -230,13 +225,13 @@
                                  style="display: flex; flex-direction: column">
                                 <div style="display: flex; width: 100%">
                                     <span class="calculator-config-title">رم (حافظه تصادفی)</span>
-                                    <span class="calculator-config-description">{{planData.memory}} گیگابایت</span>
+                                    <span class="calculator-config-description">{{planData.memory}} GB</span>
                                 </div>
 
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="calculator-config-title">حافظه ذخیره‌سازی</span>
-                                    <span class="calculator-config-description">۲.۵ گیگابایت</span>
+                                    <span class="calculator-config-title">حافظه ذخیره‌سازی اشتراکی</span>
+                                    <span class="calculator-config-description">۲.۵ GB</span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -254,12 +249,12 @@
                                  style="display: flex; flex-direction: column">
                                 <div style="display: flex; width: 100%">
                                     <span class="calculator-config-title">پردازنده</span>
-                                    <span class="calculator-config-description">{{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} هسته</span>
+                                    <span class="calculator-config-description">{{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} Core</span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
                                     <span class="calculator-config-title">حافظه ذخیره‌سازی اختصاصی</span>
-                                    <span class="calculator-config-description">{{planData.dedicatedVolume}} گیگابات</span>
+                                    <span class="calculator-config-description">{{planData.dedicatedVolume}} GB</span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -327,7 +322,7 @@
                                     </div>
 
                                     <div style="display: flex; width: 100%; margin-top: 16px;">
-                                        <span class="card-plan-config-title">حافظه ذخیره‌سازی</span>
+                                        <span class="card-plan-config-title">حافظه ذخیره‌سازی اشتراکی</span>
                                         <span class="card-plan-config-description">سفارشی</span>
                                     </div>
 
@@ -1506,7 +1501,6 @@
         },
         computed: {
             isMobile() {
-                console.log(this.$store.state.windowWidth);
                 return this.$store.state.windowWidth <= 991;
             },
         },
@@ -1632,7 +1626,7 @@
                 width max-content
                 direction ltr
                 margin-bottom 4px
-                font-family "Helvetica Neue"
+                font-family iran-sans
                 font-size .9em
                 padding-right 4px
 
@@ -1681,7 +1675,7 @@
                     color #ebebeb
                     width max-content
                     line-height 1.75
-                    font-family "Helvetica Neue"
+                    font-family iran-sans
                     font-size .9em
                     direction ltr
                     margin-bottom 4px
@@ -1709,8 +1703,11 @@
             height 100%
             display flex
             flex-direction row
-            padding-left 16px
-            padding-right 16px
+            padding-left 32px
+            padding-right 32px
+            @media only screen and (max-width 992px)
+                padding-left 16px
+                padding-right 16px
 
             .navigation-item-container
                 display flex
@@ -1794,6 +1791,7 @@
         margin-top 8px
         padding-right 16px
         padding-left 16px
+        direction ltr
         flex 1
         @media only screen and (max-width: 992px)
             font-size .9em
@@ -1910,6 +1908,7 @@
         box-sizing padding-box
         @media only screen and (max-width: 992px)
             border-radius 0 0 25px 25px
+            border-radius 0
 
         p.payg-title
             text-align center
@@ -1990,7 +1989,7 @@
                 padding-left 10px
                 flex .3
                 text-align left
-                font-family "Helvetica Neue"
+                font-family iran-sans
                 direction ltr
                 font-size 1em
                 margin-bottom auto

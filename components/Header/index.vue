@@ -35,7 +35,10 @@
                                 </a>
                             </li>
                             <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px">
-                                <a rel="noopener" target="_blank" href="https://fandogh.cloud/pricing">قیمت‌ها</a>
+                                <a rel="noopener" target="_blank" :href="'/pricing'"
+                                   style="height: 100%; width: 100%; padding: 0; text-align: center; margin-right: auto; margin-left: auto">
+                                    قیمت‌ها
+                                </a>
                             </li>
                         </ul>
                     </div>
