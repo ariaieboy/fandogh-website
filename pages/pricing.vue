@@ -371,6 +371,92 @@
 
         </div>
 
+        <price-header id="support_section" :title="headers.support.title"
+                      :description="headers.support.description"
+                      :icon="headers.support.icon">
+
+        </price-header>
+
+        <div class="row" style="width: 100%; margin-top: 32px">
+
+            <div class="support-header-parent-style">
+                <table class="support-header-table-style">
+                    <tr>
+                        <td v-for="header in support_menu_header"
+                            :width="header.width"
+                            :style="{textAlign: 'center' }">
+                            {{header.title}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="margin-left: 5%; margin-right: 5%; margin-top: 12px;">
+                <table style="width: 100%; border: none; border-collapse: collapse; table-layout: fixed">
+                    <tr class="cursor-row" v-for="(item, index) in support_menu_data"
+                        style="height: 48px; border-collapse: collapse; font-family: iran-yekan;font-size: 1.2em; color: #333333;"
+                        :style="{background: index % 2 === 0 ? '#EBEFFF' : '#fefefe'}">
+                        <td :width="support_menu_header[0].width" class="first-col">
+                            {{item.title}}
+                        </td>
+                        <td :width="support_menu_header[1].width"
+                            v-if="typeof item.develop !== 'boolean'"
+                            :style="{fontFamily: item.is_en ? 'Helvetica Neue' : 'yekan-number-regular',
+                            fontWeight: item.is_en ? 'regular' : 'normal'}"
+                            style="text-align: center; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"
+                            v-html="item.develop">
+                        </td>
+                        <td v-else
+                            :width="support_menu_header[1].width"
+                            style="font-family: 'Helvetica Neue'; text-align: center; text-overflow: ellipsis; overflow: hidden;">
+                            <img v-if="item.develop" src="../assets/svg/available.svg">
+                            <img v-else src="../assets/svg/not-available.svg">
+                        </td>
+                        <td :width="support_menu_header[2].width"
+                            v-if="typeof item.professional !== 'boolean'"
+                            :style="{fontFamily: item.is_en ? 'Helvetica Neue' : 'yekan-number-regular',
+                            fontWeight: item.is_en ? 'light' : 'normal'}"
+                            style="text-align: center; text-overflow: ellipsis; overflow: hidden;"
+                            v-html="item.professional">
+                        </td>
+                        <td v-else
+                            :width="support_menu_header[2].width"
+                            style="font-family: 'Helvetica Neue'; text-align: center; text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                            <img v-if="item.professional" src="../assets/svg/available.svg">
+                            <img v-else src="../assets/svg/not-available.svg">
+                        </td>
+                        <td :width="support_menu_header[3].width"
+                            v-if="typeof item.enterprise !== 'boolean'"
+                            :style="{fontFamily: item.is_en ? 'Helvetica Neue' : 'yekan-number-regular',
+                            fontWeight: item.is_en ? 'regular' : 'normal'}"
+                            style="text-align: center; text-overflow: ellipsis; overflow: hidden;"
+                            v-html="item.enterprise">
+                        </td>
+                        <td v-else
+                            :width="support_menu_header[3].width"
+                            style="font-family: 'Helvetica Neue'; text-align: center; text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
+                            <img v-if="item.enterprise" src="../assets/svg/available.svg">
+                            <img v-else src="../assets/svg/not-available.svg">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="support-footer-parent-style">
+                <table class="support-footer-table-style">
+                    <tr>
+                        <td v-for="(header, index) in support_price_footer"
+                            :width="header.width"
+                            :style="{textAlign: index === 0 ? 'right' : 'center',
+                                     paddingRight: index === 0 ? '21px' : '0'}">
+                            {{header.title}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
     </div>
 
 </template>
@@ -418,6 +504,11 @@
                         title: 'Pay As You Go',
                         description: 'به میزان مصرف پرداخت کنید و نگران محاسبه داینامیک مصرف منابع سرویس‌های خود نباشید.<br> سکوی ابری فندق به صورت هوشمند منابع مورد نیاز را به سرویس‌های شما تخصیص می‌دهد.',
                         alter: 'به زودی ...'
+                    }, support: {
+                        id: 'support_section',
+                        title: 'پشتیبانی',
+                        icon: 'consulting.svg',
+                        description: 'به میزان مصرف پرداخت کنید و نگران محاسبه داینامیک مصرف منابع سرویس‌های خود نباشید.<br> سکوی ابری فندق به صورت هوشمند منابع مورد نیاز را به سرویس‌های شما تخصیص می‌دهد.'
                     }
                 },
                 selected_plan: {
@@ -1386,6 +1477,111 @@
                     cpu: 0.5,
                     dedicatedVolume: 0,
                 },
+                support_menu_header: [
+                    {title: '', width: '31%'},
+                    {title: 'توسعه دهنده', width: '23%'},
+                    {title: 'حرفه‌ای', width: '23%'},
+                    {title: 'شرکتی', width: '23%'}
+                ],
+                support_menu_data: [
+                    {
+                        title: 'قرارداد سطح کیفیت',
+                        is_en: false,
+                        develop: '99',
+                        professional: '99.9',
+                        enterprise: '99.99'
+                    },
+                    {
+                        title: 'پاسخگویی برخط',
+                        is_en: false,
+                        develop: true,
+                        professional: true,
+                        enterprise: true
+                    },
+                    {
+                        title: 'تماس با پشتیبانی',
+                        is_en: false,
+                        develop: `مسائل مالی و فنی سکو<br/>۹ الی ۱۳`,
+                        professional: `مسائل مالی و فنی سکو<br/>۹ الی ۱۷`,
+                        enterprise: `مسائل مالی و فنی سکو<br/>۲۴/۷`
+                    },
+                    {
+                        title: 'پاسخگویی تیکتینگ',
+                        is_en: false,
+                        develop: `تا ۱۲ ساعت`,
+                        professional: `تا ۴ ساعت`,
+                        enterprise: `تا ۳۰ دقیقه`
+                    },
+                    {
+                        title: 'پاسخگویی در پیام‌رسان',
+                        is_en: true,
+                        develop: false,
+                        professional: `WhatsApp<br>Telegram<br>Slack`,
+                        enterprise: `WhatsApp<br>Telegram<br>Slack`
+                    },
+                    {
+                        title: 'آموزش تیم  فنی',
+                        is_en: false,
+                        develop: false,
+                        professional: `۲۴ ساعت در ماه<br>مجازی`,
+                        enterprise: `۴۸ ساعت در ماه<br>مجازی | حضوری`
+                    },
+                    {
+                        title: 'پشتیبان هم تیمی',
+                        is_en: false,
+                        develop: false,
+                        professional: false,
+                        enterprise: `پشتیبان هم‌تیمی در فضانام`
+                    },
+                    {
+                        title: 'ارائه پیش از معرفی محصولات جدید',
+                        is_en: false,
+                        develop: false,
+                        professional: false,
+                        enterprise: true
+                    },
+                    {
+                        title: 'ارائه راهکارهای 3rd party',
+                        is_en: false,
+                        develop: false,
+                        professional: `قابلیت همکاری<br>و راهنمایی تنظیمات<br>و عیب یابی`,
+                        enterprise: `قابلیت همکاری<br>و راهنمایی تنظیمات<br>و عیب یابی`
+                    },
+                    {
+                        title: 'خدمات انتقال دیتا',
+                        is_en: false,
+                        develop: `انتقال دیتاها از مبدا<br>به سکوی ابری فندق`,
+                        professional: `انتقال دیتاها از مبدا<br>به سکوی ابری فندق`,
+                        enterprise: `انتقال دیتاها از مبدا<br>به سکوی ابری فندق`
+                    },
+                    {
+                        title: 'مشاوره معماری',
+                        is_en: false,
+                        develop: `به صورت کلی`,
+                        professional: `متناسب با نیازمندی‌ها`,
+                        enterprise: `متناسب با نیازمندی‌ها<br>ارائه بازخورد فنی`
+                    },
+                    {
+                        title: 'اشتراک گذاری road map ۳ ماهه سکو',
+                        is_en: false,
+                        develop: false,
+                        professional: false,
+                        enterprise: false
+                    },
+                    {
+                        title: 'خدمات DevOps',
+                        is_en: false,
+                        develop: false,
+                        professional: false,
+                        enterprise: `مانیتورینگ<br>استقرار<br>عیب یابی<br>توسعه<br>مدیریت زیرساخت<br>`
+                    }
+                ],
+                support_price_footer: [
+                    {title: 'هزینه ماهیانه (تومان)', width: '31%'},
+                    {title: '۵۰۰,۰۰۰', width: '23%'},
+                    {title: '۲,۰۰۰,۰۰۰', width: '23%'},
+                    {title: 'تماس بگیرید', width: '23%'}
+                ],
                 memoryRangeMin: '0.5GB',
                 memoryRangeMax: '128GB',
                 volumeRangeMin: '10GB',
@@ -2131,6 +2327,111 @@
     .project-icon-container:hover
         filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.23))
         -webkit-filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.23))
+
+
+    .support-header-parent-style
+        background-color $colorPrimary
+        margin-top 0
+        width 100%
+        margin-left 5%
+        margin-right 5%
+        position sticky
+        top 128px
+        padding-top 4px
+        padding-bottom 4px
+        max-width 1750px
+        box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+
+
+    .support-header-table-style
+        width 100%
+        border none
+        border-collapse collapse
+
+        tr
+            height 40px
+            border-collapse collapse
+            color #fefefe
+            font-family iran-yekan
+            font-size 1.1em
+            font-weight bold
+
+            td
+                font-size 1em
+                @media only screen and (max-width 992px)
+                    font-size .7em
+
+
+    img
+        width 24px
+        height 24px
+        margin-top 8px
+        white-space nowrap
+        @media only screen and (max-width 992px)
+            width 18px
+            height 18px
+
+
+    .cursor-row
+        background rgba(0, 69, 255, 0.2)
+        cursor unset
+        padding-top 8px
+        padding-bottom 8px
+        border-right 5px solid #0045ff
+        border-bottom 1px solid #c4c7d0
+        height max-content
+        transition all .2s ease-in-out
+
+        td
+            font-size .9em
+            font-weight normal
+            padding-top 8px
+            padding-bottom 8px
+            line-height 1.75
+            @media only screen and (max-width 992px)
+                font-size .7em
+
+        td.first-col
+            font-family iran-yekan
+            text-align right
+            text-overflow ellipsis
+            overflow hidden
+            padding-right 16px
+            font-size .9em
+            @media only screen and (max-width 992px)
+                font-size .6em
+                padding-right 12px
+
+
+    .support-footer-parent-style
+        background-color $colorBlueArea
+        margin-top 3px
+        margin-bottom 64px
+        width 100%
+        margin-left 5%
+        margin-right 5%
+        padding-top 4px
+        padding-bottom 4px
+        max-width 1750px
+
+
+    .support-footer-table-style
+        width 100%
+        border none
+        border-collapse collapse
+
+        tr
+            height 40px
+            border-collapse collapse
+            color #fefefe
+            font-family iran-yekan
+            font-size 1.1em
+            font-weight bold
+
+            td
+                font-size 1em
+                @media only screen and (max-width 992px)
+                    font-size .7em
 
 
 </style>
