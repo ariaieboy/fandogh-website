@@ -1471,6 +1471,11 @@
                         title: 'Pay As You Go',
                         icon: 'ic-credit-card'
                     },
+                    {
+                        id: 'support_section',
+                        title: 'پشتیبانی',
+                        icon: 'ic-support'
+                    }
                 ],
                 planData: {
                     memory: .5,
