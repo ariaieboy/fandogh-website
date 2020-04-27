@@ -1506,7 +1506,7 @@
                     {
                         title: 'تماس با پشتیبانی',
                         is_en: false,
-                        develop: `مسائل مالی و فنی سکو<br/>۹ الی ۱۳`,
+                        develop: false,
                         professional: `مسائل مالی و فنی سکو<br/>۹ الی ۱۷`,
                         enterprise: `مسائل مالی و فنی سکو<br/>۲۴/۷`
                     },
@@ -1560,6 +1560,13 @@
                         enterprise: `انتقال دیتاها از مبدا<br>به سکوی ابری فندق`
                     },
                     {
+                        title: 'مشاوره ویدئویی',
+                        is_en: false,
+                        develop: `به صورت مجازی<br>۳ ساعت در ماه`,
+                        professional: `به صورت مجازی<br>۶ ساعت در ماه`,
+                        enterprise: `به صورت مجازی<br>۱۲ ساعت در ماه`
+                    },
+                    {
                         title: 'مشاوره معماری',
                         is_en: false,
                         develop: `به صورت کلی`,
@@ -1571,7 +1578,7 @@
                         is_en: false,
                         develop: false,
                         professional: false,
-                        enterprise: false
+                        enterprise: true
                     },
                     {
                         title: 'خدمات DevOps',
@@ -2341,11 +2348,13 @@
         margin-left 5%
         margin-right 5%
         position sticky
-        top 128px
+        top 115px
         padding-top 4px
         padding-bottom 4px
         max-width 1750px
-        box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+        box-shadow 0 3px 6px rgba(0, 0, 0, 0.2)
+        @media only screen and (max-width 992px)
+            top 58px
 
 
     .support-header-table-style
