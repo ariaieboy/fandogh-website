@@ -2,6 +2,8 @@
 
     <div class="price-header-container">
 
+        <div class="price-header-divider"></div>
+
         <div class="row inner-container">
 
             <div class="col-xs-12 col-md-8 col-lg-8 col-sm-12">
@@ -26,7 +28,20 @@
 
                 <div class="divider"></div>
                 <div class="description-container">
-                    <p style="color: #001069; font-size: 3em; text-align: center; margin-bottom: auto; margin-top: auto;">{{alter}}</p>
+                    <p style="color: #001069; font-size: 3em; text-align: center; margin-bottom: auto; margin-top: auto;">
+                        {{alter}}</p>
+                </div>
+
+            </div>
+
+            <div v-if="icon" class="col-xs-12 col-md-4 col-lg-4 col-sm-12 price-header-links-container">
+
+                <div class="divider"></div>
+                <div class="description-container">
+                    <img :src="require('../../../assets/svg/services/enterprise/' + icon)"
+                         style="filter: drop-shadow(0 3px 6px rgba(0,0,0,0.17)); width: 128px; height: 128px;
+                                margin: auto"
+                         :alt="icon"/>
                 </div>
 
             </div>
@@ -42,7 +57,7 @@
 <script>
     export default {
         name: "price-header",
-        props: ['title', 'description', 'links', 'alter', 'en'],
+        props: ['title', 'description', 'links', 'alter', 'en', 'icon'],
         data() {
             return {}
         }
@@ -125,7 +140,6 @@
                 padding-top 5px
                 @media only screen and (max-width 992px)
                     font-size 1em
-
 
 
     .price-header-divider
