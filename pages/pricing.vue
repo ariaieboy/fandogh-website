@@ -6,10 +6,33 @@
             <p class="header-description" v-html="description"></p>
         </div>
 
-        <div class="price-page-navigation">
-            <div class="inner-container">
+        <div :class="(isMobile ? 'price-page-navigation-column': 'price-page-navigation')">
+
+            <div v-if="isMobile" class="inner-container">
+
+                <div class="navigation-item-menu-button-container">
+                    <img :src="require('../assets/svg/' + (navIsOpen ? 'ic-close' : 'ic-menu') + '.svg')"
+                         :alt="navIsOpen ? 'ic-close' : 'ic-menu' "
+                         @click="toggleMenuNavigation"/>
+                </div>
+
                 <div v-for="item in navigation_menu"
                      class="navigation-item-container"
+                     v-if="navIsOpen"
+                     @click="moveToSection(item.id)">
+
+                    <img :src="require('../assets/svg/' + item.icon + '.svg')" :alt="item.icon"/>
+                    <p>{{item.title}}</p>
+
+                </div>
+
+            </div>
+
+            <div v-else class="inner-container">
+
+                <div v-for="item in navigation_menu"
+                     class="navigation-item-container"
+                     :style="{display: navIsOpen ? 'flex' : 'none'}"
                      @click="moveToSection(item.id)">
 
                     <img :src="require('../assets/svg/' + item.icon + '.svg')" :alt="item.icon"/>
@@ -472,6 +495,7 @@
         components: {PriceHeader},
         data() {
             return {
+                navIsOpen: false,
                 title: 'قیمت محصولات سکوی ابری فندق',
                 description: 'قیمت‌گزاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم.<br/> هر نوع پروژه‌ای با هر مقایسی را به سادگی بر روی فندق اجرا کنید.',
                 headers: {
@@ -1683,7 +1707,11 @@
 
             },
             moveToSection(id) {
+                this.navIsOpen = false;
                 document.getElementById(id).scrollIntoView({block: 'nearest', behavior: 'smooth'});
+            },
+            toggleMenuNavigation() {
+                this.navIsOpen = !this.navIsOpen
             },
             handelEventSize() {
                 var vm = this;
@@ -1922,6 +1950,97 @@
                 flex-direction row
                 padding-left 16px
                 cursor pointer
+
+                img
+                    width 24px
+                    height 24px
+                    margin-top auto
+                    margin-bottom auto
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
+                    transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        width 18px
+                        height 18px
+
+                p
+                    margin-right 12px
+                    color rgba(0, 69, 255, 0.9)
+                    font-size 1.1em
+                    margin-top auto
+                    cursor pointer
+                    margin-bottom auto
+                    transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        font-size 1em
+
+            .navigation-item-container:hover
+
+                p
+                    color rgba(0, 69, 255, 1)
+                    filter drop-shadow(0 3px 6px rgba(0, 0, 0, .4))
+
+                img
+                    filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%) drop-shadow(0 3px 6px rgba(0, 0, 0, .4))
+
+
+    .price-page-navigation-column
+        position sticky
+        top 64px
+        width 100%
+        height max-content
+        background #EBEFFF
+        display flex
+        min-height 48px
+        flex-direction column
+        z-index 10000
+        @media only screen and (max-width 1230px)
+            top 0
+
+        .inner-container
+            width 100%
+            height 100%
+            display flex
+            flex-direction column
+            padding-left 32px
+            padding-right 32px
+            @media only screen and (max-width 992px)
+                padding-left 16px
+                padding-right 16px
+
+            .navigation-item-menu-button-container
+                display flex
+                flex-direction row
+                cursor pointer
+                min-height 48px
+                margin-right auto
+                margin-left auto
+
+                img
+                    width 24px
+                    height 24px
+                    margin-top auto
+                    margin-bottom auto
+                    transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        width 18px
+                        height 18px
+
+                p
+                    margin-right 12px
+                    color rgba(0, 69, 255, 0.9)
+                    font-size 1.1em
+                    margin-top auto
+                    cursor pointer
+                    margin-bottom auto
+                    transition all .3s ease-in-out
+                    @media only screen and (max-width 1230px)
+                        font-size 1em
+
+            .navigation-item-container
+                display flex
+                flex-direction row
+                cursor pointer
+                margin-bottom 8px
 
                 img
                     width 24px
