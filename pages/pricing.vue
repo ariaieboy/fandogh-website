@@ -2011,8 +2011,7 @@
                 flex-direction row
                 cursor pointer
                 min-height 48px
-                margin-right auto
-                margin-left auto
+                opacity 0.75
 
                 img
                     width 24px
