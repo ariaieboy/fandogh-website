@@ -10,7 +10,7 @@
 
             <div v-if="isMobile" class="inner-container">
 
-                <div class="navigation-item-menu-button-container">
+                <div class="navigation-item-menu-button-container" v-if="$store.state.windowWidth !== null">
                     <img :src="require('../assets/svg/' + (navIsOpen ? 'ic-close' : 'ic-menu') + '.svg')"
                          :alt="navIsOpen ? 'ic-close' : 'ic-menu' "
                          @click="toggleMenuNavigation"/>
@@ -32,7 +32,6 @@
 
                 <div v-for="item in navigation_menu"
                      class="navigation-item-container"
-                     :style="{display: navIsOpen ? 'flex' : 'none'}"
                      @click="moveToSection(item.id)">
 
                     <img :src="require('../assets/svg/' + item.icon + '.svg')" :alt="item.icon"/>
