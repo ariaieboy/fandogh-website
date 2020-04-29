@@ -1726,7 +1726,7 @@
             },
             moveToSection(id) {
                 this.navIsOpen = false;
-                document.getElementById(id).scrollIntoView({block: 'nearest', behavior: 'smooth'});
+                document.getElementById(id).scrollIntoView({block: 'start', behavior: 'smooth'});
             },
             toggleMenuNavigation() {
                 this.navIsOpen = !this.navIsOpen
