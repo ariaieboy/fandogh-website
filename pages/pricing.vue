@@ -75,8 +75,12 @@
                                 <div v-for="(conf, index) in plan.thumb_config"
                                      class="detail-container">
                                     <span class="detail-title">{{conf.title}}:</span>
-                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount">| {{conf.detail}}</span>
-                                    <span v-else class="left detail-amount">{{conf.detail}}</span>
+                                    <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount"
+                                    :style="{fontFamily: plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">| {{conf.detail}}</span>
+                                    <span v-else class="left detail-amount"
+                                          :style="{fontFamily: plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">
+                                        {{conf.detail}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -118,8 +122,14 @@
                              borderBottomRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0'),
                              borderTopLeftRadius: isMobile ? '3px' : (index % 4 === 0  ? '0' : '3px'),
                              borderTopRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0')}">
-                            <p class="detail-title">{{conf.title}}</p>
-                            <p class="detail-amount">{{conf.detail}}</p>
+                            <p class="detail-title"
+                               :style="{fontFamily: selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">
+                                {{conf.title}}
+                            </p>
+                            <p class="detail-amount"
+                               :style="{fontFamily: selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">
+                                {{conf.detail}}
+                            </p>
                         </div>
                     </div>
 
@@ -247,13 +257,19 @@
                                  style="display: flex; flex-direction: column">
                                 <div style="display: flex; width: 100%">
                                     <span class="calculator-config-title">رم (حافظه تصادفی)</span>
-                                    <span class="calculator-config-description">{{planData.memory}} GB</span>
+                                    <span class="calculator-config-description"
+                                    style="font-family: 'Helvetica Neue'">
+                                        {{planData.memory}} GB
+                                    </span>
                                 </div>
 
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
                                     <span class="calculator-config-title">حافظه ذخیره‌سازی اشتراکی</span>
-                                    <span class="calculator-config-description">۲.۵ GB</span>
+                                    <span class="calculator-config-description"
+                                          style="font-family: 'Helvetica Neue'">
+                                        2.5 GB
+                                    </span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -271,12 +287,18 @@
                                  style="display: flex; flex-direction: column">
                                 <div style="display: flex; width: 100%">
                                     <span class="calculator-config-title">پردازنده</span>
-                                    <span class="calculator-config-description">{{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} Core</span>
+                                    <span class="calculator-config-description"
+                                          style="font-family: 'Helvetica Neue'">
+                                        {{planData.memory / 2 > 0.5 ? planData.memory / 2 : 0.5}} Core
+                                    </span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
                                     <span class="calculator-config-title">حافظه ذخیره‌سازی اختصاصی</span>
-                                    <span class="calculator-config-description">{{planData.dedicatedVolume}} GB</span>
+                                    <span class="calculator-config-description"
+                                          style="font-family: 'Helvetica Neue'">
+                                        {{planData.dedicatedVolume}} GB
+                                    </span>
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
@@ -284,7 +306,7 @@
                                     <span class="calculator-config-description">رایگان</span>
                                 </div>
 
-                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                <div style="display: flex; width: 100%; margin-top: 16px;" v-if="planData.memory > 34">
                                     <span class="calculator-config-title">پشتیبانی حرفه‌ای</span>
                                     <span class="calculator-config-description">رایگان</span>
                                 </div>
@@ -324,7 +346,7 @@
                 <div class="row payg-div">
 
                     <div class="coming-soon-container">
-                        <p>به زودی...</p>
+                        <p>Pay As You Go</p>
                     </div>
 
 
@@ -413,7 +435,7 @@
                 </table>
             </div>
 
-            <div style="margin-left: 5%; margin-right: 5%; margin-top: 12px;">
+            <div style="margin-left: 2%; margin-right: 2%; margin-top: 12px;">
                 <table style="width: 100%; border: none; border-collapse: collapse; table-layout: fixed">
                     <tr class="cursor-row" v-for="(item, index) in support_menu_data"
                         style="height: 48px; border-collapse: collapse; font-family: iran-yekan;font-size: 1.2em; color: #333333;"
@@ -727,7 +749,7 @@
                         thumb_config: [
                             {
                                 title: 'رم',
-                                detail: '512 Mi'
+                                detail: '0.5 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -741,7 +763,7 @@
                         config: [
                             {
                                 title: 'رم (حافظه تصادفی)',
-                                detail: '512 Mi'
+                                detail: '0.5 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -824,7 +846,7 @@
                         thumb_config: [
                             {
                                 title: 'رم',
-                                detail: '1024 Mi'
+                                detail: '1 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -842,7 +864,7 @@
                         config: [
                             {
                                 title: 'رم (حافظه تصادفی)',
-                                detail: '1024 Mi'
+                                detail: '1 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -940,7 +962,7 @@
                         thumb_config: [
                             {
                                 title: 'رم',
-                                detail: '2048 Mi'
+                                detail: '2 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -958,7 +980,7 @@
                         config: [
                             {
                                 title: 'رم (حافظه تصادفی)',
-                                detail: '2048 Mi'
+                                detail: '2 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -982,7 +1004,7 @@
                             },
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
-                                detail: '1638 Mi'
+                                detail: '1.6 GB'
                             }
                         ],
                         specs: [
@@ -1068,7 +1090,7 @@
                         thumb_config: [
                             {
                                 title: 'رم',
-                                detail: '5120 Mi'
+                                detail: '5 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -1086,7 +1108,7 @@
                         config: [
                             {
                                 title: 'رم (حافظه تصادفی)',
-                                detail: '5120 Mi'
+                                detail: '5 GB'
                             },
                             {
                                 title: 'پردازنده',
@@ -1110,7 +1132,7 @@
                             },
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
-                                detail: '4096 Mi'
+                                detail: '4 GB'
                             }
                         ],
                         specs: [
@@ -1861,7 +1883,7 @@
                 width max-content
                 direction ltr
                 margin-bottom 4px
-                font-family iran-sans
+                font-family "Helvetica Neue"
                 font-size .9em
                 padding-right 4px
 
@@ -1910,7 +1932,7 @@
                     color #ebebeb
                     width max-content
                     line-height 1.75
-                    font-family iran-sans
+                    font-family "Helvetica Neue"
                     font-size .9em
                     direction ltr
                     margin-bottom 4px
@@ -2011,8 +2033,7 @@
                 flex-direction row
                 cursor pointer
                 min-height 48px
-                margin-right auto
-                margin-left auto
+                opacity 0.75
 
                 img
                     width 24px
@@ -2315,7 +2336,7 @@
                 padding-left 10px
                 flex .3
                 text-align left
-                font-family iran-sans
+                font-family "Helvetica Neue"
                 direction ltr
                 font-size 1em
                 margin-bottom auto
@@ -2463,8 +2484,8 @@
         background-color $colorPrimary
         margin-top 0
         width 100%
-        margin-left 5%
-        margin-right 5%
+        margin-left 2%
+        margin-right 2%
         position sticky
         top 115px
         padding-top 4px
@@ -2540,8 +2561,8 @@
         margin-top 3px
         margin-bottom 64px
         width 100%
-        margin-left 5%
-        margin-right 5%
+        margin-left 2%
+        margin-right 2%
         padding-top 4px
         padding-bottom 4px
         max-width 1750px
