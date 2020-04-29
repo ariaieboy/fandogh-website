@@ -122,10 +122,7 @@
                              borderBottomRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0'),
                              borderTopLeftRadius: isMobile ? '3px' : (index % 4 === 0  ? '0' : '3px'),
                              borderTopRightRadius: isMobile ? '3px' : (index % 4 === 0  ? '3px' : '0')}">
-                            <p class="detail-title"
-                               :style="{fontFamily: selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">
-                                {{conf.title}}
-                            </p>
+                            <p class="detail-title">{{conf.title}}</p>
                             <p class="detail-amount"
                                :style="{fontFamily: selected_plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">
                                 {{conf.detail}}
@@ -1729,7 +1726,7 @@
             },
             moveToSection(id) {
                 this.navIsOpen = false;
-                document.getElementById(id).scrollIntoView({block: 'nearest', behavior: 'smooth'});
+                document.getElementById(id).scrollIntoView({block: 'start', behavior: 'smooth'});
             },
             toggleMenuNavigation() {
                 this.navIsOpen = !this.navIsOpen
