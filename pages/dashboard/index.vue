@@ -9,7 +9,7 @@
         <div class="col-lg-4 col-sm-12 col-xs-12">
           <f-charts
             class="pr-lg-25"
-            title="ٰVolume"
+            title="Volume"
             :data="volumeUsage"
             unit="گیگابایت"
             :colors="['#086375','#3ccc38']"
