@@ -16,12 +16,23 @@
                 </span>
 
             </div>
+
             <div v-if="windowWidth >= 992" class="normal"
                  v-tooltip="'درخواست مجدد لاگ‌ها'"
                  @click="refreshLogs">
                 <img src="../../../../assets/svg/ic_refresh.svg"
                      alt="refresh">
             </div>
+
+            <div v-if="windowWidth >= 992" class="normal"
+                 v-tooltip="'لاگ‌های قبلی'"
+                 :style="{backgroundColor: previous ? '#0045ff' : '#fefefe'}"
+                 @click="fetchPreviousLogs">
+                <img src="../../../../assets/svg/ic-time-back.svg"
+                     :style="{filter: previous ? 'unset' : 'invert(1)'}"
+                     alt="previous">
+            </div>
+
             <div v-if="windowWidth >= 992" :class="[withTimeStamp ? 'active' : 'normal']"
                  v-tooltip="'اضافه کردن تاریخ لاگ‌ها'"
                  @click="toggleTimestamp">
@@ -43,12 +54,23 @@
                 </span>
 
                 </div>
+
                 <div class="normal"
                      v-tooltip="'درخواست مجدد لاگ‌ها'"
                      @click="refreshLogs">
                     <img src="../../../../assets/svg/ic_refresh.svg"
                          alt="refresh">
                 </div>
+
+                <div class="normal"
+                     v-tooltip="'لاگ‌های قبلی'"
+                     :style="{backgroundColor: previous ? '#0045ff' : '#fefefe'}"
+                     @click="fetchPreviousLogs">
+                    <img src="../../../../assets/svg/ic-time-back.svg"
+                         :style="{filter: previous ? 'unset' : 'invert(1)'}"
+                         alt="previous">
+                </div>
+
                 <div :class="[withTimeStamp ? 'active' : 'normal']"
                      v-tooltip="'اضافه کردن تاریخ لاگ‌ها'"
                      @click="toggleTimestamp">
@@ -110,6 +132,7 @@
                 loading: false,
                 withTimeStamp: false,
                 realtime: false,
+                previous: false,
                 logOptions: {
                     dotSize: 16,
                     width: 'auto',
@@ -157,6 +180,11 @@
             },
             toggleRealtimeLog() {
                 this.realtime = !this.realtime;
+                if (this.previous){
+                    this.previous = false;
+                    this.logs = ''
+                }
+                this.previous = false;
                 if (this.realtime) {
                     this.getData();
                 }
@@ -176,6 +204,14 @@
                 this.last_log_timestamp = null;
                 this.getData();
             },
+            fetchPreviousLogs() {
+                this.realtime = false;
+                this.loading = true;
+                this.logs = '';
+                this.last_log_timestamp = null;
+                this.previous = !this.previous;
+                this.getData();
+            },
             FDate(value) {
                 return FDate({date: value})
             },
@@ -185,7 +221,8 @@
                         name: this.service.name,
                         max_logs: this.logLines,
                         last_logged_time: this.last_log_timestamp,
-                        with_timestamp: this.withTimeStamp
+                        with_timestamp: this.withTimeStamp,
+                        previous: this.previous
                     });
                     if (logObject['logs']) {
                         logObject['logs'] += this.logs;
