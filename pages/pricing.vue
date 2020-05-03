@@ -76,7 +76,7 @@
                                      class="detail-container">
                                     <span class="detail-title">{{conf.title}}:</span>
                                     <span v-if="index + 1 !== plan.thumb_config.length" class="left detail-amount"
-                                    :style="{fontFamily: plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">| {{conf.detail}}</span>
+                                          :style="{fontFamily: plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">| {{conf.detail}}</span>
                                     <span v-else class="left detail-amount"
                                           :style="{fontFamily: plan.icon === 'enterprise-plan' ? 'iran-yekan' : 'Helvetica Neue'}">
                                         {{conf.detail}}
@@ -193,7 +193,7 @@
                                            type="number"
                                            min="0.5"
                                            step="0.5"
-                                           max="64"
+                                           max="128"
                                            value="planData.memory"
                                            v-model="planData.memory"/>
 
@@ -255,7 +255,7 @@
                                 <div style="display: flex; width: 100%">
                                     <span class="calculator-config-title">رم (حافظه تصادفی)</span>
                                     <span class="calculator-config-description"
-                                    style="font-family: 'Helvetica Neue'">
+                                          style="font-family: 'Helvetica Neue'">
                                         {{planData.memory}} GB
                                     </span>
                                 </div>
@@ -279,6 +279,15 @@
                                     <span class="calculator-config-description">رایگان</span>
                                 </div>
 
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">بیشینه رم مجاز هر سرویس</span>
+                                    <span class="calculator-config-description" style="font-family: 'Helvetica Neue'">
+                                        {{parseInt(planData.memory * .8 * 1024) < 1024 ?
+                                        `${parseInt(planData.memory * .8 * 1024)} Mi` :
+                                        `${Math.fround(planData.memory * .8).toFixed(1)} GB`}}
+                                    </span>
+                                </div>
+
                             </div>
                             <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6"
                                  style="display: flex; flex-direction: column">
@@ -299,13 +308,17 @@
                                 </div>
 
                                 <div style="display: flex; width: 100%; margin-top: 16px;">
-                                    <span class="calculator-config-title">Image Registry</span>
-                                    <span class="calculator-config-description">رایگان</span>
+                                    <span class="calculator-config-title">تعداد Replica</span>
+                                    <span class="calculator-config-description" style="font-family: 'Helvetica Neue'">
+                                        {{parseInt(planData.memory) === 0 ? 2 : (parseInt(planData.memory) * 5)}}
+                                    </span>
                                 </div>
 
-                                <div style="display: flex; width: 100%; margin-top: 16px;" v-if="planData.memory > 34">
-                                    <span class="calculator-config-title">پشتیبانی حرفه‌ای</span>
-                                    <span class="calculator-config-description">رایگان</span>
+                                <div style="display: flex; width: 100%; margin-top: 16px;">
+                                    <span class="calculator-config-title">تعداد سرویس مجاز</span>
+                                    <span class="calculator-config-description" style="font-family: 'Helvetica Neue'">
+                                        {{parseInt(planData.memory) === 0 ? 2 : (parseInt(planData.memory) * 5)}}
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -391,8 +404,12 @@
                                     </div>
 
                                     <div style="display: flex; width: 100%; margin-top: 16px;">
-                                        <span class="card-plan-config-title">Image Registry</span>
-                                        <span class="card-plan-config-description">رایگان</span>
+                                        <span class="card-plan-config-title">تعداد Replica</span>
+                                        <span class="card-plan-config-description">نامحدود</span>
+                                    </div>
+                                    <div style="display: flex; width: 100%; margin-top: 16px;">
+                                        <span class="card-plan-config-title">تعداد سرویس مجاز</span>
+                                        <span class="card-plan-config-description">نامحدود</span>
                                     </div>
                                 </div>
                             </div>
