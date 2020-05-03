@@ -276,13 +276,14 @@ export const getServices = async ({commit, state}) => {
     }
 };
 
-export const getServiceLog = async ({commit, state}, {name, with_timestamp, max_logs, last_logged_time}) => {
+export const getServiceLog = async ({commit, state}, {name, with_timestamp, max_logs, last_logged_time, previous}) => {
     try {
         let logs = await Request().get(`/api/services/${name}/logs`,{
             params: {
                 with_timestamp: with_timestamp,
                 max_logs: max_logs,
-                last_logged_time: last_logged_time
+                last_logged_time: last_logged_time,
+                previous: previous
             }
         });
         commit("SET_DATA", {data: logs, id: "serviceLog"});
