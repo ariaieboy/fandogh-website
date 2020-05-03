@@ -394,11 +394,6 @@
                                         <span class="card-plan-config-title">Image Registry</span>
                                         <span class="card-plan-config-description">رایگان</span>
                                     </div>
-
-                                    <div style="display: flex; width: 100%; margin-top: 16px;">
-                                        <span class="card-plan-config-title">پشتیبانی حرفه‌ای</span>
-                                        <span class="card-plan-config-description">رایگان</span>
-                                    </div>
                                 </div>
                             </div>
 
