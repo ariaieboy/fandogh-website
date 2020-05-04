@@ -3,10 +3,11 @@
     @click.prevent="$emit('onClick')"
     class="action-button"
     href="#"
+    rel="noopener"
     :data-balloon="label"
     data-balloon-pos="up"
   >
-    <img :src="`/icons/${icon}`" alt>
+    <img :src="`/icons/${icon}`" :alt="icon">
     <label>{{label}}</label>
     <slot/>
   </a>

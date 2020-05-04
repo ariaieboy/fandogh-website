@@ -3,7 +3,7 @@
 
         <div class="row managed-service-header">
             <div class="managed-service-bg">
-                <p class="banner-title">{{title}}</p>
+                <h1 class="banner-title">{{title}}</h1>
                 <p class="banner-description">{{description}}</p>
             </div>
         </div>
@@ -39,8 +39,8 @@
 
             <div class="row" style="width: 100%; margin-top: 48px; max-width: 1370px; margin-left: auto; margin-right: auto">
                 <div v-for="service in managed_services.services" class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="padding: 16px">
-                    <a :href="service.href" target="_blank" class="managed-service-card">
-                        <img :src="require('../../assets/svg/services/managed/' + service.icon + '.svg')"/>
+                    <a :href="service.href" target="_blank" class="managed-service-card" rel="noopener">
+                        <img :src="require('../../assets/svg/services/managed/' + service.icon + '.svg')" :alt="service.icon"/>
                         <h5>{{service.title}}</h5>
                         <div style=" width: 100%; padding-left: 10%; padding-right: 10%;  height: 1px; border-radius: 25px; background-image: linear-gradient(to right, rgba(0, 69, 255, 0.2), #c1c1c1 49%, rgba(0, 69, 255, 0.2));"></div>
                         <p>{{service.description}}</p>
@@ -144,6 +144,18 @@
                             href: 'https://docs.fandogh.cloud/docs/redis-managed-service.html'
                         },
                         {
+                            title: 'RabbitMQ',
+                            description: 'Message Broker',
+                            icon: 'managed_service_rabbitmq',
+                            href: 'https://docs.fandogh.cloud/docs/rabbitmq-managed-service.html'
+                        },
+                        {
+                            title: 'File Browser',
+                            description: 'File Management',
+                            icon: 'managed_service_filebrowser',
+                            href: 'https://docs.fandogh.cloud/docs/file-browser-managed-service.html'
+                        },
+                        {
                             title: 'Proxy',
                             description: 'IP Range Limiter',
                             icon: 'managed_service_proxy',
@@ -157,10 +169,22 @@
                     video: ''
                 },
                 register: {
-                    title: 'همین حالا ثبت‌نام کنید و سرویس‌ مدیریت‌ شده خود را ظرف چند ثانیه بسازید و در پروژه خود استفاده کنید'
+                    title: 'همین حالا ثبت‌نام کنید و سرویس‌ مدیریت‌ شده خود را ظرف چند ثانیه بسازید'
                 }
 
             }
+        },
+        head() {
+            return {
+                title: "سرویس ‌های مدیریت شده | سکوی ابری فندق",
+                meta: [
+                    {
+                        hid: 'keywords',
+                        name: 'keywords',
+                        content: 'سرویس‌,سرویس‌ مدیریت شده,تکنولوژی‌,مقیاس‌پذیر,سرویس,پشتیبانی,سکو,سکوی ابری,سکوی ابری فندق,امنیت,Private Network,Private Network,اعتماد,stable,منابع,database,sql,mysql,postgresql,mongodb,mssql server,redis,rabbitmq,file browser,file,proxy,ip,range,ip range,ثبت‌نام,message broker,memory,cache,nosql,'
+                    },
+                ]
+            };
         }
     }
 </script>
@@ -189,7 +213,7 @@
         @media only screen and (max-width 992px)
             padding-bottom 50px
 
-        p.banner-title
+        h1.banner-title
             font-family iran-yekan
             font-size 3.5em
             font-weight bold
@@ -409,7 +433,7 @@
             border-radius 5px
             background-color #fefefe
             font-family  iran-yekan
-            font-size  1.2em
+            font-size  1.3em
             font-weight  normal
             font-style  normal
             font-stretch  normal
@@ -420,6 +444,11 @@
             margin-top 32px
             margin-left auto
             margin-right auto
-            box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.3)
+            transition all .2s ease-in-out
+            box-shadow 0 3px 6px 0 rgba(0, 0, 0, 0.17)
+
+        button:hover
+            transition all .2s ease-in-out
+            box-shadow 0 3px 12px 0 rgba(0, 0, 0, 0.3)
 
 </style>

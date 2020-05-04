@@ -162,14 +162,14 @@
                     tooltip: 'داده‌های شما در پوشه‌ای با نام سرویس فعلی شما در Dedicated Volume ذخیره خواهند شد.'
                 },
                 secret_key: {
-                    label: 'secret key سرویس Minio',
-                    hint: 'برای دسترسی به سرویس Minio باید یک secret key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
+                    label: 'secret key سرویس MinIO',
+                    hint: 'برای دسترسی به سرویس MinIO باید یک secret key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
                     name: ''
 
                 },
                 access_key: {
-                    label: 'access key سرویس Minio',
-                    hint: 'برای دسترسی به سرویس Minio باید یک access key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
+                    label: 'access key سرویس MinIO',
+                    hint: 'برای دسترسی به سرویس MinIO باید یک access key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
                     name: ''
 
                 },
@@ -218,18 +218,18 @@
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#volume-mounts'
                     },
                     secret_key: {
-                        title: 'secret key سرویس Minio',
-                        text: 'برای دسترسی به سرویس Minio باید یک secret key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
+                        title: 'secret key سرویس MinIO',
+                        text: 'برای دسترسی به سرویس MinIO باید یک secret key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
                         url: '#'
                     },
                     access_key: {
-                        title: 'access key سرویس Minio',
-                        text: 'برای دسترسی به سرویس Minio باید یک access key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
+                        title: 'access key سرویس MinIO',
+                        text: 'برای دسترسی به سرویس MinIO باید یک access key با طول حداقل ۱۲ کاراکتر انتخاب نمایید',
                         url: '#'
                     }
                 },
                 sections: {
-                    service_config: 'تنظیمات سرویس Minio',
+                    service_config: 'تنظیمات سرویس MinIO',
                     storage_config: 'تعیین محل ذخیره سازی',
                 },
             }

@@ -27,6 +27,7 @@
             @focus.stop="selectOption(option)"
             @click.stop="selectOption(option)"
             href="#"
+            rel="noopener"
           >{{option.title}}</a>
         </li>
       </ul>

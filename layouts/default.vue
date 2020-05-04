@@ -40,16 +40,42 @@
             }
         },
         mounted() {
-            let elm = document.querySelector('#raychatFrame')
+            let elm = document.querySelector('#raychatFrame');
             if (!elm) {
-                const raychatScript = document.createElement('script')
+                const raychatScript = document.createElement('script');
                 raychatScript.innerText = '!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="b34779ab-3e49-4256-8f71-ec8ae7e76d64";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();'
                 document.head.appendChild(raychatScript)
             }
+            this.handleStructuredHeader();
 
+        },
+        methods:{
+            handleStructuredHeader(){
+                const stHeader = document.createElement('script');
+                stHeader.type = 'application/ld+json';
+                stHeader.innerText = '{"@context": "http://schema.org","@graph": [{"@type": "WebSite", "url": "https://fandogh.cloud","name": "Fandogh PaaS | سکوی ابری فندق", "alternateName":"Fandogh Cloud", "description": "سکوی ابری فندق یک PaaS یا Platform as a Service است که به کاربران در هر سطحی این امکان را می دهد تا محصولات نرم‌افزاری خود را بر روی سرورهای ابری مستقر کنند"}, {"@type": "Organization", "url": "https://fandogh.cloud", "sameAs": ["https://github.com/fandoghpaas", "https://twitter.com/fandoghpaas","https://linkedin.com/company/fandogh-paas", "https://facebook.com/fandoghpaas/", "https://t.me/fandoghpaas", "https://virgool.io/@fandogh.cloud", "https://www.instagram.com/fandoghpaas/"], "@id": "#fandoghpaas", "name": "Fandogh PaaS | سکوی ابری فندق", "telephone": "+98-21-2842-2383", "logo": "https://fandogh.cloud/pwa_icon.png"}]}'
+                document.head.appendChild(stHeader)
+            }
         },
         watch: {
             $route() {
+
+                if(this.$route.path === '/'){
+                    if (this.$route.query.ns){
+                        var queries = {};
+                        for (const [key, value] of Object.entries(this.$route.query)) {
+                            if (key !== 'ns')
+                                queries[key] = value
+                        }
+                        this.$router.replace({
+                            path: this.$route.path,
+                            query: queries
+                        }, () => {
+                            window.location.reload()
+                        }, null);
+                    }
+                }
+
                 if (this.message) {
                     this.$store.dispatch('setMessage', this.message)
                     this.$store.dispatch('showModal', 'message')

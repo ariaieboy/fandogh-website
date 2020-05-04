@@ -1,7 +1,7 @@
 <template>
   <div class="replica-header">
     <label class="font-roboto">{{name}}</label>
-    <i>,</i>
+    <i style="font-style: normal; color: #7f828b">|</i>
     <label v-if="state === 'Running'" :class="stateColor">{{state | state}}</label>
     <div
       v-if="state !== 'Running'"
@@ -9,11 +9,11 @@
       :data-balloon="state"
       data-balloon-pos="up"
     >
-      <img src="./images/Ellipsis-2s-167px.svg" alt>
+      <img src="./images/Ellipsis-2s-167px.svg" alt="ellipse">
     </div>
-    <i>,</i>
+    <i style="font-style: normal; color: #7f828b">|</i>
     <label>
-      <span>کانتینر آماده :</span>
+      <span>کانتینر آماده:</span>
       {{count}}
     </label>
   </div>

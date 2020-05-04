@@ -2,71 +2,56 @@
     <div class="wrapper" style="padding-bottom: 100px">
         <f-loading :isFull="true" v-if="loading"/>
         <no-ssr>
-            <f-d-header style="z-index: 10000"/>
+            <f-d-header v-model="wizard_mode" style="z-index: 10000"/>
             <div :class=" ['wrapper-content', (isMobile ? '' : 'container-fluid'),{'is-small':openSidebar}]">
-                <div v-if="isMenuAvailable" :class="['wrapper-sidebar open']">
-                    <admin-sidebar :items="items" v-bind.sync="stepPage"></admin-sidebar>
-                </div>
+                <transition name="fade">
+                    <div v-if="isMenuAvailable && wizard_mode.gui" :class="['wrapper-sidebar open']">
+                        <admin-sidebar :items="items" v-bind.sync="stepPage"></admin-sidebar>
+                    </div>
+                </transition>
                 <div :class="['wrapper-main',{'open':openSidebar}]"
                      :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
                     <div class="dash-container">
                         <div :class="[(isMobile ? '' : 'container-fluid')]">
 
-                            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12" style=" margin: 0;"
+                            <div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                                 style=" margin: 0; display: flex; flex-direction: column"
                                  :style="{padding:(isMobile ? '0 16px': '0px')}">
-                                <banner class="col-xs-12 col-lg-12 col-md-12 col-sm-12" style="padding: 0; margin: 0;"
-                                        :page="stepPage.page"></banner>
-                                <keep-alive>
-                                    <component :is="stepPage.step_name"
-                                               class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                                               style="padding: 0;"
-                                               v-model="manifest_model"></component>
-                                </keep-alive>
+                                <transition name="fade">
+                                    <banner v-if="wizard_mode.gui" class="col-xs-12 col-lg-12 col-md-12 col-sm-12"
+                                            style="padding: 0; margin: 0;"
+                                            :page="stepPage.page">
+                                    </banner>
+                                    <banner v-else class="col-xs-12 col-lg-12 col-md-12 col-sm-12"
+                                            style="padding: 0; margin: 0;"
+                                            :page="cliPage.page">
+                                    </banner>
+                                </transition>
 
-                                <!--<div class="col-lg-6 col-xs-12 col-sm-12 col-md-12"-->
-                                <!--style="margin: 0; padding: 0; display: flex;">-->
-                                <!--<div style="width: 100%; min-height: 700px; margin-bottom: 14px; margin-top: 12px; border-radius: 3px;box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);background-color: #212426; padding: 16px; margin-right: 6px;box-sizing: padding-box; color: #fefefe; font-family: 'Helvetica Neue'">-->
-                                <!--<span style="text-align: left; color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr; ">-->
-                                <!--kind:-->
-                                <!--<input style="color: #fefefe; text-align: left; width: 100%; margin: auto 0; padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
-                                <!--v-model="manifest_model.service.kind.name">-->
-                                <!--</span>-->
-                                <!--<span style=" color: #3ccc38; padding-right: 6px; margin: auto 0; display: flex; width: 100%; direction: ltr; ">-->
-                                <!--name:-->
-                                <!--<input style="color: #fefefe; width: 100%; padding-left: 6px; direction: ltr; margin-bottom: 3px; font-size: .9em; font-family: 'Helvetica Neue'"-->
-                                <!--v-model="manifest_model.service.service_name.name">-->
-                                <!--</span>-->
-                                <!--<span style="color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr">-->
-                                <!--spec:-->
-                                <!--</span>-->
-                                <!--<div style="padding-left: 8px">-->
-                                <!--<span style="color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr;">-->
-                                <!--image:-->
-                                <!--<input style="color: #fefefe; padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
-                                <!--placeholder="image name"-->
-                                <!--type="text"-->
-                                <!--v-autowidth="{maxWidth: '200px', minWidth: '92px', comfortZone: 0}"-->
-                                <!--v-model="manifest_model.image.image_object.name">-->
-                                <!--<span style="color: #fefefe;padding-left: 3px; padding-right: 3px">:</span>-->
-                                <!--<input style="color: #fefefe;padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
-                                <!--placeholder="image version"-->
-                                <!--v-autowidth="{maxWidth: '200px', minWidth: '100px', comfortZone: 0}"-->
-                                <!--v-model="manifest_model.image.image_object.version">-->
-                                <!--</span>-->
-                                <!--<span style="color: #3ccc38; padding-right: 6px; display: flex; width: 100%; margin-bottom: 3px; direction: ltr;">-->
-                                <!--image_pull_policy:-->
-                                <!--<input style="color: #fefefe; padding-left: 6px; direction: ltr; font-size: .9em; font-family: 'Helvetica Neue'"-->
-                                <!--type="text"-->
-                                <!--v-model="manifest_model.image.image_pull_policy.value">-->
-                                <!--</span>-->
-                                <!--</div>-->
-                                <!--</div>-->
-                                <!--</div>-->
+
+                                <transition name="fade"
+                                            style="display: flex"
+                                            v-if="$route.query.ns">
+                                    <keep-alive v-if="wizard_mode.gui">
+                                        <component :is="stepPage.step_name"
+                                                   style="flex: 1"
+                                                   @update-service-kind="updateServiceKind"
+                                                   :manifest_model.sync="manifest_model">
+
+                                        </component>
+                                    </keep-alive>
+                                    <cli-setup-mode v-else
+                                                    style="flex: 1"
+                                                    :manifest_model.sync="manifest_model"
+                                                    @update-service-kind="updateServiceKind">
+                                    </cli-setup-mode>
+                                </transition>
+
                             </div>
 
                             <div class="navigation-container">
-
-                                <span class="navigation-btn" @click="backward">
+                                <transition name="fade">
+                                <span class="navigation-btn" @click="backward" v-if="wizard_mode.gui">
                                 <svg class="backward" width="180px" height="45px" viewBox="0 0 180 45" version="1.1"
                                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <!-- Generator: Sketch 53.1 (72631) - https://sketchapp.com -->
@@ -98,10 +83,11 @@
                                     </text>
                                     </svg>
                                 </span>
+                                </transition>
 
                                 <button class="create-svc-btn" @click="deploy">اتمام ساخت</button>
-
-                                <span class="navigation-btn" @click="forward">
+                                <transition name="fade">
+                                <span class="navigation-btn" @click="forward" v-if="wizard_mode.gui">
 
                                <svg class="forward" width="180px" height="45px" viewBox="0 0 180 45" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -126,7 +112,7 @@
 
                                     <text x="118"
                                           y="21"
-                                          :fill="(stepPage.step === 5 ? '#9c9c9c' : '#000000')"
+                                          :fill="(stepPage.step === items.length - 1 ? '#9c9c9c' : '#000000')"
                                           style="font-family: iran-yekan; font-size: 16px; font-weight: bold; user-select: none"
                                           text-anchor="start"
                                           alignment-baseline="middle">
@@ -134,6 +120,7 @@
                                     </text>
                                 </svg>
                             </span>
+                                </transition>
 
                             </div>
 
@@ -163,13 +150,18 @@
     import VolumeSetup from "../pages/dashboard/services/wizard/volume-setup";
     import PortMappingSetup from "../pages/dashboard/services/wizard/port-mapping-setup";
     import HealthCheckSetup from "../pages/dashboard/services/wizard/health-check-setup";
+    import CommandArgsSetup from "../pages/dashboard/services/wizard/command-args-setup";
+    import LifecycleMethodsSetup from "../pages/dashboard/services/wizard/lifecycle-methods-setup";
     import Banner from "../components/wizard/banner/banner";
     import 'vuetify/dist/vuetify.min.css';
     import ErrorReporter from "../utils/ErrorReporter";
+    import Popover from "../components/wizard/tooltip/popover";
+    import CliSetupMode from "../components/wizard/cli-setup-mode";
 
     export default {
         name: "wizard",
         components: {
+            CliSetupMode,
             FDHeader,
             FLoading,
             AdminSidebar,
@@ -182,25 +174,47 @@
             VolumeSetup,
             PortMappingSetup,
             HealthCheckSetup,
-            Banner
+            CommandArgsSetup,
+            LifecycleMethodsSetup,
+            Banner,
+            Popover
         },
         data() {
 
             return {
 
+                wizard_mode: {
+                    manifest: false,
+                    gui: true
+                },
                 loading: false,
+                tooltips: {
+                    image_version: 'asdadadasdsadasdasd'
+                },
                 finished: false,
+                deploying_manifest: false,
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
                     service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     default_replica: value => value >= 1 || 'کمترین مقدار مجاز ۱ است',
-                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد'
+                    valid_port: value => value >= 1 && value <= 65535 || 'مقدار پورت باید بین ۱ تا ۶۵۵۳۵ باشد',
+                    min_value: value => value >= 1 || 'کمترین زمان ۱ ثانیه است',
+                    is_root_addressed: value => value.toString().startsWith('/') || 'آدرس وارد شده، باید از root (/) شروع شود',
+                    has_space: value => !value.toString().includes(' ') || 'فاصله مجاز نیست',
+                    env_redundant: value => (this.allowed_name === null ? this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0 : this.allowed_name === value || this.manifest_model.environment_variable.env_list.filter(e => e.name === value).length === 0) || 'مقدار تکراری است',
+                    volume_redundant: value => (this.allowed_name === null ? this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0 : this.allowed_name === value || this.manifest_model.volumes.volume_list.filter(e => e.mount_path === value).length === 0) || 'مقدار تکراری است',
+                    port_map_redundant: value => (this.allowed_name === null ? this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0 : this.allowed_name === value || this.manifest_model.port_mapping.port_map_list.filter(e => e.port === value).length === 0) || 'مقدار تکراری است'
                 },
                 manifest_model: {
                     service: {
-                        kind: {local_name: 'External Service', name: 'ExternalService', is_active: true},
+                        kind: {
+                            local_name: 'External Service',
+                            prod_name: 'ExternalService',
+                            is_active: true,
+                            tooltip: 'این نوع سرویس‌ها از خارج namespace در دسترس هستند'
+                        },
                         kinds: [
                             {
                                 local_name: 'External Service',
@@ -275,7 +289,7 @@
                             },
                             {
                                 suffix: '/library',
-                                local_name: 'Docker',
+                                local_name: 'Docker Hub',
                                 icon: 'ic_docker.svg',
                                 is_active: false,
                                 tooltip: 'مبدا ایمیج رجیستری داکرهاب'
@@ -315,9 +329,10 @@
                         ]
                     },
                     environment_variable: {
-                        name: '',
-                        value: '',
+                        name: null,
+                        value: null,
                         secret: null,
+                        hidden: false,
                         env_list: []
                     },
                     port_mapping: {
@@ -365,21 +380,35 @@
                         ],
                         volume_list: []
                     },
+                    service_commands: [],
+                    service_command_args: [],
+                    post_start_commands: [],
+                    pre_stop_commands: [],
                     health_check: {
                         liveness_object: {
                             initial_delay_seconds: null,
                             period_seconds: null,
-                            timeout_seconds: 1,
-                            http_get_method: null,
-                            http_get_port: 80
+                            timeout_seconds: null,
+                            http_get: {
+                                path: null,
+                                port: null
+                            }
                         },
                         readiness_object: {
                             initial_delay_seconds: null,
                             period_seconds: null,
-                            timeout_seconds: 1,
-                            http_get_method: null,
-                            http_get_port: 80
+                            timeout_seconds: null,
+                            http_get: {
+                                path: null,
+                                port: null
+                            }
                         },
+                    }
+                },
+                cliPage: {
+                    page: {
+                        title: 'ساخت سرویس با CLI',
+                        description: 'شما روش ساخت سرویس با Online CLI را انتخاب کرده‌اید. این حالت برای کاربرانی طراحی شده‌ است که از محیط‌های ترمینالی استفاده می‌کنند و با آن تجربه و احساس راحتیِ بیشتری دارند. توجه داشته باشید در هر زمان که نیاز داشته باشید می‌توانید از نوار بالا گزینه GUI را انتخاب کنید، بدون آنکه نگران پاک شدن تنظیمات وارد شده باشید.'
                     }
                 },
                 stepPage: {
@@ -393,8 +422,7 @@
                         title: 'انتخاب نوع سرویس',
                         description: 'هر سرویس در فندق یک نسخه در حال اجرا از یک ورژن بخصوص از یکی از image های شماست. سرویس ها انواع مختلفی دارند و برای ساخت آن ها روش های متفاوتی در نظر گرفته شده است.'
                     }
-                }
-                ,
+                },
                 items: [
                     {
                         step: 0,
@@ -470,12 +498,37 @@
                             description: 'پایداری سرویس شما در گروی این است که فندق بتواند به درستی سلامت و آمادگی آن را تشخیص دهد. در بسیاری از موارد بدون همکاری سرویس شما امکان اینکه این امر به طور دقیق انجام شود وجود ندارد٬ به همین دلیل، امکانی در manifest وجود دارد که از طریق آن می‌توانید یک API در اختیار فندق قرار دهید تا از طریق آن API فندق بتواند از صحت و آمادگی سرویس شما مطلع شود. روش کار به این شکل است که یک HTTP API مشخص می‌کنید که فندق آن را در بازه‌های زمانی مشخص فراخوانی می‌کند و اگر با کد 200 پاسخ دریافت کند به معنی سلامت سرویس شماست و در غیر اینصورت یعنی سرویس دچار مشکل شده است.'
                         },
                     },
+                    {
+                        step: 6,
+                        text: 'Command/Command Args',
+                        component: '/dashboard/general',
+                        active: false,
+                        step_name: 'CommandArgsSetup',
+                        edited: false,
+                        page: {
+                            title: 'Command & Command Args',
+                            description: 'گاهی نیاز است تا دستورات پیش‌فرض یا argumentهای داکرفایل یک سرویس را تغییر دهید و یا حتی جایگزین کنید. با استفاده از commands و command_args شما می‌توانید این عمل را انجام دهید.'
+                        },
+                    },
+                    {
+                        step: 7,
+                        text: 'دستورات چرخه حیات',
+                        component: '/dashboard/general',
+                        active: false,
+                        step_name: 'LifecycleMethodsSetup',
+                        edited: false,
+                        page: {
+                            title: 'دستورات چرخه حیات',
+                            description: 'هر سرویس در طول دوره حیات خود دو نقطه مهم را طی می‌کند؛ یکی نقطه شروع (start) و دیگری نقطه پایان (stop).\n' +
+                                'شما می‌توانید با استفاده از دستورهایی که در ادامه در مورد آن‌ها توضیح داده‌ شده است، درست هنگام شروع و دقیقا قبل از پایان یافتن حیات یک سرویس و بدون آنکه نیاز باشد تا تغییری در Dockerfile سرویس ایجاد کنید، با استفاده از دستورهای post_start_command و pre_stop_command دستورات مورد نیاز خود را اجرا کنید.'
+                        },
+                    },
                 ]
             }
         },
         computed: {
             domainsList() {
-                if (!this.$store.state.domains) return []
+                if (!this.$store.state.domains) return [];
                 return this.$store.state.domains.map(item => {
                     return {
                         title: item.name,
@@ -510,230 +563,488 @@
                 return Math.max(Moment(plan.quota.expires_at).jDayOfYear() - Moment(new Date()).jDayOfYear(), 0)
             }
         },
-
         watch: {
-
-            'manifest_model.service.kinds': {
-                handler: function (value, oldValue) {
-                    let kind = this.manifest_model.service.kind
-                    this.addToManifest(kind.name, 'kind')
-                },
-                deep: true
-            },
-            'manifest_model.service.service_name': {
-                handler: function (value, oldValue) {
-                    let name = value.name
-                    if (name.length.valueOf() === 0) {
-                        this.deleteFromManifest('name')
+            $route(to, from) {
+                if (to.path.indexOf('/wizard') === -1 && !this.deploying_manifest) {
+                    if (window.confirm('در صورت خروج،‌ کلیه تغییراتی که اعمال کرده‌اید حذف می‌شوند. آیا می‌خواهید خارج شوید؟')) {
+                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                     } else {
-                        if (this.rules.required(name) === true && this.rules.counter(name) === true && this.rules.service_regex(name) === true) {
-                            this.addToManifest(name, 'name')
-                        } else {
-                            this.deleteFromManifest('name')
-                        }
-                    }
-                }, deep: true
-            },
-            'manifest_model.service.memory': {
-                handler: function (value, oldValue) {
-                    let memory = parseInt(value.amount);
-                    if (this.rules.default_memory(memory) !== true) {
-                        this.deleteFromManifest('spec.resources.memory')
-                    } else {
-                        this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
-                    }
-                }, deep: true
-            },
-            'manifest_model.service.replica': {
-                handler: function (value, oldValue) {
-                    let count = parseInt(value.count);
-                    if (this.rules.default_replica(count) !== true) {
-                        this.deleteFromManifest('spec.replicas')
-                    } else {
-                        this.addToManifest(count, 'spec.replicas')
-                    }
-                }, deep: true
-            },
-            'manifest_model.service.allow_http': {
-                handler: function (value, oldValue) {
-                    if (value.selected === null) {
-                        this.deleteFromManifest('spec.allow_http');
-                        return
-                    }
-                    this.addToManifest(value.selected, 'spec.allow_http')
-                }, deep: true
-            },
-            'manifest_model.service.path': {
-                handler: function (value, oldValue) {
-                    if (value.dir === null) {
-                        this.deleteFromManifest('spec.path')
-                        return
-                    }
-                    if (value.dir.toString().length === 0) {
-                        this.deleteFromManifest('spec.path')
-                    } else {
-                        this.addToManifest(value.dir, 'spec.path')
-                    }
-                }, deep: true
-            },
-            'manifest_model.service.port': {
-                handler: function (value, oldValue) {
-                    if (value.number === null) {
-                        this.deleteFromManifest('spec.port')
-                    } else if (this.rules.valid_port(value.number) !== true) {
-                        this.deleteFromManifest('spec.port')
-                    } else {
-                        this.addToManifest(parseInt(value.number), 'spec.port')
-                    }
-                }, deep: true
-            },
-            'manifest_model.service.domains': {
-                handler: function (value, oldValue) {
-                    let list = [...value]
-                    let mapList = list.map(v => {
-                        return {name: v}
-                    })
-                    this.addToManifest(mapList, 'spec.domains')
-                    if (mapList.length === 0) {
-                        this.deleteFromManifest('spec.domains')
+                        this.$router.replace({
+                            path: from.path,
+                            query: from.query
+                        })
                     }
                 }
             },
-            'manifest_model.health_check': {
-                handler: function (value, oldValue) {
-                    let empty = true
-                    const liveness_keys = Object.keys(value['liveness_object'])
-                    const readiness_keys = Object.keys(value['readiness_object'])
-
-                    for (let key of liveness_keys) {
-                        if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
-                            empty = false;
-                            break
+            'manifest_model.service.kinds':
+                {
+                    handler: function (value, oldValue) {
+                        let kind = this.manifest_model.service.kind;
+                        this.addToManifest(kind.prod_name, 'kind')
+                    }
+                    ,
+                    deep: true
+                },
+            'manifest_model.service.service_name':
+                {
+                    handler: function (value, oldValue) {
+                        let name = value.name;
+                        if (name.length.valueOf() === 0) {
+                            this.deleteFromManifest('name')
+                        } else {
+                            if (this.rules.required(name) === true && this.rules.counter(name) === true && this.rules.service_regex(name) === true) {
+                                this.addToManifest(name, 'name')
+                            } else {
+                                this.deleteFromManifest('name')
+                            }
+                        }
+                    }, deep: true
+                },
+            'manifest_model.service.memory':
+                {
+                    handler: function (value, oldValue) {
+                        let memory = parseInt(value.amount);
+                        if (this.rules.default_memory(memory) !== true) {
+                            this.deleteFromManifest('spec.resources.memory')
+                        } else {
+                            this.addToManifest(memory.toString().concat('Mi'), 'spec.resources.memory')
+                        }
+                    }, deep: true
+                },
+            'manifest_model.service.replica':
+                {
+                    handler: function (value, oldValue) {
+                        let count = parseInt(value.count);
+                        if (this.rules.default_replica(count) !== true) {
+                            this.deleteFromManifest('spec.replicas')
+                        } else {
+                            this.addToManifest(count, 'spec.replicas')
+                        }
+                    }, deep: true
+                },
+            'manifest_model.service.allow_http':
+                {
+                    handler: function (value, oldValue) {
+                        if (value.selected === null) {
+                            this.deleteFromManifest('spec.allow_http');
+                            return
+                        }
+                        this.addToManifest(value.selected, 'spec.allow_http')
+                    }, deep: true
+                },
+            'manifest_model.service.path':
+                {
+                    handler: function (value, oldValue) {
+                        if (value.dir === null) {
+                            this.deleteFromManifest('spec.path');
+                            return
+                        }
+                        if (value.dir.toString().length === 0) {
+                            this.deleteFromManifest('spec.path')
+                        } else {
+                            this.addToManifest(value.dir, 'spec.path')
+                        }
+                    }, deep: true
+                },
+            'manifest_model.service.port':
+                {
+                    handler: function (value, oldValue) {
+                        if (value.number === null) {
+                            this.deleteFromManifest('spec.port')
+                        } else if (this.rules.valid_port(value.number) !== true) {
+                            this.deleteFromManifest('spec.port')
+                        } else {
+                            this.addToManifest(parseInt(value.number), 'spec.port')
+                        }
+                    }, deep: true
+                },
+            'manifest_model.service.domains':
+                {
+                    handler: function (value, oldValue) {
+                        let list = [...value];
+                        let mapList = list.map(v => {
+                            return {name: v}
+                        });
+                        this.addToManifest(mapList, 'spec.domains');
+                        if (mapList.length === 0) {
+                            this.deleteFromManifest('spec.domains')
                         }
                     }
+                },
+            'manifest_model.health_check':
+                {
+                    handler: function (value, oldValue) {
+                        let liveness_empty = false;
+                        let readiness_empty = false;
+                        const liveness_keys = Object.keys(value['liveness_object']);
+                        const readiness_keys = Object.keys(value['readiness_object']);
 
-                    if (empty) {
+                        for (let key of liveness_keys) {
+                            if (key === 'http_get') {
+                                if (value.liveness_object[key]['path'] === null || value.liveness_object[key]['path'] === '') {
+                                    liveness_empty = true;
+                                }
+                                if (value.liveness_object[key]['port'] === null || value.liveness_object[key]['port'] === '') {
+                                    liveness_empty = true;
+                                }
+                            } else {
+                                if (value.liveness_object[key] === null || value.liveness_object[key] === '') {
+                                    liveness_empty = true;
+                                }
+                            }
+                        }
+
+
                         for (let key of readiness_keys) {
-                            if (value.readiness_object[key] === null || value.readiness_object[key] === '') {
-                                empty = false;
+
+                            if (key === 'http_get') {
+                                if (value.readiness_object[key]['path'] === null || value.readiness_object[key]['path'] === '') {
+                                    readiness_empty = true;
+                                }
+                                if (value.readiness_object[key]['port'] === null || value.readiness_object[key]['port'] === '') {
+                                    readiness_empty = true;
+                                }
+                            } else {
+                                if (value.readiness_object[key] === null || value.readiness_object[key] === '') {
+                                    readiness_empty = true;
+                                }
+                            }
+                        }
+
+
+                        if (!readiness_empty || !liveness_empty) {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'HealthCheckSetup') {
+                                    item.edited = true;
+                                }
+                            })
+                        } else {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'HealthCheckSetup') {
+                                    item.edited = false;
+                                }
+                            })
+                        }
+                    }, deep: true
+                },
+            'manifest_model.environment_variable.env_list':
+                {
+                    handler: function (value, oldValue) {
+                        if ([...value].length > 0) {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'EnvSetup') {
+                                    item.edited = true;
+                                }
+                            })
+                        } else {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'EnvSetup') {
+                                    item.edited = false;
+                                }
+                            })
+                        }
+
+                        if (value.length === 0)
+                            this.deleteFromManifest('spec.env');
+                        else
+                            this.addToManifest(value, 'spec.env')
+                    }, deep: true
+                },
+            'manifest_model.port_mapping.port_map_list':
+                {
+                    handler: function (value, oldValue) {
+                        if ([...value].length > 0) {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'PortMappingSetup') {
+                                    item.edited = true;
+                                }
+                            });
+                            this.addToManifest([...value], 'spec.port_mapping')
+                        } else {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'PortMappingSetup') {
+                                    item.edited = false;
+                                }
+                            });
+                            this.deleteFromManifest('spec.port_mapping')
+                        }
+                    }, deep: true
+                },
+            'manifest_model.volumes.volume_list':
+                {
+                    handler: function (value, oldValue) {
+                        if ([...value].length > 0) {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'VolumeSetup') {
+                                    item.edited = true;
+                                }
+                            })
+                        } else {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'VolumeSetup') {
+                                    item.edited = false;
+                                }
+                            })
+                        }
+                        if (value.length === 0) {
+                            this.deleteFromManifest('spec.volume_mounts')
+                        } else {
+                            this.addToManifest(value, 'spec.volume_mounts')
+                        }
+                    }, deep: true
+                },
+            'manifest_model.service_commands': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.service_command_args.length > 0 || this.manifest_model.service_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.command')
+                    } else {
+                        this.addToManifest(value, 'spec.command')
+                    }
+
+                }, deep: true
+
+            },
+            'manifest_model.service_command_args': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.service_command_args.length > 0 || this.manifest_model.service_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'CommandArgsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.command_args')
+                    } else {
+                        this.addToManifest(value, 'spec.command_args')
+                    }
+
+                }, deep: true
+
+            },
+            'manifest_model.post_start_commands': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.pre_stop_commands.length > 0 || this.manifest_model.post_start_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.post_start_command')
+                    } else {
+                        this.addToManifest(value, 'spec.post_start_command')
+                    }
+
+                }, deep: true
+
+            },
+            'manifest_model.pre_stop_commands': {
+                handler: function (value, oldValue) {
+                    if (this.manifest_model.pre_stop_commands.length > 0 || this.manifest_model.post_start_commands.length > 0) {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = true;
+                            }
+                        })
+                    } else {
+                        this.items.forEach(item => {
+                            if (item.step_name === 'LifecycleMethodsSetup') {
+                                item.edited = false;
+                            }
+                        })
+                    }
+
+                    if (value.length === 0) {
+                        this.deleteFromManifest('spec.pre_stop_command')
+                    } else {
+                        this.addToManifest(value, 'spec.pre_stop_command')
+                    }
+
+                }, deep: true
+
+            },
+            'manifest_model.image.image_object':
+                {
+                    handler: function (value, oldValue) {
+                        if (value.name === null) {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'ImageSetup') {
+                                    item.edited = false;
+
+                                }
+                            })
+                        }
+
+                        if (value.name !== '') {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'ImageSetup') {
+                                    item.edited = true;
+                                }
+                            })
+                        } else {
+                            this.items.forEach(item => {
+                                if (item.step_name === 'ImageSetup') {
+                                    item.edited = false;
+                                }
+                            })
+                        }
+
+
+                        let image_name = value.name;
+                        let image_version = value.version || '';
+
+                        if (image_name === null) {
+                            this.manifest_model.image.image_object.name = '';
+                            this.manifest_model.image.image_object.version = '';
+                            this.deleteFromManifest('spec.image');
+
+                        } else if (image_name !== '') {
+
+                            let final_image = image_name.concat(':').concat(image_version);
+                            if (image_version !== '') {
+
+                                this.manifest_model.image.registries.forEach(item => {
+                                    item.is_active = false
+                                });
+
+                                if (image_name.split('/').length > 2) {
+                                    this.manifest_model.image.registries[2].is_active = true;
+                                    this.manifest_model.image.registry = this.manifest_model.image.registries[2]
+                                } else if (image_name.split('/').length === 2) {
+                                    this.manifest_model.image.registries[1].is_active = true;
+                                    this.manifest_model.image.registry = this.manifest_model.image.registries[1]
+                                } else {
+                                    this.manifest_model.image.registries[0].is_active = true;
+                                    this.manifest_model.image.registry = this.manifest_model.image.registries[0]
+                                }
+
+                                this.addToManifest(final_image, 'spec.image')
+                            }
+                        }
+
+                    }, deep: true
+                },
+            'manifest_model.image.image_pull_policy_obj': {
+                handler: function (value, oldValue) {
+                    let policy = this.manifest_model.image.image_pull_policy.value;
+                    this.addToManifest(policy, "spec.image_pull_policy");
+                }, deep: true
+            },
+            'manifest_model.image.secret_obj': {
+                handler: function (value, oldValue) {
+                    let secret = value;
+                    if (secret.value === null || secret.value === '') {
+                        this.deleteFromManifest('spec.image_pull_secret')
+                    } else {
+                        this.addToManifest(secret.value, 'spec.image_pull_secret')
+                    }
+
+                }, deep: true
+            },
+            'manifest_model.health_check.liveness_object': {
+                handler: function (value, oldValue) {
+                    var empty = false;
+                    let keys = Object.keys(value);
+                    for (let key of keys) {
+                        if (value[key] === null || value[key] === '') {
+                            this.deleteFromManifest('spec.liveness_probe');
+                            empty = true;
+                            break
+                        } else if (key === 'http_get') {
+                            if (this.rules.is_root_addressed(value[key]['path']) !== true || this.rules.has_space(value[key]['path']) !== true) {
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
+                            if (this.rules.valid_port(value[key]['port']) !== true) {
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
+                                break
+                            }
+                        } else {
+                            if (this.rules.min_value(value[key]) !== true) {
+                                this.deleteFromManifest('spec.liveness_probe');
+                                empty = true;
                                 break
                             }
                         }
                     }
 
                     if (!empty) {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'HealthCheckSetup') {
-                                item.edited = true;
-                            }
-                        })
-                    } else {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'HealthCheckSetup') {
-                                item.edited = false;
-                            }
-                        })
+                        this.addToManifest(value, 'spec.liveness_probe')
                     }
-                }, deep: true
-            },
-            'manifest_model.environment_variable.env_list': {
-                handler: function (value, oldValue) {
-                    if ([...value].length > 0) {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'EnvSetup') {
-                                item.edited = true;
-                            }
-                        })
-                    } else {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'EnvSetup') {
-                                item.edited = false;
-                            }
-                        })
-                    }
-                }, deep: true
-            },
-            'manifest_model.port_mapping.port_map_list': {
-                handler: function (value, oldValue) {
-                    if ([...value].length > 0) {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'PortMappingSetup') {
-                                item.edited = true;
-                            }
-                        })
-                        this.addToManifest([...value], 'spec.port_mapping')
-                    } else {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'PortMappingSetup') {
-                                item.edited = false;
-                            }
-                        })
-                        this.deleteFromManifest('spec.port_mapping')
-                    }
-                }, deep: true
-            },
-            'manifest_model.volumes.volume_list': {
-                handler: function (value, oldValue) {
-                    if ([...value].length > 0) {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'VolumeSetup') {
-                                item.edited = true;
-                            }
-                        })
-                    } else {
-                        this.items.forEach(item => {
-                            if (item.step_name === 'VolumeSetup') {
-                                item.edited = false;
-                            }
-                        })
-                    }
-                }, deep: true
-            },
-            'manifest_model.image.image_object':{
-              handler: function(value, oldValue){
-                  if(value.name === null){
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = false;
-                              return
-                          }
-                      })
-                  }
-
-                  if (value.name !== '') {
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = true;
-                          }
-                      })
-                  } else {
-                      this.items.forEach(item => {
-                          if (item.step_name === 'ImageSetup') {
-                              item.edited = false;
-                          }
-                      })
-                  }
-              }, deep: true
-            },
-            manifest_model: {
-                handler: function (value, oldValue) {
 
                 }, deep: true
             },
-            $route() {
-                if (this.message) {
-                    this.$store.dispatch("setMessage", this.message);
-                    this.$store.dispatch("showModal", "message");
-                }
-                this.$store.commit("SET_DATA", {data: true, id: "loading"});
-                this.$store.commit('SET_DATA', {id: 'isNativeMenus', data: null});
-                if (this.isMobile) {
-                    this.$store.commit("SET_DATA", {data: false, id: "sideMunu"});
-                }
+            'manifest_model.health_check.readiness_object': {
+                handler: function (value, oldValue) {
+                    let empty = false;
+                    let keys = Object.keys(value);
+                    for (let key of keys) {
+                        if (value[key] === null || value[key] === '') {
+                            this.deleteFromManifest('spec.readiness_probe');
+                            empty = true;
+                            break
+                        } else if (key === 'http_get') {
+                            if (this.rules.is_root_addressed(value[key]['path']) !== true || this.rules.has_space(value[key]['path']) !== true) {
+                                this.deleteFromManifest('spec.readiness_probe');
+                                empty = true;
+                                break
+                            }
+
+                            if (this.rules.valid_port(value[key]['port']) !== true) {
+                                this.deleteFromManifest('spec.readiness_probe');
+                                empty = true;
+                                break
+                            }
+                        } else {
+                            if (this.rules.min_value(value[key]) !== true) {
+                                this.deleteFromManifest('spec.readiness_probe');
+                                empty = true;
+                                break
+                            }
+                        }
+                    }
+
+                    if (!empty) {
+                        this.addToManifest(value, 'spec.readiness_probe')
+                    }
+                }, deep: true
             }
         },
         created() {
-        },
+        }
+        ,
         beforeMount() {
             let token;
             let valid = false;
@@ -744,10 +1055,11 @@
                     this.$router.push("/user/login");
                 }
             }
-        },
+        }
+        ,
         mounted() {
             this.$store.dispatch("getDomains", {verified: true});
-            this.getImages()
+            this.getImages();
             this.$store.dispatch("getSecret");
 
 
@@ -757,13 +1069,13 @@
                 // localStorage.removeItem('vuex')
             });
             if (this.isMobile) {
-                this.$store.commit('SET_DATA', {id: 'isNativeMenus', data: null})
+                this.$store.commit('SET_DATA', {id: 'isNativeMenus', data: null});
                 this.$store.commit("SET_DATA", {data: false, id: "sideMunu"});
             }
-            let manifest = this.$store.state.manifest
+            let manifest = this.$store.state.manifest;
             // if (!Object.keys(manifest).length) this.$router.push({ path: this._steps[0].path })
-            this.persistData(manifest)
-            this.handelRyChat()
+            this.persistData(manifest);
+            this.handelRyChat();
 
             //populating manifest
             if (this.$route.query.hasOwnProperty('service')) {
@@ -773,12 +1085,40 @@
                 this.populateManifest(manifest)
             }
 
-
-        },
-        beforeDestroy() {
-            this.leaving()
-        },
+        }
+        ,
         methods: {
+            updateServiceKind(kind_value) {
+
+                this.manifest_model.service.kinds.forEach(item => {
+                    item.is_active = false
+                });
+
+                if (kind_value === this.manifest_model.service.kinds[0].name) {
+                    this.manifest_model.service.kinds[0].is_active = true;
+                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[0].name;
+                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[0].local_name;
+                    this.manifest_model.service.kind.tooltip = this.manifest_model.service.kinds[0].tooltip
+
+                } else {
+                    this.manifest_model.service.kinds[1].is_active = true;
+                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[1].name;
+                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[1].local_name;
+                    this.manifest_model.service.kind.tooltip = this.manifest_model.service.kinds[1].tooltip
+                }
+
+
+                if (this.manifest_model.service.kind.name === 'ExternalService') {
+                    this.manifest_model.service.port.number = null;
+                    this.manifest_model.service.allow_http.selected = true
+                } else {
+                    this.manifest_model.service.domains = [];
+                    this.manifest_model.service.port.number = null;
+                    this.manifest_model.service.allow_http.selected = null;
+                    this.manifest_model.service.path.dir = null
+                }
+
+            },
             async getImages() {
                 try {
                     await this.$store.dispatch("getImages");
@@ -789,33 +1129,36 @@
                     }
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 }
-            },
+            }
+            ,
             getImageV(value) {
 
                 this.$store.dispatch("getImageVersions", value)
 
-            },
+            }
+            ,
             onRegistryClicked(index) {
                 this.manifest_model.image.registries.forEach(item => {
                     item.is_active = false
                 });
                 this.manifest_model.image.registries[index].is_active = true;
-                this.manifest_model.image.registry = this.manifest_model.image.registries[index]
+                this.manifest_model.image.registry = this.manifest_model.image.registries[index];
 
-                this.manifest_model.image.image_object.name = null
-                this.manifest_model.image.image_object.version = null
+                this.manifest_model.image.image_object.name = null;
+                this.manifest_model.image.image_object.version = null;
 
                 if (this.manifest_model.image.registry.local_name === 'Fandogh' &&
                     this.manifest_model.image.secret_obj.value !== null &&
                     this.manifest_model.image.secret_obj.value !== '') {
                 }
 
-            },
+            }
+            ,
             async dumpManifest(service_name, manifest) {
                 this.loading = true;
                 await this.$store.dispatch('dumpServiceManifest', service_name)
                     .then(response => {
-                        this.loading = false
+                        this.loading = false;
                         manifest = JSON.parse(localStorage.getItem('vuex')).manifest;
                         this.populateManifest(manifest)
                     }).catch(e => {
@@ -831,7 +1174,8 @@
                             });
                         }
                     })
-            },
+            }
+            ,
             populateManifest(manifest) {
                 if (manifest.hasOwnProperty('name')) {
                     this.manifest_model.service.service_name.name = manifest.name
@@ -841,19 +1185,25 @@
                     let kind_name = manifest.kind;
 
                     this.manifest_model.service.kinds.forEach(item => {
-                        item.is_active = false
+                        item.is_active = false;
                         if (item.name === kind_name) {
                             item.is_active = true;
-                            this.manifest_model.service.kind = item
+                            this.manifest_model.service.kind.tooltip = item.tooltip;
+                            this.manifest_model.service.kind.local_name = item.local_name;
+                            this.manifest_model.service.kind.prod_name = item.name;
+                            this.manifest_model.service.kind.is_active = item.is_active;
                         }
                     })
                 } else {
-                    this.manifest_model.service.kinds[0].is_active = true
-                    this.manifest_model.service.kind = this.manifest_model.service.kinds[0]
+                    this.manifest_model.service.kinds[0].is_active = true;
+                    this.manifest_model.service.kind.is_active = this.manifest_model.service.kinds[0].is_active;
+                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[0].name;
+                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[0].local_name;
+                    this.manifest_model.service.kind.tooltip = this.manifest_model.service.kinds[0].tooltip;
                 }
 
                 if (manifest.hasOwnProperty('spec')) {
-                    let spec = manifest.spec
+                    let spec = manifest.spec;
 
                     if (spec.hasOwnProperty('resources')) {
                         if (spec.resources.hasOwnProperty('memory')) {
@@ -879,17 +1229,31 @@
                         } else if (image.split('/').length === 2) {
                             this.onRegistryClicked(1)
                         } else {
-                            this.onRegistryClicked(0)
+                            this.onRegistryClicked(0);
                             this.getImageV(image.split(':')[0])
                         }
-                        this.manifest_model.image.image_object.name = image.split(':')[0] || '';
-                        this.manifest_model.image.image_object.version = image.split(':')[1] || '';
+                        this.manifest_model.image.image_object.name = '';
+                        this.manifest_model.image.image_object.version = '';
+                        let image_parts = image.split(':');
+                        if (image_parts.length === 1){
+                            this.manifest_model.image.image_object.name += image_parts[0];
+                            this.manifest_model.image.image_object.version += 'latest'
 
+                        }else {
+
+                            for (let index = 0; index < image_parts.length; index++) {
+                                if (index !== image_parts.length - 1) {
+                                    this.manifest_model.image.image_object.name += image_parts[index] || ''
+                                } else {
+                                    this.manifest_model.image.image_object.version += image_parts[index] || ''
+                                }
+                            }
+                        }
                     }
 
                     if (spec.hasOwnProperty('image_pull_policy')) {
                         this.manifest_model.image.image_pull_policy_obj.forEach((item, index) => {
-                            item.selected = false
+                            item.selected = false;
                             if (item.value === spec.image_pull_policy) {
                                 item.selected = true
                             }
@@ -937,13 +1301,13 @@
                         spec.domains.forEach((domain, index) => {
                             if (domain.name.toString().includes('fandogh.cloud')) {
                                 spec.domains.splice(index, 1);
-                                return
+
                             }
                         });
 
-                        if([...spec.domains].length === 0){
+                        if ([...spec.domains].length === 0) {
                             this.deleteFromManifest('spec.domains')
-                        }else {
+                        } else {
                             spec.domains.forEach(item => {
                                 this.manifest_model.service.domains.push(item['name'])
                             })
@@ -959,21 +1323,40 @@
                         this.manifest_model.health_check.readiness_object = spec.readiness_probe
                     }
 
+                    if (spec.hasOwnProperty('command')) {
+                        this.manifest_model.service_commands = [...spec.command]
+                    }
+
+                    if (spec.hasOwnProperty('command_args')) {
+                        this.manifest_model.service_command_args = [...spec.command_args]
+                    }
+                    if (spec.hasOwnProperty('post_start_command')) {
+                        this.manifest_model.post_start_commands = [...spec.post_start_command]
+                    }
+
+                    if (spec.hasOwnProperty('pre_stop_command')) {
+                        this.manifest_model.pre_stop_commands = [...spec.pre_stop_command]
+                    }
+
                 } else {
 
                     this.manifest_model.service.kinds.forEach(item => {
                         item.is_active = false
                     });
                     this.manifest_model.service.kinds[0].is_active = true;
-                    this.manifest_model.service.kind = this.manifest_model.service.kinds[0]
+                    this.manifest_model.service.kind.is_active = this.manifest_model.service.kinds[0].is_active;
+                    this.manifest_model.service.kind.prod_name = this.manifest_model.service.kinds[0].name;
+                    this.manifest_model.service.kind.local_name = this.manifest_model.service.kinds[0].local_name;
+                    this.manifest_model.service.kind.tooltip = this.manifest_model.service.kinds[0].tooltip;
 
-                    this.manifest_model.service.replica.count = this.manifest_model.service.replica.default
-                    this.manifest_model.service.memory.amount = this.manifest_model.service.memory.default
-                    this.manifest_model.service.allow_http.selected = false
+                    this.manifest_model.service.replica.count = this.manifest_model.service.replica.default;
+                    this.manifest_model.service.memory.amount = this.manifest_model.service.memory.default;
+                    this.manifest_model.service.allow_http.selected = false;
                     this.manifest_model.service.allow_http.selected = true
 
                 }
-            },
+            }
+            ,
             isManifestValid() {
                 if (this.manifest_model.service.service_name.name.length === 0) {
                     this.$notify({
@@ -984,8 +1367,8 @@
                     return false
                 }
 
-                if (this.manifest_model.service.kind.name === 'ExternalService') {
-                    if (this.manifest_model.service.port.number === null) {
+                if (this.manifest_model.service.kind.prod_name === 'ExternalService') {
+                    if (!this.manifest_model.service.port.number) {
                         this.$notify({
                             title: 'لطفا پورت را مشخص نمایید',
                             time: 4000,
@@ -1004,8 +1387,8 @@
                     return false
                 }
 
-                if (this.manifest_model.image.registry.local_name === 'Docker') {
-                    if(this.manifest_model.image.image_object.name.split('/').length !== 2){
+                if (this.manifest_model.image.registry.local_name === 'Docker Hub') {
+                    if (this.manifest_model.image.image_object.name.split('/').length !== 2) {
                         this.$notify({
                             title: 'ساختار ایمیج وارد شده برای داکر صحیح نمی‌باشد',
                             time: 4000,
@@ -1016,7 +1399,7 @@
                 }
 
                 if (this.manifest_model.image.registry.local_name === 'Other') {
-                    if(this.manifest_model.image.image_object.name.split('/').length < 3){
+                    if (this.manifest_model.image.image_object.name.split('/').length < 3) {
                         this.$notify({
                             title: 'ساختار ایمیج وارد شده برای رجیستری‌های غیر داکر صحیح نمی‌باشد',
                             time: 4000,
@@ -1026,25 +1409,100 @@
                     }
                 }
 
+                if (this.manifest_model.environment_variable.env_list.length > 0) {
+                    var invalid = false;
+                    this.manifest_model.environment_variable.env_list.forEach(env => {
+                        if (env.value === '****' && env.hidden) {
+                            invalid = true;
+                        }
+                    });
 
-                return true
-            },
+                    if (invalid) {
+                        this.$notify({
+                            title: 'شما باید مقادیر ‌envهایی که hidden شده‌اند را دوباره وارد نمایید در غیر این صورت مقادیر با **** جایگزین شده و باعث تداخل در روند سرویس شما می‌شود.',
+                            time: 8000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+
+                var value_redundant = false;
+
+
+                if (this.manifest_model.environment_variable.env_list.length !== 0) {
+                    this.manifest_model.environment_variable.env_list.forEach(env_obj => {
+                        if (this.manifest_model.environment_variable.env_list.filter(e => e.name === env_obj.name).length > 1) {
+                            value_redundant = true;
+                        }
+                    });
+
+                    if (value_redundant) {
+                        this.$notify({
+                            title: 'مقادیر environment تکراری است',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+                if (this.manifest_model.port_mapping.port_map_list.length !== 0) {
+                    this.manifest_model.port_mapping.port_map_list.forEach(port_map_obj => {
+                        if (this.manifest_model.port_mapping.port_map_list.filter(e => e.port === port_map_obj.port).length > 1) {
+                            value_redundant = true;
+                        }
+                    });
+
+                    if (value_redundant) {
+                        this.$notify({
+                            title: 'مقادیر port_mapping تکراری است',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+
+                if (this.manifest_model.volumes.volume_list.length !== 0) {
+                    this.manifest_model.volumes.volume_list.forEach(volume_obj => {
+                        if (this.manifest_model.volumes.volume_list.filter(e => e.mount_path === volume_obj.mount_path).length > 1) {
+                            value_redundant = true;
+                        }
+                    });
+
+                    if (value_redundant) {
+                        this.$notify({
+                            title: 'مقادیر volumes تکراری است',
+                            time: 4000,
+                            type: 'error'
+                        });
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            ,
             deploy() {
 
                 if (this.isManifestValid()) {
-                    this.loading = true
+                    this.loading = true;
+                    this.deploying_manifest = true;
                     this.$store.commit("SET_DATA", {data: true, id: "loading"});
                     this.$store.dispatch('createServiceManifest').then(res => {
-                        this.loading = false
-                        this.finished = true
+                        this.loading = false;
+                        this.finished = true;
                         // removeValue('name')
                         // removeValue('versions')
                         this.$store.commit("SET_DATA", {id: "service", data: res});
-                        this.$router.replace(`/dashboard/services/${res.name}`)
+                        this.$router.replace({path: `/dashboard/services/${res.name}`, query: this.$route.query});
                         this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                     }).catch(e => {
-                        this.loading = false
-                        this.finished = false
+                        this.loading = false;
+                        this.finished = false;
                         // ErrorReporter(e, [], true).forEach(error => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
                         //
@@ -1056,26 +1514,21 @@
                         })
                     })
                 }
-            },
+            }
+            ,
             addToManifest(value, path) {
                 this.$store.dispatch('manifestGenerator', {
                     value: value,
                     path: path
                 })
-            },
+            }
+            ,
             deleteFromManifest(path) {
                 this.$store.dispatch('manifestDeleter', {
                     path: path
                 })
-            },
-            leaving() {
-                if (!this.finished) {
-                    if (confirm('اگر میخواهید تغییرات مانیفست draft شوند ok را انتخاب نمایید، در غیر این صورت دکمه cancel را بزنید')) {
-                    } else {
-                        this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
-                    }
-                }
-            },
+            }
+            ,
             persistData(manifest) {
                 for (let key in manifest) {
                     if (manifest.hasOwnProperty(key)) {
@@ -1088,15 +1541,17 @@
                         }
                     }
                 }
-            },
+            }
+            ,
             handelRyChat() {
-                let elm = document.querySelector('#raychatFrame')
+                let elm = document.querySelector('#raychatFrame');
                 if (!elm) {
-                    const raychatScript = document.createElement('script')
-                    raychatScript.innerText = '!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="b34779ab-3e49-4256-8f71-ec8ae7e76d64";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();'
+                    const raychatScript = document.createElement('script');
+                    raychatScript.innerText = '!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="b34779ab-3e49-4256-8f71-ec8ae7e76d64";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();';
                     document.head.appendChild(raychatScript)
                 }
-            },
+            }
+            ,
             handelEventSize() {
                 var vm = this;
                 window.addEventListener("resize", function (e) {
@@ -1105,13 +1560,15 @@
                 if (process.browser) {
                     this.setDefaultSize();
                 }
-            },
+            }
+            ,
             setSize(e) {
                 this.$store.dispatch("SET_SIZE", {
                     width: window.innerWidth,
                     height: window.innerHeight
                 });
-            },
+            }
+            ,
             setDefaultSize(e) {
                 this.$store.dispatch("SET_SIZE", {
                     width: window.innerWidth,
@@ -1120,7 +1577,8 @@
                 if (this.isMobile) {
                     this.$store.dispatch("TOGGLE_NAV", {data: null, id: "sidebar"});
                 }
-            },
+            }
+            ,
             backward() {
                 if (this.stepPage.step > 0) {
 
@@ -1140,10 +1598,11 @@
                         }
                     })
                 }
-            },
+            }
+            ,
             forward() {
 
-                if (this.stepPage.step < 5) {
+                if (this.stepPage.step < (this.items.length - 1)) {
 
                     this.items.forEach(item => {
                         item.active = item.text === this.items[this.stepPage.step + 1].text;
@@ -1165,8 +1624,21 @@
 
             }
         }
-    };
+        ,
+    }
+    ;
 </script>
+
+<style lang="css">
+    .fade-enter-active {
+        transition: opacity .3s ease-in-out;
+    }
+
+    .fade-enter, .fade-leave-to, .fade-leave-active /* .fade-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
+    }
+</style>
 
 <style lang="stylus" scoped>
 

@@ -33,8 +33,8 @@
                 <div class="row" style="display: flex; justify-content: center; margin-left: 0; margin-right: 0">
 
                     <nuxt-link class="button" to="/">صفحه اصلی</nuxt-link>
-                    <a class="button" href="https://docs.fandogh.cloud" target="_self">مستندات</a>
-                    <a class="button" href="https://blog.fandogh.cloud" target="_self">وبلاگ</a>
+                    <a class="button" href="https://docs.fandogh.cloud" target="_self" rel="noopener">مستندات</a>
+                    <a class="button" href="https://blog.fandogh.cloud" target="_self" rel="noopener">وبلاگ</a>
 
                 </div>
 

@@ -31,13 +31,11 @@
 </template>
 
 <script>
-    import Register from '~/components/Auth/Register.vue'
     import Vregister from "../../components/Auth/vregister";
 
     export default {
         components: {
-            Vregister,
-            Register
+            Vregister
         },
         mounted() {
             this.$store.dispatch('logout')
@@ -82,8 +80,8 @@
             width 100%
 
         img
-            width 64px
-            height 64px
+            width 58px
+            height 58px
             margin-left auto
             margin-right auto
             @media only screen and (max-width 992px)
@@ -92,7 +90,7 @@
 
         p
             font-family: iran-yekan
-            font-size: 2em
+            font-size: 1.8em
             font-weight: bold;
             font-style: normal;
             font-stretch: normal;
@@ -161,14 +159,14 @@
     .register-title-container
         width 100%
         height max-content
-        margin-top 48px
+        margin-top 32px
         margin-bottom 16px
         display flex
 
         p
             font-family: iran-yekan;
             width 100%
-            font-size: 2em;
+            font-size: 1.8em;
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;

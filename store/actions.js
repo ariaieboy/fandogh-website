@@ -244,6 +244,14 @@ export const createImageVersion = async (
     }
 };
 
+export const subscribeNewsletter = async ({commit, state}, email) => {
+    try {
+        return await Request().post('/api/users/newsletter', {email})
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 export const getImageVersionBuilds = async (
     {commit, state},
     {name, version}
@@ -268,9 +276,16 @@ export const getServices = async ({commit, state}) => {
     }
 };
 
-export const getServiceLog = async ({commit, state}, {name}) => {
+export const getServiceLog = async ({commit, state}, {name, with_timestamp, max_logs, last_logged_time, previous}) => {
     try {
-        let logs = await Request().get(`/api/services/${name}/logs`);
+        let logs = await Request().get(`/api/services/${name}/logs`,{
+            params: {
+                with_timestamp: with_timestamp,
+                max_logs: max_logs,
+                last_logged_time: last_logged_time,
+                previous: previous
+            }
+        });
         commit("SET_DATA", {data: logs, id: "serviceLog"});
         return logs;
     } catch (e) {
@@ -366,7 +381,7 @@ export const dumpServiceManifest = async ({commit, state}, service_name) => {
         })
         delete manifest.data['requested_at']
         commit("SET_JSON_MANIFEST", manifest.data);
-        return true
+        return manifest.data
     } catch (e) {
         return Promise.reject(e)
     }
@@ -580,6 +595,30 @@ export const deleteSelectedVolume = async ({commit, state}, volume_name) => {
     try {
 
         return await Request().delete(`api/volumes/${volume_name}`)
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const resizeSelectedVolume = async ({commit, state}, {volume_name, volume_size}) => {
+
+    try {
+
+        return await Request().patch(`api/volumes/${volume_name}`, {
+            capacity: volume_size
+        })
+
+    } catch (e) {
+        return Promise.reject(e)
+    }
+};
+
+export const getVolumeDetails = async ({commit, state}, volume_name) => {
+
+    try {
+
+        return await Request().get(`api/volumes/${volume_name}`)
 
     } catch (e) {
         return Promise.reject(e)

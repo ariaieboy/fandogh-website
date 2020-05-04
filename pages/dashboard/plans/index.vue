@@ -331,7 +331,6 @@
     import FActivePlan from "~/components/Dashboard/plans/active-plan/panel";
     import FActivePlanBox from "~/components/Dashboard/plans/active-plan";
     import {getValue} from "~/utils/cookie";
-    import Image from "../services/image";
     import Plan from "~/components/Plan";
     import Moment from 'moment-jalaali';
     import Feature from '~/components/Plan/feature.vue';
@@ -530,7 +529,6 @@
             }
         },
         components: {
-            Image,
             PanelBox,
             FPanels,
             FActivePlan,
@@ -673,7 +671,7 @@
                 await this.$store.dispatch("plan/requestPlan", bill)
                     .then(planRespose => {
                         this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                        this.$router.push(`plans/bill/${planRespose.invoice.id}`);
+                        this.$router.push({path: `plans/bill/${planRespose.invoice.id}`});
                     }).catch(e => {
                         if (e.status === 401) {
                             this.$router.push("/user/login");

@@ -3,8 +3,8 @@
 
     <div  class="dropdown-container">
         <div @click="toggle" class="dropdown--arrow">
-          <img v-if="!show" src="./images/arrow-d.svg" />
-          <img v-if="show" src="./images/arrow-u.svg" />
+          <img v-if="!show" src="./images/arrow-d.svg" alt="arrow"/>
+          <img v-if="show" src="./images/arrow-u.svg" alt="arrow"/>
         </div>
       <div v-if="!_selects.length" class="dropdown--placeholder">
         <span class="dropdown--title">
@@ -14,14 +14,14 @@
       <div v-else class="dropdown-options">
         <span v-for="select in _selects" class="dropdown--option">
           <span>{{select}}</span>
-           <img @click="$emit('input', _selects.filter(item => item !== select))" src="./images/close.svg" />
+           <img @click="$emit('input', _selects.filter(item => item !== select))" src="./images/close.svg" alt="close" />
         </span>
       </div>
     </div>
     <div v-show="show && _options.length" class="dropdown-selector">
       <ul>
         <li v-for="option in _options">
-          <a @click="$emit('input', _selects.concat(option))" href="#">{{option}}</a>
+          <a rel="noopener" @click="$emit('input', _selects.concat(option))" href="#">{{option}}</a>
         </li>
       </ul>
     </div>

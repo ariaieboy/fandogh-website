@@ -18,7 +18,7 @@
             </div>
 
         </div>
-        <log :logs="logs"/>
+        <log :logs="logs" :is_image_log="true"/>
     </div>
 </template>
 

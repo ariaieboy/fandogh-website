@@ -9,7 +9,7 @@
                           :key="index"
                           v-tooltip="inner_kind.tooltip"
                           :class="['kind-button', {'is-active': inner_kind.is_active}]"
-                          @click="onKindClicked(index)">
+                          @click="onKindClicked(inner_kind.name)">
                         {{inner_kind.local_name}}
                     </span>
 
@@ -44,7 +44,8 @@
 
                     <div style="display: flex; margin-top: 12px">
 
-                        <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px" color="#0045ff"
+                        <v-text-field style="font-family: iran-yekan; font-size: 1em; margin-left: -15px"
+                                      color="#0045ff"
                                       dir="ltr"
                                       prefix="Mi"
                                       :rules="[rules.default_memory, rules.required]"
@@ -87,7 +88,7 @@
 
             </config-box>
 
-            <config-box v-if="manifest_model.service.kind.name === 'ExternalService'"
+            <config-box v-if="manifest_model.service.kind.prod_name === 'ExternalService'"
                         :section-title="sections.external_service_config"
                         :tooltip="sections.external_service_config_tooltip">
 
@@ -200,9 +201,6 @@
                 required: true
             }
         },
-        model: {
-            prop: 'manifest_model',
-        },
         data() {
             return {
                 isEnabled: false,
@@ -234,12 +232,12 @@
                         text: 'اینجا می‌توانید لیست دامنه‌هایی که می‌خواهید به این سرویس متصل کنید را مشخص کنید. مثلا سرویس مورد نظر فرانت وب‌سایت شماست و مایلید روی domain.com و www.domain.com در دسترس باشد',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#domains'
                     },
-                    allow_http:{
+                    allow_http: {
                         title: 'Allow Http',
                         text: 'اگر این فیلد true باشد، به این معنی است که فندق نباید درخواست‌های HTTP را به HTTPS ریدایرکت کند. به طور پیشفرض مقدار این فیلد true است٬ تا درخواست‌های HTTP ریدایرکت نشوند.',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#allow-http'
                     },
-                    path:{
+                    path: {
                         title: 'Path',
                         text: 'اگر مایل هستید سرویس مورد نظرتان روی path خاصی درخواست‌ها را پاسخ دهد، مثلا از یک سرویس wordpress به عنوان بلاگ استفاده می‌کنید، می‌توانید از طریق این فیلد path را مشخص کنید، مثلا /blog/ تا فقط درخواست‌هایی که به آن مسیر ارسال شدند به وردپرس برسند و روی بقیه path ها بتوانید سرویس‌های دیگری را اجرا کنید.',
                         url: 'https://docs.fandogh.cloud/docs/service-manifest.html#path'
@@ -314,22 +312,8 @@
                     path: path
                 })
             },
-            onKindClicked(index) {
-                this.manifest_model.service.kinds.forEach(item => {
-                    item.is_active = false
-                });
-                this.manifest_model.service.kinds[index].is_active = true;
-                this.manifest_model.service.kind = this.manifest_model.service.kinds[index]
-
-                if (this.manifest_model.service.kind.name === 'ExternalService') {
-                    this.manifest_model.service.port.number = null
-                    this.manifest_model.service.allow_http.selected = true
-                } else {
-                    this.manifest_model.service.domains = [];
-                    this.manifest_model.service.port.number = null
-                    this.manifest_model.service.allow_http.selected = null
-                    this.manifest_model.service.path.dir = null
-                }
+            onKindClicked(kind_value) {
+                this.$emit('update-service-kind', kind_value)
             },
         },
         computed: {
@@ -341,7 +325,7 @@
                         value: item.name
                     };
                 });
-            },
+            }
         }
     }
 </script>
@@ -409,7 +393,8 @@
         filter invert(0%) sepia(100%) saturate(0%) hue-rotate(203deg) brightness(205%) contrast(105%) !important
 
         @media only screen and (max-width: 900px)
-            margin-top -8px !important
+            margin-top
+        -8px !important
 
 </style>
 

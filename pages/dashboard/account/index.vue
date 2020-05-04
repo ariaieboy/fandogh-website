@@ -66,19 +66,21 @@
 
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">نوع کاربری:</p>
-                        <p class="profile-entity-value" v-if="activeNamespace.quota">
-                            {{(activeNamespace.quota.memory_limit/1024 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
+                        <p class="profile-entity-value" v-if="activeNamespace.quota"
+                        :style="{color: (activeNamespace.quota.memory_limit/512 >=1 ? '#0045ff' : '#000000')}">
+                            {{(activeNamespace.quota.memory_limit/512 >=1 ? 'حرفه‌ای' : 'رایگان')}}</p>
                     </div>
 
 
                     <div style="min-height: 3em">
                         <p class="profile-entity-title">دریافت خبرنامه:</p>
                         <p class="profile-entity-value">
-                            {{(account.newsletter_subscriber ? 'تایید نکرده‌ام' : 'دریافت میکنم')}}</p>
+                            {{account.newsletter_subscriber ? 'دریافت میکنم' : 'تایید نکرده‌ام'}}</p>
                     </div>
 
                 </div>
             </div>
+
 
             <div class="box-row row">
                 <div @click="sectionClicked('ProfilePlan')"
@@ -164,14 +166,12 @@
                 get: function () {
                     return this.activeNamespace;
                 }, set: function (namespace) {
-                    if (namespace.hasOwnProperty('name')) {
-                        if (getValue('namespace') !== namespace.name) {
-                            setValue({key: 'namespace', value: namespace.name});
-                            setValue({key: 'user_role', value: namespace.user_role})
-                            window.location.reload();
-                        }
+                    if (this.$route.query.ns !== namespace.name) {
+                        sessionStorage.setItem('user_role', namespace.user_role);
+                        sessionStorage.setItem('namespace', namespace.name);
+                        this.$store.commit('SET_DATA', {data: false, id: 'loading'});
+                        window.location.replace(this.$route.path + '?ns=' + namespace.name);
                     }
-
                 }
             },
             openSidebar() {
@@ -204,10 +204,11 @@
         },
         created() {
             this.getData();
-            this.fetchUserNamespaces()
+            if (this.$route.query.ns)
+                this.fetchUserNamespaces();
         },
         methods: {
-            verifyUserAccess(permitted_roles){
+            verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
             async fetchUserNamespaces() {
@@ -215,9 +216,10 @@
                 try {
                     this.namespaces = await this.$store.dispatch('requestUserNamespaces');
                     for (let i = 0; i < this.namespaces.length; i++) {
-                        if (this.namespaces[i].name === this.namespace) {
+                        if (this.namespaces[i].name === this.$route.query.ns) {
                             this.activeNamespace = this.namespaces[i];
-                            setValue({key: 'user_role', value: this.namespaces[i].user_role})
+                            sessionStorage.setItem('user_role', this.namespaces[i].user_role);
+                            sessionStorage.setItem('namespace', this.namespaces[i].name);
                             break;
                         }
                     }

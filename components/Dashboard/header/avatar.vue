@@ -1,14 +1,14 @@
 <template>
     <div class="header-avatar">
         <div class="header-avatar-box" @click="toggleAvatar('avatar')">
-            <img class="header-avatar-img" :src="avatar" alt>
+            <img class="header-avatar-img" :src="avatar" alt="avatar">
             <div class="header-avatar-name">
                 <span>{{namespace}}</span>
             </div>
             <img
                     class="header-avatar-arrow"
                     src="./icons/arrow-point-to-right.svg"
-                    alt
+                    alt="arrow"
                     :class="{open:isNativeMenus === 'avatar'}"
             >
         </div>
@@ -18,12 +18,17 @@
                 <span class="font-roboto">{{username}}</span>
             </div>
             <div class="header-avatar-list-item">
-                <router-link :to="item.link" class="header-avatar-item" v-for="(item,i) in items" :key="i">
-                    <img :src="require('./icons/'+item.icon+'.svg')">
+                <div @click="changeNamespace" class="header-avatar-item">
+                    <img src="./icons/ic-exchange.svg" alt="change">
+                    <span>تغییر فضانام</span>
+                </div>
+                <router-link :to="{path: item.link, query: {ns: $route.query.ns}}" class="header-avatar-item"
+                             v-for="(item,i) in items" :key="i">
+                    <img :src="require('./icons/'+item.icon+'.svg')" :alt="item.icon">
                     <span>{{item.text}}</span>
                 </router-link>
                 <div @click="exit" class="header-avatar-item">
-                    <img src="./icons/ic-exit.svg" alt>
+                    <img src="./icons/ic-exit.svg" alt="exit">
                     <span>خروج</span>
                 </div>
             </div>
@@ -54,7 +59,7 @@
                 return getValue("username");
             },
             namespace() {
-                return getValue("namespace");
+                return this.$route.query.ns
             },
             isNativeMenus() {
                 return this.$store.state.isNativeMenus
@@ -67,6 +72,12 @@
             this.getAvatar();
         },
         methods: {
+            changeNamespace() {
+
+                this.$emit('change-namespace');
+                this.toggleAvatar(null)
+
+            },
             exit() {
                 this.$alertify(
                     {
@@ -232,6 +243,7 @@
             &.nuxt-link-active, &:hover
                 span
                     color $colorPrimary
+
                 img
                     filter invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%)
 </style>

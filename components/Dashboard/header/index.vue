@@ -7,7 +7,7 @@
         <img src="../../../assets/svg/ic-fandogh-mini.svg" alt="logo">
       </router-link>
     </div>
-    <f-avatar :items="list"/>
+    <f-avatar @change-namespace="changeNamespace" :items="list"/>
   </div>
 </template>
 
@@ -51,6 +51,11 @@ export default {
     }
   },
   methods: {
+    changeNamespace() {
+
+      this.$emit('toggle-namespace-modal');
+
+    },
     toggleSidebar() {
       if (this.isMobile) {
         this.$store.dispatch("TOGGLE_NAV", { data: null, id: "isNativeMenus" });

@@ -1,19 +1,19 @@
 <template>
   <div class="replica-details">
     <div class="replica-details-item">
-      <strong>نام :</strong>
+      <strong>نام سرویس:</strong>
       <span class="font-roboto">{{name}}</span>
     </div>
     <div class="replica-details-item">
-      <strong>تاریخ ساخت :</strong>
-      <span>{{FDate(date)}}</span>
+      <strong>تاریخ ساخت:</strong>
+      <span style="font-family: iran-sans">{{FDate(date)}}</span>
     </div>
     <div class="replica-details-item">
-      <strong>وضعیت :</strong>
+      <strong>وضعیت:</strong>
       <span :class="stateColor">{{state | state}}</span>
     </div>
     <div class="replica-details-item">
-      <strong>کانتینر آماده :</strong>
+      <strong>کانتینر آماده:</strong>
       <span class="success-text">{{count}}</span>
     </div>
   </div>
@@ -76,11 +76,18 @@ export default {
 
 <style lang="stylus" scoped>
 .replica-details
-  display flex
+  column-count 2
+  flex-wrap wrap
   flex-direction column
   padding 0 15px
   border-bottom 1px solid #b5b5b5
+  @media only screen and (max-width 992px)
+    display flex
+    column-count 1
   &-item
+    margin-bottom 12px
+    @media only screen and (max-width 992px)
+      margin-bottom none
     strong
       margin-left 5px
     span, strong
