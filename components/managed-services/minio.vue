@@ -34,13 +34,14 @@
                                 color="#0093ff"
                                 required
                                 :rules="[rules.required, rules.min_length]"
-                                v-model="minio_manifest.secret_key.value"
-                                :label="secret_key.label"
-                                :hint="secret_key.hint">
+                                v-model="minio_manifest.access_key.value"
+                                :label="access_key.label"
+                                :hint="access_key.hint">
 
                         </v-text-field>
 
-                        <popover :tooltip="tooltips.secret_key"></popover>
+                        <popover :tooltip="tooltips.access_key"></popover>
+
                     </div>
 
                     <div style="display: flex; margin-top: 12px">
@@ -51,14 +52,13 @@
                                 color="#0093ff"
                                 required
                                 :rules="[rules.required, rules.min_length]"
-                                v-model="minio_manifest.access_key.value"
-                                :label="access_key.label"
-                                :hint="access_key.hint">
+                                v-model="minio_manifest.secret_key.value"
+                                :label="secret_key.label"
+                                :hint="secret_key.hint">
 
                         </v-text-field>
 
-                        <popover :tooltip="tooltips.access_key"></popover>
-
+                        <popover :tooltip="tooltips.secret_key"></popover>
                     </div>
 
                     <div style="display: flex; margin-top: 12px">
