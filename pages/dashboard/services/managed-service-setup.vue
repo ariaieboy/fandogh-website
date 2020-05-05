@@ -71,6 +71,7 @@
     import Redis from "../../../components/managed-services/redis";
     import FileBrowser from "../../../components/managed-services/filemanager";
     import RabbitMQ from "../../../components/managed-services/rabbitmq";
+    import Minio from "../../../components/managed-services/minio";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
 
@@ -86,6 +87,7 @@
             Redis,
             RabbitMQ,
             FileBrowser,
+            Minio,
             Proxy
         },
         data() {
@@ -198,6 +200,18 @@
                             path: "filebrowser",
                             version: 'latest',
                             description: 'یکی از مشکلات کاربران بر روی سکو‌های ابری، دسترسی به داده‌های ذخیره‌شده بر روی Storage است، برای آنکه بتوانید به صورت گرافیکی با محل ذخیره‌سازی داده‌ها کار کنید و داده‌های خود را دانلود و آپلود و یا حتی Edit کنید، می‌توانید از سرویس مدیریت شده File Browser فندق استفاده کنید.'
+                        },
+
+                    minio:
+                        {
+                            title: 'Minio',
+                            local_title: 'MinIO',
+                            short_desc: 'Object Storage',
+                            icon: 'minio',
+                            path: "minio",
+                            version: 'latest',
+                            description: 'اگر شما به دنبال راه حلی برای ذخیره‌سازی داده‌های متفاوت هستید بهتر است از Object Storageها استفاده کنید. یکی از این Object Storageها MinIO است.\n' +
+                                'MinIO یک cloud storage سازگار با Amazon S3 است که به شما این امکان را میدهد تا فایل‌های خود را بر روی آن ذخیره کنید.'
                         },
 
                     proxy:

@@ -1,6 +1,6 @@
 <template>
 
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 " style="padding: 0 8px">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 " style="padding: 0px 8px">
         <div class="box middle-xs">
             <div style="display: inline-flex; box-sizing: content-box; width: 100%">
 
@@ -31,7 +31,7 @@
 
     .box
         display block
-        margin 1rem 0
+        margin .5rem 0
         padding 16px 16px 16px 16px
         border-radius 3px
         background-color #fefefe

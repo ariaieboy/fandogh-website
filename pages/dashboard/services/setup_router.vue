@@ -52,6 +52,7 @@
                     {title: 'Redis', description: 'In Memory Data Store', icon: 'redis', path: "redis"},
                     {title: 'File Browser', description: 'File Manager', icon: 'filebrowser', path: "filebrowser"},
                     {title: 'RabbitMQ', description: 'Message Broker', icon: 'rabbitmq', path: "rabbitmq"},
+                    {title: 'MinIO', description: 'Object Storage', icon: 'minio', path: "minio"},
                     {title: 'Proxy', description: 'Proxy Service', icon: 'proxy', path: "proxy"}
                 ],
                 services: [
