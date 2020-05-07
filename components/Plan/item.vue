@@ -46,10 +46,11 @@
         props: ["icon", "title", "dedicatedVolume", "memory", "cpu"],
         data() {
             return {
-                "base-plan": require("~/assets/svg/basic-plan.svg"),
-                "economy-plan": require("~/assets/svg/base-plan.svg"),
-                "startup-plan": require("~/assets/svg/economy-plan.svg"),
-                "professional-plan": require("~/assets/svg/startup-plan.svg")
+                "base-plan": require("~/assets/svg/plans/basic-plan.svg"),
+                "economy-plan": require("~/assets/svg/plans/economy-plan.svg"),
+                "startup-plan": require("~/assets/svg/plans/startup-plan.svg"),
+                "mid-scale-plan": require("~/assets/svg/plans/mid-scale-plan.svg"),
+                "big-scale-plan": require("~/assets/svg/plans/big-scale-plan.svg")
             };
         },
         computed: {
