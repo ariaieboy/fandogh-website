@@ -5,9 +5,7 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
     <url>
-        <loc>https://fandogh.cloud/</loc>
-        <lastmod>2020-03-31T00:01:03+00:00</lastmod>
-        <priority>1.00</priority>
+        <loc>https://www.fandogh.cloud/</loc>
     </url>
     <url>
         <loc>https://fandogh.cloud/pricing</loc>
