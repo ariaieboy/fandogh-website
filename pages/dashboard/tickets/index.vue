@@ -10,6 +10,10 @@
                     </nuxt-link>
                 </td>
             </tr>
+            <tr v-for="ticket in tickets">
+                <td>{{ticket.title}}</td>
+
+            </tr>
             </thead>
         </table>
 
@@ -19,11 +23,19 @@
 <script>
     import TableHeader from "../../../components/Dashboard/home/children/table-header";
     import TableTitle from "../../../components/Dashboard/home/children/table-title";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "index",
         components: {TableTitle, TableHeader},
-        layout: 'dashboard'
+        layout: 'dashboard',
+        computed: mapGetters({
+            tickets: 'tickets/getTickets',
+        }),
+        beforeMount() {
+            this.$store.commit("tickets/SET_TICKETS")
+        }
+
     }
 </script>
 
