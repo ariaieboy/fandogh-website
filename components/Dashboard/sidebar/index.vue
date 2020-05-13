@@ -32,6 +32,7 @@
                     {icon: 'ic-domain', text: 'دامنه‌ها', link: '/dashboard/domains'},
                     {icon: 'ic-secret', text: 'سکرت‌ها', link: '/dashboard/secret'},
                     {icon: 'ic-dedicated-volume', text: 'فضای‌ ذخیره‌سازی', link: '/dashboard/volumes'},
+                    {icon: 'ic-monitoring', isBorder: false, text: 'تیکت ها', link: '/dashboard/tickets'},
                     {icon: 'ic-monitoring', isBorder: true, text: 'مانیتورینگ', link: '/dashboard/monitoring'},
                     {icon: 'ic-plans', text: 'تنظیمات منابع', link: '/dashboard/plans'},
                 ],

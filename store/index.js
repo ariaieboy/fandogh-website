@@ -3,54 +3,57 @@ import * as actions from "./actions";
 import * as mutations from "./mutations";
 import wizard from "./wizard";
 import plan from "./plan";
+import tickets from "./tickets";
 import dashboard from "./dashboard";
+
 const createStore = () => {
-  return new Vuex.Store({
-    state: () => {
-      return {
-        isNativeMenus: null,
-        sideMunu: true,
-        windowHeight: null,
-        windowWidth: null,
-        sidebar: "halfSidebar",
-        modals: {
-          login: false,
-          register: false,
-          forgot_password: false,
-          message: false,
-          recovery: false
+    return new Vuex.Store({
+        state: () => {
+            return {
+                isNativeMenus: null,
+                sideMunu: true,
+                windowHeight: null,
+                windowWidth: null,
+                sidebar: "halfSidebar",
+                modals: {
+                    login: false,
+                    register: false,
+                    forgot_password: false,
+                    message: false,
+                    recovery: false
+                },
+                loading: true,
+                message: "",
+                progress: 0,
+                services: null,
+                service: null,
+                serviceLog: null,
+                user: {
+                    token: null
+                },
+                images: null,
+                versions: null,
+                volumes: null,
+                builds: null,
+                domains: null,
+                domain: null,
+                secrets: null,
+                user_role: "",
+                manifest: {},
+                account: {},
+                activePlan: {},
+                transactionDetail: {}
+            };
         },
-        loading: true,
-        message: "",
-        progress: 0,
-        services: null,
-        service: null,
-        serviceLog: null,
-        user: {
-          token: null
-        },
-        images: null,
-        versions: null,
-        volumes: null,
-        builds: null,
-        domains: null,
-        domain: null,
-        secrets: null,
-        user_role: "",
-        manifest: {},
-        account: {},
-        activePlan: {},
-        transactionDetail: {}
-      };
-    },
-    actions: actions,
-    mutations: mutations,
-    modules: {
-      dashboard,
-      wizard,
-      plan
-    }
-  });
+        actions: actions,
+        mutations: mutations,
+        modules: {
+            dashboard,
+            wizard,
+            plan,
+            tickets
+        }
+    });
 };
 
 export default createStore;
