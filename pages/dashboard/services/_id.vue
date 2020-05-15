@@ -56,7 +56,6 @@
             </div>
         </div>
 
-
         <div class="row main" style="margin: 0;">
             <div class="box-row row col-lg-2 col-md-2 col-sm-2 col-xs-12 padding">
                 <div @click="sectionClicked('detail')"
@@ -120,15 +119,24 @@
                 </div>
             </div>
 
-            <keep-alive>
-                <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding"
-                           v-bind:is="activeSectionName"
-                           style="padding: 0"
-                           :service="service">
+            <div class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding" style="padding-left: 0; padding-right: 0">
 
-                </component>
-            </keep-alive>
+                <div v-if="service.help_message && service.service_type === 'managed'" class="helper-message-container">
+
+                    <p class="helper-message-text">{{service.help_message}}</p>
+
+                </div>
+
+                <keep-alive>
+                    <component v-bind:is="activeSectionName"
+                               style="padding: 0"
+                               :service="service">
+                    </component>
+                </keep-alive>
+
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -454,7 +462,8 @@
             p
                 font-style normal
                 font-stretch normal
-                line-height 40px
+                padding-top 8px
+                padding-bottom 8px
                 text-align center
                 font-family iran-yekan
                 background-color #fefefe
@@ -473,9 +482,10 @@
                     border-radius 0
                     box-shadow none
                     font-size 1em
-                    line-height 32px
                     margin-top 8px
                     margin-bottom 8px
+                    padding-top 2px
+                    padding-bottom 2px
                     background-color transparent
 
 
@@ -490,7 +500,8 @@
             p
                 font-style normal
                 font-stretch normal
-                line-height 40px
+                padding-top 8px
+                padding-bottom 8px
                 text-align center
                 font-family iran-yekan
                 font-weight bold
@@ -507,7 +518,8 @@
                     min-width 200px
                     border-radius 0
                     box-shadow none
-                    line-height 32px
+                    padding-top 2px
+                    padding-bottom 2px
                     font-size 1em
                     margin-top 8px
                     margin-bottom 8px
@@ -898,6 +910,23 @@
             padding-left 12px
             @media only screen and (max-width: 766px)
                 padding 0
+
+
+    .helper-message-container
+        width 100%
+        border-radius 3px
+        background-color rgba(0, 69, 255, 0.6)
+        padding 8px 16px
+        margin-bottom 12px
+        display flex
+        flex-direction column
+
+        p.helper-message-text
+            font-size 1em
+            color #fefefe
+            font-family 'Helvetica Neue'
+            direction ltr
+            margin-bottom 0
 
 
 </style>
