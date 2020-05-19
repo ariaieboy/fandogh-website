@@ -588,7 +588,7 @@
                         },
                         {
                             title: 'حافظه ذخیره‌سازی موقت',
-                            detail: '3 GB'
+                            detail: '3GB/SVC'
                         }
                     ],
                     config: [
@@ -618,7 +618,7 @@
                         },
                         {
                             title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
-                            detail: '3 GB'
+                            detail: '3GB/SVC'
                         }
                     ],
                     specs: [
@@ -688,7 +688,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         config: [
@@ -718,7 +718,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -787,7 +787,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         config: [
@@ -817,7 +817,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -896,7 +896,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         config: [
@@ -930,7 +930,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -1020,7 +1020,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         config: [
@@ -1054,7 +1054,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -1156,7 +1156,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         config: [
@@ -1190,7 +1190,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -1298,7 +1298,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         config: [
@@ -1332,7 +1332,7 @@
                             },
                             {
                                 title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
-                                detail: '3 GB'
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
