@@ -126,7 +126,7 @@
                 return this.$store.state.sideMunu
             },
             isFullPage() {
-                if (this.$route.path.indexOf('transaction-details') !== -1) {
+                if (this.$route.path.indexOf('transaction-details') !== -1 ) {
                     return true
                 } else {
                     return false
@@ -136,7 +136,7 @@
                 return this.$store.state.windowWidth <= 992;
             },
             isMenuAvailable() {
-                if (this.$route.path.indexOf('account') !== -1) {
+                if (this.$route.path.indexOf('account') !== -1 || this.$route.path.indexOf('support') !== -1) {
                     return false;
                 } else return this.$route.path.indexOf('bill') === -1;
             }, accountExpired() {
@@ -232,11 +232,11 @@
         },
         methods: {
             changeNamespaceTo(namespace) {
-                if(this.$route.query['ns']){
-                    if(this.$route.query['ns'] !== namespace.name){
+                if (this.$route.query['ns']) {
+                    if (this.$route.query['ns'] !== namespace.name) {
                         this.toggleNamespaceModal();
                         this.syncUrlWithNs(namespace)
-                    }else {
+                    } else {
                         this.toggleNamespaceModal()
                     }
                 }
