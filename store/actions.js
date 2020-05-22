@@ -567,6 +567,14 @@ export const getSecretDetails = async ({commit, state}, secret_name) => {
     }
 };
 
+export const getTickets = async ({commit, state}) => {
+    try {
+        return await Request().get(`/api/ticketing/tickets`);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 export const getVolumes = async ({commit, state}) => {
     try {
         let volumes = await Request().get(`/api/volumes`);

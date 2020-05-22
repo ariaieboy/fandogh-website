@@ -1,6 +1,6 @@
 <template>
 
-    <div class="row" style="overflow-x:auto;margin: 0; padding-left: 5px; padding-right: 5px; padding-bottom: 150px">
+    <div class="row" style="overflow-x: auto; margin: 0; padding-left: 5px; padding-right: 5px; padding-bottom: 150px">
         <table style="width: 100%; border-collapse: separate; text-align: right; border-spacing: 0 .1em; table-layout: fixed">
             <tr class="head">
                 <th v-for="title in titles" :width="title.width">
