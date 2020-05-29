@@ -5,14 +5,14 @@
         <div class="container-fluid col-lg-11 col-md-11 col-xs-12 col-sm-12">
 
             <div style="width: 100%;">
-                <transition name="fade">
-                    <div v-if="page_status === 'index'" class="right" style="float: right;"><p
-                            class="title_header">{{page_title}}</p>
-                    </div>
-                    <div v-else class="right" style="float: right;"><p class="title_header">
-                        {{new_ticket_title}}</p>
-                    </div>
-                </transition>
+
+                <div v-if="ticket_details && page_status === 'ticket_details'" class="right" style="float: right;"><p
+                        class="title_header">
+                    {{page_title}}/{{ticket_details.id}}</p>
+                </div>
+                <div v-else class="right" style="float: right;"><p class="title_header">
+                    {{new_ticket_title}}</p>
+                </div>
 
                 <div class="support-header-container">
 
@@ -21,52 +21,222 @@
                         <button v-if="page_status === 'new_ticket'"
                                 @click="sendNewTicket"
                                 class="support-new-ticket-button">
+
                             {{apply_ticket_text}}
+
                         </button>
 
                         <button v-else
                                 class="support-new-ticket-button"
                                 @click="page_status = 'new_ticket'">
+
                             {{new_ticket_text}}
+
                         </button>
 
                         <button v-if="page_status === 'new_ticket'"
                                 class="support-cancel-ticket-button"
                                 @click="cancelNewTicket">
+
                             {{cancel_text}}
+
                         </button>
 
                     </div>
 
-                    <div v-if="page_status === 'index'" class="support-header-search-bar">
+                    <div v-if="page_status === 'ticket_details' && ticket_details"
+                         class="support-header-ticket-details">
 
-                        <div class="support-search-bar-action-container">
-                            <img src="../../../assets/svg/ic-search.svg" alt="search">
-                        </div>
+                        <p class="ticket-details-id">{{ticket_details.id}}</p>
 
+                        <div class="ticket-details-divider"></div>
 
-                        <div class="support-header-search-container">
-                            <input :placeholder="search_hint">
-                        </div>
+                        <p class="ticket-details-title">{{ticket_details.title}}</p>
+
+                        <img src="../../../components/Dashboard/header/icons/arrow-point-to-right.svg"
+                             alt="back"
+                             @click="backToIndex"
+                             class="ticket-details-button">
 
                     </div>
 
                     <div v-else class="support-header-ticket-details">
-                        <p class="ticket-details-title">{{new_ticket_title}}</p>
+                        <p class="ticket-details-title">{{ticket_details_title}}</p>
                     </div>
 
                 </div>
 
-                <div v-if="page_status === 'index'" style="margin-left: 0; margin-right: 0">
+                <div v-if="page_status === 'ticket_details' && ticket_details"
+                     class="support-ticket-details-container">
 
                     <ticket-complete-row
                             v-if="tickets.results"
-                            style="margin-left: 0; margin-right: 0;"
                             :header="titleRowComplete"
                             :func="displayTicketDetails"
-                            :is_simple="is_simple"
+                            class="ticket-complete-row"
+                            :is_simple="page_status === 'ticket_details'"
                             :cel-specs="tickets.results">
                     </ticket-complete-row>
+
+                    <div class="ticket-conversation-container">
+                        <div id="conversation_view" class="conversation-view">
+
+                            <div :class="[!ticket_details.user.is_admin ? 'user-reply-container' : 'admin-reply-container']">
+                                <div :class="[!ticket_details.user.is_admin ? 'user-reply' : 'admin-reply']">
+                                    <div>
+                                        <img :src="require('../../../assets/svg/' + (!ticket_details.user.is_admin ?
+                                         'ic-person' : 'ic-support-person') + '.svg')"
+                                             :alt="!ticket_details.user.is_admin ? 'ic-person' : 'ic-support-person'">
+                                        <p class="reply-username">{{ticket_details.user.username}}</p>
+                                    </div>
+                                    <div class="reply-message-divider"></div>
+                                    <p class="reply-message">{{ticket_details.description}}</p>
+                                </div>
+                                <div v-if="ticket_details.files.length > 0"
+                                     class="ticket-attachment-container row"
+                                     style="margin-left: 0; margin-right: 0;">
+
+                                    <div v-for="(file, index) in ticket_details.files.length < 5 ? ticket_details.files : ticket_details.files.slice(0, 4)"
+                                         :key="file.id"
+                                         class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+                                        <img v-if="index < 3"
+                                             :id="`img-${ticket_details.id}-${file.id}`"
+                                             class="attachment-image"
+                                             alt="attachment"
+                                             @click="showTicketImages(ticket_details.files, index)"
+                                             :src="getTicketFiles(file.id, `img-${ticket_details.id}-${file.id}`)">
+
+                                        <img v-else-if="index < 4 && ticket_details.files.length < 5"
+                                             :id="`img-${ticket_details.id}-${file.id}`"
+                                             class="attachment-image"
+                                             alt="attachment"
+                                             @click="showTicketImages(ticket_details.files, index)"
+                                             :src="getTicketFiles(file.id, `img-${ticket_details.id}-${file.id}`)">
+
+                                        <img v-else
+                                             class="attachment-image"
+                                             @click="showTicketImages(ticket_details.files, 0)"
+                                             src="../../../assets/svg/ic-more-attachment.svg"
+                                             alt="more">
+
+                                        <img src="../../../assets/svg/ic-see.svg"
+                                             alt="view-attachment"
+                                             class="attachment-zoom">
+
+                                    </div>
+
+                                </div>
+                                <p class="reply-date">{{ticket_details.created_at}}</p>
+                            </div>
+
+
+                            <div v-if="ticket_details.replies.length > 0"
+                                 :id="index === ticket_details.replies.length - 1 ? 'last-reply' : ''"
+                                 v-for="(reply, index) in ticket_details.replies"
+                                 :class="[!reply.user.is_admin ? 'user-reply-container' : 'admin-reply-container']">
+                                <div :class="[!reply.user.is_admin ? 'user-reply' : 'admin-reply']">
+                                    <div>
+                                        <img :src="require('../../../assets/svg/' + (!reply.user.is_admin ? 'ic-person' : 'ic-support-person') + '.svg')"
+                                             :alt="!reply.user.is_admin ? 'ic-person' : 'ic-support-person'">
+                                        <p class="reply-username">{{reply.user.username}}</p>
+                                    </div>
+                                    <div class="reply-message-divider"></div>
+                                    <p class="reply-message">{{reply.answer}}</p>
+                                </div>
+                                <div v-if="reply.files.length > 0"
+                                     class="ticket-attachment-container row"
+                                     style="margin-left: 0; margin-right: 0;">
+
+                                    <div v-for="(file, index) in reply.files.length < 5 ? reply.files : reply.files.slice(0, 4)"
+                                         :key="file.id"
+                                         class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+
+                                        <img v-if="index < 3"
+                                             :id="`img-${reply.id}-${file.id}`"
+                                             class="attachment-image"
+                                             alt="attachment"
+                                             @click="showTicketImages(reply.files, index)"
+                                             :src="getTicketFiles(file.id, `img-${reply.id}-${file.id}`)">
+
+                                        <img v-else-if="index < 4 && reply.files.length < 5"
+                                             :id="`img-${reply.id}-${file.id}`"
+                                             class="attachment-image"
+                                             alt="attachment"
+                                             @click="showTicketImages(reply.files, index)"
+                                             :src="getTicketFiles(file.id, `img-${reply.id}-${file.id}`)">
+
+                                        <img v-else
+                                             class="attachment-image"
+                                             @click="showTicketImages(reply.files, 0)"
+                                             src="../../../assets/svg/ic-more-attachment.svg"
+                                             alt="more">
+
+                                        <img src="../../../assets/svg/ic-see.svg"
+                                             alt="view-attachment"
+                                             class="attachment-zoom">
+
+                                    </div>
+
+                                </div>
+                                <p class="reply-date">{{reply.created_at}}</p>
+                            </div>
+                        </div>
+
+                        <div v-if="ticket_details.status !== 'CLOSED' && source"
+                             style=" width: 100%; height: max-content; max-width: 658px; overflow-x: auto; background-color: rgba(0, 0, 0, 0.1); margin: 0;">
+
+                            <div id="thumbnail-container"
+                                 class="attachment-preview-container">
+                            </div>
+
+                        </div>
+
+                        <div v-if="ticket_details.status !== 'CLOSED'"
+                             class="chat-input-container">
+
+                            <div class="send-message-action-container">
+                                <img src="../../../assets/svg/ic-send-message.svg"
+                                     alt="send"
+                                     @click="sendReply(ticket_details.id)">
+                            </div>
+
+                            <div class="message-input-container">
+
+                                <div class="upload-btn-wrapper2">
+
+                                    <input accept="image/png, image/jpg, text/plain, application/pdf"
+                                           @change="e => changeFiles(e.target)"
+                                           type="file"
+                                           multiple
+                                           ref="upload"
+                                           @click="e => e.target.value = null && alert(e.target.value)"
+                                           name="files[]"
+                                           id="source_1"/>
+
+                                    <img id='file'
+                                         ref='file'
+                                         src="../../../assets/svg/ic-attach-file.svg"
+                                         alt="attach"
+                                         @click="notifyUpload"
+                                         class="button-attach-file">
+
+                                </div>
+
+                                <div class="message-input-divider"></div>
+
+                                <input class="message-input"
+                                       type="text"
+                                       @input="e => this.ticket_reply = e.target.value"
+                                       ref="ticket_message"
+                                       @keyup.enter="sendReply(ticket_details.id)"
+                                       :placeholder="enter_message">
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -85,7 +255,6 @@
 
                             <textarea name="title_text"
                                       maxlength="120"
-                                      v-model="ticket_title"
                                       class="new-ticket-title-input"
                                       @input="e => this.ticket_title = e.target.value"
                                       :placeholder="ticket_title_hint">
@@ -194,7 +363,6 @@
                         <textarea name="message"
                                   maxlength="1500"
                                   @input="e => this.ticket_description = e.target.value"
-                                  v-model="ticket_description"
                                   :placeholder="ticket_description_hint">
                         </textarea>
 
@@ -202,12 +370,12 @@
 
                 </div>
 
-
             </div>
 
         </div>
 
     </div>
+
 </template>
 
 <script>
@@ -219,7 +387,7 @@
     import {formData} from "../../../utils/formData";
 
     export default {
-        name: 'index',
+        name: "_id",
         layout: 'dashboard',
         components: {
             TicketCompleteRow,
@@ -229,9 +397,11 @@
 
         }, data() {
             return {
-                page_title: 'پشتیبانی',
-                page_status: 'index',
+                page_title: 'تیکت',
+                ticket_details_title: 'ایجاد تیکت جدید',
+                page_status: 'ticket_details',
                 new_ticket_title: 'ثبت تیکت جدید',
+                ticket_id: this.$route.params.ticket,
                 source: null,
                 search_hint: 'جست‌و‌جو در تیکت‌ها...',
                 cancel_text: 'انصراف',
@@ -244,9 +414,13 @@
                     {title: 'بخش', width: '10%'},
                     {title: 'موضوع تیکت', width: '55%'}
                 ],
+                titleRowSimple: [
+                    {title: 'شماره', width: '8%'},
+                    {title: 'وضعیت', width: '12%'},
+                    {title: 'موضوع تیکت', width: '80%'}
+                ],
                 is_simple: false,
                 tickets: {},
-                ticket_replies: {},
                 ticket_details: null,
                 enter_message: 'پیام خود را وارد نمایید...',
                 ticket_reply: '',
@@ -276,21 +450,6 @@
             }
         },
         methods: {
-            chooseDepartment(index) {
-                this.selected_department = this.department_options[index];
-                this.show_departments = false;
-            },
-            cancelNewTicket() {
-                this.selected_department = null;
-                this.show_departments = false;
-                this.ticket_title = '';
-                this.ticket_description = '';
-                this.page_status = 'index';
-                if (this.source) {
-                    document.getElementById('thumbnail-container-2').innerHTML = '';
-                    this.source = null;
-                }
-            },
             async sendNewTicket() {
 
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
@@ -354,6 +513,21 @@
                 this.$store.commit("SET_DATA", {data: false, id: "loading"});
 
             },
+            cancelNewTicket() {
+                this.selected_department = null;
+                this.show_departments = false;
+                this.ticket_title = '';
+                this.ticket_description = '';
+                this.page_status = 'ticket_details';
+                if (this.source) {
+                    document.getElementById('thumbnail-container-2').innerHTML = '';
+                    this.source = null;
+                }
+            },
+            chooseDepartment(index) {
+                this.selected_department = this.department_options[index];
+                this.show_departments = false;
+            },
             async getData() {
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 try {
@@ -387,20 +561,135 @@
                     }
                 }
             },
+            async getReplies(ticket_id) {
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                try {
+                    let ticket_replies = await this.$store.dispatch("getTicketReplies", ticket_id);
+
+                    this.ticket_details = {...ticket_replies};
+                    this.ticket_details.created_at = Moment(ticket_replies.created_at).format('HH:mm jYYYY/jMM/jDD');
+
+                    await this.$nextTick();
+
+                    this.ticket_details.replies = ticket_replies.replies.map(({id, files, user, created_at, answer}) => {
+                        return {
+                            id,
+                            files,
+                            user,
+                            created_at: Moment(created_at).format('HH:mm jYYYY/jMM/jDD'),
+                            answer
+                        };
+                    });
+
+                    this.$nextTick();
+                    document.getElementById('conversation_view').scrollTop = 99999999;
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: e.data.message,
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
+            },
+            async getTicketFiles(file_id, element_id) {
+
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                try {
+                    let response = await this.$store.dispatch("getTicketFiles", file_id);
+                    var reader = new window.FileReader();
+                    reader.readAsDataURL(response);
+                    reader.onload = function () {
+                        if (response.type === 'text/plain') {
+                            document.getElementById(element_id).src = require('../../../assets/svg/ic-file-text.svg')
+                        } else if (response.type === 'application/pdf') {
+                            document.getElementById(element_id).src = require('../../../assets/svg/ic-pdf-file.svg')
+                        } else {
+                            document.getElementById(element_id).src = reader.result;
+                        }
+                    };
+                    await this.$nextTick();
+                    document.getElementById('conversation_view').scrollTop = 99999999;
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: e.data.message,
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
+            },
+            async sendReply(ticket_id) {
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                try {
+                    let fd = formData([
+                        {
+                            name: 'answer',
+                            value: this.ticket_reply
+                        }
+                    ]);
+
+                    if (this.source) {
+                        for (let file of this.source)
+                            fd.append('file', file)
+                    }
+
+                    let response = await this.$store.dispatch("sendTicketReply", {ticket_id: ticket_id, formData: fd});
+                    this.$refs.ticket_message.value = '';
+                    if (this.source) {
+                        const thumbnailNode = document.getElementById('thumbnail-container');
+                        thumbnailNode.innerHTML = '';
+                        this.source = null;
+                    }
+                    this.ticket_details.replies.push(response);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: e.data.message,
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
+            },
             displayTicketDetails(index) {
-                this.$router.push(`/dashboard/support/${this.tickets.results[index].id}`);
+                if (this.ticket_id) {
+                    if (this.ticket_id === this.tickets.results[index].id)
+                        return;
+                }
+                this.$router.replace(`/dashboard/support/${this.tickets.results[index].id}`);
+            },
+            backToIndex() {
+                this.$router.go(-1);
             },
             changeFiles(target) {
 
                 var files = target.files;
 
                 if (this.source) {
-                    if (document.getElementById(this.page_status === 'index' ? 'thumbnail-container' : 'thumbnail-container-2').children.length > 0)
-                        document.getElementById(this.page_status === 'index' ? 'thumbnail-container' : 'thumbnail-container-2').innerHTML = ''
+                    if (document.getElementById(this.page_status === 'ticket_details' ? 'thumbnail-container' : 'thumbnail-container-2').children.length > 0)
+                        document.getElementById(this.page_status === 'ticket_details' ? 'thumbnail-container' : 'thumbnail-container-2').innerHTML = ''
                 }
 
                 this.$nextTick(() => {
                     this.source = null;
+
                     if (files) {
 
                         this.source = files;
@@ -416,7 +705,6 @@
                 this.$refs.upload.click()
             },
             readSourceImage(file) {
-                console.log(file)
                 var reader = new window.FileReader();
                 reader.readAsDataURL(file);
                 var vm = this;
@@ -427,6 +715,7 @@
 
                     var DOM_img = document.createElement("img");
                     DOM_img.className = 'main-img';
+
                     if (reader.result.indexOf('application/pdf') !== -1) {
                         DOM_img.src = require('../../../assets/svg/ic-pdf-file.svg')
                     } else if (reader.result.indexOf('text/plain') !== -1) {
@@ -442,25 +731,37 @@
                     DOM_div.appendChild(DOM_img);
                     DOM_div.appendChild(DOM_remove_btn);
 
-                    document.getElementById(vm.page_status === 'index' ? 'thumbnail-container' : 'thumbnail-container-2').appendChild(DOM_div);
+                    document.getElementById(vm.page_status === 'ticket_details' ? 'thumbnail-container' : 'thumbnail-container-2').appendChild(DOM_div);
 
                     document.getElementById(`thumbnail-${file.name}`).addEventListener('click', function () {
                         vm.source = Array.from(vm.source).filter(function (item) {
                             return item.name !== file.name
                         });
+
                         if (vm.source.length === 0) {
                             vm.source = null
                         }
-                        document.getElementById(vm.page_status === 'index' ? 'thumbnail-container' : 'thumbnail-container-2').removeChild(DOM_div);
+                        document.getElementById(vm.page_status === 'ticket_details' ? 'thumbnail-container' : 'thumbnail-container-2').removeChild(document.getElementById(`thumbnail-${file.name}`))
                     }, false);
                 }
             },
+            showTicketImages(images, index) {
+                let image_object = {
+                    selected_image: images[index],
+                    images: images
+                };
+                this.$store.commit('SET_DATA', {data: image_object, id: 'ticket_images'})
+            }
         },
         created() {
-            this.getData()
+            this.getData();
+            this.getReplies(this.ticket_id)
         }, mounted() {
             this.$store.commit("SET_DATA", {data: false, id: "loading"});
         },
+        beforeDestroy() {
+            this.$store.commit("SET_DATA", {data: null, id: "ticket_images"});
+        }
     }
 </script>
 
@@ -480,10 +781,10 @@
 
 
     .title_header
-        font-family iran-yekan
+        font-family yekan-number-regular
         font-style normal
         font-weight bold
-        font-size 1.2em
+        font-size 1.8em
         font-stretch normal
         line-height 1.75
         padding-top 18px
@@ -624,8 +925,8 @@
                 font-size 1em
                 color #111
                 margin auto 0
-                padding 0 12px
                 line-height 45px
+                padding 0 12px
                 font-family iran-sans
                 @media only screen and (max-width 992px)
                     line-height 34px
@@ -638,9 +939,9 @@
 
             p.ticket-details-title
                 font-size 1em
-                line-height 45px
                 color #111
                 margin auto 0
+                line-height 45px
                 padding 0 12px
                 @media only screen and (max-width 992px)
                     line-height 34px
@@ -656,10 +957,19 @@
         width 100%
         display flex
         flex-direction row
+        @media only screen and (max-width 992px)
+            flex-direction column
+
+        .ticket-complete-row
+            margin-right 0
+            flex .45
+            margin-left 12px
+            @media only screen and (max-width 992px)
+                display none
 
         div.ticket-conversation-container
             flex .57
-            margin-top 24px
+            margin-top 16px
             display flex
             flex-direction column
 
@@ -679,7 +989,9 @@
                     display flex
                     flex-direction column
                     width 50%
-                    margin-left: auto;
+                    margin-left auto
+                    @media only screen and (max-width 992px)
+                        width 75%
 
                     div.user-reply
                         padding 12px 16px
@@ -688,13 +1000,38 @@
                         flex-direction column
                         display flex
 
-                        p.reply-username
-                            margin 0
-                            color #3c3c3c
-                            font-family 'Helvetica Neue'
-                            font-size .9em
-                            font-weight bold
+                        div
+                            width max-content
                             display flex
+                            flex-direction row
+
+                            p.reply-username
+                                margin 0
+                                color #3c3c3c
+                                font-family 'Helvetica Neue'
+                                font-size 1em
+                                font-weight normal
+                                display flex
+                                line-height 22px
+
+                            img
+                                width 22px
+                                height 22px
+                                padding 3px
+                                border-radius 15px
+                                border 1px solid #000
+                                margin-left 8px
+                                opacity 50%
+                                margin-top auto
+                                margin-bottom auto
+
+
+                        div.reply-message-divider
+                            height 1px
+                            background-color #000
+                            width 100%
+                            margin 8px 0
+                            opacity .2
 
                         p.reply-message
                             color #3c3c3c
@@ -755,6 +1092,8 @@
                     flex-direction column
                     width 50%
                     margin-right auto
+                    @media only screen and (max-width 992px)
+                        width 75%
 
                     div.admin-reply
                         padding 12px 16px
@@ -763,13 +1102,39 @@
                         flex-direction column
                         display flex
 
-                        p.reply-username
-                            margin 0
-                            color #fefefe
-                            font-family 'Helvetica Neue'
-                            font-size .9em
-                            font-weight bold
+                        div
+                            width 100%
                             display flex
+                            direction ltr
+                            flex-direction row
+
+
+                            p.reply-username
+                                margin 0
+                                color #fefefe
+                                font-family 'Helvetica Neue'
+                                font-size 1em
+                                font-weight normal
+                                display flex
+                                line-height 22px
+
+                            img
+                                width 22px
+                                height 22px
+                                padding 3px
+                                border-radius 15px
+                                border 1px solid #000
+                                margin-right 8px
+                                filter invert(1)
+                                opacity 75%
+                                margin-top auto
+                                margin-bottom auto
+
+                        div.reply-message-divider
+                            height 1px
+                            background-color #fff
+                            margin 8px 0
+                            opacity .2
 
                         p.reply-message
                             color #fefefe
@@ -837,6 +1202,8 @@
                 display flex
                 flex-direction row
                 padding 4px 8px
+                margin-top 2px
+                z-index 100
                 max-height 88px
 
                 div.send-message-action-container
@@ -878,7 +1245,6 @@
                         width 100%
                         outline none
                         padding-top 4px
-
 
     .attachment-preview-container
         display inline-flex
@@ -929,8 +1295,8 @@
             flex .45
             margin-left 12px
             @media only screen and (max-width 992px)
-                flex unset
                 margin-left 0
+                flex unset
 
             div.new-ticket-title-container
                 width 100%
@@ -1057,7 +1423,6 @@
                             min-height 80px
                             max-height 200px
 
-
                         p
                             width 100%
                             line-height 36px
@@ -1067,9 +1432,6 @@
                             padding 0 16px
                             cursor pointer
                             transition all .3s ease-in-out
-                            @media only screen and (max-width 992px)
-                                line-height 32px
-
 
                         p:hover
                             background-color rgba(127, 130, 139, 0.25)
@@ -1175,7 +1537,6 @@
                     min-height 200px
                     max-height 400px
 
-
         div.new-ticket-message-text-input:hover
             box-shadow 0 2px 6px rgba(0, 0, 0, 0.45)
 
@@ -1249,7 +1610,6 @@
             font-size .9em
 
 </style>
-
 
 <style lang="css">
 
