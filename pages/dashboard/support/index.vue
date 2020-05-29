@@ -458,9 +458,7 @@
         },
         created() {
             this.getData()
-        }, mounted() {
-            this.$store.commit("SET_DATA", {data: false, id: "loading"});
-        },
+        }
     }
 </script>
 
