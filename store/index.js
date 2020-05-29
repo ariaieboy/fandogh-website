@@ -40,7 +40,8 @@ const createStore = () => {
         manifest: {},
         account: {},
         activePlan: {},
-        transactionDetail: {}
+        transactionDetail: {},
+        ticket_images: null
       };
     },
     actions: actions,
