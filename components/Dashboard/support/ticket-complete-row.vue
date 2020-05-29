@@ -1,8 +1,9 @@
 <template>
 
     <div class="row support-complete-row-container">
-        <table style="width: 100%; min-width: 900px; border-collapse: separate; border-spacing: 0 .15em; table-layout: fixed">
-            <tbody class="section">
+        <table style="width: 100%; border-collapse: separate; border-spacing: 0 .15em; table-layout: fixed"
+               :style="{minWidth: is_simple ? 'unset' : '900px'}">
+            <tbody v-if="!is_simple" class="section">
             <tr class="header">
                 <th v-for="item in header" v-bind:style="{width:item.width}">
                     {{item.title}}
@@ -10,12 +11,13 @@
             </tr>
             </tbody>
             <tbody>
-            <tr class="data" v-for="celSpec in celSpecs">
-                <td class="number" width="8%">{{celSpec.id}}</td>
-                <td width="12%" v-html="celSpec.status"></td>
-                <td width="15%" style="font-family: iran-sans">{{celSpec.created_at}}</td>
-                <td width="10%">{{celSpec.department}}</td>
-                <td class="number" width="55%" style="direction: ltr">{{celSpec.title}}</td>
+            <tr class="data" v-for="(celSpec, index) in celSpecs"
+                @click="func ? func(index) : ''">
+                <td class="number" :width="is_simple ? '10%' : '8%'">{{celSpec.id}}</td>
+                <td :width="is_simple ? '37%' : '12%'" width="15%" v-html="celSpec.status"></td>
+                <td v-if="!is_simple" width="15%" style="font-family: iran-sans">{{celSpec.created_at}}</td>
+                <td v-if="!is_simple" width="10%">{{celSpec.department}}</td>
+                <td :width="is_simple ? '53%' : '55%'">{{celSpec.title}}</td>
             </tr>
             </tbody>
         </table>
@@ -25,7 +27,7 @@
 <script>
     export default {
         name: "ticket-complete-row",
-        props: ['header', 'celSpecs'],
+        props: ['header', 'celSpecs', 'func', 'is_simple'],
     }
 </script>
 
@@ -34,7 +36,7 @@
     .support-complete-row-container
         overflow-x auto
         padding-bottom 150px
-        padding-top 24px
+        padding-top 16px
         @media only screen and (max-width 992px)
             padding-top 16px
 
