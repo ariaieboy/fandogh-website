@@ -566,7 +566,9 @@
                 try {
                     let ticket_replies = await this.$store.dispatch("getTicketReplies", ticket_id);
 
+
                     this.ticket_details = {...ticket_replies};
+                    console.log(this.ticket_details);
                     this.ticket_details.created_at = Moment(ticket_replies.created_at).format('HH:mm jYYYY/jMM/jDD');
 
                     await this.$nextTick();

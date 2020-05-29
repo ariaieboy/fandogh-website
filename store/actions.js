@@ -569,7 +569,7 @@ export const getSecretDetails = async ({commit, state}, secret_name) => {
 
 export const getTickets = async ({commit, state}) => {
     try {
-        return await Request().get(`/api/ticketing/tickets`);
+        return await Request().get(`/api/tickets`);
     } catch (e) {
         return Promise.reject(e);
     }
@@ -577,7 +577,7 @@ export const getTickets = async ({commit, state}) => {
 
 export const getTicketReplies = async ({commit, state}, ticket_id) => {
     try {
-        return await Request().get(`/api/ticketing/tickets/${ticket_id}`);
+        return await Request().get(`/api/tickets/${ticket_id}`);
     } catch (e) {
         return Promise.reject(e);
     }
@@ -585,7 +585,7 @@ export const getTicketReplies = async ({commit, state}, ticket_id) => {
 
 export const getTicketFiles = async ({commit, state}, file_id) => {
     try {
-        return await Request().get(`/api/ticketing/tickets/files/${file_id}`, {
+        return await Request().get(`/api/tickets/files/${file_id}`, {
             responseType: "blob"
         });
     } catch (e) {
@@ -595,7 +595,7 @@ export const getTicketFiles = async ({commit, state}, file_id) => {
 
 export const sendTicketReply = async ({commit, state}, {ticket_id, formData}) => {
     try {
-        return await Request().post(`/api/ticketing/tickets/${ticket_id}`, formData, {
+        return await Request().post(`/api/tickets/${ticket_id}`, formData, {
             onUploadProgress: progressEventListener(commit),
             headers: {
                 "Content-Type": "multipart/form-data"
@@ -608,7 +608,7 @@ export const sendTicketReply = async ({commit, state}, {ticket_id, formData}) =>
 
 export const sendNewTicket = async ({commit, state}, {formData}) => {
     try {
-        return await Request().post('/api/ticketing/tickets', formData, {
+        return await Request().post('/api/tickets', formData, {
             onUploadProgress: progressEventListener(commit),
             headers: {
                 "Content-Type": "multipart/form-data"
