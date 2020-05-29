@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="140px" height="140px" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Group 7</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M45.8284271,0 L52,0 C53.1045695,-2.02906125e-16 54,0.8954305 54,2 L54,8.17157288 C54,9.27614237 53.1045695,10.1715729 52,10.1715729 C51.469567,10.1715729 50.9608592,9.96085919 50.5857864,9.58578644 L44.4142136,3.41421356 C43.633165,2.63316498 43.633165,1.36683502 44.4142136,0.585786438 C44.7892863,0.210713681 45.2979941,1.42970659e-15 45.8284271,0 Z" id="path-1"></path>
+        <filter x="-43.6%" y="-80.8%" width="224.4%" height="224.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="1" dy="-1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-270.000000, -250.000000)">
+            <g id="Group-7" transform="translate(270.000000, 250.000000)">
+                <rect id="Rectangle" fill-opacity="0.1" fill="#111111" fill-rule="nonzero" x="0" y="0" width="140" height="140" rx="5"></rect>
+                <g id="Group-6" transform="translate(46.000000, 36.000000)">
+                    <g id="Group-5" transform="translate(0.000000, 2.000000)">
+                        <path d="M2,1.0658141e-14 L25.7910448,1.0658141e-14 L25.7910448,1.0658141e-14 L38.6865672,1.0658141e-14 L42.2505793,1.0658141e-14 C44.0732816,5.53353433e-16 45.797159,0.828538314 46.9357921,2.25182971 L50.2673024,6.41621756 C51.118405,7.48009585 51.5820896,8.80195888 51.5820896,10.1643878 L51.5820896,16.119403 L51.5820896,16.119403 L51.5820896,32.238806 L51.5820896,61.6716418 C51.5820896,62.7762113 50.6866591,63.6716418 49.5820896,63.6716418 L2,63.6716418 C0.8954305,63.6716418 3.68798443e-15,62.7762113 3.55271368e-15,61.6716418 L3.55271368e-15,2 C3.41744293e-15,0.8954305 0.8954305,1.08610472e-14 2,1.0658141e-14 Z" id="Rectangle" fill="#2C14FF" fill-rule="nonzero"></path>
+                        <text id="TXT" font-family="HelveticaNeue, Helvetica Neue" font-size="20" font-weight="normal" fill="#FEFEFE">
+                            <tspan x="8" y="38.5820896">TXT</tspan>
+                        </text>
+                    </g>
+                    <g id="Rectangle" transform="translate(47.500000, 6.500000) rotate(-180.000000) translate(-47.500000, -6.500000) ">
+                        <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                        <use fill="#1900FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
