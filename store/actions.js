@@ -278,7 +278,7 @@ export const getServices = async ({commit, state}) => {
 
 export const getServiceLog = async ({commit, state}, {name, with_timestamp, max_logs, last_logged_time, previous}) => {
     try {
-        let logs = await Request().get(`/api/services/${name}/logs`,{
+        let logs = await Request().get(`/api/services/${name}/logs`, {
             params: {
                 with_timestamp: with_timestamp,
                 max_logs: max_logs,
@@ -574,6 +574,51 @@ export const getTickets = async ({commit, state}) => {
         return Promise.reject(e);
     }
 };
+
+export const getTicketReplies = async ({commit, state}, ticket_id) => {
+    try {
+        return await Request().get(`/api/ticketing/tickets/${ticket_id}`);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
+export const getTicketFiles = async ({commit, state}, file_id) => {
+    try {
+        return await Request().get(`/api/ticketing/tickets/files/${file_id}`, {
+            responseType: "blob"
+        });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
+export const sendTicketReply = async ({commit, state}, {ticket_id, formData}) => {
+    try {
+        return await Request().post(`/api/ticketing/tickets/${ticket_id}`, formData, {
+            onUploadProgress: progressEventListener(commit),
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
+export const sendNewTicket = async ({commit, state}, {formData}) => {
+    try {
+        return await Request().post('/api/ticketing/tickets', formData, {
+            onUploadProgress: progressEventListener(commit),
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 
 export const getVolumes = async ({commit, state}) => {
     try {
