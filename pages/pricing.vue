@@ -1,5 +1,6 @@
 <template>
-    <div style="width: 100%; max-width: 1750px; margin-left: auto; margin-right: auto; background: rgba(225,223,223,0.2);">
+
+    <div style="width: 100%; max-width: 1750px; margin-left: auto; margin-right: auto; background-color: rgba(225,223,223,0.2);" class="bg-test">
 
         <div class="parallax-container">
             <h1>{{title}}</h1>
@@ -527,7 +528,7 @@
             return {
                 navIsOpen: false,
                 title: 'قیمت محصولات سکوی ابری فندق',
-                description: 'قیمت‌گزاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم.<br/> هر نوع پروژه‌ای با هر مقایسی را به سادگی بر روی فندق اجرا کنید.',
+                description: 'قیمت‌گذاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم.<br/> هر نوع پروژه‌ای با هر مقایسی را به سادگی بر روی فندق اجرا کنید.',
                 headers: {
                     plans: {
                         id: 'plan_section',
@@ -585,6 +586,10 @@
                             title: 'حافظه ذخیره‌سازی اشتراکی',
                             detail: '2.5 GB'
                         },
+                        {
+                            title: 'حافظه ذخیره‌سازی موقت',
+                            detail: '3GB/SVC'
+                        }
                     ],
                     config: [
                         {
@@ -609,7 +614,11 @@
                         },
                         {
                             title: 'بیشینه رم مجاز هر سرویس',
-                            detail: '320 Mi'
+                            detail: '200 Mi'
+                        },
+                        {
+                            title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
+                            detail: '3GB/SVC'
                         }
                     ],
                     specs: [
@@ -677,6 +686,10 @@
                                 title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت',
+                                detail: '3GB/SVC'
+                            }
                         ],
                         config: [
                             {
@@ -701,7 +714,11 @@
                             },
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
-                                detail: '320 Mi'
+                                detail: '200 Mi'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -768,6 +785,10 @@
                                 title: 'حافظه ذخیره‌سازی اشتراکی',
                                 detail: '2.5 GB'
                             },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت',
+                                detail: '3GB/SVC'
+                            }
                         ],
                         config: [
                             {
@@ -793,6 +814,10 @@
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '400 Mi'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -869,6 +894,10 @@
                                 title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '10 GB'
                             },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت',
+                                detail: '3GB/SVC'
+                            }
                         ],
                         config: [
                             {
@@ -898,6 +927,10 @@
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '819 Mi'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -985,6 +1018,10 @@
                                 title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '50 GB'
                             },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت',
+                                detail: '3GB/SVC'
+                            }
                         ],
                         config: [
                             {
@@ -1014,6 +1051,10 @@
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '1.6 GB'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -1113,6 +1154,10 @@
                                 title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '200 GB'
                             },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت',
+                                detail: '3GB/SVC'
+                            }
                         ],
                         config: [
                             {
@@ -1142,6 +1187,10 @@
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '4 GB'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -1247,6 +1296,10 @@
                                 title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: '465 GB'
                             },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت',
+                                detail: '3GB/SVC'
+                            }
                         ],
                         config: [
                             {
@@ -1276,6 +1329,10 @@
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
                                 detail: '19.5 GB'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
+                                detail: '3GB/SVC'
                             }
                         ],
                         specs: [
@@ -1384,6 +1441,10 @@
                                 title: 'حافظه ذخیره‌سازی اختصاصی',
                                 detail: 'سفارشی'
                             },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت',
+                                detail: 'سفارشی'
+                            },
                         ],
                         config: [
                             {
@@ -1412,6 +1473,10 @@
                             },
                             {
                                 title: 'بیشینه رم مجاز هر سرویس',
+                                detail: 'سفارشی'
+                            },
+                            {
+                                title: 'حافظه ذخیره‌سازی موقت (Ephemeral Storage)',
                                 detail: 'سفارشی'
                             }
                         ],
@@ -1718,12 +1783,12 @@
                     {
                         hid: 'description',
                         name: 'description',
-                        content: 'قیمت‌گزاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم. از پروژه‌های کوچک یا پروژه‌های شرکتی را با حداقل هزینه و حداکثر کیفیت تهیه کنید.'
+                        content: 'قیمت‌گذاری رقابتی و منعطف برای هر نوع پروژه‌ای و با هر مقیاسی، کیفیت بالا در مقابل هزینه کم. از پروژه‌های کوچک یا پروژه‌های شرکتی را با حداقل هزینه و حداکثر کیفیت تهیه کنید.'
                     },
                     {
                         hid: 'keywords',
                         name: 'keywords',
-                        content: 'قیمت,پروژه,سکو,سکوی ابری,سکوی ابری فندق,تکنولوژی,docker,پشتیبانی'
+                        content: 'قیمت,پروژه,سکو,سکوی ابری,سکوی ابری فندق,تکنولوژی,docker,پشتیبانی,داکر,mvp,پلن,رایگان,Load Balancer,رم,memory,volume,pay as you go,سکو,فضانام,مانیتورینگ,توسعه,مدیریت زیرساخت,مشاوره,انتقال داده,DevOps,دانشجو,شرکت,AI,shop,website,blog,bot'
                     }
                 ]
 
@@ -2594,6 +2659,13 @@
                 font-size 1em
                 @media only screen and (max-width 992px)
                     font-size .7em
+
+
+    .bg-test
+        background-size 50%
+        background url("../assets/svg/price_bg.svg") no-repeat right top
+        @media only screen and (max-width: 1230px)
+            background none
 
 
 </style>

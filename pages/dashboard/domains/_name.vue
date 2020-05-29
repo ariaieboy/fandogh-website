@@ -38,7 +38,7 @@
                                   :options="{controls: ['play-large', 'play', 'progress', 'mute', 'volume','current-time','fullscreen']}">
                             <video style="width: 100%">
                                 <source style="width: 100%"
-                                        :src="require('../../../assets/media/' + menu_item.video + '.mp4')"
+                                        :src="'https://media.fandogh.cloud/tutorials/domains/' + menu_item.video + '.mp4'"
                                         type="video/mp4"/>
                             </video>
                         </vue-plyr>
