@@ -103,14 +103,14 @@
                                         <img v-if="index < 3"
                                              :id="`img-${ticket_details.id}-${file.id}`"
                                              class="attachment-image"
-                                             alt="attachment"
+                                             alt=""
                                              @click="showTicketImages(ticket_details.files, index)"
                                              :src="getTicketFiles(file.id, `img-${ticket_details.id}-${file.id}`)">
 
                                         <img v-else-if="index < 4 && ticket_details.files.length < 5"
                                              :id="`img-${ticket_details.id}-${file.id}`"
                                              class="attachment-image"
-                                             alt="attachment"
+                                             alt=""
                                              @click="showTicketImages(ticket_details.files, index)"
                                              :src="getTicketFiles(file.id, `img-${ticket_details.id}-${file.id}`)">
 
