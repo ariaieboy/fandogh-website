@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="140px" height="140px" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
-    <title>Group 4</title>
+    <title>Group 6</title>
     <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M45.8284271,0 L52,0 C53.1045695,-2.02906125e-16 54,0.8954305 54,2 L54,8.17157288 C54,9.27614237 53.1045695,10.1715729 52,10.1715729 C51.469567,10.1715729 50.9608592,9.96085919 50.5857864,9.58578644 L44.4142136,3.41421356 C43.633165,2.63316498 43.633165,1.36683502 44.4142136,0.585786438 C44.7892863,0.210713681 45.2979941,1.42970659e-15 45.8284271,0 Z" id="path-1"></path>
-        <filter x="-51.3%" y="-80.8%" width="224.4%" height="224.4%" filterUnits="objectBoundingBox" id="filter-2">
-            <feOffset dx="0" dy="-1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-        </filter>
-    </defs>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group-4">
+        <g id="Group-6">
             <rect id="Rectangle" fill-opacity="0.1" fill="#111111" fill-rule="nonzero" x="0" y="0" width="140" height="140" rx="5"></rect>
-            <g id="Group-3" transform="translate(45.000000, 37.000000)">
-                <g id="Group-8">
-                    <g id="Group-2">
-                        <path d="M2,2.41791045 L25.7910448,2.41791045 L25.7910448,2.41791045 L38.6865672,2.41791045 L42.2505793,2.41791045 C44.0732816,2.41791045 45.797159,3.24644876 46.9357921,4.66974016 L50.2673024,8.83412801 C51.118405,9.8980063 51.5820896,11.2198693 51.5820896,12.5822983 L51.5820896,18.5373134 L51.5820896,18.5373134 L51.5820896,34.6567164 L51.5820896,64.0895522 C51.5820896,65.1941217 50.6866591,66.0895522 49.5820896,66.0895522 L2,66.0895522 C0.8954305,66.0895522 1.3527075e-16,65.1941217 0,64.0895522 L0,4.41791045 C-1.3527075e-16,3.31334095 0.8954305,2.41791045 2,2.41791045 Z" id="Rectangle" fill="#E20E3F" fill-rule="nonzero"></path>
-                        <g id="Rectangle" transform="translate(47.500000, 6.500000) rotate(-180.000000) translate(-47.500000, -6.500000) ">
-                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                            <use fill="#D40B39" fill-rule="evenodd" xlink:href="#path-1"></use>
-                        </g>
-                    </g>
-                    <text id="PDF" fill-opacity="0.903545673" fill="#FEFEFE" font-family="HelveticaNeue, Helvetica Neue" font-size="20" font-weight="normal">
-                        <tspan x="6" y="40">PDF</tspan>
-                    </text>
+            <g id="Group-5" transform="translate(45.000000, 39.000000)">
+                <g id="Group-4" fill="#E20E3F" fill-rule="nonzero">
+                    <path d="M2,0.41791045 L25.7910448,0.41791045 L25.7910448,0.41791045 L38.6865672,0.41791045 L42.2505793,0.41791045 C44.0732816,0.41791045 45.797159,1.24644876 46.9357921,2.66974016 L50.2673024,6.83412801 C51.118405,7.8980063 51.5820896,9.2198693 51.5820896,10.5822983 L51.5820896,16.5373134 L51.5820896,16.5373134 L51.5820896,32.6567164 L51.5820896,62.0895522 C51.5820896,63.1941217 50.6866591,64.0895522 49.5820896,64.0895522 L2,64.0895522 C0.8954305,64.0895522 3.55271368e-15,63.1941217 3.55271368e-15,62.0895522 L3.55271368e-15,2.41791045 C3.55271368e-15,1.31334095 0.8954305,0.41791045 2,0.41791045 Z" id="Rectangle"></path>
                 </g>
+                <text id="PDF" fill-opacity="0.903545673" fill="#FEFEFE" font-family="HelveticaNeue, Helvetica Neue" font-size="20" font-weight="normal">
+                    <tspan x="6" y="38">PDF</tspan>
+                </text>
             </g>
         </g>
     </g>
