@@ -6,9 +6,9 @@
 
             <div style="width: 100%;">
 
-                <div v-if="ticket_details && page_status === 'ticket_details'" class="right" style="float: right;"><p
+                <div v-if="page_status === 'ticket_details'" class="right" style="float: right;"><p
                         class="title_header">
-                    {{page_title}}/{{ticket_details.id}}</p>
+                    {{page_title}}/{{ticket_details !== null ? ticket_details.id : '_'}}</p>
                 </div>
                 <div v-else class="right" style="float: right;"><p class="title_header">
                     {{new_ticket_title}}</p>
@@ -18,40 +18,22 @@
 
                     <div class="support-header-action-container">
 
-                        <button v-if="page_status === 'new_ticket'"
-                                @click="sendNewTicket"
-                                class="support-new-ticket-button">
-
-                            {{apply_ticket_text}}
-
-                        </button>
-
-                        <button v-else
+                        <button v-if="page_status === 'ticket_details'"
                                 class="support-new-ticket-button"
                                 @click="page_status = 'new_ticket'">
-
                             {{new_ticket_text}}
-
-                        </button>
-
-                        <button v-if="page_status === 'new_ticket'"
-                                class="support-cancel-ticket-button"
-                                @click="cancelNewTicket">
-
-                            {{cancel_text}}
-
                         </button>
 
                     </div>
 
-                    <div v-if="page_status === 'ticket_details' && ticket_details"
+                    <div v-if="page_status === 'ticket_details'"
                          class="support-header-ticket-details">
 
-                        <p class="ticket-details-id">{{ticket_details.id}}</p>
+                        <p class="ticket-details-id">{{ticket_details !== null ? ticket_details.id : ''}}</p>
 
                         <div class="ticket-details-divider"></div>
 
-                        <p class="ticket-details-title">{{ticket_details.title}}</p>
+                        <p class="ticket-details-title">{{ticket_details !== null ? ticket_details.title : ''}}</p>
 
                         <img src="../../../components/Dashboard/header/icons/arrow-point-to-right.svg"
                              alt="back"
@@ -66,19 +48,19 @@
 
                 </div>
 
-                <div v-if="page_status === 'ticket_details' && ticket_details"
+                <div v-if="page_status === 'ticket_details'"
                      class="support-ticket-details-container">
 
                     <ticket-complete-row
-                            v-if="tickets.results"
+                            v-if="ticket_details"
                             :header="titleRowComplete"
-                            :func="displayTicketDetails"
+                            :func="replaceTicketDetails"
                             class="ticket-complete-row"
                             :is_simple="page_status === 'ticket_details'"
                             :cel-specs="tickets.results">
                     </ticket-complete-row>
 
-                    <div class="ticket-conversation-container">
+                    <div v-if="ticket_details" class="ticket-conversation-container">
                         <div id="conversation_view" class="conversation-view">
 
                             <div :class="[!ticket_details.user.is_admin ? 'user-reply-container' : 'admin-reply-container']">
@@ -103,14 +85,14 @@
                                         <img v-if="index < 3"
                                              :id="`img-${ticket_details.id}-${file.id}`"
                                              class="attachment-image"
-                                             alt="attachment"
+                                             alt=""
                                              @click="showTicketImages(ticket_details.files, index)"
                                              :src="getTicketFiles(file.id, `img-${ticket_details.id}-${file.id}`)">
 
                                         <img v-else-if="index < 4 && ticket_details.files.length < 5"
                                              :id="`img-${ticket_details.id}-${file.id}`"
                                              class="attachment-image"
-                                             alt="attachment"
+                                             alt=""
                                              @click="showTicketImages(ticket_details.files, index)"
                                              :src="getTicketFiles(file.id, `img-${ticket_details.id}-${file.id}`)">
 
@@ -372,6 +354,24 @@
 
             </div>
 
+            <div v-if="page_status === 'new_ticket'" class="support-header-container">
+
+                <div class="support-footer-action-container">
+
+                    <button class="support-new-ticket-button"
+                            @click="sendNewTicket">
+                        {{apply_ticket_text}}
+                    </button>
+
+                    <button class="support-cancel-ticket-button"
+                            @click="cancelNewTicket">
+                        {{cancel_text}}
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -400,7 +400,7 @@
                 page_title: 'تیکت',
                 ticket_details_title: 'ایجاد تیکت جدید',
                 page_status: 'ticket_details',
-                new_ticket_title: 'ثبت تیکت جدید',
+                new_ticket_title: 'تیکت جدید...',
                 ticket_id: this.$route.params.ticket,
                 source: null,
                 search_hint: 'جست‌و‌جو در تیکت‌ها...',
@@ -568,7 +568,6 @@
 
 
                     this.ticket_details = {...ticket_replies};
-                    console.log(this.ticket_details);
                     this.ticket_details.created_at = Moment(ticket_replies.created_at).format('HH:mm jYYYY/jMM/jDD');
 
                     await this.$nextTick();
@@ -636,6 +635,17 @@
             async sendReply(ticket_id) {
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 try {
+
+                    if (this.ticket_reply.length === 0) {
+                        this.$notify({
+                            title: 'متن تیکت را وارد نکرده‌اید.',
+                            time: 4000,
+                            type: "error"
+                        });
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        return;
+                    }
+
                     let fd = formData([
                         {
                             name: 'answer',
@@ -655,6 +665,7 @@
                         thumbnailNode.innerHTML = '';
                         this.source = null;
                     }
+                    response.created_at = Moment(response.created_at).format('HH:mm jYYYY/jMM/jDD');
                     this.ticket_details.replies.push(response);
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
@@ -670,12 +681,10 @@
                     }
                 }
             },
-            displayTicketDetails(index) {
-                if (this.ticket_id) {
-                    if (this.ticket_id === this.tickets.results[index].id)
-                        return;
-                }
-                this.$router.replace(`/dashboard/support/${this.tickets.results[index].id}`);
+            replaceTicketDetails(index) {
+                if (this.tickets.results[index].id !== parseInt(this.ticket_id))
+                    this.$router.replace(`/dashboard/support/${this.tickets.results[index].id}`);
+
             },
             backToIndex() {
                 this.$router.go(-1);
@@ -854,6 +863,66 @@
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
 
 
+
+        div.support-footer-action-container
+            display flex
+            flex-direction row
+            flex .45
+            padding-top 16px
+            margin-right auto
+            margin-left unset
+            width max-content
+            @media only screen and (max-width 992px)
+                margin-bottom 16px
+                margin-left auto
+                margin-right auto
+
+            button.support-new-ticket-button
+                height 45px
+                width 200px
+                background-color #00dcf5
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+                border-radius 3px
+                color #333
+                font-size 1em
+                outline none
+                font-family iran-yekan
+                transition all .3s ease-in-out
+                @media only screen and (max-width 992px)
+                    height 34px
+                    width 150px
+
+            button.support-new-ticket-button:hover
+                background-color #00E5FF
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
+
+
+            button.support-apply-ticket-button
+                outline none
+
+            button.support-apply-ticket-button:hover
+            button.support-cancel-ticket-button
+                height 45px
+                width 200px
+                background-color #f53388
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+                border-radius 3px
+                color #fefefe
+                font-size 1em
+                outline none
+                font-family iran-yekan
+                margin-right 6px
+                transition all .3s ease-in-out
+                @media only screen and (max-width 992px)
+                    height 34px
+                    width 150px
+
+            button.support-cancel-ticket-button:hover
+                background-color #ff4095
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
+
+
+
         div.support-header-search-bar
             width 100%
             box-shadow 0 3px 6px rgba(0, 0, 0, 0.12)
@@ -927,11 +996,8 @@
                 font-size 1em
                 color #111
                 margin auto 0
-                line-height 45px
                 padding 0 12px
                 font-family iran-sans
-                @media only screen and (max-width 992px)
-                    line-height 34px
 
             div.ticket-details-divider
                 width 1px
@@ -943,10 +1009,7 @@
                 font-size 1em
                 color #111
                 margin auto 0
-                line-height 45px
                 padding 0 12px
-                @media only screen and (max-width 992px)
-                    line-height 34px
 
             img.ticket-details-button
                 transform rotate(-90deg)
@@ -1011,7 +1074,7 @@
                                 margin 0
                                 color #3c3c3c
                                 font-family 'Helvetica Neue'
-                                font-size 1em
+                                font-size .9em
                                 font-weight normal
                                 display flex
                                 line-height 22px
@@ -1115,7 +1178,7 @@
                                 margin 0
                                 color #fefefe
                                 font-family 'Helvetica Neue'
-                                font-size 1em
+                                font-size .9em
                                 font-weight normal
                                 display flex
                                 line-height 22px
@@ -1205,7 +1268,6 @@
                 flex-direction row
                 padding 4px 8px
                 margin-top 2px
-                z-index 100
                 max-height 88px
 
                 div.send-message-action-container

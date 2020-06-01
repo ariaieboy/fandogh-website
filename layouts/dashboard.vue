@@ -57,7 +57,7 @@
 
                     <img id="large-img-preview"
                          alt="attachment"
-                         :src="null"
+                         src="../assets/svg/ic-file-placeholder.svg"
                          class="preview-modal-show-case">
 
                     <div class="preview-modal-thumbnail-container">
@@ -321,6 +321,7 @@
                         var DOM_img = document.createElement("img");
                         DOM_img.id = `thumbnail-img-${file.reply}-${file.id}`;
                         DOM_img.className = 'dashboard-main-img';
+
                         if (data.type === 'text/plain') {
                             DOM_img.src = require('../assets/svg/ic-file-text.svg')
                         } else if(data.type === 'application/pdf'){
@@ -358,9 +359,9 @@
 
             },
             dismissPreviewModal() {
-                this.$store.commit("SET_DATA", {data: null, id: "ticket_images"});
                 document.getElementById('thumbnail-rail-container').innerHTML = '';
-                document.getElementById('large-img-preview').src = null;
+                document.getElementById('large-img-preview').src = require('../assets/svg/ic-file-placeholder.svg');
+                this.$store.commit("SET_DATA", {data: null, id: "ticket_images"});
             },
             getTicketFiles(file, init_file) {
 
