@@ -18,22 +18,10 @@
 
                     <div class="support-header-action-container">
 
-                        <button v-if="page_status === 'new_ticket'"
-                                @click="sendNewTicket"
-                                class="support-new-ticket-button">
-                            {{apply_ticket_text}}
-                        </button>
-
-                        <button v-else
+                        <button v-if="page_status === 'index'"
                                 class="support-new-ticket-button"
                                 @click="page_status = 'new_ticket'">
                             {{new_ticket_text}}
-                        </button>
-
-                        <button v-if="page_status === 'new_ticket'"
-                                class="support-cancel-ticket-button"
-                                @click="cancelNewTicket">
-                            {{cancel_text}}
                         </button>
 
                     </div>
@@ -205,6 +193,24 @@
 
             </div>
 
+            <div v-if="page_status === 'new_ticket'" class="support-header-container">
+
+                <div class="support-footer-action-container">
+
+                    <button class="support-new-ticket-button"
+                            @click="sendNewTicket">
+                        {{apply_ticket_text}}
+                    </button>
+
+                    <button class="support-cancel-ticket-button"
+                            @click="cancelNewTicket">
+                        {{cancel_text}}
+                    </button>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
@@ -231,7 +237,7 @@
             return {
                 page_title: 'پشتیبانی',
                 page_status: 'index',
-                new_ticket_title: 'ثبت تیکت جدید',
+                new_ticket_title: 'تیکت جدید...',
                 source: null,
                 search_hint: 'جست‌و‌جو در تیکت‌ها...',
                 cancel_text: 'انصراف',
@@ -416,7 +422,6 @@
                 this.$refs.upload.click()
             },
             readSourceImage(file) {
-                console.log(file)
                 var reader = new window.FileReader();
                 reader.readAsDataURL(file);
                 var vm = this;
@@ -549,6 +554,64 @@
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
 
 
+
+        div.support-footer-action-container
+            display flex
+            flex-direction row
+            flex .45
+            padding-top 16px
+            margin-right auto
+            margin-left unset
+            width max-content
+            @media only screen and (max-width 992px)
+                margin-bottom 16px
+                margin-left auto
+                margin-right auto
+
+            button.support-new-ticket-button
+                height 45px
+                width 200px
+                background-color #00dcf5
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+                border-radius 3px
+                color #333
+                font-size 1em
+                outline none
+                font-family iran-yekan
+                transition all .3s ease-in-out
+                @media only screen and (max-width 992px)
+                    height 34px
+                    width 150px
+
+            button.support-new-ticket-button:hover
+                background-color #00E5FF
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
+
+
+            button.support-apply-ticket-button
+                outline none
+
+            button.support-apply-ticket-button:hover
+            button.support-cancel-ticket-button
+                height 45px
+                width 200px
+                background-color #f53388
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.17)
+                border-radius 3px
+                color #fefefe
+                font-size 1em
+                outline none
+                font-family iran-yekan
+                margin-right 6px
+                transition all .3s ease-in-out
+                @media only screen and (max-width 992px)
+                    height 34px
+                    width 150px
+
+            button.support-cancel-ticket-button:hover
+                background-color #ff4095
+                box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
+
         div.support-header-search-bar
             width 100%
             box-shadow 0 3px 6px rgba(0, 0, 0, 0.12)
@@ -623,10 +686,7 @@
                 color #111
                 margin auto 0
                 padding 0 12px
-                line-height 45px
                 font-family iran-sans
-                @media only screen and (max-width 992px)
-                    line-height 34px
 
             div.ticket-details-divider
                 width 1px
@@ -636,12 +696,9 @@
 
             p.ticket-details-title
                 font-size 1em
-                line-height 45px
                 color #111
                 margin auto 0
                 padding 0 12px
-                @media only screen and (max-width 992px)
-                    line-height 34px
 
             img.ticket-details-button
                 transform rotate(-90deg)
