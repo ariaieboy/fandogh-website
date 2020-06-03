@@ -278,7 +278,7 @@ export const getServices = async ({commit, state}) => {
 
 export const getServiceLog = async ({commit, state}, {name, with_timestamp, max_logs, last_logged_time, previous}) => {
     try {
-        let logs = await Request().get(`/api/services/${name}/logs`,{
+        let logs = await Request().get(`/api/services/${name}/logs`, {
             params: {
                 with_timestamp: with_timestamp,
                 max_logs: max_logs,
@@ -566,6 +566,59 @@ export const getSecretDetails = async ({commit, state}, secret_name) => {
         return Promise.reject(e);
     }
 };
+
+export const getTickets = async ({commit, state}) => {
+    try {
+        return await Request().get(`/api/tickets`);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
+export const getTicketReplies = async ({commit, state}, ticket_id) => {
+    try {
+        return await Request().get(`/api/tickets/${ticket_id}`);
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
+export const getTicketFiles = async ({commit, state}, file_id) => {
+    try {
+        return await Request().get(`/api/tickets/files/${file_id}`, {
+            responseType: "blob"
+        });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
+export const sendTicketReply = async ({commit, state}, {ticket_id, formData}) => {
+    try {
+        return await Request().post(`/api/tickets/${ticket_id}`, formData, {
+            onUploadProgress: progressEventListener(commit),
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
+export const sendNewTicket = async ({commit, state}, {formData}) => {
+    try {
+        return await Request().post('/api/tickets', formData, {
+            onUploadProgress: progressEventListener(commit),
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+    } catch (e) {
+        return Promise.reject(e);
+    }
+};
+
 
 export const getVolumes = async ({commit, state}) => {
     try {

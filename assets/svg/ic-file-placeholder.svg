@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="140px" height="140px" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Group 3</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-3">
+            <rect id="Rectangle" fill-opacity="0.1" fill="#111111" fill-rule="nonzero" x="0" y="0" width="140" height="140" rx="5"></rect>
+            <g id="Group-2" transform="translate(46.000000, 38.000000)">
+                <g id="Group" fill="#15EAFF" fill-rule="nonzero">
+                    <path d="M2,7.10542736e-15 L25.7910448,7.10542736e-15 L38.6865672,7.10542736e-15 L42.2505793,7.10542736e-15 C44.0732816,7.10542736e-15 45.797159,0.828538314 46.9357921,2.25182971 L50.2673024,6.41621756 C51.118405,7.48009585 51.5820896,8.80195888 51.5820896,10.1643878 L51.5820896,16.119403 L51.5820896,32.238806 L51.5820896,61.6716418 C51.5820896,62.7762113 50.6866591,63.6716418 49.5820896,63.6716418 L2,63.6716418 C0.8954305,63.6716418 0,62.7762113 0,61.6716418 L0,2 C0,0.8954305 0.8954305,7.10542736e-15 2,7.10542736e-15 Z" id="Rectangle"></path>
+                </g>
+                <text id="FILE" font-family="HelveticaNeue, Helvetica Neue" font-size="20" font-weight="normal" fill="#000000">
+                    <tspan x="6" y="39.5820896">FILE</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
