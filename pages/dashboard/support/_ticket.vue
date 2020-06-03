@@ -687,7 +687,7 @@
 
             },
             backToIndex() {
-                this.$router.go(-1);
+                this.$router.replace('/dashboard/support');
             },
             changeFiles(target) {
 
