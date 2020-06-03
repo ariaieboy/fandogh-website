@@ -1086,7 +1086,7 @@
                                 border-radius 15px
                                 border 1px solid #000
                                 margin-left 8px
-                                opacity 50%
+                                opacity .5
                                 margin-top auto
                                 margin-bottom auto
 
@@ -1191,7 +1191,7 @@
                                 border 1px solid #000
                                 margin-right 8px
                                 filter invert(1)
-                                opacity 75%
+                                opacity .75
                                 margin-top auto
                                 margin-bottom auto
 
