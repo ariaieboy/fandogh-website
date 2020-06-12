@@ -385,6 +385,7 @@
     import File from "~/components/elements/file";
     import TicketCompleteRow from "../../../components/Dashboard/support/ticket-complete-row"
     import {formData} from "../../../utils/formData";
+    import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
         name: "_id",
@@ -397,6 +398,7 @@
 
         }, data() {
             return {
+                message: '',
                 page_title: 'تیکت',
                 ticket_details_title: 'ایجاد تیکت جدید',
                 page_status: 'ticket_details',
@@ -505,12 +507,23 @@
                         fd.append('file', file)
                 }
 
+                try {
+                    let ticket_object = await this.$store.dispatch("sendNewTicket", {formData: fd});
+                    this.$router.replace(`/dashboard/support/${ticket_object.id}`);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
 
-                let ticket_object = await this.$store.dispatch("sendNewTicket", {formData: fd});
-
-                this.$router.replace(`/dashboard/support/${ticket_object.id}`);
-
-                this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: ErrorReporter(e, this.$data),
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
 
             },
             cancelNewTicket() {
@@ -592,7 +605,7 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });

@@ -223,6 +223,7 @@
     import File from "~/components/elements/file";
     import TicketCompleteRow from "../../../components/Dashboard/support/ticket-complete-row"
     import {formData} from "../../../utils/formData";
+    import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
         name: 'index',
@@ -235,6 +236,7 @@
 
         }, data() {
             return {
+                message: '',
                 page_title: 'پشتیبانی',
                 page_status: 'index',
                 new_ticket_title: 'تیکت جدید...',
@@ -353,11 +355,24 @@
                 }
 
 
-                let ticket_object = await this.$store.dispatch("sendNewTicket", {formData: fd});
 
-                this.$router.replace(`/dashboard/support/${ticket_object.id}`);
+                try {
+                    let ticket_object = await this.$store.dispatch("sendNewTicket", {formData: fd});
+                    this.$router.replace(`/dashboard/support/${ticket_object.id}`);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
 
-                this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                }catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: ErrorReporter(e, this.$data),
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
 
             },
             async getData() {
