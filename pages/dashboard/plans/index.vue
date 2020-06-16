@@ -182,141 +182,168 @@
             <div class="container-fluid col-md-4 col-lg-4 col-sm-4 col-xs-12" :class="['checkout-box', {open}]">
                 <div :class="['row' , (open ? 'expanded-invoice' : 'collapsed-invoice')]" class="row"
                      style="margin-bottom: -1px;">
-                    <div class="one" @click="translateCheckoutBox" style="cursor: pointer">
-                        <img src="../../../assets/svg/arrow.svg" alt="arrow" style="cursor: pointer"></img>
+                    <div class="one" @click="translateCheckoutBox" style="cursor: pointer;">
+                        <img src="../../../assets/svg/arrow.svg" alt="arrow" style="cursor: pointer"/>
                     </div>
                     <div class="two">
 
                     </div>
-
                 </div>
-                <div class="row" style="background-color: #fefefe">
-                    <div style="flex: 1">
-                        <p class="checkout-section-title">حافظه تصادفی (رم)</p>
-                        <div style="display: flex;">
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    فعلی:
-                                </p>
+
+                <div class="row" style="background-color: #fefefe;">
+                    <div style="flex: 1;">
+                        <p style="font-family: iran-yekan; font-size: 1.1em; padding: 6px 16px; margin-bottom: 0;
+                        background-color: rgba(233,236,245,0.5);">منابع
+                            فعلی</p>
+
+                        <div style="display: flex; flex-direction: column; padding: 6px 16px 6px 24px;">
+                            <div style="display: flex; flex: 1; flex-direction: row">
+                                <p style="margin-bottom: 0; width: max-content; font-size: 1em">حافظه تصادفی (رم)</p>
                                 <p v-if="memory > 0.49"
-                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
-                                    {{memory}} گیگ
+                                   style="font-family: iran-sans; color: #0045ff; text-align: left; line-height: 1.75;
+                                   margin-right: auto; margin-bottom: 0; font-size: 1em">
+                                    {{memory}} گیگابایت
                                 </p>
                                 <p v-else
-                                   style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
+                                   style="font-family: iran-sans; color: #0045ff; text-align: left; line-height: 1.75;
+                                   margin-right: auto; margin-bottom: 0; font-size: 1em">
                                     ۴۰۰ مگابایت
                                 </p>
                             </div>
 
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    سفارش:
-                                </p>
-                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; line-height: 2; margin: 0">
-                                    {{planData.memory}} گیگ
-                                </p>
-                            </div>
                         </div>
-
-                    </div>
-
-                    <div style="flex: 1">
-                        <p class="checkout-section-title">حافظه ذخیره‌سازی</p>
-                        <div style="display: flex">
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    فعلی:
-                                </p>
-                                <p style="font-family: iran-sans; color: #0045ff; text-align: center; line-height: 2; margin: 0">
-                                    {{dedicatedVolume}} گیگ
+                        <div style="display: flex; flex-direction: column; padding: 6px 16px 6px 24px;">
+                            <div style="display: flex; flex: 1; flex-direction: row">
+                                <p style="margin-bottom: 0; width: max-content; font-size: 1em">حافظه ذخیره‌سازی</p>
+                                <p v-if="memory > 0.49"
+                                   style="font-family: iran-sans; color: #0045ff; text-align: left; line-height: 1.75;
+                                   margin-right: auto; margin-bottom: 0; font-size: 1em">
+                                    {{dedicatedVolume.toLocaleString()}} گیگابایت
                                 </p>
                             </div>
 
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    سفارش:
-                                </p>
-                                <p style="font-family: iran-sans; font-weight: normal; text-align: center; line-height: 2; margin: 0">
-                                    {{(planData.dedicatedVolume >= 10 ? planData.dedicatedVolume : 0)}} گیگ
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div v-if="memory > .4" class="row" style="background-color: #fefefe">
-                    <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}"
-                            @click="is_upgrading_plan = !is_upgrading_plan">
-                        افزایش منابع فعلی
-                    </button>
+
+                <div class="row" style="padding-top: 8px; background-color: #fefefe">
+                    <div style="flex: 1;">
+                        <p style="font-family: iran-yekan; font-size: 1.1em; padding: 6px 16px; margin-bottom: 0;
+                        background-color: rgba(233,236,245,0.5);">منابع
+                            سفارشی</p>
+                        <div style="display: flex; flex-direction: column; padding: 6px 16px 6px 24px;">
+                            <div style="display: flex; flex: 1; flex-direction: row">
+                                <p style="margin-bottom: 0; width: max-content; font-size: 1em">حافظه تصادفی (رم)</p>
+                                <p style="font-family: iran-sans; color: #0045ff; text-align: left; line-height: 1.75;
+                                   margin-right: auto; margin-bottom: 0; font-size: 1em">
+                                    {{planData.memory.toLocaleString()}} گیگابایت
+                                </p>
+                            </div>
+
+                        </div>
+                        <div style="display: flex; flex-direction: column; padding: 6px 16px 6px 24px;">
+                            <div style="display: flex; flex: 1; flex-direction: row">
+                                <p style="margin-bottom: 0; width: max-content; font-size: .9em">حافظه ذخیره‌سازی</p>
+                                <p v-if="memory > 0.49"
+                                   style="font-family: iran-sans; color: #0045ff; text-align: left; line-height: 1.75;
+                                   margin-right: auto; margin-bottom: 0; font-size: .9em">
+                                    {{(planData.dedicatedVolume >= 10 ? planData.dedicatedVolume.toLocaleString() : 0)}}
+                                    گیگابایت
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
-                <div class="checkout-box-bottom-container">
-                    <div class="row"
-                         v-if="!is_upgrading_plan"
-                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
-                    <span style="width: 100%">
-                        مدت اعتبار پلن:
+                <div v-if="memory > .4" class="row" style="padding-top: 8px;background-color: #fefefe">
+                    <div style="flex: 1;">
+                        <p style="font-family: iran-yekan; font-size: 1.1em; padding: 6px 16px; margin-bottom: 0; background-color: rgba(233,236,245,0.5);">
+                            ارتقا منابع پلن</p>
+                        <p v-if="!is_upgrading_plan" style="font-family: iran-sans; color: #2c2c2c; text-align: right; line-height: 1.75;
+                                   padding: 6px 16px; margin-bottom: 0; font-size: 1em">
+                            در صورتی که قصد ارتقا منابع پلن فعلی را دارید بر روی دکمه زیر کلیک کنید
+                        </p>
+                        <p v-else style="font-family: iran-sans; color: #2c2c2c; text-align: right; line-height: 1.75;
+                                   padding: 6px 16px; margin-bottom: 0; font-size: 1em">
+                            شما در حال ارتقا منابع فعلی هستید
+                        </p>
+
+                        <div style="padding: 6px 16px">
+                            <button class="upgrade-button" :class="{'enabled':is_upgrading_plan}"
+                                    @click="is_upgrading_plan = !is_upgrading_plan">
+                                افزایش منابع پلن فعلی
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row" v-if="!is_upgrading_plan" style="padding-top: 8px; background-color: #fefefe">
+                    <div style="flex: 1;">
+                        <p style="font-family: iran-yekan; font-size: 1.1em; padding: 6px 16px; margin-bottom: 0; background-color: rgba(233,236,245,0.5);">
+                            مدت اعتبار پلن</p>
                         <v-select
                                 dir="rtl"
                                 :clearable="false"
                                 :searchable="false"
                                 label="title"
-                                style="margin-bottom: 0 !important;"
+                                style="margin-bottom: 0 !important; width: 100%; padding: 6px 16px 6px 4px;"
                                 v-model="selectedMonth"
                                 :options="monthList"
                                 @input="monthChanged"
-                                placeholder="مدت اعتبار پلن"
-                        ></v-select>
-                    </span>
-
-                    </div>
-
-                    <div class="row"
-                         style="flex: 1 0 auto; padding-left: 16px; padding-right: 16px; padding-top: 16px; background-color: #fefefe">
-                    <span style="width: 100%">
-                        کد تخفیف:
-                        <v-text-field
-                                type="text"
-                                style=" direction: rtl !important;"
-                                dir="ltr"
-                                :placeholder="'کد تخفیف را اینجا وارد نمایید'"
-                                v-model="finalBill.voucher_code">
-
-                        </v-text-field>
-                    </span>
-
+                                placeholder="مدت اعتبار پلن">
+                        </v-select>
                     </div>
                 </div>
 
-                <div class="row" style="background-color: #fefefe; padding-bottom: 12px">
-                    <div style="flex: 1">
-                        <p class="checkout-section-title">مبلغ نهایی</p>
-                        <div style="display: flex">
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    فعلی:</p>
-
-                                <p style="width: 100%; text-align: center; font-family: iran-sans; color: #0045ff; line-height: 2; margin: 0">
+                <div class="row" style="padding-top: 8px; background-color: #fefefe">
+                    <div style="flex: 1;">
+                        <p style="font-family: iran-yekan; font-size: 1.1em; padding: 6px 16px; margin-bottom: 0; background-color: rgba(233,236,245,0.5);">
+                            مبلغ نهایی</p>
+                        <div style="display: flex; flex-direction: column; padding: 6px 16px 6px 24px;">
+                            <div style="display: flex; flex: 1; flex-direction: row">
+                                <p style="margin-bottom: 0; width: max-content; font-size: 1em">فعلی</p>
+                                <p v-if="memory > 0.49"
+                                   style="font-family: iran-sans; color: #0045ff; text-align: left; line-height: 1.75;
+                                   margin-right: auto; margin-bottom: 0; font-size: 1em">
                                     {{fixedTotal.toLocaleString() + 'تومان '}}
                                 </p>
-
                             </div>
-
-                            <div style="flex: 1">
-                                <p style="font-family: iran-yekan;font-weight: bold; padding: 0 16px; font-size: 15px; text-align: center; margin: 6px 0 0 0 ">
-                                    سفارش:</p>
-                                <p style="width: 100%; text-align: center; font-family: iran-sans;line-height: 2; margin: 0">
+                        </div>
+                        <div style="display: flex; flex-direction: column; padding: 6px 16px 6px 24px;">
+                            <div style="display: flex; flex: 1; flex-direction: row">
+                                <p style="margin-bottom: 0; width: max-content; font-size: 1em">سفارش</p>
+                                <p v-if="memory > 0.49"
+                                   style="font-family: iran-sans; color: #0045ff; text-align: left; line-height: 1.75;
+                                   margin-right: auto; margin-bottom: 0; font-size: 1em">
                                     {{total === '0' ? '۰ تومان' : total + ' تومان'}}
                                 </p>
                             </div>
                         </div>
+
                     </div>
                 </div>
 
+                <div class="row" style="padding-top: 8px; background-color: #fefefe">
+                    <div style="flex: 1;">
+                        <p style="font-family: iran-yekan; font-size: 1.1em; padding: 6px 16px; margin-bottom: 0; background-color: rgba(233,236,245,0.5);">
+                            کد تخفیف</p>
+                        <div style="display: flex; flex-direction: column; padding: 6px 16px 6px 24px;">
+                            <v-text-field
+                                    type="text"
+                                    style=" direction: rtl !important;"
+                                    dir="ltr"
+                                    :placeholder="'کد تخفیف را اینجا وارد نمایید'"
+                                    v-model="finalBill.voucher_code">
+                            </v-text-field>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="row" style="background-color: #fefefe">
+                <div class="row" style="padding: 16px; background-color: #fefefe">
                     <button class="checkout" @click="pushUrl">
-                        ثبت نهایی و پرداخت
+                        ثبت نهایی و مشاهده فاکتور
                     </button>
                 </div>
 
@@ -604,11 +631,7 @@
                 this.finalBill.month_count = month.value;
             },
             translateCheckoutBox() {
-                if (this.isCollapsed) {
-                    this.isCollapsed = false;
-                } else {
-                    this.isCollapsed = true;
-                }
+                this.isCollapsed = !this.isCollapsed;
             },
             incMemory() {
                 if (this.planData.memory < this.memoryOptions.max) {
@@ -778,7 +801,6 @@
     .checkout-box
         position sticky
         border-radius 3px
-        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         width 100%
         max-height min-content
         top 60px
@@ -786,8 +808,8 @@
         bottom 20px
         margin-top 30px
         transition max-height 0.2s ease
+        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
         z-index 10
-
         @media only screen and (max-width: 1200px)
             bottom 0
             box-shadow 0 -3px 6px 0 rgba(0, 0, 0, 0.17)
@@ -813,31 +835,32 @@
 
         button.checkout
             width 100%
-            height 40px
-            border-radius 3px
+            height 45px
+            border-radius 0
             margin-bottom 16px
-            margin-right 16px
-            margin-left 16px
+            margin-top 6px
             border none
             color #fefefe
             outline none
             cursor pointer
             box-shadow 0 3px 6px 0 rgba(60, 204, 56, 0.42)
-            background-color rgba(60, 204,56, 0.9)
+            background-color rgba(60, 204, 56, 0.9)
             font-family iran-yekan
             font-size 14px
             transition all .2s ease-in-out
             @media only screen and (max-width: 900px)
                 height 35px
+                margin-top 0
                 margin-bottom 12px
                 margin-right 16px
                 margin-left 16px
             @media only screen and (max-width: 600px)
                 max-height 73px
+                margin-top 0
 
         button.checkout:hover
             transition all .2s ease-in-out
-            background-color rgba(60, 204,56, 1)
+            background-color rgba(60, 204, 56, 1)
 
 
     .section-title-image
@@ -923,9 +946,9 @@
     .checkout-section-title
         text-align center
         background-color #0045ff
-        margin: 0
-        padding-top 10px
-        padding-bottom 10px
+        margin 0
+        padding-top 6px
+        padding-bottom 6px
         color #fff
         @media only screen and (min-width: 900px)
             border-radius 0 !important
@@ -940,24 +963,24 @@
             height: 45px;
             width: 45px;
             display inline-flex
-            background-color: #0045ff;
+            background-color: #fefefe;
             border-radius: 25px;
             margin-bottom: -22px;
             cursor pointer
-            box-shadow: 0 -2px 6px 0 rgba(0, 0, 0, 0.37);
 
             img
                 display flex
-                margin-bottom 13px
+                margin-bottom 12px
                 margin-right auto
                 margin-left auto
+                filter invert(1)
                 transform rotate(90deg)
 
         div.two
             box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
             width 100%
             height 1px
-            background-color #0045ff
+            background-color #fefefe
             z-index -1
 
     .collapsed-invoice
@@ -970,24 +993,24 @@
             height: 45px;
             width: 45px;
             display inline-flex
-            background-color: #0045ff;
+            background-color: #fefefe;
             border-radius: 25px;
             margin-bottom: -22px;
             cursor pointer
-            box-shadow: 0 -2px 6px 0 rgba(0, 0, 0, 0.37);
 
             img
                 display flex
-                margin-bottom 13px
+                margin-bottom 12px
                 margin-right auto
                 margin-left auto
+                filter invert(1)
                 transform rotate(-90deg)
 
         div.two
             box-shadow 0 -2px 6px 0 rgba(0, 0, 0, 1)
             width 100%
             height 1px
-            background-color #0045ff
+            background-color #fefefe
             z-index -1
 
 
@@ -1022,21 +1045,14 @@
         height 45px
         font-family iran-yekan
         border-radius 3px
-        margin-bottom 16px
-        margin-right 16px
-        margin-left 16px
-        border none
+        background-color rgba(0, 229, 255, 0.4)
         color $fontGray
         outline none
         cursor pointer
-        background-color rgba(36, 213, 216, .4)
-        margin-top 12px
-        font-size 1em
+        font-size .9em
+        transition all .2s ease-in-out
         @media only screen and (max-width: 900px)
             height 40px
-            margin-bottom 12px
-            margin-right 16px
-            margin-left 16px
         @media only screen and (max-width: 600px)
             max-height 73px
 
@@ -1048,6 +1064,13 @@
     .upgrade-button:hover
         background-color $colorAccent
         color $fontBlack
+
+
+    .checkout-section-box
+        margin-top 6px
+        box-shadow 0 2px 6px 0 rgba(0, 0, 0, 0.07)
+        @media only screen and (max-width 992px)
+            margin-top 0
 
 
 </style>
@@ -1065,6 +1088,8 @@
 
     .v-select .vs__dropdown-toggle {
         margin-bottom: 0 !important;
+        background-color: transparent !important;
+        border: none !important;
     }
 
     .v-text-field {
