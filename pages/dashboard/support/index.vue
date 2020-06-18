@@ -26,20 +26,20 @@
 
                     </div>
 
-                    <div v-if="page_status === 'index'" class="support-header-search-bar">
+                    <!--<div v-if="page_status !== 'index'" class="support-header-search-bar">-->
 
-                        <div class="support-search-bar-action-container">
-                            <img src="../../../assets/svg/ic-search.svg" alt="search">
-                        </div>
+                        <!--<div class="support-search-bar-action-container">-->
+                            <!--<img src="../../../assets/svg/ic-search.svg" alt="search">-->
+                        <!--</div>-->
 
 
-                        <div class="support-header-search-container">
-                            <input :placeholder="search_hint">
-                        </div>
+                        <!--<div class="support-header-search-container">-->
+                            <!--<input :placeholder="search_hint">-->
+                        <!--</div>-->
 
-                    </div>
+                    <!--</div>-->
 
-                    <div v-else class="support-header-ticket-details">
+                    <div v-if="page_status !== 'index'" class="support-header-ticket-details">
                         <p class="ticket-details-title">{{new_ticket_title}}</p>
                     </div>
 
