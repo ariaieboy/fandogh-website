@@ -74,6 +74,7 @@
                             <textarea name="title_text"
                                       maxlength="120"
                                       v-model="ticket_title"
+                                      dir="auto"
                                       class="new-ticket-title-input"
                                       @input="e => this.ticket_title = e.target.value"
                                       :placeholder="ticket_title_hint">
@@ -181,6 +182,7 @@
 
                         <textarea name="message"
                                   maxlength="1500"
+                                  dir="auto"
                                   @input="e => this.ticket_description = e.target.value"
                                   v-model="ticket_description"
                                   :placeholder="ticket_description_hint">
@@ -495,6 +497,7 @@
         font-size .9em
         white-space nowrap
         overflow-x fragments
+        direction rtl
 
 
     .title_header

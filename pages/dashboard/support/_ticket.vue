@@ -72,7 +72,12 @@
                                         <p class="reply-username">{{ticket_details.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
-                                    <p class="reply-message">{{ticket_details.description}}</p>
+                                    <textarea :disabled="'true'"
+                                              dir="auto"
+                                              class="reply-message"
+                                              :rows="ticket_details.description.split(/\r\n|\r|\n/).length">
+                                        {{ticket_details.description}}
+                                    </textarea>
                                 </div>
                                 <div v-if="ticket_details.files.length > 0"
                                      class="ticket-attachment-container row"
@@ -124,7 +129,12 @@
                                         <p class="reply-username">{{reply.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
-                                    <p class="reply-message">{{reply.answer}}</p>
+                                    <textarea :disabled="'true'"
+                                              dir="auto"
+                                              class="reply-message"
+                                              :rows="reply.answer.split(/\r\n|\r|\n/).length">
+                                        {{reply.answer}}
+                                    </textarea>
                                 </div>
                                 <div v-if="reply.files.length > 0"
                                      class="ticket-attachment-container row"
@@ -180,7 +190,7 @@
                             <div class="send-message-action-container">
                                 <img src="../../../assets/svg/ic-send-message.svg"
                                      alt="send"
-                                     @click="sendReply(ticket_details.id)">
+                                     @click="e => sendReply(e, ticket_details.id)">
                             </div>
 
                             <div class="message-input-container">
@@ -207,12 +217,15 @@
 
                                 <div class="message-input-divider"></div>
 
-                                <input class="message-input"
-                                       type="text"
-                                       @input="e => this.ticket_reply = e.target.value"
-                                       ref="ticket_message"
-                                       @keyup.enter="sendReply(ticket_details.id)"
-                                       :placeholder="enter_message">
+                                <textarea class="message-input"
+                                          type="text"
+                                          dir="auto"
+                                          @input="e => this.ticket_reply = e.target.value"
+                                          ref="ticket_message"
+                                          :rows="this.ticket_reply.split(/\r\n|\r|\n/).length"
+                                          @keyup.enter="e => sendReply(e, ticket_details.id)"
+                                          :placeholder="enter_message">
+                                </textarea>
 
                             </div>
 
@@ -238,6 +251,7 @@
                             <textarea name="title_text"
                                       maxlength="120"
                                       class="new-ticket-title-input"
+                                      dir="auto"
                                       @input="e => this.ticket_title = e.target.value"
                                       :placeholder="ticket_title_hint">
                             </textarea>
@@ -344,6 +358,7 @@
 
                         <textarea name="message"
                                   maxlength="1500"
+                                  dir="auto"
                                   @input="e => this.ticket_description = e.target.value"
                                   :placeholder="ticket_description_hint">
                         </textarea>
@@ -512,7 +527,7 @@
                     this.$router.replace(`/dashboard/support/${ticket_object.id}`);
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
 
-                }catch (e) {
+                } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                     if (e.status === 401) {
                         this.$router.push("/user/login");
@@ -579,7 +594,6 @@
                 try {
                     let ticket_replies = await this.$store.dispatch("getTicketReplies", ticket_id);
 
-
                     this.ticket_details = {...ticket_replies};
                     this.ticket_details.created_at = Moment(ticket_replies.created_at).format('HH:mm jYYYY/jMM/jDD');
 
@@ -645,7 +659,12 @@
                     }
                 }
             },
-            async sendReply(ticket_id) {
+            async sendReply(e, ticket_id) {
+
+                if (e.shiftKey === true) {
+                    return;
+                }
+
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 try {
 
@@ -672,6 +691,7 @@
                     }
 
                     let response = await this.$store.dispatch("sendTicketReply", {ticket_id: ticket_id, formData: fd});
+                    this.ticket_reply = '';
                     this.$refs.ticket_message.value = '';
                     if (this.source) {
                         const thumbnailNode = document.getElementById('thumbnail-container');
@@ -680,6 +700,8 @@
                     }
                     response.created_at = Moment(response.created_at).format('HH:mm jYYYY/jMM/jDD');
                     this.ticket_details.replies.push(response);
+                    this.$nextTick();
+                    document.getElementById('conversation_view').scrollTop = 99999999;
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -802,6 +824,8 @@
         font-size .9em
         white-space nowrap
         overflow-x fragments
+        direction rtl
+        padding-top 2px
 
 
     .title_header
@@ -876,7 +900,6 @@
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
 
 
-
         div.support-footer-action-container
             display flex
             flex-direction row
@@ -933,7 +956,6 @@
             button.support-cancel-ticket-button:hover
                 background-color #ff4095
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
-
 
 
         div.support-header-search-bar
@@ -1111,11 +1133,12 @@
                             margin 8px 0
                             opacity .2
 
-                        p.reply-message
+                        textarea.reply-message
                             color #3c3c3c
                             font-family iran-yekan
                             font-size .8em
                             margin-bottom 0
+                            overflow-y none
 
                     p.reply-date
                         color #7C7C7C
@@ -1214,11 +1237,14 @@
                             margin 8px 0
                             opacity .2
 
-                        p.reply-message
+                        textarea.reply-message
                             color #fefefe
                             font-family iran-yekan
                             font-size .8em
+                            white-space pre-line
                             margin-bottom 0
+                            resize none
+                            overflow-y none
 
 
                     p.reply-date
@@ -1276,12 +1302,12 @@
                 border-radius 2px
                 box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 width 100%
-                height 44px
+                min-height 44px
+                height max-content
                 display flex
                 flex-direction row
                 padding 4px 8px
                 margin-top 2px
-                max-height 88px
 
                 div.send-message-action-container
                     flex .05
@@ -1308,20 +1334,24 @@
                     background-color #F2F2F2
                     border-radius 20px
                     height 100%
+                    padding 8px 0
+                    box-sizing content-box
 
                     div.message-input-divider
                         width 1px
-                        margin 5px 0 5px 12px
+                        margin 1px 0 1px 12px
                         background-color #cfcfcf
 
-                    input.message-input
+                    textarea.message-input
                         padding-left 12px
                         font-size .9em
                         font-family yekan-number-regular
                         color #3c3c3c
                         width 100%
+                        line-height normal
                         outline none
-                        padding-top 4px
+                        margin-bottom 0
+                        resize none
 
     .attachment-preview-container
         display inline-flex
