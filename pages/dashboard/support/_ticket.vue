@@ -260,35 +260,18 @@
 
                         <div class="new-ticket-department-container">
 
-                            <transition name="fade">
+                                <div class="new-ticket-department-selection">
 
-                                <div v-if="!show_departments"
-                                     class="new-ticket-department-label-container"
-                                     @click="show_departments = !show_departments">
+                                    <div class="department-selection-label-container">
 
-                                    <p>{{ this.selected_department ?
-                                        this.selected_department.local_name :
-                                        this.select_department_label }}
-                                    </p>
+                                        <p>{{ this.selected_department ?
+                                            this.selected_department.local_name :
+                                            this.select_department_label }}
+                                        </p>
 
-                                    <img src="../../../assets/svg/arrow.svg"/>
-
-                                </div>
-
-                                <div v-if="show_departments"
-                                     class="new-ticket-department-selection">
-
-                                    <div @click="show_departments = !show_departments"
-                                         class="department-selection-label-container">
-
-                                        <p>{{department_title}}</p>
-
-                                        <img src="../../../assets/svg/arrow.svg"
-                                             alt="open"/>
+                                        <img src="../../../assets/svg/arrow.svg"/>
 
                                     </div>
-
-                                    <div class="department-selection-divider"></div>
 
                                     <div class="department-selection-list-container">
 
@@ -300,7 +283,6 @@
                                     </div>
 
                                 </div>
-                            </transition>
 
                         </div>
 
@@ -345,7 +327,7 @@
 
                     <div class="new-ticket-message-text-input">
 
-                        <div style="width: 100%; display: flex; flex-direction: row; background-color: #0045ff; padding: 12px 16px;">
+                        <div style="width: 100%; display: flex; flex-direction: row; background-color: #0045ff; padding: 8px 16px;">
                             <p style="font-size: 1em; font-weight: normal; font-family: iran-yekan; width: 100%;
                                       color: #fefefe; margin-bottom: 0;">
                                 {{ticket_description_label}}</p>
@@ -1422,7 +1404,7 @@
                     border-top-left-radius 2px
                     flex-direction row
                     background-color #0045ff
-                    padding 12px 16px
+                    padding 8px 16px
 
                 textarea.new-ticket-title-input
                     width 100%
@@ -1448,34 +1430,6 @@
                 flex-direction column
                 margin-top 8px
 
-                div.new-ticket-department-label-container
-                    border-radius 2px
-                    cursor pointer
-                    height 45px
-                    width 100%
-                    display flex
-                    flex-direction row
-                    box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
-                    background-color #0045ff
-                    transition all .3s ease-in-out
-
-                    p
-                        font-size 1em
-                        font-weight normal
-                        font-family iran-yekan
-                        width 100%
-                        padding 0 16px
-                        margin-bottom auto
-                        margin-top auto
-                        color #fefefe
-
-                    img
-                        transform rotate(180deg)
-                        filter invert(0)
-                        width 16px
-                        height 16px
-                        margin auto auto auto 16px
-
                 div.new-ticket-department-selection
                     width 100%
                     background-color #fefefe
@@ -1484,39 +1438,34 @@
                     flex-direction column
                     border-radius 2px
                     overflow-y auto
-                    cursor pointer
                     transition all .3s ease-in-out
 
                     div.department-selection-label-container
                         width 100%
                         display flex
                         flex-direction row
+                        background-color #0045ff
+                        height 45px
 
                         p
                             font-size 1em
                             font-weight normal
                             font-family iran-yekan
                             width 100%
+                            color #fefefe
                             padding 0 16px
                             margin-bottom auto
-                            margin-top 10px
-                            opacity 0.4
+                            margin-top auto
 
                         img
                             transform rotate(180deg)
-                            filter invert(1)
+                            filter invert(0)
                             width 24px
                             margin-left 12px
                             padding 4px
                             height 24px
                             margin-right auto
                             margin-top 11px
-
-
-                    div.department-selection-divider
-                        height 1px
-                        background-color #F2F2F2
-                        margin 12px 16px
 
                     div.department-selection-list-container
                         width 100%
@@ -1541,12 +1490,8 @@
                             transition all .3s ease-in-out
 
                         p:hover
-                            background-color rgba(127, 130, 139, 0.25)
+                            background-color rgba(127, 130, 139, 0.15)
 
-
-                div.new-ticket-department-label-container:hover
-                    box-shadow 0 3px 6px rgba(0, 0, 0, 0.45)
-                    background-color #005dff
 
             div.new-ticket-attachment-container
                 overflow hidden
@@ -1572,7 +1517,7 @@
                     cursor pointer
                     height 100%
                     position absolute
-                    background-color #0045ff
+                    background-color #00dffa
                     width 100%
                     display flex
                     flex-direction row
@@ -1587,20 +1532,20 @@
                         padding 0 16px
                         margin-bottom auto
                         margin-top auto
-                        color #fefefe
+                        color #2c2c2c
 
                     img
                         transform rotate(180deg) scale(1.1)
                         width 16px
                         height 16px
                         margin auto auto auto 16px
-                        filter invert(1)
+                        filter invert(0)
 
             div.new-ticket-attachment-container:hover
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.45)
 
                 div.new-ticket-attachment-label-container
-                    background-color #005dff
+                    background-color #00E5FF
 
             div.new-ticket-attachment-preview-container
                 width 100%
@@ -1629,7 +1574,7 @@
 
             textarea
                 width 100%
-                min-height 300px
+                min-height 395px
                 max-height 500px
                 font-family yekan-number-regular
                 font-size 1em
