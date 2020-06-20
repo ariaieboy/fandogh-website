@@ -72,12 +72,11 @@
                                         <p class="reply-username">{{ticket_details.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
-                                    <textarea :disabled="'true'"
-                                              dir="auto"
-                                              class="reply-message"
-                                              :rows="ticket_details.description.split(/\r\n|\r|\n/).length">
+                                    <pre :disabled="'true'"
+                                       dir="auto"
+                                       class="reply-message">
                                         {{ticket_details.description}}
-                                    </textarea>
+                                    </pre>
                                 </div>
                                 <div v-if="ticket_details.files.length > 0"
                                      class="ticket-attachment-container row"
@@ -129,12 +128,11 @@
                                         <p class="reply-username">{{reply.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
-                                    <textarea :disabled="'true'"
-                                              dir="auto"
-                                              class="reply-message"
-                                              :rows="reply.answer.split(/\r\n|\r|\n/).length">
+                                    <pre :disabled="'true'"
+                                       dir="auto"
+                                       class="reply-message">
                                         {{reply.answer}}
-                                    </textarea>
+                                    </pre>
                                 </div>
                                 <div v-if="reply.files.length > 0"
                                      class="ticket-attachment-container row"
@@ -260,29 +258,29 @@
 
                         <div class="new-ticket-department-container">
 
-                                <div class="new-ticket-department-selection">
+                            <div class="new-ticket-department-selection">
 
-                                    <div class="department-selection-label-container">
+                                <div class="department-selection-label-container">
 
-                                        <p>{{ this.selected_department ?
-                                            this.selected_department.local_name :
-                                            this.select_department_label }}
-                                        </p>
+                                    <p>{{ this.selected_department ?
+                                        this.selected_department.local_name :
+                                        this.select_department_label }}
+                                    </p>
 
-                                        <img src="../../../assets/svg/arrow.svg"/>
-
-                                    </div>
-
-                                    <div class="department-selection-list-container">
-
-                                        <p @click="chooseDepartment(index)"
-                                           v-for="(dep, index) in department_options">
-                                            {{dep.local_name}}
-                                        </p>
-
-                                    </div>
+                                    <img src="../../../assets/svg/arrow.svg"/>
 
                                 </div>
+
+                                <div class="department-selection-list-container">
+
+                                    <p @click="chooseDepartment(index)"
+                                       v-for="(dep, index) in department_options">
+                                        {{dep.local_name}}
+                                    </p>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
@@ -1063,7 +1061,7 @@
                 min-height 450px
                 max-height 500px
                 overflow-y scroll
-                display flex
+                display flow-root
                 flex-direction column
                 padding 16px
 
@@ -1115,12 +1113,18 @@
                             margin 8px 0
                             opacity .2
 
-                        textarea.reply-message
+                        pre.reply-message
                             color #3c3c3c
                             font-family iran-yekan
                             font-size .8em
                             margin-bottom 0
-                            overflow-y none
+                            line-height normal
+                            white-space pre-line
+                            white-space -moz-pre-wrap
+                            white-space -o-pre-wrap
+                            word-wrap break-word
+                            unicode-bidi plaintext
+                            overflow-wrap break-word
 
                     p.reply-date
                         color #7C7C7C
@@ -1219,14 +1223,18 @@
                             margin 8px 0
                             opacity .2
 
-                        textarea.reply-message
+                        pre.reply-message
                             color #fefefe
                             font-family iran-yekan
                             font-size .8em
-                            white-space pre-line
                             margin-bottom 0
-                            resize none
-                            overflow-y none
+                            white-space pre-line
+                            white-space -moz-pre-wrap
+                            white-space -o-pre-wrap
+                            word-wrap break-word
+                            line-height normal
+                            unicode-bidi plaintext
+                            overflow-wrap break-word
 
 
                     p.reply-date
@@ -1317,7 +1325,6 @@
                     border-radius 20px
                     height 100%
                     padding 8px 0
-                    box-sizing content-box
 
                     div.message-input-divider
                         width 1px
