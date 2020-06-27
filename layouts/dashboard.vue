@@ -73,6 +73,7 @@
                 <div v-if="isMenuAvailable" :class="['wrapper-sidebar', {'open':openSidebar}]">
                     <admin-sidebar/>
                 </div>
+
                 <div :class="['wrapper-main',{'open':openSidebar}]"
                      :style="{opacity:(isMobile && openSidebar ? '0.5' : '1.0')}">
                     <div :style="{marginTop: isFullPage ? '0' : null}" class="dash-container">
@@ -586,12 +587,12 @@
     // transition all 0.5s
     .dash-container
         box-sizing border-box
-        margin-top $spaceTop + 68px
+        margin-top $spaceTop + 48px
         padding-bottom 20px
         min-height calc(100vh - 120px)
         @media only screen and (max-width: 1230px)
             margin 0
-            margin-top $spaceTop + 60px
+            margin-top $spaceTop + 40px
             padding 0 30px
             width 100%
         @media only screen and (max-width: 992px)
