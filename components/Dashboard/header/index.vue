@@ -26,7 +26,7 @@ export default {
       list: [
         { icon: 'ic-profile', text: 'حساب کاربری', link: '/dashboard/account' },
         { icon: 'ic-home', text: 'داشبورد', link: '/dashboard/general' },
-        // { icon: 'ic-support', text: 'پشتیبانی', link: '/dashboard/support' }
+        { icon: 'ic-support', text: 'پشتیبانی', link: '/dashboard/support' }
       ]
     }
   },
