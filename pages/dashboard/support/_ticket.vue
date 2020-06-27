@@ -73,8 +73,8 @@
                                     </div>
                                     <div class="reply-message-divider"></div>
                                     <pre :disabled="'true'"
-                                       dir="auto"
-                                       class="reply-message">
+                                         dir="auto"
+                                         class="reply-message">
                                         {{ticket_details.description}}
                                     </pre>
                                 </div>
@@ -129,8 +129,8 @@
                                     </div>
                                     <div class="reply-message-divider"></div>
                                     <pre :disabled="'true'"
-                                       dir="auto"
-                                       class="reply-message">
+                                         dir="auto"
+                                         class="reply-message">
                                         {{reply.answer}}
                                     </pre>
                                 </div>
@@ -214,13 +214,11 @@
                                 </div>
 
                                 <div class="message-input-divider"></div>
-
                                 <textarea class="message-input"
                                           type="text"
                                           dir="auto"
-                                          @input="e => this.ticket_reply = e.target.value"
                                           ref="ticket_message"
-                                          :rows="this.ticket_reply.split(/\r\n|\r|\n/).length"
+                                          rows="1"
                                           @keyup.enter="e => sendReply(e, ticket_details.id)"
                                           :placeholder="enter_message">
                                 </textarea>
@@ -383,7 +381,7 @@
     import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
-        name: "_id",
+        name: "_ticket",
         layout: 'dashboard',
         components: {
             TicketCompleteRow,
@@ -395,6 +393,7 @@
             return {
                 message: '',
                 page_title: 'تیکت',
+                input_rows: 1,
                 ticket_details_title: 'ایجاد تیکت جدید',
                 page_status: 'ticket_details',
                 new_ticket_title: 'تیکت جدید...',
@@ -562,7 +561,7 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });
@@ -632,7 +631,7 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });
@@ -648,7 +647,7 @@
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 try {
 
-                    if (this.ticket_reply.length === 0) {
+                    if (this.$refs.ticket_message.value.length === 0) {
                         this.$notify({
                             title: 'متن تیکت را وارد نکرده‌اید.',
                             time: 4000,
@@ -661,7 +660,7 @@
                     let fd = formData([
                         {
                             name: 'answer',
-                            value: this.ticket_reply
+                            value: this.$refs.ticket_message.value
                         }
                     ]);
 
@@ -671,7 +670,6 @@
                     }
 
                     let response = await this.$store.dispatch("sendTicketReply", {ticket_id: ticket_id, formData: fd});
-                    this.ticket_reply = '';
                     this.$refs.ticket_message.value = '';
                     if (this.source) {
                         const thumbnailNode = document.getElementById('thumbnail-container');
@@ -689,7 +687,7 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });
@@ -782,7 +780,8 @@
         created() {
             this.getData();
             this.getReplies(this.ticket_id)
-        }, mounted() {
+        },
+        mounted() {
             this.$store.commit("SET_DATA", {data: false, id: "loading"});
         },
         beforeDestroy() {
@@ -1334,13 +1333,13 @@
                     textarea.message-input
                         padding-left 12px
                         font-size .9em
+                        min-height 32px
                         font-family yekan-number-regular
                         color #3c3c3c
                         width 100%
                         line-height normal
                         outline none
                         margin-bottom 0
-                        resize none
 
     .attachment-preview-container
         display inline-flex
