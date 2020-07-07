@@ -69,7 +69,7 @@
                                         <img :src="require('../../../assets/svg/' + (!ticket_details.user.is_admin ?
                                          'ic-person' : 'ic-support-person') + '.svg')"
                                              :alt="!ticket_details.user.is_admin ? 'ic-person' : 'ic-support-person'">
-                                        <p class="reply-username">{{ticket_details.user.username}}</p>
+                                        <p class="reply-username">{{ticket_details.user.first_name ? `${ticket_details.user.first_name} ${ticket_details.user.last_name}` : ticket_details.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
                                     <pre :disabled="'true'"
@@ -125,7 +125,7 @@
                                     <div>
                                         <img :src="require('../../../assets/svg/' + (!reply.user.is_admin ? 'ic-person' : 'ic-support-person') + '.svg')"
                                              :alt="!reply.user.is_admin ? 'ic-person' : 'ic-support-person'">
-                                        <p class="reply-username">{{reply.user.username}}</p>
+                                        <p class="reply-username">{{reply.user.first_name ? `${reply.user.first_name} ${reply.user.last_name}` : reply.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
                                     <pre :disabled="'true'"
@@ -1087,8 +1087,8 @@
                             p.reply-username
                                 margin 0
                                 color #3c3c3c
-                                font-family 'Helvetica Neue'
-                                font-size .9em
+                                font-family 'Helvetica Neue', iran-yekan
+                                font-size .8em
                                 font-weight normal
                                 display flex
                                 line-height 22px
@@ -1198,8 +1198,8 @@
                             p.reply-username
                                 margin 0
                                 color #fefefe
-                                font-family 'Helvetica Neue'
-                                font-size .9em
+                                font-family 'Helvetica Neue', iran-yekan
+                                font-size .8em
                                 font-weight normal
                                 display flex
                                 line-height 22px
