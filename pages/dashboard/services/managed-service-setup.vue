@@ -91,7 +91,7 @@
             FileBrowser,
             Minio,
             Elasticsearch,
-            Kibana,
+            // Kibana,
             Proxy
         },
         data() {
