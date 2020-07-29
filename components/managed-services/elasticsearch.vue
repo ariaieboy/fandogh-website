@@ -246,7 +246,7 @@
                         value: null
                     },
                     min_memory: {
-                        name: 'volume_name',
+                        name: 'min_memory',
                         value: 512
                     },
                     max_memory: {
@@ -261,7 +261,7 @@
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
-                    min_memory: value => value >= this.manifest_model.memory.amount / 4 && value <= this.manifest_model.memory.amount || 'مقدار min memory باید حداقل یک چهارم رم کلی باشد.',
+                    min_memory: value => value >= this.manifest_model.memory.amount / 4 && value < this.manifest_model.memory.amount / 2 || 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
                     max_memory: value => value >= this.manifest_model.memory.amount / 2 && value < this.manifest_model.memory.amount || 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
                     regex: value => !value || new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',

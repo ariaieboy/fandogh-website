@@ -256,6 +256,8 @@
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
+                    min_memory: value => value >= this.managed_service_manifest.memory.amount / 4 && value < this.managed_service_manifest.memory.amount / 2 || 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
+                    max_memory: value => value >= this.managed_service_manifest.memory.amount / 2 && value < this.managed_service_manifest.memory.amount || 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
                     service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
@@ -308,21 +310,42 @@
                 }
 
 
-                this.managed_service_manifest.parameters.forEach(item => {
-                    if (item.name === 'volume_name') {
-                        if (this.rules.regex(item.value) !== true ||
-                            this.rules.required(item.value) !== true ||
-                            this.rules.counter(item.value) !== true) {
-                            this.$notify({
-                                title: 'نام volume قابل قبول نیست',
-                                time: 4000,
-                                type: 'error'
-                            });
-                            return false
-                        }
-                    }
-                });
 
+                if (this.managed_service[this.service_name].title === 'Elasticsearch') {
+
+                    let min_memory_checked = true;
+                    let max_memory_checked = true;
+
+                    this.managed_service_manifest.parameters.forEach(item => {
+
+                        if (item.name === 'min_memory') {
+                            if (this.rules.min_memory(item.value) !== true) {
+                                this.$notify({
+                                    title: 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
+                                    time: 4000,
+                                    type: 'error'
+                                });
+                                min_memory_checked = false
+                            }
+                        }
+
+                        if (item.name === 'max_memory') {
+                            if (this.rules.max_memory(item.value) !== true) {
+                                this.$notify({
+                                    title: 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
+                                    time: 4000,
+                                    type: 'error'
+                                });
+                                max_memory_checked = false;
+                            }
+                        }
+
+                    });
+
+                    if (!max_memory_checked || !min_memory_checked) {
+                        return false
+                    }
+                }
 
                 if (this.managed_service[this.service_name].title === 'Mysql' || this.managed_service[this.service_name].title === 'Postgresql') {
 
@@ -360,6 +383,27 @@
                             return false
                         }
                     }
+                }
+
+
+                let volume_checked = true;
+                this.managed_service_manifest.parameters.forEach(item => {
+                    if (item.name === 'volume_name') {
+                        if (this.rules.regex(item.value) !== true ||
+                            this.rules.required(item.value) !== true ||
+                            this.rules.counter(item.value) !== true) {
+                            this.$notify({
+                                title: 'نام volume قابل قبول نیست',
+                                time: 4000,
+                                type: 'error'
+                            });
+                            volume_checked = false
+                        }
+                    }
+                });
+
+                if (!volume_checked) {
+                    return false
                 }
 
                 return true
