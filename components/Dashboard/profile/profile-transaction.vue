@@ -49,17 +49,20 @@
                 await this.$store.dispatch("getTransactions", 'PLAN')
                     .then(transactionResponse => {
                         this.transactions = transactionResponse.map(
-                            ({id, paid_at, total, items}) => {
+                            ({id, paid_at, total, items, month_count, payment_type}) => {
                                 return {
                                     transactionCode: id,
                                     transactionAmount: total,
                                     namespace: this.$store.state.activePlan.name,
                                     description: 'جزئیات تراکنش',
                                     items,
+                                    payment_type,
+                                    month_count,
                                     date: Moment(paid_at).format('jYYYY/jMM/jDD - HH:mm')
                                 };
                             }
                         );
+                        this.transactions.reverse()
                     }).catch(e => {
                         if (e.status === 401) {
                             this.$router.push("/user/login");

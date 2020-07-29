@@ -143,6 +143,7 @@
                                         eventLabel: 'role edit successful',
                                         eventValue: `${email}`
                                     });
+                                    window.location.reload()
                                 })
                                 .catch(e => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});

@@ -2,7 +2,7 @@
   <div>
     <div class="modal" :class="{'no-modal': noModal}">
       <div v-if="!noModal" class="close-modal">
-        <a href="#" @click="$emit('onOverlay')" class="close">
+        <a href="#" @click="$emit('onOverlay')" class="close" rel="noopener">
           <img alt="close icon" :src="require('../../../assets/svg/ic_close-2.svg')">
         </a>
       </div>

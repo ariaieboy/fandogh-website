@@ -4,7 +4,7 @@
             <nav class="header-container" :class="{'no-fixed': noFixed, 'header-dashboard': dashboard}">
                 <div class="right-menu">
                     <div class="menu">
-                        <a>
+                        <a rel="noopener">
                             <img class="nev-button" @click="toggleSideBar('navbar')" alt="hamburger button"
                                  :src="require('../../assets/svg/ic_hamburger.svg')">
                         </a>
@@ -34,10 +34,11 @@
                                     بلاگ
                                 </a>
                             </li>
-                            <li v-if="isMainPage"
-                                style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px"
-                                v-scroll-to="{el: '#prices', duration:1000, easing: 'linear'}">
-                                قیمت‌ها
+                            <li style="color: #fefefe; font-size: 1em; font-family: iran-yekan; cursor: pointer; height: 100%; width: max-content; text-align: center; padding: 0 12px">
+                                <a rel="noopener" target="_blank" :href="'/pricing'"
+                                   style="height: 100%; width: 100%; padding: 0; text-align: center; margin-right: auto; margin-left: auto">
+                                    قیمت‌ها
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -46,19 +47,19 @@
                     <button class="nav-action-button" @click="$router.push('/user/login')">ورود</button>
                 </div>
                 <div class="user" v-else>
-                    <button @click="$router.push('/dashboard')" class="nav-action-button">داشبورد</button>
+                    <button @click="$router.push('/dashboard/general')" class="nav-action-button">داشبورد</button>
                 </div>
                 <!-- <div v-if="loggedIn" class="profile">
                   <a href="#" @click.prevent="toggleMenu(null)">
                     <img :src="avatar" alt="profile">
                   </a>
                 </div>-->
+
             </nav>
 
-            <login ref="login"/>
-            <register ref="register"/>
+            <!--<login ref="login"/>-->
+            <!--<register ref="register"/>-->
             <sidebar ref="menu"/>
-            <message ref="message"/>
         </header>
         <div id="sub_menu" ref="sub_menu" class="sub_menu" style="opacity: 0; visibility: hidden;">
             <div class="menu_section">
@@ -68,7 +69,8 @@
                     <div v-for="service in managed_services"
                          style="display: flex; flex-direction: column; width: 50%; height: max-content; margin-bottom: 12px">
                         <a class="managed-service"
-                           :href="service.href" target="_blank">
+                           :href="service.href" target="_blank"
+                           rel="noopener">
                             <img :src="require('../../assets/svg/services/managed/' + service.icon + '.svg')"
                                  :alt="service.icon"
                                  style="max-width: 48px; max-height: 48px"/>
@@ -80,7 +82,7 @@
                     </div>
                 </div>
 
-                <a class="button" @click="$router.push('/managed-services')">مشاهده همه</a>
+                <a class="button" @click="$router.push('/managed-services')" rel="noopener">مشاهده همه</a>
 
             </div>
             <div class="vertical_line"></div>
@@ -91,7 +93,8 @@
                 <div class="row" style="width: 100%; margin-left: 0; margin-right: 0">
 
                     <a v-for="language in languages" class="language-support"
-                       @click="$router.push('/languages/' + language.href)">
+                       @click="$router.push('/languages/' + language.href)"
+                       rel="noopener">
                         <img style="filter: invert(75%) sepia(59%) saturate(4513%) hue-rotate(218deg) brightness(100%) contrast(108%); margin-top: auto; margin-bottom: auto;"
                              :src="require('../../assets/svg/services/language/' + language.icon +  '.svg')"
                              :alt="language.icon"/>
@@ -100,7 +103,7 @@
 
                 </div>
 
-                <a class="button" @click="$router.push('languages')">مشاهده همه</a>
+                <a class="button" @click="$router.push('languages')" rel="noopener">مشاهده همه</a>
 
             </div>
             <div class="vertical_line"></div>
@@ -120,6 +123,7 @@
                             </div>
                             <div class="product-sub-category-section">
                                 <a v-for="item in product.items" :href="item.href"
+                                   rel="noopener"
                                    target="_blank">
                                     {{item.title}}</a>
                             </div>
@@ -140,21 +144,15 @@
 <script>
     import logo from "./logo";
     import FButton from "~/components/elements/button";
-    import Login from "~/components/Auth/Login";
     import Sidebar from "./sidebar";
-    import Register from "../Auth/Register";
-    import Message from "../Auth/Message";
     import {getValue} from "~/utils/cookie";
     import Gravatar from "~/utils/gravatar";
 
     export default {
         components: {
-            Register,
             logo,
             FButton,
-            Login,
-            Sidebar,
-            Message
+            Sidebar
         },
         props: ["noFixed"],
         data() {
@@ -186,6 +184,10 @@
                             {
                                 title: 'CLI',
                                 href: 'https://docs.fandogh.cloud/docs/getting-started.html'
+                            },
+                            {
+                                title: 'Manifests',
+                                href: 'https://github.com/fandoghpaas/fandogh-manifests'
                             },
                         ]
                     },
@@ -242,10 +244,10 @@
                         href: 'https://docs.fandogh.cloud/docs/postgresql-managed-service.html'
                     },
                     {
-                        title: 'Proxy',
-                        caption: 'IP Range Limiter',
-                        icon: 'managed_service_proxy',
-                        href: 'https://docs.fandogh.cloud/docs/proxy-managed-service.html'
+                        title: 'MongoDB',
+                        caption: 'NoSQL Database',
+                        icon: 'managed_service_mongodb',
+                        href: 'https://docs.fandogh.cloud/docs/mongodb-managed-service.html'
                     },
                     {
                         title: 'Redis',
@@ -253,6 +255,12 @@
                         icon: 'managed_service_redis',
                         href: 'https://docs.fandogh.cloud/docs/redis-managed-service.html'
                     },
+                    {
+                        title: 'RabbitMQ',
+                        caption: 'Message Broker',
+                        icon: 'managed_service_rabbitmq',
+                        href: 'https://docs.fandogh.cloud/docs/rabbitmq-managed-service.html'
+                    }
                 ]
             };
         },
@@ -295,9 +303,6 @@
             },
             dashboard() {
                 return this.$route.fullPath.includes("dashboard");
-            },
-            isMainPage() {
-                return this.$route.path === '/'
             }
         },
         methods: {

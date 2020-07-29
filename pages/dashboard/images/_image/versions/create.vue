@@ -158,12 +158,12 @@
             Popover
         },
         methods: {
-            verifyUserAccess(permitted_roles){
+            verifyUserAccess(permitted_roles) {
                 return RoleAccessHandler(permitted_roles)
             },
             createImageVersion() {
 
-                if(this.rules.required(this.image.version.value) !== true){
+                if (this.rules.required(this.image.version.value) !== true) {
                     this.$notify({
                         title: 'نام نسخه نمی‌تواند خالی باشد.',
                         time: 4000,
@@ -173,8 +173,8 @@
                 }
 
 
-                if(this.rules.version_start_regex(this.image.version.value) !== true ||
-                    this.rules.version_start_regex(this.image.version.value) !== true){
+                if (this.rules.version_start_regex(this.image.version.value) !== true ||
+                    this.rules.version_start_regex(this.image.version.value) !== true) {
                     this.$notify({
                         title: 'نسخه ایمیج وارد شده صحیح نمی‌باشد',
                         time: 4000,
@@ -208,9 +208,9 @@
                                 time: 4000,
                                 type: "success"
                             });
-                            this.$router.push(
-                                `/dashboard/images/${this.name}/versions/${this.image.version.value}/logs`
-                            );
+                            this.$router.push({
+                                path: `/dashboard/images/${this.name}/versions/${this.image.version.value}/logs`
+                            });
                         })
                         .catch(e => {
                             this.loading = false;

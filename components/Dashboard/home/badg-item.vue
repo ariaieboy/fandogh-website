@@ -33,14 +33,16 @@ export default {
   align-items center
   margin-left 10px
   padding 5px
-  width 168px
+  min-width 168px
+  width max-content
   border-radius 16px
   background-color #f0f0f0
   span
     color #333333
     font-size 12px
+    margin-left 5px
   i
-    margin-left 15px
+    margin-left 8px
     width 10px
     height 10px
     border-radius 100%

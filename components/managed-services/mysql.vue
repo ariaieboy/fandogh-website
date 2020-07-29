@@ -34,7 +34,7 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.counter, rules.required, rules.regex]"
+                                :rules="[rules.counter, rules.required]"
                                 v-model="mysql_manifest.password.value"
                                 :label="password.label"
                                 :hint="password.hint">

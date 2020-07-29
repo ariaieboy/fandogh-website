@@ -16,7 +16,7 @@
       <!-- Modal content -->
       <div class="alert-content" v-if="options">
         <div class="alert-image">
-          <img :src="image">
+          <img :src="image" alt="icon">
           <h2>{{options.title}}</h2>
         </div>
         <div class="alert-content">

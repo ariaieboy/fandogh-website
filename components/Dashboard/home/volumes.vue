@@ -3,7 +3,14 @@
 
         <table-title :title="sectionTitle.title" :icon="sectionTitle.icon"></table-title>
 
-        <div style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
+        <empty-feature v-if="volumes.length === 0"
+                       :privileged="verifyUserAccess({ADMIN:'ADMIN', DEVELOPER: 'DEVELOPER'})"
+                       :title="emptySection.title" :icon="emptySection.icon" :url="createVolume">
+
+        </empty-feature>
+
+        <div v-else
+             style="border-radius: 3px; width: 100%; background-color: #fefefe; box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.07); box-sizing: content-box">
 
             <table-header :headers="headers"></table-header>
 
@@ -14,9 +21,15 @@
                         <td :width="headers[0].width" style="text-align: center; text-overflow: ellipsis">
                             {{volume.name}}
                         </td>
-                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans;">{{volume.created_at}}</td>
-                        <td :width="headers[2].width" style="text-align: center; font-family: iran-sans;">{{volume.capacity}} گیگابایت</td>
-                        <td :width="headers[3].width" style="text-align: center">
+                        <td :width="headers[1].width" style="text-align: center; font-family: iran-sans;">
+                            {{volume.created_at}}
+                        </td>
+                        <td :width="headers[2].width" style="text-align: center;">{{volume.capacity}}</td>
+                        <td :width="headers[3].width"
+                            style="text-align: center;text-overflow: ellipsis; overflow: hidden; white-space: nowrap; max-width: 80px">
+                            {{volume.condition}}
+                        </td>
+                        <td :width="headers[4].width" style="text-align: center">
                             <div style="width: 100%; display: flex; background-color: #f0f0f0; border-radius: 25px;padding-bottom: 3px; padding-top: 3px; justify-content: end;white-space: nowrap">
                                 <i class="status" :class="stateIcon(volume.service)"
                                 ></i>
@@ -44,6 +57,8 @@
     import TableTitle from "./children/table-title";
     import TableNavigation from "./children/table-navigation";
     import Moment from 'moment-jalaali'
+    import EmptyFeature from "./children/empty-feature";
+    import RoleAccessHandler from "../../../utils/RoleAccessHandler";
 
     export default {
         name: "volumes",
@@ -51,23 +66,30 @@
             TableNavigation,
             TableTitle,
             TableHeader,
-            Moment
+            Moment,
+            EmptyFeature,
+            RoleAccessHandler
         },
         data() {
             return {
+                emptySection: {
+                    title: 'فضای ‌‌ذخیره‌سازی',
+                    icon: 'ic-dedicated-volume',
+                },
                 sectionTitle: {
-                    title: 'حافظه‌های ذخیره‌سازی',
+                    title: 'فضای ذخیره‌سازی',
                     icon: 'ic-dedicated-volume'
                 },
                 headers: [
-                    {title: 'نام حافظه‌', width: '30%'},
-                    {title: 'تاریخ ساخت', width: '20%'},
-                    {title: 'فضای کل', width: '25%'},
-                    {title: 'وضعیت اتصال', width: '25%'},
+                    {title: 'نام فضای ذخیره‌سازی', width: '30%'},
+                    {title: 'تاریخ ساخت', width: '15%'},
+                    {title: 'حجم', width: '12%'},
+                    {title: 'وضعیت', width: '20%'},
+                    {title: 'متصل به', width: '23%'},
                 ],
                 navigation: {
-                    title: 'تعداد حافظه‌ ذخیره‌سازی',
-                    button: 'لیست حافظه‌ها'
+                    title: 'تعداد فضای ذخیره‌سازی',
+                    button: 'لیست فضاها'
                 },
             }
         }, computed: {
@@ -75,11 +97,12 @@
                 let volumes = this.$store.state.volumes === null ? [] : this.$store.state.volumes
                 if (volumes) {
                     return volumes.map(
-                        ({age, capacity, name, mounted_to}) => {
+                        ({age, capacity, name, mounted_to, condition}) => {
                             return {
                                 created_at: Moment(age).format('jYYYY/jMM/jDD'),
-                                capacity: capacity.toString().replace('Gi', ''),
+                                capacity: `${capacity.toString().replace('Gi', '')}Gi`,
                                 name,
+                                condition: name === null ? 'در حال ساخت...' : ((condition === 'Resizing' || condition === 'FileSystemResizePending') && !mounted_to) ? 'در انتظار اتصال به سرویس و اتمام افزایش فضا' : (condition === 'Resizing' || condition === 'FileSystemResizePending') ? 'در حال افزایش فضا...' : 'آماده',
                                 service: mounted_to
                             };
                         }
@@ -99,14 +122,20 @@
             goToVolumes() {
                 this.$router.push('/dashboard/volumes/')
             },
+            createVolume() {
+                this.$router.push('/dashboard/volumes/create')
+            },
+            verifyUserAccess(permitted_roles) {
+                return RoleAccessHandler(permitted_roles)
+            },
             stateIcon: function (service) {
-                if(service){
+                if (service) {
                     return 'mounted-circle'
-                }else {
+                } else {
                     return 'free-circle'
                 }
             }
-        },filters:{
+        }, filters: {
             state: function (service) {
                 return service === null ? 'آزاد' : service
             }

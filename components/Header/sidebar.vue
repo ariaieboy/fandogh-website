@@ -2,7 +2,7 @@
     <div class="sidebar" :class="{'show-sidebar-navbar': sidebar}">
         <div class="row sidebar-heading no-margin" style="display: flex; flex-direction: column">
             <div class="col-xs-6">
-                <a href="#" @click.prevent="toggleMenu" class="close">
+                <a href="#" @click.prevent="toggleMenu" class="close" rel="noopener">
                     <img alt="close icon"
                          :src="require('../../assets/svg/ic_close.svg')">
                 </a>
@@ -19,10 +19,10 @@
         <div class="products">
             <ul class="row">
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="https://fandogh.cloud/languages" target="_blank">اجرای مستقیم کدها</a>
+                    <img src="../../assets/svg/source_deployment_icon.svg" alt="lang"><a href="https://fandogh.cloud/languages" target="_blank" rel="noopener">اجرای مستقیم کدها</a>
                 </li>
                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <img src="../../assets/svg/ic-managed-services.svg" alt="lang"><a href="https://fandogh.cloud/managed-services" target="_blank">سرویس‌های مدیریت شده</a>
+                    <img src="../../assets/svg/ic-managed-services.svg" alt="lang"><a href="https://fandogh.cloud/managed-services" target="_blank" rel="noopener">سرویس‌های مدیریت شده</a>
                 </li>
                 <!--<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
                     <!--<img src="../../assets/svg/services/other_services/developer_tools.svg" alt="lang"><a href="#">Developer Tools</a>-->
@@ -39,7 +39,7 @@
         <div class="navs">
             <ul class="row">
                 <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                    <a href="/">صفحه اصلی</a>
+                    <a href="/" rel="noopener">صفحه اصلی</a>
                 </li>
                 <!--<li>-->
                 <!--<a @click="toggleMenu" href="#prices">سرویس ها</a>-->
@@ -55,6 +55,9 @@
                 </li>
                 <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <router-link :to="{path:'/our-values'}">ارزش‌های ما</router-link>
+                </li>
+                <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+                    <router-link :to="{path:'/pricing'}">قیمت‌ها</router-link>
                 </li>
                 <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
                     <router-link :to="{path:'/conditions-of-use'}">قوانین سکو</router-link>

@@ -1,6 +1,6 @@
 <template>
     <div v-if="service && !loading">
-        <p class="title">جزییات سرویس</p>
+        <p id="service_title" class="title">جزییات سرویس</p>
 
         <div class="row" style="margin: 0 0 12px 0;">
             <div class="service-header">
@@ -29,6 +29,11 @@
                     <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.memory}}</span>
                 </span>
 
+                <span class="service-spec">
+                    تعداد restart<br>
+                    <span style="font-size: 1.2em; color: black;padding-right: .2em; font-family: iran-sans">{{service.service_restarts}}</span>
+                </span>
+
                 <div v-if="!removing && verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})"
                      class="service-edit-container">
                     <span class="service-edit"
@@ -43,10 +48,13 @@
                           @click="remove">
                         حذف سرویس
                     </span>
+                    <span class="download-service"
+                          @click="downloadServiceManifest(service.name)">
+                        دانلود مانیفست
+                    </span>
                 </div>
             </div>
         </div>
-
 
         <div class="row main" style="margin: 0;">
             <div class="box-row row col-lg-2 col-md-2 col-sm-2 col-xs-12 padding">
@@ -103,17 +111,32 @@
                      class="restart-service">
                     <p>راه‌اندازی مجدد</p>
                 </div>
+
+                <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER', OPERATOR:'OPERATOR'})"
+                     @click="downloadServiceManifest(service.name)"
+                     class="download-service">
+                    <p>دانلود مانیفست</p>
+                </div>
             </div>
 
-            <keep-alive>
-                <component class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding"
-                           v-bind:is="activeSectionName"
-                           style="padding: 0"
-                           :service="service">
+            <div class="col-lg-10 col-md-10 col-xs-12 col-sm-10 padding" style="padding-left: 0; padding-right: 0">
 
-                </component>
-            </keep-alive>
+                <div v-if="service.help_message && service.service_type === 'managed'" class="helper-message-container">
+
+                    <p class="helper-message-text">{{service.help_message}}</p>
+
+                </div>
+
+                <keep-alive>
+                    <component v-bind:is="activeSectionName"
+                               style="padding: 0"
+                               :service="service">
+                    </component>
+                </keep-alive>
+
+            </div>
         </div>
+
     </div>
 </template>
 
@@ -136,6 +159,7 @@
     import rollback from "./service/rollback"
     import ErrorReporter from "../../../utils/ErrorReporter";
     import RoleAccessHandler from "../../../utils/RoleAccessHandler";
+    import * as yaml from "js-yaml";
 
     export default {
         layout: "dashboard",
@@ -231,7 +255,10 @@
                 if (this.service.service_type === 'managed') {
                     this.dumpManifest(this.service.name)
                 } else {
-                    this.$router.push({path: '/dashboard/services/wizard', query: {service: this.service.name}})
+                    this.$router.push({
+                        path: '/dashboard/services/wizard',
+                        query: {service: this.service_name, ns: this.$route.query.ns}
+                    })
                 }
             },
             remove() {
@@ -252,7 +279,7 @@
                             this.$store.dispatch("deleteService", this.service_name)
                                 .then(res => {
                                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
-                                    this.$router.replace('/dashboard/services');
+                                    this.$router.replace({path: '/dashboard/services'});
                                     this.$ga.event({
                                         eventCategory: "service",
                                         eventAction: "remove service",
@@ -302,9 +329,35 @@
                     if (e.status === 401) {
                         this.$router.push("/user/login");
                     } else {
-                        this.$router.push("/dashboard/services")
+                        this.$router.push({path: "/dashboard/services"})
                     }
                 }
+            },
+            async downloadServiceManifest(service_name) {
+                this.$store.commit("SET_DATA", {data: true, id: "loading"});
+                await this.$store.dispatch('dumpServiceManifest', service_name)
+                    .then(response => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        var fileURL = window.URL.createObjectURL(new Blob([yaml.dump(response, {'sortKeys': true})]));
+                        var fileLink = document.createElement('a');
+                        fileLink.href = fileURL;
+                        fileLink.setAttribute('download', `${service_name}-manifest.yml`);
+                        document.body.appendChild(fileLink);
+                        fileLink.click();
+                    }).catch(e => {
+                        this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                        if (e.status === 401) {
+                            this.$router.push("/user/login");
+                        } else {
+                            ErrorReporter(e, this.$data, true).forEach(error => {
+                                this.$notify({
+                                    title: error,
+                                    time: 4000,
+                                    type: "error"
+                                });
+                            });
+                        }
+                    });
             },
             async dumpManifest(service_name) {
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
@@ -409,7 +462,8 @@
             p
                 font-style normal
                 font-stretch normal
-                line-height 40px
+                padding-top 8px
+                padding-bottom 8px
                 text-align center
                 font-family iran-yekan
                 background-color #fefefe
@@ -428,9 +482,10 @@
                     border-radius 0
                     box-shadow none
                     font-size 1em
-                    line-height 32px
                     margin-top 8px
                     margin-bottom 8px
+                    padding-top 2px
+                    padding-bottom 2px
                     background-color transparent
 
 
@@ -445,7 +500,8 @@
             p
                 font-style normal
                 font-stretch normal
-                line-height 40px
+                padding-top 8px
+                padding-bottom 8px
                 text-align center
                 font-family iran-yekan
                 font-weight bold
@@ -462,7 +518,8 @@
                     min-width 200px
                     border-radius 0
                     box-shadow none
-                    line-height 32px
+                    padding-top 2px
+                    padding-bottom 2px
                     font-size 1em
                     margin-top 8px
                     margin-bottom 8px
@@ -561,6 +618,30 @@
                 margin-bottom 8px
                 letter-spacing normal
                 color $fontGray
+
+        div.download-service
+            padding 0
+            cursor pointer
+            @media only screen and (max-width: 766px)
+                margin-right: -1px
+                display: none
+
+            p
+                font-style normal
+                font-stretch normal
+                line-height 40px
+                text-align center
+                font-family iran-yekan
+                font-weight normal
+                font-size .9em
+                background-color $colorPrimary
+                border-radius 3px
+                box-shadow 0 2px 6px 0 rgba(41, 121, 255, 0.2)
+                outline none
+                margin-top 0
+                margin-bottom 8px
+                letter-spacing normal
+                color $totalWhite
 
 
     .box-row::-webkit-scrollbar
@@ -768,6 +849,25 @@
         margin-top 0
         cursor pointer
 
+    span.download-service
+        font-style normal
+        background-color $colorPrimary
+        outline none
+        letter-spacing normal
+        color $totalWhite
+        display inline-block
+        line-height 1.75
+        margin-bottom auto
+        font-size 1.2em
+        font-family iran-yekan
+        font-weight normal
+        border-radius 3px
+        text-align center
+        align-self start
+        padding 8px 24px
+        margin-top 0
+        cursor pointer
+
     .service-delete
         display inline-block
         color $totalWhite
@@ -799,6 +899,7 @@
         @media only screen and (max-width: 766px)
             font-size 1.2em
             display block
+            margin-top 8px
             padding-right 0
             padding-left 0
 
@@ -809,6 +910,23 @@
             padding-left 12px
             @media only screen and (max-width: 766px)
                 padding 0
+
+
+    .helper-message-container
+        width 100%
+        border-radius 3px
+        background-color rgba(0, 69, 255, 0.6)
+        padding 8px 16px
+        margin-bottom 12px
+        display flex
+        flex-direction column
+
+        p.helper-message-text
+            font-size 1em
+            color #fefefe
+            font-family 'Helvetica Neue'
+            direction ltr
+            margin-bottom 0
 
 
 </style>

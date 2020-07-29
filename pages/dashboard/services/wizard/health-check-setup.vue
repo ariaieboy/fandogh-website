@@ -81,7 +81,7 @@
                                     type="text"
                                     dir="ltr"
                                     :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
-                                    v-model="manifest_model.health_check.liveness_object.http_get_method"
+                                    v-model="manifest_model.health_check.liveness_object.http_get.path"
                                     :hint="health_check_obj.http_get_method_hint"
                                     :label="health_check_obj.http_get_method_label">
 
@@ -100,7 +100,7 @@
                                     type="number"
                                     dir="ltr"
                                     :rules="[rules.required, rules.valid_port]"
-                                    v-model.number="manifest_model.health_check.liveness_object.http_get_port"
+                                    v-model.number="manifest_model.health_check.liveness_object.http_get.port"
                                     :hint="health_check_obj.http_get_port_hint"
                                     :label="health_check_obj.http_get_port_label">
 
@@ -193,7 +193,7 @@
                                     type="text"
                                     dir="ltr"
                                     :rules="[rules.required, rules.is_root_addressed, rules.has_space]"
-                                    v-model="manifest_model.health_check.readiness_object.http_get_method"
+                                    v-model="manifest_model.health_check.readiness_object.http_get.path"
                                     :hint="health_check_obj.http_get_method_hint"
                                     :label="health_check_obj.http_get_method_label">
 
@@ -212,7 +212,7 @@
                                     dir="ltr"
                                     type="number"
                                     :rules="[rules.required, rules.valid_port]"
-                                    v-model.number="manifest_model.health_check.readiness_object.http_get_port"
+                                    v-model.number="manifest_model.health_check.readiness_object.http_get.port"
                                     :hint="health_check_obj.http_get_port_hint"
                                     :label="health_check_obj.http_get_port_label">
 
@@ -331,80 +331,6 @@
                     path: path
                 })
             },
-        },
-        computed: {},
-        watch: {
-            'manifest_model.health_check.liveness_object': {
-                handler: function (value, oldValue) {
-                    let empty = false
-                    let keys = Object.keys(value)
-                    for (let key of keys) {
-                        if (value[key] === null || value[key] === '') {
-                            this.deleteFromManifest('spec.liveness_probe');
-                            empty = true;
-                            break
-                        }else if(key === 'http_get_method'){
-                            if(this.rules.is_root_addressed(value[key]) !== true || this.rules.has_space(value[key]) !== true){
-                                this.deleteFromManifest('spec.liveness_probe');
-                                empty = true;
-                                break
-                            }
-                        }else if(key === 'http_get_port'){
-                            if(this.rules.valid_port(value[key]) !== true){
-                                this.deleteFromManifest('spec.liveness_probe');
-                                empty = true;
-                                break
-                            }
-                        }else {
-                            if(this.rules.min_value(value[key])){
-                                this.deleteFromManifest('spec.liveness_probe');
-                                empty = true;
-                                break
-                            }
-                        }
-                    }
-
-                    if (!empty) {
-                        this.addToManifest(value, 'spec.liveness_probe')
-                    }
-
-                }, deep: true
-            },
-            'manifest_model.health_check.readiness_object': {
-                handler: function (value, oldValue) {
-                    let empty = false
-                    let keys = Object.keys(value)
-                    for (let key of keys) {
-                        if (value[key] === null || value[key] === '') {
-                            this.deleteFromManifest('spec.readiness_probe')
-                            empty = true
-                            break
-                        }else if(key === 'http_get_method'){
-                            if(this.rules.is_root_addressed(value[key]) !== true || this.rules.has_space(value[key]) !== true){
-                                this.deleteFromManifest('spec.readiness_probe')
-                                empty = true
-                                break
-                            }
-                        }else if(this.rules.valid_port(value[key]) !== true){
-                            if(value[key] > 65535 || value[key] < 1){
-                                this.deleteFromManifest('spec.readiness_probe')
-                                empty = true
-                                break
-                            }
-                        }else {
-                            if(this.rules.min_value(value[key])){
-                                this.deleteFromManifest('spec.readiness_probe')
-                                empty = true
-                                break
-                            }
-                        }
-                    }
-
-                    if (!empty) {
-                        this.addToManifest(value, 'spec.readiness_probe')
-                    }
-                }, deep: true
-            }
         }
     }
 </script>

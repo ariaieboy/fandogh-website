@@ -7,7 +7,7 @@
             <div style="overflow: hidden; margin-bottom: 32px">
                 <div class="right" style="float: right;"><p class="title_header"> لیست ایمیج‌ها</p></div>
                 <div v-if="verifyUserAccess({ADMIN: 'ADMIN', DEVELOPER: 'DEVELOPER'})" class="left" style="float: left; cursor: pointer; margin-top: 8px"
-                     @click="$router.push('/dashboard/images/create')">
+                     @click="$router.push({path: '/dashboard/images/create'})">
                     <svg width="180px" height="55px" viewBox="0 0 208 63" version="1.1"
                          xmlns="http://www.w3.org/2000/svg">
                         <defs>
@@ -166,7 +166,7 @@
                     // eventLabel:'user',
                     // eventValue:'userId'
                 });
-                this.$router.push(`/dashboard/images/${this.images[index].name}/versions`);
+                this.$router.push({path: `/dashboard/images/${this.images[index].name}/versions`});
             },
             createVersion(index) {
                 this.$ga.event({
@@ -175,7 +175,7 @@
                     // eventLabel:'user',
                     // eventValue:'userId'
                 });
-                this.$router.push(`/dashboard/images/${this.images[index].name}/versions/create`);
+                this.$router.push({path: `/dashboard/images/${this.images[index].name}/versions/create`});
             },
             remove(index) {
                 this.$ga.event({
@@ -237,6 +237,7 @@
         font-size 1.2em
         font-stretch normal
         line-height 1.75
+        padding-top 18px
         color #7c7c7c
         letter-spacing normal
 

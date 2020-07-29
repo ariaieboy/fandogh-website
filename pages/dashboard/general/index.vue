@@ -4,19 +4,22 @@
     <div class="dashboard-home-panel-chart">
       <div class="row">
         <div class="col-lg-4 col-sm-12 col-xs-12">
-          <f-charts :data="serviceUsage" unit="مگابایت" :colors="['#086375','#3ccc38']"/>
+          <f-charts :data="serviceUsage" unit="مگابایت" :colors="['#086375','#3ccc38']"
+                    :icon="'ic-service.svg'"/>
         </div>
         <div class="col-lg-4 col-sm-12 col-xs-12">
           <f-charts
             class="pr-lg-25"
-            title="ٰVolume"
+            title="Dedicated Volume"
             :data="volumeUsage"
+            :icon="'ic-storage.svg'"
             unit="گیگابایت"
             :colors="['#086375','#3ccc38']"
           />
         </div>
       </div>
     </div>
+
     <div class="row">
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <f-images/>
@@ -30,9 +33,9 @@
       <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <f-secrets/>
       </div>
-      <!--<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">-->
-        <!--<f-volumes/>-->
-      <!--</div>-->
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <f-volumes/>
+      </div>
     </div>
   </div>
 </template>

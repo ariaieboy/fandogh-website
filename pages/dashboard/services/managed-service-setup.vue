@@ -71,6 +71,9 @@
     import Redis from "../../../components/managed-services/redis";
     import Elasticsearch from "../../../components/managed-services/elasticsearch";
     import Kibana from "../../../components/managed-services/kibana";
+    import FileBrowser from "../../../components/managed-services/filemanager";
+    import RabbitMQ from "../../../components/managed-services/rabbitmq";
+    import Minio from "../../../components/managed-services/minio";
     import Proxy from "../../../components/managed-services/proxy";
     import ErrorReporter from "../../../utils/ErrorReporter";
 
@@ -84,6 +87,9 @@
             MongoDB,
             Mssql,
             Redis,
+            RabbitMQ,
+            FileBrowser,
+            Minio,
             Elasticsearch,
             Kibana,
             Proxy
@@ -174,6 +180,42 @@
                             path: "redis",
                             version: '5.0.3',
                             description: 'شاید تا به حال نام پایگاه داده قدرتمند Redis را شنیده باشید. طبق توضیحات سایت Redis.io ٬ Redis یک پایگاه داده متن‌باز است که با قابلیت ذخیره داده‌ها به صورت in-memory باعث بالا رفتن سرعت ذخیره و بازیابی داده‌ها می‌شود.'
+
+                        },
+
+                    rabbitmq:
+                        {
+                            title: 'RabbitMQ',
+                            local_title: 'RabbitMQ',
+                            short_desc: 'Message Broker',
+                            icon: 'rabbitmq',
+                            path: "rabbitmq",
+                            version: 'latest',
+                            description: 'RabbitMQ یک سرویس متن باز message-broker یا پیام دهنده است که معماری Advanced Message Queuing Protocol یا به اختصار (AMQP) را ایجاد کرده‌ است.\n' +
+                                'همچنین این سرویس در ادامه با معماری plug-in به نحوی گسترش یافت تا بتواند از پروتکول‌هایی مثل Streaming Text Oriented Messaging Protocol یا به اختصار (STOMP)، MQTT و ... هم پشتیبانی کند.'
+                        },
+
+                    filebrowser:
+                        {
+                            title: 'FileBrowser',
+                            local_title: 'File Browser',
+                            short_desc: 'File Manager',
+                            icon: 'filebrowser',
+                            path: "filebrowser",
+                            version: 'latest',
+                            description: 'یکی از مشکلات کاربران بر روی سکو‌های ابری، دسترسی به داده‌های ذخیره‌شده بر روی Storage است، برای آنکه بتوانید به صورت گرافیکی با محل ذخیره‌سازی داده‌ها کار کنید و داده‌های خود را دانلود و آپلود و یا حتی Edit کنید، می‌توانید از سرویس مدیریت شده File Browser فندق استفاده کنید.'
+                        },
+
+                    minio:
+                        {
+                            title: 'Minio',
+                            local_title: 'MinIO',
+                            short_desc: 'Object Storage',
+                            icon: 'minio',
+                            path: "minio",
+                            version: 'latest',
+                            description: 'اگر شما به دنبال راه حلی برای ذخیره‌سازی داده‌های متفاوت هستید بهتر است از Object Storageها استفاده کنید. یکی از این Object Storageها MinIO است.\n' +
+                                'MinIO یک cloud storage سازگار با Amazon S3 است که به شما این امکان را میدهد تا فایل‌های خود را بر روی آن ذخیره کنید.'
                         },
                     elasticsearch:
                         {
@@ -207,7 +249,7 @@
                             version: 'latest',
                             description: 'هنگامی که شما سرویس‌های خود را دیپلوی می‌کنید٬ سکو ترافیک خروجی سرویس شما را بر روی IP های متفاوتی برمی‌گرداند.\n' +
                                 'این حالت در برخی شرایط که نیاز به یک IP آدرس مشخص وجود دارد٬ کار را کمی دشوار می‌کند.\n' +
-                                'برای اینکه بتوانید از این مشکل جلوگیری به عمل آورید می‌توانید از Proxy Managed Service استفاده کنید. تنها کافی‌ است با استفاده از دستور fandogh managed-service deploy proxy 1 -c service_name proxy-server یک سرویس Proxy ایجاد کرده و داخل سرویسی که می‌خواهید ترافیک خروجی آن بر روی range ip مشخصی قرار گیرد تنظیم می‌کنید که این سرویس٬ responseهای خود را به proxy-server:3128 هدایت کند.'
+                                'برای اینکه بتوانید از این مشکل جلوگیری به عمل آورید می‌توانید از Proxy Managed Service استفاده کنید. تنها کافی‌ است با استفاده از دستور fandogh managed-service deploy proxy 1 -c service_name proxy-server یک سرویس Proxy ایجاد کرده و داخل سرویسی که می‌خواهید ترافیک خروجی آن بر روی range ip مشخصی قرار گیرد تنظیم می‌کنید که این سرویس، responseهای خود را به proxy-server:3128 هدایت کند.'
                         }
                 },
                 rules: {
@@ -384,7 +426,7 @@
                             // removeValue('name')
                             // removeValue('versions')
                             this.$store.commit("SET_DATA", {id: "service", data: res});
-                            this.$router.replace(`/dashboard/services/${res.name}`)
+                            this.$router.replace({path: `/dashboard/services/${res.name}`})
                             this.$store.commit('SET_DATA', {id: 'manifest', data: {}})
                         }, 5000);
 

@@ -1,7 +1,7 @@
 <template>
 
     <div class="parent">
-        <img v-if="icon" :src="require('../icons/' + icon + '.svg')" alt="name"></img>
+        <img v-if="icon" :src="require('../icons/' + icon + '.svg')" :alt="icon"></img>
         <p>{{status}}</p>
     </div>
 

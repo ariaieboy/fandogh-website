@@ -5,7 +5,8 @@
                 {{title}}
                 <span v-if="loading">
                     <img style=" margin-top: auto; margin-bottom: auto; width: 32px; height: 32px"
-                         src="~/assets/img/icons/loading.svg"/>
+                         src="~/assets/img/icons/loading.svg"
+                         alt="loading"/>
                 </span>
             </div>
             <div>
@@ -13,7 +14,7 @@
                     <line-chart class="wrapper"
                                 :chartData="chartData"
                                 :options="options"
-                                :styles="{height: '500px',width: '100%'}">
+                                :styles="myStyles">
                     </line-chart>
                 </div>
             </div>
@@ -58,7 +59,11 @@
             async fillData() {
                 this.loading = true;
 
-                await this.$store.dispatch("getMetric", {metric: this.metricName, service: this.serviceFilter['value'], hours: this.dateFilter['value']});
+                await this.$store.dispatch("getMetric", {
+                    metric: this.metricName,
+                    service: this.serviceFilter['value'],
+                    hours: this.dateFilter['value']
+                });
                 this.chartData = {
                     datasets: this.$store.state[this.metricName]
                 };
@@ -87,12 +92,22 @@
             ActionButton,
             FEmpty,
             LineChart
-        }, watch:{
-            dateFilter(){
+        }, watch: {
+            dateFilter() {
                 this.fillData()
             },
-            serviceFilter(){
+            serviceFilter() {
                 this.fillData()
+            }
+        },
+        computed: {
+            myStyles() {
+                return {
+                    position: 'relative',
+                    width: '100%',
+                    height: (this.chartData === null ? '500px' : this.chartData.datasets.length * 23 > 500 ?
+                        `${this.chartData.datasets.length * 23}px` : '500px')
+                }
             }
         }
     };

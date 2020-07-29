@@ -51,7 +51,8 @@
                         تایید دعوت‌نامه
                     </button>
                     <a v-else-if="error === null" href="https://fandogh.cloud/user/login"
-                       target="_blank" class="invitation-dialog-button">ورود
+                       target="_blank" class="invitation-dialog-button"
+                       rel="noopener">ورود
                         به حساب کاربری</a>
                 </div>
             </div>
@@ -61,8 +62,8 @@
 
             <div class="info-line"></div>
             <div class="info-action-container">
-                <a>حریم خصوصی</a>
-                <a>شرایط استفاده</a>
+                <a rel="noopener">حریم خصوصی</a>
+                <a rel="noopener">شرایط استفاده</a>
             </div>
             <p class="ownership-right">© 2019 Fandogh PaaS</p>
 

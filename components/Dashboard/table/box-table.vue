@@ -1,6 +1,6 @@
 <template>
 
-    <div class="row" style="overflow-x:auto;margin: 0; padding-left: 5px; padding-right: 5px; padding-bottom: 150px">
+    <div class="row" style="overflow-x: auto; margin: 0; padding-left: 5px; padding-right: 5px; padding-bottom: 150px">
         <table style="width: 100%; border-collapse: separate; text-align: right; border-spacing: 0 .1em; table-layout: fixed">
             <tr class="head">
                 <th v-for="title in titles" :width="title.width">
@@ -9,7 +9,10 @@
             </tr>
             <tr class="data-head" v-for="(item, index) in items">
 
-                <td :class="title.class" v-html="item[title.name]" v-for="title in titles" @click="func? func(index) : ''"
+                <td :class="title.class" v-html="item[title.name]" v-for="title in titles"
+                    @click="func? func(index) : ''"
+                    v-tooltip="!item[title.name] ? null : item[title.name].toString().length > 12 ? item[title.name].toString().includes('div')
+                    ? null : item[title.name] : null"
                     :style="{cursor: (func ? 'pointer' : 'unset')}">
                     {{item[title.name]}}
                 </td>
@@ -21,7 +24,8 @@
 
                         <div :id="index" class="dropdown-content">
 
-                            <a v-for="item in menu" @click="item.method(index)" :style="item.style">
+                            <a v-for="item in menu" @click="item.method(index)" :style="item.style"
+                               rel="noopener">
 
                                 <img :src="require('../../../static/icons/' + item.icon)"
                                      :alt="item.title"/>
@@ -63,7 +67,7 @@
                     var dropdowns = document.getElementsByClassName("dropdown-content");
                     var i;
                     for (i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
+                        var openDropdown = dropdowns[i].toString();
                         if (openDropdown.classList.contains('show')) {
                             openDropdown.classList.remove('show');
                         }
@@ -136,7 +140,6 @@
                     @media only screen and (max-width: 766px)
                         width 7px
                         height 15px
-
 
 
     .dropbtn {

@@ -14,7 +14,7 @@
       <tbody>
         <tr v-for="item in items">
           <td>{{item.reason}}</td>
-          <td>{{item.message}}</td>
+          <td>{{item.message.toString().replace(new RegExp('fandogh-k8s-node+[0-9]*'), 'fandogh-k8s-node')}}</td>
           <td>{{item.count}}</td>
           <!-- <td>2018-10-03</td> -->
           <td>{{FDate(item.last_timestamp)}}</td>

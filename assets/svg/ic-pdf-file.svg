@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="140px" height="140px" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Group 6</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-6">
+            <rect id="Rectangle" fill-opacity="0.1" fill="#111111" fill-rule="nonzero" x="0" y="0" width="140" height="140" rx="5"></rect>
+            <g id="Group-5" transform="translate(45.000000, 39.000000)">
+                <g id="Group-4" fill="#E20E3F" fill-rule="nonzero">
+                    <path d="M2,0.41791045 L25.7910448,0.41791045 L25.7910448,0.41791045 L38.6865672,0.41791045 L42.2505793,0.41791045 C44.0732816,0.41791045 45.797159,1.24644876 46.9357921,2.66974016 L50.2673024,6.83412801 C51.118405,7.8980063 51.5820896,9.2198693 51.5820896,10.5822983 L51.5820896,16.5373134 L51.5820896,16.5373134 L51.5820896,32.6567164 L51.5820896,62.0895522 C51.5820896,63.1941217 50.6866591,64.0895522 49.5820896,64.0895522 L2,64.0895522 C0.8954305,64.0895522 3.55271368e-15,63.1941217 3.55271368e-15,62.0895522 L3.55271368e-15,2.41791045 C3.55271368e-15,1.31334095 0.8954305,0.41791045 2,0.41791045 Z" id="Rectangle"></path>
+                </g>
+                <text id="PDF" fill-opacity="0.903545673" fill="#FEFEFE" font-family="HelveticaNeue, Helvetica Neue" font-size="20" font-weight="normal">
+                    <tspan x="6" y="38">PDF</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

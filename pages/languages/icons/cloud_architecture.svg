@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="44px" height="49px" viewBox="0 0 44 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 62 (91390) - https://sketch.com -->
+    <title>Group 98</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-98" transform="translate(1.000000, 0.000000)">
+            <g id="framework" stroke="#FDFDFD" stroke-linecap="round" stroke-linejoin="bevel" stroke-width="2">
+                <g id="Group_3347" transform="translate(-0.000000, 0.866000)">
+                    <path d="M2.621,10.592 L5.242,9.079 L10.484,6.053 L20.966,0 L31.449,6.052 L36.691,9.078 L39.312,10.591 M41.933,15.13 L41.933,36.315 L31.449,42.367 L26.207,45.393 L23.586,46.906 M18.344,46.906 L15.723,45.393 L10.481,42.367 L0,36.315 L0,15.131" id="Path_1924"></path>
+                </g>
+            </g>
+            <g id="cloud-computing-(1)" transform="translate(7.000000, 14.000000)" fill="#FDFDFD" fill-rule="nonzero">
+                <path d="M23.1998585,7.58388372 L23.1428142,7.58388372 C22.5935851,2.88622764 18.2787193,-0.483789667 13.5053768,0.0569627025 C9.48846186,0.511881444 6.31919822,3.63066113 5.85695005,7.58388372 L5.8001414,7.58388372 C2.59669828,7.58388372 0,10.1394086 0,13.2920579 C0,16.4444751 2.59669828,19 5.8001414,19 L23.1998585,19 C26.4033017,19 29,16.4444751 29,13.2920579 C29,10.1396406 26.4030659,7.58388372 23.1998585,7.58388372 Z" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>
