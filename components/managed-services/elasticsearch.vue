@@ -107,6 +107,33 @@
 
             </config-box>
 
+            <config-box :section-title="sections.access_ability_config">
+
+                <form class="col-xs-12" style="padding: 0">
+
+                    <div style="width: 100%">
+
+                        <div style="padding: 12px 0;">
+                        <span style="font-size: 0.8em; line-height: 1.75">
+                            {{elastic_search_exposed.tooltip}}
+                        </span>
+                        </div>
+
+                        <div>
+                            <fan-checkbox
+                                    @click.native="elasticExposionSelected"
+                                    :object="elastic_search_exposed">
+
+                            </fan-checkbox>
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+            </config-box>
+
             <config-box :section-title="sections.storage_config">
 
                 <div style="width: 100%">
@@ -203,6 +230,12 @@
                     hint: 'حداکثر رم مصرفی مجاز برای سرویس Elasticsearch',
                     name: ''
                 },
+                elastic_search_exposed: {
+                    label: 'Elasticsearch Exposed',
+                    value: "Elasticsearch Exposed",
+                    tooltip: 'با فعال/غیر فعال کردن این بخش می‌توانید مشخص کنید که سرویس شما از طریق Browser‌ها در دسترس باشد یا خیر.',
+                    selected: true
+                },
                 elasticsearch_manifest: {
                     elastic_password: {
                         name: 'elastic_password',
@@ -219,6 +252,10 @@
                     max_memory: {
                         name: 'max_memory',
                         value: 1024
+                    },
+                    elastic_search_exposed: {
+                        name: 'elastic_search_exposed',
+                        value: true
                     }
                 },
                 rules: {
@@ -260,10 +297,16 @@
                         title: 'بیشینه رم مصرفی',
                         text: 'با تعیین max memory مشخص می‌کنید که سرویس شما حداکثر رمی که می‌تواند مصرف کند چه میزان باشد.',
                         url: '#'
+                    },
+                    elastic_search_exposed: {
+                        title: 'دسترسی خارجی به Elasticsearch',
+                        text: 'با فعال/غیر فعال کردن این بخش می‌توانید مشخص کنید که سرویس شما از طریق Browser‌ها در دسترس باشد یا خیر.',
+                        url: '#'
                     }
                 },
                 sections: {
                     service_config: 'تنظیمات سرویس Elasticsearch',
+                    access_ability_config: 'تنظیمات دسترسی Elasticsearch',
                     storage_config: 'تعیین محل ذخیره سازی',
                 },
             }
@@ -282,21 +325,31 @@
                         case 'elastic_password':
                             this.elasticsearch_manifest.password.value = param.value;
                             break;
+                        case 'elastic_search_exposed':
+                            this.elasticsearch_manifest.elastic_search_exposed.value = param.value;
+                            this.elastic_search_exposed.selected = param.value;
+                            break;
                         case 'volume_name':
                             this.elasticsearch_manifest.volume_name.value = param.value;
                             break;
                         case 'min_memory':
-                            this.elasticsearch_manifest.min_memory.value = param.value
+                            this.elasticsearch_manifest.min_memory.value = param.value;
                             break;
                         case 'max_memory':
-                            this.elasticsearch_manifest.max_memory.value = param.value
+                            this.elasticsearch_manifest.max_memory.value = param.value;
                             break;
 
                     }
                 })
             }
 
-        }, watch: {
+        }, methods: {
+            elasticExposionSelected() {
+                this.elastic_search_exposed.selected = !this.elastic_search_exposed.selected;
+                this.elasticsearch_manifest.elastic_search_exposed.value = this.elastic_search_exposed.selected;
+            }
+        },
+        watch: {
             'elasticsearch_manifest.elastic_password': {
                 handler: function (value, oldvalue) {
                     this.manifest_model.parameters.forEach((param, index) => {
@@ -306,6 +359,15 @@
                     });
                     if (value.value.toString().length > 0)
                         this.manifest_model.parameters.push(value)
+                }, deep: true
+            }, 'elasticsearch_manifest.elastic_search_exposed': {
+                handler: function (value, oldvalue) {
+                    this.manifest_model.parameters.forEach((param, index) => {
+                        if (param.name === 'elastic_search_exposed') {
+                            this.manifest_model.parameters.splice(index, 1)
+                        }
+                    });
+                    this.manifest_model.parameters.push(value)
                 }, deep: true
             },
             'elasticsearch_manifest.volume_name': {
