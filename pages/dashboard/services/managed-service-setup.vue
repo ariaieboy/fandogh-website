@@ -69,6 +69,8 @@
     import Mssql from "../../../components/managed-services/mssql";
     import Postgresql from "../../../components/managed-services/postgresql";
     import Redis from "../../../components/managed-services/redis";
+    import Elasticsearch from "../../../components/managed-services/elasticsearch";
+    import Kibana from "../../../components/managed-services/kibana";
     import FileBrowser from "../../../components/managed-services/filemanager";
     import RabbitMQ from "../../../components/managed-services/rabbitmq";
     import Minio from "../../../components/managed-services/minio";
@@ -88,6 +90,8 @@
             RabbitMQ,
             FileBrowser,
             Minio,
+            Elasticsearch,
+            // Kibana,
             Proxy
         },
         data() {
@@ -213,6 +217,27 @@
                             description: 'اگر شما به دنبال راه حلی برای ذخیره‌سازی داده‌های متفاوت هستید بهتر است از Object Storageها استفاده کنید. یکی از این Object Storageها MinIO است.\n' +
                                 'MinIO یک cloud storage سازگار با Amazon S3 است که به شما این امکان را میدهد تا فایل‌های خود را بر روی آن ذخیره کنید.'
                         },
+                    elasticsearch:
+                        {
+                            title: 'Elasticsearch',
+                            local_title: 'Elasticsearch',
+                            short_desc: 'Search Engine',
+                            icon: 'elasticsearch',
+                            path: "elasticsearch",
+                            version: 'latest',
+                            description: 'Elasticsearch محبوب‌ترین موتور جست‌و‌جو (Search Engine) در بین کاربران است که بر پایه کتابخانه Lucene و زبان برنامه‌نویسی Java توسعه یافته و از قدرت بالایی برخوردار است. این موتور جست‌و‌جو قابلیت جست‌و‌جو تمام متن را با پشتیبانی از پروتکل HTTP را به صورت توزیع شده در اختیار کاربران قرار می‌دهد. همچنین بخش‌هایی از این سرویس به صورت متن‌باز تحت لیسانس‌هایی مانند Apache توسعه یافته و بخش‌هایی دیگر تحت عنوان Elastic License توسعه یافته‌اند.'
+                        },
+                    // kibana:
+                    //     {
+                    //         title: 'Kibana',
+                    //         local_title: 'Kibana',
+                    //         short_desc: 'Elastic Dashboard',
+                    //         icon: 'kibana',
+                    //         path: "kibana",
+                    //         version: 'latest',
+                    //         description: 'Kibana یک داشبورد مدیریتی و متن‌باز برای دسترسی به داده‌های ثبت شده داخل Elasticsearch است. کاربرها می‌توانند بر اساس داده‌های موجود جداول و گراف‌های متفاوتی ایجاد کنند.\n' +
+                    //             'Kibana همچنین قابلیتی برای Present کردن داده‌ها به اسم Canvas دارد که به کاربر اجازه می‌دهد تا از داده‌های مورد نیاز Slideهایی برای نمایش ایجاد کرده و خروجی بگیرد.'
+                    //     },
 
                     proxy:
                         {

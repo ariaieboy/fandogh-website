@@ -1,6 +1,7 @@
 <template>
 
-    <div style="width: 100%; max-width: 1750px; margin-left: auto; margin-right: auto; background-color: rgba(225,223,223,0.2);" class="bg-test">
+    <div style="width: 100%; max-width: 1750px; margin-left: auto; margin-right: auto; background-color: rgba(225,223,223,0.2);"
+         class="bg-test">
 
         <div class="parallax-container">
             <h1>{{title}}</h1>
@@ -498,12 +499,12 @@
 
             <div class="support-footer-parent-style">
                 <table class="support-footer-table-style">
-                    <tr>
-                        <td v-for="(header, index) in support_price_footer"
-                            :width="header.width"
+                    <tr v-for="price_plan in support_price_footer">
+                        <td v-for="(price, index) in price_plan"
+                            :width="price.width"
                             :style="{textAlign: index === 0 ? 'right' : 'center',
                                      paddingRight: index === 0 ? '21px' : '0'}">
-                            {{header.title}}
+                            {{price.title}}
                         </td>
                     </tr>
                 </table>
@@ -1708,10 +1709,36 @@
                     }
                 ],
                 support_price_footer: [
-                    {title: 'هزینه ماهیانه (تومان)', width: '31%'},
-                    {title: '۳۰۰,۰۰۰', width: '23%'},
-                    {title: '۲,۰۰۰,۰۰۰', width: '23%'},
-                    {title: 'تماس بگیرید', width: '23%'}
+                    [
+                        {title: 'هزینه ماهیانه (تومان)', width: '31%'},
+                        {title: '۶۰۰,۰۰۰', width: '23%'},
+                        {title: '۳,۰۰۰,۰۰۰', width: '23%'},
+                        {title: '', width: '23%'}
+                    ],
+                    [
+                        {title: 'هزینه ۳ ماهه (تومان - هر ماه)', width: '31%'},
+                        {title: '۵۷۰,۰۰۰', width: '23%'},
+                        {title: '۲,۸۵۰,۰۰۰', width: '23%'},
+                        {title: '', width: '23%'}
+                    ],
+                    [
+                        {title: 'هزینه ۶ ماهه (تومان - هر ماه)', width: '31%'},
+                        {title: '۵۴۰,۰۰۰', width: '23%'},
+                        {title: '۲,۷۰۰,۰۰۰', width: '23%'},
+                        {title: 'تماس بگیرید', width: '23%'}
+                    ],
+                    [
+                        {title: 'هزینه ۹ ماهه (تومان - هر ماه)', width: '31%'},
+                        {title: '۵۱۰,۰۰۰', width: '23%'},
+                        {title: '۲,۵۵۰,۰۰۰', width: '23%'},
+                        {title: '', width: '23%'}
+                    ],
+                    [
+                        {title: 'هزینه ۱۲ ماهه (تومان - هر ماه)', width: '31%'},
+                        {title: '۴۸۰,۰۰۰', width: '23%'},
+                        {title: '۲,۴۰۰,۰۰۰', width: '23%'},
+                        {title: '', width: '23%'}
+                    ],
                 ],
                 memoryRangeMin: '0.5GB',
                 memoryRangeMax: '128GB',

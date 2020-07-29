@@ -69,10 +69,14 @@
                                         <img :src="require('../../../assets/svg/' + (!ticket_details.user.is_admin ?
                                          'ic-person' : 'ic-support-person') + '.svg')"
                                              :alt="!ticket_details.user.is_admin ? 'ic-person' : 'ic-support-person'">
-                                        <p class="reply-username">{{ticket_details.user.username}}</p>
+                                        <p class="reply-username">{{ticket_details.user.first_name ? `${ticket_details.user.first_name} ${ticket_details.user.last_name}` : ticket_details.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
-                                    <p class="reply-message">{{ticket_details.description}}</p>
+                                    <pre :disabled="'true'"
+                                         dir="auto"
+                                         class="reply-message">
+                                        {{ticket_details.description}}
+                                    </pre>
                                 </div>
                                 <div v-if="ticket_details.files.length > 0"
                                      class="ticket-attachment-container row"
@@ -121,10 +125,14 @@
                                     <div>
                                         <img :src="require('../../../assets/svg/' + (!reply.user.is_admin ? 'ic-person' : 'ic-support-person') + '.svg')"
                                              :alt="!reply.user.is_admin ? 'ic-person' : 'ic-support-person'">
-                                        <p class="reply-username">{{reply.user.username}}</p>
+                                        <p class="reply-username">{{reply.user.first_name ? `${reply.user.first_name} ${reply.user.last_name}` : reply.user.username}}</p>
                                     </div>
                                     <div class="reply-message-divider"></div>
-                                    <p class="reply-message">{{reply.answer}}</p>
+                                    <pre :disabled="'true'"
+                                         dir="auto"
+                                         class="reply-message">
+                                        {{reply.answer}}
+                                    </pre>
                                 </div>
                                 <div v-if="reply.files.length > 0"
                                      class="ticket-attachment-container row"
@@ -180,7 +188,7 @@
                             <div class="send-message-action-container">
                                 <img src="../../../assets/svg/ic-send-message.svg"
                                      alt="send"
-                                     @click="sendReply(ticket_details.id)">
+                                     @click="e => sendReply(e, ticket_details.id)">
                             </div>
 
                             <div class="message-input-container">
@@ -206,13 +214,14 @@
                                 </div>
 
                                 <div class="message-input-divider"></div>
-
-                                <input class="message-input"
-                                       type="text"
-                                       @input="e => this.ticket_reply = e.target.value"
-                                       ref="ticket_message"
-                                       @keyup.enter="sendReply(ticket_details.id)"
-                                       :placeholder="enter_message">
+                                <textarea class="message-input"
+                                          type="text"
+                                          dir="auto"
+                                          ref="ticket_message"
+                                          rows="1"
+                                          @keyup.enter="e => sendReply(e, ticket_details.id)"
+                                          :placeholder="enter_message">
+                                </textarea>
 
                             </div>
 
@@ -238,6 +247,7 @@
                             <textarea name="title_text"
                                       maxlength="120"
                                       class="new-ticket-title-input"
+                                      dir="auto"
                                       @input="e => this.ticket_title = e.target.value"
                                       :placeholder="ticket_title_hint">
                             </textarea>
@@ -246,11 +256,9 @@
 
                         <div class="new-ticket-department-container">
 
-                            <transition name="fade">
+                            <div class="new-ticket-department-selection">
 
-                                <div v-if="!show_departments"
-                                     class="new-ticket-department-label-container"
-                                     @click="show_departments = !show_departments">
+                                <div class="department-selection-label-container">
 
                                     <p>{{ this.selected_department ?
                                         this.selected_department.local_name :
@@ -261,32 +269,16 @@
 
                                 </div>
 
-                                <div v-if="show_departments"
-                                     class="new-ticket-department-selection">
+                                <div class="department-selection-list-container">
 
-                                    <div @click="show_departments = !show_departments"
-                                         class="department-selection-label-container">
-
-                                        <p>{{department_title}}</p>
-
-                                        <img src="../../../assets/svg/arrow.svg"
-                                             alt="open"/>
-
-                                    </div>
-
-                                    <div class="department-selection-divider"></div>
-
-                                    <div class="department-selection-list-container">
-
-                                        <p @click="chooseDepartment(index)"
-                                           v-for="(dep, index) in department_options">
-                                            {{dep.local_name}}
-                                        </p>
-
-                                    </div>
+                                    <p @click="chooseDepartment(index)"
+                                       v-for="(dep, index) in department_options">
+                                        {{dep.local_name}}
+                                    </p>
 
                                 </div>
-                            </transition>
+
+                            </div>
 
                         </div>
 
@@ -331,7 +323,7 @@
 
                     <div class="new-ticket-message-text-input">
 
-                        <div style="width: 100%; display: flex; flex-direction: row; background-color: #0045ff; padding: 12px 16px;">
+                        <div style="width: 100%; display: flex; flex-direction: row; background-color: #0045ff; padding: 8px 16px;">
                             <p style="font-size: 1em; font-weight: normal; font-family: iran-yekan; width: 100%;
                                       color: #fefefe; margin-bottom: 0;">
                                 {{ticket_description_label}}</p>
@@ -344,6 +336,7 @@
 
                         <textarea name="message"
                                   maxlength="1500"
+                                  dir="auto"
                                   @input="e => this.ticket_description = e.target.value"
                                   :placeholder="ticket_description_hint">
                         </textarea>
@@ -385,9 +378,10 @@
     import File from "~/components/elements/file";
     import TicketCompleteRow from "../../../components/Dashboard/support/ticket-complete-row"
     import {formData} from "../../../utils/formData";
+    import ErrorReporter from "../../../utils/ErrorReporter";
 
     export default {
-        name: "_id",
+        name: "_ticket",
         layout: 'dashboard',
         components: {
             TicketCompleteRow,
@@ -397,7 +391,9 @@
 
         }, data() {
             return {
+                message: '',
                 page_title: 'تیکت',
+                input_rows: 1,
                 ticket_details_title: 'ایجاد تیکت جدید',
                 page_status: 'ticket_details',
                 new_ticket_title: 'تیکت جدید...',
@@ -505,12 +501,23 @@
                         fd.append('file', file)
                 }
 
+                try {
+                    let ticket_object = await this.$store.dispatch("sendNewTicket", {formData: fd});
+                    this.$router.replace(`/dashboard/support/${ticket_object.id}`);
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
 
-                let ticket_object = await this.$store.dispatch("sendNewTicket", {formData: fd});
-
-                this.$router.replace(`/dashboard/support/${ticket_object.id}`);
-
-                this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                } catch (e) {
+                    this.$store.commit("SET_DATA", {data: false, id: "loading"});
+                    if (e.status === 401) {
+                        this.$router.push("/user/login");
+                    } else {
+                        this.$notify({
+                            title: ErrorReporter(e, this.$data),
+                            time: 4000,
+                            type: "error"
+                        });
+                    }
+                }
 
             },
             cancelNewTicket() {
@@ -554,7 +561,7 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });
@@ -565,7 +572,6 @@
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 try {
                     let ticket_replies = await this.$store.dispatch("getTicketReplies", ticket_id);
-
 
                     this.ticket_details = {...ticket_replies};
                     this.ticket_details.created_at = Moment(ticket_replies.created_at).format('HH:mm jYYYY/jMM/jDD');
@@ -592,7 +598,7 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });
@@ -625,18 +631,23 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });
                     }
                 }
             },
-            async sendReply(ticket_id) {
+            async sendReply(e, ticket_id) {
+
+                if (e.shiftKey === true) {
+                    return;
+                }
+
                 this.$store.commit("SET_DATA", {data: true, id: "loading"});
                 try {
 
-                    if (this.ticket_reply.length === 0) {
+                    if (this.$refs.ticket_message.value.length === 0) {
                         this.$notify({
                             title: 'متن تیکت را وارد نکرده‌اید.',
                             time: 4000,
@@ -649,7 +660,7 @@
                     let fd = formData([
                         {
                             name: 'answer',
-                            value: this.ticket_reply
+                            value: this.$refs.ticket_message.value
                         }
                     ]);
 
@@ -667,6 +678,8 @@
                     }
                     response.created_at = Moment(response.created_at).format('HH:mm jYYYY/jMM/jDD');
                     this.ticket_details.replies.push(response);
+                    this.$nextTick();
+                    document.getElementById('conversation_view').scrollTop = 99999999;
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
                 } catch (e) {
                     this.$store.commit("SET_DATA", {data: false, id: "loading"});
@@ -674,7 +687,7 @@
                         this.$router.push("/user/login");
                     } else {
                         this.$notify({
-                            title: e.data.message,
+                            title: ErrorReporter(e, this.$data),
                             time: 4000,
                             type: "error"
                         });
@@ -687,7 +700,7 @@
 
             },
             backToIndex() {
-                this.$router.go(-1);
+                this.$router.replace('/dashboard/support');
             },
             changeFiles(target) {
 
@@ -767,7 +780,8 @@
         created() {
             this.getData();
             this.getReplies(this.ticket_id)
-        }, mounted() {
+        },
+        mounted() {
             this.$store.commit("SET_DATA", {data: false, id: "loading"});
         },
         beforeDestroy() {
@@ -789,6 +803,8 @@
         font-size .9em
         white-space nowrap
         overflow-x fragments
+        direction rtl
+        padding-top 2px
 
 
     .title_header
@@ -863,7 +879,6 @@
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
 
 
-
         div.support-footer-action-container
             display flex
             flex-direction row
@@ -920,7 +935,6 @@
             button.support-cancel-ticket-button:hover
                 background-color #ff4095
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
-
 
 
         div.support-header-search-bar
@@ -1046,7 +1060,7 @@
                 min-height 450px
                 max-height 500px
                 overflow-y scroll
-                display flex
+                display flow-root
                 flex-direction column
                 padding 16px
 
@@ -1073,8 +1087,8 @@
                             p.reply-username
                                 margin 0
                                 color #3c3c3c
-                                font-family 'Helvetica Neue'
-                                font-size .9em
+                                font-family 'Helvetica Neue', iran-yekan
+                                font-size .8em
                                 font-weight normal
                                 display flex
                                 line-height 22px
@@ -1086,7 +1100,7 @@
                                 border-radius 15px
                                 border 1px solid #000
                                 margin-left 8px
-                                opacity 50%
+                                opacity .5
                                 margin-top auto
                                 margin-bottom auto
 
@@ -1098,11 +1112,18 @@
                             margin 8px 0
                             opacity .2
 
-                        p.reply-message
+                        pre.reply-message
                             color #3c3c3c
                             font-family iran-yekan
                             font-size .8em
                             margin-bottom 0
+                            line-height normal
+                            white-space pre-line
+                            white-space -moz-pre-wrap
+                            white-space -o-pre-wrap
+                            word-wrap break-word
+                            unicode-bidi plaintext
+                            overflow-wrap break-word
 
                     p.reply-date
                         color #7C7C7C
@@ -1177,8 +1198,8 @@
                             p.reply-username
                                 margin 0
                                 color #fefefe
-                                font-family 'Helvetica Neue'
-                                font-size .9em
+                                font-family 'Helvetica Neue', iran-yekan
+                                font-size .8em
                                 font-weight normal
                                 display flex
                                 line-height 22px
@@ -1191,7 +1212,7 @@
                                 border 1px solid #000
                                 margin-right 8px
                                 filter invert(1)
-                                opacity 75%
+                                opacity .75
                                 margin-top auto
                                 margin-bottom auto
 
@@ -1201,11 +1222,18 @@
                             margin 8px 0
                             opacity .2
 
-                        p.reply-message
+                        pre.reply-message
                             color #fefefe
                             font-family iran-yekan
                             font-size .8em
                             margin-bottom 0
+                            white-space pre-line
+                            white-space -moz-pre-wrap
+                            white-space -o-pre-wrap
+                            word-wrap break-word
+                            line-height normal
+                            unicode-bidi plaintext
+                            overflow-wrap break-word
 
 
                     p.reply-date
@@ -1263,12 +1291,12 @@
                 border-radius 2px
                 box-shadow 0 2px 6px rgba(0, 0, 0, 0.07)
                 width 100%
-                height 44px
+                min-height 44px
+                height max-content
                 display flex
                 flex-direction row
                 padding 4px 8px
                 margin-top 2px
-                max-height 88px
 
                 div.send-message-action-container
                     flex .05
@@ -1295,20 +1323,23 @@
                     background-color #F2F2F2
                     border-radius 20px
                     height 100%
+                    padding 8px 0
 
                     div.message-input-divider
                         width 1px
-                        margin 5px 0 5px 12px
+                        margin 1px 0 1px 12px
                         background-color #cfcfcf
 
-                    input.message-input
+                    textarea.message-input
                         padding-left 12px
                         font-size .9em
+                        min-height 32px
                         font-family yekan-number-regular
                         color #3c3c3c
                         width 100%
+                        line-height normal
                         outline none
-                        padding-top 4px
+                        margin-bottom 0
 
     .attachment-preview-container
         display inline-flex
@@ -1379,7 +1410,7 @@
                     border-top-left-radius 2px
                     flex-direction row
                     background-color #0045ff
-                    padding 12px 16px
+                    padding 8px 16px
 
                 textarea.new-ticket-title-input
                     width 100%
@@ -1405,34 +1436,6 @@
                 flex-direction column
                 margin-top 8px
 
-                div.new-ticket-department-label-container
-                    border-radius 2px
-                    cursor pointer
-                    height 45px
-                    width 100%
-                    display flex
-                    flex-direction row
-                    box-shadow 0 3px 6px rgba(0, 0, 0, 0.25)
-                    background-color #0045ff
-                    transition all .3s ease-in-out
-
-                    p
-                        font-size 1em
-                        font-weight normal
-                        font-family iran-yekan
-                        width 100%
-                        padding 0 16px
-                        margin-bottom auto
-                        margin-top auto
-                        color #fefefe
-
-                    img
-                        transform rotate(180deg)
-                        filter invert(0)
-                        width 16px
-                        height 16px
-                        margin auto auto auto 16px
-
                 div.new-ticket-department-selection
                     width 100%
                     background-color #fefefe
@@ -1441,39 +1444,34 @@
                     flex-direction column
                     border-radius 2px
                     overflow-y auto
-                    cursor pointer
                     transition all .3s ease-in-out
 
                     div.department-selection-label-container
                         width 100%
                         display flex
                         flex-direction row
+                        background-color #0045ff
+                        height 45px
 
                         p
                             font-size 1em
                             font-weight normal
                             font-family iran-yekan
                             width 100%
+                            color #fefefe
                             padding 0 16px
                             margin-bottom auto
-                            margin-top 10px
-                            opacity 0.4
+                            margin-top auto
 
                         img
                             transform rotate(180deg)
-                            filter invert(1)
+                            filter invert(0)
                             width 24px
                             margin-left 12px
                             padding 4px
                             height 24px
                             margin-right auto
                             margin-top 11px
-
-
-                    div.department-selection-divider
-                        height 1px
-                        background-color #F2F2F2
-                        margin 12px 16px
 
                     div.department-selection-list-container
                         width 100%
@@ -1498,12 +1496,8 @@
                             transition all .3s ease-in-out
 
                         p:hover
-                            background-color rgba(127, 130, 139, 0.25)
+                            background-color rgba(127, 130, 139, 0.15)
 
-
-                div.new-ticket-department-label-container:hover
-                    box-shadow 0 3px 6px rgba(0, 0, 0, 0.45)
-                    background-color #005dff
 
             div.new-ticket-attachment-container
                 overflow hidden
@@ -1529,7 +1523,7 @@
                     cursor pointer
                     height 100%
                     position absolute
-                    background-color #0045ff
+                    background-color #00dffa
                     width 100%
                     display flex
                     flex-direction row
@@ -1544,20 +1538,20 @@
                         padding 0 16px
                         margin-bottom auto
                         margin-top auto
-                        color #fefefe
+                        color #2c2c2c
 
                     img
                         transform rotate(180deg) scale(1.1)
                         width 16px
                         height 16px
                         margin auto auto auto 16px
-                        filter invert(1)
+                        filter invert(0)
 
             div.new-ticket-attachment-container:hover
                 box-shadow 0 3px 6px rgba(0, 0, 0, 0.45)
 
                 div.new-ticket-attachment-label-container
-                    background-color #005dff
+                    background-color #00E5FF
 
             div.new-ticket-attachment-preview-container
                 width 100%
@@ -1586,7 +1580,7 @@
 
             textarea
                 width 100%
-                min-height 300px
+                min-height 395px
                 max-height 500px
                 font-family yekan-number-regular
                 font-size 1em

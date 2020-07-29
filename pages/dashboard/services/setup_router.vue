@@ -50,6 +50,8 @@
                     {title: 'MSSQL Server', description: 'Database', icon: 'mssql', path: "mssql"},
                     {title: 'MongoDB', description: 'Database', icon: 'mongodb', path: "mongodb"},
                     {title: 'Redis', description: 'In Memory Data Store', icon: 'redis', path: "redis"},
+                    {title: 'Elasticsearch', description: 'Search Engine', icon: 'elasticsearch', path: "elasticsearch"},
+                    // {title: 'Kibana', description: 'Elastic Dashboard', icon: 'kibana', path: "kibana"},
                     {title: 'File Browser', description: 'File Manager', icon: 'filebrowser', path: "filebrowser"},
                     {title: 'RabbitMQ', description: 'Message Broker', icon: 'rabbitmq', path: "rabbitmq"},
                     {title: 'MinIO', description: 'Object Storage', icon: 'minio', path: "minio"},
@@ -70,9 +72,6 @@
                 return RoleAccessHandler(permitted_roles)
             },
             onSelected(path) {
-                console.log(path)
-                console.log(this.$route.query)
-                console.log(this.$route.path)
                 this.$router.replace({path: '/dashboard/services/' + path, query: this.$route.query})
             },
         }

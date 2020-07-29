@@ -231,7 +231,7 @@
             margin-bottom 30px
 
             img
-                margin-left 15px
+                margin-left 12px
                 filter invert(40%)
 
             span
