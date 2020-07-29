@@ -51,8 +51,8 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.counter]"
-                                v-model="elasticsearch_manifest.min_memory.value"
+                                :rules="[rules.min_memory]"
+                                v-model.number="elasticsearch_manifest.min_memory.value"
                                 :label="min_memory.label"
                                 :hint="min_memory.hint">
 
@@ -69,8 +69,8 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.counter]"
-                                v-model="elasticsearch_manifest.max_memory.value"
+                                :rules="[rules.max_memory]"
+                                v-model.number="elasticsearch_manifest.max_memory.value"
                                 :label="max_memory.label"
                                 :hint="max_memory.hint">
 
@@ -221,12 +221,12 @@
                     name: ''
                 },
                 min_memory: {
-                    label: 'Min Memory',
+                    label: 'Min Memory Heap Size',
                     hint: 'حداقل رم مصرفی مجاز برای سرویس Elasticsearch',
                     name: ''
                 },
                 max_memory: {
-                    label: 'Max Memory',
+                    label: 'Max Memory Heap Size',
                     hint: 'حداکثر رم مصرفی مجاز برای سرویس Elasticsearch',
                     name: ''
                 },
@@ -261,6 +261,8 @@
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
+                    min_memory: value => value >= this.manifest_model.memory.amount / 4 && value <= this.manifest_model.memory.amount || 'مقدار min memory باید حداقل یک چهارم رم کلی باشد.',
+                    max_memory: value => value >= this.manifest_model.memory.amount / 2 && value < this.manifest_model.memory.amount || 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
                     regex: value => !value || new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     default_replica: value => value >= 1 || 'کمترین مقدار مجاز ۱ است',
@@ -290,12 +292,12 @@
                     },
                     min_memory: {
                         title: 'کمینه رم مصرفی',
-                        text: 'با تعیین min memory مشخص می‌کنید که سرویس شما حداقل رمی که می‌تواند مصرف کند چه میزان باشد.',
+                        text: 'با تعیین min memory مشخص می‌کنید که سرویس شما حداقل رمی که می‌تواند برای Heap Size مصرف کند چه میزان باشد.',
                         url: '#'
                     },
                     max_memory: {
                         title: 'بیشینه رم مصرفی',
-                        text: 'با تعیین max memory مشخص می‌کنید که سرویس شما حداکثر رمی که می‌تواند مصرف کند چه میزان باشد.',
+                        text: 'با تعیین max memory مشخص می‌کنید که سرویس شما حداکثر رمی که می‌تواند برای Heap Size مصرف کند چه میزان باشد.',
                         url: '#'
                     },
                     elastic_search_exposed: {
