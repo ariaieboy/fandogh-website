@@ -51,14 +51,14 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.min_memory]"
-                                v-model.number="elasticsearch_manifest.min_memory.value"
-                                :label="min_memory.label"
-                                :hint="min_memory.hint">
+                                :rules="[rules.min_heap_memory]"
+                                v-model.number="elasticsearch_manifest.min_heap_memory.value"
+                                :label="min_heap_memory.label"
+                                :hint="min_heap_memory.hint">
 
                         </v-text-field>
 
-                        <popover :tooltip="tooltips.min_memory"></popover>
+                        <popover :tooltip="tooltips.min_heap_memory"></popover>
 
                     </div>
 
@@ -69,14 +69,14 @@
                                 dir="ltr"
                                 color="#0093ff"
                                 required
-                                :rules="[rules.max_memory]"
-                                v-model.number="elasticsearch_manifest.max_memory.value"
-                                :label="max_memory.label"
-                                :hint="max_memory.hint">
+                                :rules="[rules.max_heap_memory]"
+                                v-model.number="elasticsearch_manifest.max_heap_memory.value"
+                                :label="max_heap_memory.label"
+                                :hint="max_heap_memory.hint">
 
                         </v-text-field>
 
-                        <popover :tooltip="tooltips.max_memory"></popover>
+                        <popover :tooltip="tooltips.max_heap_memory"></popover>
 
                     </div>
 
@@ -220,12 +220,12 @@
                     hint: 'نام volume که قصد دارید داده‌های شما در آن ذخیره شوند.',
                     name: ''
                 },
-                min_memory: {
+                min_heap_memory: {
                     label: 'Min Memory Heap Size',
                     hint: 'حداقل رم مصرفی مجاز برای سرویس Elasticsearch',
                     name: ''
                 },
-                max_memory: {
+                max_heap_memory: {
                     label: 'Max Memory Heap Size',
                     hint: 'حداکثر رم مصرفی مجاز برای سرویس Elasticsearch',
                     name: ''
@@ -245,12 +245,12 @@
                         name: 'volume_name',
                         value: null
                     },
-                    min_memory: {
-                        name: 'min_memory',
+                    min_heap_memory: {
+                        name: 'min_heap_memory',
                         value: 512
                     },
-                    max_memory: {
-                        name: 'max_memory',
+                    max_heap_memory: {
+                        name: 'max_heap_memory',
                         value: 1024
                     },
                     elastic_search_exposed: {
@@ -261,8 +261,8 @@
                 rules: {
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
-                    min_memory: value => value >= this.manifest_model.memory.amount / 4 && value < this.manifest_model.memory.amount / 2 || 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
-                    max_memory: value => value >= this.manifest_model.memory.amount / 2 && value < this.manifest_model.memory.amount || 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
+                    min_heap_memory: value => value >= this.manifest_model.memory.amount / 4 && value < this.manifest_model.memory.amount / 2 || 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
+                    max_heap_memory: value => value >= this.manifest_model.memory.amount / 2 && value < this.manifest_model.memory.amount || 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
                     regex: value => !value || new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     default_replica: value => value >= 1 || 'کمترین مقدار مجاز ۱ است',
@@ -290,12 +290,12 @@
                         text: 'رمز عبوری که برای database خود انتخاب میکنید،‌در صورتی خالی گذاشتن این بخش، رمز عبوی ساخته نخواهد شد.',
                         url: '#'
                     },
-                    min_memory: {
+                    min_heap_memory: {
                         title: 'کمینه رم مصرفی',
                         text: 'با تعیین min memory مشخص می‌کنید که سرویس شما حداقل رمی که می‌تواند برای Heap Size مصرف کند چه میزان باشد.',
                         url: '#'
                     },
-                    max_memory: {
+                    max_heap_memory: {
                         title: 'بیشینه رم مصرفی',
                         text: 'با تعیین max memory مشخص می‌کنید که سرویس شما حداکثر رمی که می‌تواند برای Heap Size مصرف کند چه میزان باشد.',
                         url: '#'
@@ -334,11 +334,11 @@
                         case 'volume_name':
                             this.elasticsearch_manifest.volume_name.value = param.value;
                             break;
-                        case 'min_memory':
-                            this.elasticsearch_manifest.min_memory.value = param.value;
+                        case 'min_heap_memory':
+                            this.elasticsearch_manifest.min_heap_memory.value = param.value;
                             break;
-                        case 'max_memory':
-                            this.elasticsearch_manifest.max_memory.value = param.value;
+                        case 'max_heap_memory':
+                            this.elasticsearch_manifest.max_heap_memory.value = param.value;
                             break;
 
                     }
@@ -383,21 +383,21 @@
                         this.manifest_model.parameters.push(value)
                 }, deep: true
             },
-            'elasticsearch_manifest.min_memory': {
+            'elasticsearch_manifest.min_heap_memory': {
                 handler: function (value, oldvalue) {
                     this.manifest_model.parameters.forEach((param, index) => {
-                        if (param.name === 'min_memory') {
+                        if (param.name === 'min_heap_memory') {
                             this.manifest_model.parameters.splice(index, 1)
                         }
                     });
-                    if (value.value !== null)
+                    if (value.value !== null
                         this.manifest_model.parameters.push(value)
                 }, deep: true
             },
-            'elasticsearch_manifest.max_memory': {
+            'elasticsearch_manifest.max_heap_memory': {
                 handler: function (value, oldvalue) {
                     this.manifest_model.parameters.forEach((param, index) => {
-                        if (param.name === 'max_memory') {
+                        if (param.name === 'max_heap_memory') {
                             this.manifest_model.parameters.splice(index, 1)
                         }
                     });

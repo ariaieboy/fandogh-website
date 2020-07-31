@@ -256,8 +256,8 @@
                     required: value => !!value || 'پر کردن این فیلد اجباری‌ است',
                     counter: value => value.length <= 100 || 'مقدار وارد شده نباید بیش از ۱۰۰ کاراکتر باشد',
                     default_memory: value => value >= 50 || 'کمترین میزان رم قابل قبول ۵۰ مگابایت است',
-                    min_memory: value => value >= this.managed_service_manifest.memory.amount / 4 && value < this.managed_service_manifest.memory.amount / 2 || 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
-                    max_memory: value => value >= this.managed_service_manifest.memory.amount / 2 && value < this.managed_service_manifest.memory.amount || 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
+                    min_heap_memory: value => value >= this.managed_service_manifest.memory.amount / 4 && value < this.managed_service_manifest.memory.amount / 2 || 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
+                    max_heap_memory: value => value >= this.managed_service_manifest.memory.amount / 2 && value < this.managed_service_manifest.memory.amount || 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
                     service_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
                     volume_name_regex: value => new RegExp('^[a-z]+(-*[a-z0-9]+)*$').test(value) || 'نام وارد شده صحیح نمی‌باشد (تنها ترکیب حروف کوچک a تا z، اعداد و خط تیره (-) معتبر هستند)',
@@ -313,36 +313,36 @@
 
                 if (this.managed_service[this.service_name].title === 'Elasticsearch') {
 
-                    let min_memory_checked = true;
-                    let max_memory_checked = true;
+                    let min_heap_memory_checked = true;
+                    let max_heap_memory_checked = true;
 
                     this.managed_service_manifest.parameters.forEach(item => {
 
-                        if (item.name === 'min_memory') {
-                            if (this.rules.min_memory(item.value) !== true) {
+                        if (item.name === 'min_heap_memory') {
+                            if (this.rules.min_heap_memory(item.value) !== true) {
                                 this.$notify({
                                     title: 'مقدار min memory باید حداقل یک چهارم و حداکثر کمتر از نصف رم کلی باشد.',
                                     time: 4000,
                                     type: 'error'
                                 });
-                                min_memory_checked = false
+                                min_heap_memory_checked = false
                             }
                         }
 
-                        if (item.name === 'max_memory') {
-                            if (this.rules.max_memory(item.value) !== true) {
+                        if (item.name === 'max_heap_memory') {
+                            if (this.rules.max_heap_memory(item.value) !== true) {
                                 this.$notify({
                                     title: 'مقدار max memory باید بیش از نصف رم کلی و کمتر از مقدار نهایی رم کلی باشد.',
                                     time: 4000,
                                     type: 'error'
                                 });
-                                max_memory_checked = false;
+                                max_heap_memory_checked = false;
                             }
                         }
 
                     });
 
-                    if (!max_memory_checked || !min_memory_checked) {
+                    if (!max_heap_memory_checked || !min_heap_memory_checked) {
                         return false
                     }
                 }
