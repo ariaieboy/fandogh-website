@@ -390,7 +390,7 @@
                             this.manifest_model.parameters.splice(index, 1)
                         }
                     });
-                    if (value.value !== null
+                    if (value.value !== null)
                         this.manifest_model.parameters.push(value)
                 }, deep: true
             },
