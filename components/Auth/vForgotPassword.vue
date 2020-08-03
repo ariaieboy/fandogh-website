@@ -120,7 +120,11 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; border-radius: 5p
                         this.message = response.message
                     }).catch(e => {
                         this.loading = false
-                        this.error = ErrorReporter(e, this.$data)
+                        if (e.status === undefined) {
+                            this.error = 'اختلال در ارتباط با سرور، لطفا اینترنت خود را بررسی کرده و دوباره تلاش کنید.';
+                        } else {
+                            this.error = ErrorReporter(e, this.$data)
+                        }
                     })
                 }
             }

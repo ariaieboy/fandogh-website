@@ -253,7 +253,11 @@ text-align: center; font-family: iran-yekan; font-size: 1.4em; outline:none; bor
                         this.message = response.message
                     }).catch(error => {
                         this.loading = false;
-                        this.error = ErrorReporter(error, this.$data)
+                        if (error.status === undefined) {
+                            this.error = 'اختلال در ارتباط با سرور، لطفا اینترنت خود را بررسی کرده و دوباره تلاش کنید.';
+                        } else {
+                            this.error = ErrorReporter(error, this.$data)
+                        }
                     })
                 }
             }
