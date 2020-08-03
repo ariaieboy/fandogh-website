@@ -32,7 +32,6 @@
         methods: {
             processLogLine(line) {
                 let parts = line.toString().split('->');
-                console.log(parts)
                 if (!parts) {
                     return line
                 }
