@@ -113,10 +113,10 @@
             validateInputs() {
 
                 if (this.rules.password_required(this.user.new_password) !== true) {
-                    this.$refs.new_password.focus();
+                    this.$refs.new_password.focus()
                     return false
                 } else if (this.rules.repeat_password_required(this.user.repeat_password) !== true) {
-                    this.$refs.repeat_password.focus();
+                    this.$refs.repeat_password.focus()
                     return false
                 } else if (this.user.new_password !== this.user.repeat_password) {
                     return this.error = 'گذرواژه و تکرار گذرواژه شما یکسان نیست'
@@ -127,26 +127,22 @@
             resetPassword() {
                 if (this.validateInputs()) {
                     if (this.loading) return;
-                    this.loading = true;
-                    this.error = null;
+                    this.loading = true
+                    this.error = null
                     this.$store.dispatch('resetPassword', this.user).then(response => {
-                        this.loading = false;
+                        this.loading = false
                         this.$router.push({path: '/'});
                         this.message = response.message
                     }).catch(e => {
                         this.loading = false;
-                        if (e.status === undefined) {
-                            this.error = 'اختلال در ارتباط با سرور، لطفا اینترنت خود را بررسی کرده و دوباره تلاش کنید.';
-                        }else {
-                            this.error = e
-                        }
+                        this.error = e
                     })
                 }
             }
         },
         mounted() {
 
-            this.$refs.repeat_password.focus();
+            this.$refs.repeat_password.focus()
             this.$refs.new_password.focus()
         }
 
