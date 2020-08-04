@@ -31,7 +31,7 @@ export default function request(params, options) {
                 const {data} = await service(params, options).post(url, body, config)
                 return data
             } catch (e) {
-                return Promise.reject(e.response.data.message ? e.response.data.message : e.response.data)
+                return Promise.reject(!e.response ? 'اختلال در ارتباط با سرور، لطفا اینترنت خود را بررسی کرده و دوباره تلاش کنید.' : e.response.data.message ? e.response.data.message : e.response.data)
             }
         },
         put: async (url, body, config) => {
@@ -39,7 +39,7 @@ export default function request(params, options) {
                 const {data} = await service(params, options).put(url, body, config)
                 return data
             } catch (e) {
-                return Promise.reject(e.response.data.message ? e.response.data.message : e.response.data)
+                return Promise.reject(!e.response ? 'اختلال در ارتباط با سرور، لطفا اینترنت خود را بررسی کرده و دوباره تلاش کنید.' : e.response.data.message ? e.response.data.message : e.response.data)
             }
         },
         patch: async (url, body) => {

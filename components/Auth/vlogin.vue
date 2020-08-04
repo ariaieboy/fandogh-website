@@ -152,11 +152,7 @@
                         })
                         .catch(e => {
                             this.loading = false;
-                            if (e.status === undefined) {
-                                this.error = 'اختلال در ارتباط با سرور، لطفا اینترنت خود را بررسی کرده و دوباره تلاش کنید.';
-                            } else {
-                                this.error = e;
-                            }
+                            this.error = e;
                         });
                 }
             }
