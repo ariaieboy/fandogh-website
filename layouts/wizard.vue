@@ -1432,15 +1432,17 @@
 
 
                 if (this.manifest_model.environment_variable.env_list.length !== 0) {
+                    let redundant_value = null;
                     this.manifest_model.environment_variable.env_list.forEach(env_obj => {
                         if (this.manifest_model.environment_variable.env_list.filter(e => e.name === env_obj.name).length > 1) {
+                            redundant_value = env_obj.name;
                             value_redundant = true;
                         }
                     });
 
                     if (value_redundant) {
                         this.$notify({
-                            title: 'مقادیر environment تکراری است',
+                            title: `مقدار environment با کلید ${redundant_value} تکراری است`,
                             time: 4000,
                             type: 'error'
                         });
