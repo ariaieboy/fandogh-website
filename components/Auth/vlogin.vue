@@ -17,6 +17,7 @@
                         style="font-family: iran-yekan !important;width: 375px !important; font-size: 1em !important; padding-left: 0 !important; margin-left: auto !important; margin-right: auto !important;"
                         color="#0045ff"
                         type="text"
+                        browser-autocomplete="username"
                         dir="rtl"
                         @keyup.enter="login"
                         :rules="[rules.username_required]"
